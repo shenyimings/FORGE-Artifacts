@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/Gonewild.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x0C14F1681F0396188c59C5e610e8609D22c469bb",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "CoinToken": "contracts/Gonewild/CoinToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can lead to an OUT_OF_GAS exception if the excluded addresses list is too long. Similarly, the `_getCurrentSupply` function uses a loop for evaluating total supply and can also be aborted with an OUT_OF_GAS exception.",
+            "severity": "low",
+            "location": "_includeInReward() and _getCurrentSupply functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges, including the ability to change tax, dev, and liquidity fees, maximum transaction amount, exclude from fees, change dev address, router address, minimum tokens to add to liquidity, and lock/unlock.",
+            "severity": "low",
+            "location": "Various functions accessible by the contract owner"
+        }
+    ]
+}

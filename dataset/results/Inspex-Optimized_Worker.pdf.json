@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/Inspex-Optimized_Worker.pdf",
+    "project_info": {
+        "url": "https://github.com/alpaca-finance/bsc-alpaca-contract",
+        "commit_id": "1aee2ceec77e3fd3162b74858c846cdc5692928d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bsc-alpaca-contract": "contracts/Inspex-Optimized_Worker/bsc-alpaca-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Invalid baseToken Calculation in liquidate() Function",
+            "description": "A user will gain additional baseToken when their position is liquidated, and the user who opens a new position after liquidating will lose part of their baseToken.",
+            "severity": "high",
+            "location": "CakeMaxiWorker02.sol, liquidate() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Transaction Ordering Dependence",
+            "description": "The front-running attack can be performed, resulting in a bad swapping rate for the beneficial vault and reinvestment.",
+            "severity": "low",
+            "location": "PancakeswapV2Worker02.sol, WaultSwapWorker02.sol, CakeMaxiWorker02.sol contracts (specifically in the _reinvest() function)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Input Validation",
+            "description": "Setting treasuryBountyBps or reinvestBountyBps to be greater than 10,000 causes transaction reversion for all work() function executions.",
+            "severity": "low",
+            "location": "PancakeswapV2Worker02.sol, CakeMaxiWorker02.sol, WaultSwapWorker02.sol (setTreasuryBountyBps and setMaxReinvestBountyBps functions)"
+        }
+    ]
+}

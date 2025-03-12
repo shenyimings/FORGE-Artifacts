@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/DeFi智能合约安全审计报告 - earning.farm.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "6638ef7940660f01597da84c4748ba8845a4d6acb80311fe79b343d56e7f7ab1",
+        "address": "0x65ff67d6a61ae6bab8821c584f5f394d35e9b50e",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.5.10+commit.5a6ea5b1"
+        ],
+        "project_path": {
+            "CRVExchange": "contracts/DeFi智能合约安全审计报告 - earning/CRVExchange"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incompatible type for `i` variable",
+            "description": "The `i` variable in the `remove_liquidity_one_coin` function has an incorrect type, causing errors.",
+            "severity": "high",
+            "location": "CurveInterface contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1287"
+                ]
+            },
+            "title": "Incompatible usage of `curve` variable",
+            "description": "The Aave pool's PriceInterface uses the `curve` variable from CurveInterface, but it doesn't exist in the Aave pool.",
+            "severity": "high",
+            "location": "Aave pool contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No slippage control in deposit functions",
+            "description": "Deposit functions in IPoolBase, IethPoolBase, and IWbtcPoolBase contracts don't check for slippage, potentially causing losses.",
+            "severity": "medium",
+            "location": "Multiple pool contracts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "No slippage control in CRV exchange operation",
+            "description": "The contract doesn't check for slippage during CRV exchanges, potentially causing losses.",
+            "severity": "medium",
+            "location": "CRV exchange function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Unnecessary owner permissions",
+            "description": "Owner permissions in controller/Vault/Exchange/TrustList/Pool contracts are not transferred to Timelock or community governance, posing a risk of unauthorized changes.",
+            "severity": "medium",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No validation for deposit amount",
+            "description": "The `deposit` function doesn't validate the `_amount` input, leading to potential gas waste.",
+            "severity": "low",
+            "location": "CFFVault contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Multiple hardcoded addresses in contracts",
+            "description": "Hardcoded addresses can become outdated and cause business logic failures if external addresses change.",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Simplified operation may cause possible precision errors",
+            "description": "Inaccurate calculation of deposit amount due to simplified operation",
+            "severity": "n/a",
+            "location": "CFValut.sol / CFETHVault.sol, function deposit(uint256 _amount)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of restriction on refundTarget function",
+            "description": "Unrestricted access to refundTarget function may lead to user fund loss",
+            "severity": "n/a",
+            "location": "CFController.sol / CFETHController.sol, function refundTarget()"
+        }
+    ]
+}

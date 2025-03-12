@@ -1,0 +1,185 @@
+{
+    "path": "artifacts/MetaTimePools_SC_Audit_Report_12112023_SA-1992.pdf",
+    "project_info": {
+        "url": "https://github.com/Metatime-Technology-Inc/pool-contracts/",
+        "commit_id": "692f9732352da63878e983a3be663dffbec39c01",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "pool-contracts": "contracts/MetaTimePools_SC_Audit_Report_12112023_SA-1992/pool-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of parameter validation on Distributor initialization",
+            "description": "The Distributor contract does not validate the parameters lastClaimTime, claimableAmount and leftClaimableAmount.",
+            "severity": "low",
+            "location": "./contracts/core/Distributor.sol : isParamsValid()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Initialized Variable to Default Value",
+            "description": "Initializing variables to default value executes an extra order that is not required.",
+            "severity": "info",
+            "location": "./contracts/core/Distributor.sol : calculateClaimableAmount(), ./contracts/core/StrategicPool.sol, ./contracts/vesting/TokenDistributor.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Return value on _withdraw function of LiquidityPool contract not used",
+            "description": "The _withdraw function returns a boolean value that is never used on the transferFunds function that calls it.",
+            "severity": "info",
+            "location": "./contracts/core/prize-pool/StakePrizePoolV2.sol: _liquidate()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Use two step ownership transfer pattern",
+            "description": "The two step ownership transfer pattern ensures a more robust approach to change the ownership of the contract.",
+            "severity": "info",
+            "location": "./contracts/core/Distributor.sol, ./contracts/core/TokenDistributor.sol, ./contracts/core/TokenDistributorWithNoVesting.sol, ./contracts/utils/PoolFactory.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "PoolFactory implementation contracts can be set to zero or incorrect values leaving the contract non functional",
+            "description": "The initialize function of the PoolFactory contract sets the global state address variables for the implementation contracts to clone without performing any validation on the received input.",
+            "severity": "info",
+            "location": "./contracts/core/PoolFactory.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Change return value to avoid extra SLOAD",
+            "description": "The current implementation of the functions createDistributor and createTokenDistributor use a global variable twice when it is not required.",
+            "severity": "info",
+            "location": "./contracts/core/PoolFactory.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "lastBurnedAmount of StrategicPool is redundant",
+            "description": "The global state variable lastBurnedAmount of the StrategicPool contract is never used and the value is emitted on an event.",
+            "severity": "info",
+            "location": "./contracts/core/StrategicPool.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Consider controlling casting overflow on StrategicPool",
+            "description": "The functions burn and burnWithFormula of the StrategicPool contract perform cast from unsigned integer to signed integer which can lead to a negative number.",
+            "severity": "info",
+            "location": "./contracts/core/StrategicPool.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing NatSpec documentation for leftClaimableAmount",
+            "description": "The parameter leftClaimableAmount does not contain NatSpec documentation.",
+            "severity": "info",
+            "location": "./contracts/core/Distributor.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-271"
+                ]
+            },
+            "title": "Owner Can Renounce Itself",
+            "description": "The owner can renounce itself creating a problem to operate with high privileged functions.",
+            "severity": "info",
+            "location": "./contracts/core/Distributor.sol, ./contracts/core/LiquidityPool.sol, ./contracts/core/StrategicPool.sol, ./contracts/core/TokenDistributor.sol, ./contracts/core/TokenDistributorWithNoVesting.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "The protocol is heavily centralized which can jeopardize the protocol stability if unauthorized access to the owner accounts occurs.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

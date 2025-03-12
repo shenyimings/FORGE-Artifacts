@@ -1,0 +1,182 @@
+{
+    "path": "artifacts/livepeer.pdf",
+    "project_info": {
+        "url": "https://github.com/livepeer/protocol/tree/929182cc684410d55eb9048f47ed1ec3ab70461a",
+        "commit_id": "929182cc684410d55eb9048f47ed1ec3ab70461a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol": "contracts/livepeer/protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Transcoder election can be predictable and influenced",
+            "description": "A malicious miner can manipulate the job-creation block to achieve a desired hash, influencing the transcoder election.",
+            "severity": "low",
+            "location": "Livepeer smart contract (transcoder election mechanism), BondingManager.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Loss of precision for sufficiently high denominator and amount",
+            "description": "MathUtils.percOf function loses precision when dealing with large amounts and fractional percentages outside the precision range.",
+            "severity": "info",
+            "location": "Livepeer smart contract (floating-point implementation), MathUtils.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Pseudorandom number generation is not random",
+            "description": "Transcoder assignment elections are not fair due to non-uniformly distributed pseudorandom numbers.",
+            "severity": "low",
+            "location": "Livepeer smart contract (pseudorandom number generation), BondingManager.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Transcoders with low bonded stake can avoid slashing penalties",
+            "description": "Slashed transcoders can evade penalties by adjusting their bonded stake to a minimum value.",
+            "severity": "low",
+            "location": "Livepeer smart contract, BondingManager.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ]
+            },
+            "title": "Bonding synchronization errors between data structures can enable stolen and locked tokens",
+            "description": "Delegated stake is stored in two different data structures, and if they get out of sync, delegates can claim earnings not owed to them, reduce transcoders' bonded stake, and lock other delegates' tokens.",
+            "severity": "info",
+            "location": "BondingManager.sol (functions: updateKey, claimEarnings) and EarningsPool.sol (function: autoClaimEarnings)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Insufficient Testing and Commenting in Bonding Manager",
+            "description": "Edge cases not covered in unit and integration tests; complex data structures lack documentation.",
+            "severity": "info",
+            "location": "Bonding Manager contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "Storage Mapping Deletion Pattern in SortedDoublyLL Contract",
+            "description": "Deleting a transcoder pool does not remove underlying Node mappings, allowing potential manipulation of pool data.",
+            "severity": "high",
+            "location": "SortedDoublyLL contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Unsecured Pseudorandom Number Generation",
+            "description": "Using block hashes or timestamps as a source of randomness in smart contracts, which can be influenced by malicious miners.",
+            "severity": "n/a",
+            "location": "Smart contract's pseudorandom number generation mechanism"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ],
+                "4": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Publicly Visible Contract State",
+            "description": "Random numbers cannot be generated or stored in the contract until after all lottery entries have been stored, as everything in a contract is publicly visible.",
+            "severity": "n/a",
+            "location": "Smart contract's state management"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Precalculable Random Numbers",
+            "description": "Computers can precalculate random numbers off-chain before the end of the block, making generated randomness predictable.",
+            "severity": "n/a",
+            "location": "Off-chain calculations"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Non-Random Modulus Operation",
+            "description": "Taking the modulus of a random number does not produce another random number.",
+            "severity": "n/a",
+            "location": "Smart contract's pseudorandom number generation mechanism"
+        }
+    ]
+}

@@ -1,0 +1,83 @@
+{
+    "path": "artifacts/Strategy-Curve-scrv-v4_1.md",
+    "project_info": {
+        "url": "https://github.com/pickle-finance/protocol",
+        "commit_id": "8d2a96ced740cb5dda4381e70d476760ce4b13e1",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol": "contracts/Strategy-Curve-scrv-v4_1/protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Harvesting Potential Front-Run",
+            "description": "`harvest()` function has no limitations on caller identifier, making it vulnerable to front-running.",
+            "severity": "info",
+            "location": "strategy-curve-scrv-v4_1.sol#L153"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Potentially Null Swap Destination Address",
+            "description": "`_swapUniswap` function can swap tokens with `UniswapRouterV2` to `address(0)` destination.",
+            "severity": "info",
+            "location": "strategy-base.sol#L214"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Non-Null Addresses",
+            "description": "Lack of checks for non-null addresses in `StrategyCurveSCRVv4_1` and `StrategyBase` contract fields.",
+            "severity": "info",
+            "location": "strategy-curve-scrv-v4_1.sol#L49, strategy-base.sol#L44"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant memory allocation for asset index type",
+            "description": "Unnecessary use of `uint256` for asset index type in `getMostPremium()` function.",
+            "severity": "info",
+            "location": "strategy-curve-scrv-v4_1.sol#L81"
+        }
+    ]
+}

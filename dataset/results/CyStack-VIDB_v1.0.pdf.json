@@ -1,0 +1,106 @@
+{
+    "path": "artifacts/CyStack-VIDB_v1.0.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xbfce0c7d3ba3a7f7a039521fe371a87bf84baad4",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.5.17+commit.d19bba13"
+        ],
+        "project_path": {
+            "VIDBToken": "contracts/CyStack-VIDB_v1/VIDBToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Dead Amount Possibility",
+            "description": "Gas cost for transfer function increases over time due to increasing array length.",
+            "severity": "high",
+            "location": "transfer and transferFrom functions, getLockedAmount function (contract.sol#719-724)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Locked Ether",
+            "description": "Contract has a payable function without withdrawal capacity, leading to lost Ether.",
+            "severity": "low",
+            "location": "fallback function (contract.sol#786-788)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Block Timestamp",
+            "description": "Dangerous usage of block.timestamp, which can be manipulated by miners.",
+            "severity": "info",
+            "location": "getLockedAmount function (contract.sol#722)"
+        },
+        {
+            "id": 3,
+            "category": {},
+            "title": "Allowing Older Solidity Versions",
+            "description": "Pragma version ^0.5.0 allows old versions and solc-0.5.0 is not recommended for deployment.",
+            "severity": "info",
+            "location": "contract.sol#5"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Too Many Digits",
+            "description": "Literals with many digits are difficult to read and review, leading to potential incorrect usage.",
+            "severity": "info",
+            "location": "constructor function (contract.sol#669,672,673,674,677,689)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State Variables That Could Be Declared Constant",
+            "description": "Constant state variables should be declared constant to save gas.",
+            "severity": "info",
+            "location": "contract.sol#L615-619"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Public Function That Could Be Declared External",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "info",
+            "location": "various public functions (contract.sol#...)"
+        }
+    ]
+}

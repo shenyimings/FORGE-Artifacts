@@ -1,0 +1,125 @@
+{
+    "path": "artifacts/Blockchain_Labs_NZ-Earth.pdf",
+    "project_info": {
+        "url": "https://github.com/BlockchainLabsNZ/Back-to-Earth-audit",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Back-to-Earth-audit": "contracts/Blockchain_Labs_NZ-Earth/Back-to-Earth-audit"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unnecessary Transaction",
+            "description": "`burn` and `burnFrom` functions accept a value of 0 tokens, which is not correct as this will spend gas on a transaction that does not alter the state.",
+            "severity": "low",
+            "location": "burn and burnFrom functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect ERC20 Implementation",
+            "description": "transfer should return boolean true/false",
+            "severity": "low",
+            "location": "transfer function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Event Emission",
+            "description": "mintToken emits the Transfer event twice, which can be simplified.",
+            "severity": "low",
+            "location": "mintToken function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-460"
+                ]
+            },
+            "title": "Gas Consumption",
+            "description": "throwing will consume all gas, consider returning in some cases to preserve the user's gas.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unchecked Frozen Tokens",
+            "description": "burn function doesn’t check whether the address is frozen.",
+            "severity": "medium",
+            "location": "burn function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Integer Overflow",
+            "description": "mintToken isn't checking for overflows.",
+            "severity": "medium",
+            "location": "mintToken function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted Access",
+            "description": "burnFrom never decreases the allowance amount, allowing anyone with an allowance to burn all tokens belonging to that token holder.",
+            "severity": "high",
+            "location": "burnFrom function"
+        }
+    ]
+}

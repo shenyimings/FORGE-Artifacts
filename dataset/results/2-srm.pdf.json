@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/2-srm.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "ad605c88ed2abe5c2611d6454696efac6a701419e89074445c8a7781273203cb",
+        "address": "0xf49E9665F9f54FC3d1aEa6Bf558B1031c0676944",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.9+commit.e5eed63a"
+        ],
+        "project_path": {
+            "SapceRace": "contracts/2-srm/SapceRace"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-330"
+                ],
+                "3": [
+                    "CWE-1241"
+                ]
+            },
+            "title": "Deterministic Pseudo-Random Number",
+            "description": "The SpaceRace contract is using a very simple technique that combines only the block.difficulty and block.timestamp, which can be easily manipulated by users under specific circumstances.",
+            "severity": "low",
+            "location": "contract.sol#L475"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Contract Balance Dependency",
+            "description": "The calculation of sell and buy prices heavily depends on the SapceRace contract's amount, which can be abused by users and produce unexpected results in the financial ecosystem.",
+            "severity": "low",
+            "location": "contract.sol#L398"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Initial Amount Distribution",
+            "description": "The price calculations depend on the initial contract’s funds, which can lead to underflow if the contract's amount is insufficient.",
+            "severity": "low",
+            "location": "contract.sol#L475"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Public Function could be Declared External",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "contract.sol#L296,305,405,449,455,511,539,551,555,559,566,570,574,578,582,586,590,594,614,618"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State Variables could be Declared Constant",
+            "description": "Constant state variables should be declared constant to save gas.",
+            "severity": "low",
+            "location": "contract.sol#L336,337,333,334,332,357,335"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the Solidity naming convention.",
+            "severity": "low",
+            "location": "contract.sol#L117,332,333,334,336,337"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing Events Arithmetic",
+            "description": "There are functions that have no event emitted, making it difficult to track off-chain changes.",
+            "severity": "low",
+            "location": "contract.sol#L566"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Divide before Multiply Operation",
+            "description": "Performing divisions before multiplications may cause loss of precision.",
+            "severity": "low",
+            "location": "contract.sol#L364"
+        }
+    ]
+}

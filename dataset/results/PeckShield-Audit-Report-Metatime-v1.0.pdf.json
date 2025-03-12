@@ -1,0 +1,88 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Metatime-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/MetatimeSocial/metatime/tree/75d27f8a7d2a750a5c3ab4fe0216a360fe4c49ed",
+        "commit_id": "75d27f8a7d2a750a5c3ab4fe0216a360fe4c49ed",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "metatime": "contracts/PeckShield-Audit-Report-Metatime-v1/metatime"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Proper Handling of isActive in UserProfile::_withdraw()",
+            "description": "Incomplete user profile deletion logic in UserProfile::_withdraw() allows a deleted user to call updateNickname().",
+            "severity": "medium",
+            "location": "UserProfile contract, _withdraw() function"
+        },
+        {
+            "id": 1,
+            "category": {},
+            "title": "Proper Handling of reward() in RewardTheAuthor",
+            "description": "Funds deposited into the contract via reward() are counted into _userRewards[msgSender()][address(token)] rather than _userRewards[target][address(token)].",
+            "severity": "medium",
+            "location": "RewardTheAuthor contract, reward() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Duplicate Pool Detection and Prevention In MutiRewardPool",
+            "description": "The addition of a new pool does not perform necessary sanity checks in preventing a new pool with a duplicate _stakingDuration from being added.",
+            "severity": "low",
+            "location": "MutiRewardPool contract, addPool() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The administrative account (owner) has a critical role in governing the system-wide operations, but it is worrisome if this privileged owner account is a plain EOA account.",
+            "severity": "medium",
+            "location": "Multiple Contracts"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Proper Handling of Unsupported Token in RewardTheAuthor::claim()",
+            "description": "There is no constraint to prohibit the author from withdrawing unsupported tokens from the contract.",
+            "severity": "low",
+            "location": "RewardTheAuthor contract, claim() function"
+        }
+    ]
+}

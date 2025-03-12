@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/Inspex-AlpacaStablecoin.pdf",
+    "project_info": {
+        "url": "https://github.com/alpaca-finance/alpaca-stablecoin",
+        "commit_id": "0b684fcf4deedeba4c02a2454ccfbb10bc1e8f03",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "alpaca-stablecoin": "contracts/Inspex-AlpacaStablecoin/alpaca-stablecoin"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Use of Upgradable Contract Design",
+            "description": "The logic of affected contracts can be arbitrarily changed, allowing the proxy owner to perform malicious actions.",
+            "severity": "high",
+            "location": "Multiple contracts (AccessControlConfig, AlpacaOraclePriceFeed, etc.)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variables",
+            "description": "Critical state variables can be updated anytime by controlling authorities without notifying the users.",
+            "severity": "high",
+            "location": "Multiple contracts (AlpacaOraclePriceFeed, BookKeeper, CollateralPoolConfig, etc.)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Unsafe Price Oracle",
+            "description": "The price from the oracle can be manipulated, resulting in frozen positions.",
+            "severity": "low",
+            "location": "DexPriceOracle contract, getPrice() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unchecked treasuryFeeBps Value Initialization",
+            "description": "The _treasuryFeeBps value can be set freely during contract initialization, exceeding the upper limit defined in the setTreasuryFeeBps() function.",
+            "severity": "info",
+            "location": "ibTokenAdapter contract, initialize() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "AlpacaAuth, AlpacaStablecoinProxyActions, PositionManager, ProxyWallet, ProxyWalletCache, ProxyWalletFactory, ProxyWalletRegistry, StableSwapModule contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Dependency",
+            "description": "The DexPriceOracle contract inherits from OpenZeppelin's PausableUpgradeable abstract contract but does not initialize or use it, resulting in unnecessary gas usage on deployment.",
+            "severity": "info",
+            "location": "DexPriceOracle contract"
+        }
+    ]
+}

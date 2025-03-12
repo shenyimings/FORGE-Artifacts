@@ -1,0 +1,122 @@
+{
+    "path": "artifacts/auric-network.pdf",
+    "project_info": {
+        "url": "https://github.com/auricfinance/auric-finance/tree/master",
+        "commit_id": "master",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "auric-finance": "contracts/auric-network/auric-finance"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Rebase During Warm-Up Phase",
+            "description": "The rebase() function can be called during the warm-up phase for generating average prices if setNextRebase() is not set properly.",
+            "severity": "low",
+            "location": "Rebaser.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Initialization Race Pattern",
+            "description": "The platform uses the initialization pattern to set some parameters, instead of those being placed in the constructor.",
+            "severity": "low",
+            "location": "TimeLock.sol, Rebaser.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Allowance Double-Spend Exploit",
+            "description": "An attacker could exploit the allowance double-spend vulnerability by calling approve() and then transferFrom() before the transaction is mined.",
+            "severity": "info",
+            "location": "AUSC.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Unenforceable Interfaces",
+            "description": "The code orchestrates several smart contracts making calls to each other, which may lead to transactions failing if interfaces become unavailable.",
+            "severity": "info",
+            "location": "AuricRewards contract, PoolEscrow contract, AUSCM token"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Privileged Roles and Ownership",
+            "description": "Smart contracts have owner variables that designate a person with special privileges to make modifications, which may be a centralization of power.",
+            "severity": "info",
+            "location": "Various contracts (e.g., AUSCMs in escrows, Rebaser.sol)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Oracle Dependency",
+            "description": "The platform depends on external oracles for determining prices, which may lead to issues if the oracles become unavailable or report dishonest prices.",
+            "severity": "info",
+            "location": "Oracle integrations (Chainlink, Uniswap)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Strict Inequality",
+            "description": "A minor mismatch with spec in the implementation of proposer requirements.",
+            "severity": "info",
+            "location": "GovernorAlpha.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Low Quorum Requirement",
+            "description": "Any proposal will automatically reach quorum since quorumVotes() returns proposalThreshold().",
+            "severity": "n/a",
+            "location": "Governance mechanism"
+        }
+    ]
+}

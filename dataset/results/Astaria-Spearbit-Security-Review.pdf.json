@@ -1,0 +1,254 @@
+{
+    "path": "artifacts/Astaria-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/AstariaXYZ/astaria-core",
+        "commit_id": "7e9574606344f832855632f5ce8087a71ee480eb",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "astaria-core": "contracts/Astaria-Spearbit-Security-Review/astaria-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Race condition in `buyoutLien`",
+            "description": "LienToken.buyoutLien and VaultImplementation.buyoutLien are prone to race conditions",
+            "severity": "low",
+            "location": "LienToken.sol#L102, VaultImplementation.sol#L305"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "BEACON_PROXY_IMPLEMENTATION and WETH cannot be updated for AstariaRouter",
+            "description": "There is no update mechanism for BEACON_PROXY_IMPLEMENTATION and WETH in AstariaRouter",
+            "severity": "low",
+            "location": "IAstariaRouter.sol#L67, IAstariaRouter.sol#L72"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Incorrect key parameter type is used for s.epochData",
+            "description": "In PublicVault, the epoch key provided is to the mapping s.epochData its type is uint64",
+            "severity": "low",
+            "location": "PublicVault.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "buyoutLien, canLiquidate and makePayment have different notions of expired liens",
+            "description": "The expired/non-functional liens time ranges for different endpoints are not unified",
+            "severity": "low",
+            "location": "VaultImplementation.sol#L305, LienToken.sol#L731, AstariaRouter.sol#L509"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Factor out s.slope updates",
+            "description": "Slope updates occur in multiple locations but do not emit events",
+            "severity": "low",
+            "location": "PublicVault.sol#L422, PublicVault.sol#L491"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "External call to arbitrary address",
+            "description": "The Router has a convenience function to commit to multiple liens AstariaRouter.commitToLiens",
+            "severity": "low",
+            "location": "AstariaRouter.commitToLiens, AstariaRouter._executeCommitment"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Astaria's Seaport orders may not be listed on OpenSea",
+            "description": "Astaria orders will fail OpenSea Order Validation",
+            "severity": "low",
+            "location": "CollateralToken.sol#L524-L530"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Any ERC20 held in the Router can be stolen using ERC4626RouterBase functions",
+            "description": "A malicious user can design a contract to control the router's holdings of an ERC20",
+            "severity": "low",
+            "location": "ERC4626RouterBase.sol#L15-65"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistency in byte size of maxInterestRate",
+            "description": "Inconsistency between uint88 and uint48 types",
+            "severity": "low",
+            "location": "AstariaRouter.sol#L246"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Router#file has update for nonexistent MinInterestRate variable",
+            "description": "Update to non-existent variable",
+            "severity": "low",
+            "location": "AstariaRouter.sol#L247-248"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "getLiquidationWithdrawRatio() and getYIntercept() have incorrect return types",
+            "description": "Inconsistent return types (uint256 instead of uint88)",
+            "severity": "low",
+            "location": "PublicVault.sol#L170-L172, L174-L176"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "The modified implementation of redeem is omitting a check to make sure not to redeem 0 assets",
+            "description": "Missing check for zero assets redemption",
+            "severity": "low",
+            "location": "PublicVault.sol#L108, L141"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PublicVault's redeem and redeemFutureEpoch always returns 0 assets",
+            "description": "Always returning zero assets",
+            "severity": "low",
+            "location": "PublicVault.sol#L133, L148, L114"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "OWNER() cannot be updated for private or public vaults",
+            "description": "Immutable owner data for ClonesWithImmutableArgs.clone",
+            "severity": "low",
+            "location": "AstariaVaultBase.sol#L22-L24"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "ROUTER() can not be updated for private or public vaults",
+            "description": "Immutable ROUTER data for ClonesWithImmutableArgs.clone",
+            "severity": "low",
+            "location": "AstariaVaultBase.sol#L14-L16"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong return parameter type is used for s.epochData",
+            "description": "Inconsistency in return types (uint256 instead of uint64)",
+            "severity": "low",
+            "location": "PublicVault.sol#L170-L172"
+        }
+    ]
+}

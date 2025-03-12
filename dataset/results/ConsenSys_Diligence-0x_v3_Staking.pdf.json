@@ -1,0 +1,194 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-0x_v3_Staking.pdf",
+    "project_info": {
+        "url": "https://github.com/0xProject/0x-monorepo",
+        "commit_id": "b8e01d7be535196a3145a431291183ecfbb333c6",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "0x-monorepo": "contracts/ConsenSys_Diligence-0x_v3_Staking/0x-monorepo"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Anyone can remove a maker's pending pool join status",
+            "description": "An attacker can delete the pending join status of any maker in any pool by passing NIL_POOL_ID to removeMakerFromStakingPool.",
+            "severity": "high",
+            "location": "MixinStakingPool.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Delegated stake weight reduction can be bypassed by using an external contract",
+            "description": "Staking pools allow ZRX holders to delegate their staked ZRX to a market maker in exchange for a configurable percentage of the stake reward. Using a smart contract, it is possible to represent ZRX owned by any number of parties as ZRX staked by a single party, bypassing the delegated stake weight reduction.",
+            "severity": "high",
+            "location": "Staking contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "LibFixedMath functions fail to catch a number of overflows",
+            "description": "The __add(), __mul(), and __div() functions in LibFixedMath.sol do not catch all overflows.",
+            "severity": "medium",
+            "location": "LibFixedMath.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Remove unnecessary fallback function in Staking contract",
+            "description": "The Staking contract has a payable fallback function that is never used, which introduces silent failures when calls are made to the contract with no specified function.",
+            "severity": "low",
+            "location": "Staking.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "LibProxy.proxyCall() may overwrite important memory",
+            "description": "The proxyCall function in LibProxy library does not validate the called contract or function, which may lead to reentrancy attacks.",
+            "severity": "low",
+            "location": "LibProxy.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Arithmetic Overflows in LibFixedMath functions",
+            "description": "The __add(), __mul(), and __div() functions in LibFixedMath.sol do not catch all overflows.",
+            "severity": "n/a",
+            "location": "LibFixedMath.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant MixinAbstract and Unnecessary Cognitive Overhead",
+            "description": "The abstract pattern in MixinAbstract adds unnecessary cognitive overhead.",
+            "severity": "n/a",
+            "location": "code/contracts/staking/contracts/src/sys/"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Confusing Access to activePoolsThisEpoch",
+            "description": "The two functions _getActivePoolsFromEpoch and _getActivePoolFromEpoch in MixinFinalizer are syntax sugar for activePoolsThisEpoch[epoch % 2].",
+            "severity": "low",
+            "location": "code/contracts/staking/contracts/src/sys/MixinFinalizer.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Function _getUnfinalizedPoolRewardsFromState",
+            "description": "The function _getUnfinalizedPoolRewardsFromState in MixinFinalizer is a simple wrapper around the library function LibCobbDouglas.cobbDouglas and can be removed.",
+            "severity": "low",
+            "location": "code/contracts/staking/contracts/src/sys/MixinFinalizer.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Potential buffer overflow in LibFixedMath library",
+            "description": "The LibFixedMath library uses internal functions _mul, _div, and _add without explicit input validation, which may lead to potential buffer overflows.",
+            "severity": "medium",
+            "location": "LibFixedMath.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Insecure use of proxyCall in LibProxy library",
+            "description": "The proxyCall function in LibProxy library does not validate the called contract or function, which may lead to reentrancy attacks.",
+            "severity": "high",
+            "location": "LibProxy.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Insufficient error handling in LibStakingRichErrors library",
+            "description": "The LibStakingRichErrors library does not provide sufficient error handling for various error types, which may lead to unexpected contract behavior.",
+            "severity": "medium",
+            "location": "LibStakingRichErrors.sol"
+        }
+    ]
+}

@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/mmmem.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x460440c8deb7680d32a87dfb2d6392c2c83bfa09",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "MMMem": "contracts/mmmem/MMMem"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "MEE - Missing Events Emission",
+            "description": "The contract performs actions and state mutations from external methods that do not result in the emission of events.",
+            "severity": "low",
+            "location": "MMMem.sol#L742,751,796,804,815"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RED - Redundant Event Declaration",
+            "description": "The event `MinTokensBeforeSwapUpdated` is declared and not being used in the contract.",
+            "severity": "low",
+            "location": "MMMem.sol#L527"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "AOI - Arithmetic Operations Inconsistency",
+            "description": "The contract uses both the SafeMath library and native arithmetic operations, which can introduce inconsistencies and undermine intended safety measures.",
+            "severity": "low",
+            "location": "MMMem.sol#L810,837"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PVC - Price Volatility Concern",
+            "description": "The contract accumulates tokens from taxes to swap them for ETH, which can lead to significant price volatility if the variable is set to a large number.",
+            "severity": "low",
+            "location": "MMMem.sol#L1028"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "RSW - Redundant Storage Writes",
+            "description": "The contract modifies state variables without checking if their current value is the same as the one given as an argument, leading to redundant storage writes and unnecessary gas consumption.",
+            "severity": "low",
+            "location": "MMMem.sol#L788"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "CR - Code Repetition",
+            "description": "The contract contains repetitive code segments that can lead to issues with gas efficiency, complexity, readability, security, and maintainability.",
+            "severity": "low",
+            "location": "MMMem.sol#L537"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RSML - Redundant SafeMath Library",
+            "description": "The contract uses the SafeMath library, which is not necessary in Solidity versions greater than or equal to 0.8.0, adding complexity and increasing gas consumption unnecessarily.",
+            "severity": "low",
+            "location": "MMMem.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "IDI - Immutable Declaration Improvement",
+            "description": "The contract declares state variables that are initialized once in the constructor and not modified afterwards, but could be declared as immutable to save gas.",
+            "severity": "low",
+            "location": "MMMem.sol#L560,562,571,577,583"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the Solidity naming convention guidelines, which can affect readability and maintainability.",
+            "severity": "low",
+            "location": "MMMem.sol#L166,431,505,508,511,516,819,958,962,970"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "L07 - Missing Events Arithmetic",
+            "description": "The contract does not include events for arithmetic operations, which can make it difficult to track and monitor the activity on the contract.",
+            "severity": "low",
+            "location": "MMMem.sol#L793,804,812"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L19 - Stable Compiler Version",
+            "description": "The contract uses a non-locked pragma version, which can lead to compatibility issues and unexpected behavior.",
+            "severity": "low",
+            "location": "MMMem.sol#L2"
+        }
+    ]
+}

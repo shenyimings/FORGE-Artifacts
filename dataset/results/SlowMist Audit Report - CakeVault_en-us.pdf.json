@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/SlowMist Audit Report - CakeVault_en-us.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xa80240Eb5d7E05d3F250cF000eEc0891d00b51CC",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "CakeVault": "contracts/SlowMist Audit Report - CakeVault_en-us/CakeVault"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "The deflationary token docking issue",
+            "description": "Users can transfer deflationary tokens into the vault contract, which may result in a different number of tokens received than expected.",
+            "severity": "info",
+            "location": "deposit function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "CakeAtLastUserAction parameter record error issue",
+            "description": "The calculation of cakeAtLastUserAction uses the balanceOf function, which may result in an incorrect value due to token transfer.",
+            "severity": "info",
+            "location": "withdraw function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing event records",
+            "description": "No event recording is performed when setting admin, treasury, or sensitive contract parameters.",
+            "severity": "info",
+            "location": "setAdmin, setTreasury, and other functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Emergency withdrawal issue",
+            "description": "The emergencyWithdraw function may cause unintended results if performed while the contract is not suspended.",
+            "severity": "low",
+            "location": "emergencyWithdraw function"
+        }
+    ]
+}

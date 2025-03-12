@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-0x_Exchange_v4.pdf",
+    "project_info": {
+        "url": "https://github.com/0xProject/protocol",
+        "commit_id": "475b608338561a1dce3199bfb9fb59ee9372149b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol": "contracts/ConsenSys_Diligence-0x_Exchange_v4/protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused function _executeMetaTransaction()",
+            "description": "This function appears to be unused and should be removed unless there’s a justification for its existence.",
+            "severity": "low",
+            "location": "MetaTransactionsFeature.sol, L190-214"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Stale comments",
+            "description": "There are several comments throughout the codebase that applied to an earlier version of the code and are no longer accurate.",
+            "severity": "n/a",
+            "location": "UniswapFeature.sol, L400-L401"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Revert if msg.value is non-zero but user is not selling ether",
+            "description": "The function reverts if msg.value != sellAmount only when the caller is selling ether for other tokens.",
+            "severity": "n/a",
+            "location": "UniswapFeature.sol, L179-L181"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Ether temporarily held during transactions can be stolen via reentrancy",
+            "description": "The exchange proxy temporarily holds a balance during a transaction, which is vulnerable to theft if the following conditions are met...",
+            "severity": "high",
+            "location": "MetaTransactionsFeature.sol, L137; LiquidityProviderFeature.sol, L96"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Non-static call to ERC20.allowance()",
+            "description": "The function makes a non-static call to the token’s allowance() function.",
+            "severity": "low",
+            "location": "UniswapFeature.sol, L373-L377"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked returndatasize in low-level external calls",
+            "description": "The function makes external calls from low-level assembly code without checking that the call returned the expected amount of data.",
+            "severity": "low",
+            "location": "UniswapFeature.sol, multiple locations"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Rollback functionality can lead to untested combinations",
+            "description": "The SimpleFunctionRegistry allows rolling back individual functions without a timelock, leading to untested and unpredictable combinations of functions.",
+            "severity": "low",
+            "location": "SimpleFunctionRegistry contract"
+        }
+    ]
+}

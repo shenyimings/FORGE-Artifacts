@@ -1,0 +1,872 @@
+{
+    "path": "artifacts/AstraDAO Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/astradao/astra-private/tree/9c617cc411364559291163927a67def8b50e4d69",
+        "commit_id": "9c617cc411364559291163927a67def8b50e4d69",
+        "address": "0x73E883b8924E1Ebc0299faAB828C3198489471eA",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.9+commit.e5eed63a"
+        ],
+        "project_path": {
+            "TransparentUpgradeableProxy": "contracts/AstraDAO Smart Contract Audit Report - QuillAudits/TransparentUpgradeableProxy"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Hardcoded Index creation fee",
+            "description": "The astraAmount initialized into code is different from the amount of astra tokens that is mentioned in whitepaper to create an index.",
+            "severity": "low",
+            "location": "Contract - IndicesPayment, A1"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Ownership transfer should be two step process",
+            "description": "In indicesPayment contract transferOwnership() function takes newOwner and sets it to the _owner variable in _setOwner() function.",
+            "severity": "low",
+            "location": "Contract - IndicesPayment, A2"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Re-entrancy guard is unused",
+            "description": "In indicesPayments code ReentrancyGuard has been inherited and initialized but nonReentrant modifier has never been used for any of the functions.",
+            "severity": "info",
+            "location": "Contract - IndicesPayment, A3"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Pushing same address in mapping",
+            "description": "addChefAddress() function is used to add chef contract address to the code.",
+            "severity": "low",
+            "location": "Contract - ITokendeployer, B1"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Spelling mistake in modifier",
+            "description": "onlyOwner() modifier has been misspelled as onlyOnwer().",
+            "severity": "info",
+            "location": "Contract - ITokendeployer, B2"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused code in contract",
+            "description": "_setupDecimals() and beforeTokenTransfer() functions are unused.",
+            "severity": "info",
+            "location": "Contract - ITokendeployer, B3"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "whitelistDAOaddress() function allows multiple DAOs to exist",
+            "description": "In poolConfiguration contract whitelistDAOaddress() function allows whitelisting of DAO addresses to be interacted with.",
+            "severity": "low",
+            "location": "Contract - PoolConfiguration, C1"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Set fix fee limit",
+            "description": "updateEarlyExitFees(), updatePerfees(), updateSlippagerate() are taking uint values to set fees and rate.",
+            "severity": "low",
+            "location": "Contract - PoolConfiguration, C2"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "Add setter function to support new path",
+            "description": "In contract the tokens are initialized in the initialize() function which acts as constructor.",
+            "severity": "low",
+            "location": "Contract - SwapV2, D1"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Out of gas issue can occur on initializing the contract",
+            "description": "The contract’s initialize function takes _tokens address array which if is big enough can cause the transaction to go out of gas.",
+            "severity": "low",
+            "location": "Contract - SwapV2, D2"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused code can be removed",
+            "description": "constructor() public {}",
+            "severity": "info",
+            "location": "Contract - SwapV2, D3"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Add a check for path with same tokens",
+            "description": "Swapv2 has some functions that are getting used by other contracts.",
+            "severity": "info",
+            "location": "Contract - SwapV2, D4"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Calling restakeAstraReward() results in loss of funds for protocol",
+            "description": "In contract itoken-staking if the user wants to withdraw tokens there is an option of staking the rewards for the deposit which is made.",
+            "severity": "high",
+            "location": "Contract - ITokenStaking, E1"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "restakeAstraReward() can revert on wrong _pid",
+            "description": "In contract itoken-staking user has option to restake astra rewards if he doesn’t want to get slashed rewards.",
+            "severity": "medium",
+            "location": "Contract - ITokenStaking, E2"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Pool should be restricted to one iToken only",
+            "description": "Currently while depositing and withdrawing deposit() and withdraw() functions are taking itoken parameters this can increase the attack surface.",
+            "severity": "medium",
+            "location": "Contract - ITokenStaking, E3"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "LPToken should be added directly while adding pool",
+            "description": "The Itoken and decimal value should be added directly while adding pool with add() instead of adding in `itokenInfo` array with addItoken().",
+            "severity": "medium",
+            "location": "Contract - ITokenStaking, E4"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "_withdraw()sends itoken as well as astra of same amount",
+            "description": "While withdrawing _withdraw() sends staked itoken amount back to the staker address on L800 but again it sends the same amount of astra back to the user using safeAstraTransfer() on L 804.",
+            "severity": "medium",
+            "location": "Contract - ITokenStaking, E5"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-669"
+                ]
+            },
+            "title": "Restakes in incorrect vault",
+            "description": "It is mentioned in whitepaper \"5.7.Rewards Distribution System>Claiming Rewards - iTokens Staking & Liquidity Mining\" on page 18 that \"Claim 100% and restake in 90-days lockup\".",
+            "severity": "medium",
+            "location": "Contract - ITokenStaking, E6"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "In checkEligibleAmount function updateUserSlashingfees function totaldepositAmount,     stkInfo.amount should be swapped",
+            "description": "checkEligibleAmount() is calling updateUserAverageSlashingFees() when duration of staked vault is not passed while calling withdraw().",
+            "severity": "medium",
+            "location": "Contract - ITokenStaking, E7"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Rewards are different for same deposit amount after changing decimals of iToken",
+            "description": "In contract itokendeployer owner can change decimals of itoken.",
+            "severity": "low",
+            "location": "Contract - ITokenStaking, E8"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "IToken staking gives the same reward for Different iTokens",
+            "description": "for depositing into different indexes different itokens get minted as a share of deposited amount.",
+            "severity": "low",
+            "location": "Contract - ITokenStaking, E9"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unnecessary use of addVault() function",
+            "description": "In itoken-staking contract there are vaults decided for months 0, 3, 6, 9, 12.",
+            "severity": "low",
+            "location": "Contract - ITokenStaking, E10"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ],
+                "3": [
+                    "CWE-1064"
+                ]
+            },
+            "title": "Inefficient use of arrays",
+            "description": "poolIn() function takes an array of _tokens and _values, which can consume more gas than a single address type variable.",
+            "severity": "info",
+            "location": "poolIn() function"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused variable",
+            "description": "The isEnabled boolean variable in PoolUser struct is not getting used and can be removed.",
+            "severity": "info",
+            "location": "PoolUser struct"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused event",
+            "description": "Event WithdrawnToken() on L 587 is never used in contract hence is redundant.",
+            "severity": "low",
+            "location": "L 587"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant assignments",
+            "description": "Multiple instances of redundant variable assignments in different functions.",
+            "severity": "low",
+            "location": "Various locations (L 876, L 877, etc.)"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant typecasting",
+            "description": "Unnecessary typecasting in two instances (poolIn() and getItokenValue()).",
+            "severity": "low",
+            "location": "poolIn() and getItokenValue()"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused function",
+            "description": "The withdrawPendingAmount() internal function is not getting used in the contract.",
+            "severity": "low",
+            "location": "withdrawPendingAmount() function"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect assumption about block creation time",
+            "description": "Block creation time depends on mining process and network activity, hence blocks per day can vary.",
+            "severity": "low",
+            "location": "n/a (general contract logic)"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Limited precision for fee calculation",
+            "description": "Solidity does not support decimals, making it difficult to set fees less than 1 percent.",
+            "severity": "low",
+            "location": "calculatefee() function"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Missing error message",
+            "description": "require statement on L1122 lacks an error message, making debugging difficult.",
+            "severity": "low",
+            "location": "L1122"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing require check",
+            "description": "Lack of a require check in certain conditions can lead to unintended behavior.",
+            "severity": "medium",
+            "location": "buyAstraToken() function"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unbounded array size",
+            "description": "propose() function allows proposers to submit proposals with an unbounded amount of actions.",
+            "severity": "high",
+            "location": "GovernorAlpha contract"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Double vote possibility",
+            "description": "Users can call the vote function multiple times, allowing them to double spend their votes.",
+            "severity": "medium",
+            "location": "castVote() and castVoteBySig() functions"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Flash loan vulnerability",
+            "description": "Users can manipulate votes by using flash loans to temporarily increase their staking power.",
+            "severity": "low",
+            "location": "stakingScoreAndMultiplier() function"
+        },
+        {
+            "id": 35,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Missing voter restriction",
+            "description": "Lack of a check to restrict voting to top holders for the first 90 days.",
+            "severity": "low",
+            "location": "Governance contract"
+        },
+        {
+            "id": 36,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unauthorized proposal cancellation",
+            "description": "The cancel() function in GovernorAlpha is an external function without a msg.sender check.",
+            "severity": "medium",
+            "location": "cancel() function"
+        },
+        {
+            "id": 37,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Unused return value",
+            "description": "The castVoteBySig() function returns a value that is not used.",
+            "severity": "low",
+            "location": "castVoteBySig() function"
+        },
+        {
+            "id": 38,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistent values",
+            "description": "The proposalTokens value in the contract does not match the value mentioned in the whitepaper.",
+            "severity": "info",
+            "location": "Governance contract"
+        },
+        {
+            "id": 39,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused variables",
+            "description": "Multiple unused variables are present in the contracts.",
+            "severity": "info",
+            "location": "Various locations (IHolders, startTime, etc.)"
+        },
+        {
+            "id": 40,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Transaction-ordering dependence",
+            "description": "Timelock executes data from governance in the same order it was declared.",
+            "severity": "low",
+            "location": "execute() function"
+        },
+        {
+            "id": 41,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Unbounded loop",
+            "description": "The castVoteBySigs() function uses a for loop without a max length check, leading to potential out-of-gas reverts.",
+            "severity": "low",
+            "location": "castVoteBySigs() function"
+        },
+        {
+            "id": 42,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Missing event emission",
+            "description": "Some functions lack event emissions for important changes.",
+            "severity": "info",
+            "location": "Various locations (updateEarlyExitfees(), updatePerfees(), etc.)"
+        },
+        {
+            "id": 43,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Centralization risk",
+            "description": "Contracts contain functions that are only controlled by admin/owner, creating a centralization risk.",
+            "severity": "high",
+            "location": "Various locations (indicesPayments, itokendeployer, etc.)"
+        },
+        {
+            "id": 44,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Solidity version",
+            "description": "Some contracts use old Solidity versions that lack new security checks.",
+            "severity": "low",
+            "location": "Various locations (IndicesPayment, IToken, etc.)"
+        },
+        {
+            "id": 45,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-188"
+                ]
+            },
+            "title": "Storage collision risk",
+            "description": "Contracts inherit ReentrancyGuard, which lacks a storage gap, leading to potential storage collisions.",
+            "severity": "low",
+            "location": "Various locations (itoken-staking, chefv2, etc.)"
+        },
+        {
+            "id": 46,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unintended deposit behavior",
+            "description": "Deposit functionality allows depositing 0 amounts, which may lead to unintended outcomes.",
+            "severity": "low",
+            "location": "chefv2 and itoken-staking contracts"
+        },
+        {
+            "id": 47,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Inefficient variable usage",
+            "description": "Some variables are public but only changed once, wasting gas.",
+            "severity": "info",
+            "location": "Various locations (sushiswapRouter, uniswapV2Router, etc.)"
+        },
+        {
+            "id": 48,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect comments",
+            "description": "Some comments do not match the actual functionality, leading to confusion.",
+            "severity": "info",
+            "location": "Various locations (buytokens(), updatePool(), etc.)"
+        },
+        {
+            "id": 49,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused events",
+            "description": "Some events are declared but not used in the contracts.",
+            "severity": "low",
+            "location": "Event WithdrawnToken()"
+        },
+        {
+            "id": 50,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Gas-intensive logic",
+            "description": "The deposit function's gas cost increases significantly as the number of users grows, making it inefficient.",
+            "severity": "medium",
+            "location": "Deposit function"
+        },
+        {
+            "id": 51,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Unsecured use of old OZ contract version",
+            "description": "Using an old OpenZeppelin (OZ) contract version may lead to future problems and potential bugs.",
+            "severity": "medium",
+            "location": "contracts using OZ library"
+        },
+        {
+            "id": 52,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1077"
+                ]
+            },
+            "title": "Gas inefficient comparison",
+            "description": "Comparing a value with == false instead of using the ! operator can be gas-inefficient.",
+            "severity": "low",
+            "location": "indicesPayments contract, deposit function"
+        },
+        {
+            "id": 53,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Insecure assumption about 0th pool",
+            "description": "Assuming the 0th pool is Astra's pool without proper initialization can lead to potential issues.",
+            "severity": "medium",
+            "location": "chefv2 contract"
+        },
+        {
+            "id": 54,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Unoptimized function calls",
+            "description": "Calling updateRewardRate() twice instead of once leads to unnecessary gas consumption.",
+            "severity": "low",
+            "location": "chefV2 and itoken-staking contracts, withdraw and restake functions"
+        },
+        {
+            "id": 55,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant code",
+            "description": "Redundant code can be removed to improve gas efficiency.",
+            "severity": "low",
+            "location": "chefv2 and itoken-staking contracts"
+        },
+        {
+            "id": 56,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Insecure use of block.timestamp and block.number",
+            "description": "Relying on block.timestamp and block.number for precise time calculations is insecure due to synchronization, miner manipulation, and changing block times.",
+            "severity": "medium",
+            "location": "various contracts"
+        }
+    ]
+}

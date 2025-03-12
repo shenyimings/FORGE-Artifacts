@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/Diverse_Solutions_SC-Audit-Report_15062023_SA-1275.pdf",
+    "project_info": {
+        "url": "https://github.com/DiverseSolutions/ardmoney-staking-smart-contracts",
+        "commit_id": "71b0b2e7d5aaa4db31652574cdb48f2081e045a2",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ardmoney-staking-smart-contracts": "contracts/Diverse_Solutions_SC-Audit-Report_15062023_SA-1275/ardmoney-staking-smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "Unauthorized minting of XARDM tokens compromises user funds integrity.",
+            "severity": "critical",
+            "location": "./contracts/XARDM.sol : mint()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unlimited XARDM token minting",
+            "description": "The system owner has the ability to mint an unlimited number of XARDM tokens, which can lead to a potential manipulation of the token price by affecting the token supply.",
+            "severity": "critical",
+            "location": "XARDMStaking contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Front-Running Attack; Inflation Attack",
+            "description": "Rounding issue in the deposit() function allows inflation attack and front-running attack.",
+            "severity": "critical",
+            "location": "deposit() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Undocumented Behavior",
+            "description": "Not explicitly documented that only EOA can participate in staking",
+            "severity": "high",
+            "location": "./contracts/XARDMStaking.sol : onlyEOA()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Smart contract owners' influence on execution logic",
+            "description": "The owner has too much control over the smart contract's logic, which can be exploited.",
+            "severity": "high",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Requirements Violation; Race Condition",
+            "description": "Users can manipulate system to pay unfair penalty fees.",
+            "severity": "high",
+            "location": "./contracts/XARDMStaking.sol : deposit(), withdraw()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Deposit system issue",
+            "description": "Each new deposit resets the user's deadline, regardless of any time already passed from the previous deposit.",
+            "severity": "medium",
+            "location": " Deposit system"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-544"
+                ]
+            },
+            "title": "Unchecked Transfer",
+            "description": "No SafeERC20 library used for ERC20 token transfers.",
+            "severity": "medium",
+            "location": "./contracts/XARDMStaking.sol : deposit(), withdraw(), resetRewards()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "PAUSER_ROLE can pause XARDM token transferability, causing DoS vulnerability.",
+            "severity": "medium",
+            "location": "./contracts/XARDMStaking.sol : pause(), unpause()"
+        }
+    ]
+}

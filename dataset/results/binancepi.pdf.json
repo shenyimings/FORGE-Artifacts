@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/binancepi.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "c7e474f2",
+        "address": "0x2670255fe04a69849070A20a0487263a06CF7971",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "BinancePi": "contracts/binancepi/BinancePi"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can stop transactions for all users excluding the owner",
+            "description": "The contract owner has the authority to stop sales for all users excluding the owner, allowing them to set _totalTaxIfSelling to a high value or set _maxTxAmount to zero.",
+            "severity": "critical",
+            "location": "contract.sol#L682,784"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can increase fees more than 25%",
+            "description": "The contract owner has the authority to increase fees over the allowed limit of 25% by calling the setSellTaxes function with a high percentage value.",
+            "severity": "critical",
+            "location": "contract.sol#L577"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner manipulation of fees and transactions",
+            "description": "The owner can abuse functions to manipulate fees and stop transactions, potentially converting the contract into a honeypot.",
+            "severity": "n/a",
+            "location": "Various functions in the BinancePi contract (e.g., setBuyTaxes, setSellTaxes)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Potential honeypot and prevention of user sales",
+            "description": "If the owner abuses admin functions, users may be prevented from selling.",
+            "severity": "n/a",
+            "location": "BinancePi contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization risk",
+            "description": "Single ownership can lead to centralization risks and potential manipulation.",
+            "severity": "n/a",
+            "location": "BinancePi contract (owner-related functions)"
+        }
+    ]
+}

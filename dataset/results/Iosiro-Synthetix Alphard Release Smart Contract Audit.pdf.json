@@ -1,0 +1,176 @@
+{
+    "path": "artifacts/Iosiro-Synthetix Alphard Release Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix",
+        "commit_id": "f3537b973c51e1eb3556dd02619b31c0c24d4002",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix": "contracts/Iosiro-Synthetix Alphard Release Smart Contract Audit/synthetix"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Reduced to Zero",
+            "description": "Stakers who reduced their debt share to zero in the current fee period could not claim fees or rewards.",
+            "severity": "medium",
+            "location": "FeePool.sol, function feesByPeriod(address account)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Outdated Comment",
+            "description": "Outdated comment in FeePool.sol still referenced debtEntryIndex.",
+            "severity": "info",
+            "location": "FeePool.sol, line 555"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code Duplication",
+            "description": "Duplicate code was found in SynthetixDebtShare._increaseBalance function.",
+            "severity": "n/a",
+            "location": "SynthetixDebtShare.sol, _increaseBalance function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of Zero Address Validation",
+            "description": "SynthetixDebtShare.transferFrom should add a zero address check for the recipient.",
+            "severity": "n/a",
+            "location": "SynthetixDebtShare.sol, transferFrom function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Code",
+            "description": "Legacy source files, functions, variables, and constants became redundant due to several changes made.",
+            "severity": "n/a",
+            "location": "Various contracts (FeePoolState.sol, FeePool.synthetix(), Issuer.collateralManager())"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Code Duplication",
+            "description": "SynthetixDebtShare.sharePercent could reuse SynthetixDebtShare.sharePercentOnPeriod to avoid unnecessary code duplication.",
+            "severity": "n/a",
+            "location": "SynthetixDebtShare.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent Naming Conventions",
+            "description": "Inconsistent naming conventions for variables of type ISynthetixDebtShare were used at different points in the code.",
+            "severity": "n/a",
+            "location": "Various contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Improper Use of Literals",
+            "description": "BaseSynthetix#L143 used the literal string \"sUSD\" when a constant had already been declared and should be used instead.",
+            "severity": "n/a",
+            "location": "BaseSynthetix.sol, L143"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Suboptimal Slot Layout",
+            "description": "The slot layout at SynthetixDebtShare.sol#L53 was neither optimally packed nor optimized for gas efficiency.",
+            "severity": "n/a",
+            "location": "SynthetixDebtShare.sol, L53"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Unnecessary Reverts",
+            "description": "FeePool.effectiveDebtRatioForPeriod had a number of require statements that could be rewritten to return 0 instead, which could avoid unnecessary reverts.",
+            "severity": "n/a",
+            "location": "FeePool.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Inefficient SLOADs",
+            "description": "FeePool._feesAndRewardsFromPeriod could cache the recentFeePeriodsStorage result to reduce repeated SLOADs.",
+            "severity": "n/a",
+            "location": "FeePool.sol"
+        }
+    ]
+}

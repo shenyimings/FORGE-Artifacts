@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/p2b.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x547C927Dc80c0F94A3825C805D725a69aB16DD6E",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.10+commit.fc410830"
+        ],
+        "project_path": {
+            "Play2Burn": "contracts/p2b/Play2Burn"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "ST - Stop Transactions",
+            "description": "The contract owner can stop transactions for all users excluding themselves by setting _maxTxAmount to zero.",
+            "severity": "medium",
+            "location": "https://bscscan.com/address/0x547C927Dc80c0F94A3825C805D725a69aB16DD6E#code#L1346"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "OCTD - Owner Contract Tokens Drain",
+            "description": "The contract owner can claim all the balance of the contract by calling the claimStuckTokens function with a zero address as an argument.",
+            "severity": "critical",
+            "location": "https://bscscan.com/address/0x547C927Dc80c0F94A3825C805D725a69aB16DD6E#code#L1126"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "ELFM - Exceed Limit Fees Manipulation",
+            "description": "The contract owner can increase fees beyond the allowed limit of 25% by calling the setBuyFee function with high percentage values.",
+            "severity": "critical",
+            "location": "https://bscscan.com/address/0x547C927Dc80c0F94A3825C805D725a69aB16DD6E#code#L1081,L1088"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "ULTW - Unlimited Liquidity to Team Wallet",
+            "description": "The contract owner can transfer funds without limit to the team wallet by setting a high fee to the marketingFee variable.",
+            "severity": "critical",
+            "location": "https://bscscan.com/address/0x547C927Dc80c0F94A3825C805D725a69aB16DD6E#code#L1378"
+        }
+    ]
+}

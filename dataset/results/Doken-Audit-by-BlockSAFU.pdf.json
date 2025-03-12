@@ -1,0 +1,185 @@
+{
+    "path": "artifacts/Doken-Audit-by-BlockSAFU.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x0420EB45AC5a4f04763f679c07c3A637741E0289",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.6+commit.7338295f"
+        ],
+        "project_path": {
+            "DoKENV2": "contracts/Doken-Audit-by-BlockSAFU/DoKENV2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked Return Value of Transfer/TransferFrom",
+            "description": "The return value of an external transfer/transferFrom is checked.",
+            "severity": "low",
+            "location": "Token Contract, Function transferFrom"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Same Marketing and Dev Wallet Address",
+            "description": "Marketing and dev wallet same address.",
+            "severity": "low",
+            "location": "Token Contract, Variables mktFeeReceiver and teamFeeReceiver"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owner Can Set Blacklist Address",
+            "description": "The owner can set a blacklist address, which could lead to honeypot scenarios.",
+            "severity": "high",
+            "location": "Token Contract, Functions addToBlackList and removeFromBlackList"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Owner Can Pause Transaction",
+            "description": "The owner can pause transactions, but still sell tokens.",
+            "severity": "high",
+            "location": "Token Contract, Function pauseTx"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner Can Set Timelock for Buy and Sell",
+            "description": "The owner can set timelocks for buy and sell, but exempt specific addresses.",
+            "severity": "high",
+            "location": "Token Contract, Functions setBuyTimeLock, setSellTimeLock, setIsSellLockExempt, and setIsBuyLockExempt"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Pause Trade Functionality",
+            "description": "Owner can pause trade, which poses a high risk to users.",
+            "severity": "high",
+            "location": "pauseTx function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Time Lock Exemptions",
+            "description": "Owner can exempt specific addresses from time locks, posing a high risk to users.",
+            "severity": "high",
+            "location": "setIsBuyLockExempt and setIsSellLockExempt functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner-Controlled Fees",
+            "description": "Owner can set fees up to 20%, which may be detrimental to users if misused.",
+            "severity": "medium",
+            "location": "Various fee-setting functions (e.g., setDevFee, setBuybackFee, etc.)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Contract Inheritance",
+            "description": "No description provided, so the risk level is unknown.",
+            "severity": "n/a",
+            "location": "Contract inheritance mechanism"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Add to Blacklist Functionality",
+            "description": "Owner can blacklist addresses, which poses a high risk to users if misused.",
+            "severity": "high",
+            "location": "addToBlackList function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Ownership Renunciation",
+            "description": "Owner can renounce ownership, leaving the contract without an owner and potentially causing issues.",
+            "severity": "medium",
+            "location": "renounceOwnership function"
+        }
+    ]
+}

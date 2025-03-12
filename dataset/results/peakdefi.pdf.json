@@ -1,0 +1,259 @@
+{
+    "path": "artifacts/peakdefi.pdf",
+    "project_info": {
+        "url": "https://github.com/PeakDeFi/peakdefi-token/tree/70ba3dfb7d06639920ece9642f8163365da65f1b",
+        "commit_id": "70ba3dfb7d06639920ece9642f8163365da65f1b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "peakdefi-token": "contracts/peakdefi/peakdefi-token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Untransferred ownership of peakReferralToken",
+            "description": "MigrateOwnedContractsToNextVersion function does not transfer the ownership of peakReferralToken",
+            "severity": "high",
+            "location": "PeakDeFiFund.sol, migrateOwnedContractsToNextVersion function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Peak token cap not handled correctly",
+            "description": "_interestRateFactor function will throw instead of returning zero rate after 5 billion cap is reached",
+            "severity": "medium",
+            "location": "PeakStaking.sol, _interestRateFactor function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "External signature won't work with msg.sender",
+            "description": "msg.sender value will still be equal to the initial sender when using delegate call",
+            "severity": "medium",
+            "location": "PeakDefiLogic.sol, createInvestmentWithSignature, sellInvestmentWithSignature, createCompoundOrderWithSignature, and sellCompoundOrderWithSignature functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "ChangeTokenData allows changing decimals value",
+            "description": "Changing the decimals value can lead to high severity issues",
+            "severity": "low",
+            "location": "PEAKDEFI_V2.sol, changeTokenData function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Functions do not validate input parameters",
+            "description": "Funds may be sent to the 0x0 address due to missing input validation",
+            "severity": "low",
+            "location": "Multiple functions in various contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Unlocked dependency versions in package.json files",
+            "description": "Unexpected behavior may occur due to updates of contracts in these packages",
+            "severity": "low",
+            "location": "peakdefi-contracts and PeakDefi-Token package.json files"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "High gas consumption in PeakDeFiLogic3",
+            "description": "Multiple functions loop through cycleNumber, potentially reaching block gas limit",
+            "severity": "low",
+            "location": "PeakDeFiLogic3.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Bigger Bonus Daily not implemented in _interestRateFactor",
+            "description": "Specification does not match implementation",
+            "severity": "low",
+            "location": "PeakStaking.sol, _interestRateFactor function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "UniswapOracle.consult may return stale price",
+            "description": "Caller contract won't be notified if the oracle stops being updated",
+            "severity": "low",
+            "location": "UniswapOracle.sol, consult function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Contract may receive USDC back without handling it correctly",
+            "description": "RegisterWithETH and registerWithToken may send USDC back to the contract",
+            "severity": "low",
+            "location": "PeakDeFiLogic2.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unstructured message signature allows phishing attempts or replay attacks",
+            "description": "Users may not be able to verify the authenticity of messages",
+            "severity": "low",
+            "location": "PeakDefiFund.sol, createInvestmentWithSignature, sellInvestmentWithSignature, createCompoundOrderWithSignature, and sellCompoundOrderWithSignature functions"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Initialization functions do not implement authorization mechanism",
+            "description": "An attacker can front-run a transaction to set initialization parameters to their own",
+            "severity": "low",
+            "location": "PeakdefiFactory.sol, createFund and initialization functions"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma versions in Solidity files",
+            "description": "May lead to unexpected behavior due to compiler version changes",
+            "severity": "info",
+            "location": "Multiple Solidity files"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Allowance double-spend exploit in ERC20 tokens",
+            "description": "Alice's allowance can be exploited by Bob to transfer more tokens than intended",
+            "severity": "info",
+            "location": "PEAKDEFI_V1.sol, PEAKDEFI_V2.sol, and PeakToken.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ]
+            },
+            "title": "Clone-and-own approach may lead to security risks",
+            "description": "Copied code may contain vulnerabilities or modified libraries",
+            "severity": "info",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 15,
+            "category": {},
+            "title": "UniswapOracle.sol uses a fixed period for price consultation",
+            "description": "May lead to outdated prices",
+            "severity": "info",
+            "location": "UniswapOracle.sol"
+        }
+    ]
+}

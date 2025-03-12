@@ -1,0 +1,284 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Zer0_zAuction.pdf",
+    "project_info": {
+        "url": "https://github.com/zer0-os/zBanc/tree/48da0ac1eebbe31a74742f1ae4281b156f03a4bc",
+        "commit_id": "48da0ac1eebbe31a74742f1ae4281b156f03a4bc",
+        "address": "0xc778417E063141139Fce010982780140Aa0cD5Ab",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "zBanc": "contracts/ConsenSys_Diligence-Zer0_zAuction/zBanc"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Consider using the best type available in function arguments and declarations",
+            "description": "Using address instead of a specific contract type can lead to issues",
+            "severity": "n/a",
+            "location": "zAuction/contracts/zAuction.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Family of methods",
+            "description": "Switching to safe* family of methods may introduce reentrancy vectors",
+            "severity": "n/a",
+            "location": "Various contracts (zAuction, Zsale)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Inconsistent use of safeTransferFrom method",
+            "description": "Domains are minted using safeMint but transferred without checks",
+            "severity": "n/a",
+            "location": "zNS/contracts/Registrar.sol and others"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Consider replacing zAuctionAccountant",
+            "description": "Replaced with a call to wrap ETH",
+            "severity": "n/a",
+            "location": "zAuction contracts"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Separate test artifacts from system contracts",
+            "description": "Test artifacts should be in a separate folder",
+            "severity": "n/a",
+            "location": "zAuction/contracts/ERC721TestToken.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Consider using openzeppelin npm packages instead of copying their contracts",
+            "description": "Use integrity checked dependency and package management system",
+            "severity": "n/a",
+            "location": "zAuction/contracts/oz"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Consider switching to usingFor notation",
+            "description": "Improve code readability by declaring SafeMath usingFor uint256",
+            "severity": "n/a",
+            "location": "Various contracts (zAuction, Zsale)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Adhere to commonly used code style and naming conventions",
+            "description": "Enforce code style guidelines in the CI pipeline using linter tools",
+            "severity": "n/a",
+            "location": "Various contracts (zAuction, zNS)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incomplete/Dead Code in zWithdraw and zDeposit",
+            "description": "The methods do not appear to be properly implemented.",
+            "severity": "high",
+            "location": "zAuction contract, functions zWithdraw and zDeposit"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unpredictable behavior for users due to admin front running or general bad timing",
+            "description": "An administrator can update the zAuction contract without warning.",
+            "severity": "high",
+            "location": "zAuctionAccountant contract, functions SetZauction and SetAdmin"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "The lifecycle of a bid both for zAuction and zNS is not clear, and has many flaws.",
+            "description": "There is no way to cancel an old bid or invalidate bids automatically after the formal auction is over.",
+            "severity": "high",
+            "location": "zAuction and zNS contracts"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Potential initialization frontrunning and unnecessary init function",
+            "description": "The zAuction initialization method is unprotected.",
+            "severity": "low",
+            "location": "zAuction contract, function init"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Unfavorable Scenario with Parallel Contracts",
+            "description": "Two contracts may be active in parallel accepting WETH bids.",
+            "severity": "high",
+            "location": "zAuctionAccountant contract, function SetZauction"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Gas griefing by spamming off-chain fake bids",
+            "description": "Accounts can submit transactions that are deemed to fail, luring others into spending gas.",
+            "severity": "medium",
+            "location": "zAuction and zNS contracts"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Functionality outlined in specification that is not implemented yet",
+            "description": "User flow (2) is not implemented in the smart contract system.",
+            "severity": "medium",
+            "location": "zAuction contract"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Auctions/offers can be terminated by reusing auction id",
+            "description": "Malicious actors may force the termination of active auctions/sales.",
+            "severity": "medium",
+            "location": "zAuction contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Hardcoded ropsten token address",
+            "description": "The auction contract hardcodes the WETH ERC20 token address for Ropsten.",
+            "severity": "low",
+            "location": "zAuction contract"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Allowing zero value withdrawals/deposits/exchange",
+            "description": "The accountant contract allows zero-value transactions.",
+            "severity": "low",
+            "location": "zAuctionAccountant contract"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Ineffective zero-value transfers",
+            "description": "Zero value transfers perform a no-operation sometimes followed by calling out to the recipient of the withdrawal.",
+            "severity": "n/a",
+            "location": "zAuction/contracts/zAuctionAccountant.sol:L38-L42, L33-L36"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Seller can accept their own bid",
+            "description": "A seller can accept their own bid which is an ineffective action that is emitting an event.",
+            "severity": "low",
+            "location": "n/a"
+        }
+    ]
+}

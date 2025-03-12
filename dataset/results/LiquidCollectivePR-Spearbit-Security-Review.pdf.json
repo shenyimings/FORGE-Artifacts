@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/LiquidCollectivePR-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/liquid-collective/liquid-collective-protocol/tree/638e03ea1799600698a2bd40bfcbf5406b083dd3",
+        "commit_id": "638e03ea1799600698a2bd40bfcbf5406b083dd3",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "liquid-collective-protocol": "contracts/LiquidCollectivePR-Spearbit-Security-Review/liquid-collective-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Calculation of CurrentValidatorExitsDemand and TotalValidatorExitsRequested using unsolicited exits",
+            "description": "Calculation of CurrentValidatorExitsDemand and TotalValidatorExitsRequested using unsolicited exits can happen at the end of _setStoppedValidatorCounts(...)",
+            "severity": "info",
+            "location": "OperatorsRegistry.1.sol#L541-L546, OperatorsRegistry.1.sol#L569-L574"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Define a new internal function to update TotalValidatorExitsRequested",
+            "description": "Refactor the logic of updating TotalValidatorExitsRequested and emitting the relevant event by introducing the new internal function",
+            "severity": "info",
+            "location": "OperatorsRegistry.1.sol#L584-L585, OperatorsRegistry.1.sol#L848-L849"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Use _setCurrentValidatorExitsDemand",
+            "description": "If an update is needed for CurrentValidatorExitsDemand in _setStoppedValidatorCounts(...), the internal function _setCurrentValidatorExitsDemand is not used",
+            "severity": "info",
+            "location": "OperatorsRegistry.1.sol#L467, OperatorsRegistry.1.sol#L589-L592"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-439"
+                ]
+            },
+            "title": "Changes to the emission of RequestedValidatorExits event during catch-up",
+            "description": "The event log will be different between the old and new implementations, potentially causing off-chain components to read outdated information",
+            "severity": "info",
+            "location": "OperatorsRegistry.1.sol#L488, OperatorsRegistry.1.sol#L546"
+        }
+    ]
+}

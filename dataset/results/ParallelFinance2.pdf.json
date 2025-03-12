@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/ParallelFinance2.pdf",
+    "project_info": {
+        "url": "https://github.com/para-space/paraspace-core/tree/9bacd4d6362bdf9f87c3b6afed97bbcc3145f11d",
+        "commit_id": "9bacd4d6362bdf9f87c3b6afed97bbcc3145f11d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "paraspace-core": "contracts/ParallelFinance2/paraspace-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "getReservesData does not set all AggregatedReserveData fields",
+            "description": "The getReservesData function does not set the name and assetType fields of the AggregatedReserveData structure, leading to uninitialized data.",
+            "severity": "low",
+            "location": "contracts/ui/UiPoolDataProvider.sol, function getReservesData"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Excessive type repetition in returned tuples",
+            "description": "Several functions return tuples with many fields of the same type adjacent to each other, making it error-prone for callers.",
+            "severity": "info",
+            "location": "contracts/protocol/libraries/{logic/GenericLogic.sol, configuration/ReserveConfiguration.sol}"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Incorrect grace period could result in denial of service",
+            "description": "Setting the grace period parameter too high could result in a denial-of-service condition.",
+            "severity": "high",
+            "location": "contracts/protocol/configuration/PriceOracleSentinel.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect accounting in _transferCollaterizable",
+            "description": "The _transferCollaterizable function mishandles the collaterizedBalance and _isUsedAsCollateral fields.",
+            "severity": "info",
+            "location": "contracts/protocol/tokenization/{NToken.sol, base/MintableIncentivizedERC721.sol}"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "IPriceOracle interface is used only in tests",
+            "description": "The IPriceOracle interface is not used in the production code.",
+            "severity": "info",
+            "location": "contracts/interfaces/IPriceOracle.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Manual ERC721 transfers could be claimed as NTokens by anyone",
+            "description": "Users are able to manually transfer ERC721 assets to the NToken contract, which allows attackers to mint their own NTokens for any erroneously transferred ERC721 assets.",
+            "severity": "high",
+            "location": "supplyERC721FromNToken function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing asset type checks in ValidationLogic library",
+            "description": "Some validation functions involving assets do not check the given asset's type.",
+            "severity": "info",
+            "location": "contracts/protocol/libraries/logic/ValidationLogic.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Uniswap v3 NFT flash claims may lead to undercollateralization",
+            "description": "Flash claims of Uniswap NFTs allow the flash claim recipient to withdraw liquidity from the underlying position, leading to undercollateralization and loss of protocol funds.",
+            "severity": "high",
+            "location": "contracts/protocol/libraries/logic/FlashClaimLogic.sol"
+        }
+    ]
+}

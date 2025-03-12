@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/SlowMist Audit Report - SmoothyV1_en-us.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xe5859f4EFc09027A9B718781DCb2C6910CAc6E91",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "Root": "contracts/SlowMist Audit Report - SmoothyV1_en-us/Root"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ]
+            },
+            "title": "Risk of repeated contract initialization",
+            "description": "The owner can initialize the contract through the `initialize` function to set key parameters, but there is no restriction on the `initialize` function to prevent repeated initialization calls.",
+            "severity": "high",
+            "location": "SmoothyMasterV1.sol, VotingEscrow.sol, SmoothyV1.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Risk of excessive authority",
+            "description": "The owner role can arbitrarily modify the minter role address, leading to risk of excessive owner authority.",
+            "severity": "medium",
+            "location": "liquidity-mining/SMTYToken.sol (changeMinter function)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Denial of Service Risk",
+            "description": "The massUpdatePools function can cause a DoS risk if the number of pools exceeds too much.",
+            "severity": "medium",
+            "location": "SmoothyMasterV1 contract (massUpdatePools function)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "The lockDuration does not match the lockEnd",
+            "description": "When reconfirming the lockDuration, the new lock duration and the smaller value of MAX_TIME are taken, but in the end, the _end parameter is still directly passed to lockEnd.",
+            "severity": "low",
+            "location": "liquidity-mining/SmoothyMasterV1.sol (extendLock function)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate calculation of LP amount",
+            "description": "The final calculation result may be inconsistent with expectations due to cached data for calculation.",
+            "severity": "low",
+            "location": "SmoothyV1 contract (getMintAmount and other functions)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "The change of LP pool weights affects users' income",
+            "description": "When the Owner calls the add function and the set function, all LP pool weights will change accordingly.",
+            "severity": "n/a",
+            "location": "liquidity-mining/SmoothyMasterV1.sol (add and set functions)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Loss of precision issue",
+            "description": "The _updateWorkingAmount function may result in loss of accuracy due to division first and then multiplication.",
+            "severity": "n/a",
+            "location": "SmoothyMasterV1 contract (_updateWorkingAmount function)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Unrecoverable issue of pool imbalance",
+            "description": "The penalty mechanism may not be able to recover the token pool if it is maliciously manipulated.",
+            "severity": "n/a",
+            "location": "SmoothyV1 contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Risk of Potential Token Transfer Failure",
+            "description": "The safeTransferFrom and safeTransfer functions may fail due to non-compliance with EIP20 specifications.",
+            "severity": "n/a",
+            "location": "SmoothyV1 contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Token compatibility issue",
+            "description": "Exchange operations may not be performed correctly if the project is connected to a stable rebase algorithm.",
+            "severity": "n/a",
+            "location": "SilMaster.sol"
+        }
+    ]
+}

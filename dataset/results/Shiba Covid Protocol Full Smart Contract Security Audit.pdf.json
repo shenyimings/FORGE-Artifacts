@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/Shiba Covid Protocol Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xe7f4ebaa247b09b1e5e55a09932c11cbb028e041",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "ShibaCovid": "contracts/Shiba Covid Protocol Full Smart Contract Security Audit/ShibaCovid"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Zero address reward",
+            "description": "The owner can add a zero address back to rewards through the `includeInReward()` function, decreasing the share of each holder.",
+            "severity": "medium",
+            "location": "includeInReward() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas (1)",
+            "description": "The `includeInReward()` function uses a loop to find and remove addresses from the `_excluded` list, which may lead to an OUT_OF_GAS exception if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "includeInReward() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas (2)",
+            "description": "The `_getCurrentSupply` function uses a loop to evaluate the total supply, which may lead to an OUT_OF_GAS exception if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "_getCurrentSupply function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized risk",
+            "description": "The `addLiquidity()` function sends the owner's address as a parameter, allowing them to acquire generated LP tokens and accumulate a significant portion.",
+            "severity": "low",
+            "location": "addLiquidity() function"
+        }
+    ]
+}

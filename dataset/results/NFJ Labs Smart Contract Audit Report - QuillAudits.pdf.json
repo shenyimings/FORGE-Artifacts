@@ -1,0 +1,203 @@
+{
+    "path": "artifacts/NFJ Labs Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/ArtisticJewellers/nfjlabs-marketplace/tree/master",
+        "commit_id": "master",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "nfjlabs-marketplace": "contracts/NFJ Labs Smart Contract Audit Report - QuillAudits/nfjlabs-marketplace"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Improper Use of beforeTokenTransfer Hook with PausableUpgradable.sol WhenNotPaused Modifier",
+            "description": "The hook was not implemented properly, and the override feature did not work as expected.",
+            "severity": "high",
+            "location": "ArtisticJeweller.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Platform owner can steal any owner’s NFTs: POC",
+            "description": "PlatformOwner can take ownership of tokens by calling cancelAuction() before they can be transferred to the new owner.",
+            "severity": "high",
+            "location": "Marketplace.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Allow Setting Unchecked Arbitrary Values",
+            "description": "Malicious NFT creators can set royalties higher than 2.5%.",
+            "severity": "medium",
+            "location": "ArtisticJeweller.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "NFT Item Put On Sale Cannot Be Removed Unless Purchased: POC1/POC2",
+            "description": "NFT items put on sale cannot be removed unless purchased, even after the auction period has elapsed.",
+            "severity": "medium",
+            "location": "Marketplace.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Input validation",
+            "description": "Zero addresses and arbitrary amounts can be passed in without reverting.",
+            "severity": "low",
+            "location": "Marketplace.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of Gas Issue",
+            "description": "The for-loop in the transferToHigherBidder function may cause an out-of-gas issue if there are many bidders.",
+            "severity": "low",
+            "location": "Marketplace.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unnecessary Check In mintNFT Function",
+            "description": "Unnecessary require check on L98.",
+            "severity": "info",
+            "location": "ArtisticJeweller.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove Unused Variable",
+            "description": "Unused variable MAX_BPS should be removed.",
+            "severity": "info",
+            "location": "ArtisticJeweller.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Change Function Visibility from Public to External",
+            "description": "View functions with public visibility can be changed to external to save gas.",
+            "severity": "info",
+            "location": "ArtisticJeweller.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of Comments",
+            "description": "The codebase lacks comments, making it hard to understand.",
+            "severity": "info",
+            "location": "ArtisticJeweller.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Emit events for notable changes to state",
+            "description": "Important changes are not logged by emitting events.",
+            "severity": "info",
+            "location": "ArtisticJeweller.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Modifier only used once",
+            "description": "The NFTCreator() modifier is only called once and can be inlined.",
+            "severity": "info",
+            "location": "ArtisticJeweller.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inaccurate Code Behavior",
+            "description": "The contracts lack specified pragma solidity versions and do not properly interface with external contracts.",
+            "severity": "info",
+            "location": "ArtisticJeweller.sol, Marketplace.sol"
+        }
+    ]
+}

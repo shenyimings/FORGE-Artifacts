@@ -1,0 +1,83 @@
+{
+    "path": "artifacts/Verichains Public Audit Report - MiLady Meme Coin Smartcontracts - v1.1.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x12970e6868f88f6557b76120662c1b3e50a646bf",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "LadysToken": "contracts/Verichains Public Audit Report - MiLady Meme Coin Smartcontracts - v1/LadysToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralize in mint, burn and blacklist functions",
+            "description": "The person with MINTER_ROLE/BURNER_ROLE can mint/burn tokens of any user. The person with DEFAULT_ADMIN_ROLE can blacklist any address.",
+            "severity": "low",
+            "location": "Ladys.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "signatureThreshold must always be greater than 0",
+            "description": "Users with DEFAULT_ADMIN_ROLE can change the value of signatureThreshold, but there is no requirement that the value must always be greater than 0.",
+            "severity": "low",
+            "location": "MemBridge.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "MemBridge.sol - The signer must always be different from address 0",
+            "description": "ecrecover function always returns address 0 for invalid signatures",
+            "severity": "low",
+            "location": "MemBridge.sol, verifySignature function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "BridgePool.sol - The contract still approves the old token when switching to a new token",
+            "description": "The owner can change to a new token, but does not set the allowance of the old token to 0 for the MemBridge contract.",
+            "severity": "info",
+            "location": "BridgePool.sol, authorizeBridge and setToken functions"
+        }
+    ]
+}

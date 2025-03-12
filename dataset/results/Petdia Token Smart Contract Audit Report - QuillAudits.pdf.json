@@ -1,0 +1,56 @@
+{
+    "path": "artifacts/Petdia Token Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/razzorsec/RazzorSec-Contracts/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "RazzorSec-Contracts": "contracts/Petdia Token Smart Contract Audit Report - QuillAudits/RazzorSec-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Token mint irregularity",
+            "description": "The internal mint function is called in the token’s constructor to mint a certain number of tokens (3000000000 * 18**18) tokens to the deployer of the contract, which does not match up with the standard value of 10**18 used to denote decimals for ease of transfer and reduction of arithmetic errors.",
+            "severity": "medium",
+            "location": "Petdia.sol contract, token mint function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Privilege and Ownership transfer",
+            "description": "The contract does not make use of the Ownable inheritance and can be removed to save deployment costs and reduce unused code.",
+            "severity": "low",
+            "location": "Petdia.sol contract, ownership transfer function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma",
+            "description": "Contracts should be deployed with the same compiler version that they have been tested with thoroughly. Locking the pragma helps to ensure that contracts do not accidentally get deployed using, for example, an outdated compiler version that might introduce bugs that affect the contract system negatively.",
+            "severity": "info",
+            "location": "Petdia.sol contract, pragma solidity >=0.8.0"
+        }
+    ]
+}

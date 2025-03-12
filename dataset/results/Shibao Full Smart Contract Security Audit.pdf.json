@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/Shibao Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xBe1515C9A5D7C358E87d932973648a1F402B7A04",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.4+commit.3f05b770"
+        ],
+        "project_path": {
+            "Shibao": "contracts/Shibao Full Smart Contract Security Audit/Shibao"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Loop in rebase() function may cause out of gas exception",
+            "description": "The rebase() function uses a loop that may abort with an OUT_OF_GAS exception if not rebased for a long time.",
+            "severity": "low",
+            "location": "Shibao contract, rebase() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Rounding errors in division calculations",
+            "description": "Division operations may result in rounding errors due to Solidity's lack of floating points.",
+            "severity": "low",
+            "location": "Various functions with division operations"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing event emission in _basicTransfer() function",
+            "description": "The _basicTransfer() function does not emit a transferring event.",
+            "severity": "low",
+            "location": "Shibao contract, _basicTransfer() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential MAX_SUPPLY exceedance",
+            "description": "There is no checking to ensure that future totalSupply does not exceed MAX_SUPPLY.",
+            "severity": "low",
+            "location": "Shibao contract, totalSupply variable"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized control by owner",
+            "description": "The owner has extensive privileges, including swapping all contract balance to treasury address and changing various settings.",
+            "severity": "low",
+            "location": "Shibao contract, Ownership and various functions"
+        }
+    ]
+}

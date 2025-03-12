@@ -1,0 +1,263 @@
+{
+    "path": "artifacts/88mph.pdf",
+    "project_info": {
+        "url": "https://github.com/88mphapp/88mph-contracts/tree/76cd9d1fc45e65f5d0f686621fe6af85c40aa140",
+        "commit_id": "76cd9d1fc45e65f5d0f686621fe6af85c40aa140",
+        "address": "0xa696a63cc78dffa1a63e9e50587c197387ff6c7e",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "88mph-contracts": "contracts/88mph/88mph-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Lack of validation of interest oracle's money market upon DInterest initialization",
+            "description": "DInterest contract may have different money markets than its interest oracle, causing incorrect interest rates and potential fund losses.",
+            "severity": "medium",
+            "location": "DInterest.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Lack of return value check on transfer and transferFrom",
+            "description": "Some tokens do not revert when transfers fail, enabling users to steal funds.",
+            "severity": "info",
+            "location": "xMPH.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Lack of two-step process for contract ownership transfers",
+            "description": "A single-step ownership transfer may result in an irrecoverable contract if the owner address is incorrect.",
+            "severity": "info",
+            "location": "OwnableUpgradeable"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-451"
+                ]
+            },
+            "title": "Users cannot specify a minimum desired interest amount for new deposits",
+            "description": "Users cannot guarantee a profitable amount of interest when depositing funds into 88mph.",
+            "severity": "medium",
+            "location": "DInterest.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Linearization of exponential compounding could lead to insolvency",
+            "description": "Incorrect implementation of money market rate per second calculation, leading to potential system insolvency.",
+            "severity": "high",
+            "location": "EMAOracle.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Initialization functions can be front-run",
+            "description": "Front-running attack on initialization functions, allowing malicious initialization of contracts.",
+            "severity": "high",
+            "location": "deploy/*"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of contract existence check on delegatecall",
+            "description": "Missing contract existence check before delegatecall, potentially leading to unexpected behavior and loss of funds.",
+            "severity": "info",
+            "location": "openzeppelin-contracts/*/Proxy.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Inconsistent validation of money markets' rewards address",
+            "description": "Inconsistent validation of _rewards address across different contracts, potentially leading to errors or security vulnerabilities.",
+            "severity": "low",
+            "location": "HarvestMarket.sol, AaveMarket.sol, BProtocolMarket.sol, CompoundERC20Market.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Solidity compiler optimizations can be problematic",
+            "description": "Enabled optional Solidity compiler optimizations may introduce security vulnerabilities.",
+            "severity": "n/a",
+            "location": "hardhat.config.js"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Redundant addition of zero value in the Harvest money market",
+            "description": "The return value of vault.balanceOf(address(this)) can be omitted from totalValue().",
+            "severity": "info",
+            "location": "HarvestMarket.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of documentation concerning Rescuable base contract could result in exploitable modifications",
+            "description": "The protocol's use of a Rescuable base contract lacks proper documentation, which may lead to exploits.",
+            "severity": "info",
+            "location": "MoneyMarket.sol, YVaultMarket.sol, HarvestMarket.sol, AaveMarket.sol, CompoundERC20Market.sol, BProtocolMarket.sol, CreamERC20Market.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Modifications make the safeApprove function unsafe",
+            "description": "The modified safeApprove function does not protect against approve front-running attacks.",
+            "severity": "info",
+            "location": "SafeERC20.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Transferring the entire balance of a contract has unintended consequences",
+            "description": "Transferring an entire balance can lead to loss of funds and inconsistent behavior.",
+            "severity": "low",
+            "location": "YVaultMarket.sol, CompoundERC20Market.sol, BProtocolMarket.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Users are not informed of the pitfalls of using Yearn vaults",
+            "description": "Yearn's implementation details can leak through the abstraction, causing users to realize a loss or revert.",
+            "severity": "medium",
+            "location": "YVaultMarket.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Sponsor payout uses two transfers when only one is required",
+            "description": "Unnecessary and wasteful use of two transfers instead of one.",
+            "severity": "info",
+            "location": "Sponsorable.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "ERC20Wrapper's transferFrom function ignores the sender argument",
+            "description": "The function ignores the sender argument, causing unexpected token transfers.",
+            "severity": "high",
+            "location": "ERC20Wrapper.sol"
+        }
+    ]
+}

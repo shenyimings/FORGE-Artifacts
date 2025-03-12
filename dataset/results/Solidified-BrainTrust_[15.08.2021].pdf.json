@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/Solidified-BrainTrust_[15.08.2021].pdf",
+    "project_info": {
+        "url": "https://github.com/Snowfork/BTRST-Contracts",
+        "commit_id": "7ff8fb76010925634ab5b23425208c67c2f11f62",
+        "address": "0x799ebfabe77a6e34311eeee9825190b9ece32824",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "BTRST-Contracts": "contracts/Solidified-BrainTrust_[15/BTRST-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralized Admin Privileges",
+            "description": "The full supply of tokens is allocated to one specific address during contract deployment, allowing centralized admin privileges.",
+            "severity": "info",
+            "location": "Timelock.sol, Contract Deployment"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Token susceptible to approve attack",
+            "description": "Changing an allowance through the approve() method brings the risk that someone may use both the old and the new allowance by unfortunate transaction ordering.",
+            "severity": "low",
+            "location": "BTRUST.sol, approve() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Allows duplicate values",
+            "description": "The functions addMarketplaceCategory() and addFoundationMember() do not validate the input and this allows duplicate values to be present in both marketplaceCategories and foundationMemberships array.",
+            "severity": "low",
+            "location": "GovernanceDecisions.sol, addMarketplaceCategory() and addFoundationMember() functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "List of proposals might not be executable within a single transaction",
+            "description": "The function execute() attempts to execute all the submitted proposal calls within the same transaction, which may result in an always failing and un-executable proposal.",
+            "severity": "low",
+            "location": "GovernorAlpha.sol, execute() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused import",
+            "description": "The debug import 'hardhat/console.sol' has been left in the code.",
+            "severity": "n/a",
+            "location": "GovernorAlpha.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent Solidity versions",
+            "description": "The contracts use different compiler versions defined by pragmas.",
+            "severity": "n/a",
+            "location": "Contracts' pragma definitions"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate SafeMath implementations",
+            "description": "The contracts all use their own implementations of secure arithmetic operations.",
+            "severity": "n/a",
+            "location": "Contracts' SafeMath implementations"
+        }
+    ]
+}

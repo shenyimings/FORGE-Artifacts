@@ -1,0 +1,476 @@
+{
+    "path": "artifacts/ShieldStakingVault_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "2a6bdc4a9de461b1e467788b6772b397b1fdaa56",
+        "address": "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.7.6+commit.7338295f"
+        ],
+        "project_path": {
+            "Quoter": "contracts/ShieldStakingVault_final_Secure3_Audit_Report/Quoter"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Users can get StakingVault shares for free",
+            "description": "User can withdraw funds without burning his vault shares.",
+            "severity": "critical",
+            "location": "code/contracts/StakingVault.sol (L240, L256-L258, L294, L325)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "OptionsTrading.latestRoundID should be updated",
+            "description": "latestRoundID can never be changed.",
+            "severity": "medium",
+            "location": "code/contracts/OptionsTrading.sol (L17)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Wrong caller check in onlyGovernance modifier",
+            "description": "onlyGovernance modifier checks the wrong caller.",
+            "severity": "critical",
+            "location": "code/contracts/OptionsTrading.sol (L47)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Redundant msg.value check in payOptionYield function",
+            "description": "Redundant check for msg.value in payOptionYield function.",
+            "severity": "info",
+            "location": "code/contracts/OptionsTrading.sol (L79-L81)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "StakingVault.SERIAL_NUMBER is not guaranteed to be unique",
+            "description": "SERIAL_NUMBER may not be unique when creating a StakingVault using VaultManager.batchCreate function.",
+            "severity": "info",
+            "location": "code/contracts/StakingVault.sol (L69)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect slippage control in settle and terminate functions",
+            "description": "Slippage check is incorrect in settle and terminate functions.",
+            "severity": "critical",
+            "location": "code/contracts/StakingVault.sol (L432-L435, L653-L656)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "StakingVault.curveEnabled is redundant",
+            "description": "curveEnabled variable is always assigned true together with lpMiningEnabled and never used later.",
+            "severity": "info",
+            "location": "code/contracts/structs/VaultStorage.sol (L68-L70), code/contracts/StakingVault.sol (L81-L84)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "StakingVault.minDeposit is not initialized",
+            "description": "minDeposit storage variable is not initialized in StakingVault contract.",
+            "severity": "low",
+            "location": "code/contracts/StakingVault.sol (L160)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "StakingVault.withdrawableAmountInRound is not used correctly",
+            "description": "withdrawableAmountInRound is not used correctly in currentSharePrice() function.",
+            "severity": "critical",
+            "location": "code/contracts/StakingVault.sol (L243-L260, L514-L528)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "cancelWithdraw does not update totalWithdrawingShares and withdrawingSharesInRound",
+            "description": "Inconsistency in accounting for deposits and withdrawals",
+            "severity": "critical",
+            "location": "cancelWithdraw() function in StakingVault contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "depositFor can bypass maxVolume limit",
+            "description": "Deposit volume not checked against maxVolume limit",
+            "severity": "medium",
+            "location": "depositFor() function in StakingVault contract"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong use of msg.value and address.balance in deposit()",
+            "description": "Misuse of msg.value and address(this).balance leading to incorrect deposit limit check",
+            "severity": "medium",
+            "location": "deposit() function in StakingVault contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Logical Error in exit Function",
+            "description": "The exit function does not send the refund to the user and does not burn shares.",
+            "severity": "critical",
+            "location": "StakingVault.sol, lines 667-687"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Logical Error in exit Function",
+            "description": "The exit function always reverts due to conflicting modifiers.",
+            "severity": "critical",
+            "location": "StakingVault.sol, lines 52-55, 331-332, 667-670"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-573"
+                ]
+            },
+            "title": "State Modification in view Function",
+            "description": "The getEtherOnLPMining function modifies state through external calls.",
+            "severity": "medium",
+            "location": "StakingVault.sol, lines 606-627"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas Optimization Opportunity",
+            "description": "The calculation of etherOut can be optimized.",
+            "severity": "info",
+            "location": "StakingVault.sol, line 616"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "StakingVault::initialize should check whether endTime is as expected",
+            "description": "The contract can be re-initialized if the publisher passes a presaleEndTime value of 0.",
+            "severity": "low",
+            "location": "StakingVault.sol, function initialize"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "StakingVault::initiateWithdraw should increase withdrawingSharesInRound",
+            "description": "In initiateWithdraw, when the user deposits shares, withdrawingSharesInRound is not increased in certain conditions.",
+            "severity": "critical",
+            "location": "StakingVault.sol, function initiateWithdraw"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ],
+                "3": [
+                    "CWE-595"
+                ],
+                "4": [
+                    "CWE-284"
+                ]
+            },
+            "title": "StakingVault::sellAllLDO Incorrect recipient address",
+            "description": "The recipient address in the ExactInputSingleParams struct should be address(this) instead of msg.sender.",
+            "severity": "critical",
+            "location": "StakingVault.sol, function sellAllLDO"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "StakingVault::sellAllLDO WETH is not unwrapped",
+            "description": "In the sellAllLDO function, all LDO will be sold and receive WETH token, but it's not unwrapped.",
+            "severity": "critical",
+            "location": "StakingVault.sol, function sellAllLDO"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "StakingVault::settlement Anyone can provide _minLPMint and _minEtherReceived leading to sandwich attack",
+            "description": "The settlement can be called by anyone, and tokens are exchanged in STABLE_SWAP as needed in the settlement.",
+            "severity": "medium",
+            "location": "StakingVault.sol, function settlement"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Uncontrolled Slippage",
+            "description": "Malicious callers can perform sandwich attacks due to uncontrolled slippage.",
+            "severity": "critical",
+            "location": "settlement function in StakingVault contract"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect handling of etherNeedToSell",
+            "description": "Users may be unable to withdraw ETH due to insufficient balance.",
+            "severity": "critical",
+            "location": "settlement function in StakingVault contract, lines 416-436"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Excessive shares minted",
+            "description": "TotalPendingAmount is inflated, resulting in too many shares being minted.",
+            "severity": "medium",
+            "location": "settlement function in StakingVault contract"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Premium for the management fee rate and performance fee rate is missing",
+            "description": "There are no restrictions on the fee rate values, and corresponding events are missing when system parameters change.",
+            "severity": "info",
+            "location": "VaultManager.sol# L169-L175"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "receive() is not implemented in OptionTrading and StakingVault contract",
+            "description": "Ethers transfer will be reverted because neither OptionsTrading nor StakingVault contracts implement a receive function.",
+            "severity": "medium",
+            "location": "OptionsTrading and StakingVault contracts"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-248"
+                ]
+            },
+            "title": "Unhandled ETH Transfer in IStableSwap.remove_liquidity_imbalance",
+            "description": "IStableSwap.remove_liquidity_imbalance called in settlement and terminate functions will send ether to the StakingVault contract, leading to a revert.",
+            "severity": "medium",
+            "location": "IStableSwap.remove_liquidity_imbalance function"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Reentrancy Vulnerability due to lack of receive function",
+            "description": "Ethers transfer will be reverted because neither OptionsTrading nor StakingVault contracts implement a receive function.",
+            "severity": "medium",
+            "location": "OptionsTrading and StakingVault contracts"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "StakingVault curveEnabled is redundant",
+            "description": "curveEnabled variable is always assigned true together with lpMiningEnabled and never used later.",
+            "severity": "info",
+            "location": "code/contracts/structs/VaultStorage.sol (L68-L70), code/contracts/StakingVault.sol (L81-L84)"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-920"
+                ]
+            },
+            "title": "Gas optimization by using immutable",
+            "description": "Some global parameters can be set as immutable to save gas.",
+            "severity": "info",
+            "location": "code/contracts/VaultManager.sol# L7-L16"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Gas optimization by reorganizing storage layout",
+            "description": "The global parameters in the VaultStorage contract can be reorganized to save gas.",
+            "severity": "info",
+            "location": "code/contracts/structs/VaultStorage.sol#L6"
+        }
+    ]
+}

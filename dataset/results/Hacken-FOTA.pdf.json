@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/Hacken-FOTA.pdf",
+    "project_info": {
+        "url": "https://github.com/fotaio/sale-contracts",
+        "commit_id": "5c252d5964298fda2a563e8724ccd888cd1af047",
+        "address": "0xe4D810feb232eA08373a79A826b4955D72732f10",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.2+commit.661d1103"
+        ],
+        "project_path": {
+            "TransparentUpgradeableProxy": "contracts/Hacken-FOTA/TransparentUpgradeableProxy"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Test runs not applicable",
+            "description": "Below contracts are required by tests but not available.",
+            "severity": "medium",
+            "location": "Contracts: FOTAToken.sol, MBUSDToken.sol, MUSDTToken.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Possible variable inconsistency",
+            "description": "Variable totalAllocated is not changed when buyer allocation removed.",
+            "severity": "low",
+            "location": "Contracts: PrivateSale.sol, SeedSale.sol, StrategicSale.sol; Functions: removeBuyerAllocation"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing event for changing vestingTime, tgeRatio, fundAdmin",
+            "description": "Changing critical values should be followed by the event emitting for better tracking off-chain.",
+            "severity": "low",
+            "location": "Contracts: PrivateSale.sol, SeedSale.sol, StrategicSale.sol; Functions: updateVestingTime, updateTGERatio, updateFundAdmin"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "A public function that could be declared external",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "Contracts: PrivateSale.sol, SeedSale.sol, StrategicSale.sol; Function: initialize"
+        }
+    ]
+}

@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/SlowMist Audit Report - ENF_WBTC_Borrow_ETH_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/Shata-Capital/ENF_WBTC_Borrow_ETH",
+        "commit_id": "31edacafb1e3b59ead110184d1e25b333235c5d2",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ENF_WBTC_Borrow_ETH": "contracts/SlowMist Audit Report - ENF_WBTC_Borrow_ETH_en-us/ENF_WBTC_Borrow_ETH"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant parameter issue",
+            "description": "The _asset parameter in the getAssetPrice function of PriceOracle contract is not used.",
+            "severity": "info",
+            "location": "contracts/subStrategies/PriceOracle.sol, function getAssetPrice"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Token swap defect when withdrawing",
+            "description": "Using wbtcAmt as amountInMaximum may not be successfully swapped due to price deviation.",
+            "severity": "low",
+            "location": "WBTC_Borrow_ETH contract, _withdraw function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Swap balance has not been processed",
+            "description": "Excess WBTC tokens have not been sent to the user or re-staked into AAVE.",
+            "severity": "medium",
+            "location": "WBTC_Borrow_ETH contract, _withdraw function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-358"
+                ]
+            },
+            "title": "Slippage check issue with _swapExactInput operation",
+            "description": "No slippage check is performed in the _swapExactInput function.",
+            "severity": "low",
+            "location": "WBTC_Borrow_ETH contract, _swapExactInput function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Defects in LTV operation",
+            "description": "ReduceLTV operation may not be able to effectively control risk due to slippage.",
+            "severity": "medium",
+            "location": "WBTC_Borrow_ETH contract, reduceLTV function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Reduced availability for LTV operations",
+            "description": "No slippage check in raiseLTV and reduceLTV functions reduces their availability.",
+            "severity": "high",
+            "location": "WBTC_Borrow_ETH contract, raiseLTV and reduceLTV functions"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "The withdraw function will not work when the market is extreme",
+            "description": "Withdraw function fails to perform repay operation in extreme market conditions.",
+            "severity": "medium",
+            "location": "WBTC_Borrow_ETH contract, _withdraw function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Risk of multiple leverages in unilateral market conditions",
+            "description": "Multiple leverages make the protocol extremely sensitive to market stability.",
+            "severity": "info",
+            "location": "WBTC_Borrow_ETH contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Risk of excessive authority",
+            "description": "Owner role has too many permissions, increasing single-point risk.",
+            "severity": "medium",
+            "location": "WBTC_Borrow_ETH contract"
+        }
+    ]
+}

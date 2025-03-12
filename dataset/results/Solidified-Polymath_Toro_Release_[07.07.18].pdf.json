@@ -1,0 +1,200 @@
+{
+    "path": "artifacts/Solidified-Polymath_Toro_Release_[07.07.18].pdf",
+    "project_info": {
+        "url": "https://github.com/PolymathNetwork/polymath-core",
+        "commit_id": "v1.2.0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "polymath-core": "contracts/Solidified-Polymath_Toro_Release_[07/polymath-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "IModuleFactory contracts are treated as trusted in SecurityToken contract",
+            "description": "Owner of the SecurityToken contract can pass an arbitrary contract to the addModule function and have it treated as a trusted module factory.",
+            "severity": "critical",
+            "location": "SecurityToken contract, lines 191 and 200"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Mint function in SecurityToken allows creating a positive balance for address(0) with fatal consequences",
+            "description": "The mint function in the SecurityToken contract doesn't contain any check preventing the zero address from being the beneficiary.",
+            "severity": "high",
+            "location": "SecurityToken contract, mint function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "changeModuleBudget function of SecurityToken is vulnerable to approve frontrunning attack",
+            "description": "The increaseApproval and decreaseApproval functions were not used when modifying a module's budget, making it vulnerable to approve frontrunning attacks.",
+            "severity": "high",
+            "location": "SecurityToken contract, changeModuleBudget function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Possible future re-entrancy vulnerability in CappedSTO based contracts",
+            "description": "Adding a TransferManager module when _deliverTokens is called can lead to arbitrary code execution and potentially re-entering the CappedSTO contract.",
+            "severity": "high",
+            "location": "CappedSTO contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Registries can be front run and “ransomed”",
+            "description": "Ticker reservation allows potential attackers to frontrun them and squat the desired ticker, then offering it to the original buyer for a ransom.",
+            "severity": "high",
+            "location": "Registry contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Dividend mechanism may return incorrect checkpoint Balances",
+            "description": "The function getValueAt may return incorrect results if checkpoints are far enough in the past and don't consider that a specific checkpointId might not be present in the checkpoints array.",
+            "severity": "low",
+            "location": "PresaleSTO contract, getValueAt function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Ticker string is not converted to uppercase in addCustomSecurityToken of SecurityTokenRegistry contract",
+            "description": "In contrast to generateSecurityToken, addCustomSecurityToken does not convert the provided ticker string to uppercase before creating an entry in the symbols mapping.",
+            "severity": "low",
+            "location": "SecurityTokenRegistry contract, addCustomSecurityToken function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong update of contribution counters in allocateTokensMulti function of PresaleSTO contract",
+            "description": "ETH and POLY contribution arguments in the allocateTokensMulti function are implemented as totals for all contributions in the batch, but the numbers are added for each contributor.",
+            "severity": "low",
+            "location": "PresaleSTO contract, allocateTokensMulti function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistency in expiry limit",
+            "description": "The comment in the code contradicts the actual variable value.",
+            "severity": "low",
+            "location": "TickerRegistry.sol, lines 19-20"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No validation that owner != address(0) when registering ticker",
+            "description": "A ticker registration with address(0) as owner will appear to succeed and user will be charged; the impact is very limited.",
+            "severity": "low",
+            "location": "Registry contracts"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "No way to deprecate address keys in Registry",
+            "description": "Once a key is registered, there's no way to deprecated/deactivate it.",
+            "severity": "low",
+            "location": "Registry contracts"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Percentage transfer manager only works with 18 decimal tokens",
+            "description": "The percentage transfer manager only expects tokens with 18 decimals; if STOs are added with different decimal places, the manager won't work correctly.",
+            "severity": "low",
+            "location": "TransferManager contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Polymath can seize security token registrations",
+            "description": "Polymath can change which contract a registry entry points to without restriction; this gives Polymath significant privileges.",
+            "severity": "high",
+            "location": "Registry contracts"
+        }
+    ]
+}

@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/Iosiro-ixo Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/ixofoundation/ixo-solidity",
+        "commit_id": "417c40f1bd6600e5d1d8b49d136f2b97a098591c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ixo-solidity": "contracts/Iosiro-ixo Smart Contract Audit/ixo-solidity"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "Calls to validate(...) should be reverted after action is triggered",
+            "description": "The if statement used to check whether an action had already been triggered returned true if the action had already been triggered.",
+            "severity": "info",
+            "location": "AuthContract.sol, Lines 66-68"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Return type specified for transfer(...) functions with no return value in function body",
+            "description": "The `transfer(...) function was specified with the return type bool, however the functions in question did not return the result of the transfer.",
+            "severity": "info",
+            "location": "ProjectWalletAuthoriser.sol, Line 35, BasicProjectWallet.sol, Line 42"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Confirmed and Triggered events should index the transaction ID",
+            "description": "The logging events `Confirmed and` `Triggered did not use the indexed keyword on the id parameter.",
+            "severity": "info",
+            "location": "AuthContract.sol, Lines 25-26"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-209"
+                ]
+            },
+            "title": "Incorrect require validation failure messages",
+            "description": "Several validation error messages had improper messages associated with them.",
+            "severity": "info",
+            "location": "AuthContract.sol, Lines 81-84"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1106"
+                ]
+            },
+            "title": "Use of implicit integer sizes in AuthContract and ixoERC20Token contract implementations",
+            "description": "Several properties and functions contained implicit uint type declarations.",
+            "severity": "info",
+            "location": "AuthContract.sol and ixoERC20Token.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Inexact solidity compiler version used",
+            "description": "The pragma version was not fixed to a specific version, which could result in using the highest non-breaking version.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Multiple High Risk Authorisation Issues",
+            "description": "Several high-risk security issues were identified in the validate(...) function, including multiple confirms permitted per member, possible to replay transactions, and last member to confirm determines final state.",
+            "severity": "high",
+            "location": "AuthContract.sol, Lines 58-85"
+        }
+    ]
+}

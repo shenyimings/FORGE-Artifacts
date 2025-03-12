@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/DappLooker Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/razzorsec/RazzorSec-Contracts/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "RazzorSec-Contracts": "contracts/DappLooker Smart Contract Audit Report - QuillAudits/RazzorSec-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Ownership and Privilege transfer",
+            "description": "Inappropriate renouncing of ownership can lead to loss of owner privileges and access to tokens.",
+            "severity": "high",
+            "location": "PaymentVault.sol, functions like renounceOwnership and transferOwnership"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Token validity",
+            "description": "Non-standard ERC20 tokens (e.g., FeeOnTransfer tokens, rebase tokens) can reduce the expected number of tokens deposited into the vault.",
+            "severity": "high",
+            "location": "PaymentVault.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Frontrunning",
+            "description": "A malicious actor can call initialize() before the intended owner, gaining ownership and privileges.",
+            "severity": "high",
+            "location": "PaymentVault.sol, function initialize()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Only owner can make withdrawals",
+            "description": "The current logic allows only the owner to withdraw deposited tokens.",
+            "severity": "medium",
+            "location": "PaymentVault.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Event emission",
+            "description": "Events emitted in the contract could be indexed for easy searching and sorting.",
+            "severity": "info",
+            "location": "PaymentVault.sol, event emission"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma",
+            "description": "The solidity pragma version is unlocked, which can lead to potential attacks with future releases.",
+            "severity": "info",
+            "location": "PaymentVault.sol, solidity pragma version"
+        }
+    ]
+}

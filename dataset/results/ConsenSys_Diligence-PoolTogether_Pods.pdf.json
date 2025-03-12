@@ -1,0 +1,158 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-PoolTogether_Pods.pdf",
+    "project_info": {
+        "url": "https://github.com/pooltogether/pods-v3-contracts",
+        "commit_id": "879dc8b911fc506dd6bead1f36eade919ccfea57",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "pods-v3-contracts": "contracts/ConsenSys_Diligence-PoolTogether_Pods/pods-v3-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ],
+                "3": [
+                    "CWE-15"
+                ]
+            },
+            "title": "Winning pods can be frontrun with large deposits",
+            "description": "An attacker could identify a winning Pod contract and make a large deposit, diluting existing user shares and claiming the entire prize.",
+            "severity": "critical",
+            "location": "Pod.sol:L266-L288"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Token transfers may return false",
+            "description": "Not checking the return value of token transfers can lead to false positives.",
+            "severity": "critical",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "TokenDrop : Unprotected initialize() function",
+            "description": "The initialize() function is unprotected and can be called multiple times, allowing an attacker to drain the asset token balance.",
+            "severity": "critical",
+            "location": "TokenDrop.sol:L81-L87"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Pod: Re-entrancy during deposit or withdrawal can lead to stealing funds",
+            "description": "Re-entrancy vulnerability in the deposit and withdrawal functions can be exploited to drain the pod.",
+            "severity": "critical",
+            "location": "Pod.sol:L274-L281"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "TokenDrop: Re-entrancy in the claim function can cause draining of funds",
+            "description": "Re-entrancy vulnerability in the claim function can lead to the draining of funds.",
+            "severity": "high",
+            "location": "TokenDrop.sol:L139-L153"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Pod: Having multiple token drops is inconsistent",
+            "description": "Inconsistent behavior when having multiple token drops.",
+            "severity": "medium",
+            "location": "Pod.sol:L455-L477"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Withdrawal from pool contract may not control fees",
+            "description": "Fees are not controlled or limited by the user when withdrawing from the pool contract.",
+            "severity": "n/a",
+            "location": "Pod.sol:L523-L532"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "ProxyFactory.deployMinimal() does not check for contract creation failure",
+            "description": "Not checking for contract creation failure can lead to issues with proxy contracts.",
+            "severity": "low",
+            "location": "ProxyFactory.sol:L9-L35"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Pod.setManager() checks validity of wrong address",
+            "description": "Checking the validity of the wrong address in setManager() function.",
+            "severity": "low",
+            "location": "Pod.sol:L233-L240"
+        }
+    ]
+}

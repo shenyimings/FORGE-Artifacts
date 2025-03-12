@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/CateDogeInuSafeElonMoonMars_Full_Smart_Contract_Security_Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x385ca01bbc634a984c46d71031b35b581f16f57b",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "CDISEMM": "contracts/CateDogeInuSafeElonMoonMars_Full_Smart_Contract_Security_Audit/CDISEMM"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas exception due to long excluded addresses list",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can cause an out-of-gas exception if the list is too long.",
+            "severity": "low",
+            "location": "Contract CDISEMM, function includeInReward()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Rounding error due to division before multiplication",
+            "description": "Calculations with division can cause rounding errors in Solidity, which does not support floating points.",
+            "severity": "low",
+            "location": "Various functions involving division operations"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner has excessive privileges",
+            "description": "The owner has the ability to change fees, maximum transaction amounts, exclude from fee, and more, which can be a security risk.",
+            "severity": "low",
+            "location": "Various functions with onlyOwner modifiers"
+        }
+    ]
+}

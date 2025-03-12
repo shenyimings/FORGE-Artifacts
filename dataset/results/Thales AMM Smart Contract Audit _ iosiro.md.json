@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/Thales AMM Smart Contract Audit _ iosiro.md",
+    "project_info": {
+        "url": "https://github.com/thales-markets/contracts",
+        "commit_id": "0612289757c06763e2864332de67c76daabc645c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Thales AMM Smart Contract Audit _ iosiro/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Option price oracle manipulation",
+            "description": "Potential for manipulation of option pricing when purchasing options with alternative collateral to sUSD.",
+            "severity": "high",
+            "location": "ThalesAMM.sol, get_dy_underlying() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent usage of `minSpread` in buy and sell operations",
+            "description": "Inconsistency between the `basePrice` used in the buy and sell validation.",
+            "severity": "medium",
+            "location": "ThalesAMM.sol, buy and sell operations"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Add admin function validation",
+            "description": "Lack of validation on parameters provided to admin functions.",
+            "severity": "info",
+            "location": "Various admin functions (listed in the report)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No validation of Chainlink TTL",
+            "description": "No validation of Chainlink TTL to ensure prices are within the heartbeat values set out in the documentation.",
+            "severity": "info",
+            "location": "Chainlink integration"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Missing event",
+            "description": "Lack of event emission for `setStakingThalesAndReferrals()` admin function.",
+            "severity": "info",
+            "location": "setStakingThalesAndReferrals() admin function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Restrict `mint` and `burn` calls",
+            "description": "Exposure of `mint()` and `burn()` functions presents an unnecessary risk.",
+            "severity": "info",
+            "location": "PositionalMarket.sol contract"
+        }
+    ]
+}

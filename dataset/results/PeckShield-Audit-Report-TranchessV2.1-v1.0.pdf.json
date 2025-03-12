@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-TranchessV2.1-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/tranchess/contract-core/tree/50acfd2",
+        "commit_id": "50acfd2",
+        "address": "0x4BB3AeB5Ba75bC6A44177907B54911b19d1cF8f7",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "TimelockController": "contracts/PeckShield-Audit-Report-TranchessV2/TimelockController"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Incorrect Accounting in VotingEscrowV3:_receiveCrossChain()",
+            "description": "The function _receiveCrossChain() updates the calling user's lock balance and unlocking timestamp instead of the given account.",
+            "severity": "medium",
+            "location": "VotingEscrowV3 contract, _receiveCrossChain() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Revisited Tranche Mint/Burn/Transfer/Approval Logic in FundV4",
+            "description": "Inconsistent refreshment of balances for different tranche tokens.",
+            "severity": "low",
+            "location": "FundV4 contract, primaryMarketMint()/primaryMarketBurn() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Improved Event Generation in BatchKeeperHelperBase",
+            "description": "Emit events only when the requested operation is successful.",
+            "severity": "info",
+            "location": "BatchKeeperHelperBase contract, addAllowlist()/removeAllowlist() functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Piggybacking startWeek in ChessScheduleRelayer::crossChainMint()",
+            "description": "The implementation assumes timely cross-chain transfers and implicitly assumes the receiving on the destination chain occurs within the same week as the sending on the source chain.",
+            "severity": "low",
+            "location": "ChessScheduleRelayer contract, crossChainMint() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged owner account has critical roles and privileges, posing counter-party risk to protocol users if it's a plain EOA account.",
+            "severity": "low",
+            "location": "Multiple Contracts (specifically, PrimaryMarketV4 contract)"
+        }
+    ]
+}

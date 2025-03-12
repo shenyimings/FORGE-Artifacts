@@ -1,0 +1,179 @@
+{
+    "path": "artifacts/Verichains Public Audit Report - Polyroll - v1.1.pdf",
+    "project_info": {
+        "url": "https://github.com/polyroll/polyroll-farm",
+        "commit_id": "02403ae2cb0dbd083bc6bf163d8ae00d11017977",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "polyroll-farm": "contracts/Verichains Public Audit Report - Polyroll - v1/polyroll-farm"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "MasterChef – Using deflationary token as LP token will lead to many vulnerabilities",
+            "description": "Using a deflationary token as an LP token can cause problems in the MasterChef contract, such as incorrect user rewards and referral commissions.",
+            "severity": "medium",
+            "location": "MasterChef contract, deposit function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "MasterChef – Missing validation for pool id in set function",
+            "description": "Missing validation for pool id in the set function can lead to incorrect results in future reward calculations.",
+            "severity": "medium",
+            "location": "MasterChef contract, set function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "MasterChef – Redundant require statement in the updateEmissionRate function",
+            "description": "The `require` statement at line 331 is not necessary.",
+            "severity": "low",
+            "location": "MasterChef contract, updateEmissionRate function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "RollToken – Missing delegates updating when transfer tokens",
+            "description": "RollToken allows token holders to give voting power to a delegatee, but the current implementation does not update the voting power records when transferring tokens.",
+            "severity": "critical",
+            "location": "RollToken contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "RollToken – Integer overflow in mint function",
+            "description": "An overflow can occur in the `_totalSupply + _amount` addition, leading to a wrong result for the condition checking statement.",
+            "severity": "low",
+            "location": "RollToken contract, mint function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RollToken – Redundant if statement in mint function",
+            "description": "The `if` statement has two conditions that are always true, therefore it is redundant and can be removed to save gas and make the code cleaner.",
+            "severity": "low",
+            "location": "RollToken contract, mint function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "RollToken – Misleading comment of delegates function",
+            "description": "The function `delegates` in the RollToken contract is used for getting the delegatee address of delegator, not for delegating votes.",
+            "severity": "low",
+            "location": "RollToken contract, delegates function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Timelock – Missing checking for valid state when cancel transaction",
+            "description": "A transaction should not be canceled if it is not in the queue.",
+            "severity": "low",
+            "location": "Timelock contract, cancelTransaction function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Timelock – Deprecated call.value(…)",
+            "description": "The `call.value(…)`` syntax was deprecated in favor of `call{value: …}`.",
+            "severity": "low",
+            "location": "Timelock contract, executeTransaction function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "RandGen – Multiple randomness requests can lead to result loss",
+            "description": "The current implementation of the RandGen contract can only store one randomness request result at a moment, which can lead to result loss if there are multiple requests.",
+            "severity": "high",
+            "location": "RandGen contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Inefficient Gas Usage in `settleLottery` Function",
+            "description": "Resetting array values by assigning new empty arrays is not efficient in terms of gas usage.",
+            "severity": "n/a",
+            "location": "settleLottery function, lines 450-451"
+        }
+    ]
+}

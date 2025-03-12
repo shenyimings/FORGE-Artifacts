@@ -1,0 +1,479 @@
+{
+    "path": "artifacts/FraxQ42021.pdf",
+    "project_info": {
+        "url": "https://github.com/FraxFinance/frax-solidity/tree/31dd816b03c5598141b5de7b1595453f0fdddb75",
+        "commit_id": "31dd816b03c5598141b5de7b1595453f0fdddb75",
+        "address": "0x2fe065e6ffef9ac95ab39e5042744d695f560729",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "frax-solidity": "contracts/FraxQ42021/frax-solidity"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Testing is not routine",
+            "description": "The Frax Solidity repository lacks reproducible tests that can be run locally.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "No clear mapping from contracts to tests",
+            "description": "There is no clear mapping between contracts and their corresponding tests in the test folder.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "amoMinterBorrow cannot be paused",
+            "description": "The amoMinterBorrow function does not check for 'paused' flags or whether the minter's associated collateral type is enabled.",
+            "severity": "medium",
+            "location": "FraxPoolV3.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Array updates are not constant time",
+            "description": "Arrays are allowed to grow without bound, and those arrays are searched linearly.",
+            "severity": "medium",
+            "location": "Various contracts"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect calculation of collateral amount in redeemFrax",
+            "description": "The redeemFrax function multiplies a FRAX amount with the collateral price to calculate the equivalent collateral amount, which is incorrect.",
+            "severity": "high",
+            "location": "FraxPoolV3.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Missing check of return value of transfer and transferFrom",
+            "description": "Transfer and transferFrom calls do not check return values, allowing attackers to mint LP tokens for free.",
+            "severity": "high",
+            "location": "TWAMM contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked ERC20 transfer",
+            "description": "Transfer and transferFrom calls do not check return values, allowing attackers to mint LP tokens for free.",
+            "severity": "n/a",
+            "location": "TWAMM contract (provideLiquidity function)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Insecure rewards distributor",
+            "description": "Token managers can set the global rewards distributor, overwriting each other's settings.",
+            "severity": "n/a",
+            "location": "FraxUnifiedFarmTemplate.sol (setGaugeController function)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Manipulable reward boosts",
+            "description": "minVeFXSForMaxBoost can be manipulated to increase rewards by selling FRAX through the incentivized Uniswap V2 pool.",
+            "severity": "medium",
+            "location": "FraxCrossChainFarmSushi.sol (minVeFXSForMaxBoost function)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Limited redeemable collateral",
+            "description": "Most collateral is not directly redeemable by depositors due to manual movement into AMO contracts.",
+            "severity": "n/a",
+            "location": "FraxPoolV3.sol, ConvexAMO.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect globalCollateralValue",
+            "description": "FRAX.globalCollateralValue counts FRAX as collateral, not debt.",
+            "severity": "high",
+            "location": "Frax.sol (globalCollateralValue function)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Manual collateral values are error-prone",
+            "description": "Setting collateral values manually is error-prone and can lead to incorrect accounting.",
+            "severity": "high",
+            "location": "ManualTokenTrackerAMO.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unreviewed Script Impacting FRAX.globalCollateralValue",
+            "description": "The script used to calculate collateral prices has not been reviewed, and its correctness is unknown, potentially affecting the reliability of FRAX.globalCollateralValue.",
+            "severity": "n/a",
+            "location": "FRAXStablecoin contract"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Unclear Configuration and Tracking of Interactions",
+            "description": "The configuration of Frax Protocol is complex, and interactions are not clearly tracked, increasing the attack surface.",
+            "severity": "n/a",
+            "location": "Frax Protocol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Outdated and Incorrectly Counted Collateral",
+            "description": "collatDollarBalance has not been updated since November 13, 2021, and FRAX.globalCollateralValue incorrectly counts FRAX as collateral.",
+            "severity": "n/a",
+            "location": "FRAXStablecoin contract"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Insecure ManualTokenTrackerAMO",
+            "description": "The use of a manual script to update data in ManualTokenTrackerAMO increases the risk of errors or malicious actions.",
+            "severity": "n/a",
+            "location": "ManualTokenTrackerAMO contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unreviewed Contract",
+            "description": "Interacting with contracts that lack a security review.",
+            "severity": "high",
+            "location": "Token integration checklist, general considerations"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Complex Code",
+            "description": "Tokens with complex code require a higher standard of review.",
+            "severity": "medium",
+            "location": "Contract composition, human-summary printer"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of SafeMath",
+            "description": "Contracts that do not use SafeMath require a higher standard of review.",
+            "severity": "high",
+            "location": "Contract composition, SafeMath usage"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Multiple Entry Points",
+            "description": "Tokens with multiple entry points for balance updates can break internal bookkeeping.",
+            "severity": "medium",
+            "location": "Token integration checklist, trail of bits 71"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-770"
+                ],
+                "4": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Upgradeable Contract",
+            "description": "Upgradeable contracts may change their rules over time.",
+            "severity": "high",
+            "location": "Owner privileges, human-summary printer"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Minting Capabilities Abuse",
+            "description": "Malicious or compromised owners can abuse minting capabilities.",
+            "severity": "high",
+            "location": "Owner privileges, human-summary printer"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Blacklisting Features",
+            "description": "Malicious or compromised owners can trap contracts relying on tokens with a blacklist.",
+            "severity": "medium",
+            "location": "Owner privileges, manual review"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Pausable Token Trap",
+            "description": "Malicious or compromised owners can trap contracts relying on pausable tokens.",
+            "severity": "medium",
+            "location": "Owner privileges, manual review"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "ERC20 Race Condition",
+            "description": "The ERC20 standard has a known race condition that must be mitigated to prevent attackers from stealing tokens.",
+            "severity": "high",
+            "location": "ERC20 conformity checks, slither-check-erc"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy in Transfer Functions",
+            "description": "External calls in transfer functions can lead to reentrancies.",
+            "severity": "high",
+            "location": "Risks of ERC20 extensions, manual review"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Deflationary Tokens",
+            "description": "Deflationary tokens can lead to unexpected behavior.",
+            "severity": "medium",
+            "location": "Risks of ERC20 extensions, manual review"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Interest Distribution",
+            "description": "Some tokens distribute interest to token holders, which may be trapped in the contract if not taken into account.",
+            "severity": "low",
+            "location": "Risks of ERC20 extensions, manual review"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Token Scarcity Issues",
+            "description": "Tokens with a low total supply can be easily manipulated.",
+            "severity": "medium",
+            "location": "Token scarcity reviews, manual review"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Flash Minting",
+            "description": "Flash minting can lead to substantial swings in the balance and total supply.",
+            "severity": "high",
+            "location": "Token scarcity reviews, manual review"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ],
+                "3": [
+                    "CWE-440"
+                ]
+            },
+            "title": "ERC721 Non-Compliance",
+            "description": "The behavior of certain contracts may differ from the original ERC721 specification.",
+            "severity": "medium",
+            "location": "ERC721 conformity checks, safeTransferFrom functions"
+        }
+    ]
+}

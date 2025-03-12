@@ -1,0 +1,233 @@
+{
+    "path": "artifacts/1-dz.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x218c62a3cc89ff54c28287facdd094dda6931e00",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "DecentralZone": "contracts/1-dz/DecentralZone"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Stops Transactions",
+            "description": "The transactions are initially disabled for all users excluding authorized addresses.",
+            "severity": "critical",
+            "location": "DecentralZone.sol#L555"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Fixed Swap Address",
+            "description": "The swap address is assigned once and cannot be changed.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Redundant Liquidity Swaps",
+            "description": "The contract performs redundant liquidity swaps even if the contract's balance is zero.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Variable Declaration",
+            "description": "The `BuyTaxes` and `SellTaxes` variables are declared and initialized but not used in a meaningful way by the contract.",
+            "severity": "low",
+            "location": "DecentralZone.sol#L461,462"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing Events Emission",
+            "description": "The contract performs actions and state mutations from external methods that do not result in the emission of events.",
+            "severity": "low",
+            "location": "DecentralZone.sol#L601,668,700,707,711,715"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Redundant Storage Writes",
+            "description": "The contract modifies the state of certain variables even if their current state is equal to the one given as an argument.",
+            "severity": "low",
+            "location": "DecentralZone.sol#L668,711,715"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Transfers Liquidity to Team Wallet",
+            "description": "The contract owner has the authority to transfer funds without limit to the team wallet.",
+            "severity": "low",
+            "location": "DecentralZone.sol#L718"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Potential Transfer Revert Propagation",
+            "description": "The contract sends funds to a `marketingWallet` as part of the transfer flow.",
+            "severity": "low",
+            "location": "DecentralZone.sol#L632"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Immutable Declaration Improvement",
+            "description": "The contract declares state variables that their value is initialized once in the constructor and are not modified afterwards.",
+            "severity": "low",
+            "location": "DecentralZone.sol#L482,483"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the Solidity naming conventions.",
+            "severity": "low",
+            "location": "DecentralZone.sol#L65,67,409,447,448,451,461,462,601,671,676,683,690,710,714"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing Events Arithmetic",
+            "description": "The contract does not include events for significant actions.",
+            "severity": "low",
+            "location": "DecentralZone.sol#L673"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Divide before Multiply Operation",
+            "description": "Performing divisions before multiplications may cause a loss of precision.",
+            "severity": "low",
+            "location": "DecentralZone.sol#L622,623,630"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Uninitialized Variables in Local Scope",
+            "description": "Using uninitialized local variables can lead to unpredictable behavior.",
+            "severity": "low",
+            "location": "DecentralZone.sol#L563,564,566"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Stable Compiler Version",
+            "description": "The pragma solidity version is not locked.",
+            "severity": "low",
+            "location": "DecentralZone.sol#L3"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Succeeded Transfer Check",
+            "description": "The contract does not check if the result of the transfer methods is successful.",
+            "severity": "low",
+            "location": "DecentralZone.sol#L725"
+        }
+    ]
+}

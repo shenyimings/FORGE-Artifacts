@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/elcr.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xa7b94a42479190662f78c51938e2da8bd623857e",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "Token": "contracts/elcr/Token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "MOEE - Misleading Ownership Event Emission",
+            "description": "The contract emits an OwnershipTransferred event with the zero address as the new owner when lockOwnership method is invoked, which may lead to misinterpretation.",
+            "severity": "critical",
+            "location": "Token.sol#L295"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "MEE - Missing Events Emission",
+            "description": "The contract does not emit events for significant actions, making it difficult for external parties to track and monitor the activity on the contract.",
+            "severity": "medium",
+            "location": "Token.sol#L256,260,264,268,272,276,287,291"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "CR - Code Repetition",
+            "description": "The transfer and transferFrom methods contain identical code, making the contract more prone to errors or inconsistencies.",
+            "severity": "medium",
+            "location": "Token.sol#L102,163"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "IDI - Immutable Declaration Improvement",
+            "description": "The contract declares state variables that are not modified after initialization, but does not use the immutable declaration, which can save gas.",
+            "severity": "low",
+            "location": "Token.sol#L57,58,60,62,64,65,66,69,70,71,74,75,76"
+        }
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/Bitcoin Banana.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x8D5CDc96835acAB9E626D44f7eFa9C9010146710",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "CoinToken": "contracts/Bitcoin Banana/CoinToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can cause an OUT_OF_GAS exception if there is a long excluded addresses list. Similarly, the function `_getCurrentSupply` also uses a loop for evaluating total supply, which could be aborted with OUT_OF_GAS exception.",
+            "severity": "low",
+            "location": "Functions `includeInReward()` and `_getCurrentSupply`"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges, including changing tax and liquidity fee, maximum transaction amount, excluding from the fee, locking and unlocking, claiming all tokens from contract balance, and changing `numTokensSellToAddToLiquidity`.",
+            "severity": "low",
+            "location": "Owner's functions"
+        }
+    ]
+}

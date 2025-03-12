@@ -1,0 +1,140 @@
+{
+    "path": "artifacts/EloInu_AuditReport_InterFi.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x35207068e057a01861A654463c01B04cc111E760",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "Elo": "contracts/EloInu_AuditReport_InterFi/Elo"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected functions",
+            "description": "These contracts have external and public functions that can be modified or called by anyone, potentially leading to unauthorized actions.",
+            "severity": "n/a",
+            "location": "Various contracts (IERC20, IUniswapV2Factory, IUniswapV2Pair, IUniswapV2Router01, Elo)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Payable function",
+            "description": "The payable function in the Elo contract allows arbitrary ETH transfers, which could lead to reentrancy attacks or other security issues.",
+            "severity": "n/a",
+            "location": "Elo, <Receive Ether>"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unlocked functions",
+            "description": "Some functions are not locked or restricted, allowing unauthorized access and modifications.",
+            "severity": "n/a",
+            "location": "Various contracts (IERC20, IUniswapV2Factory, IUniswapV2Pair, IUniswapV2Router01)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Insecure function calls",
+            "description": "These functions can be called by anyone, potentially leading to unauthorized token transfers or modifications.",
+            "severity": "n/a",
+            "location": "Elo (transfer, approve, transferFrom, increaseAllowance, decreaseAllowance, deliver)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owner-only restriction bypass",
+            "description": "The onlyOwner restriction may be bypassed if the owner's address is compromised or tampered with.",
+            "severity": "n/a",
+            "location": "Elo (excludeFromReward, includeInReward)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Elevated Impact of Active Smart Contract Owner",
+            "description": "The active smart contract owner has elevated impact on the smart contract's safety and security.",
+            "severity": "high",
+            "location": "Owner privileges"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unrestricted Changes to Max Transaction Percentage",
+            "description": "The smart contract owner can change the max transaction percentage to zero.",
+            "severity": "medium",
+            "location": "max transaction %"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Low Severity Issue in EloInu.sol File",
+            "description": "Expected pragma, import directive or contract/interface/library definition is missing.",
+            "severity": "low",
+            "location": "EloInu.sol file"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Insufficient Testing of Certain Functions",
+            "description": "Functions such as Buy Back, Burn, Mint, Rebase, Blacklist, Lock are not tested.",
+            "severity": "medium",
+            "location": "Various functions in the smart contract"
+        }
+    ]
+}

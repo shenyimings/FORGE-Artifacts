@@ -1,0 +1,275 @@
+{
+    "path": "artifacts/Bastion Smart Contracts Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/bastion-wallet/kernel/tree/79dc2ff67117c8e34f0a1559e35966a259b12b48",
+        "commit_id": "79dc2ff67117c8e34f0a1559e35966a259b12b48",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "kernel": "contracts/Bastion Smart Contracts Audit Report - QuillAudits/kernel"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-439"
+                ]
+            },
+            "title": "Solidity version incompatibility",
+            "description": "Solidity pragma versions above 0.8.19 may be incompatible on some chains.",
+            "severity": "low",
+            "location": "Kernel smart wallets"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Array update pattern",
+            "description": "The owner array is completely rewritten with every setOwners() call and not appended.",
+            "severity": "low",
+            "location": "MultiECDSAKernelFactory - setOwners()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Single-step ownership transfer",
+            "description": "onlyOwner modifier can be exploited if the owner is compromised.",
+            "severity": "medium",
+            "location": "MultiECDSAKernelFactory: onlyOwner"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Kernel can interact with an EOA instead of a contract",
+            "description": "execute() function may delegatecall or call an EOA without reverting.",
+            "severity": "low",
+            "location": "Kernel, execute() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked logic address in EIP1967 constructor",
+            "description": "No check for address validity in the EIP1967 proxy constructor.",
+            "severity": "medium",
+            "location": "EIP1967Proxy constructor"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Risk of stuck funds in proxy contracts",
+            "description": "msg.value not checked, leading to potential stuck funds.",
+            "severity": "low",
+            "location": "Proxy contracts (EIP1967Proxy)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Naming convention",
+            "description": "Multiple mentions of zerodev.kernel in the codebase.",
+            "severity": "info",
+            "location": "Codebase"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "enable() and disable() in validators do not emit events",
+            "description": "No event emitted for disabling validators.",
+            "severity": "info",
+            "location": "ECDSAValidator"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input validation",
+            "description": "No validation of `to` addresses or tokenAddress array.",
+            "severity": "low",
+            "location": "BatchActions.sol, executeBatch() and approveAndTransfer20Batch()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Array operation optimization in BatchActions.sol",
+            "description": "Using calldata instead of memory can save gas.",
+            "severity": "info",
+            "location": "BatchActions.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant code",
+            "description": "Unnecessary variable assignment and declaration.",
+            "severity": "info",
+            "location": "Kernel.sol, validateUserOp() function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Function visibility specifiers can be external instead of public",
+            "description": "Externally facing functions declared public but not called internally.",
+            "severity": "info",
+            "location": "Various contracts (KillSwitchValidator.sol, ECDSAValidator.sol, ERC165SessionKeyValidator, MultiECDSAValidator, SessionKeyOwnedValidator)"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Error handling",
+            "description": "Custom errors can reduce gas costs for returning long strings.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Logic in validateSignature() can be reused within validateUserOp()",
+            "description": "Repeated code can be reduced by calling validateSignature() within validateUserOp().",
+            "severity": "info",
+            "location": "SessionKeyValidator, MultiECDSAValidator and ECDSAValidator"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Unused interface",
+            "description": "IKernel interface declared but not used.",
+            "severity": "low",
+            "location": "IKernel interface declaration"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Convert repeated code into a modifier",
+            "description": "msg.sender == entrypoint check can be converted to a modifier.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Repeated addresses can cost extra gas when iterating over owners array",
+            "description": "Non-unique addresses in setOwners() call can increase the loop iterations.",
+            "severity": "low",
+            "location": "MultiECDSAKernelFactory - setOwners()"
+        }
+    ]
+}

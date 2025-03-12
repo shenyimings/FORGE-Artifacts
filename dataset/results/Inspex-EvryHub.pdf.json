@@ -1,0 +1,158 @@
+{
+    "path": "artifacts/Inspex-EvryHub.pdf",
+    "project_info": {
+        "url": "https://github.com/Evry-Finance/evry-hub/tree/86601724f4",
+        "commit_id": "86601724f4",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "evry-hub": "contracts/Inspex-EvryHub/evry-hub"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Use of Upgradable Contract Design",
+            "description": "Smart contracts designed to be upgradable, allowing the proxy owner to perform malicious actions.",
+            "severity": "high",
+            "location": "EvryHub smart contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change critical state variables to gain high privilege and withdraw funds from the contract.",
+            "severity": "high",
+            "location": "BridgeBank.sol, functions changeOperator() and setEmergencyWithdrawDelayTime()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Improper Design for Operator Privilege",
+            "description": "The holder of the operator address's private key can execute critical functions freely, allowing them to transfer funds from the contract.",
+            "severity": "high",
+            "location": "BridgeBank.sol, functions unlock(), emergencyWithdraw(), and refund()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy Attack",
+            "description": "An attacker can call the lock() function repeatedly via reentrancy attack to record an excessively high amount of token locked.",
+            "severity": "medium",
+            "location": "BridgeBank.sol, function lock()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions that are executable by the controlling parties are not logged properly.",
+            "severity": "low",
+            "location": "BridgeBank contract, functions changeOperator() and setEmergencyWithdraw()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Whitelisting of Token Address",
+            "description": "There is no checking mechanism whether the token is supported or not in the lock() function.",
+            "severity": "info",
+            "location": "BridgeBank contract, function lock()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Modifier Without Effect",
+            "description": "The availableNonce modifier has no effect because the condition will always be evaluated to true.",
+            "severity": "info",
+            "location": "BscBank and EthBank contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "various contracts and functions"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Inexplicit Solidity Compiler Version",
+            "description": "The Solidity compiler versions declared in the smart contracts were not explicit, which may potentially result in compatibility issues.",
+            "severity": "info",
+            "location": "Migrations.sol (_multiple contracts: Migrations, BridgeBank, BridgeBankPausable, EthBank, BscBank, BridgeToken)"
+        }
+    ]
+}

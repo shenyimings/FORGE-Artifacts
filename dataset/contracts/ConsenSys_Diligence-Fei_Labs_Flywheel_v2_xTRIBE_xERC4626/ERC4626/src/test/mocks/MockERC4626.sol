@@ -1,0 +1,14 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
+pragma solidity 0.8.10;
+
+import {ERC20} from "solmate/tokens/ERC20.sol";
+import {ERC4626} from "solmate/mixins/ERC4626.sol";
+
+contract MockERC4626 is ERC4626 {
+
+    constructor(ERC20 underlying) ERC4626(underlying, "MockVault", "MV") {}
+
+    function totalAssets() public view override returns (uint256) {
+      return asset.balanceOf(address(this));
+    }
+}

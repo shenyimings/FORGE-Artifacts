@@ -1,0 +1,257 @@
+{
+    "path": "artifacts/GiveUs_SC-Audit-Report_07062023_SA-1304.pdf",
+    "project_info": {
+        "url": "https://github.com/Krayt78/GiveUsContracts",
+        "commit_id": "af8ce9eb0405098f53ed3d6584ec4bd3271c1941",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "GiveUsContracts": "contracts/GiveUs_SC-Audit-Report_07062023_SA-1304/GiveUsContracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Funds Lock / Undocumented Behavior",
+            "description": "No withdrawal mechanism for native coins sent to the contract.",
+            "severity": "critical",
+            "location": "Crowdfunding.sol, multiple functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Funds Lock",
+            "description": "Transaction fee not tracked, leading to locked funds in the contract.",
+            "severity": "critical",
+            "location": "Crowdfunding.sol, donateToProject()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unchecked Transfer",
+            "description": "No check for ERC20 token transfer failures, leading to denial of service vulnerabilities.",
+            "severity": "high",
+            "location": "Crowdfunding.sol, multiple functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Undocumented Mathematical Operation",
+            "description": "Unclear usage of ++ operator in deliberateVote() function.",
+            "severity": "high",
+            "location": "Crowdfunding.sol, deliberateVote()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Highly Permissive Role Access / Token Balance Manipulation",
+            "description": "UPDATER_ROLE has unrestricted access to user project owner funds.",
+            "severity": "high",
+            "location": "Crowdfunding.sol, withdrawFundsToOtherProject()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Non-Finalized Code",
+            "description": "TODO comments in the code indicate non-finalized code.",
+            "severity": "medium",
+            "location": "Crowdfunding.sol, createProject()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Contradiction - Missing Validation",
+            "description": "Missing validation in functions createProject() and setDonationFee()",
+            "severity": "medium",
+            "location": "Crowdfunding.sol, createProject()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Uninitialized Inheritance",
+            "description": "Inherited contracts not initialized in Crowdfunding.sol",
+            "severity": "medium",
+            "location": "Crowdfunding.sol, initialize()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Contradiction",
+            "description": "Misleading NatSpec in function endTresholdVoting()",
+            "severity": "medium",
+            "location": "Crowdfunding.sol, endTresholdVoting()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "No validation against 0x0 address in function addNewSupportedToken()",
+            "severity": "low",
+            "location": "Crowdfunding.sol, addNewSupportedToken()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Functions that Can Be Declared External",
+            "description": "Public functions can be declared as external to save Gas",
+            "severity": "low",
+            "location": "Crowdfunding.sol, initialize()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Variables that Can Be Boolean",
+            "description": "Some variables can be declared as bool to increase readability and optimize storage",
+            "severity": "low",
+            "location": "Crowdfunding.sol, *"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Modifier Usage",
+            "description": "Unnecessary modifier calls in private functions",
+            "severity": "low",
+            "location": "Crowdfunding.sol, startTresholdVoting(), deliberateVote(), resetVoteSession()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Typos in Code",
+            "description": "Typos in several places in Crowdfunding and ICrowdfunding",
+            "severity": "n/a",
+            "location": "Crowdfunding.sol, *, ICrowdfunding.sol, *"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation - Order of Layout",
+            "description": "Project does not follow official code style guidelines",
+            "severity": "n/a",
+            "location": "Crowdfunding.sol, *, ICrowdfunding.sol, *"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Variable",
+            "description": "Unused variable WITHDRAWER_ROLE in Crowdfunding.sol",
+            "severity": "n/a",
+            "location": "Crowdfunding.sol, WITHDRAWER_ROLE"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation - Naming Conventions",
+            "description": "Function name CheckAndStartThresholdVoting() does not follow naming convention",
+            "severity": "n/a",
+            "location": "Crowdfunding.sol, CheckAndStartThresholdVoting()"
+        }
+    ]
+}

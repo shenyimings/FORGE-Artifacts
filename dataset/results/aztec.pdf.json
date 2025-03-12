@@ -1,0 +1,250 @@
+{
+    "path": "artifacts/aztec.pdf",
+    "project_info": {
+        "url": "https://github.com/AztecProtocol/AZTEC",
+        "commit_id": "c3f49df54849cd2e91a9ba4937d895179e7c283d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "AZTEC": "contracts/aztec/AZTEC"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "IERC20 is incompatible with non-standard ERC20 tokens",
+            "description": "Several high-profile ERC20 tokens do not implement the standard correctly, causing issues with `approve`, `transfer`, and `transferFrom` functions.",
+            "severity": "medium",
+            "location": "AZTEC protocol, IERC20.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-311"
+                ]
+            },
+            "title": "AWS filesystem encryption is not configured",
+            "description": "Filesystem encryption is disabled in setup-mpc-server's Terraform configuration, making data easier to exfiltrate.",
+            "severity": "low",
+            "location": "AWS configuration, setup-mpc-server\\terraform\\main.tf"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "AWS instance is associated with a public IP address",
+            "description": "Public IP address association allows direct access to the server, increasing attack surface.",
+            "severity": "low",
+            "location": "AWS configuration, setup-mpc-server\\terraform\\main.tf"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-757"
+                ]
+            },
+            "title": "AWS ALB load balancer allows plaintext traffic",
+            "description": "HTTP listener in alb_listener redirects to HTTPS, but allows insecure protocols, enabling HTTP downgrade attacks.",
+            "severity": "low",
+            "location": "AWS configuration, setup-iac\\main.tf"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "AWS ALB load balancer has access logs disabled",
+            "description": "Lack of access logs on ALB configured by setup-iac limits attack investigation capabilities.",
+            "severity": "low",
+            "location": "AWS configuration, setup-iac\\main.tf"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "AWS security group allowing all traffic exists",
+            "description": "Security group rule in setup-iac allows incoming traffic from any address, enabling lateral movement.",
+            "severity": "low",
+            "location": "AWS configuration, setup-iac\\main.tf"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-1426"
+                ]
+            },
+            "title": "Failure to validate MPC output can lead to double spending attack",
+            "description": "Insecure validation of jointly computed secret value enables double spending attacks.",
+            "severity": "high",
+            "location": "AZTEC protocol setup, verifier.cpp"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Random value generated can be zero or one",
+            "description": "Libff random number generator can generate 0 or 1, causing false verification of invalid G1 points and enabling double spending attacks.",
+            "severity": "high",
+            "location": "setup/setup.cpp, verify/verifier.cpp, ACE/validator"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-274"
+                ]
+            },
+            "title": "Missing check for address(0) in constructor of AdminUpgradeabilityProxy",
+            "description": "Constructor of AdminUpgradeabilityProxy does not perform zero-address checks before calling _setAdmin(), making the contract un-administrable.",
+            "severity": "medium",
+            "location": "AdminUpgradeabilityProxy contract, AdminUpgradeabilityProxy.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Missing elliptic curve pairing check in the Swap Validator",
+            "description": "The Swap protocol does not perform an elliptic curve pairing check to validate its output notes.",
+            "severity": "high",
+            "location": "Swap protocol, Swap.sol"
+        },
+        {
+            "id": 10,
+            "category": {},
+            "title": "Using nested hashes reduces security",
+            "description": "The validator contracts implement an optimized Join-Split verification that uses random x_i values to verify a proof with only one elliptic curve pairing operation.",
+            "severity": "low",
+            "location": "JoinSplit verifier, ACE/validators"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ],
+                "3": [
+                    "CWE-440"
+                ]
+            },
+            "title": "Solidity compiler optimizations can be dangerous",
+            "description": "There have been several bugs with security implications related to optimizations.",
+            "severity": "n/a",
+            "location": "Solidity contracts"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Replay attack and revocation inversion on confidentialApprove",
+            "description": "The confidentialApprove method is used to allow third parties to spend notes on the note owner’s behalf.",
+            "severity": "high",
+            "location": "confidentialApprove function, ZKAssetBase.sol, aztec.js/src/signer/index.js"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Scaling factor allows values leading to potentially undesirable behavior",
+            "description": "The NoteRegistryManager contract defines how notes will be managed.",
+            "severity": "medium",
+            "location": "NoteRegistryManager contract, NoteRegistryManager.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "MultiSigWallet can call invalid contracts",
+            "description": "Transactions are added to the MultiSig wallet via submitTransaction.",
+            "severity": "medium",
+            "location": "MultiSigWallet contract, MultiSigWallet.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Time locking contracts are prone to overflow",
+            "description": "The time lock check is an unbounded addition which can overflow and cause the check to always pass.",
+            "severity": "low",
+            "location": "time locking contracts, MultiSigWalletWithTimeLock.sol"
+        }
+    ]
+}

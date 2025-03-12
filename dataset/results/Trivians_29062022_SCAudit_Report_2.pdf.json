@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/Trivians_29062022_SCAudit_Report_2.pdf",
+    "project_info": {
+        "url": "https://github.com/tanselkaya/TrivianToken",
+        "commit_id": "be7968ce9aea8afeb26ac6149a32142fed4d552f",
+        "address": "0xca863f710922e79339402e6708d67acf9e8572d",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "TrivianToken": "contracts/Trivians_29062022_SCAudit_Report_2/TrivianToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Unnecessary SafeMath usage",
+            "description": "Using SafeMath is not necessary as Solidity >= 0.8.0 provides errors for buffer overflow and underflow.",
+            "severity": "medium",
+            "location": "TokenVesting.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Stucked funds in the contract",
+            "description": "The contract contains payable functions to receive native tokens, but there are no methods to withdraw them from the contract.",
+            "severity": "medium",
+            "location": "TokenVesting.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Contracts should be deployed with the same compiler version and flags that have been tested thoroughly.",
+            "severity": "low",
+            "location": "TrivianToken.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "The public function could be declared external",
+            "description": "Public functions that are never called by the contract should be declared external to save Gas.",
+            "severity": "low",
+            "location": "TrivianToken.sol, TokenVesting.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Zero address is allowed",
+            "description": "The new address for the service signer does not check if it is a zero address, which could be sent as a default value.",
+            "severity": "low",
+            "location": "TokenVesting.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant payable address cast",
+            "description": "Release function casts beneficiary address to payable, which is redundant, as the contract transfers ERC20 tokens, not the network native token.",
+            "severity": "low",
+            "location": "TokenVesting.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing vesting validation",
+            "description": "CreateVestingSchedule function does not validate if the cliff period is less than the vesting duration.",
+            "severity": "low",
+            "location": "TokenVesting.sol"
+        }
+    ]
+}

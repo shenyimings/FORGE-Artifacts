@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/ackee-blockchain-siren-amm-report.pdf",
+    "project_info": {
+        "url": "https://github.com/sirenmarkets/core/tree/0329d49e58ec866b09d12e835324b8278ce9386e",
+        "commit_id": "0329d49e58ec866b09d12e835324b8278ce9386e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "core": "contracts/ackee-blockchain-siren-amm-report/core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked transfers in SeriesDeployer.autoCreateSeriesAndBuy",
+            "description": "Does not use SafeERC20 and does not handle cases where tokens return false on failure conditions",
+            "severity": "high",
+            "location": "SeriesDeployer contract, autoCreateSeriesAndBuy function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "WToken Vault has no access controls",
+            "description": "Assumes the caller is an AMM without checking, leading to potential undefined behavior if called by other parties",
+            "severity": "medium",
+            "location": "WTokenVault contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing zero-address checks",
+            "description": "Multiple places in the system lack zero-address checks, leaving it vulnerable to incorrect input arguments",
+            "severity": "high",
+            "location": "Data validation"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Code layout can be improved",
+            "description": "Arithmetic operations spanning multiple lines hinder readability",
+            "severity": "info",
+            "location": "Code maturity"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Use of semantic values as defaults in enums",
+            "description": "Solidity enums default to the first option, which can be dangerous if used as state variables",
+            "severity": "info",
+            "location": "Data validation"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Usage of solc optimizer",
+            "description": "Enabling the solc optimizer may lead to unexpected bugs",
+            "severity": "high",
+            "location": "Compiler configuration"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "System is lacking in documentation",
+            "description": "The system lacks high-level documentation, hindering readability and onboarding",
+            "severity": "info",
+            "location": "Specification & documentation"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Log old values in logs",
+            "description": "Important state changes only log new values, not old ones",
+            "severity": "info",
+            "location": "Logging"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "MinterAmm.updateVolatility’s return parameter is never initialized",
+            "description": "Alice, a developer building on top of Siren, observes the function signature of MinterAmm.updateVolatility and assumes that the function returns some semantically meaningful unsigned integer. However, it returns 0 instead.",
+            "severity": "low",
+            "location": "MinterAmm contract, updateVolatility function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Unsatifactory function implementation in MinterAmm.claimAllExpiredTokens",
+            "description": "The claimAllExpiredTokens function has three issues: it uses two loops, relies on Enumerable Set implementation details, and has a dynamic condition in the for loop.",
+            "severity": "n/a",
+            "location": "MinterAmm.sol (claimAllExpiredTokens function)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Incorrect Inheritance in VolatilityOracle",
+            "description": "VolatilityOracle inherits from OwnableUpgradeable but is not meant to be upgraded.",
+            "severity": "medium",
+            "location": "VolatilityOracle"
+        }
+    ]
+}

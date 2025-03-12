@@ -1,0 +1,416 @@
+{
+    "path": "artifacts/Farmings.md",
+    "project_info": {
+        "url": "https://github.com/cryptoalgebra/Algebra",
+        "commit_id": "7290fad656bfa89db3743c52af631154f6a8a2d5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Algebra": "contracts/Farmings/Algebra"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Users' rewards can be lost if the incentive maker adds a new farming with the same key",
+            "description": "If the incentive maker adds a new farming after the previous one was unattached by the pool, then all users' rewards will be lost.",
+            "severity": "high",
+            "location": "AlgebraEternalFarming.sol (L113 and L303)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "The reward distributor can send funds to an unattached pool",
+            "description": "There is no check in the `addRewards()` function that would stop the reward distributor from sending funds to a virtual pool that was unattached from the Algebra pool due to a revert in the `crossTo()` function.",
+            "severity": "high",
+            "location": "AlgebraEternalFarming.sol (L186-L195)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "The creation of the incentive with zero rewards blocks the pool's incentive system",
+            "description": "It's possible to create an incentive with 0 rewards using `AlgebraEternalFarming.createEternalFarming()`.",
+            "severity": "high",
+            "location": "AlgebraEternalFarming.sol (L103 and L418)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Unsynchronized positions in `NonFungiblePositionManager` and `AlgebraEternalFarming` can be exploited for receiving unfair rewards",
+            "description": "If `FarmingCenter._updatePosition` reverts internally, `NonFungiblePositionManager` ignores that revert.",
+            "severity": "high",
+            "location": "NonfungiblePositionManager.sol (L369) and AlgebraEternalFarming.sol (L385)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Virtual pools detached from the corresponding `AlgebraPool` result in an inconsistent state",
+            "description": "In cases where `AlgebraPool` connected to `VirtualAlgebraPool` catches a revert during a call to the `crossTo` function, the pool will reset its `activeIncentive` parameter to the 0 address.",
+            "severity": "high",
+            "location": "SwapCalculation.sol (L210)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Incorrect sequence of calls can lead to a revert",
+            "description": "Getting reserves before applying new rewards can lead to a revert on a call of the `decreaseRewardsAmount()` function.",
+            "severity": "medium",
+            "location": "AlgebraEternalFarming.sol, L161"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Rates can be updated for a deactivated farming",
+            "description": "There is no check that the incentive maker can't set non-zero rates for a deactivated pool.",
+            "severity": "medium",
+            "location": "AlgebraEternalFarming.sol, L198-L202"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-908"
+                ]
+            },
+            "title": "Initialization of the `virtualPool` should be made earlier",
+            "description": "`virtualPool` is currently initialized after using it in the check.",
+            "severity": "medium",
+            "location": "AlgebraEternalFarming.sol, L398"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Admin can drain all rewards from all incentives",
+            "description": "`AlgebraEternalFarming.decreaseRewardsAmount()` sends rewards to the address of admin.",
+            "severity": "medium",
+            "location": "AlgebraEternalFarming.sol, L172"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Unused variables",
+            "description": "Several storage variables can be removed.",
+            "severity": "low",
+            "location": "FarmingCenter.sol, L21; VirtualTickManagement.sol, L23; EternalVirtualPool.sol, L18"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Events missing",
+            "description": "Several functions should emit an event for better UX in possible integrations.",
+            "severity": "low",
+            "location": "AlgebraEternalFarming.sol, L186-L195, L198-L202"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unchecked calculations can be dangerous in some places",
+            "description": "There are several places where it is better to not use unchecked calculations.",
+            "severity": "low",
+            "location": "AlgebraEternalFarming.sol, L327-L332, L160-L168"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "If a user transfers NFT, they can lose rewards",
+            "description": "If the user transfer NFT before calling `collectRewards`, they will lose accrued rewards",
+            "severity": "low",
+            "location": "FarmingCenter.sol, L113-L115"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "`EternalVirtualPool._distributeRewards()` has an unnecessary parameter",
+            "description": "Internal function `EternalVirtualPool._distributeRewards()` uses the `currentTimestamp` parameter.",
+            "severity": "low",
+            "location": "EternalVirtualPool.sol, L208"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "An unnecessary allowed caller in `EternalVirtualPool.crossTo()`",
+            "description": "`EternalVirtualPool.crossTo()` is allowed to be called by `farmingCenterAddress` but it's never called from the farming center.",
+            "severity": "low",
+            "location": "EternalVirtualPool.sol, L103"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "An unnecessary incentive storage change",
+            "description": "`AlgebraEternalFarming._enterFarming()` marks the incentive as deactivated in the storage and after that reverts in case of the virtual pool address desynchronization.",
+            "severity": "low",
+            "location": "AlgebraEternalFarming.sol, L386"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "`INCENTIVE_MAKER` can create an incentive for any IAlgebraPool",
+            "description": "`INCENTIVE_MAKER` can create an incentive for any `IAlgebraPool`, not only for the ones created by the factory.",
+            "severity": "low",
+            "location": "AlgebraEternalFarming.sol, L103"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Anyone can call `AlgebraEternalFarming.addRewards()`",
+            "description": "`AlgebraEternalFarming.addRewards()` can be called by any address.",
+            "severity": "low",
+            "location": "AlgebraEternalFarming.sol, L186"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1116"
+                ]
+            },
+            "title": "An incorrect (misspelled) word in the comment",
+            "description": "At line a misspelled word is used.",
+            "severity": "low",
+            "location": "VirtualTickManagement.sol, L134"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "An unnecessary type cast",
+            "description": "At line variable `factory` is cast to the `IAlgebraFactory` type, but it already has the `IAlgebraFactory` type by definition.",
+            "severity": "low",
+            "location": "AlgebraEternalFarming.sol, L99"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "The detached `Incentive` cannot be deactivated manually",
+            "description": "If the virtual pool is detached from its corresponding algebra pool, then it is impossible for the incentive manager to manually change its status to the `deactivated` state due to this check.",
+            "severity": "low",
+            "location": "AlgebraEternalFarming.sol, L143"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "A redundant call to `_updatePositionInVirtualPool` in the `_updatePosition` function",
+            "description": "The call to `_updatePositionInVirtualPool` here can be replaced with the `distributeRewards` call since the `liquidityDelta` argument is set to 0 at that point.",
+            "severity": "low",
+            "location": "AlgebraEternalFarming.sol, L263"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "`getInnerRewardsGrowth` can be called for non-existed ticks",
+            "description": "There are no checks in the `getInnerRewardsGrowth` function that `bottomTick` and `topTick` were added to the tick tree.",
+            "severity": "low",
+            "location": "EternalVirtualPool.sol, L64-L67"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "The check can be made earlier to save gas",
+            "description": "The liquidity of the position check can be made earlier to save some gas.",
+            "severity": "low",
+            "location": "AlgebraEternalFarming.sol, L209"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Rebasable tokens cannot be used for rewards",
+            "description": "The current farming design doesn't allow work with rebasable tokens.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Zero checks are missing",
+            "description": "The protocol allows to transfer 0 amount of tokens to the 0 address.",
+            "severity": "low",
+            "location": "AlgebraEternalFarming.sol, L410"
+        }
+    ]
+}

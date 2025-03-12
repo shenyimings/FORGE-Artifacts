@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/Inspex-ArkenDexV3_&_ArkenApprove.pdf",
+    "project_info": {
+        "url": "https://github.com/arken-lab/arken-swap-protocol",
+        "commit_id": "4144548e447c98a69c768e41c92b69d5bb2cb320",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "arken-swap-protocol": "contracts/Inspex-ArkenDexV3_&_ArkenApprove/arken-swap-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Use of Upgradable Contract Design",
+            "description": "The logic of affected contracts can be arbitrarily changed by the proxy owner, allowing malicious actions.",
+            "severity": "high",
+            "location": "ArkenDexV3 & ArkenApprove contracts, General category"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "Controlling authorities can change critical state variables to gain additional profit, which is unfair to other users.",
+            "severity": "high",
+            "location": "ArkenDexV3 contract (ArkenDexV3.sol): updateFeeWallet(), updateWETH(), updateWETHDfyn(), updateDODOApproveAddress(), updateArkenApprove(); ArkenApprove contract (ArkenApprove.sol): updateCallableAddress()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Swapping Without Fees",
+            "description": "The platform does not receive swap fees when `desc.isSourceFee` is set to false and the `route.to` address is set to the destination address or `address(1)`.",
+            "severity": "info",
+            "location": "ArkenDexV3 contract, `_trade()` function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missing Caller Address Verification in uniswapV3SwapCallback()",
+            "description": "The caller address is not checked properly, allowing any address to withdraw ERC20 tokens.",
+            "severity": "info",
+            "location": "ArkenDexV3 contract, `uniswapV3SwapCallback()` function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Logging Parameter for Privileged Functions",
+            "description": "The SetCallableAddress event emits the incorrect old address value.",
+            "severity": "info",
+            "location": "ArkenApprove.sol, function updateCallableAddress()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "The initialize() function has public visibility, which can lead to unnecessary memory allocation.",
+            "severity": "info",
+            "location": "ArkenApprove.sol, function initialize()"
+        }
+    ]
+}

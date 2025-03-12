@@ -1,0 +1,404 @@
+{
+    "path": "artifacts/Seaport-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/ProjectOpenSea/seaport",
+        "commit_id": "8d95af1a952ac0ebf784e323e5e1a2b5d687cc4f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "seaport": "contracts/Seaport-Spearbit-Security-Review/seaport"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Spent offer amounts not accurately provided",
+            "description": "The spent offer amounts shared with a zone or contract offerer may not be actual.",
+            "severity": "medium",
+            "location": "OrderFulfilled, collection of (advanced) orders"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate spent offer item amounts",
+            "description": "Spent offer item amounts shared with a zone or contract offerer may not be actual.",
+            "severity": "medium",
+            "location": "AdvancedOrders, CONTRACT order type"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Advance orders can generate incorrect consideration items",
+            "description": "Advance orders of CONTRACT order type can break the aggregation routine.",
+            "severity": "medium",
+            "location": "AdvancedOrders, CONTRACT order type"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Revert on unused native tokens return",
+            "description": "Calls to PausableZone's executeMatchAdvancedOrders and executeMatchOrders can revert.",
+            "severity": "medium",
+            "location": "PausableZone, executeMatchAdvancedOrders and executeMatchOrders"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "ABI decoding vulnerability for bytes memory",
+            "description": "Maliciously constructed calldata can corrupt memory.",
+            "severity": "medium",
+            "location": "ABI decoding for bytes memory"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Different consideration recipients breaking aggregation routine",
+            "description": "Advance orders of CONTRACT order type can generate orders with different consideration recipients.",
+            "severity": "low",
+            "location": "AdvancedOrders, CONTRACT order type"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "Accidental calls to TypehashDirectory",
+            "description": "Calls to TypehashDirectory will be successful due to deployed bytecode starting with 00, corresponding to the STOP opcode.",
+            "severity": "low",
+            "location": "TypehashDirectory.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Incorrect signature length validation",
+            "description": "_isValidBulkOrderSize does not perform the signature length validation correctly.",
+            "severity": "low",
+            "location": "Verifiers.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Truncated nonce shared with contract offerer",
+            "description": "When contractNonce occupies more than 12 bytes, the truncated nonce shared back with the contract offerer through ratifyOrder would be smaller than the actual stored nonce.",
+            "severity": "low",
+            "location": "ConsiderationEncoder.sol and OrderValidator.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ],
+                "3": [
+                    "CWE-440"
+                ]
+            },
+            "title": "The use of identity precompile to copy memory need not be optimal across chains",
+            "description": "Using the identity precompile for copying memory is suboptimal on certain EVM versions.",
+            "severity": "info",
+            "location": "PointerLibraries.sol#L267"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-188"
+                ]
+            },
+            "title": "Some address fields are masked even though the ConsiderationDecoder wanted to skip this masking",
+            "description": "The compiler masks address type fields in structs when used in memory.",
+            "severity": "info",
+            "location": "Multiple locations (listed in the document)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas Optimization",
+            "description": "Division by a constant power of 2 can be optimized using shr instead of div.",
+            "severity": "info",
+            "location": "TokenTransferrer.sol#L318-L324, L437-L440, L445, L459-L465, L695-L698, L708, L722-L731, Verifiers.sol#L153"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Push Instructions Optimization",
+            "description": "Unnecessary PUSH32 instructions can be optimized to reduce gas costs.",
+            "severity": "info",
+            "location": "various lines in the contract code (refer to the provided document fragment)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Arithmetic Simplification",
+            "description": "Arithmetic operations can be simplified/optimized in _validateOrderAndUpdateStatus function.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Unnecessary Masking",
+            "description": "Some address fields are masked even though the ConsiderationDecoder wanted to skip this masking.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Arithmetic in _validateOrderAndUpdateStatus can be simplified/optimized",
+            "description": "The arithmetic involving advancedOrder.numerator, advancedOrder.denominator, orderStatus.numerator and orderStatus.denominator contains multiple nested if/else blocks.",
+            "severity": "info",
+            "location": "OrderValidator.sol#L107, #L192-L291"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant use of OffsetOrLengthMask",
+            "description": "The mask in ((src.readUint256() & OffsetOrLengthMask) is redundant.",
+            "severity": "info",
+            "location": "ConsiderationEncoder.sol#L59"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "Insufficient checks to prevent out-of-bounds returndata reads",
+            "description": "ABI-decoding of generateOrder returndata does not have sufficient checks",
+            "severity": "info",
+            "location": "ConsiderationDecoder.sol#L456-L461"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Renaming writeBytes to writeBytes32",
+            "description": "The function name writeBytes is not accurate in this context.",
+            "severity": "info",
+            "location": "PointerLibraries.sol#L3064"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-optimal usage of constants in ConsiderationConstants.sol",
+            "description": "Hard coded constants should be tested against.",
+            "severity": "info",
+            "location": "ConsiderationConstants.sol, ConduitConstants.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused / Redundant imports in ZoneInteraction.sol",
+            "description": "Multiple unused / redundant imports.",
+            "severity": "info",
+            "location": "ZoneInteraction.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "The compiled YUL code includes redundant consecutive validation of enum types",
+            "description": "Half the location where an enum type struct field has been used/accessed, the validation function for this enum type is performed twice",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "Typo in comment for the selector used in ConsiderationEncoder.sol#abi_encode_validateOrder()",
+            "description": "Minor typo in comments",
+            "severity": "info",
+            "location": "ConsiderationEncoder.sol#L221, ConsiderationEncoder.sol#L321"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Typo for the index check comment in _aggregateValidFulfillmentConsiderationItems",
+            "description": "There is a typo in _aggregateValidFulfillmentConsiderationItems",
+            "severity": "info",
+            "location": "FulfillmentApplier.sol"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Seaport phishing attack",
+            "description": "An attacker can take advantage of the domain separator caching mechanism to deploy a modified/proxied contract that replicates the original Seaport's domain separator, allowing them to receive more tokens than intended.",
+            "severity": "info",
+            "location": "ConsiderationBase.sol#L112-L113, ConsiderationBase.sol#L37"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "CONTRACT order type vulnerability",
+            "description": "Orders of CONTRACT order type can lower the value of a token offered by transferring derived connected tokens to a different item when Seaport calls the generateOrder function.",
+            "severity": "info",
+            "location": "ContractOffererInterface.sol#L7-L12, ContractOffererInterface.sol#L16-L22"
+        }
+    ]
+}

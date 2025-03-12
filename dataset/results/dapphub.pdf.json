@@ -1,0 +1,251 @@
+{
+    "path": "artifacts/dapphub.pdf",
+    "project_info": {
+        "url": "https://github.com/dapphub/ds-auth/tree/52c6a32a858601859dd809c718b59fb064fa21a7",
+        "commit_id": "52c6a32a858601859dd809c718b59fb064fa21a7",
+        "address": "0xaec71b3be50bc4cd99b44ea84fcf1ecc913bc33d",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ds-auth": "contracts/dapphub/ds-auth"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing contract existence check can cause lost ethers",
+            "description": "Lack of a code contract existence check leads to considering calls to non-contract addresses or self-destructed contracts as successful.",
+            "severity": "medium",
+            "location": "DSExec, DSProxy"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Cached destructible contracts may lead to corrupted execution",
+            "description": "An attacker can take advantage of the cache system to fool a user into calling a destructed contract.",
+            "severity": "medium",
+            "location": "DSProxy"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Wrong operator leads to unexecuted operations and lost tokens",
+            "description": "Using the equality operator instead of assignment leads to only one scheduled action being stored, resulting in actions not triggering and ethers being lost.",
+            "severity": "high",
+            "location": "DSClock"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Missing loop iteration prevents the last finalist from being elected",
+            "description": "Incorrect loop bounds prevent the election of the last finalist.",
+            "severity": "high",
+            "location": "DSPrism, snap function (prism.sol#L162)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Race condition in the ERC20 approve function may lead to token theft",
+            "description": "A known race condition in the ERC20 standard's approve function leads to token theft.",
+            "severity": "high",
+            "location": "DSWeth and DSToken, approve function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Actions without expiration times are not executable",
+            "description": "An implementation error prevents executing actions scheduled without an expiration time.",
+            "severity": "medium",
+            "location": "DSClock, wire and fire functions (clock.sol#L55-L68, clock.sol#L101-L111)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Wrong parameter order leads to unusable function",
+            "description": "Incorrect parameter order in the wire function prevents its execution.",
+            "severity": "medium",
+            "location": "DSClock, wire function (clock.sol#L89-L98)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Calling ERC20.transferFrom to itself may lead to unexpected behavior",
+            "description": "DSToken and DSWeth's transferFrom implementation differs from other ERC20 tokens.",
+            "severity": "n/a",
+            "location": "DSToken and DSWeth, transferFrom function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ],
+                "3": [
+                    "CWE-835"
+                ]
+            },
+            "title": "DSClock test hangs forever",
+            "description": "The tests provided with DSClock run indefinitely without termination.",
+            "severity": "info",
+            "location": "DSClock, clock.t.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Tie Breaking in DS-Prism",
+            "description": "Manipulating token weights can circumvent the tie-breaking rule.",
+            "severity": "medium",
+            "location": "DSPrism, swap and drop functions (prism.sol#L86-L88)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Mismatches between the DSChief documentation and code may lead to unexpected behavior",
+            "description": "Differences between the DSChief documentation and implementation may cause unexpected behavior.",
+            "severity": "n/a",
+            "location": "DSChief, various functions"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Potential reentrancy vulnerability in DSChief.setRootUser",
+            "description": "Lack of auth modifier could lead to vulnerability in future code refactoring.",
+            "severity": "n/a",
+            "location": "DSChief.setRootUser"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential difference in totalSupply calculation",
+            "description": "DSWeth.totalSupply uses this.balance instead of correct token emission amount.",
+            "severity": "n/a",
+            "location": "DSWeth.totalSupply"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ],
+                "3": [
+                    "CWE-912"
+                ],
+                "4": [
+                    "CWE-912"
+                ]
+            },
+            "title": "Unnecessary payable function",
+            "description": "fire function in DSClock can be made non-payable to prevent ethers from being trapped.",
+            "severity": "n/a",
+            "location": "DSClock.fire"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Potential vulnerability due to unclear documentation (TOB-DappHub-001)",
+            "description": "Unclear if reward should be given if contract does not exist in DSClock.",
+            "severity": "n/a",
+            "location": "DSClock"
+        }
+    ]
+}

@@ -1,0 +1,215 @@
+{
+    "path": "artifacts/Hacken-Codex on Althash.pdf",
+    "project_info": {
+        "url": "https://github.com/CDEXonAltHash/Codex-Rewards-Platform/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Codex-Rewards-Platform": "contracts/Hacken-Codex on Althash/Codex-Rewards-Platform"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Depositing logic is corrupted.",
+            "description": "On depositTokens, depositedRewardTokens is increasing with a full amount of tokens (including reserved for loyalty bonuses), but it is not decreasing on transferring loyalty bonuses.",
+            "severity": "critical",
+            "location": "Contract: CDEX_rewards.sol, Functions: depositTokens"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Depositing logic is corrupted.",
+            "description": "When setting new reward rates in notifyRewardAmount, the code should use only reserved and not involved parts, pending rewards must not be touched.",
+            "severity": "critical",
+            "location": "Contract: CDEX_rewards.sol, Functions: notifyRewardAmount"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Users can get bonuses even if they should not.",
+            "description": "Users can stake a small amount of money, but before claiming rewards add a big amount to get the bonus and then take it back.",
+            "severity": "high",
+            "location": "Contract: CDEX_rewards.sol, Function: getReward"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unsafe functions.",
+            "description": "If these functions are called when there are any pending rewards, the logic may be corrupted.",
+            "severity": "high",
+            "location": "Contract: CDEX_rewards.sol, Functions: setTokenContract, setRankingContract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Check if transfer and transferFrom have finished successfully.",
+            "description": "Transfer can fail without reverting transaction according to internal reasons.",
+            "severity": "medium",
+            "location": "Contract: CDEX_rewards.sol, Functions: stake, withdraw, getReward, depositTokens"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Violation of ERC-20 standard.",
+            "description": "CDEXTokenContract looks like an ERC-20 contract, but it does not correspond fully.",
+            "severity": "medium",
+            "location": "Contract: CDEX_rewards.sol, Interface: CDEXTokenContract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Key-value storage is wrongly defined.",
+            "description": "In terms of the provided definition, balance is key, and user address is value, but there could be several users with equal balance.",
+            "severity": "medium",
+            "location": "Contract: CDEX_rewards.sol, Interface: CDEXRankingContract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reserving too much money for bonuses.",
+            "description": "loyaltyBonusTotal is set as the sum of loyalty bonuses, but only one of them is applied.",
+            "severity": "medium",
+            "location": "Contract: CDEX_rewards.sol, Function: setLoyaltyTiersBonus"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong ordered loyalty bonuses.",
+            "description": "The functions do not check whether parameters are given in descending order.",
+            "severity": "medium",
+            "location": "Contract: CDEX_rewards.sol, Functions: setLoyaltyTiersBonus, setLoyaltyTiers"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Missing validation of transfer results.",
+            "description": "Results of the “transfer” function are ignored.",
+            "severity": "low",
+            "location": "Contract: CDEX_rewards.sol, Functions: stake, withdraw"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Floating pragma.",
+            "description": "The contracts use floating pragma ^0.4.21.",
+            "severity": "low",
+            "location": "Contract: CDEX_rewards.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused event.",
+            "description": "Event Recovered is defined but never used.",
+            "severity": "low",
+            "location": "Contract: CDEX_rewards.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Functions that can be declared as external.",
+            "description": "In order to save Gas, public functions that are never called in the contract should be declared as external.",
+            "severity": "low",
+            "location": "Contract: CDEX_rewards.sol, Function: setTokenContract, setRankingContract, depositTokens, notifyRewardAmount"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Non-essential code.",
+            "description": "In order to save Gas, code that could be skipped should be skipped.",
+            "severity": "low",
+            "location": "Contract: CDEX_rewards.sol, Function: getReward, depositTokens, notifyRewardAmount, updateReward"
+        }
+    ]
+}

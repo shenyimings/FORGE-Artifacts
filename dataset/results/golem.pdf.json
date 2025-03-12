@@ -1,0 +1,230 @@
+{
+    "path": "artifacts/golem.pdf",
+    "project_info": {
+        "url": "https://github.com/golemfactory/golem-contracts",
+        "commit_id": "1af6431b214cb75d7bec0604d5ff3e7a2d5f55c0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "golem-contracts": "contracts/golem/golem-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1127"
+                ]
+            },
+            "title": "Contracts specify outdated compiler version",
+            "description": "Golem contracts specify various outdated versions of the Solidity compiler.",
+            "severity": "info",
+            "location": "All contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Race condition in ERC20 approve function may lead to token theft",
+            "description": "Known race condition in ERC20 standard's approve function can lead to token theft.",
+            "severity": "medium",
+            "location": "ERC20 approve function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ],
+                "3": [
+                    "CWE-1104"
+                ]
+            },
+            "title": "OpenZeppelin dependencies do not track upstream changes",
+            "description": "Not tracking upstream changes for OpenZeppelin dependencies can lead to vulnerabilities.",
+            "severity": "low",
+            "location": "OpenZeppelin dependencies"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "User can silently burn tokens in batchTransfer functions",
+            "description": "Users can burn tokens without firing a Burn event or decreasing the totalSupply variable.",
+            "severity": "low",
+            "location": "GolemTokenNetworkBatch and GNTDeposit contracts, batchTransfer functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Empty accounts can trigger Mint and Burn events",
+            "description": "Both withdraw and transferFromGate functions do not require non-zero amounts to trigger Mint and Burn events.",
+            "severity": "info",
+            "location": "Mint and Burn events"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Deletion of user tokens in batchTransfer function",
+            "description": "User tokens can be deleted if a payment element contains the address of the initiating user (msg.sender).",
+            "severity": "high",
+            "location": "GolemNetworkTokenBatching, batchTransfer function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Hardcoded non-zero burn address is active",
+            "description": "The hardcoded burn address 0xdeadbeef is active and insecure.",
+            "severity": "high",
+            "location": "GNTDeposit, burn function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "User can silently burn tokens in the GNTDeposit withdraw function",
+            "description": "Users can transfer tokens to the special address 0xdeadbeef to burn tokens without firing a Burn event.",
+            "severity": "medium",
+            "location": "GNTDeposit, withdraw function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Depositing tokens in GNTDeposit does not reset the timelock",
+            "description": "The individual deposit of new tokens is not tracked and does not extend the withdrawal period window.",
+            "severity": "high",
+            "location": "GNTDeposit, onTokenReceived function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Timelock events can be reused",
+            "description": "Deposit events do not include task information, allowing malicious users to deceive participants.",
+            "severity": "low",
+            "location": "GNTDeposit, onTokenReceived function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Users can burn their own tokens",
+            "description": "Users can burn their own tokens using the burn function in GolemTokenNetworkBatching.",
+            "severity": "low",
+            "location": "GolemTokenNetworkBatching, burn function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Burning tokens does not update total supply",
+            "description": "The burn function in GolemTokenNetworkBatching does not update the totalSupply in the GolemTokenNetwork.",
+            "severity": "medium",
+            "location": "GolemTokenNetwork, GolemTokenNetworkBatching (burn function)"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "A user can stop a batch payment by providing 0x0 as an address",
+            "description": "An attacker can provide the address 0x0 to cause the revert of payments performed using batchTransfer.",
+            "severity": "low",
+            "location": "GolemTokenNetworkBatching (batchTransfer function)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Token transfer not ERC20 compliant",
+            "description": "The GNT implementation disallows transfer values of 0, which is explicitly required by the ERC20 spec.",
+            "severity": "n/a",
+            "location": "GolemNetworkToken (transfer function)"
+        }
+    ]
+}

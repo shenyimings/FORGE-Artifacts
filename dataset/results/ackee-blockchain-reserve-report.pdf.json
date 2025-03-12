@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/ackee-blockchain-reserve-report.pdf",
+    "project_info": {
+        "url": "https://github.com/reserve-protocol/protocol/tree/5cc6e94d9adfdab636a3cf3bfa72888bd6a6020d",
+        "commit_id": "5cc6e94d9adfdab636a3cf3bfa72888bd6a6020d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol": "contracts/ackee-blockchain-reserve-report/protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "M1: Unlimited allowance",
+            "description": "The BackingManager contract grants unlimited allowance to main.rToken() in the grantRTokenAllowance function.",
+            "severity": "medium",
+            "location": "p1/BackingManager.sol, grantRTokenAllowance function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "M2: Downcasting overflow",
+            "description": "The protocol uses potentially dangerous downcasting to uint32 in many contracts.",
+            "severity": "medium",
+            "location": "Multiple contracts (p1/Furnace.sol, StRSRP1._payoutRewards, GnosisTrade.stateTransition, BasketLib.empty, BasketLib.copy, BasketLib.add)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "M3: Insufficient data validation",
+            "description": "The contracts have insufficient data validation for parameters that are passing addresses in their init functions.",
+            "severity": "medium",
+            "location": "p1/Broker.sol, p1/RevenueTrader.sol, p1/Main.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "W1: Code duplications",
+            "description": "Collateral contracts contain a lot of duplicated code.",
+            "severity": "info",
+            "location": "plugins/assets/*Collateral.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "W2: Basket nonce double increment",
+            "description": "The copy function increments the Basket.nonce by 2.",
+            "severity": "info",
+            "location": "p1/BasketHandler.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "W3: Enum to uint casting",
+            "description": "Casting enum to uint ordinal values can be dangerous, and comparing them using < and > operators even more.",
+            "severity": "info",
+            "location": "p1/BasketHandler.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "W4: Wrong revert message",
+            "description": "The require statement reverts with the message \"paused or frozen\" when the protocol is not pausedOrFrozen and main.hasRole(OWNER, _msgSender()) returns false.",
+            "severity": "info",
+            "location": "p1/BasketHandler.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "W5: Support for meta-transactions",
+            "description": "The protocol is using OpenZeppelin Context for potential support for meta transactions in the future, which creates a new attack surface via the _msgSender function.",
+            "severity": "info",
+            "location": "*/*"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "W6: Usage of solc optimizer",
+            "description": "Enabling solc optimizer may lead to unexpected bugs",
+            "severity": "info",
+            "location": "Compiler configuration"
+        }
+    ]
+}

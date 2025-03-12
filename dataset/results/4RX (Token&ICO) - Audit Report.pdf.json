@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/4RX (Token&ICO) - Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/FourRX/4rx",
+        "commit_id": "bf96812acb07dd3081e73c9a88176cc3d1a07312, 852a9a8221a10623ef2adc763419857a37d33797",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "4rx": "contracts/4RX (Token&ICO) - Audit Report/4rx"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Return Value of an External Call is never used Effectively",
+            "description": "The external calls made in ICOContract.sol do return a boolean as well as other imperative values that could effectively indicate whether or not the external call was successful, but they are not used effectively in some instances of the contract.",
+            "severity": "low",
+            "location": "ICOContract.sol, lines 43, 49, 59, 93, 102"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "External Visibility should be preferred",
+            "description": "Some functions that are never called throughout the contract should be marked as external visibility instead of public visibility for gas optimization.",
+            "severity": "low",
+            "location": "ICOContract.sol, purchase and recoverTokens functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "constructor does not include Zero Address Validation",
+            "description": "The constructor in ICOContract.sol initializes some state variables without implementing zero address validation checks to ensure that no zero address is passed as arguments.",
+            "severity": "low",
+            "location": "ICOContract.sol, lines 250-253"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Constant declaration should be preferred",
+            "description": "State variables that are not supposed to change throughout the contract in FourRXToken.sol should be declared as constant.",
+            "severity": "low",
+            "location": "FourRXToken.sol, lines 53-63"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "External Visibility should be preferred",
+            "description": "Some functions that are never called throughout the contract in FourRXToken.sol should be marked as external visibility instead of public visibility for gas optimization.",
+            "severity": "low",
+            "location": "FourRXToken.sol, requestPrice and fulfill functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "constructor does not include Zero Address Validation",
+            "description": "The constructor in FourRXToken.sol initializes a state variable without implementing zero address validation checks to ensure that no zero address is passed as arguments.",
+            "severity": "low",
+            "location": "FourRXToken.sol, lines 250-253"
+        }
+    ]
+}

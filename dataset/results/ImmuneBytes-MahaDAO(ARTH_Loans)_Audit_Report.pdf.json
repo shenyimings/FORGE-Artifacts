@@ -1,0 +1,200 @@
+{
+    "path": "artifacts/ImmuneBytes-MahaDAO(ARTH_Loans)_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/MahaDAO/arth-vaults",
+        "commit_id": "117c1005adb4ad8e443a4f3e803adb539a128cf2",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "arth-vaults": "contracts/ImmuneBytes-MahaDAO(ARTH_Loans)_Audit_Report/arth-vaults"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Trove’s Status is not adequately validated in the _getTotalsFromBatchLiquidate_NormalMode function",
+            "description": "The protocol uses a batchLiquidateTroves function that is used to liquidate a custom list of troves without adequate validation for Non-Active troves.",
+            "severity": "high",
+            "location": "Contract: TroveManager, Function: _getTotalsFromBatchLiquidate_NormalMode"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Local variable used in Function. Adverse effect on Gas Optimization",
+            "description": "Unnecessary use of a local variable collToLiquidate instead of using the already available vars.collToLiquidate from the LocalVariables_InnerSingleLiquidateFunction struct.",
+            "severity": "medium",
+            "location": "Contract: TroveManager, Function: _liquidateNormalMode"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Multiplication is being performed on the result of Division",
+            "description": "Performing division before multiplication might lead to loss of precision.",
+            "severity": "medium",
+            "location": "Contract: TroveManager, Functions: _redistributeDebtAndColl"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Contract includes functions that perform Multiplication on the result of Division",
+            "description": "Performing division before multiplication might lead to loss of precision.",
+            "severity": "medium",
+            "location": "Contract: StabilityPool, Functions: _computeLQTYPerUnitStaked & _computeRewardsPerUnitStaked"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ],
+                "4": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Contract’s WETH balance is not checked before initiating a transfer",
+            "description": "The function transfers WETH to the caller without checking if the contract has sufficient WETH.",
+            "severity": "low",
+            "location": "Contract: StabilityPool, Function: _sendEthGainToDepositor"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Return Value of an External Call is not used Effectively",
+            "description": "The return value from the external call is not used to ensure the successful execution of the function.",
+            "severity": "low",
+            "location": "Contract: StabilityPool, Lines: 908, 919, 1082"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "Violation of Check_Effects_Interaction Pattern in the Withdraw function",
+            "description": "The fallback function updates state variables after making an external call, violating the Check Effects Interaction Pattern.",
+            "severity": "medium",
+            "location": "Contract: ActivePool, Function: Withdraw"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked WETH Transfers found in Contract",
+            "description": "The return value from the external WETH transfer is not used to ensure successful execution of the function.",
+            "severity": "medium",
+            "location": "Contract: ActivePool, Lines: 97, 151"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant assert validation in setAddresses function",
+            "description": "Assert validation to ensure MIN_NET_DEBT is greater than Zero, but MIN_NET_DEBT is already initialized with a value greater than Zero in the LiquityBase contract.",
+            "severity": "medium",
+            "location": "Contract: BorrowerOperations, Function: setAddresses (Line no: 130)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "_activePoolAddColl function ignores the Return value from external call",
+            "description": "The activePoolAddColl function doesn’t take into consideration the return value from weth transfers.",
+            "severity": "low",
+            "location": "Contract: BorrowerOperations, Function: _activePoolAddColl (Line no: 584)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "BorrowerOperations contract includes unused Internal Functions",
+            "description": "The contract includes internal functions that are never used throughout the contract.",
+            "severity": "low",
+            "location": "Contract: BorrowerOperations, _requireCallerIsBorrower and _getUSDValue functions (Line no: 521-525, 627-632)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Coding Style Issues in BorrowerOperations contract",
+            "description": "Code readability is influenced by coding style issues, which may lead to bugs in the future.",
+            "severity": "info",
+            "location": "Contract: BorrowerOperations"
+        }
+    ]
+}

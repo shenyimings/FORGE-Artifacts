@@ -1,0 +1,205 @@
+{
+    "path": "artifacts/Avalaunch XAVA Protocol Audit - CoinFabrik Blog.pdf",
+    "project_info": {
+        "url": "https://github.com/avalaunch-app/xava-protocol/",
+        "commit_id": "fd9b97ccd963819a282fa5c21bf0545d180f8797",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "xava-protocol": "contracts/Avalaunch XAVA Protocol Audit - CoinFabrik Blog/xava-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "CR-01 Unlimited Permits Issued for Admin",
+            "description": "AvalaunchCollateral allows unlimited permits to be issued for admin.",
+            "severity": "critical",
+            "location": "contracts/AvalaunchCollateral.sol:135-176, 192-226"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "MI-01 No Booster Round Is Possible",
+            "description": "Booster round is unavailable due to inconsistent setting of parameters.",
+            "severity": "low",
+            "location": "AvalaunchSale.setSalesParams()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "MI-02 Floating Pragma",
+            "description": "Unlocked pragma version can introduce bugs upon deployment with a different compiler version.",
+            "severity": "low",
+            "location": "Multiple contracts (DevToken.sol, IAdmin.sol, etc.)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "MI-03 Inconsistent Parameters in AvalaunchSale and SalesFactory",
+            "description": "Collateral parameter set differently in AvalaunchSales and SalesFactory.",
+            "severity": "low",
+            "location": "SalesFactory"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "MI-04 Prefer Importing Libraries from NPM",
+            "description": "Imported libraries may lead to errors or missed updates.",
+            "severity": "low",
+            "location": "IERC20Metadata.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "EN-01 Outdated Solidity Compiler Version",
+            "description": "Outdated solidity compiler version (v0.6.12) used in audited contracts.",
+            "severity": "info",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "EN-02 Unused Flattened Library",
+            "description": "Unused flattened library may introduce reported issues.",
+            "severity": "info",
+            "location": "TransparentUpgradeableProxy"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "EN-03 tokenPriceInUSD Is Unused and Misleading",
+            "description": "Unused variable tokenPriceInUSD is misleading and unrelated to tokenPriceInAVAX.",
+            "severity": "info",
+            "location": "AvalaunchSale.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "EN-04 dexalotPortfolio May Be Set Before Sale Is Created",
+            "description": "Ensure sale creation in setAndSupportDexalotPortfolio().",
+            "severity": "info",
+            "location": "AvalaunchSale.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "EN-05 admin Array Not Checked For Repetitions During Construction",
+            "description": "Repeated addresses in the input array _addresses may create inconsistencies.",
+            "severity": "info",
+            "location": "Admin.sol:18-24"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "EN-06 Replace Integers by Constants",
+            "description": "Hardcoded integers should be replaced with constants for better readability and maintenance.",
+            "severity": "info",
+            "location": "FarmingXava.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "EN-07 Two safeMath Libraries",
+            "description": "Multiple safeMath libraries used across contracts, consider unifying or removing unused ones.",
+            "severity": "info",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 12,
+            "category": {},
+            "title": "EN-08 Documentation",
+            "description": "Improve documentation using Solidity's NatSpec format and remove development comments.",
+            "severity": "info",
+            "location": "Multiple contracts"
+        }
+    ]
+}

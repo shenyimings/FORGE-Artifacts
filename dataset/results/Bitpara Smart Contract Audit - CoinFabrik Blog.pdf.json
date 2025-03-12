@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/Bitpara Smart Contract Audit - CoinFabrik Blog.pdf",
+    "project_info": {
+        "url": "https://github.com/sottile27/bitpara",
+        "commit_id": "b584216d4d0261af9afb50a4a556f693f1763ac5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bitpara": "contracts/Bitpara Smart Contract Audit - CoinFabrik Blog/bitpara"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Solidity version is too old",
+            "description": "The contract is targeting an outdated Solidity compiler version (0.4.18), which was released in October 2017 and may contain unfixed bugs.",
+            "severity": "medium",
+            "location": "bitpara.sol, pragma solidity ^0.4.18;"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner can make arbitrary transfers",
+            "description": "The owner can make transfers from any user to himself using the transferToOwner function.",
+            "severity": "low",
+            "location": "bitpara.sol, transferToOwner function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Solidity version is not fixed",
+            "description": "The code allows compilation with source code compatible versions of solidity above 0.4.18, which may introduce features and bug fixes that might change the expected behavior.",
+            "severity": "low",
+            "location": "bitpara.sol, pragma solidity ^0.4.18;"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use of deprecated constant modifier",
+            "description": "The contract uses the \"constant\" modifier instead of the recommended \"view\" modifier.",
+            "severity": "low",
+            "location": "bitpara.sol, various functions (e.g., totalSupply, balanceOf, allowance)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary extra checks",
+            "description": "Redundant checks are performed in the transfer, transferFrom, and burn functions.",
+            "severity": "n/a",
+            "location": "bitpara.sol, transfer, transferFrom, and burn functions"
+        }
+    ]
+}

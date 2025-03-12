@@ -1,0 +1,161 @@
+{
+    "path": "artifacts/2022-03-maplefinance-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/maple-labs/erc20",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "erc20": "contracts/2022-03-maplefinance-securityreview/erc20"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Risk of reuse of signatures across forks due to lack of chain ID validation",
+            "description": "ERC20Permit contract implements EIP-2612 functionality but lacks chain ID validation, enabling signature replay attacks across different forks.",
+            "severity": "high",
+            "location": "erc20/contracts/ERC20Permit.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-638"
+                ],
+                "5": [
+                    "CWE-424"
+                ]
+            },
+            "title": "Risk of token theft due to race condition in ERC20’s approve function",
+            "description": "A known race condition in the ERC20 standard’s approve function could lead to token theft.",
+            "severity": "high",
+            "location": "erc20/contracts/ERC20.sol, ERC20Permit.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing check on newAsset's decimals",
+            "description": "The Migrator contract lacks a check to ensure that newAsset's decimals are equal to the old asset's decimals.",
+            "severity": "low",
+            "location": "mpl-migrator/contracts/Migrator.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of zero address checks",
+            "description": "Several functions in the codebase do not revert when passed a zero address, which is not an acceptable value for certain parameters.",
+            "severity": "low",
+            "location": "erc20/contracts/ERC20Permit.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possibility that users could receive more assets than the amount due",
+            "description": "If totalSupply is zero, the first user who deposits after updateVestingSchedule is called could immediately redeem his tokens to get back more of the asset than deposited.",
+            "severity": "low",
+            "location": "contracts/RevenueDistributionToken.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Signature malleability due to use of ecrecover",
+            "description": "The ERC20Permit contract is susceptible to signature malleability because it uses the precompiled EVM contract ecrecover.",
+            "severity": "low",
+            "location": "erc20/contracts/ERC20Permit.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Solidity compiler optimizations can be problematic",
+            "description": "Optional compiler optimizations in Solidity might introduce security vulnerabilities due to latent bugs or incorrect caching.",
+            "severity": "info",
+            "location": "foundry.toml"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked balance increments in _transfer and _mint functions",
+            "description": "Balance increments can be done inside an unchecked block to save gas.",
+            "severity": "n/a",
+            "location": "ERC20Permit.sol (_transfer and _mint functions)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use of inline assembly to get the chainId",
+            "description": "Replace with block.chainId to enhance code readability.",
+            "severity": "n/a",
+            "location": "ERC20Permit.sol (L48-L51)"
+        }
+    ]
+}

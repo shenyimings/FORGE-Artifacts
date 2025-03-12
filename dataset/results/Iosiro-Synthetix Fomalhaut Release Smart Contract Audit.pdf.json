@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/Iosiro-Synthetix Fomalhaut Release Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix",
+        "commit_id": "95d73f7b74483e72fffe1f8ee90f037a2f7b8773",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix": "contracts/Iosiro-Synthetix Fomalhaut Release Smart Contract Audit/synthetix"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Use of transfer function",
+            "description": "Using `transfer` to send ether can lead to incompatibility with some contracts due to gas cost changes.",
+            "severity": "info",
+            "location": "EtherCollateralsUSD.sol (lines 504, 588, 665, and 669)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Loan Debt Cleared Without Full Repayment",
+            "description": "A user could clear their loan debt without full repayment by paying an amount smaller than the loan's accrued interest.",
+            "severity": "high",
+            "location": "EtherCollateralsUSD.sol, line 665"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Liquidated Loan Collateral Not Updated",
+            "description": "When a loan was liquidated with the liquidateLoan function, the underlying loan collateral was not updated to reflect the liquidation.",
+            "severity": "high",
+            "location": "EtherCollateralsUSD.sol, line 580"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect amountToLiquidate Calculation",
+            "description": "When liquidating loans at or below the issuance ratio, the contract may burn synths more than the intended amount of _debtToCover.",
+            "severity": "medium",
+            "location": "EtherCollateralsUSD.sol, line 568"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unsafe Arithmetic Used",
+            "description": "The _formatAggregatorAnswer function made use of * and - operators instead of SafeMath.mul() and SafeMath.sub() respectively.",
+            "severity": "info",
+            "location": "ExchangeRates.sol, lines 548 and 549"
+        }
+    ]
+}

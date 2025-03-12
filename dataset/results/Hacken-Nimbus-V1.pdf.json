@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/Hacken-Nimbus-V1.pdf",
+    "project_info": {
+        "url": "https://github.com/nimbusplatformorg/nim-smartcontract/tree/7bda71190cca5d139e15b46a33ca041eb060f38d",
+        "commit_id": "6e57eafcdc7b9a08ccb0369bf135a69ce4680be5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "nim-smartcontract": "contracts/Hacken-Nimbus-V1/nim-smartcontract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ]
+            },
+            "title": "Limiting approve and transfer amount to 96 bits violates ERC-20 standard.",
+            "description": "This can lead to limited acceptance of the asset and fund losses in some rare cases.",
+            "severity": "critical",
+            "location": "GNBU.sol, functions: approve, permit"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Inclusion of frozen balances in transfer function.",
+            "description": "The transfer function can fail if a user decides to transfer all his tokens but has unclaimed vested tokens.",
+            "severity": "high",
+            "location": "GNBU.sol, function: balanceOf"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Proposal cancellation restriction.",
+            "description": "Proposal can be cancelled only if a proposer has not enough votes and not enough stake balance.",
+            "severity": "high",
+            "location": "NimbusGovernorV1.sol, function: cancel"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant SafeMath library usage.",
+            "description": "The SafeMath library is redundant for compiler versions >= 8.0.0.",
+            "severity": "low",
+            "location": "All contracts"
+        }
+    ]
+}

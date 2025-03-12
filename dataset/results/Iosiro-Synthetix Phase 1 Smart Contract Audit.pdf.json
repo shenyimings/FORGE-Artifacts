@@ -1,0 +1,257 @@
+{
+    "path": "artifacts/Iosiro-Synthetix Phase 1 Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix",
+        "commit_id": "97de3307acf4c1b1cd572a2594d26389a553407e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix": "contracts/Iosiro-Synthetix Phase 1 Smart Contract Audit/synthetix"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": " Dangerous Method for Maintaining Havven Drawing Rights (HDRs) Rate",
+            "description": "The HDR exchange rate could spike when adding or removing currencies from the basket, resulting in inconsistencies in the system.",
+            "severity": "low",
+            "location": "ExchangeRates.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Excessive Owner Capabilities",
+            "description": "Owners of the contracts have too much control over the system, introducing risk of single points of failure.",
+            "severity": "info",
+            "location": "System-wide"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-665"
+                ]
+            },
+            "title": "Uninitialized CurrencyKeys in ExchangeRates constructor",
+            "description": "The constructor of ExchangeRates could contribute to predictable spikes in the HDR rate value if not correctly initialised with all the currencies in currencyKeys.",
+            "severity": "info",
+            "location": "ExchangeRates.sol, Line 83"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Impractical to remove a Nomin once it is in use",
+            "description": "The `removeNomin(...) function required the total supply of the Nomin being removed to be zero.",
+            "severity": "info",
+            "location": "SafeMath.sol, Line 1"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use of implicit integer sizes in contract implementations",
+            "description": "The use of implicit type `uint` instead of a specific type.",
+            "severity": "info",
+            "location": "Throughout the project"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inexact Solidity compiler version used",
+            "description": "The pragma version was not fixed to a specific version, which could result in using an alternative compiler with unidentified bugs.",
+            "severity": "info",
+            "location": "SafeMath.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Unaudited compiler version",
+            "description": "Version 0.4.25 of the Solidity compiler was used without a publicly available security review.",
+            "severity": "info",
+            "location": "System-wide"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Incorrect Exchange Fee Rate Validation",
+            "description": "The `setExchangeFeeRate(...) function incorrectly used MAX_TRANSFER_FEE_RATE for validation instead of MAX_EXCHANGE_FEE_RATE.",
+            "severity": "low",
+            "location": "FeePool.sol, Line 124"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Type declaration of decimals does not match ERC-20 standard",
+            "description": "The `decimals` variable was defined using an implicit `uint` type as opposed to the `uint8` type as in the ERC-20 standard.",
+            "severity": "info",
+            "location": "ExternStateToken.sol, Line 54; Havven.sol, Line 151; Nomins.sol, Line 47"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Inconsistent case used on external method sethavvenState",
+            "description": "The `sethavvenState(...)` function did not match the case conventions of other function names.",
+            "severity": "info",
+            "location": "Havven.sol, Line 261"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Comments incorrectly describe code",
+            "description": "Certain comments in the code were found to incorrectly describe the intended functionality of the codebase.",
+            "severity": "info",
+            "location": "Nomins.sol, Lines 89-93, 111-115, 132-133, 155-156; Havven.sol, Lines 422-433"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing comment blocks",
+            "description": "Certain areas of the code had no comments.",
+            "severity": "info",
+            "location": "FeePool.sol; Havven.sol; ExchangeRates.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "No validation on whether a rate is older than the existing rate",
+            "description": "No validation was performed to ensure that the rate was, in fact, a more recent exchange rate than the current one.",
+            "severity": "info",
+            "location": "ExchangeRates.sol, Line 139"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Several critical operations not covered in Truffle tests",
+            "description": "Certain critical operations in the smart contract logic were untested in what was otherwise a relatively comprehensive test suite.",
+            "severity": "info",
+            "location": "Havven.sol; HavvenEscrow.sol; HavvenState.sol; SelfDestructable.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No event when changing Havven State",
+            "description": "An event indicating that the Havven State had been changed was removed to reduce the contract size.",
+            "severity": "info",
+            "location": "Havven.sol, Line 265"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Comment typos",
+            "description": "Typos were identified within certain comments in the codebase.",
+            "severity": "info",
+            "location": "FeePool.sol; elsewhere"
+        }
+    ]
+}

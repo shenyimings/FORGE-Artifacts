@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/Inspex-Lottery.pdf",
+    "project_info": {
+        "url": "https://github.com/ThorusFi/contracts",
+        "commit_id": "9713802c5cfbb8b6cf02f958f53a58df10ca1a76",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Inspex-Lottery/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Arbitrary Update of rewardOffered",
+            "description": "The owner can update the rewardOffered state, potentially lowering the rewards for winning tickets.",
+            "severity": "medium",
+            "location": "ThorusLottery contract, function setRewardOffered()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change the critical state variables to gain additional profit.",
+            "severity": "low",
+            "location": "ThorusLottery contract, functions allowBuying(), disallowBuying(), setRewardOffered(), allowClaiming(), settleRandomResult(), withdrawThorus()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Unwithdrawable Excessive Reward",
+            "description": "The owner cannot withdraw excessive $DAI left in the contract.",
+            "severity": "info",
+            "location": "ThorusLottery contract, function setRewardOffered()"
+        }
+    ]
+}

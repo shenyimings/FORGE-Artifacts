@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/RoyalPay_0x4BED6C95AeF12f6c3e680132Ba17b7FdFB79DB7d.pdf",
+    "project_info": {
+        "url": "https://github.com/interfinetwork/audited-codes/blob/main/RoyalPay.sol",
+        "commit_id": "1c94c7a90a0b65dd0aa9b549526a0801caa2ba88",
+        "address": "0x4bed6c95aef12f6c3e680132ba17b7fdfb79db7d",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.6+commit.7338295f"
+        ],
+        "project_path": {
+            "RoyalPay": "contracts/RoyalPay_0x4BED6C95AeF12f6c3e680132Ba17b7FdFB79DB7d/RoyalPay"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Unauthorized Wallet Modification",
+            "description": "Smart contract owner can whitelist wallets to modify some of the 'write contract' parameters, potentially leading to unauthorized changes.",
+            "severity": "low",
+            "location": "addWhitelisted and removeWhitelisted functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Max Sell Transaction Limitation",
+            "description": "A non-whitelisted wallet can only sell a specified number of tokens, which can be limiting.",
+            "severity": "low",
+            "location": "Max Sell function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of Re-entrancy Guard",
+            "description": "Smart contract does not utilize re-entrancy guard to prevent re-entrant calls.",
+            "severity": "low",
+            "location": "Not specified"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Elevated Risk of Out-of-Gas and Resource Exhaustion Errors",
+            "description": "Smart contract owner can airdrop tokens to specified wallets, which may lead to out-of-gas and resource exhaustion errors.",
+            "severity": "low",
+            "location": "`multiTransfer` function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Code for `transferOwnership()`",
+            "description": "Ideal transfer ownership code should be written like the one provided in the report.",
+            "severity": "low",
+            "location": "`transferOwnership()` function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "No Arbitrary Limit Set for Max Sell Transaction Amount",
+            "description": "Smart contract owner can change max sell transaction amount to zero, without any arbitrary limit set.",
+            "severity": "low",
+            "location": "`setMaxSellTransaction` function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Low Severity Issue (Pragma Directive or Contract/Interface/Library Definition)",
+            "description": "The issue may or may not create a functional vulnerability.",
+            "severity": "low",
+            "location": "Not specified"
+        }
+    ]
+}

@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/idle-governance.pdf",
+    "project_info": {
+        "url": "https://github.com/Idle-Labs/idle-governance/tree/develop",
+        "commit_id": "develop",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "idle-governance": "contracts/idle-governance/idle-governance"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-233"
+                ]
+            },
+            "title": "delegateBySig() Should Validate the v and s Parameters",
+            "description": "The contract should validate the v and s parameters as in ECDSA.sol.",
+            "severity": "info",
+            "location": "contracts/Idle.sol, function delegateBySig()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Possible Truncation in Calculating APR Precision",
+            "description": "The computed pair will always return a result that has the last two digits as 0 due to division before multiplication.",
+            "severity": "info",
+            "location": "contracts/PriceOracle.sol, function getCompApr"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Integer Overflow / Underflow",
+            "description": "Potential underflow on L70 in PriceOracle.sol.",
+            "severity": "n/a",
+            "location": "contracts/PriceOracle.sol, line 70"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Uninitialized comptrollerImplementation",
+            "description": "comptrollerImplementation is never initialized.",
+            "severity": "n/a",
+            "location": "contracts/IdleControllerStorage.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Low Code Coverage",
+            "description": "The branch, statement, and function coverage of contracts Idle.sol and IdleController.sol are low.",
+            "severity": "n/a",
+            "location": "contracts/Idle.sol and contracts/IdleController.sol"
+        }
+    ]
+}

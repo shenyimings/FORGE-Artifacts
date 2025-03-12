@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/HAECHI_AUDIT-Fractional.pdf",
+    "project_info": {
+        "url": "https://github.com/fractional-company/contracts",
+        "commit_id": "37f9428fe9a5596c93ed9dfccb7be41afc0646ee",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/HAECHI_AUDIT-Fractional/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "DoS can happen when the winning address is a contract address",
+            "description": "ERC721TokenVault#bid() will send eth to the winning bidder if the current bid is successful, but sending eth can execute fallback function. If fallback function is declared to run an infinite loop, bid() function will always fail.",
+            "severity": "critical",
+            "location": "ERC721TokenVault.sol, bid() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "updateUserPrice can set reservePrice out of range",
+            "description": "ERC721TokenVault#updateUserPrice() is for setting the reservePrice, but unlike _beforeTokenTransfer() function, updateUserPrice() function does not check if reservePrice is between acceptable range.",
+            "severity": "critical",
+            "location": "ERC721TokenVault.sol, updateUserPrice() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Redeem function should send ETH to the winning address",
+            "description": "ERC721TokenVault#redeem() is used when someone buys out all the minted tokens. If this happens, bidding will end. But the winning bidder won’t receive its bidded eth.",
+            "severity": "high",
+            "location": "ERC721TokenVault.sol, redeem() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Can end auction before it starts",
+            "description": "ERC721TokenVault#end() does not check if the auction has started. If auction ends before even it starts, current winning bidder will be zero address so it will result in losing control of the nft",
+            "severity": "high",
+            "location": "ERC721TokenVault.sol, end() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "claimFee() function will mint tokens eternally and it will mint different fees based on called time",
+            "description": "ERC721TokenVault#claimFee() will mint tokens even after the auction ends. Also, the number of minted token amounts is not consistent.",
+            "severity": "low",
+            "location": "ERC721TokenVault.sol, claimFee() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "updateAuctionLength/updateBasePrice won't have any effect after auction starts",
+            "description": "ERC721TokenVault#updateAuctionLength()/updateBasePrice() function is for setting the auction metadata before auction has started. Although these functions can be called even after the auction has started, it won’t have any effect on the auction's metadata.",
+            "severity": "info",
+            "location": "ERC721TokenVault.sol, updateAuctionLength()/updateBasePrice() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "IndexERC721 has unused variables",
+            "description": "IndexERC721 has two unused variables, _tokenIdTracker and tokenToIndexOwner.",
+            "severity": "info",
+            "location": "IndexERC721.sol"
+        }
+    ]
+}

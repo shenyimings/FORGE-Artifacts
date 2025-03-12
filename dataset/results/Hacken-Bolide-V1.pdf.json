@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/Hacken-Bolide-V1.pdf",
+    "project_info": {
+        "url": "https://github.com/bolide-fi/contracts",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Hacken-Bolide-V1/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible rewards lost or receiving more",
+            "description": "Changing allocPoint in MasterBlid.set method while _withUpdate flag is set to false may lead to rewards lost or receiving rewards more than deserved.",
+            "severity": "low",
+            "location": "Contract: MasterChef.sol, Function: set"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Privileged ownership",
+            "description": "The owner of the MasterBlid contract has permission to updateMultiplier, add new pools, change pool’s allocation points, and set a migrator contract without community consensus.",
+            "severity": "medium",
+            "location": "Contract: MasterChef.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Excess writing operation",
+            "description": "When _allocPoint is not changed for the pool, there is still an assignment for a new value, which consumes gas doing nothing.",
+            "severity": "low",
+            "location": "Contract: MasterChef.sol, Function: set"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Emit Events",
+            "description": "Functions that change critical values should emit events for better off-chain tracking.",
+            "severity": "low",
+            "location": "Contract: MasterChef.sol, Functions: setMigrator, updateMultiplier, setBlidPerBlock"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating solidity version",
+            "description": "It is recommended to specify the exact solidity version in the contracts.",
+            "severity": "low",
+            "location": "Contracts: all"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Balance updated after transfer",
+            "description": "It is recommended to update the balance state before doing any token transfer.",
+            "severity": "n/a",
+            "location": "Contract: MasterChef.sol, Functions: emergencyWithdraw, migrate"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "A public function that could be declared external",
+            "description": "Public functions that are never called by the contract should be declared external.",
+            "severity": "low",
+            "location": "Contracts: MasterChef.sol, Functions: updateMultiplier, add, set, setBlidPerBlock, setMigrator, setExpenseAddress, migrate, deposit, withdraw, enterStaking, leaveStaking"
+        }
+    ]
+}

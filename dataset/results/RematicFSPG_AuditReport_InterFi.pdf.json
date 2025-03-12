@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/RematicFSPG_AuditReport_InterFi.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x687A406be05b7E0418fe2DF60fD0c730bBbB7e8E",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.13+commit.abaa5c0e"
+        ],
+        "project_path": {
+            "FSPFactory": "contracts/RematicFSPG_AuditReport_InterFi/FSPFactory"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Use of proxy and upgradeable contracts",
+            "description": "Privileged role can initiate contract implementation. Contract upgradeability allows privileged roles to change current contract implementation.",
+            "severity": "critical",
+            "location": "FSPFactory, Governance contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Potential front-running",
+            "description": "Functions can be manipulated by front-running a transaction to deposit assets and make profits by back-running a transaction to withdraw assets.",
+            "severity": "low",
+            "location": "deposit, claimReflections, claimReward, withdraw, createLoan, accept functions in FSP Factory and Governance contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Improper function logic",
+            "description": "withdrawToken function is not callable by the contract owner to remove stuck tokens, and _authorizeUpgrade function is never used.",
+            "severity": "low",
+            "location": "FSP Factory, Governance contracts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Timestamp manipulation via block.timestamp",
+            "description": "Block timestamp can be manipulated by a miner.",
+            "severity": "low",
+            "location": "n/a (general warning)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Minimize function visibility Improper use of external and/or public attributes",
+            "description": "Functions can have improper visibility.",
+            "severity": "low",
+            "location": "_calculateReflections function in FSP Factory contract, _authorizeUpgrade function in Governance contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Third Party Dependencies",
+            "description": "Interacting with third-party protocols can be compromised or exploited.",
+            "severity": "low",
+            "location": "n/a (general warning)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Irrelevant code",
+            "description": "Redundant and dead code.",
+            "severity": "n/a",
+            "location": "Various functions in FSP Factory and Governance contracts (e.g., isWhitelistedLender, isWhitelistedBorrower, etc.)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Typographical Error",
+            "description": "Typographical errors in function names.",
+            "severity": "n/a",
+            "location": "upateTeamWallet, aPRInerestRate functions in Governance contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Potential resource exhaustion errors",
+            "description": "Functions may throw out-of-gas errors when called.",
+            "severity": "low",
+            "location": "_calculateReflections, emergencyWithdrawByPoolOwner functions in FSP Factory contract"
+        }
+    ]
+}

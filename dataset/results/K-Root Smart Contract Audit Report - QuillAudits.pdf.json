@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/K-Root Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xe25d2b32749aa34708975ce949507ab723f71bbc",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "KROOT": "contracts/K-Root Smart Contract Audit Report - QuillAudits/KROOT"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted Token Burning",
+            "description": "The owner can burn any user address’s tokens, which may not provide true freedom to users to use or hold their tokens.",
+            "severity": "medium",
+            "location": "`burn` function in the K-Root Token smart contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Unvalidated New Owner Address",
+            "description": "Missing check for the new owner address, which can create serious issues if a wrong address is passed.",
+            "severity": "low",
+            "location": "`changeOwnership` function in the K-Root Token smart contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inefficient Code",
+            "description": "Using onlyOwner modifier can optimize code and reduce gas usage.",
+            "severity": "info",
+            "location": "`mint` and `burn` functions in the K-Root Token smart contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Variable Usage",
+            "description": "The use of an extra variable can be avoided.",
+            "severity": "info",
+            "location": "`_burn` function in the K-Root Token smart contract"
+        }
+    ]
+}

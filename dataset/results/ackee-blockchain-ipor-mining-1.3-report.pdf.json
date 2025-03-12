@@ -1,0 +1,317 @@
+{
+    "path": "artifacts/ackee-blockchain-ipor-mining-1.3-report.pdf",
+    "project_info": {
+        "url": "https://github.com/IPOR-Labs/ipor-protocol",
+        "commit_id": "audit-v2",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ipor-protocol": "contracts/ackee-blockchain-ipor-mining-1/ipor-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Reclaiming renounced ownership",
+            "description": "The owner can appoint a new owner, but if the appointment is not accepted and the owner renounces the ownership, the appointed owner can still accept the ownership.",
+            "severity": "medium",
+            "location": "IporOwnable.sol, IporOwnableUpgradeable.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Renounce ownership risk",
+            "description": "Renouncing ownership at the wrong moment can have harsh consequences, such as blocking the upgradeability process.",
+            "severity": "medium",
+            "location": "* (all contracts)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-programmatic approach for setting constants",
+            "description": "The library Constants sets some constants manually as literals instead of using a programmatic approach.",
+            "severity": "medium",
+            "location": "Constants.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Usage of solc optimizer",
+            "description": "Using the solc optimizer may lead to unexpected bugs.",
+            "severity": "info",
+            "location": "* (all contracts)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unnecessary usage of post-inc",
+            "description": "Post-incrementation is used instead of pre-incrementation, which is less gas-efficient.",
+            "severity": "info",
+            "location": "LiquidityMining.sol, LiquidityMiningInternal.sol, PowerIpor.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent definition of iterator variables in for loops",
+            "description": "Inconsistent definitions of iterator variables impair readability.",
+            "severity": "info",
+            "location": "LiquidityMiningInternal.sol, PowerIpor.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Variables should be declared as constants",
+            "description": "Variables with constant values are not declared as constants.",
+            "severity": "info",
+            "location": "LiquidityMiningInternal.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of zero-amount check",
+            "description": "Unstaking zero amount does not cause harm but wastes gas and rebalances indicators unnecessarily.",
+            "severity": "info",
+            "location": "LiquidityMining.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary use _msgSedner()",
+            "description": "Using `_msgSender()` instead of `msg.sender` is less gas-efficient.",
+            "severity": "info",
+            "location": "*"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Confusing function name",
+            "description": "The function `_calculateAmountWithoutFee` has a misleading name.",
+            "severity": "info",
+            "location": "PowerIpor.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary variables creation",
+            "description": "Creating new variables inside loops costs additional gas and should be avoided.",
+            "severity": "info",
+            "location": "LiquidityMiningInternal.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect initialization pattern",
+            "description": "The upgradeable contracts use the `_init` and `_init_unchained` functions incorrectly, which may lead to double initialization.",
+            "severity": "info",
+            "location": "LiquidityMiningInternal.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Usage of memory instead of calldata",
+            "description": "Using memory instead of calldata in function arguments for read-only purposes.",
+            "severity": "info",
+            "location": "LiquidityMiningInternal.sol, PowerIpor.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reading length of an array in for loop",
+            "description": "Gas expensive approach to reading array length in a loop.",
+            "severity": "info",
+            "location": "LiquidityMining.sol, LiquidityMiningInternal.sol, PowerIpor.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant use of SafeERC20 library",
+            "description": "Using SafeERC20 library with a trusted contract.",
+            "severity": "info",
+            "location": "PowerIpor.sol, PowerIporInternal.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Lack of robust contract composition",
+            "description": "No protection against initializing a random wrong address.",
+            "severity": "info",
+            "location": "LiquidityMiningInternal.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Require should be assert",
+            "description": "Misuse of require instead of assert in function calculateAccruedRewards.",
+            "severity": "info",
+            "location": "MiningCalculation.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "The owner can prevent unstaking from LiquidityMining",
+            "description": "Owner can prevent users from unstaking by pausing the contract or removing a token.",
+            "severity": "info",
+            "location": "LiquidityMiningInternal.sol"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code duplication",
+            "description": "Duplicated code in function claim in LiquidityMining and _calculateAccountRewards in LiquidityMiningInternal.",
+            "severity": "info",
+            "location": "LiquidityMining.sol, LiquidityMiningInternal.sol"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Comment quality",
+            "description": "Typos, bad grammar, and redundant comments across the project code base.",
+            "severity": "info",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Inability to unstake when the contract runs out of rewards",
+            "description": "Users cannot withdraw staked tokens if the contract runs out of rewards.",
+            "severity": "high",
+            "location": "LiquidityMining.sol"
+        }
+    ]
+}

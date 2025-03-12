@@ -1,0 +1,203 @@
+{
+    "path": "artifacts/ImmuneBytes-Retreeb_Preliminary_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/RetreebInc/staking-platform",
+        "commit_id": "30471f1fe81580d56cbc2f3189e64d583cd78a85",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "staking-platform": "contracts/ImmuneBytes-Retreeb_Preliminary_Audit_Report/staking-platform"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "withdrawAmount() function might fail in some cases.",
+            "description": "The current function design of the withdrawAmount() function does not represent a very strong logic, which can lead to unexpected scenarios and reverts.",
+            "severity": "high",
+            "location": "StakingPlatform contract, withdrawAmount() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing imperative validation in withdrawAmount() function",
+            "description": "No validation was found in the function to ensure that it is only called when the block.timestamp is greater than or equal to the end period.",
+            "severity": "high",
+            "location": "StakingPlatform contract, withdrawAmount() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "withdrawAmount() function includes inadequate logic",
+            "description": "The function does not represent a very strong logic as per the current architecture, which can lead to issues with token approvals.",
+            "severity": "medium",
+            "location": "StakingPlatform contract, withdrawAmount() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "StartStaking event should emit out all imperative arithmetic state variables",
+            "description": "The StartStaking event does not emit the lockPeriod value, which is considered standard practice.",
+            "severity": "low",
+            "location": "StakingPlatform contract, StartStaking event"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Input validations and checkpoints can be improved in the withdrawAmount() function",
+            "description": "The function does not impose adequate validation on the amount argument being passed to the function.",
+            "severity": "n/a",
+            "location": "StakingPlatform contract, withdrawAmount() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Gasless Send",
+            "description": "Function sends or transfer is called and receiver has a costly fallback function",
+            "severity": "n/a",
+            "location": "Token.sol, StakingPlatform.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Exception Disorder",
+            "description": "There is an exception in the call chain but these functions hide exceptions",
+            "severity": "n/a",
+            "location": "Token.sol, StakingPlatform.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-654"
+                ]
+            },
+            "title": "Timestamp Dependency",
+            "description": "The test case evaluates a condition based on timestamp and then sends ether",
+            "severity": "n/a",
+            "location": "Token.sol, StakingPlatform.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Block Number Dependency",
+            "description": "The test case evaluates a condition based on block number and then sends ether",
+            "severity": "n/a",
+            "location": "Token.sol, StakingPlatform.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-430"
+                ]
+            },
+            "title": "Danger Delegate Call",
+            "description": "delegatecall is executed via msg.data.",
+            "severity": "n/a",
+            "location": "Token.sol, StakingPlatform.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy",
+            "description": "A contract function is called via fallback function from another contract and sends ether.",
+            "severity": "n/a",
+            "location": "Token.sol, StakingPlatform.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Integer Overflow/Underflow",
+            "description": "If b >0 and a + b < a or b > 0 and a − b > b or ···",
+            "severity": "n/a",
+            "location": "Token.sol, StakingPlatform.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "Freezing Ether",
+            "description": "After all test case, nosend()or transfer() function is executed",
+            "severity": "n/a",
+            "location": "Token.sol, StakingPlatform.sol"
+        }
+    ]
+}

@@ -1,0 +1,46 @@
+{
+    "path": "artifacts/GalaxyFinance Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xE77932B1216125848e82C3967e75698362168f99, 0xC8b44fc9e6B8FD806111A04b1f208A0087BAF9b1, 0xe1D4661a28f0Bdc8CfB0E796dF91EcCFE495B145",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "GalaxyFinanceToken": "contracts/GalaxyFinance Full Smart Contract Security Audit/GalaxyFinanceToken",
+            "GalaxyFinance": "contracts/GalaxyFinance Full Smart Contract Security Audit/GalaxyFinance",
+            "GalaxyChef": "contracts/GalaxyFinance Full Smart Contract Security Audit/GalaxyChef"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "add(uint256 _allocPoint, …) and set(uint256 _pid, …) could invoke massUpdatePools() function, that can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "GalaxyChef contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "add function issue",
+            "description": "If some LP token is added to the contract twice using function add, then the total amount of reward in function updatePool() will be incorrect.",
+            "severity": "low",
+            "location": "GalaxyChef contract"
+        }
+    ]
+}

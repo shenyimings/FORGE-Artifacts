@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/agw.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x83cb621a6816ec64a779cfe15fb3770f6435506f",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "LiquidityGeneratorToken": "contracts/agw/LiquidityGeneratorToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "FSA - Fixed Swap Address",
+            "description": "The swap address is assigned once and cannot be changed, which may not allow the contract to migrate to a new liquidity pool pair or decentralized exchange.",
+            "severity": "low",
+            "location": "LiquidityGeneratorToken.sol#L1020,1022,1026"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PVC - Price Volatility Concern",
+            "description": "The contract accumulates tokens from taxes to swap them for ETH, but if the variable `numTokensSellToAddToLiquidity` is set to a big number, it could lead to significant price volatility.",
+            "severity": "low",
+            "location": "LiquidityGeneratorToken.sol#L1264"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RSML - Redundant SafeMath Library",
+            "description": "The contract uses the SafeMath library, which is redundant and increases gas consumption unnecessarily.",
+            "severity": "low",
+            "location": "LiquidityGeneratorToken.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "IDI - Immutable Declaration Improvement",
+            "description": "The contract declares state variables that are initialized once in the constructor and not modified afterwards, which can be declared as immutable to save gas.",
+            "severity": "low",
+            "location": "LiquidityGeneratorToken.sol#L999,1001,1010,1016,1022"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the Solidity naming conventions.",
+            "severity": "low",
+            "location": "LiquidityGeneratorToken.sol#L641,942,945,948,953,1264,1403,1407,1415"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L07 - Missing Events Arithmetic",
+            "description": "The contract is missing events arithmetic.",
+            "severity": "low",
+            "location": "LiquidityGeneratorToken.sol#L1238,1249,1257"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L09 - Dead Code Elimination",
+            "description": "The contract has dead code that is never executed or reached.",
+            "severity": "low",
+            "location": "LiquidityGeneratorToken.sol#L441,469,494,504,523,537,556,566,583,593,610"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "L16 - Validate Variable Setters",
+            "description": "The contract does not validate variable setters properly.",
+            "severity": "low",
+            "location": "LiquidityGeneratorToken.sol#L1041"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1102"
+                ]
+            },
+            "title": "L17 - Usage of Solidity Assembly",
+            "description": "The contract uses assembly code, which can be error-prone.",
+            "severity": "low",
+            "location": "LiquidityGeneratorToken.sol#L447,622"
+        }
+    ]
+}

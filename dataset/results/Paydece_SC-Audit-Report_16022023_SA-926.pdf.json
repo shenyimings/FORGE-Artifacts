@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/Paydece_SC-Audit-Report_16022023_SA-926.pdf",
+    "project_info": {
+        "url": "https://github.com/PayDece/paydece-contracts",
+        "commit_id": "3f71651c954f1f644f943d5d4d53dd8c7ad351e4",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "paydece-contracts": "contracts/Paydece_SC-Audit-Report_16022023_SA-926/paydece-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "The owner of the project can modify the project fee without any restrictions.",
+            "severity": "high",
+            "location": "./contracts/PaydeceEscrowV3: setFeeSeller() and ./contracts/PaydeceEscrowV3: setFeeBuyer()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Requirements Violation",
+            "description": "Function refundBuyerNativeCoin sends funds to the _seller instead of returning them to the _buyer.",
+            "severity": "high",
+            "location": "./contracts/PaydeceEscrowV3: refundBuyerNativeCoin()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unfinalized Code",
+            "description": "The contract contains commented-out code and code used for debugging purposes, increasing Gas consumption.",
+            "severity": "high",
+            "location": "./contracts/PaydeceEscrowV3"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Usage of Built-In Transfer",
+            "description": "The built-in transfer and send functions process a hard-coded amount of Gas, which may fail due to \"out of Gas\" exception.",
+            "severity": "medium",
+            "location": "./contracts/PaydeceEscrowV3: _releaseEscrowNativeCoin(), ./contracts/PaydeceEscrowV3: refundBuyerNativeCoin(), and ./contracts/PaydeceEscrowV3: withdrawFeesNativeCoin()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Locking the pragma helps ensure that contracts do not accidentally get deployed using an outdated compiler version.",
+            "severity": "low",
+            "location": "./contracts/USDTToken.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Check-Effect-Interaction Pattern Violation",
+            "description": "Contract violates the CEI pattern, updating state variables after external calls.",
+            "severity": "low",
+            "location": "./contracts/PaydeceEscrowV3: withdrawFees()"
+        }
+    ]
+}

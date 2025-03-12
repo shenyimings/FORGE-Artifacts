@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/Hacken-RedFox-V3.pdf",
+    "project_info": {
+        "url": "https://github.com/RFL-Valt/smart-cheft-contract",
+        "commit_id": "dddf820a166b092fac4d1ad570fd2a424f6381d8",
+        "address": "0x4394f7d0b05f80baf246f79854e0e93f71181df1",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "SmartChefFactory": "contracts/Hacken-RedFox-V3/SmartChefFactory"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Tautology or contradiction",
+            "description": "The expressions in IERC20.totalSupply() function would always return true and are excess.",
+            "severity": "medium",
+            "location": "IERC20.totalSupply() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "The pool owner is able to withdraw rewards",
+            "description": "The pool owner/creator could withdraw the entire rewards balance at any time using the emergencyRewardWithdraw function.",
+            "severity": "medium",
+            "location": "emergencyRewardWithdraw function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-356"
+                ]
+            },
+            "title": "The pool owner could stop rewards with no event emitted",
+            "description": "The pool owner/creator could stop rewards at any time with no event or notification for users using the stopReward function.",
+            "severity": "medium",
+            "location": "stopReward function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Some users could receive less or more than deserved",
+            "description": "By calling the updateRewardPerBlock, the pool creator/owner could set a new value (even 0) and it will affect all previously staked but not withdrawn users.",
+            "severity": "medium",
+            "location": "updateRewardPerBlock function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "A State variable that could be declared immutable",
+            "description": "State variables that got initialized in the constructor and then never change their values should be declared immutable to save gas.",
+            "severity": "low",
+            "location": "n/a"
+        }
+    ]
+}

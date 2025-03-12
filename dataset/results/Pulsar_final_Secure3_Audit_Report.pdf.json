@@ -1,0 +1,218 @@
+{
+    "path": "artifacts/Pulsar_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/PulsarSwap/TWAMM-Contracts/",
+        "commit_id": "f5cc7b0ea35f9e9a6872cdff62fb9c740ef7da5b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "TWAMM-Contracts": "contracts/Pulsar_final_Secure3_Audit_Report/TWAMM-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Invalid check on orderIdStatusMap",
+            "description": "In the withdrawProceedsFromLongTermSwap and cancelLongTermSwap functions, when orderIdStatusMap is set to false, the check is invalid.",
+            "severity": "low",
+            "location": "code/twamm/contracts/libraries/LongTermOrders.sol#L180-L181"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "No Upper Limit for the fee",
+            "description": "The project owner can set a very high fee before the user's transaction is on-chain, thus causing a loss to the user.",
+            "severity": "low",
+            "location": "code/twamm/contracts/Factory.sol#L64-L67"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "No slippage control when providing or removing liquidity",
+            "description": "In the addLiquidity* and withdrawLiquidity* functions, the number of tokens the user needs to provide or receive is affected by the number of reserved tokens the contract currently has.",
+            "severity": "medium",
+            "location": "code/twamm/contracts/TWAMM.sol#L176-L180"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Gas Limit DOS in executeVirtualOrdersUntilSpecifiedBlock",
+            "description": "executeVirtualOrdersUntilSpecifiedBlock has a traversal of the expireblocklist, which will cause the loop to traverse too many times when a large number of expireblocks are squeezed without updates, thus reaching the transaction gas limit.",
+            "severity": "medium",
+            "location": "code/twamm/contracts/libraries/LongTermOrders.sol#353-369"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Tokens received after LongTermSwap may be smaller than expected due to precision loss",
+            "description": "There is an precision loss when calculating the sellingRate in the performLongTermSwap function.",
+            "severity": "medium",
+            "location": "code/twamm/contracts/libraries/LongTermOrders.sol#L139-L140"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ],
+                "3": [
+                    "CWE-440"
+                ]
+            },
+            "title": "Unsupported fee-on-transfer tokens",
+            "description": "The current implementation does not support fee-on-transfer tokens.",
+            "severity": "medium",
+            "location": "code/twamm/contracts/Pair.sol#L215-L224, code/twamm/contracts/TWAMM.sol#L240-L245"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Wrong usage of sortAmounts",
+            "description": "sortAmounts expect amountOutA to match token, amountOutB to match WETH, here it doesn't necessarily hold.",
+            "severity": "medium",
+            "location": "code/twamm/contracts/TWAMM.sol#L234, code/twamm/contracts/TWAMM.sol#L266"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "RemoveLiquidity has the Potential to Completely Empty the Pair",
+            "description": "RemoveLiquidity has the potential to completely empty the pair, which would lead to a potential fraud risk.",
+            "severity": "critical",
+            "location": "code/twamm/contracts/Pair.sol#L129-L158, code/twamm/contracts/Pair.sol#L202-L244, code/twamm/contracts/libraries/LongTermOrders.sol#L395-L402"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Denial of Service",
+            "description": "executeVirtualOrdersUntilSpecifiedBlock operation cannot be executed when there is only some long-term buy orders from A to B, causing a denial of service for Pair.",
+            "severity": "high",
+            "location": "computeVirtualBalances function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unreasonable Price Manipulation",
+            "description": "Liquidity provider can set an unreasonable price at low cost by calling provideInitialLiquidity twice.",
+            "severity": "high",
+            "location": "provideInitialLiquidity function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ]
+            },
+            "title": "Lack of isContract Check",
+            "description": "safeTransferFrom lacks isContract check, potentially leading to invalid calls to EOA's address.",
+            "severity": "info",
+            "location": "TransferHelper.sol#L32-L44"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Redundant Calculation",
+            "description": "k is already calculated and passed in as a parameter, but still recalculated.",
+            "severity": "info",
+            "location": "LongTermOrders.sol#L457"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Redundant Check",
+            "description": "curNode.left == 0 is guaranteed in the else if branch, making the check redundant.",
+            "severity": "info",
+            "location": "BinarySearchTree.sol#L185"
+        }
+    ]
+}

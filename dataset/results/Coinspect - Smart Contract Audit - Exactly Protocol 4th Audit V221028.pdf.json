@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/Coinspect - Smart Contract Audit - Exactly Protocol 4th Audit V221028.pdf",
+    "project_info": {
+        "url": "https://github.com/exactly-protocol/protocol/",
+        "commit_id": "9eaee805a8c42322a646749b105ef884c78dc531",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol": "contracts/Coinspect - Smart Contract Audit - Exactly Protocol 4th Audit V221028/protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Chainlink response liveliness not checked",
+            "description": "No liveness checks are performed while retrieving oracle data, which could lead to outdated prices being used.",
+            "severity": "medium",
+            "location": "Auditor.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "PriceFeedWrapper rate return value not checked",
+            "description": "The data retrieval from the rate conversion wrapper does not check the retrieved price and success condition, which could lead to invalid data being used.",
+            "severity": "medium",
+            "location": "PriceFeedWrapper.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Invalid price feeds could be set while enabling new markets",
+            "description": "The checks performed while calling Auditor.setPriceFeed() are not performed while enabling new markets, which could lead to invalid prices being used.",
+            "severity": "low",
+            "location": "Auditor.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "mockStETH implementation allows public minting",
+            "description": "The mockStETH contract implements a non-access controlled mint function, which could lead to unlimited token minting in production.",
+            "severity": "info",
+            "location": "MockStETH.sol"
+        }
+    ]
+}

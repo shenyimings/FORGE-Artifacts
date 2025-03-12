@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-MantisSwap-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/Mantissa-Finance/audit-v2/tree/99c074e5",
+        "commit_id": "99c074e5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "audit-v2": "contracts/PeckShield-Audit-Report-MantisSwap-v1/audit-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Proper Update of user.lastClaim in Business Logic",
+            "description": "Lack of updating the lastClaim variable based on the new veMntRate and the new total deposit amount, allowing users to claim more veMNT than expected.",
+            "severity": "high",
+            "location": "veMNT::deposit()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Improved Validation of Unclaimed List in Business Logic",
+            "description": "Lack of validation for the list state, allowing a sold list to be claimed more than once.",
+            "severity": "medium",
+            "location": "Marketplace::claimAuctionBid()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential Reentrancy Risk in Rewarder::onMntReward()",
+            "description": "Violation of the checks-effects-interactions principle, potentially leading to reentrancy attacks.",
+            "severity": "medium",
+            "location": "Rewarder::onMntReward()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged account (owner) has critical role in governing and regulating system-wide operations, posing counter-party risk to protocol users.",
+            "severity": "low",
+            "location": "Multiple contracts, specifically MasterMantis contract."
+        }
+    ]
+}

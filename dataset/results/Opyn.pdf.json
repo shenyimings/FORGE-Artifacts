@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/Opyn.pdf",
+    "project_info": {
+        "url": "https://github.com/opynfinance/squeeth-monorepo",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "squeeth-monorepo": "contracts/Opyn/squeeth-monorepo"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "onERC721Received callback is never called when new tokens are minted or transferred",
+            "description": "ERC721 implementation used by the Controller contract does not properly call the corresponding callback when new tokens are minted or transferred.",
+            "severity": "high",
+            "location": "Controller.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Users can create vaults that cannot be liquidated",
+            "description": "The Controller contract allows users to deposit UniswapV3 token positions into vaults without checking if they hold liquidity, making them non-liquidable.",
+            "severity": "high",
+            "location": "Controller.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Initialization function can be front-run",
+            "description": "The init function in ShortPowerPerp and WPowerPerp contracts is not protected, allowing an attacker to front-run it and initialize the contract with malicious values.",
+            "severity": "low",
+            "location": "ShortPowerPerp.sol, WPowerPerp.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "The computation of the normalization factor can fail",
+            "description": "The system does not properly check for a corner case that could make the transaction revert, blocking interactions with the Controller contract.",
+            "severity": "high",
+            "location": "Controller.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Users can disrupt the bookkeeping of the strategy when it is deployed",
+            "description": "Any user can add any amount of collateral to the strategy vault, disrupting the bookkeeping operations on the first deposit.",
+            "severity": "high",
+            "location": "CrabStrategy.sol, Controller.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of access controls allows anyone to deposit Uniswap tokens",
+            "description": "The Controller contract allows anyone to add a UniswapV3 token position as collateral to any vault.",
+            "severity": "low",
+            "location": "Controller.sol, function depositUniPositionToken"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Front-running a withdrawal operation can cause it to revert",
+            "description": "An attacker can front-run the withdraw function in the CrabStrategy contract to force the transaction to fail.",
+            "severity": "low",
+            "location": "CrabStrategy.sol, function withdraw"
+        }
+    ]
+}

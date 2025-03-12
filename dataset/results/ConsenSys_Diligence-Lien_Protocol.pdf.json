@@ -1,0 +1,242 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Lien_Protocol.pdf",
+    "project_info": {
+        "url": "https://github.com/Fairmint/c-org/tree/master",
+        "commit_id": "master",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "c-org": "contracts/ConsenSys_Diligence-Lien_Protocol/c-org"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "A reverting fallback function will lock up all payouts",
+            "description": "In BoxExchange.sol, the internal function _transferEth() reverts if the transfer does not succeed, which can lead to locked up payouts.",
+            "severity": "critical",
+            "location": "BoxExchange.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "WIP: Force traders to mint gas token",
+            "description": "An attack scenario where a large trade is made via the Fairswap_iDOLvsEth exchange, which can lead to a gas token minting attack.",
+            "severity": "high",
+            "location": "Fairswap_iDOLvsETH/contracts/BoxExchange.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missing Proper Access Control",
+            "description": "Some functions do not have proper access control and are public, allowing anyone to call them.",
+            "severity": "high",
+            "location": "MainContracts.Auction.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "TODO tags present in the code",
+            "description": "TODO tags indicate essential parts of the system that need to be addressed before production.",
+            "severity": "medium",
+            "location": "Various locations in the codebase, e.g., MainContracts/contracts/Auction.sol and BondMaker.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Documented function getERC20TokenDividend() does not exist",
+            "description": "Function listed in README but not implemented in the codebase.",
+            "severity": "medium",
+            "location": "Fairswap_iDOLvsLien, README and exchange contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Fairswap interfaces are inconsistent",
+            "description": "Inconsistencies between Fairswap contract interfaces may cause issues for composability with external contracts.",
+            "severity": "medium",
+            "location": "Fairswap_iDOLvsETH, Fairswap_iDOLvsLien, and Fairswap_iDOLvsImmmortalOptions exchanges"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "Fairswap: Inconsistent checks on _executionOrder()",
+            "description": "Inconsistent checks on _executionOrder() function may cause issues.",
+            "severity": "low",
+            "location": "Fairswap_iDOLvsLien/contracts/BoxExchange.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Unable to Compile Contracts",
+            "description": "Compilation fails due to missing files and undefined interface functions.",
+            "severity": "high",
+            "location": "Fairswap_iDOLvsImmortalOptions repository, contracts/testTokens/TestBondMaker.sol and CalculatorInterface"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent Constant Naming",
+            "description": "Inconsistent naming of constants (e.g., A_DAY and SECONDS_IN_DAY) throughout the code.",
+            "severity": "n/a",
+            "location": "TrustedPriceOracle and ChainlinkPriceOracle contracts"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading Comments",
+            "description": "Inline comments in the code are misleading, potentially due to code updates without comment updates.",
+            "severity": "n/a",
+            "location": "Fairswap_iDOLvsETH/contracts/BoxExchange.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Conditional Statements",
+            "description": "Recurring conditional statements can be simplified and clarified by breaking them down into smaller functions.",
+            "severity": "n/a",
+            "location": "Fairswap contracts (e.g., Exchange contract)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1093"
+                ]
+            },
+            "title": "Improper Mapping Type",
+            "description": "_isAuctionEmergency mapping uses bytes32 => uint, which can be simplified to a boolean type.",
+            "severity": "n/a",
+            "location": "AuctionTimeControl contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate Checks",
+            "description": "Many instances of duplicate and redundant checks throughout the code (e.g., in TrustedPriceOracle.sol).",
+            "severity": "n/a",
+            "location": "Various contracts (e.g., Oracle/contracts/TrustedPriceOracle.sol)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Confusing DecimalSafeMath Usage",
+            "description": "DecimalSafeMath naming and usage are confusing, potentially leading to overflows and readability issues.",
+            "severity": "n/a",
+            "location": "Fairswap_iDOLvsETH/contracts/BoxExchange.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary payable Keyword",
+            "description": "payable keyword is used unnecessarily in some functions (e.g., _issueNewBond() and executionOrders()).",
+            "severity": "n/a",
+            "location": "MainContracts/contracts/BondMaker.sol and Fairswap_iDOLvsETH/contracts/BoxExchange.sol"
+        }
+    ]
+}

@@ -1,0 +1,200 @@
+{
+    "path": "artifacts/ackee-blockchain-axelar-report.pdf",
+    "project_info": {
+        "url": "https://github.com/axelarnetwork/axelar-cgp-solidity/tree/c6f8c7c",
+        "commit_id": "c6f8c7c",
+        "address": "0x39d3E4d2fCAD60014779B3C82879807b572Fd419",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "axelar-cgp-solidity": "contracts/ackee-blockchain-axelar-report/axelar-cgp-solidity"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-233"
+                ]
+            },
+            "title": "Insufficient data validation in the upgrade function",
+            "description": "The upgrade function lacks input data validation, which can lead to threats described in W4 issue.",
+            "severity": "high",
+            "location": "AxelarGateway.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked transfer for external tokens",
+            "description": "A return value of an external transfer call is not checked, allowing malicious tokens to cause unexpected behavior.",
+            "severity": "high",
+            "location": "AxelarGateway.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ],
+                "3": [
+                    "CWE-1121"
+                ]
+            },
+            "title": "_containsDuplicates function can be optimized",
+            "description": "The _containsDuplicates function runs in O(n^2), which can be costly in gas and potentially cause a Denial of Service.",
+            "severity": "medium",
+            "location": "AxelarGatewayMultisig.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "ERC20 is missing basic arithmetic checks",
+            "description": "Missing arithmetic checks in ERC20 functions for token manipulation, leading to potential integer overflow reverting messages.",
+            "severity": "low",
+            "location": "ERC20.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Usage of solc optimizer",
+            "description": "Potential unexpected bugs due to use of solc optimizer, which may not be safe.",
+            "severity": "info",
+            "location": "Compiler configuration"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating pragma",
+            "description": "Version mismatch risk due to inconsistent Solidity version specification.",
+            "severity": "info",
+            "location": "Compiler configuration"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-300"
+                ]
+            },
+            "title": "Transaction replay",
+            "description": "Potential transaction replay vulnerability in AxelarGatewayMultisig and AxelarGatewaySinglesig contracts.",
+            "severity": "info",
+            "location": "AxelarGatewayMultisig.sol, AxelarGatewaySinglesig.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Pitfalls of upgradeability",
+            "description": "Potential protocol freeze due to upgradeability issues in logic contracts.",
+            "severity": "info",
+            "location": "Upgradeability"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Integer underflow if the owner epoch is 0",
+            "description": "Potential integer underflow in _isValidPreviousOwner function if ownerEpoch is 0.",
+            "severity": "info",
+            "location": "AxelarGatewaySinglesig.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Logic Contracts",
+            "description": "Malicious actors can interact with logic contracts directly.",
+            "severity": "n/a",
+            "location": "Logic contracts, no specific function mentioned."
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unsafe Initialization Sequence",
+            "description": "Attacker can call other functions on the Proxy before initialize is called on it.",
+            "severity": "n/a",
+            "location": "Proxy contract, initialization function."
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Front-Running Initialization Function",
+            "description": "Attacker can front-run one of the initialization functions.",
+            "severity": "n/a",
+            "location": "Not specified."
+        }
+    ]
+}

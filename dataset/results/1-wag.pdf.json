@@ -1,0 +1,152 @@
+{
+    "path": "artifacts/1-wag.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "main",
+        "address": "0xd50c8a17d5c4b8e2d984933c7e37e5b92d687b8d",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.9+commit.e5eed63a"
+        ],
+        "project_path": {
+            "Wagon": "contracts/1-wag/Wagon"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Stops Transactions (ST)",
+            "description": "The contract owner has the authority to stop transactions for all users.",
+            "severity": "low",
+            "location": "contracts/Wagon.sol#L77"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Transfers User's Tokens (OTUT)",
+            "description": "The contract owner can transfer a blacklisted user's tokens to the owner's contract.",
+            "severity": "critical",
+            "location": "contracts/Wagon.sol#L153"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Mints Tokens (MT)",
+            "description": "The contract owner has the authority to mint tokens, potentially inflating the token supply.",
+            "severity": "critical",
+            "location": "contracts/Wagon.sol#L91"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Blacklists Addresses (BC)",
+            "description": "The contract owner can stop addresses from transactions by adding them to a blacklist.",
+            "severity": "medium",
+            "location": "contracts/Wagon.sol#L137"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Conformance to Solidity Naming Conventions",
+            "description": "Non-conformance to Solidity naming conventions, affecting code readability and maintainability.",
+            "severity": "low",
+            "location": "contracts/Wagon.sol#L58,130,137,145,153"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Validate Variable Setters",
+            "description": "Missing input validation in variable setters, potentially leading to unexpected behavior or errors.",
+            "severity": "low",
+            "location": "contracts/Wagon.sol#L59"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Stable Compiler Version",
+            "description": "Unlocked pragma version, potentially introducing vulnerabilities and undiscovered bugs.",
+            "severity": "low",
+            "location": "contracts/Wagon.sol#L2"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Abuse of owner privileges",
+            "description": "Functions can be abused by the owner, such as stopping transactions, transferring user tokens, minting tokens, and blacklisting addresses.",
+            "severity": "high",
+            "location": "Wagon contract (ERC20 implementation)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Inflation risk",
+            "description": "If the contract owner abuses the mint functionality, the contract will be highly inflated.",
+            "severity": "high",
+            "location": "Wagon contract (ERC20 implementation)"
+        }
+    ]
+}

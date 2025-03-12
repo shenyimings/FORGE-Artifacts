@@ -1,0 +1,152 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Aave_Protocol_V2.pdf",
+    "project_info": {
+        "url": "https://github.com/aave/protocol-v2/tree/750920303e33b66bc29862ea3b85206dda9ce786",
+        "commit_id": "750920303e33b66bc29862ea3b85206dda9ce786",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol-v2": "contracts/ConsenSys_Diligence-Aave_Protocol_V2/protocol-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unprotected receiverAddress argument",
+            "description": "An attacker can pass any address as the receiverAddress, stealing funds from other contracts that have given allowances to the LendingPool contract.",
+            "severity": "medium",
+            "location": "code/contracts/lendingpool/LendingPoolCollateralManager.sol:L490-L517"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Griefing attack by taking flash loan on behalf of user",
+            "description": "Anyone can execute a flash loan on behalf of other users, forcing the user to pay fees from the flash loan.",
+            "severity": "medium",
+            "location": "code/contracts/lendingpool/LendingPool.sol:L547-L554"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Interest rates are updated incorrectly",
+            "description": "The function updateInterestRates() updates the borrow rates of a reserve, but since the rates depend on the available liquidity, they must be recalculated each time liquidity changes.",
+            "severity": "medium",
+            "location": "code/contracts/lendingpool/LendingPoolCollateralManager.sol:L377-L382"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unhandled return values of transfer and transferFrom",
+            "description": "ERC20 implementations are not always consistent, and some may return 'false' on failure instead of reverting.",
+            "severity": "medium",
+            "location": "Multiple locations (code/contracts/lendingpool/LendingPoolCollateralManager.sol)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Re-entrancy attacks with ERC-777",
+            "description": "Some tokens may allow users to perform re-entrancy while calling the transferFrom function.",
+            "severity": "low",
+            "location": "code/contracts/lendingpool/LendingPool.sol:L91-L118"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Manipulation of stable rates",
+            "description": "Liquidity providers could trigger an artificial \"liquidity crisis\" in a reserve and increase the stable interest rates of borrowers.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Code quality could be improved",
+            "description": "Some minor code quality improvements are recommended to improve readability.",
+            "severity": "low",
+            "location": "Multiple locations (code/contracts/tokenization/StableDebtToken.sol, code/contracts/configuration/LendingPoolAddressesProviderRegistry.sol)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Attacker can front-run delegator when changing allowance",
+            "description": "Users can grant allowances to borrow debt assets to other users using the delegateAllowance function, which is susceptible to a classical ERC20 approve attack.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Description of flash loan function is inconsistent with code",
+            "description": "The function flashLoan in LendingPool.sol takes an argument mode that specifies the interest rate mode, but the inline comments are unclear and do not relate to the actual code.",
+            "severity": "low",
+            "location": "code/contracts/lendingpool/LendingPool.sol"
+        }
+    ]
+}

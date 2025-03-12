@@ -1,0 +1,44 @@
+{
+    "path": "artifacts/Acria Token Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x44f5909e97e1cbf5fbbdf0fc92fd83cde5d5c58a",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "AcriaToken": "contracts/Acria Token Contract Audit Report - QuillAudits/AcriaToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "No access control on burn function",
+            "description": "In the contract Acria, there is a burn() function to burn the tokens. According to the documentation, the burn function should only be called by the owner of the contract but in the contract anyone can call the function and burn their own tokens.",
+            "severity": "medium",
+            "location": "Acria.sol, Function: burn"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Does not check address and amounts are equal in length",
+            "description": "In contract Acria, there is a function transferBatch() which is used to transfer amounts to many wallets at the same time. The function works correctly but there is no check for the lengths of both of the addresses and amounts array.",
+            "severity": "low",
+            "location": "Acria.sol, Function: transferBatch()"
+        }
+    ]
+}

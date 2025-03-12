@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/BinaKeyChain.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xe1e93b3eb9dc59f6dc7f10988118d623837bac3d",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.4.26+commit.4563c3fc"
+        ],
+        "project_path": {
+            "BinaKeyChainToken": "contracts/BinaKeyChain/BinaKeyChainToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong total supply restriction",
+            "description": "The function Distribute() checks that totalDistributed < totalSupply, but should check totalDistributed + _amount < totalSupply.",
+            "severity": "low",
+            "location": "Distribute() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "getTokens function errors",
+            "description": "bonusCond3 is lower than bonusCond2; “(msg.value >= bonusCond2 && msg.value < bonusCond3)” will never be true.",
+            "severity": "low",
+            "location": "getTokens() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function DistributeAirdropMultiple() uses the loop for distributing tokens as airdrop, which can lead to out-of-gas errors.",
+            "severity": "low",
+            "location": "DistributeAirdropMultiple() function"
+        }
+    ]
+}

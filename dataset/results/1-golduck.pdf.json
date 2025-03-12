@@ -1,0 +1,266 @@
+{
+    "path": "artifacts/1-golduck.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x6D2c7B38557B39776FbB82f593e82C3eB0d6E159",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.13+commit.abaa5c0e"
+        ],
+        "project_path": {
+            "RewardPool": "contracts/1-golduck/RewardPool"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential Transfer Amount Inconsistency",
+            "description": "The transferred amount could potentially be less than the expected amount.",
+            "severity": "low",
+            "location": "transfer() and transferFrom() functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Stops Reward Distribution",
+            "description": "The reward distribution can be delayed for a huge period of time by setting the `buyBackWait` to a high value.",
+            "severity": "medium",
+            "location": "setBuyBackWait() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Stops Reward Withdrawal",
+            "description": "The reward withdrawal can be stopped for any asset by setting either the `isActive` property to false or the `claimWait` property to a high value.",
+            "severity": "medium",
+            "location": "setRewardActiveStatus() and updateClaimWait() functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Duplicate Reward Tokens",
+            "description": "The contract overrides the token's value with the last element of the `rewardAsset` array without removing the last element.",
+            "severity": "low",
+            "location": "removeRewardToken() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Misleading Error Messages",
+            "description": "The contract uses misleading error messages that do not accurately reflect the problem.",
+            "severity": "low",
+            "location": "Various functions with incorrect error messages"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading Method Naming",
+            "description": "Methods have misleading names that do not accurately reflect their functionality.",
+            "severity": "low",
+            "location": "Various functions with generic or unclear names"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Transfers Contract's Tokens",
+            "description": "The contract owner has the authority to claim all the balance of the contract.",
+            "severity": "low",
+            "location": "recoverLeftOverToken() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Time Units Usage",
+            "description": "Using arbitrary numbers for time-related values instead of reserved keywords like `seconds`, `minutes`, etc.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Accumulated Amount Overflow",
+            "description": "Variables accumulating values may exceed their data type's maximum capacity, leading to overflows.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant SafeMath Library",
+            "description": "Using SafeMath library for arithmetic operations when Solidity's native functionality is sufficient.",
+            "severity": "low",
+            "location": "contracts/RPD_V1/RewardDistributor.sol, contracts/RPD_V1/RewardPool.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Immutable Declaration Improvement",
+            "description": "Not declaring variables as `immutable` that are only initialized in the constructor and never changed.",
+            "severity": "low",
+            "location": "contracts/RPD_V1/RewardDistributor.sol#L22"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State Variables could be Declared Constant",
+            "description": "Not declaring state variables as `constant` that never change.",
+            "severity": "low",
+            "location": "contracts/RPD_V1/RewardPool.sol#L44"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Conformance to Solidity Naming Conventions",
+            "description": "Not following Solidity's recommended naming conventions for variables, functions, and contracts.",
+            "severity": "low",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Unused State Variable",
+            "description": "Declaring a state variable that is never used in the contract.",
+            "severity": "low",
+            "location": "contracts/RPD_V1/RewardPool.sol#L44"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing Events Arithmetic",
+            "description": "Not including events to record and log changes or actions within the contract.",
+            "severity": "low",
+            "location": "contracts/RPD_V1/RewardPool.sol#L127,150"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Uninitialized Variables in Local Scope",
+            "description": "Using uninitialized local variables that can lead to unpredictable behavior.",
+            "severity": "low",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Validate Variable Setters",
+            "description": "Not properly validating user-supplied input for variable setters, which can lead to unexpected behavior.",
+            "severity": "low",
+            "location": "contracts/RPD_V1/RewardPool.sol#L91,299"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Succeeded Transfer Check",
+            "description": "Not properly checking the success of transfer operations.",
+            "severity": "low",
+            "location": "contracts/RPD_V1/RewardDistributor.sol, contracts/RPD_V1/RewardPool.sol"
+        }
+    ]
+}

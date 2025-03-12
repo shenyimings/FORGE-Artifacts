@@ -1,0 +1,281 @@
+{
+    "path": "artifacts/YieldV2.pdf",
+    "project_info": {
+        "url": "https://github.com/yieldprotocol/vault-v2/tree/e46a3ae",
+        "commit_id": "e46a3ae",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "vault-v2": "contracts/YieldV2/vault-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Lack of contract existence check on delegatecall",
+            "description": "Delegatecall returns success even if the implementation contract is non-existent or self-destructed.",
+            "severity": "high",
+            "location": "Delegatecall in a payable function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Use of delegatecall in a payable function inside a loop",
+            "description": "Delegatecall retains the msg.value in each iteration, potentially tampering with system arithmetic.",
+            "severity": "high",
+            "location": "Payable function inside a loop"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ],
+                "3": [
+                    "CWE-455"
+                ]
+            },
+            "title": "Lack of two-step process for critical operations",
+            "description": "ABIEncoderV2 has caused numerous issues in the past and still poses risks.",
+            "severity": "n/a",
+            "location": "Throughout the codebase"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Project dependencies contain vulnerabilities",
+            "description": "Dependencies have known vulnerabilities (underscore, normalize-url, tar).",
+            "severity": "medium",
+            "location": "package.json"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Witch function vulnerability",
+            "description": "Anyone can buy collateral from any vault, creating an arbitrage opportunity.",
+            "severity": "high",
+            "location": "Witch contract, buy and payAll functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Solidity optimizer issue",
+            "description": "Optional compiler optimizations may cause security vulnerabilities due to latent bugs.",
+            "severity": "info",
+            "location": "hardhat.config.js"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Risks with EIP-2612",
+            "description": "Permit function front-running and phishing attacks are possible due to signature-based authentication.",
+            "severity": "info",
+            "location": "yield-utils-v2"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Front-running vulnerability",
+            "description": "Not using batched transactions can lead to theft through front-running.",
+            "severity": "high",
+            "location": "strategy-v2/contracts/Strategy.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Strategy contract vulnerability",
+            "description": "The burnForBase() function can be exploited if the base token is used as the reward token, allowing a user to receive more base tokens than deserved.",
+            "severity": "high",
+            "location": "Strategy contract, burnForBase() function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-922"
+                ]
+            },
+            "title": "Insufficient key protection",
+            "description": "Sensitive information such as Etherscan keys and an owner private key are stored in the process environment, making it easier for an attacker to compromise them.",
+            "severity": "medium",
+            "location": "hardhat.config.js"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Auction vulnerability",
+            "description": "The Yield Protocol auction system lacks limits on the amount of collateral that can be auctioned off, potentially leading to a catastrophic loss of collateral.",
+            "severity": "medium",
+            "location": "Witch.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of incentives",
+            "description": "There is no direct incentive for users to call the Witch.auction function, which can lead to delayed auctions and increased losses for the protocol.",
+            "severity": "n/a",
+            "location": "Witch.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-183"
+                ]
+            },
+            "title": "Dependency vulnerability",
+            "description": "The contracts do not reliably reflect updates or security fixes implemented in dependencies, making them vulnerable to exploits.",
+            "severity": "low",
+            "location": "yieldspace-v2/contracts/Math64x64.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Cauldron function vulnerability",
+            "description": "The Cauldron contract's give and tweak functions do not check whether the passed vaultId is associated with an existent vault, potentially creating malformed vaults.",
+            "severity": "info",
+            "location": "Cauldron.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Validation and access control issue",
+            "description": "The codebase lacks exhaustive data validation, relies on implicit assumptions about data validation, and omits checks for zero values, making it prone to vulnerabilities.",
+            "severity": "info",
+            "location": "Throughout the codebase"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "isContract behavior",
+            "description": "The Yield Protocol system relies on the isContract() function to check whether there is a contract at the target address, but it can return unexpected results in certain edge cases.",
+            "severity": "info",
+            "location": "Router.sol, Timelock.sol, Relay.sol, PoolFactory.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1044"
+                ]
+            },
+            "title": "Multiple repository issue",
+            "description": "The Yield Protocol code is spread across four repositories, making it more difficult to navigate the codebase and obtain a complete picture of the code that existed at any one time.",
+            "severity": "info",
+            "location": "Throughout the Codebase"
+        }
+    ]
+}

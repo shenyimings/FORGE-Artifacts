@@ -1,0 +1,152 @@
+{
+    "path": "artifacts/w6g.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "b8622b4dfab0118abb4ed2b39ef07356da47380a56aa69f32e5cf58faaf08c9f",
+        "address": "0x8dd435d3484AF2914a15463594e8DB1fd135e1B8",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.6+commit.11564f7e"
+        ],
+        "project_path": {
+            "World_6_Game": "contracts/w6g/World_6_Game"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "ULTW - Transfers Liquidity to Team Wallet",
+            "description": "The contract owner has the authority to liquidate funds.",
+            "severity": "low",
+            "location": "contract.sol#L208"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "PTFE - Paired Token Fees Exempt",
+            "description": "The contract assumes that during the swap of the BNB/Token pair, the contract should not tax the transfer.",
+            "severity": "low",
+            "location": "contract.sol#L171"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "MFEA - Misleading Fees Exempt Assumption",
+            "description": "The contract is based on the fact that external tokens WBNB and BUSD will never add fees in their transfer functionality.",
+            "severity": "low",
+            "location": "contract.sol#L171,186"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "SAD - Swapped Amount Diversion",
+            "description": "The _burn function should take into consideration the tokens that have been swapped and not the fixed number.",
+            "severity": "low",
+            "location": "contract.sol#L233"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L01 - Public Function could be Declared External",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "ERC20.sol#L61,69,86,93,100,112,120,131,149,177,196 Ownable.sol#L53,61 W6G.sol#L66,67,70,71"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L02 - State Variables could be Declared Constant",
+            "description": "Constant state variables should be declared constant to save gas.",
+            "severity": "low",
+            "location": "W6G.sol#L30,29,35,36"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "Solidity defines a naming convention that should be followed.",
+            "severity": "low",
+            "location": "ERC20.sol#L35 W6G.sol#L11,321,322,323,324,21,22,25,26,27,29,30,51,53"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "L05 - Unused State Variable",
+            "description": "There are segments that contain unused state variables.",
+            "severity": "low",
+            "location": "W6G.sol#L13"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L09 - Dead Code Elimination",
+            "description": "Functions that are not used in the contract and make the code's size bigger.",
+            "severity": "low",
+            "location": "ERC20.sol#L220 Strings.sol#L39"
+        }
+    ]
+}

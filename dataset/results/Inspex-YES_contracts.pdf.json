@@ -1,0 +1,176 @@
+{
+    "path": "artifacts/Inspex-YES_contracts.pdf",
+    "project_info": {
+        "url": "https://github.com/inspex-archive/YuemmaiRental_YES-contracts",
+        "commit_id": "de7684e0f771acefabe4d5f6f3648b81e75e83ff",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "YuemmaiRental_YES-contracts": "contracts/Inspex-YES_contracts/YuemmaiRental_YES-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Withdrawable Amount Miscalculation",
+            "description": "Users can withdraw $YES at the maximum amount, causing the collateral value to drop lower than their borrowed asset value.",
+            "severity": "critical",
+            "location": "YESVault.sol, _withdraw() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change the critical state variables to gain additional profit.",
+            "severity": "high",
+            "location": "BorrowLimitOracle, KAP20Lending, KUBLending, YESController, YESPriceOracle, YESVault contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Invoking of Unreliable Smart Contract",
+            "description": "Using the adminRouter and committee contracts may cause harm to the user, e.g., arbitrarily depositing and withdrawing user funds.",
+            "severity": "high",
+            "location": "KAP20Lending, KUBLending, LToken, YESController, YESToken, YESVault contracts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Transaction Ordering Dependence (Race Condition)",
+            "description": "The mechanism for protecting from buying a higher price does not work properly, resulting in the platform paying more to get $YES tokens and retrieving lower amounts of underlying assets.",
+            "severity": "medium",
+            "location": "merketSell() and marketBuy() functions in the MarketImpl contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Parameter Calculation",
+            "description": "The price from the consult() function can be easily affected when the conditions are met, which affects other functions of the platform.",
+            "severity": "low",
+            "location": "SlidingWindowOracle contract, consult() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Time manipulation vulnerability",
+            "description": "Users can manipulate the price by buying or selling tokens and achieving a small value for the `timeElapsed` parameter.",
+            "severity": "n/a",
+            "location": "SlidingWindowOracle.sol, functions `getFirstObservationInWindow()` and `consult()`"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Public functions can be changed to external if not called from internal functions.",
+            "severity": "info",
+            "location": "Multiple contracts (YESController, YESPriceOracle, YESVault)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Uninitialized State Variable",
+            "description": "Unused state variables should be removed or initialized properly.",
+            "severity": "info",
+            "location": "YESController.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused paused variables",
+            "description": "The `transferGuardianPaused`, `seizeGuardianPaused`, and `borrowGuardianPaused` variables are always evaluated to true and can be removed.",
+            "severity": "n/a",
+            "location": "Various functions in YESController.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Unused borrow cap condition",
+            "description": "The `borrowCaps[lContract]` value is always 0, so the condition that checks if `(borrowCap != 0)` is always evaluated to false.",
+            "severity": "n/a",
+            "location": "borrowAllowed function in YESController.sol"
+        }
+    ]
+}

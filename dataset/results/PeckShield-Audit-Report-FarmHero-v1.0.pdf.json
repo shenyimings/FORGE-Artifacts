@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-FarmHero-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/farmhero/polygon-core/tree/41b430d",
+        "commit_id": "41b430d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "polygon-core": "contracts/PeckShield-Audit-Report-FarmHero-v1/polygon-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20-Compliant Tokens",
+            "description": "Non-compliance with ERC20 standard in token contracts may cause issues if not handled properly.",
+            "severity": "medium",
+            "location": "Multiple Contracts, Business Logic"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Suggested Adherence Of Checks-Effects-Interactions Pattern",
+            "description": "Violation of checks-effects-interactions principle may lead to re-entrancy attacks.",
+            "severity": "high",
+            "location": "Playerbook, Time and State"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Timely massUpdatePools During Pool Weight Changes",
+            "description": "Failure to timely invoke massUpdatePools() before updating pool weights may create unfair reward distribution.",
+            "severity": "low",
+            "location": "HeroFarmV3, Business Logic"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Proper Withdraw Fee Collection in withdraw()",
+            "description": "The withdraw fee collection logic is flawed, collecting fees when only one condition is met.",
+            "severity": "medium",
+            "location": "HeroFarmV3 contract, withdraw() function (line 647)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Proper Share Accounting in emergencyWithdrawNFT()",
+            "description": "The emergencyWithdrawNFT() function fails to properly record user states.",
+            "severity": "high",
+            "location": "HeroFarmV3 contract, emergencyWithdrawNFT() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved Sanity Checks For System Parameters",
+            "description": "The update logic for system-wide parameters needs improvement with more rigorous sanity checks.",
+            "severity": "low",
+            "location": "HeroFarmV3 contract, setRates() and other parameter-setting functions"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved Logic in inCaseTokensGetStuck()",
+            "description": "The function does not ensure that the token is not a staked pool token, putting user funds at risk.",
+            "severity": "high",
+            "location": "HeroFarmV3 contract, inCaseTokensGetStuck() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Possible Sandwich/MEV Attacks For Reduced Returns",
+            "description": "The _safeSwap() function is vulnerable to front-running attacks due to lack of effective slippage restriction.",
+            "severity": "low",
+            "location": "StratX2_HERO_QuickV2 contract, _safeSwap() function"
+        }
+    ]
+}

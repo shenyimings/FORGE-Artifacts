@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/Woonkly Security Audit (DEX & STAKE) - CoinFabrik Blog.pdf",
+    "project_info": {
+        "url": "https://github.com/Woonkly/STAKESmartContractPreRelease",
+        "commit_id": "779522de8afcf9285d660abdcc0fb10a62f6f659",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "STAKESmartContractPreRelease": "contracts/Woonkly Security Audit (DEX & STAKE) - CoinFabrik Blog/STAKESmartContractPreRelease"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate coin reserve balance tracking in DEX rewards",
+            "description": "Inaccurate tracking of the contract's balance due to not updating `_coin_reserve` value after `transfer` function is used.",
+            "severity": "critical",
+            "location": "DEX rewards, `_withdrawReward` function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Miscalculated decrease value in rewards",
+            "description": "Miscalculated result when decreasing pending rewards by the amount withdrawn.",
+            "severity": "critical",
+            "location": "Rewards function, lines (1) and (2)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Denial of service in iterations over stakes with multiple accounts",
+            "description": "Potential denial-of-service attack due to iterations that could run out of gas.",
+            "severity": "medium",
+            "location": "woonklyPOS.sol, lines 876 and 925"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Denial of service in withdraw funds function over iteration",
+            "description": "Potential denial-of-service attack due to iterations that could run out of gas.",
+            "severity": "medium",
+            "location": "Withdraw funds function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Reentrancy using custom token",
+            "description": "Possible reentrancy attack by using a malicious ERC20 contract.",
+            "severity": "low",
+            "location": "WoonklyPOS.sol, `_processReward` function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicated require statement",
+            "description": "Unnecessary require statement in WithdrawLiquidity and WithdrawReward functions.",
+            "severity": "n/a",
+            "location": "WonklyDEX.sol, lines 792 and 423"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary condition",
+            "description": "Unnecessary if clause that can be removed to save gas.",
+            "severity": "n/a",
+            "location": "WonklyDEX.sol, line 465"
+        }
+    ]
+}

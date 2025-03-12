@@ -1,0 +1,83 @@
+{
+    "path": "artifacts/GemSpree.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x48a64f116ce221fd7c1119775ba7892701f9911d",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "GemSpree": "contracts/GemSpree/GemSpree"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The functions `includeInReward` and `_getCurrentSupply` use loops that could lead to OUT_OF_GAS exceptions if there are long excluded addresses lists.",
+            "severity": "low",
+            "location": "Functions `includeInReward` and `_GetCurrentSupply`"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges, including changing the maximum transaction amount, excluding from fees, changing charity addresses, locking, and unlocking.",
+            "severity": "low",
+            "location": "Various functions (e.g., `excludeFromReward`, `lock`, `unlock`)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary address checking",
+            "description": "The `ExcludeFromReward` function includes unnecessary address checking not related to the contract.",
+            "severity": "low",
+            "location": "Function `ExcludeFromReward`"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Zero burnAmt check",
+            "description": "The `_tokenTransfer` function should check that `burnAmt` is not equal to zero to avoid excess transfers.",
+            "severity": "low",
+            "location": "Function `_tokenTransfer`"
+        }
+    ]
+}

@@ -1,0 +1,122 @@
+{
+    "path": "artifacts/SmartContract_Audit_Solidproof_EternalDoge.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xc1ca351262ac17c9152cb5ac784c67533c85180d",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.9+commit.e5eed63a"
+        ],
+        "project_path": {
+            "EternalDoge": "contracts/SmartContract_Audit_Solidproof_EternalDoge/EternalDoge"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "Check that the address is not zero",
+            "severity": "low",
+            "location": "Main Contract, Line 647"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State variables that could be declared constant",
+            "description": "Add the `constant` attributes to state variables that never change",
+            "severity": "info",
+            "location": "Main Contract, Lines 352, 310, 387, 373, 372, 379, 378, 302"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unused return values",
+            "description": "Ensure that all the return values of the function calls are used and handle both success and failure cases if needed by the business logic",
+            "severity": "info",
+            "location": "Main Contract, Lines 767, 922"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused state variables",
+            "description": "Remove unused state variables",
+            "severity": "info",
+            "location": "Main Contract, Lines 375, 381, 302"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Unnecessary condition",
+            "description": "_liquidityRatio + _marketingRatio + _devRatio will never be 0 because of the require statement (in function setRatios) which says that all 3 variables must have a value of 100...",
+            "severity": "info",
+            "location": "Main Contract, Lines 733-734"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Don’t reuse the same code",
+            "description": "Avoid copy paste and use functions instead. We recommend to delete the \"including address back into rewards\" part in setExcludedFromReward function because there is a includeMeToRewards function in line 559 which are exactly the same and use that instead.",
+            "severity": "info",
+            "location": "Main Contract, Lines 560-569 and 545-554"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Comment does not match function",
+            "description": "The recoverBNB function does not correspond to the comment above. Adjust the comment or expand the function, this could lead to confusion for customers",
+            "severity": "info",
+            "location": "Main Contract, Line 934"
+        }
+    ]
+}

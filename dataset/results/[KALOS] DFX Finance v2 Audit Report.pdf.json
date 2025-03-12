@@ -1,0 +1,236 @@
+{
+    "path": "artifacts/[KALOS] DFX Finance v2 Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/dfx-finance/protocol-v2",
+        "commit_id": "5b4482440c4c3b636398b968283bcbb014809455",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol-v2": "contracts/[KALOS] DFX Finance v2 Audit Report/protocol-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "The whitelisting option is always turned off",
+            "description": "Whitelisting option is immediately turned off after creating a new curve and cannot be turned back on.",
+            "severity": "info",
+            "location": "src/Curve.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "newCurve() cause DoS by Front-Running",
+            "description": "A malicious user can supply a malicious oracle address, causing DoS.",
+            "severity": "high",
+            "location": "src/CurveFactoryV2.sol, function newCurve()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "unzap() has no MEV Protection",
+            "description": "No minimum return amount specified, making users vulnerable to front-running attacks.",
+            "severity": "medium",
+            "location": "src/Zap.sol, function unzap()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "LP withdrawal may not work if the minter is not the withdrawer",
+            "description": "Logic error in pool guard implementation causes issues with LP token transferability.",
+            "severity": "high",
+            "location": "src/Curve.sol, withdraw function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "newCurve() needs more input validation",
+            "description": "Insufficient input validation leads to potential LP draining attacks.",
+            "severity": "medium",
+            "location": "src/CurveFactoryV2.sol, Function: newCurves()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "targetSwap's buggy implementation leads to LP draining attack",
+            "description": "Incorrect amount calculation in targetSwap function allows for LP draining attacks.",
+            "severity": "critical",
+            "location": "src/Swaps.sol, Function: targetSwap()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Front-Running on pool guard amount setting",
+            "description": "Front-running possible between user depositing LP and owner setting pool guard amount.",
+            "severity": "info",
+            "location": "src/Curve.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "lack of zero address check for factory address",
+            "description": "CurveFactory address parameter needs to be checked if it is the zero address.",
+            "severity": "info",
+            "location": "src/AssimilatorFactory.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "AssimilatorFactory's transferFee() method does not use their return parameter",
+            "description": "TransferSuccess_ boolean variable is not used and returns false, which is unintuitive.",
+            "severity": "info",
+            "location": "src/assimilators/AssimilatorV2.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ],
+                "4": [
+                    "CWE-551"
+                ]
+            },
+            "title": "oracle update can be sandwiched to extract value from the LP, fee parameter is incorrectly set",
+            "description": "Chainlink price oracle information can be used to convert raw amounts to numeraires in swap functions.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Assimilator's functions can be simplified and improved on precision as well",
+            "description": "Simplify computation for intakeNumeraireLPRatio, viewRawAmountLPRatio, and viewNumeraireBalanceLPRatio.",
+            "severity": "info",
+            "location": "src/assimilators/AssimilatorV2.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect calculation of _swapInfo.totalFees may lead to excessive fees for the user",
+            "description": "Calculation of total fee is incorrect due to implementation.",
+            "severity": "low",
+            "location": "src/Swaps.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "The first LP can be front-run to lose a portion of their assets, via unbalanced small transfer",
+            "description": "The first LP can be front-run to lose a portion of their assets via an unbalanced small transfer.",
+            "severity": "critical",
+            "location": "src/ProportionalLiquidity.sol, deposit logic"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "ERC4626-style bug leads to loss for the first LP via front-running",
+            "description": "An attacker can mint a very small number of vault/LP tokens and transfer a large amount of tokens to the vault, causing the LP to receive zero LP tokens back.",
+            "severity": "critical",
+            "location": "src/ProportionalLiquidity.sol, deposit logic"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "The number of iterations for convergence is not enough in certain cases, leading to failed swaps",
+            "description": "In certain cases, 32 iterations may not be enough for the algorithm to converge, leading to some swaps failing.",
+            "severity": "info",
+            "location": "src/CurveMath.sol, fixed point iteration"
+        }
+    ]
+}

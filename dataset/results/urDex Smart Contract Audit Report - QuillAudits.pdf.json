@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/urDex Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/Urdex-finance/Urdex-contract/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Urdex-contract": "contracts/urDex Smart Contract Audit Report - QuillAudits/Urdex-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-116"
+                ],
+                "3": [
+                    "CWE-838"
+                ]
+            },
+            "title": "Creating invalid calldata",
+            "description": "abi.encodeWithSignature takes function arguments in their data types, but values are getting converted to bytes data and passed to it.",
+            "severity": "high",
+            "location": "urDexTimelock.sol, executeTransaction() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Incorrect variable is getting checked",
+            "description": "Delay is getting checked instead of _delay in constructor and setDelay() function.",
+            "severity": "medium",
+            "location": "urDexTimelock.sol, L26 and L34"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma",
+            "description": "Using floating pragma (pragma solidity ^0.8.17) may lead to deployment with a different compiler version.",
+            "severity": "low",
+            "location": "urDexTimelock.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "DAO contract design consideration",
+            "description": "The DAO contract's design should not break any functionality of the timelock contract.",
+            "severity": "info",
+            "location": "n/a (DAO contract, out of scope for this audit)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma",
+            "description": "Using floating pragma (pragma solidity ^0.8.17) does not ensure that the contracts will be deployed with the same version, which may lead to bugs.",
+            "severity": "info",
+            "location": "urdToken.sol contract"
+        }
+    ]
+}

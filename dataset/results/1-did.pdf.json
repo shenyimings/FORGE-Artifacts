@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/1-did.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x10e449fb87cde6fd6b82a3cdd4bae283c2f34729",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.6+commit.11564f7e"
+        ],
+        "project_path": {
+            "DIDToken": "contracts/1-did/DIDToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Minting tokens by contract owner",
+            "description": "The contract owner has the authority to mint tokens, which could lead to highly inflated contracts.",
+            "severity": "critical",
+            "location": "contract.sol#L37"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Burning tokens from a specific address by contract owner",
+            "description": "The contract owner has the authority to burn tokens from a specific address, which could result in users losing their tokens.",
+            "severity": "critical",
+            "location": "contract.sol#L44"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Public functions not declared as external",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "contracts/DIDToken.sol#L20"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused state variables present in the contract",
+            "description": "There are segments that contain unused state variables.",
+            "severity": "low",
+            "location": "contracts/DIDToken.sol#L7"
+        }
+    ]
+}

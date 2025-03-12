@@ -1,0 +1,164 @@
+{
+    "path": "artifacts/CERTIK-YEARNTOGETHER-AUDIT-REPORT.pdf",
+    "project_info": {
+        "url": "https://github.com/yearntogether/platform-contracts/tree/d1e20147a4cc5797a51baa0f966353e4bedc201a",
+        "commit_id": "d1e20147a4cc5797a51baa0f966353e4bedc201a",
+        "address": "0x0614CBfb5C0e9c9Be5A460f383EddDF884080C99",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "AntiBotStandardToken": "contracts/CERTIK-YEARNTOGETHER-AUDIT-REPORT/AntiBotStandardToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "GLOBAL-01 CENTRALIZATION RISKS",
+            "description": "Centralization risks due to privileged roles in contracts LottoAdmin and LottoCore.",
+            "severity": "high",
+            "location": "Contracts LottoAdmin and LottoCore"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "D1E-01 INCOMPATIBILITY WITH DEFLATIONARY TOKENS",
+            "description": "Incompatibility with deflationary tokens due to logic issues in LottoAdmin.sol and LottoCore.sol.",
+            "severity": "medium",
+            "location": "LottoAdmin.sol (lines 21, 23, 33, 35, 45, 47, 57, 59) and LottoCore.sol (lines 230, 237, 292, 308)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Deflationary Token Transfer Vulnerability",
+            "description": "Failure to discount transaction fees when transferring deflationary ERC20 tokens may lead to contract losses.",
+            "severity": "n/a",
+            "location": "Various functions in LottoCore.sol and LottoAdmin.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "LAB-01 MISSING ZERO ADDRESS VALIDATION",
+            "description": "Addresses should be checked before assignment or external call to ensure they are not zero addresses.",
+            "severity": "low",
+            "location": "LottoAdmin.sol (lines 159, 160, 161, 162, 163, 164, 165, 169, 180, 206)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "LCB-03 UNSAFE CAST",
+            "description": "Insecure casting of uint256 to uint40 without evaluating bounds.",
+            "severity": "low",
+            "location": "LottoCore.sol (line 69)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "LCB-02 MISSING VALIDATION",
+            "description": "Lack of validation in _drawReferralPayout() function may result in unnecessary gas fees and token transfers.",
+            "severity": "info",
+            "location": "LottoCore.sol (line 405)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "LCB-04 LACK OF SELF-REFERENCE CHECK IN THE `_setReferrer()` FUNCTION",
+            "description": "No validation to check if _referrer could be msg.sender address itself, potentially violating the design.",
+            "severity": "info",
+            "location": "LottoCore.sol (lines 133, 291)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ],
+                "3": [
+                    "CWE-15"
+                ]
+            },
+            "title": "LCB-05 USER CAN FAVOR USDT AND DEPRECIATE YTG TOKEN",
+            "description": "Users can withdraw USDT tokens instead of YTG tokens, potentially causing depreciation.",
+            "severity": "info",
+            "location": "LottoCore.sol (lines 311, 325)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Validation",
+            "description": "Unnecessary validation in _acceptOwner() function.",
+            "severity": "info",
+            "location": "LottoAdmin.sol (lines 190, 216)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State Variable Should Be Declared Constant",
+            "description": "State variables that never change should be declared as constant to save gas.",
+            "severity": "info",
+            "location": "LottoStorage.sol (lines 109, 120, 124, 198)"
+        }
+    ]
+}

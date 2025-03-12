@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/Inspex-AutoCompoundVault.pdf",
+    "project_info": {
+        "url": "https://github.com/mondayclub/mondayclub",
+        "commit_id": "16a17e4d60d174333b0041ad30d7c803f170bd01",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "mondayclub": "contracts/Inspex-AutoCompoundVault/mondayclub"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change critical state variables to gain additional profit, making it unfair to other users.",
+            "severity": "high",
+            "location": "StrategyCommonChefLP contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Improper Reward Distribution",
+            "description": "A part of the compounded rewards could be claimed by a user without any prior token deposited.",
+            "severity": "medium",
+            "location": "AutoCompoundVault contract, function deposit()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Transaction Ordering Dependence (Race Condition)",
+            "description": "Front-running attack can be performed, resulting in bad swapping rates for reinvestment and lower rewards.",
+            "severity": "low",
+            "location": "StrategyCommonChefLP contract, functions _harvest() and addLiquidity()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions' executions cannot be monitored easily by the users.",
+            "severity": "low",
+            "location": "AutoCompoundVault, StrategyCommonChefLP contracts (multiple functions)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed.",
+            "severity": "info",
+            "location": "StrategyCommonChefLP contract (pause function), FeeManager.sol (setCallFee function)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Access Control",
+            "description": "Critical state variables can be updated by controlling authorities without notifying users.",
+            "severity": "high",
+            "location": "StrategyCommonChefLP contract, functions setHarvestOnDeposit(), setShouldGasThrottle(), setCallFee()"
+        }
+    ]
+}

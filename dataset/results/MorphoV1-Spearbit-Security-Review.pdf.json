@@ -1,0 +1,167 @@
+{
+    "path": "artifacts/MorphoV1-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/morpho-dao/morpho-v1",
+        "commit_id": "5f39e0d197830dbd4ede7f1657973a56f7e21232",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "morpho-v1": "contracts/MorphoV1-Spearbit-Security-Review/morpho-v1"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Liquidating Morpho's Aave position leads to state desync",
+            "description": "Desync of user position state in Morpho from actual Aave position after liquidation, leading to issues with withdrawals and repayments.",
+            "severity": "high",
+            "location": "ExitPositionsManager.sol#L239"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Deprecate market but still prevent liquidators from liquidating borrowers",
+            "description": "Currently, when a market must be deprecated, Morpho checks that borrowing has been paused before applying the new value for the flag.",
+            "severity": "medium",
+            "location": "aave-v2/MorphoGovernance.sol#L358-L366"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "SetIsPausedForAllMarkets bypasses check done in setIsBorrowPaused and allows resuming borrow on a deprecated market",
+            "description": "The MorphoGovernance contract allows Morpho to set the isBorrowPaused to false only if the market is not deprecated, but this check is not enforced by the _setPauseStatus function.",
+            "severity": "medium",
+            "location": "aave-v2/MorphoGovernance.sol#L470"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "User withdrawals can fail if Morpho position is close to liquidation",
+            "description": "When trying to withdraw funds from Morpho as a P2P supplier, the last step of the withdrawal algorithm borrows an amount from the pool (\"hard withdraw\").",
+            "severity": "medium",
+            "location": "ExitPositionsManager.sol#L468"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "P2P borrowers' rate can be reduced",
+            "description": "Users on the pool currently earn a much worse rate than users with P2P credit lines.",
+            "severity": "medium",
+            "location": "InterestRatesManager.sol#L182"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Frontrunners can exploit system by not allowing head of DLL to match in P2P",
+            "description": "For a given asset x, liquidity is supplied on the pool since there are not enough borrowers.",
+            "severity": "medium",
+            "location": "MatchingEngine.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Differences between Morpho and Compound borrow validation logic",
+            "description": "The Morpho approach is to mimic 1:1 the logic of the underlying protocol, including all the logic and sanity checks that are done before executing a user's action.",
+            "severity": "medium",
+            "location": "compound/PositionsManager.sol#L336-L344"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Users can continue to borrow from a deprecated market",
+            "description": "When a market is being marked as deprecated, there is no verification that the borrow for that market has already been disabled.",
+            "severity": "medium",
+            "location": "aave-v2/MorphoGovernance.sol#L395"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "ERC20 with transfer's fee are not handled by *PositionManager",
+            "description": "Some ERC20 tokens could have fees attached to the transfer event, while others could enable them in the future.",
+            "severity": "medium",
+            "location": "PositionsManager.sol, EntryPositionsManager.sol, ExitPositionsManager.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Cannot liquidate Morpho users if no liquidity on the pool",
+            "description": "Morpho implements liquidations by repaying the borrowed asset and then withdrawing the collateral asset from the underlying protocol (Aave / Compound).",
+            "severity": "medium",
+            "location": "aave-v2/ExitPositionsManager.sol#L277"
+        }
+    ]
+}

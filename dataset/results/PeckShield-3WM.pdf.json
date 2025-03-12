@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/PeckShield-3WM.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xd065ca6460ae6d379c93ec0422084c2bc7048d77",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "BEP20TokenContract": "contracts/PeckShield-3WM/BEP20TokenContract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Non ERC20-Compliance Of Transfer Event",
+            "description": "The mint() function emits a Transfer event with the contract itself as the _from address, instead of 0x0 as specified in the ERC20 standard.",
+            "severity": "info",
+            "location": "3WM Token Contract, Coding Practices (PVE-001) / BEP20TokenContract, mint() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue Of Admin Keys",
+            "description": "The owner account has privileged roles and can add new tokens into circulation, disable token transfer, and set the privileged ICO address.",
+            "severity": "medium",
+            "location": "3WM Token Contract, Security Features (PVE-002) / BEP20TokenContract, mint(), lockToken(), setICO() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Bypass of vestedlist feature",
+            "description": "The vestedlist feature can be bypassed by accounts in vestedlist using non-vestedlist accounts to transfer tokens.",
+            "severity": "n/a",
+            "location": "BEP20TokenContract, functions transfer() and approve()"
+        }
+    ]
+}

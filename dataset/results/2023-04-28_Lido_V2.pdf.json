@@ -1,0 +1,284 @@
+{
+    "path": "artifacts/2023-04-28_Lido_V2.pdf",
+    "project_info": {
+        "url": "https://github.com/lidofinance/lido-dao",
+        "commit_id": "e45c4d6fb8120fd29426b8d969c19d8a798ca974",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "lido-dao": "contracts/2023-04-28_Lido_V2/lido-dao"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Funds stealing by malicious staking module",
+            "description": "Malicious StakingModule can put their own controlled withdrawal credentials for the deposits upcoming from Lido.",
+            "severity": "critical",
+            "location": "StakingModule contract, function deposit()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Not matching interface",
+            "description": "OracleReportSanityChecker has the IWithdrawalQueue interface with the getWithdrawalRequestStatus function defined in it.",
+            "severity": "high",
+            "location": "OracleReportSanityChecker contract, function _checkRequestIdToFinalizeUpTo"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong NFT balance",
+            "description": "In the contract WithdrawalRequestNFT, the function balanceOf returns a user's balance, including claimed NFTs that the contract has already burned.",
+            "severity": "high",
+            "location": "WithdrawalRequestNFT contract, function balanceOf"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Withdrawal NFT burning after transfer to self",
+            "description": "Each withdrawal request is an NFT token, this NFT can be transferred to another address by the owner.",
+            "severity": "high",
+            "location": "WithdrawalRequestNFT contract, function _transfer"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Incorrect require leads to DOS",
+            "description": "In the function AccountingOracle._processStakingRouterExitedValidatorsByModule there is a check that all public keys are unique.",
+            "severity": "high",
+            "location": "_processStakingRouterExitedValidatorsByModule"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Affecting on burn request",
+            "description": "Anyone can increase rewards by transferring stETH to NodeOperatorsRegistry contract.",
+            "severity": "info",
+            "location": "Burner contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Range restriction",
+            "description": "_targetLimit variable should have a range check.",
+            "severity": "info",
+            "location": "Line 599"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Narrow range",
+            "description": "_refundedValidatorsCount should be less than or equal to stuckValidatorsCount.",
+            "severity": "info",
+            "location": "Line 640"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Depositable ether zero check",
+            "description": "There is no check if _etherToLockOnWithdrawalQueue <= address(this).balance.",
+            "severity": "info",
+            "location": "_collectRewardsAndProcessWithdrawals()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing length check in loadKeysSigs()",
+            "description": "There is no length check for _pubkeys and _signatures.",
+            "severity": "info",
+            "location": "loadKeysSigs()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No checks for different values in setter functions",
+            "description": "In DepositSecurityModule, there are no checks if the new value is different than the current value.",
+            "severity": "info",
+            "location": "DepositSecurityModule setter functions"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "StakingRouter can return exited validators that haven't been updated",
+            "description": "The function StakingRouter.getStakingModuleSummary() returns summary.totalExitedValidators taken from staking module which can differ from the total exited stored in the staking router.",
+            "severity": "info",
+            "location": "StakingRouter.getStakingModuleSummary()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Possible risk of DOS via ETH sending into Consensus Layer",
+            "description": "An attacker can send a deposit to the Ethereum 2.0 deposit contract with a public key of a Lido validator.",
+            "severity": "info",
+            "location": "OracleReportSanityChecker._checkAnnualBalancesIncrease()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Possibility to deposit the same validator address",
+            "description": "_makeBeaconChainDeposits32ETH method doesn't check that all public keys are unique.",
+            "severity": "info",
+            "location": "_makeBeaconChainDeposits32ETH"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Extra if statement in _checkConsensus method",
+            "description": "The if (_computeSlotAtTimestamp(timestamp) > frame.reportProcessingDeadlineSlot) statement is always false and can be removed.",
+            "severity": "info",
+            "location": "_checkConsensus method"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Impossible to set reportProcessor if the initial epoch is in the future",
+            "description": "It is impossible to execute the method setReportProcessor of HashConcensus contract if _frameConfig.initialEpoch is in the future.",
+            "severity": "info",
+            "location": "HashConcensus.setReportProcessor()"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "DEADLINE_SLOT_OFFSET",
+            "description": "The constant field DEADLINE_SLOT_OFFSET cannot be changed without redeploying the contract.",
+            "severity": "info",
+            "location": "HashConcensus.Deadline_Slot_Offset"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Soft requirement for transfer",
+            "description": "Function LidoExecutionLayerRewardsVault.withdrawRewards() is used only inside Lido._handleOracleReport(), but it doesn't guarantee that the required amount will be transferred, which can lead to math errors.",
+            "severity": "info",
+            "location": "LidoExecutionLayerRewardsVault.withdrawRewards()"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas optimization",
+            "description": "In function Lido._distributeFee(), transferShares consumes more gas than mintShares.",
+            "severity": "info",
+            "location": "Lido._distributeFee()"
+        }
+    ]
+}

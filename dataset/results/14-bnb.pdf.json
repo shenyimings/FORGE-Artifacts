@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/14-bnb.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "a07436314697de0c88953dd2ecc60f7d491d6fc2f89ce890e93536123af9ec08",
+        "address": "0x3837155448d85E9FE132a9fc721c5C417a7FFB07",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.9+commit.e5eed63a"
+        ],
+        "project_path": {
+            "BNBPark": "contracts/14-bnb/BNBPark"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Contract Balance Dependency",
+            "description": "The calculation of sell and buy prices heavily depends on the contract's balance, which may be abused by users and produce unexpected results.",
+            "severity": "low",
+            "location": "contract.sol#L351"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Initial Amount Distribution",
+            "description": "The price calculations depend on the initial contract's funds, which may lead to underflow if funds are less than acquisition funds.",
+            "severity": "low",
+            "location": "contract.sol#L341"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing Check (MC)",
+            "description": "Unsanitized variables used in calculations may produce vulnerability issues.",
+            "severity": "medium",
+            "location": "contract.sol#L377,382"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Succeeded Transfer Check (STC)",
+            "description": "Transfers are not checked for success, which may lead to incorrect assumptions about transfer results.",
+            "severity": "low",
+            "location": "contract.sol#L331,346"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Public Function could be Declared External (L01)",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "Multiple locations in contract.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Conformance to Solidity Naming Conventions (L04)",
+            "description": "Some naming conventions are not followed, which may lead to confusion.",
+            "severity": "low",
+            "location": "Multiple locations in contract.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing Events Arithmetic (L07)",
+            "description": "Critical arithmetic parameters do not have events emitted, making it difficult to track off-chain changes.",
+            "severity": "low",
+            "location": "contract.sol#L387"
+        }
+    ]
+}

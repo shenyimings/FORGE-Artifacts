@@ -1,0 +1,218 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-TCR.pdf",
+    "project_info": {
+        "url": "https://github.com/skmgoldin/sol-dll",
+        "commit_id": "91cb2448",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "sol-dll": "contracts/ConsenSys_Diligence-TCR/sol-dll"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "State changes occur after token contract calls",
+            "description": "Token contracts can perform reentrancy attacks to take advantage of this.",
+            "severity": "medium",
+            "location": "Throughout the contract system"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Re-inserting the last node in the list creates a cycle",
+            "description": "Can lead to inconsistent list states.",
+            "severity": "critical",
+            "location": "DLL.sol, insert function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "getCommitHash is an unreliable proof that _prevPollID exists",
+            "description": "Users can set their commit hash for a poll to zero, which would lock their tokens forever.",
+            "severity": "high",
+            "location": "PLCRVoting, commitVote function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Integer overflow in startPoll",
+            "description": "Can result in polls that will accept votes but never unlock tokens.",
+            "severity": "high",
+            "location": "PLCRVoting, startPoll function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "pollExists is misleading and incomplete",
+            "description": "Doesn't check if a poll exists and misses polls with unreasonable stage times.",
+            "severity": "high",
+            "location": "PLCRVoting, pollExists function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Parameterizer proposal deposits and challenge deposits can differ",
+            "description": "Can lead to tokens not being distributed properly.",
+            "severity": "high",
+            "location": "tcr, challengeReparameterization function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Integer underflow in challengeReparameterization",
+            "description": "Can allow tokens to be drained from the contract.",
+            "severity": "high",
+            "location": "tcr, challengeReparameterization function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Integer underflow in withdrawVotingRights",
+            "description": "Vote token balance can underflow.",
+            "severity": "medium",
+            "location": "PLCRVoting, withdrawVotingRights function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Integer overflows in proposeReparameterization",
+            "description": "Can overflow due to arithmetic operations.",
+            "severity": "medium",
+            "location": "tcr, proposeReparameterization function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Integer overflow in Registry.apply",
+            "description": "listingHash.applicationExpiry can overflow when set to block.timestamp + parameterizer.get(\"applyStageLen\")",
+            "severity": "medium",
+            "location": "Registry.apply, listingHash\\applicationExpiry"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Challenges with zero votes will succeed",
+            "description": "Polls resolve as failing when they expire with no votes, causing inconsistent comments",
+            "severity": "low",
+            "location": "PLCRVoting, Parameterizer.sol, Registry.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "An unchallenged application cannot be cancelled",
+            "description": "New applicants cannot exit the registry like whitelisted applicants can",
+            "severity": "low",
+            "location": "Registry"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Parameterizer proposal owner never gets token back if proposal goes unchallenged",
+            "description": "Proposal owner doesn't get tokens back when processProposal is called after appExpiry date but before processBy date",
+            "severity": "n/a",
+            "location": "Parameterizer, processProposal.js"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PLCRVoting edge case",
+            "description": "getInsertPointForNumTokens function fails to provide correct insert points in certain cases involving in-place updates",
+            "severity": "n/a",
+            "location": "PLCRVoting, getInsertPointForNumTokens function"
+        }
+    ]
+}

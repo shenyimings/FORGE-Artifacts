@@ -1,0 +1,263 @@
+{
+    "path": "artifacts/CleverMinu_Smart_Contract_Audit_Report_QuillAudits_.pdf",
+    "project_info": {
+        "url": "https://github.com/cleverminu/Contract",
+        "commit_id": "4a7cac0615c0f265544c2aa974900041d59d61e6",
+        "address": "0x155AB9Cd3655Aa6174E1e743a6DA1E208762b03d",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "CleverMinu": "contracts/CleverMinu_Smart_Contract_Audit_Report_QuillAudits_/CleverMinu"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "All Funds can be drained before sale via IMOsale()",
+            "description": "IMOsale has no access control, allowing whitelisted addresses to drain the entire contract during the sale.",
+            "severity": "high",
+            "location": "CleverMinu Contract, IMOsale() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "All Funds can be drained before sale via IMOreferral()",
+            "description": "IMOreferral has no access control and can be used to drain the complete contract by whitelisted users.",
+            "severity": "high",
+            "location": "CleverMinu Contract, IMOreferral() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Incorrect require statement in init()",
+            "description": "Incorrect require statement due to which init reverts on setting IMO end date in any time in future.",
+            "severity": "n/a",
+            "location": "CleverMinu Contract, init() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Incorrect require statement in transferAnyERC20Token() of HoldingContract",
+            "description": "TransferAnyERC20Token can be used to drain all the CLEVERMINU tokens from the holding contract by a malicious admin at any point of time.",
+            "severity": "high",
+            "location": "HoldingContract, transferAnyERC20Token() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Approve race condition",
+            "description": "Race condition for approve which allows the approved address to spend more tokens than expected.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Centralization of setUSERBurnRatio (Medium)",
+            "description": "SetUSERBurnRatio() can be used to change USER_BURNRATIO anytime and increased by a malicious owner at the detriment of users.",
+            "severity": "medium",
+            "location": "CleverMinu Contract, setUSERBurnRatio() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Incorrect require statement in setIMOendTime()",
+            "description": "On line: 354 the require statement is potentially incorrect.",
+            "severity": "n/a",
+            "location": "CleverMinu Contract, setIMOendTime() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Old solidity version",
+            "description": "The contract is using solidity version 0.4.24.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of sanity checks",
+            "description": "No sanity value checks for IMO_BURNRATIO in setIMOBurnRatio function.",
+            "severity": "low",
+            "location": "CleverMinu Contract, setIMOBurnRatio() function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No sanity value checks for IMOENDTIME",
+            "description": "A non-epoch timestamp can also be set for this value accidentally resulting in IMOENDTIME being passed already by the currents timestamp.",
+            "severity": "low",
+            "location": "CleverMinu Contract, IMOENDTIME variable"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Uncheck Return Value:",
+            "description": "HoldingContract.initiate(address,uint256) ignores return value by ERC20Interface(MAINCONTRACT).transferinternal(this,receiver,tokens)",
+            "severity": "n/a",
+            "location": "HoldingContract, initiate() function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Constructor does not need visibility specifier",
+            "description": "Solidity versions >0.5.0 do not require a visibility specifier for constructors.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate type specified (Informational)",
+            "description": "uint type declaration has been used in the IERC20Interface and SafeMath.",
+            "severity": "info",
+            "location": "IERC20Interface and SafeMath contracts"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Lack of error messages",
+            "description": "SafeMath and Owned does not have comments for errors of require statements.",
+            "severity": "info",
+            "location": "SafeMath and Owned contracts"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary usage of function (Informational)",
+            "description": "A separate safeDiv256() function is not needed as safeDiv() function works for uint256 values as well.",
+            "severity": "info",
+            "location": "SafeMath contract, safeDiv256() function"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Unnecessary usage of SafeMath",
+            "description": "SafeMath not required in Latest solidity compiler versions above 0.8.0.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "SafeMath functions can be made internal",
+            "description": "SafeMath functions can be made internal instead of public.",
+            "severity": "info",
+            "location": "SafeMath contract"
+        }
+    ]
+}

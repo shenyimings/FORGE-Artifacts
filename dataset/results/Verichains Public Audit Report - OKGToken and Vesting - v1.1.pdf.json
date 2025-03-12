@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/Verichains Public Audit Report - OKGToken and Vesting - v1.1.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x8ebeD852909991Ef28A1AC9d05Bf033Bd9ba05c7",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.13+commit.abaa5c0e"
+        ],
+        "project_path": {
+            "PeriodicVesting": "contracts/Verichains Public Audit Report - OKGToken and Vesting - v1/PeriodicVesting"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "OKGToken - BPContract function",
+            "description": "No guarantee that BPContract will not contain any security-related issues.",
+            "severity": "info",
+            "location": "OKGToken contract, BPContract function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Periodic - Token owner can mint unlimited amount of tokens",
+            "description": "The token contract contains a mint function for onlyOwner, enabling the owner to mint unlimited amounts of tokens without any cap.",
+            "severity": "info",
+            "location": "PeriodicVesting contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "PeriodicVesting - Redundant code in addBeneficiary function",
+            "description": "The addBeneficiary function contains redundant code that can be removed for gas savings.",
+            "severity": "info",
+            "location": "PeriodicVesting contract, addBeneficiary function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "PeriodicVesting - The release function may not work if the beneficiariesList is too large",
+            "description": "The release function contains a for-loop that consumes gas following the length of beneficiariesList; if the list is too large, the release transaction will run out of gas.",
+            "severity": "info",
+            "location": "PeriodicVesting contract, release function"
+        }
+    ]
+}

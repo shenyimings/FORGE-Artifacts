@@ -1,0 +1,215 @@
+{
+    "path": "artifacts/Baby LTC Smart Contract Audit (1).pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x59FB9a377004CC8974009F72d94b4d801C58499B",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "BABYTOKEN": "contracts/Baby LTC Smart Contract Audit (1)/BABYTOKEN"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "High Tax Rate",
+            "description": "Buy tax and sell tax rates are high (14%)",
+            "severity": "n/a",
+            "location": "Contract Functions Analysis, Buy Tax and Sell Tax functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Honeypot Risk",
+            "description": "Holder is able to buy and sell; if honeypot, the contract blocks sell transfer from holder wallet",
+            "severity": "n/a",
+            "location": "Contract Functions Analysis, Honeypot Analyse function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Proxy Contract Risk",
+            "description": "The proxy contract means contract owner can modify the function of the token and possibly affect the price",
+            "severity": "n/a",
+            "location": "Contract Functions Analysis, Proxy Contract function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Whitelist Function Found",
+            "description": "Can cause farming, some addresses may not be able to trade normally (honeypot risk)",
+            "severity": "n/a",
+            "location": "Contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Specific Tax Changing Functions found",
+            "description": "The contract owner may set a very outrageous tax rate for assigned address to block it from trading",
+            "severity": "n/a",
+            "location": "Contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Trading Cooldown Function found",
+            "description": "Like a temporary honeypot",
+            "severity": "n/a",
+            "location": "Contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Max Transaction and Holding Modify function found",
+            "description": "Can cause honeypot",
+            "severity": "n/a",
+            "location": "Contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Transaction Limiter Function Found",
+            "description": "Honeypot risk",
+            "severity": "n/a",
+            "location": "Contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Incorrect Acces Control",
+            "description": "If this is misconfigured or not properly validated on sensitive functions, it may lead to loss of funds, tokens and in some cases compromise of the smart contract",
+            "severity": "critical",
+            "location": "processDividendTracker function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ],
+                "4": [
+                    "CWE-789"
+                ]
+            },
+            "title": "Unchecked Array Length",
+            "description": "If array.length is large enough, the function exceeds the block gas limit, and transactions calling it will never be confirmed",
+            "severity": "high",
+            "location": "n/a"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Use of TX. origin",
+            "description": "Using the variable for authorization could make a contract vulnerable",
+            "severity": "high",
+            "location": "n/a"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unchecked Transfers",
+            "description": "Some tokens do not revert the transaction when the transfer or transferFrom fails and returns False",
+            "severity": "high",
+            "location": "n/a"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Approve Front Running Attack",
+            "description": "The swapTokensForEth() method overrides current allowance regardless of whether the spender already used it or not, so there is no way to increase or decrease allowance by a certain value atomically unless the token owner is a smart contract, not an account",
+            "severity": "high",
+            "location": "swapTokensForEth function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Dangerous Unary Expressions",
+            "description": "Care should be taken when implementing arithmetic expressions because they may control critical function logic, tokens, ether, etc.",
+            "severity": "medium",
+            "location": "n/a"
+        }
+    ]
+}

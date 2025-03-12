@@ -1,0 +1,31 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.21;
+
+import {IERC20Events} from "./../events/IERC20Events.sol";
+import {IERC20Permit} from "./../interfaces/IERC20Permit.sol";
+import {ERC20PermitStorage} from "./../libraries/ERC20PermitStorage.sol";
+import {Context} from "@openzeppelin/contracts/utils/Context.sol";
+
+/// @title ERC20 Fungible Token Standard, optional extension: Permit (proxiable version).
+/// @dev This contract is to be used via inheritance in a proxied implementation.
+/// @dev Note: This contract requires ERC20 (Fungible Token Standard).
+/// @dev Note: This contract requires ERC20Detailed.
+abstract contract ERC20PermitBase is IERC20Events, IERC20Permit, Context {
+    using ERC20PermitStorage for ERC20PermitStorage.Layout;
+
+    /// @inheritdoc IERC20Permit
+    function permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s) external {
+        ERC20PermitStorage.layout().permit(owner, spender, value, deadline, v, r, s);
+    }
+
+    /// @inheritdoc IERC20Permit
+    function nonces(address owner) external view returns (uint256) {
+        return ERC20PermitStorage.layout().nonces(owner);
+    }
+
+    /// @inheritdoc IERC20Permit
+    // solhint-disable-next-line func-name-mixedcase
+    function DOMAIN_SEPARATOR() external view returns (bytes32) {
+        return ERC20PermitStorage.DOMAIN_SEPARATOR();
+    }
+}

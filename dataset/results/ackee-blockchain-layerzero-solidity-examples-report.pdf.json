@@ -1,0 +1,188 @@
+{
+    "path": "artifacts/ackee-blockchain-layerzero-solidity-examples-report.pdf",
+    "project_info": {
+        "url": "https://github.com/LayerZero-Labs/solidity-examples",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "solidity-examples": "contracts/ackee-blockchain-layerzero-solidity-examples-report/solidity-examples"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "M1: Renounce ownership",
+            "description": "Accidentally calling renounceOwnership function, which forever invalidates the role, and nobody can get the ownership role.",
+            "severity": "medium",
+            "location": "LZApp.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-283"
+                ]
+            },
+            "title": "M2: Dangerous transfer ownership",
+            "description": "No robust verification mechanism for the new proposed owner in transferOwnership function.",
+            "severity": "medium",
+            "location": "LZApp.sol, LZAppUpgradeable.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "M3: Initialize functions in upgradeability",
+            "description": "Double initialization",
+            "severity": "medium",
+            "location": "contracts-upgradeable/*.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "M4: Address validation in constructor",
+            "description": "Incorrect value of _endpoint is passed to the LzApp constructor",
+            "severity": "medium",
+            "location": "LzApp.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "M5: Data validation in constructor",
+            "description": "Value _startMintId is set with higher number than _endMintId in UniversalONFT721 constructor",
+            "severity": "medium",
+            "location": "UniversalONFT721.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "M6: Accepting messages from untrusted remotes",
+            "description": "Message from an untrusted remote gets executed",
+            "severity": "medium",
+            "location": "LzApp.sol, NonblockingLzApp.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "W6: Lack of cross-chain token ID validation",
+            "description": "Intersecting id ranges may lead to critical mistakes",
+            "severity": "info",
+            "location": "UniversalONFT721.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "W7: Mint without price require",
+            "description": "Mint function lacks requirement on NFT price",
+            "severity": "info",
+            "location": "UniversalONFT721, mint function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "I1: Gas optimization in mint function",
+            "description": "Post-inc used instead of pre-inc for gas efficiency",
+            "severity": "info",
+            "location": "UniversalONFT721.sol, mint function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "I2: Unused SafeERC20",
+            "description": "Unused library inclusion",
+            "severity": "info",
+            "location": "NativeOFT.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "I3: Bad coding practices",
+            "description": "Various bad coding practices (NatSpec comment, misleading comment, unresolved TODOs)",
+            "severity": "info",
+            "location": "UniversalONFT721 and NativeOFT contracts"
+        }
+    ]
+}

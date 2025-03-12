@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/Vault V2 (Vyper part).md",
+    "project_info": {
+        "url": "https://github.com/iearn-finance/yearn-vaults",
+        "commit_id": "054034304c7912d227d460feadc23177103de0b9",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "yearn-vaults": "contracts/Vault V2 (Vyper part)/yearn-vaults"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Potential withdrawal lock",
+            "description": "In case if the result of withdrawals in the previous loop iteration `self.token.balanceOf(self)` becomes more than `value` that will cause a transaction revert.",
+            "severity": "high",
+            "location": "Vault.vy#L787"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Code commentary doesn't comply with real implementation",
+            "description": "At line it is defined that rate limit has \"tokens per block\" dimension, but in rate limit checker code `strategy_rateLimit` assumed as variable with \"tokens per second\" dimension.",
+            "severity": "info",
+            "location": "Vault.vy#L94 and Vault.vy#L1124"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential issue with re-entrancy",
+            "description": "Method `report` at this line called by strategy makes an external call back to strategy in `_assessFees` method.",
+            "severity": "info",
+            "location": "Vault.vy#L1246"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Adding `Approval` event in `transferFrom`",
+            "description": "Here we have a decrease in allowance as a result of `transferFrom` call, but new `Approval` event isn't emitted.",
+            "severity": "info",
+            "location": "Vault.vy#L468"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-768"
+                ]
+            },
+            "title": "Optimize deposit amount check",
+            "description": "Following check of deposit, the amount is required only if the previous condition returns false, in another case `amount` value is already limited by `self.depositLimit - self._totalAssets()`.",
+            "severity": "info",
+            "location": "Vault.vy#L658 and Vault.vy#L668"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Typo in commentary",
+            "description": "At line there is an extra ‘f’.",
+            "severity": "info",
+            "location": "Vault.vy#L1270"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Implicit loss calculation",
+            "description": "_reportLoss function defined here implicitly changes the passed value of the loss tokens amount.",
+            "severity": "info",
+            "location": "Vault.vy#L1191"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ],
+                "4": [
+                    "CWE-567"
+                ]
+            },
+            "title": "Unoptimized `withdrawalQueue` updating",
+            "description": "At lines there are some places when we need to remove or add strategy.",
+            "severity": "info",
+            "location": "Vault.vy#L1062-L1066 and Vault.vy#L1041-L1046"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Strategy can report loss and gain at the same time",
+            "description": "For now strategy can report loss and gain at the same time.",
+            "severity": "info",
+            "location": "Vault.vy#L1246"
+        }
+    ]
+}

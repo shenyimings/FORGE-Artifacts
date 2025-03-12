@@ -1,0 +1,182 @@
+{
+    "path": "artifacts/POA PoPA.md",
+    "project_info": {
+        "url": "https://github.com/poanetwork/poa-popa",
+        "commit_id": "e259cec1fcfcfdff30a52bffb395d845c774855b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "poa-popa": "contracts/POA PoPA/poa-popa"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Unbounded counters",
+            "description": "`totalUsers`, `totalAddresses`, and `totalConfirmed` counters only increase, but never decrease.",
+            "severity": "info",
+            "location": "ProofOfPhysicalAddress.sol#L44-L46"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Array index out-of-bounds access",
+            "description": "`userAddressConfirmed` function may access an array element that does not exist.",
+            "severity": "info",
+            "location": "ProofOfPhysicalAddress.sol#L98"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Array index out-of-bounds access",
+            "description": "`userAddress` and `userAddressConfirmed` functions do not check the index existence before accessing an array element.",
+            "severity": "info",
+            "location": "ProofOfPhysicalAddress.sol#L200, L214"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Function specifiers",
+            "description": "It is recommended to use `view` or `pure` instead of `constant` as function specifiers.",
+            "severity": "info",
+            "location": "ProofOfPhysicalAddress.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Modifier usage",
+            "description": "The `require(userExists(wallet));` check should be turned into a modifier.",
+            "severity": "info",
+            "location": "ProofOfPhysicalAddress.sol#L97"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Claim existence verification",
+            "description": "A check is recommended to verify the claim's existence before decoding.",
+            "severity": "info",
+            "location": "ProofOfPhysicalAddress.sol#L104"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Decoding empty claim",
+            "description": "It is recommended to add `require(userAddressConfirmed(wallet, ai));` above to avoid decoding an empty claim.",
+            "severity": "info",
+            "location": "ProofOfPhysicalAddress.sol#L225"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Internal consistency check",
+            "description": "Replace the condition with `assert(keccakIdentifier != 0x0)` to ensure internal consistency.",
+            "severity": "info",
+            "location": "ProofOfPhysicalAddress.sol#L100"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Algorithm complexity",
+            "description": "An algorithm with an O(N) complexity for injecting data into the blockchain can be replaced by an O(1) complexity algorithm.",
+            "severity": "info",
+            "location": "ProofOfPhysicalAddress.sol#L309"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Confirmation code signature",
+            "description": "The confirmation code is sent from the DApp web directly to the smart contract, bypassing the DApp server, which requires a signature from the DApp server.",
+            "severity": "info",
+            "location": "ProofOfPhysicalAddress.sol#L331"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Physical address limitation",
+            "description": "The number of possible physical addresses for a single account should be explicitly limited to prevent security issues.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

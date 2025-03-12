@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-OpenSky-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/OpenSky-Finance/opensky-protocol/tree/97cf052cef13aa9fbe1c1edb767b21613b961cda",
+        "commit_id": "97cf052cef13aa9fbe1c1edb767b21613b961cda",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "opensky-protocol": "contracts/PeckShield-Audit-Report-OpenSky-v1/opensky-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged owner account needs to be scrutinized.",
+            "severity": "medium",
+            "location": "Multiple Contracts, Security Features category"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-573"
+                ],
+                "3": [
+                    "CWE-628"
+                ],
+                "4": [
+                    "CWE-685"
+                ]
+            },
+            "title": "Mismatched IncentiveController Invocation in OpenSkyOToken",
+            "description": "The caller invokes handleAction() with an inconsistent list of arguments.",
+            "severity": "medium",
+            "location": "OpenSkyOToken contract, function `_transfer()`"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Proper Interest Accrual on Parameter Changes",
+            "description": "The update logic on treasuryFactor and interestModelAddress can be improved by properly applying their changes.",
+            "severity": "low",
+            "location": "OpenSkyPool contract, functions `setTreasuryFactor()` and `setInterestModelAddress()`"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Use of Borrow Rate in OpenSkyPool::borrow()",
+            "description": "The borrow rate is computed using the utilization rate before the borrow operation, which may incur less cost for the borrowing user at the expense of collecting less fee for existing liquidity providers.",
+            "severity": "medium",
+            "location": "OpenSkyPool contract, function `borrow()`"
+        }
+    ]
+}

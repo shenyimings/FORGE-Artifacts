@@ -1,0 +1,167 @@
+{
+    "path": "artifacts/202207070950.pdf",
+    "project_info": {
+        "url": "https://github.com/dogechain-lab/dogechain",
+        "commit_id": "4dfcea48a3948d435f4d03c742fffe173f979739",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "dogechain": "contracts/202207070950/dogechain"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "The transactions pool blockage",
+            "description": "If a transaction with too high a nonce is constructed and submitted to a specified node, it will fill up the waiting pool queued for that node, blocking new transactions.",
+            "severity": "high",
+            "location": "Node transaction pool"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "System contract management permission is too large",
+            "description": "Owner's permission is too high, allowing them to remove pledge amounts and manage cross-chain signers.",
+            "severity": "low",
+            "location": "System contract validatorSet and bridge"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Possible voting problems in PoA consensus model",
+            "description": "Validators cannot cancel votes before the specified address becomes a validator.",
+            "severity": "low",
+            "location": "IBFT-PoA mode, validator voting"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Exceptional error message in special case of eth_call",
+            "description": "The query operation will fail with an incorrect error message if a gas greater than the block-gas-limit is specified.",
+            "severity": "info",
+            "location": "eth_call interface"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-922"
+                ],
+                "3": [
+                    "CWE-312"
+                ],
+                "4": [
+                    "CWE-313"
+                ]
+            },
+            "title": "Insecure storage of private key",
+            "description": "The private key is stored in plaintext in the specified path consensus/validator.key.",
+            "severity": "high",
+            "location": "initValidatorKey function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ],
+                "3": [
+                    "CWE-940"
+                ]
+            },
+            "title": "Replay attack vulnerability (Fixed)",
+            "description": "dogechain's transaction signature does not contain the chainId, making it vulnerable to replay attacks with similar Ethereum chains.",
+            "severity": "medium",
+            "location": "calcTxHash function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Problems with dogechain's transaction pool processing (Duplicate)",
+            "description": "Not provided",
+            "severity": "n/a",
+            "location": "Transaction pool"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Insufficient gas price limit",
+            "description": "If a node does not specify a minimum gas price limit, the default will be 0, indicating that the transaction will not consume gas.",
+            "severity": "low",
+            "location": "Node configuration"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Repeatedly add the same address as a validator",
+            "description": "It is possible to repeatedly add the same node address to the validator list by the owner if the pledge amount reaches the threshold.",
+            "severity": "low",
+            "location": "validatorSet contract"
+        }
+    ]
+}

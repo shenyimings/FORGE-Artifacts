@@ -1,0 +1,52 @@
+{
+    "path": "artifacts/Thoreum.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xaB7EC1C6A86D12C9Ea64c817f421465cdDDF28F4, 0xF4168CD3C00799bEeB9a88a6bF725eB84f5d41b7, 0x580dE58c1BD593A43DaDcF0A739d504621817c05",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "ThoreumReferral": "contracts/Thoreum/ThoreumReferral",
+            "MasterChef": "contracts/Thoreum/MasterChef",
+            "ThoreumToken": "contracts/Thoreum/ThoreumToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can lead to an `OUT_OF_GAS` exception if there are many excluded addresses. Similar issues exist in `_getCurrentSupply`, `add`, `set`, `updateAllocPoint`, and `updateEmissionRate`.",
+            "severity": "low",
+            "location": "Multiple functions (includeInReward, _getCurrentSupply, add, set, updateAllocPoint, updateEmissionRate)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has various privileges that can impact the system's behavior and security.",
+            "severity": "n/a",
+            "location": "Multiple contracts (Token, MasterChef, Referral)"
+        }
+    ]
+}

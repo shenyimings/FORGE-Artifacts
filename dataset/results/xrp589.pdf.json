@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/xrp589.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xb63f7284f65eecd25dad09bf04ad2b849fc8ae42",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.20+commit.a1b79de6"
+        ],
+        "project_path": {
+            "XRP589": "contracts/xrp589/XRP589"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RVU - Redundant Variable Usage",
+            "description": "The contract contains redundant variables that do not serve any distinct purpose and merely duplicate other variable values, leading to unnecessary gas consumption and increased complexity.",
+            "severity": "low",
+            "location": "(contract variables) `buyTotalFees` and `sellTotalFees`"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "RSW - Redundant Storage Writes",
+            "description": "The contract performs redundant storage writes without checking if the current state is equal to the one given as an argument.",
+            "severity": "low",
+            "location": "XRP589.sol#L378, (function) `toggleSwap`"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "MEE - Missing Events Emission",
+            "description": "The contract performs actions and state mutations from external methods without emitting events, making it difficult for external parties to track and monitor the activity on the contract.",
+            "severity": "low",
+            "location": "XRP589.sol#L371,381, (functions) `updateBuyFees` and `updateSellFees`"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "IDI - Immutable Declaration Improvement",
+            "description": "The contract declares state variables that can be optimized by declaring them as immutable, which saves gas when defined.",
+            "severity": "low",
+            "location": "XRP589.sol#L282,285 (state variables) `dexRouter` and `lpPair`"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The contract does not conform to the Solidity naming conventions, which can affect code readability and maintainability.",
+            "severity": "low",
+            "location": "XRP589.sol#L191,259,371,381,496,510 (various function and variable names)"
+        }
+    ]
+}

@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/LiquityProtocolandStabilityPoolFinalReport.pdf",
+    "project_info": {
+        "url": "https://github.com/liquity/dev/tree/8cec3fda04b8c71994dc14858386bf6a161164fc",
+        "commit_id": "8cec3fda04b8c71994dc14858386bf6a161164fc",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "dev": "contracts/LiquityProtocolandStabilityPoolFinalReport/dev"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Exit reverts if there are no claimable rewards",
+            "description": "If the liquidity pool lacks claimable staker rewards, exit will always revert.",
+            "severity": "info",
+            "location": "Unipool.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Chainlink may report erroneous prices when unfrozen",
+            "description": "Chainlink reports erroneous prices without validation when it resumes operation.",
+            "severity": "medium",
+            "location": "PriceFeed contract, PriceFeed.sol, oracle logic"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Chainlink may report erroneous prices when Tellor remains untrusted after the last update",
+            "description": "Chainlink reports erroneous prices without validation when Tellor is frozen or broken.",
+            "severity": "medium",
+            "location": "PriceFeed contract, PriceFeed.sol, oracle logic"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Frontend mechanism may confuse users",
+            "description": "The frontend selection mechanism is not properly explained to users. An undocumented cache of the _frontEndTag in provideToSP may lead users to misuse the function.",
+            "severity": "low",
+            "location": "StabilityPool contract, StabilityPool.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Underflow in _computeRewardsPerUnitStaked might cause DoS during liquidations",
+            "description": "An underflow in the _computeRewardsPerUnitStaked function could cause a temporary DoS during liquidation. The rounding feedback mechanism of the _computeRewardsPerUnitStaked function might cause an underflow, leading to a denial-of-service (DoS) during liquidation.",
+            "severity": "low",
+            "location": "StabilityPool contract, StabilityPool.sol"
+        }
+    ]
+}

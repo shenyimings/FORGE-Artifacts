@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/Soken-Base_Reward_Token.pdf",
+    "project_info": {
+        "url": "https://github.com/sokenteam/smart_contract_audits",
+        "commit_id": "n/a",
+        "address": "0x82FabF676c7876694EDB013226f2a341dECa52Fd",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.13+commit.abaa5c0e"
+        ],
+        "project_path": {
+            "BRW": "contracts/Soken-Base_Reward_Token/BRW"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Owner Privileges",
+            "description": "The contract contains ownership functionality and ownership is not renounced, which allows the creator or current owner to modify contract behavior.",
+            "severity": "medium",
+            "location": "Contract (BaseReward.sol)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Volatile Code",
+            "description": "The return values of functions swapExactTokensForETHSupportingFeeOnTransferTokens and addLiquidityETH are not properly handled.",
+            "severity": "medium",
+            "location": "Functions (swapExactTokensForETHSupportingFeeOnTransferTokens, addLiquidityETH)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Ether Withdrawal",
+            "description": "Unprotected public and external functions were found which accept addresses controlled by external users, allowing for unauthorized ether withdrawal.",
+            "severity": "high",
+            "location": "Functions (Lines 940-947)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Third-Party Dependency",
+            "description": "The contract interacts with third-party entities antisnipe and liquidityRestrictor protocols, which can be compromised and lead to lost or stolen assets.",
+            "severity": "medium",
+            "location": "Contract (BaseReward.sol), functions (setAntisnipeAddress(), setLiquidityRestrictionAddress())"
+        }
+    ]
+}

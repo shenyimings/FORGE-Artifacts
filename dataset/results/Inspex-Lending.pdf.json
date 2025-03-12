@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/Inspex-Lending.pdf",
+    "project_info": {
+        "url": "https://github.com/Welnance/smart-contract/tree/2cd2024351",
+        "commit_id": "2cd2024351",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smart-contract": "contracts/Inspex-Lending/smart-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Arbitrary Token Address Setting",
+            "description": "Anyone can change the token address of $BUSD and $WEL to a malicious token and use the price of the malicious token to gain profit in the platform.",
+            "severity": "critical",
+            "location": "WelPriceOracle.sol, functions setTokenBUSD() and setTokenWel()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Arbitrary Price Setting",
+            "description": "The price of assets can be manipulated by anyone to gain a huge profit when supplying or borrowing on the platform.",
+            "severity": "critical",
+            "location": "SimplePriceOracle.sol, functions setUnderlyingPrice() and setDirectPrice()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Use of Unsafe Price Source",
+            "description": "The asset price on the platform can be arbitrarily manipulated by the flashloan attack.",
+            "severity": "critical",
+            "location": "WelPriceOracle.sol, function getAmountsOut()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "Critical state variables can be updated by the controlling authorities, potentially gaining additional profit at the expense of other users.",
+            "severity": "high",
+            "location": "Multiple contracts (WEL Comptroller Migrations PriceOracleProxy Unitroller WBep20Delegate WBep20Delegator WelChainlinkOracle WelPriceOracle WLDaiDelegate WLToken Ownable WLTreasury WelLikeDelegate)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Access Control",
+            "description": "The logic of the affected contract can be arbitrarily changed, allowing the proxy owner to perform malicious actions.",
+            "severity": "high",
+            "location": "Comptroller and WBep20Delegate contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Unusable Token via Contract Freezing",
+            "description": "The contract owner can freeze the token, preventing its use.",
+            "severity": "low",
+            "location": "WEL.sol (function freeze())"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Compiler Version",
+            "description": "Use of outdated Solidity compiler version with known bugs.",
+            "severity": "low",
+            "location": "WelChainlinkOracle.sol (pragma solidity 0.5.16;)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "GovernorAlpha, WEL, Comptroller, PriceOracleProxy, SimplePriceOracle, Unitroller contracts"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1111"
+                ]
+            },
+            "title": "Inexplicit Solidity Compiler Version",
+            "description": "The Solidity compiler versions declared in the smart contracts were not explicit.",
+            "severity": "info",
+            "location": "Comptroller, ComptrollerV1Storage, DAIInterestRateModelV2, InterestRateModel, JumpRateModel, Maximillion, Migrations, PriceOracle, PriceOracleProxy, Reservoir, SimplePriceOracle, Timelock, Unitroller, WBep20, WBep20Delegate, WBep20Delegator, WBep20Immutable, WelLikeDelegate, WelPriceOracle, WhitePaperInterestRateModel, WLBNB, WLDaiDelegate, WLToken, WLTreasury contracts"
+        }
+    ]
+}

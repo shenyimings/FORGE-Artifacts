@@ -1,0 +1,248 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Atomic_Loans.pdf",
+    "project_info": {
+        "url": "https://github.com/AtomicLoans/atomicloans-eth-contracts",
+        "commit_id": "078298ff19c89d40ede080ec0b01c5bb6dc151ef",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "atomicloans-eth-contracts": "contracts/ConsenSys_Diligence-Atomic_Loans/atomicloans-eth-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy attack on `Funds.pull` can lead to draining funds",
+            "description": "Reentrancy attacks can drain the contract of tokens by repeatedly calling `pull` function.",
+            "severity": "high",
+            "location": "Funds.pull"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Oracles use testing contracts",
+            "description": "Oracles used testing contracts that disable critical security checks.",
+            "severity": "medium",
+            "location": "OraclizeAPI.sol and Chainlinked.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "`Loans.setSechs` off-by-one error leads to secret reuse",
+            "description": "Off-by-one error in `Loans.setSechs` causes secret hashes to be reused, leading to catastrophic consequences.",
+            "severity": "high",
+            "location": "Loans.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Partial payments are mishandled and can be lost",
+            "description": "Partial payments are transferred multiple times, causing loss or failure.",
+            "severity": "medium",
+            "location": "Loans.sol and Sales.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "`Funds.sechi` is never updated, leading to reused secrets",
+            "description": "Funds.sechi not updated, causing the same four secrets to be reused for new loans.",
+            "severity": "high",
+            "location": "Funds.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy attack on `Loans.pull` can lead to draining funds",
+            "description": "Allows an ERC223 or ERC777 token to drain the contract of tokens by repeatedly calling `pull` function.",
+            "severity": "high",
+            "location": "Loans.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "`Loans.unpay` can be called repeatedly to drain tokens",
+            "description": "Allows a borrower to drain the contract of tokens by repeatedly calling `unpay` function.",
+            "severity": "high",
+            "location": "Loans.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy attack on `Sales.take` can lead to draining funds",
+            "description": "Allows an ERC223 or ERC777 token to drain the contract of tokens by repeatedly calling `take` function.",
+            "severity": "high",
+            "location": "Sales.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Bidders can prevent any higher bids from being accepted",
+            "description": "Allows a bidder to block transfers and prevent higher bids from being accepted.",
+            "severity": "medium",
+            "location": "Sales.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Return values from ERC20 `transfer`, `transferFrom`, and `approve` calls must be checked",
+            "description": "Failing to check return values can lead to unintended behavior and token theft.",
+            "severity": "low",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "`Sales.take` transfers too little to the lender (and too much to the borrower)",
+            "description": "Incorrect calculation of amount transferred to lender and borrower.",
+            "severity": "high",
+            "location": "Sales.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Vars should not be a user-supplied contract",
+            "description": "A malicious Vars contract can manipulate or block all future auctions.",
+            "severity": "medium",
+            "location": "Sales.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Loan contract initialization race condition",
+            "description": "An attacker can set the sales state variable to any contract they want, allowing them to manipulate or block all future auctions.",
+            "severity": "medium",
+            "location": "Loans.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Oracle inheritance model concerns",
+            "description": "The inheritance model used by the oracle contracts makes the code hard to verify.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy attack in `Funds.push`",
+            "description": "Similar to issue 6.1, Funds.push performs a transfer before the corresponding balance update.",
+            "severity": "high",
+            "location": "Funds.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "loanExpiration should be renamed in the collateral swap provider",
+            "description": "Misnamed parameter",
+            "severity": "low",
+            "location": "BitcoinCollateralSwapProvider.js"
+        }
+    ]
+}

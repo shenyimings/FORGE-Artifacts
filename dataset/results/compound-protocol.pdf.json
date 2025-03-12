@@ -1,0 +1,56 @@
+{
+    "path": "artifacts/compound-protocol.pdf",
+    "project_info": {
+        "url": "https://github.com/GauntletNetworks/compound-protocol/tree/gauntlet",
+        "commit_id": "gauntlet",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "compound-protocol": "contracts/compound-protocol/compound-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "compSpeeds Update",
+            "description": "The implemented internal method Comptroller.setCompSpeedInternal does not update the related cToken market staking indexes, leading to users gaining more or less Comp reward.",
+            "severity": "medium",
+            "location": "Comptroller.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "_grantComp Insufficient Balance",
+            "description": "The Comptroller._grantComp method only succeeds when the amount requested is less than or equal to the remaining Comptroller Comp balance, but fails silently without emitting an event or throwing when the amount is more.",
+            "severity": "low",
+            "location": "Comptroller.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked Pragma",
+            "description": "The Solidity files specify a version number with a caret (^), implying an unlocked pragma, which could lead to unexpected behavior in the future.",
+            "severity": "info",
+            "location": "Comptroller.sol, ComptrollerStorage.sol, Exponential.sol"
+        }
+    ]
+}

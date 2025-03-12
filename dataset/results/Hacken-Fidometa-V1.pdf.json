@@ -1,0 +1,530 @@
+{
+    "path": "artifacts/Hacken-Fidometa-V1.pdf",
+    "project_info": {
+        "url": "https://github.com/fidometa/Smart_Contract",
+        "commit_id": "ad56b0ce678f77d162752dbb5d987d2f4a29fddf",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Smart_Contract": "contracts/Hacken-Fidometa-V1/Smart_Contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing functionality",
+            "description": "The functions emit Transfer event but do not change any balances, leading to possible double-spending or reduction of users’ rewards.",
+            "severity": "critical",
+            "location": "FidoMeta.sol, Functions: _burn, _mint, constructor"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Excluding from receiving rewards logic is corrupted",
+            "description": "The user's reflection balance updates along with his prime balance, and on including this user back, his balance is updated according to reflection tokens (_rOwned), and all hidden community rewards will be received.",
+            "severity": "critical",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Operation between different time units",
+            "description": "block.timestamp may be bigger than startTime plus initialLock in seconds, but initialLock is given in days, leading to unexpected unlocking of funds or reverting the transaction.",
+            "severity": "critical",
+            "location": "FidoMeta.sol, Functions: unlock"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Significant impact on market price",
+            "description": "The functions change the balances of all users at one moment, which could be used for changing market price significantly, predicting exchange rates, and as a result, looting untrained users.",
+            "severity": "critical",
+            "location": "FidoMeta.sol, Functions: burn, mint"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "A new vesting period may not be created",
+            "description": "locks mapping is not cleared on finishing of the vesting period, so the owner will not be able to set new vesting for the same user.",
+            "severity": "high",
+            "location": "FidoMeta.sol, Functions: transferWithLock, unlock"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "No checks to prevent percentage overflow",
+            "description": "Fees may become more than 100%, leading to reverting of all transactions.",
+            "severity": "high",
+            "location": "FidoMeta.sol, Function: setCommunityCharge, setEcoSysFee, setSurcharge1, setSurcharge2, setSurcharge3"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "User balance may exceed the total supply",
+            "description": "If the owner excludes himself from rewards and then burns all tokens, the total supply will be lower than the sum of user balances, leading to wrong rates calculation and unexpected behavior of taking charges logic.",
+            "severity": "high",
+            "location": "FidoMeta.sol, Functions: burn"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Integer Underflow",
+            "description": "If a user unlocks vesting firstly in the first four months and then in the sixth month or later, the transaction will be reverted due to underflow.",
+            "severity": "high",
+            "location": "FidoMeta.sol, Functions: unlock"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Missing management of excluded accounts",
+            "description": "According to the current algorithm, all excluded accounts should be added to _excluded array and _isExcludedFromReward mapping, but in the function adding to _excluded is missed.",
+            "severity": "high",
+            "location": "FidoMeta.sol, Function: setServiceWallet"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Old wallets are not included back to changes and rewards",
+            "description": "These functions set new wallets and exclude them from charging but do not include back the old ones.",
+            "severity": "medium",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Possible Gas exceeding",
+            "description": "The contract can exceed the gas limit in long cycles.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol, function: includeInReward"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "SafeMath is unneeded after 0.8.0",
+            "description": "To save Gas and make code transparent, it is better not to use the SafeMath library.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Initial minting event skipped",
+            "description": "In the constructor, if all tokens are assigned to the owner, the Transfer event should be emitted.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Burn wallet could be changed",
+            "description": "The burn wallet (surcharge1) should never be changed.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Vested assets should be unlocked automatically",
+            "description": "The function should calculate the actual withdrawable amount for the user.",
+            "severity": "medium",
+            "location": "FidoMeta.sol, function: _transfer"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Violation of ERC-20 standard",
+            "description": "transferFrom should be possible if the amount is allowed by the owner of the assets.",
+            "severity": "low",
+            "location": "FidoMeta.sol, function: transferFrom"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-561"
+                ]
+            },
+            "title": "Unused library",
+            "description": "Using the Address library is not needed.",
+            "severity": "low",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Modification of well-known contract",
+            "description": "Imported or copy-pasted contracts (like SafeMath, Context, Ownable, etc.) should not be modified to keep the code clear.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Floating pragma",
+            "description": "The contracts use floating pragma ^0.8.11.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Violation of IERC-20 standard",
+            "description": "According to the IERC-20 standard, the functions should be external to save Gas.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol, functions: transfer, allowance, approve, transferFrom"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused functions",
+            "description": "Unused code overloads the code and takes additional Gas for deploying.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Similar functions",
+            "description": "Functions that do mostly the same things may be united.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol, functions: setCommunityCharge, setEcoSysFee, setSurcharge1, setSurcharge2, setSurcharge3"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Template code",
+            "description": "It is better to create a modifier to exclude the account from all charges.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Template code",
+            "description": "The functions do not compose calculations and are used only in one place, so code separation is useless.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Similar functions",
+            "description": "Functions that do mostly the same things may be united.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol, functions: _takeEcoSysCharge, _takeSurcharge1, _takeSurcharge2, _takeSurcharge3"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Functions that can be declared as external",
+            "description": "To save Gas, public functions that are never called in the contract should be declared as external.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol, function: excludeFromReward"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Template variables",
+            "description": "The code should not be overwhelmed with copy-pasted variables, functions, and other structures.",
+            "severity": "medium",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Template code",
+            "description": "To save Gas costly reassignment operations should not be used.",
+            "severity": "medium",
+            "location": "FidoMeta.sol, function: _tokenTransfer"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Overwhelmed code",
+            "description": "Unneeded reassignment is provided.",
+            "severity": "medium",
+            "location": "FidoMeta.sol, function: _transfer"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Repeated code",
+            "description": "The functions include the same operation (updating r-space balance of the sender) that could be moved to _doTransfer function.",
+            "severity": "info",
+            "location": "FidoMeta.sol, Functions: _transferFromExcluded, _transferToExcluded, _transferStandard, _transferBothExcluded"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary code",
+            "description": "Any unnecessary code should be removed in order to save Gas.",
+            "severity": "info",
+            "location": "FidoMeta.sol, function: _tokenTransfer"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Functions that can be declared as external",
+            "description": "To save Gas, public functions that are never called in the contract should be declared as external.",
+            "severity": "info",
+            "location": "FidoMeta.sol, function: totalSupply"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary checks",
+            "description": "Any unnecessary code should be removed in order to save Gas.",
+            "severity": "info",
+            "location": "FidoMeta.sol, function: setCharges"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Modification of well-known contract",
+            "description": "Imported or copy-pasted contracts (like SafeMath, Context, Ownable, etc.) should not be modified to keep the code clear.",
+            "severity": "info",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Hardcoded values",
+            "description": "Hardcoded values make development harder and the code less readable.",
+            "severity": "info",
+            "location": "FidoMeta.sol, function: _getTValues"
+        }
+    ]
+}

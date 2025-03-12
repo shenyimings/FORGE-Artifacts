@@ -1,0 +1,158 @@
+{
+    "path": "artifacts/[KALOS] Meter Liquid Staking v1.1 (ENG).pdf",
+    "project_info": {
+        "url": "https://github.com/meterio/sys-contracts",
+        "commit_id": "32b9693224a78a8e11ab4603beb64699ed58b75f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "sys-contracts": "contracts/[KALOS] Meter Liquid Staking v1/sys-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Signature Malleability",
+            "description": "Using an outdated ECDSA library with known vulnerability",
+            "severity": "info",
+            "location": "ECDSA.sol (Meter Liquid Staking contracts)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "Single point of failure due to staking concentration on a single candidate",
+            "severity": "info",
+            "location": "LSD Contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of Bucket Owner Verification",
+            "description": "Malicious user can change candidates of different buckets, allowing block reward theft",
+            "severity": "high",
+            "location": "MeterTracker.Native (Meter POV chain)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "Unwithdrawn User Repayment Issue",
+            "description": "Users of stMTRG may not be able to withdraw in the worst-case scenario.",
+            "severity": "critical",
+            "location": "StMTRG contract, functions requestClose and executeClose"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Asset Loss during Conversion",
+            "description": "WstMTRG users may lose their MTRG tokens forever.",
+            "severity": "critical",
+            "location": "WstMTRG and StMTRG contracts, functions unwrap and shareToValue"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Potential Unintended Backdoor",
+            "description": "Creators of the contract that has MeterERC20 tokens could rug-pull the tokens from their contracts.",
+            "severity": "critical",
+            "location": "MeterERC20 contract, function move"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of Blacklist Validation",
+            "description": "The blacklisted users can withdraw their funds.",
+            "severity": "high",
+            "location": "StMTRG contract, function _transfer and withdraw"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Centralization Risk - 2",
+            "description": "Admin can withdraw any user's assets to any address.",
+            "severity": "info",
+            "location": "StMTRG contract, functions adminWithdrawAll and adminWithdraw"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Bucket Update Issue",
+            "description": "After the bucket's candidate has been updated to a different candidate, the new candidate's existing buckets/delegators will receive fewer rewards.",
+            "severity": "high",
+            "location": "MeterTracker contract, function BucketUpdateCandidate"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unfair Treatment of MTRG Stakers",
+            "description": "MTRG stakers spend more value than MTR stakers even though they receive the same value of rewards due to price disparity between MTR and MTRG tokens.",
+            "severity": "high",
+            "location": "Staking contract, BoundHandler function"
+        }
+    ]
+}

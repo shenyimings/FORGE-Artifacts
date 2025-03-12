@@ -1,0 +1,83 @@
+{
+    "path": "artifacts/Inspex-SuperDeed_V.2.pdf",
+    "project_info": {
+        "url": "https://github.com/SuperLauncher/v2-superdeed",
+        "commit_id": "cdb5007eac5938b0faed785c60545b2d4889ba17",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "v2-superdeed": "contracts/Inspex-SuperDeed_V/v2-superdeed"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Improper Setting of Asset Details",
+            "description": "The DAO can transfer out the fund after the project owner has funded the token. Moreover, when the token address has been changed, the users cannot claim the token after the vesting has started.",
+            "severity": "medium",
+            "location": "SuperDeedV2 contract, setAssetDetails() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Improper DAO Privilege in Emergency Withdrawal Process",
+            "description": "The DAO can transfer tokens to any arbitrary address, stealing from the platform owner.",
+            "severity": "low",
+            "location": "SuperDeedV2.sol, function daoMultiSigEmergencyWithdraw()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Modification of Vesting Information After Finalization",
+            "description": "The configurator role can change vesting information after the group state has been finalized.",
+            "severity": "low",
+            "location": "SuperDeedV2.sol, function defineVesting()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Starting of Vesting Without Funded Group",
+            "description": "The contract allows vesting to start even when none of the groups are funded, leading to users not being able to claim tokens.",
+            "severity": "info",
+            "location": "SuperDeedV2 contract, startVesting() function"
+        }
+    ]
+}

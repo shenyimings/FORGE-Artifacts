@@ -1,0 +1,488 @@
+{
+    "path": "artifacts/Element_Finance_Governance_Security_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/element-fi/elf-council",
+        "commit_id": "6ad776533a190b4364d5ddf450f36e3668d3f8ce",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "elf-council": "contracts/Element_Finance_Governance_Security_Audit_Report/elf-council"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Insufficient voting majority requirement",
+            "description": "Proposal can be approved with a single YES vote and many MAYBE votes.",
+            "severity": "n/a",
+            "location": "CoreVoting.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate event emission",
+            "description": "ProposalExecuted event can emit true even if the proposal is not executed.",
+            "severity": "n/a",
+            "location": "CoreVoting.sol#L226"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ],
+                "4": [
+                    "CWE-567"
+                ]
+            },
+            "title": "Non-atomic batch execution vulnerability",
+            "description": "Batch of calls in proposals is executed non-atomically.",
+            "severity": "high",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-172"
+                ]
+            },
+            "title": "Ambiguous abi.encodePacked() usage",
+            "description": "abi.encodePacked() omits size information of arrays, potentially allowing hash mismatch.",
+            "severity": "high",
+            "location": "CoreVoting.sol#L246-L251"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Insufficient input validation",
+            "description": "Calling proposal() with empty targets array always succeeds and increases proposalCount.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Potential flash loan vulnerability",
+            "description": "Proposer can temporarily increase voting power using flash loans",
+            "severity": "high",
+            "location": "Proposal creation"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Underflow vulnerability",
+            "description": "Length argument of zero causes underflow",
+            "severity": "low",
+            "location": "History.sol#_find()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy vulnerability",
+            "description": "Executing proposals can lead to reentrancy attacks",
+            "severity": "high",
+            "location": "CoreVoting.execute(), Timelock.execute()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-248"
+                ]
+            },
+            "title": "Unchecked generic calls",
+            "description": "No failure propagation occurs in Treasury.genericCall()",
+            "severity": "high",
+            "location": "Treasury.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unrevoked malicious votes",
+            "description": "Votes from compromised vaults remain even after removal",
+            "severity": "high",
+            "location": "Vote counting process"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ],
+                "4": [
+                    "CWE-567"
+                ]
+            },
+            "title": "Inconsistent voting power",
+            "description": "Updates to unvestedMultiplier are not atomic",
+            "severity": "n/a",
+            "location": "VestingVault"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Self-delegation vulnerability",
+            "description": "Delegate function allows self-delegation, increasing voting power",
+            "severity": "high",
+            "location": "VestingVault.delegate()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1288"
+                ]
+            },
+            "title": "Duplicate leaf nodes in Merkle tree",
+            "description": "Multiple leaves for the same user can cause claim failures",
+            "severity": "medium",
+            "location": "MerkleRewards"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Flash loan attack on proposals",
+            "description": "Proposer can temporarily increase voting power using flash loans",
+            "severity": "high",
+            "location": "Proposal creation"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "Missing storage initialization function",
+            "description": "VestingVault cannot be properly initialized",
+            "severity": "high",
+            "location": "VestingVault"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unenforced voting period requirement",
+            "description": "Voting period can exceed historical voting power record period",
+            "severity": "low",
+            "location": "CoreVoting"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Double execution of batches in Timelock",
+            "description": "increaseTime() and execute() functions can lead to double execution",
+            "severity": "high",
+            "location": "Timelock"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Griefing attack on voters using array expansion",
+            "description": "Large arrays can cause function reverts, delaying approvals",
+            "severity": "low",
+            "location": "History._clear()"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Identical proposal executions",
+            "description": "Multiple identical proposals can be executed, causing issues",
+            "severity": "high",
+            "location": "Timelock"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-229"
+                ],
+                "4": [
+                    "CWE-230"
+                ]
+            },
+            "title": "Unintuitive Vote Cancellation",
+            "description": "Calling vote() with an empty list cancels previous votes.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Sanity Checks",
+            "description": "Lack of input validation for addGrantAndDelegate() and changeUnvestedMultiplier().",
+            "severity": "medium",
+            "location": "VestingVault.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Sanity Check",
+            "description": "Lack of input validation for execute().",
+            "severity": "n/a",
+            "location": "Timelock.sol"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unsafe Type Conversions",
+            "description": "Insecure conversions from uint128 to int256.",
+            "severity": "n/a",
+            "location": "VestingVault.sol, lines 190, 224, 268, and 329"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Inconsistent Membership Determination",
+            "description": "Setter functions do not enforce redetermination of membership.",
+            "severity": "n/a",
+            "location": "GSCVault.sol"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Inconsistent Owner Initialization",
+            "description": "Different method used for setting the owner.",
+            "severity": "n/a",
+            "location": "CoreVoting.sol, line 118"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Sanity Check",
+            "description": "Lack of input validation for vote() and execute().",
+            "severity": "n/a",
+            "location": "CoreVoting.sol"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code Duplication",
+            "description": "Duplicate code block.",
+            "severity": "n/a",
+            "location": "History.sol"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Sanity Check",
+            "description": "Lack of input validation for delegatee addresses.",
+            "severity": "n/a",
+            "location": "LockingVault.sol and MerkleRewards.sol"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Sanity Check",
+            "description": "Lack of input validation for Merkle proof size.",
+            "severity": "n/a",
+            "location": "MerkleRewards.sol"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Interface Inconsistency",
+            "description": "Interfaces not inherited by implementation contracts.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Typo in Function Name",
+            "description": "Typo in queryVotePower function name.",
+            "severity": "n/a",
+            "location": "GSCVault.sol, line 145"
+        }
+    ]
+}

@@ -1,0 +1,284 @@
+{
+    "path": "artifacts/AutoMiningToken_SC-Audit-Report_20092023_SA-1519.pdf",
+    "project_info": {
+        "url": "https://github.com/AutoMiningToken/amtEnviroment",
+        "commit_id": "n/a",
+        "address": "0x6ae0a238a6f51df8eee084b1756a54dd8a8e85d3",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.9+commit.e5eed63a"
+        ],
+        "project_path": {
+            "AMT": "contracts/AutoMiningToken_SC-Audit-Report_20092023_SA-1519/AMT"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Invalid Calculations",
+            "description": "Incorrect order of function calls leading to unfair token distribution.",
+            "severity": "high",
+            "location": "./marketvault.sol : backingWithdrawl()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Contradiction in Docs",
+            "description": "Inconsistent documentation regarding token buying functionality.",
+            "severity": "low",
+            "location": "./Production/contracts/Market.sol : buy()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Invalid Calculations",
+            "description": "Incorrect updating of chargedAt and amtUsedAt mappings.",
+            "severity": "medium",
+            "location": "./Master.sol : chargeFromTo()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Validation",
+            "description": "Division by zero possible due to lack of balance check.",
+            "severity": "medium",
+            "location": "./marketvault.sol : getBackRate()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Best Practice Violation / Unchecked Return Value",
+            "description": "Failure to validate return values of transfer and transferFrom functions.",
+            "severity": "low",
+            "location": "./marketvault.sol : backingWithdrawl(), buy(), charge(); ./Market.sol : release(), payRent(), charge(), liqCharge(), addLiquidityLocking(), addLiquidity(), removeLiquidity()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing Event Emitting",
+            "description": "Failure to emit events for important state changes.",
+            "severity": "low",
+            "location": "./Master.sol : extendApprove(), setPayerWallet(), payRent(), addLiquidityLocking(), addLiquidity(), removeLiquidity(), mintMaster(); ./mastervault : backingWithdrawl(), buy(), setMaster(), charge()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "The owner of the marketvault contract can change the Master contract address and call the charge() function, potentially leading to security breaches.",
+            "severity": "high",
+            "location": "./marketvault.sol : setMaster(), charge()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Validation",
+            "description": "backingWithdraw function does not check if the BTCB balance of the contract is not zero, potentially leading to users not getting any BTCB in exchange for burning their AMT tokens.",
+            "severity": "low",
+            "location": "./Production/contracts/BurnVault.sol : backingWithdraw()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Accumulation of Dust Values",
+            "description": "The Master contract's charge function distributes rewards, potentially leading to fractional values and accumulation of dust.",
+            "severity": "low",
+            "location": "./Production/contracts/Master.sol : charge(), chargeFromTo()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "The project uses floating pragmas ^0.8.0, which may result in contracts being deployed using the wrong pragma version.",
+            "severity": "low",
+            "location": "./AMT.sol, ./LIQUIDITYAMT.sol, ./marketvault.sol, ./Master.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Shadowing State Variable",
+            "description": "The parameter _name of the AMT.constructor shadows an ERC20._name, potentially leading to security issues.",
+            "severity": "low",
+            "location": "./AMT.sol, ./LIQUIDITYAMT.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "Address parameters are used without checking against the possibility of 0x0, potentially leading to unwanted external calls.",
+            "severity": "low",
+            "location": "./marketvault.sol : setMaster(); ./Master.sol : liqLocker.constructor(), Master.constructor(), Master.setPayerWallet(), Master.mintMaster()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Invalid Hardcoded Value",
+            "description": "The milisecsToValidate variable is declared as ‘60000’ to represent 1 minute, but it's actually 1000 minutes.",
+            "severity": "low",
+            "location": "./Master.sol : addLiquidityLocking(), addLiquidity()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Typos in the Documentation",
+            "description": "Fix typos in the documentation to improve code quality.",
+            "severity": "info",
+            "location": "./marketvault.sol, ./Master.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Declaration",
+            "description": "Remove redundant declarations to improve code readability and maintainability.",
+            "severity": "info",
+            "location": "./Master.sol : liqLocked"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation",
+            "description": "Follow Solidity's naming conventions, ordering of elements, and add NatSpec annotations for better code quality.",
+            "severity": "info",
+            "location": "./AMT.sol, ./LIQUIDITYAMT.sol, ./marketvault.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "State Variables Default Visibility",
+            "description": "Specify the intended visibility explicitly for state variables.",
+            "severity": "info",
+            "location": "./AMT.sol : nameForDeploy, symbolForDeploy; ./LiquidityAmt(sol); ./Market.sol; ./liqLocker.sol; ./Master.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Unused Variable",
+            "description": "Remove the unused variable masterSetControl.",
+            "severity": "info",
+            "location": "./Market.sol"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Import",
+            "description": "Remove the unused import of Master.sol in BurnVault.sol.",
+            "severity": "info",
+            "location": "./BurnVault.sol"
+        }
+    ]
+}

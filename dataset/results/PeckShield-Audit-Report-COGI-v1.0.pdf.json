@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-COGI-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/COGI-Technology/cogi_contracts/tree/d87a739e6efda86ccb0d625de608e576f55228c8",
+        "commit_id": "d87a739e6efda86ccb0d625de608e576f55228c8",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "cogi_contracts": "contracts/PeckShield-Audit-Report-COGI-v1/cogi_contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue Of Admin Keys",
+            "description": "A plain EOA admin account can be worrisome, and a revised multi-sig account could alleviate this concern.",
+            "severity": "medium",
+            "location": "Multiple Contracts (CogiERC20)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Code Removal",
+            "description": "Unnecessary redundancies in the code can be safely removed.",
+            "severity": "low",
+            "location": "CogiERC20, CogiERC721 contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Market Bypass With Direct ERC721 safeTransferFrom()",
+            "description": "It is possible for the current owner and buyer to directly negotiate a price without paying the listingPrice.",
+            "severity": "high",
+            "location": "CogiNFTMarket contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Amount Of Ether Transferred",
+            "description": "The distribution of msg.value in the purchaseExecution() function is incorrect, leading to execution failure.",
+            "severity": "high",
+            "location": "CogiNFTMarket contract (purchaseExecution() function)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Improved Ether Transfers",
+            "description": "Recommendation for improved ether transfers.",
+            "severity": "info",
+            "location": "Business Logics"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Insufficient Gas for Ether Transfers",
+            "description": "Using `transfer()` and `send()` functions in Solidity can lead to out-of-gas errors when the owner address is a contract that implements a callback function containing EVM instructions such as SLOAD.",
+            "severity": "info",
+            "location": "CogiNFTMarket contract, specifically in the `purchaseExecution()` function on lines 95 and 101"
+        }
+    ]
+}

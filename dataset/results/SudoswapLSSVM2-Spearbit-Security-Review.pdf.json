@@ -1,0 +1,596 @@
+{
+    "path": "artifacts/SudoswapLSSVM2-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/sudoswap/lssvm2",
+        "commit_id": "5c1a0cabf4668c0901ba5e1377f05ac75fc923d6",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "lssvm2": "contracts/SudoswapLSSVM2-Spearbit-Security-Review/lssvm2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "`_pullTokenInputAndPayProtocolFee()` doesn't check that tokens are received",
+            "description": "The function doesn't verify if it actually received the tokens after doing `safeTransferFrom()`.",
+            "severity": "medium",
+            "location": "LSSVMPairERC20.sol#L34-L115"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "A malicious settings contract can call `onOwnershipTransferred()` to take over pair",
+            "description": "The function `onOwnershipTransferred()` can be called from a pair via `call()`, allowing a malicious settings contract to take over the pair.",
+            "severity": "medium",
+            "location": "StandardSettings.sol#L118-L158"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "One can attempt to steal a pair's ETH",
+            "description": "Anyone can pass the enrolled pair's address instead of a splitter address in `bulkWithdrawFees()` to effectively call the pair's `withdrawAllETH()`.",
+            "severity": "medium",
+            "location": "StandardSettings.sol#L301-L305, Splitter.sol#L26-L29, LSSVMPairETH.sol#L103-L105"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "`swap()` could mix tokens with ETH",
+            "description": "The function `swap()` adds the output of `swapNFTsForToken()` to the `ethAmount`, which could be set to the wrong value accidentally or on purpose.",
+            "severity": "medium",
+            "location": "VeryFastRouter.sol#L102-L212"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Using a single tokenRecipient in VeryFastRouter could result in locked NFTs",
+            "description": "The use of a single `tokenRecipient` address for both ETH/tokens and NFTs may result in locked NFTs.",
+            "severity": "medium",
+            "location": "VeryFastRouter.sol#L45, #L134-L139, #L158-L210, LSSVMRouter.sol#L42-L43"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner can mislead users by abusing `changeSpotPrice()` and `changeDelta()`",
+            "description": "A malicious owner could set up a pair which promises to buy NFTs for high prices and then frontrun the transaction by setting the spotprice to 0.",
+            "severity": "medium",
+            "location": "LSSVMPair.sol#L584-L604"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Pair may receive less ETH trade fees than expected under certain conditions",
+            "description": "Depending on the values of protocol fee and royalties, if `_feeRecipient == _assetRecipient`, the pair will receive less trade fees than expected.",
+            "severity": "medium",
+            "location": "LSSVMPairETH.sol#L48-L55"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Swapping tokens/ETH for NFTs may exhibit unexpected behavior for certain values of input amount, trade fees and royalties",
+            "description": "The `_pullTokenInputAndPayProtocolFee()` function pulls ERC20/ETH from caller/router and pays protocol fees, trade fees, and royalties proportionately.",
+            "severity": "medium",
+            "location": "LSSVMPairERC20.sol#L34-L115, LSSVMPairETH.sol#L22-L73"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "NFTs may be exchanged for 0 tokens when price decreases too much",
+            "description": "The sale of multiple NFTs, in combination with linear curves, results in a price decrease, and the complete number of NFTs is transferred from the originator of the transaction, even while the last few NFTs are worth 0.",
+            "severity": "medium",
+            "location": "LinearCurve.sol#L98-L161"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Reentrancy in `balanceOf()` via two pairs",
+            "description": "A reentrancy issue can occur if two pairs with the same ERC1155 NFTid are deployed, allowing a malicious router to circumvent balanceOf() checks.",
+            "severity": "medium",
+            "location": "LSSVMPairERC1155.sol#L222-L246"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Function `call()` is risky and can be restricted further",
+            "description": "The function `call()` is powerful and thus risky, allowing potentially dangerous function selectors to be executed.",
+            "severity": "medium",
+            "location": "LSSVMPair.sol#L640-L645"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Incorrect newSpotPrice and newDelta may be obtained due to unsafe downcasts",
+            "description": "Unsafe downcasts from uint256 to uint128 can occur, leading to silent overflows and incorrect results.",
+            "severity": "medium",
+            "location": "XykCurve.sol#L83 and XykCurve.sol#L130"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Fewer checks in `pairTransferNFTFrom()` and `pairTransferERC1155From()`",
+            "description": "The functions `pairTransferNFTFrom()` and `pairTransferERC1155From()` lack certain checks, allowing actions to be attempted on the wrong type of pairs.",
+            "severity": "medium",
+            "location": "LSSVMRouter.sol#L491-L543, VeryFastRouter.sol#L344-L407"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "A malicious collection admin can reclaim a pair at any time to deny enhanced setting royalties",
+            "description": "A malicious collection admin can forcibly call `reclaimPair()` prematurely, breaking the settings contract and denying enhanced royalty terms to pair owners.",
+            "severity": "medium",
+            "location": "StandardSettings.sol#L164-L178"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "PropertyCheckers and Settings not sufficiently restricted",
+            "description": "The LSSVMPairFactory accepts any address for external contracts, lacking sanity checks on them.",
+            "severity": "medium",
+            "location": "LSSVMPairFactory.sol#L120-L201, LSSVMPairFactory.sol#L430-L433, LSSVMPairFactory.sol#L485-492"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "A malicious router can skip transfer of royalties and protocol fee",
+            "description": "A malicious router may implement `pairTransferERC20From()` functions that do not transfer the number of tokens as expected, skipping royalty and protocol fee transfers.",
+            "severity": "medium",
+            "location": "LSSVMPairERC20.sol#L59-L91"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Malicious front-end can sneak intermediate ownership changes to perform unauthorized actions",
+            "description": "A malicious front-end can sneak in an intermediate ownership change during a multicall, allowing unauthorized actions to be executed under the new owner.",
+            "severity": "medium",
+            "location": "LSSVMPair.sol#L653-L667"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Missing override in authAllowedForToken",
+            "description": "Manifold admins are incorrectly not allowed by authAllowedForToken to toggle settings and reclaim their authorized pairs.",
+            "severity": "medium",
+            "location": "LSSVMPairFactory.sol#L330-L377, RoyaltyEngine.sol#L38-L46"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Misdirected transfers to invalid pair variants or non-pair recipients may lead to loss/lock of NFTs/tokens",
+            "description": "Functions depositNFTs() and depositERC20() allow deposits of ERC 721 NFTs and ERC20 tokens after pair creation without proper validation.",
+            "severity": "medium",
+            "location": "LSSVMPairFactory.sol#L650-L663, LSSVMPairFactory.sol#L668-L676"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "authAllowedForToken() returns prematurely in certain scenarios causing an authentication DoS",
+            "description": "Tokens listed on Nifty or Foundation may cause an authentication DoS if the proposedAuthAddress had admin roles on other platforms.",
+            "severity": "medium",
+            "location": "LSSVMPairFactory.sol#L330-L377"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Partial fills don't recycle ETH",
+            "description": "When a partial fill is applied, ETH is not recycled, leading to extra gas costs and potentially worse trading conditions.",
+            "severity": "low",
+            "location": "VeryFastRouter.sol#L211-L425"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Wrong allowances can be abused by the owner",
+            "description": "The function call() allows transferring tokens and NFTs that have an allowance set to the pair, which could be accidentally given to the pair.",
+            "severity": "low",
+            "location": "LSSVMPair.sol#L640-L645"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Maliciously crafted SellOrderWithPartialFill can drain router's balance",
+            "description": "Sell orders with partial fills can drain the router's balance if not properly validated.",
+            "severity": "low",
+            "location": "VeryFastRouter.sol#L276-L291"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused functionality of safeBatchTransferFrom()",
+            "description": "The function pairTransferERC1155From() allows transfer of multiple id's of ERC1155 NFTs, but the rest of the code only uses one id at a time.",
+            "severity": "info",
+            "location": "LSSVMRouter.sol#L531-L543"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "False positive in test_getSellInfoWithoutFee()",
+            "description": "Delta not validated via validateDelta, causing a false positive.",
+            "severity": "info",
+            "location": "ExponentialCurve.t.sol#L92, ExponentialCurve.sol#L181"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Checks-Effects-Interactions pattern not used in swapNFTsForToken()",
+            "description": "Defensive programming pattern not followed.",
+            "severity": "info",
+            "location": "LSSVMPairERC1155.sol#L181, LSSVMPairERC721.sol#L179"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Two versions of withdrawERC721() and withdrawERC1155()",
+            "description": "Duplicate functions with slightly different implementations.",
+            "severity": "info",
+            "location": "LSSVMPairERC721.sol#L272-L299, LSSVMPairERC1155.sol#L257-L301"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ]
+            },
+            "title": "Missing sanity/threshold checks may cause undesirable behavior and/or waste of gas",
+            "description": "Lack of input and return value validation.",
+            "severity": "info",
+            "location": "LSSVMPairERC1155.sol#L49-53"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Deviation from standard/uniform naming convention affects readability",
+            "description": "Non-uniform naming conventions used throughout the codebase.",
+            "severity": "info",
+            "location": "Multiple files (see description)"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Function _getRoyaltyAndSpec() contains code duplication which affects maintainability",
+            "description": "Code duplication in _getRoyaltyAndSpec() function.",
+            "severity": "info",
+            "location": "RoyaltyEngine.sol#L132-L313"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "getSellInfo always adds 1 rather than rounding which leads to last item being sold at 0",
+            "description": "Rounding issue in getSellInfo function.",
+            "severity": "info",
+            "location": "LinearCurve.sol#L130"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Two ways to query the assetRecipient",
+            "description": "Having two ways to query the assetRecipient could be confusing",
+            "severity": "info",
+            "location": "LSSVMPair.sol#L77, LSSVMPair.sol#L315-L328"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "LSSVMPairs can be simplified",
+            "description": "LSSVMPairs can be simplified by passing PairVariant and IMMUTABLE_PARAMS_LENGTH to LSSVMPair",
+            "severity": "info",
+            "location": "LSSVMPairERC1155ERC20.sol#L19, LSSVMPairERC1155ETH.sol#L18, LSSVMPairERC721ERC20.sol#L18"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Absent/Incomplete Natspec affects readability and maintenance",
+            "description": "Comments are key to understanding the codebase logic, but some functions within the codebase contain issues with respect to their comments with either no Natspec or incomplete Natspec annotations, leading to partial descriptions of the functions.",
+            "severity": "info",
+            "location": "Various contracts and functions"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "MAX_SETTABLE_FEE value does not follow a standard notation",
+            "description": "The protocol establishes several constant hard-coded MAX_FEE-like variables across different contracts.",
+            "severity": "info",
+            "location": "StandardSettings.sol#L22"
+        },
+        {
+            "id": 35,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "No modifier for __Ownable_init",
+            "description": "Usually __Ownable_init also has a modifier like initializer or onlyInitializing.",
+            "severity": "info",
+            "location": "OwnableWithTransferCallback.sol#L24-L26"
+        },
+        {
+            "id": 36,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Wrong value of seconds in year slightly affects precision",
+            "description": "Calculation of ONE_YEAR_SECS takes into account leap years (typically 365.25 days), looking for most exact precision.",
+            "severity": "info",
+            "location": "StandardSettingsFactory.sol#L12"
+        },
+        {
+            "id": 37,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing idempotent checks may be added for consistency",
+            "description": "Setter functions could check if the value being set is the same as the variable's existing value to avoid doing a state variable write in such scenarios.",
+            "severity": "info",
+            "location": "LSSVMPairFactory.sol#L409-L413, LSSVMPairFactory.sol#L419-L423, LSSVMPairFactory.sol#L430-433, StandardSettings.sol#L79-L81"
+        },
+        {
+            "id": 38,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use of isPair() is not intuitive",
+            "description": "The usage of isPair() could be refactored to make the code easier to read and maintain.",
+            "severity": "info",
+            "location": "LSSVMPairFactory.sol#L309-L322"
+        },
+        {
+            "id": 39,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1101"
+                ]
+            },
+            "title": "Royalty related code spread across different contracts affects readability",
+            "description": "The contract LSSVMPairFactory contains the function authAllowedForToken(), which has a lot of interactions with external contracts related to royalties.",
+            "severity": "info",
+            "location": "LSSVMPairFactory.sol#L330-L377, RoyaltyEngine.sol"
+        }
+    ]
+}

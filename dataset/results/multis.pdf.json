@@ -1,0 +1,71 @@
+{
+    "path": "artifacts/multis.pdf",
+    "project_info": {
+        "url": "https://github.com/multis/MULTISig/tree/master",
+        "commit_id": "master",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "MULTISig": "contracts/multis/MULTISig"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Theoretically possible integer overflow",
+            "description": "The contract assumes that the daily limit for spent ether is a number that can be represented by uint256, which may lead to an integer overflow if ether supply ever required more than 256 bits to represent it.",
+            "severity": "info",
+            "location": "GSNMultiSigWalletWithDailyLimit.sol, lines 66 and 73"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Compatibility of the contracts with the Istanbul Ethereum hard fork",
+            "description": "The function external_call() hardcodes a gas cost constant 34710, which may not be compatible with the Istanbul Ethereum hard fork.",
+            "severity": "n/a",
+            "location": "GSNMultiSigWallet.sol, line 263"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Malicious user can spam the array deployedWallets",
+            "description": "The factory allows anybody to create a new wallet via the function create(), which may lead to \"spam\" the array deployedWallets with a large number of empty wallets.",
+            "severity": "n/a",
+            "location": "GSNMultisigFactory.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of documentation on contract usage and deployment",
+            "description": "The lack of documentation on the order of operations when it comes to creating a new contract, funding the contract, granting tokens to potential multisig creators, etc.",
+            "severity": "n/a",
+            "location": "n/a"
+        }
+    ]
+}

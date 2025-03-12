@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/1-svc.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xAAc82B1d9fFE7c50fd2d5C8b0d3a0d8E3a374b03",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.10+commit.fc410830"
+        ],
+        "project_path": {
+            "CoinToken": "contracts/1-svc/CoinToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can stop or pause transactions",
+            "description": "The contract owner has the authority to stop the sales for all users excluding the owner, which may lead to an overflow and transaction revert.",
+            "severity": "critical",
+            "location": "contract.sol#L912"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can increase fees more than a reasonable percent (25%)",
+            "description": "The contract owner has the authority to increase over the allowed limit of 25%, which may lead to unauthorized token manipulation.",
+            "severity": "critical",
+            "location": "contract.sol#L1"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can blacklist wallets from selling",
+            "description": "The contract owner has the authority to stop contracts from transactions, which may lead to unauthorized token manipulation.",
+            "severity": "medium",
+            "location": "contract.sol#L1002"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Unnecessary gas production due to sellPath configuration definition",
+            "description": "The sellPath configuration is defined in every transaction but it's used only when the contract balance is sufficient for swap, producing unnecessary gas.",
+            "severity": "low",
+            "location": "contract.sol#L891"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Public functions that are never called by the contract should be declared external to save gas",
+            "description": "Public functions that are never called from the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "Multiple locations (contract.sol#L177,185,202,209,216,228,236,247,265,293,312,518,526,1016,1023,1031,1039,1046,1054,1070,1108,1116)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Constant state variables should be declared constant to save gas",
+            "description": "Constant state variables should be declared constant to save gas.",
+            "severity": "low",
+            "location": "Multiple locations (contract.sol#L838,843,848,831,835,840,845,837,842,847,836,841,846,833)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-conformance to Solidity naming conventions",
+            "description": "Non-conformance to Solidity naming conventions may lead to code readability and maintainability issues.",
+            "severity": "low",
+            "location": "contract.sol#L638,639,656,692"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused state variables present in the contract",
+            "description": "There are segments that contain unused state variables.",
+            "severity": "low",
+            "location": "Multiple locations (contract.sol#L835,836,837,838,840,841,842,843,845,846,847,848)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Performing divisions before multiplications may cause lose of prediction",
+            "description": "Performing divisions before multiplications may cause lose of prediction.",
+            "severity": "low",
+            "location": "contract.sol#L890"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Variables defined in the local scope are not initialized",
+            "description": "There are variables that are defined in the local scope and are not initialized.",
+            "severity": "low",
+            "location": "contract.sol#L896"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Potential Abuse of Admin Functions",
+            "description": "The contract owner can abuse admin functions, such as stopping transactions, manipulating fees, and blacklisting addresses, to convert the contract into a honeypot and prevent users from selling.",
+            "severity": "high",
+            "location": "CoinToken contract, various functions (e.g., pause, burn, enableBlacklist, etc.)"
+        }
+    ]
+}

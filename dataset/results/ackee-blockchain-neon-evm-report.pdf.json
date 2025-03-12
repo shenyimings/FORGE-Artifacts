@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/ackee-blockchain-neon-evm-report.pdf",
+    "project_info": {
+        "url": "https://github.com/neonlabsorg/neon-evm",
+        "commit_id": "779",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "neon-evm": "contracts/ackee-blockchain-neon-evm-report/neon-evm"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "M1: Selfdestruct early evaluation",
+            "description": "The selfdestruct instruction does not follow the specification, causing incorrect behavior in certain functions.",
+            "severity": "medium",
+            "location": "state.rs, Application logic"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-439"
+                ]
+            },
+            "title": "M2: The emulation of the spl_associated_token_program will not work",
+            "description": "A condition in the emulate function is faulty due to an upgrade of the spl_associated_token_account crate.",
+            "severity": "medium",
+            "location": "spl_associated_token.rs, Application logic"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L1: Precompiled ecrecover behaves incorrectly",
+            "description": "The pre-compiled ecrecover contract does not follow the specification in cases of failure and input lengths.",
+            "severity": "low",
+            "location": "ecrecover.rs, Application logic"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "W1: Differences in the system program emulation",
+            "description": "The SystemInstruction::Transfer emulator doesn't check if the source account contains any data, leading to different results than actual execution.",
+            "severity": "info",
+            "location": "system.rs, SystemInstruction::Transfer emulator"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "I1: Redundant account check",
+            "description": "Redundant check for the Rent account in sysvar.rs",
+            "severity": "info",
+            "location": "sysvar.rs, line 29"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "I2: Unnecessary owner check",
+            "description": "Unnecessary check if the code account belongs to the evm_loader program in account_create.rs",
+            "severity": "info",
+            "location": "account_create.rs, line 51"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "I3: Unnecessary instruction argument",
+            "description": "Passing bump_seed as an argument is unnecessary and can be removed in CreateAccountV02 instruction",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "I4: Unnecessary holder owner validation",
+            "description": "Double check of ownership in TransactionStepFromAccount instruction",
+            "severity": "info",
+            "location": "transaction_step_from_account.rs, line 56"
+        }
+    ]
+}

@@ -1,0 +1,179 @@
+{
+    "path": "artifacts/1-legx.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x9b85fa50f2d0f48363f5199ac679402ca5a58d2c",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "LEGX": "contracts/1-legx/LEGX"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Price Volatility Concern",
+            "description": "The contract accumulates tokens from taxes to swap them for ETH, and if the variable `swapTokensAtAmount` is set to a big number, it could lead to significant price volatility.",
+            "severity": "low",
+            "location": "LEGX.sol#L587"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "Redundant Storage Writes",
+            "description": "The contract modifies the state of certain variables without checking if their current state is equal to the one given as an argument.",
+            "severity": "low",
+            "location": "LEGX.sol#L595,624,632,809"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Decimal Division Precision",
+            "description": "Division of decimal (fixed point) numbers can result in rounding errors due to the way that division is implemented in Solidity.",
+            "severity": "low",
+            "location": "LEGX.sol#L683,684,685,686,691,692,693,694,775,776,777,778"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Transfers Contract's Tokens",
+            "description": "The contract owner has the authority to claim ownership of tokens and transfer them out of the contract.",
+            "severity": "low",
+            "location": "LEGX.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant SafeMath Library",
+            "description": "The usage of the SafeMath library adds complexity, overhead, and increases gas consumption unnecessarily.",
+            "severity": "low",
+            "location": "LEGX.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Immutable Declaration Improvement",
+            "description": "State variables can be declared as constant using the constant keyword.",
+            "severity": "low",
+            "location": "LEGX.sol#L527,528,529,530,531,534,535,536,537,538,547,550,569,570"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State Variables could be Declared Constant",
+            "description": "State variables can be declared as constant using the constant keyword.",
+            "severity": "low",
+            "location": "LEGX.sol#L481,483"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the Solidity naming conventions.",
+            "severity": "low",
+            "location": "LEGX.sol#L40,41,57,329,511,512,806"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing Events Arithmetic",
+            "description": "The contract is missing events that are required for arithmetic operations.",
+            "severity": "low",
+            "location": "LEGX.sol#L588,808"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Dead Code Elimination",
+            "description": "The contract has dead code that is never executed or reached during normal contract execution.",
+            "severity": "low",
+            "location": "LEGX.sol#L743"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Divide before Multiply Operation",
+            "description": "The order of operations in arithmetic calculations is important, and performing divisions before multiplications may cause loss of precision.",
+            "severity": "low",
+            "location": "LEGX.sol#L683,684,685,686,690,691,692,693,694,775,785"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "Local Scope Variable Shadowing",
+            "description": "Local scope variable shadowing occurs when a local variable with the same name as a variable in an outer scope is declared within a function or code block.",
+            "severity": "low",
+            "location": "LEGX.sol#L521"
+        }
+    ]
+}

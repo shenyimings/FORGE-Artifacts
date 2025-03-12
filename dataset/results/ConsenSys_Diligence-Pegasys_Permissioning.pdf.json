@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Pegasys_Permissioning.pdf",
+    "project_info": {
+        "url": "https://github.com/PegaSysEng/permissioning-smart-contracts",
+        "commit_id": "05d33ae376f00fcc768c333dc7a2812283cf5004",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "permissioning-smart-contracts": "contracts/ConsenSys_Diligence-Pegasys_Permissioning/permissioning-smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "readOnlyMode provides false sense of security",
+            "description": "readOnlyMode can be toggled by admins and does not prevent determined actors from making changes",
+            "severity": "medium",
+            "location": "AccountRules, NodeRules"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Ingress.setContractAddress() can cause duplicate entries",
+            "description": "setContractAddress() allows adding contracts with address 0, leading to duplicate entries in contractKeys",
+            "severity": "medium",
+            "location": "Ingress.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use specific contract types instead of address where possible",
+            "description": "Using address type for variables instead of specific contract types can lead to lack of clarity and reduced type checker benefits",
+            "severity": "n/a",
+            "location": "AccountRules, NodeRules"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Ingress.removeContract is an O(n) operation",
+            "description": "removeContract in Ingress.sol has inefficiencies due to its implementation",
+            "severity": "n/a",
+            "location": "Ingress.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use a specific Solidity compiler version",
+            "description": "Pragma solidity should specify a specific version instead of a range for clarity and avoiding potential bugs",
+            "severity": "low",
+            "location": "Various contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "ContractDetails.owner is never read",
+            "description": "The owner field in ContractDetails struct is written to but never read",
+            "severity": "low",
+            "location": "Ingress.sol"
+        }
+    ]
+}

@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/HAECHI_AUDIT-Shoyu.pdf",
+    "project_info": {
+        "url": "https://github.com/sushiswap/shoyu",
+        "commit_id": "c7804e7c2626e778cab96b6a4811fddacc7f41aa",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "shoyu": "contracts/HAECHI_AUDIT-Shoyu/shoyu"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Auction may not work properly due to Strategy logic",
+            "description": "The canExecute() function returns true when the auction deadline has elapsed, causing the NFT to be awarded to the user who bids first after the deadline.",
+            "severity": "high",
+            "location": "EnglishAuction contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "TokenFactory contract cannot distribute NFT721 and NFT1155 when the factory address differs from the owner address",
+            "description": "The factory address differing from the owner address prevents the initialization process from being performed normally.",
+            "severity": "high",
+            "location": "TokenFactory contract, NFT721.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Auction is not performed normally due to the absence of IERC721#onERC721Received() function implementation",
+            "description": "The auction fails because the onERC721Received() function is not implemented in ERC721GovernanceToken.",
+            "severity": "low",
+            "location": "ERC721Liquidator contract, ERC721GovernanceToken"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Auction is not performed normally due to the absence of IERC1271#isValidSignature() function implementation",
+            "description": "The auction fails because the isValidSignature() function is not implemented in Governance Token.",
+            "severity": "low",
+            "location": "BaseExchange contract, ERC721GovernanceToken"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Anyone can issue NFTs using Factory Contract",
+            "description": "Anyone can call the mintWithTags721() and mintWithTags1155() functions to issue as many NFTs as they want.",
+            "severity": "low",
+            "location": "TokenFactory contract"
+        }
+    ]
+}

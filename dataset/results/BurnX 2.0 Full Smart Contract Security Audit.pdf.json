@@ -1,0 +1,44 @@
+{
+    "path": "artifacts/BurnX 2.0 Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x1e950af2f6f8505c09f0ca42c4b38f10979cb22e",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "BurnX20": "contracts/BurnX 2/BurnX20"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Dynamic rFee calculation",
+            "description": "The function _getRValues() changes rFee after subtracting it from rAmount, which may cause less correlation between rFee and tFee and oversize total token balance.",
+            "severity": "medium",
+            "location": "BurnX20 contract, _getRValues() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The functions includeInReward() and _getCurrentSupply use loops which may cause OUT_OF_GAS exceptions if the excluded addresses list is long.",
+            "severity": "low",
+            "location": "BurnX20 contract, includeInReward() and _getCurrentSupply functions"
+        }
+    ]
+}

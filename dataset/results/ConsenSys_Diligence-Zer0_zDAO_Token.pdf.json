@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Zer0_zDAO_Token.pdf",
+    "project_info": {
+        "url": "https://github.com/zer0-os/zBanc/tree/48da0ac1eebbe31a74742f1ae4281b156f03a4bc",
+        "commit_id": "48da0ac1eebbe31a74742f1ae4281b156f03a4bc",
+        "address": "0x2a3bff78b79a009976eea096a51a948a3dc00e34",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "zBanc": "contracts/ConsenSys_Diligence-Zer0_zDAO_Token/zBanc"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "Uninitialized implementations of upgradeable contracts",
+            "description": "Implementations of upgradeable contracts may be left uninitialized, potentially leading to reputational damage.",
+            "severity": "medium",
+            "location": "zDAO Token"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Zero value transfers",
+            "description": "The contract allows zero-value transfers, which can lead to wasted gas and malicious campaigns.",
+            "severity": "low",
+            "location": "zDAO-Token/contracts/ZeroDAOToken.sol:L68-L78"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Unnecessary gas waste on calculations",
+            "description": "The contract wastes gas on calculations for calls that will always fail when the contract is paused.",
+            "severity": "low",
+            "location": "zDAO-Token/contracts/ZeroDAOToken.sol:L80-L81"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing snapshot functionality",
+            "description": "The snapshot functionality to allow token balances being used for DAO governance votings is not implemented correctly.",
+            "severity": "high",
+            "location": "zDAO-Token/contracts/ZeroDAOToken.sol:L12-L17 and L83-L83"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-300"
+                ]
+            },
+            "title": "Revoking vesting tokens right before cliff period expiration might be delayed/front-runned",
+            "description": "Beneficiary may front-run revocation transaction by delaying or inserting a release transaction, thus withdrawing the vested amount.",
+            "severity": "low",
+            "location": "zDAO-Token/contracts/TokenVesting.sol:L69-L109"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ]
+            },
+            "title": "Total amount of claimable tokens is not verifiable",
+            "description": "Users cannot verify whether the contract token balance is sufficient for all claimers due to off-chain Merkle tree storage.",
+            "severity": "low",
+            "location": "n/a"
+        }
+    ]
+}

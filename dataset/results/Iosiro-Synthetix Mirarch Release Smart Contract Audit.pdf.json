@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/Iosiro-Synthetix Mirarch Release Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix",
+        "commit_id": "10c683b3a7d6f702c03dcd17e39749ae07591c8d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix": "contracts/Iosiro-Synthetix Mirarch Release Smart Contract Audit/synthetix"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "No settlement prior to transfer",
+            "description": "Users should be forced to settle before being able to burn synths when calling initiateSynthTransfer().",
+            "severity": "high",
+            "location": "contracts/BaseSynthetixBridge.sol, function initiateSynthTransfer()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "System-wide controls ignored",
+            "description": "The status of synthActive and issuanceActive should be checked to ensure that the synth can be transferred and that the system is allowing the issuance of synths.",
+            "severity": "low",
+            "location": "contracts/BaseSynthetixBridge.sol, functions initiateSynthTransfer() and finalizeSynthTransfer()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Throttle rate of synth transfer",
+            "description": "A control can be put in place to throttle the rate of issuance of synths.",
+            "severity": "info",
+            "location": "SIP-229"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Atomic swap slippage control",
+            "description": "A slippage control mechanism was suggested to ensure that users receive at least a minimum amount out of their destination synth.",
+            "severity": "info",
+            "location": "SIP-198, function dexPrice and chainlinkPriceWithBuffer"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Function name refactoring",
+            "description": "Renaming functions dexPrice and chainlinkPriceWithBuffer to indicate that the returned value is the value of the exchange.",
+            "severity": "info",
+            "location": "SIP-198, contracts/ExchangeRatesWithDexPricing.sol"
+        }
+    ]
+}

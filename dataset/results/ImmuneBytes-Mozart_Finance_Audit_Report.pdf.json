@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/ImmuneBytes-Mozart_Finance_Audit_Report.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x9eEC1044C5bD15782F806C63003F4730eeDfDAE4",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "PianoToken": "contracts/ImmuneBytes-Mozart_Finance_Audit_Report/PianoToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Missing burn function in transferFrom()",
+            "description": "Users transferring tokens via transferFrom will be able to move their tokens without burning them.",
+            "severity": "high",
+            "location": "PianoTokens contract, transferFrom() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Inconsistent delegate movement in transfer and transferFrom functions",
+            "description": "Delegates are not moved to the receiver’s _delegates_ mapping in transfer and transferFrom functions.",
+            "severity": "high",
+            "location": "PianoTokens contract, transfer() and transferFrom() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistent mint function implementation",
+            "description": "Mint function in BEP20 does not include _moveDelegates() implementation which is important in tracking the user’s votes.",
+            "severity": "medium",
+            "location": "BEP20 contract, mint() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant getOwner function",
+            "description": "Redundant functions to get the owner of Piano Token were found in IBEP20 and BEP20 contracts.",
+            "severity": "low",
+            "location": "IBEP20 and BEP20 contracts, getOwner() function"
+        }
+    ]
+}

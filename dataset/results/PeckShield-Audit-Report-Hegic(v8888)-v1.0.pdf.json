@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Hegic(v8888)-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/hegic/Hegic-protocol-v8888/tree/f0b6606",
+        "commit_id": "f0b6606",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Hegic-protocol-v8888": "contracts/PeckShield-Audit-Report-Hegic(v8888)-v1/Hegic-protocol-v8888"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Logic In PriceCalculator::_priceModifier()",
+            "description": "The public utilizationRate storage variable will always be 0 because there is no function to update it in the contract.",
+            "severity": "low",
+            "location": "PriceCalculator::_priceModifier()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Potential Overflow In HegicMath::sqrt()",
+            "description": "The uint256 k = (x + 1)>> 1 will overflow if the input parameter is 2^256-1.",
+            "severity": "low",
+            "location": "HegicMath::sqrt()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Accommodation Of Non-ERC20-Compliant Tokens",
+            "description": "A normal call to approve() with a currently non-zero allowance may fail, and the lack of return value of USDT's approve() may cause reverts.",
+            "severity": "low",
+            "location": "Facade/HegicPool"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Potential Sandwich/MEV Attack For createOption()",
+            "description": "The createOption() function is vulnerable to sandwich/MEV attacks due to the lack of slippage control.",
+            "severity": "medium",
+            "location": "Facade contract, createOption() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Revisited Reentrancy Protection In HegicPool",
+            "description": "The provideFrom() function in the HegicPool contract is vulnerable to reentrancy attacks.",
+            "severity": "n/a",
+            "location": "HegicPool contract, provideFrom() function"
+        }
+    ]
+}

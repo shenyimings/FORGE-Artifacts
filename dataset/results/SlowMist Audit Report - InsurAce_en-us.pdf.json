@@ -1,0 +1,131 @@
+{
+    "path": "artifacts/SlowMist Audit Report - InsurAce_en-us.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.6+commit.6c089d02"
+        ],
+        "project_path": {
+            "UniswapV2Router02": "contracts/SlowMist Audit Report - InsurAce_en-us/UniswapV2Router02"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Reordering attack risk",
+            "description": "Risk of reordering attacks that may cause losses in the InsurAce pool.",
+            "severity": "high",
+            "location": "contracts/pool/StakersPool.sol, function claimPayout and _convertTokenforExactPaymentToken"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missing permission check",
+            "description": "The addCoverOwner function does not perform permission checking, any user can call this function to add owner.",
+            "severity": "high",
+            "location": "contracts/cover/CoverData.sol, function addCoverOwner"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ]
+            },
+            "title": "DoS issue",
+            "description": "_getDelAccuRwAmtPS has 3 while loop nestings, which will be affected by the parameters and dos due to more users or more mining cycles added.",
+            "severity": "medium",
+            "location": "contracts/staking/ScheduledMiningProgram.sol, function _getDelAccuRwAmtPS"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Excessive authority issue",
+            "description": "Admin has permission to add sender, which can lead to denial of service.",
+            "severity": "low",
+            "location": "contracts/token/INSURToken.sol (function addSender and removeSender)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "DoS issue",
+            "description": "Using for loop to find the value in allowedCallersArray[_callee] can cause Out of Gas.",
+            "severity": "low",
+            "location": "contracts/secmatrix/SecurityMatrix.sol (functions addAllowdCallersPerCallee and setAllowdCallersPerCallee)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ],
+                "3": [
+                    "CWE-837"
+                ]
+            },
+            "title": "Repeatable call risk",
+            "description": "Calling setupVestors multiple times can lead to duplicate vestors in the vestor array.",
+            "severity": "low",
+            "location": "contracts/fixedvesting/FixedVesting.sol (function setupVestors)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Overflow risk",
+            "description": "Not using safe math to calculate the length of the array can cause overflow issues.",
+            "severity": "low",
+            "location": "contracts/cover/CoverConfig.sol (function removeCurrency)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "FlashLoan attack risk",
+            "description": "Unstake is judged by >= when there are already voting tasks, which can be exploited using flashloan to vote.",
+            "severity": "low",
+            "location": "contracts/claim/Claim.sol (function unstake)"
+        }
+    ]
+}

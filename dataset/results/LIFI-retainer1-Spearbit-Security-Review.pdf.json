@@ -1,0 +1,197 @@
+{
+    "path": "artifacts/LIFI-retainer1-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/lifinance/contracts",
+        "commit_id": "79d5263aaa46e0b4416cd21fdd1a91571fc9b164",
+        "address": "0xd37bbe5744d730a1d98d8dc97c42f0ca46ad7146",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.13+commit.abaa5c0e"
+        ],
+        "project_path": {
+            "THORChain_Router": "contracts/LIFI-retainer1-Spearbit-Security-Review/THORChain_Router"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "Receiver doesn't always reset allowance",
+            "description": "The `_swapAndCompleteBridgeTokens()` function in `Receiver.sol` may not reset the approval to the executor if there is insufficient gas.",
+            "severity": "high",
+            "location": "CelerIMFacet"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-237"
+                ],
+                "4": [
+                    "CWE-240"
+                ]
+            },
+            "title": "CelerIMFacet incorrectly sets RelayerCelerIM as receiver",
+            "description": "The `_startBridge()` function in `CelerIMFacet.sol` updates the `bridgeData.receiver` variable, which is a reference to the same memory location as `_bridgeData.receiver`, making the receiver on the destination chain the relayer address.",
+            "severity": "high",
+            "location": "CelerIMFacet.sol#L171-L177"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Max approval to any address is possible",
+            "description": "The `setApprovalForBridges()` function in `HopFacetOptimized.sol` allows for max approval to any address.",
+            "severity": "high",
+            "location": "HopFacetOptimized.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Revert for excessive approvals",
+            "description": "Certain tokens like UNI and COMP revert if the value input for approval or transfer surpasses uint96.",
+            "severity": "low",
+            "location": "HopFacetOptimized.sol#L42"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Inconsistent transaction failure/stuck due to missing validation of global fixed native fee rate and execution fee",
+            "description": "The current implementation does not validate the global fixed native fee rate and execution fee, leading to inconsistent transaction failures or stuck transactions.",
+            "severity": "low",
+            "location": "DeBridgeFacet.sol#L124"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect value emitted",
+            "description": "The value emitted for `toAmount` in `LibSwap.swap()` is difficult to interpret as it's not clear which of the two values has been emitted.",
+            "severity": "low",
+            "location": "LibSwap.sol#L76-L78"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Storage slots derived from hashes are prone to pre-image attacks",
+            "description": "Storage slots manually constructed using keccak hash of a string are prone to storage slot collisions as the pre-images of these hashes are known.",
+            "severity": "low",
+            "location": "Various contracts (AxelarFacet.sol, HopFacet.sol, MultichainFacet.sol, etc.)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Incorrect arguments compared in SquidFacet",
+            "description": "The function `startBridgeTokensViaSquid()` reverts if (`_squidData.sourceCalls.length > 0`) != `_bridgeData.hasSourceSwaps`.",
+            "severity": "low",
+            "location": "SquidFacet.sol#L69"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ],
+                "3": [
+                    "CWE-704"
+                ]
+            },
+            "title": "Unsafe casting of bridge amount from uint256 to uint128",
+            "description": "The code performs an unsafe cast from a uint256 value to a uint128 value in the call to `initiateTeleport()` function.",
+            "severity": "low",
+            "location": "MakerTeleportFacet.sol#L118"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-300"
+                ]
+            },
+            "title": "External calls of SquidFacet",
+            "description": "The functions CallBridge and CallBridgeCall do random external calls.",
+            "severity": "info",
+            "location": "SquidFacet.sol#L126-L175"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Missing test coverage for triggerRefund Function",
+            "description": "The current test suite does not include test cases for the triggerRefund function.",
+            "severity": "info",
+            "location": "RelayerCelerIM.sol#L449"
+        }
+    ]
+}

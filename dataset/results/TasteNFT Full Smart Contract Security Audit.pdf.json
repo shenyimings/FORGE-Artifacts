@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/TasteNFT Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xdb238123939637d65a03e4b2b485650b4f9d91cb",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "CoinToken": "contracts/TasteNFT Full Smart Contract Security Audit/CoinToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Out of gas in includeInReward() function",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can cause an OUT_OF_GAS exception if there are many excluded addresses.",
+            "severity": "low",
+            "location": "includeInReward()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas in _getCurrentSupply function",
+            "description": "The function `_getCurrentSupply` uses a loop for evaluating total supply, which can cause an OUT_OF_GAS exception if there are many excluded addresses.",
+            "severity": "low",
+            "location": "_getCurrentSupply"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Excessive Owner Privileges",
+            "description": "The owner has too much control over the contract, including changing fees, maximum transaction amount, excluding from fee, claiming tokens, and locking/unlocking.",
+            "severity": "low",
+            "location": "Various functions (e.g., setTaxFeePercent, setMaxTxPercent, excludeFromFee, etc.)"
+        }
+    ]
+}

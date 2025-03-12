@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Am.pdf",
+    "project_info": {
+        "url": "https://github.com/amptoken/amp-token-contracts/, https://github.com/flexahq/flexa-collateral-manager/",
+        "commit_id": "4203e96d1138632a991d072d0c232fd8ba69c9e1, aece0f6b24df6348221da548a815528a6633a20e, 8d421c295c2ed5d3eef12e5992d96efb8d10d2d3",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "amp-token-contracts": "contracts/ConsenSys_Diligence-Am/amp-token-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Eliminate assembly code by using ABI decode",
+            "description": "Assembly code used for gas optimization reduces readability and updatability of the code.",
+            "severity": "medium",
+            "location": "amp-contracts/contracts/partitions/PartitionsBase.sol:L39-L44, flexa-collateral-manager/contracts/FlexaCollateralManager.sol#L1403"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Ignored return value for transferFrom call",
+            "description": "TransferFrom function may not revert if the amount exceeds the allowance.",
+            "severity": "high",
+            "location": "amp-contracts/contracts/Amp.sol:L619-L620"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Potentially insufficient validation for operator transfers",
+            "description": "Validation does not require sender to be an operator for transferred value not exceeding allowance.",
+            "severity": "medium",
+            "location": "amp-contracts/contracts/Amp.sol:L755-L759"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Unbounded loop when validating Merkle proofs",
+            "description": "Loop for validating Merkle proofs is unbounded, potentially allowing DoS-like attacks.",
+            "severity": "medium",
+            "location": "flexa-collateral-manager/contracts/FlexaCollateralManager.sol:L1460-L1470"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Mitigation for possible reentrancy in token transfers",
+            "description": "ERC777 tokens may be vulnerable to reentrancy attacks.",
+            "severity": "medium",
+            "location": "amp-contracts/contracts/Amp.sol:L1152-L1177"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Potentially inconsistent input validation",
+            "description": "Input validation is missing in some functions.",
+            "severity": "medium",
+            "location": "Various locations (e.g., Amp.transferWithData, Amp.authorizeOperatorByPartition)"
+        }
+    ]
+}

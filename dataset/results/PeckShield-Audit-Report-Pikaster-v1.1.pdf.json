@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Pikaster-v1.1.pdf",
+    "project_info": {
+        "url": "https://github.com/pikasterdev/pikaster/tree/a6088fe",
+        "commit_id": "a6088fe",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "pikaster": "contracts/PeckShield-Audit-Report-Pikaster-v1/pikaster"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Incorrect Logic Of ERC721Template::remint()",
+            "description": "The current implementation of remint() function can be improved to avoid reverting if tokenId was not burned before by the MINTER_ROLE.",
+            "severity": "low",
+            "location": "ERC721Template, function remint()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Safe-Version Replacement With safeTransfer()",
+            "description": "The transfer() function does not have a return value, which may cause unexpected behavior when called.",
+            "severity": "low",
+            "location": "ERC20Template, ERC721Template, USDT Token Contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Trust Issue Of Admin Keys",
+            "description": "Privileged accounts (DEFAULT_ADMIN_ROLE/MINTER/BURNER) have excessive power and may pose a counter-party risk to contract users.",
+            "severity": "medium",
+            "location": "ERC20Template, ERC721Template"
+        }
+    ]
+}

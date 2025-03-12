@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/Hacken-Nimbus-V4.pdf",
+    "project_info": {
+        "url": "https://github.com/nimbusplatformorg/nim-smartcontract/tree/7bda71190cca5d139e15b46a33ca041eb060f38d",
+        "commit_id": "7bda71190cca5d139e15b46a33ca041eb060f38d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "nim-smartcontract": "contracts/Hacken-Nimbus-V4/nim-smartcontract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unintended behavior in balanceOf function",
+            "description": "The transfer function can fail if a user decides to transfer all his tokens but has unclaimed vested tokens.",
+            "severity": "high",
+            "location": "NBU.sol, Function: balanceOf"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Insecure token balance calculation",
+            "description": "The function sums balances of different tokens and proceeds calculations with those values.",
+            "severity": "high",
+            "location": "NimbusReferralProgram.sol, Function: isUserBalanceEnough"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unvalidated vesting types",
+            "description": "Vesting types are not validated. Any number can be passed.",
+            "severity": "medium",
+            "location": "NBU.sol, Function: give"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect sponsorAddress calculation",
+            "description": "The function returns 0 address for all users whose sponsorId is lower than sponsorId.",
+            "severity": "medium",
+            "location": "NimbusReferralProgram.sol, Function: userSponsorAddressByAddress"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Ineffective token transfer for sponsors with id < 1000000001",
+            "description": "The function does not actually transfer anything for sponsors with id < 1000000001.",
+            "severity": "medium",
+            "location": "NimbusReferralProgram.sol, Function: transferToSponsor"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Insecure sponsorAddress calculation for id < 1000000001",
+            "description": "The function returns zero address for all sponsors with id < 1000000001.",
+            "severity": "medium",
+            "location": "NimbusReferralProgram.sol, Function: userSponsorAddressByAddress"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant SafeMath library usage",
+            "description": "The SafeMath library is redundant for compiler versions >= 8.0.0.",
+            "severity": "low",
+            "location": "All contracts"
+        }
+    ]
+}

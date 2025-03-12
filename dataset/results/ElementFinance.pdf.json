@@ -1,0 +1,281 @@
+{
+    "path": "artifacts/ElementFinance.pdf",
+    "project_info": {
+        "url": "https://github.com/element-fi/elf-contracts",
+        "commit_id": "637c6f959315cbb11a164555e588520c7d89122b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "elf-contracts": "contracts/ElementFinance/elf-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "External price manipulation",
+            "description": "The Tranche contract logic is vulnerable to sophisticated (instant) price manipulation attacks.",
+            "severity": "high",
+            "location": "Tranche contract, principal token minting and interest token redemption logic"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Flaws in minting principal tokens",
+            "description": "The interest deduction logic has a flaw, leading to scenarios where users lose their funds even if the share price constantly goes up.",
+            "severity": "low",
+            "location": "Principal token minting logic"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Minting principal tokens with negative interest",
+            "description": "The principal token minting logic relies on the assumption that the vault will never return negative interest, leading to questionable behaviors.",
+            "severity": "low",
+            "location": "Principal token minting logic"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Flaws in yearn vault integration",
+            "description": "Flaws in the yearn vault integration can be exploited to drain all the reserve funds.",
+            "severity": "high",
+            "location": "Yearn vault integration"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy vulnerability",
+            "description": "Token contract allows callbacks from senders or receivers during token transfers, leading to a reentrancy exploit.",
+            "severity": "high",
+            "location": "YVaultAssetProxy.reserveDeposit()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Flaws in updating reserves",
+            "description": "Incorrect reserve update logic in _deposit() and _withdraw() functions of YVaultAssetProxy.",
+            "severity": "high",
+            "location": "YVaultAssetProxy._deposit() and YVaultAssetProxy._withdraw()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Fixed-point arithmetic errors in ConvergentCurvePool",
+            "description": "Broken fixed-point arithmetic when the number of decimals of either the underlying or bond token is not 18.",
+            "severity": "high",
+            "location": "ConvergentCurvePool"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Undesirable failures for joinPool()/exitPool() due to rounding errors",
+            "description": "Rounding errors in safe math sanity checks lead to undesirable failures.",
+            "severity": "low",
+            "location": "ConvergentCurvePool.joinPool() and ConvergentCurvePool.exitPool()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Flaws in fee deduction logic",
+            "description": "Incorrect fee deduction logic leads to charging more fees than needed for certain cases.",
+            "severity": "low",
+            "location": "ConvergentCurvePool"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Risky trick",
+            "description": "The trick in ERC20Permit's constructor may introduce an attack surface.",
+            "severity": "info",
+            "location": "ERC20Permit.sol, constructor()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Open pre-approval of allowances",
+            "description": "The permit() function can be exploited by malicious tokens.",
+            "severity": "info",
+            "location": "UserProxy.sol, mint()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Integration issues for WrappedPosition.prefundedDeposit()",
+            "description": "Using msg.sender instead of _destination in prefundedDeposit().",
+            "severity": "info",
+            "location": "WrappedPosition.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential division-by-zero errors in ConvergentCurvePool",
+            "description": "Division by zero may occur during pool initialization.",
+            "severity": "info",
+            "location": "ConvergentCurvePool.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Sanity checks for ConvergentCurvePool",
+            "description": "Missing sanity checks for constructor parameters and getYieldExponent().",
+            "severity": "info",
+            "location": "ConvergentCurvePool.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Sanity checks for UserProxy.mint()",
+            "description": "Missing sanity check to ensure _underlying is associated with _position.",
+            "severity": "info",
+            "location": "UserProxy.sol, mint()"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Sanity checks for YVaultAssetProxy constructor",
+            "description": "Different decimals values may cause issues in YVaultAssetProxy.",
+            "severity": "info",
+            "location": "YVaultAssetProxy.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Buying underlying tokens at discount with no fee",
+            "description": "Opportunistic buying of underlying tokens without paying fees.",
+            "severity": "low",
+            "location": "ConvergentCurvePool.sol (YieldSpace curve implementation)"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing test scenarios",
+            "description": "Incomplete test coverage for certain cases in ConvergentCurvePool.sol.",
+            "severity": "info",
+            "location": "ConvergentCurvePool.sol"
+        }
+    ]
+}

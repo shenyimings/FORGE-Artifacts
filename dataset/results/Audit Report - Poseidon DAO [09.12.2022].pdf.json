@@ -1,0 +1,182 @@
+{
+    "path": "artifacts/Audit Report - Poseidon DAO [09.12.2022].pdf",
+    "project_info": {
+        "url": "https://github.com/Poseidon-DAO/poseidon-token",
+        "commit_id": "520bf1e4c19788285d78ec0db183fb75dd24dd88",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "poseidon-token": "contracts/Audit Report - Poseidon DAO [09/poseidon-token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-1060"
+                ]
+            },
+            "title": "ERC20_PDN.sol: Function deleteVest does not remove vest amounts from ownerLock",
+            "description": "The ownerLock storage variable should be subtracted by the amounts from the deleted vests, but it isn't.",
+            "severity": "high",
+            "location": "ERC20_PDN.sol, function deleteVest"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "ERC20_PDN.sol: Function runAirdrop inconsistently scales the airdrop amount with _decimals",
+            "description": "The runAirdrop function scales the amount to transfer with the _decimals passed, but it does not do so when subtracting the amount from the availableOwnerBalance.",
+            "severity": "high",
+            "location": "ERC20_PDN.sol, function runAirdrop"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ERC20_PDN.sol: The burn functionality is missing ownerLock checks",
+            "description": "In both transfer and transferFrom, before moving any amount from an address, there are checks if that address is the owner, and if it is - if he will have at least ownerLock balance left after transfer. This is not done neither in burn nor in burnAndReceiveNFT.",
+            "severity": "high",
+            "location": "ERC20_PDN.sol, function burn"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent decimals for amount parameter",
+            "description": "Some functions that accept an amount multiply this amount by 10 ** _decimals. Other functions expect an amount with the token’s decimals.",
+            "severity": "low",
+            "location": "Multiple functions in ERC20_PDN.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "ERC20_PDN.sol: Function burnAndReceive does not scale down the msg.sender balance before comparison",
+            "description": "The burnAndReceive function is documented to expect to receive an _amount argument that is not considering the decimals of the token.",
+            "severity": "low",
+            "location": "ERC20_PDN.sol, function burnAndReceive"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Vested unclaimed amounts can be deleted",
+            "description": "The function deleteVest can be used to delete entries in vestList that are already claimable but were not claimed yet by the user.",
+            "severity": "low",
+            "location": "ERC20_PDN.sol, function deleteVest"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "ERC20-PDN.sol: Function burn has a wrong comment",
+            "description": "The NatSpec of burn says it emits OwnerChangeEvent which is incorrect, such event is not emitted in the function.",
+            "severity": "info",
+            "location": "ERC20-PDN.sol, function burn"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "The project is using SafeMathUpgradeable but it is not needed",
+            "description": "Solidity compiler version 0.8.0 introduced built-in math checks, so there is no need to use a library like SafeMath anymore as it will result in gas overhead.",
+            "severity": "info",
+            "location": "Project setup"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Valid ERC1155 ID 0 not accepted in setERC1155",
+            "description": "The ID 0 is a valid ID for an ERC1155 token and there are many token implementations where the IDs start at zero.",
+            "severity": "info",
+            "location": "ERC1155_PDN.sol, function setERC1155"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "airdropVest does not use the constant SECURITY_DELAY",
+            "description": "Instead of using the constant SECURITY_DELAY, the function airdropVest uses the value 5760 directly.",
+            "severity": "info",
+            "location": "ERC20_PDN.sol, function airdropVest"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "ERC20_PDN.sol: Function addVest has a _duration parameter that is not a duration in seconds",
+            "description": "The vest struct has a field expirationDate that is not really a date but a value of block height.",
+            "severity": "info",
+            "location": "ERC20_PDN.sol, function addVest"
+        }
+    ]
+}

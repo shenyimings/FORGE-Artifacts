@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/Inspex-CakeMaxi.pdf",
+    "project_info": {
+        "url": "https://github.com/alpaca-finance/bsc-alpaca-contract",
+        "commit_id": "1f89672f65acdedc9a4852a0f9afce05e31cae75",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bsc-alpaca-contract": "contracts/Inspex-CakeMaxi/bsc-alpaca-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Swapping Tolerance Calculation",
+            "description": "The price impact can be higher than the tolerance value, causing the position to lose value from a bad swapping rate.",
+            "severity": "medium",
+            "location": "PancakeswapV2RestrictedCakeMaxiStrategyAddBaseWithFarm.sol, execute() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Transaction Ordering Dependence",
+            "description": "The Front Running attack can be performed, resulting in a bad swapping rate and a lower bounty.",
+            "severity": "low",
+            "location": "CakeMaxiWorker.sol, reinvest() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ],
+                "3": [
+                    "CWE-1104"
+                ]
+            },
+            "title": "Outdated Solidity Version",
+            "description": "The use of unmaintained third-party components (Solidity version) may lead to potential security risks.",
+            "severity": "low",
+            "location": "Multiple contracts, including CakeMaxiWorker.sol, CakeMaxiWorkerConfig.sol, PancakeswapV2RestrictedCakeMaxiStrategyAddBaseTokenOnly.sol, PancakeswapV2RestrictedCakeMaxiStrategyAddBaseWithFarm.sol, and others."
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Solidity Compiler Version",
+            "description": "The use of an outdated Solidity compiler version (0.6.6) with known inherent bugs that may potentially cause damage to the smart contracts or their users.",
+            "severity": "low",
+            "location": "CakeMaxiWorker.sol, CakeMaxiWorkerConfig.sol, PancakeswapV2RestrictedCakeMaxiStrategyAddBaseTokenOnly.sol, PancakeswapV2RestrictedCakeMaxiStrategyAddBaseWithFarm.sol, PancakeswapV2RestrictedCakeMaxiStrategyLiquidate.sol, PancakeswapV2RestrictedCakeMaxiStrategyWithdrawMinimizeTrading.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Potential Upgradable Without Timelock",
+            "description": "The smart contracts are upgradable without a timelock mechanism, allowing the owner to modify the contract logic at any time, making the contracts untrustworthy.",
+            "severity": "info",
+            "location": "CakeMaxiWorker.sol, CakeMaxiWorkerConfig.sol, PancakeswapV2RestrictedCakeMaxiStrategyAddBaseTokenOnly.sol, PancakeswapV2RestrictedCakeMaxiStrategyAddBaseWithFarm.sol, PancakeswapV2RestrictedCakeMaxiStrategyLiquidate.sol, PancakeswapV2RestrictedCakeMaxiStrategyWithdrawMinimizeTrading.sol"
+        }
+    ]
+}

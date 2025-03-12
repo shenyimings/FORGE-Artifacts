@@ -1,0 +1,158 @@
+{
+    "path": "artifacts/Ritestream_Staking_Smart_Contract_Audit_Report_QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/ritestream/ritestream-contract/tree/master",
+        "commit_id": "master",
+        "address": "0x1156B992b1117a1824272e31797A2b88f8a7c729",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ritestream-contract": "contracts/Ritestream_Staking_Smart_Contract_Audit_Report_QuillAudits/ritestream-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect logic in stake function",
+            "description": "Incorrect calculation of totalStaked amount",
+            "severity": "medium",
+            "location": "Staking.sol, stake() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy vulnerability",
+            "description": "Unstake function can be re-entered by calling unstake again before the previous call has finished",
+            "severity": "medium",
+            "location": "Staking.sol, unstake() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unstake function transfers more than intended",
+            "description": "Unstake function transfers the staked amount and the reward amount instead of just the reward",
+            "severity": "medium",
+            "location": "Staking.sol, unstake() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "Unstaking with index confusion",
+            "description": "Copying and popping elements in the stake array can lead to confusion when unstaking",
+            "severity": "low",
+            "location": "Staking.sol, unstake() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reward amount not transferred correctly",
+            "description": "The total reward amount is not calculated and transferred correctly",
+            "severity": "low",
+            "location": "Staking.sol, constructor"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Fee on transfer token issue",
+            "description": "Contract does not handle fee on transfer tokens correctly",
+            "severity": "low",
+            "location": "Staking.sol, reward calculation"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Loop iteration issues",
+            "description": "Loop in stake function can lead to out-of-gas errors",
+            "severity": "low",
+            "location": "Staking.sol, stake() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Constant declaration issue",
+            "description": "MAX_CAP variable should be declared as a constant",
+            "severity": "info",
+            "location": "Staking.sol, MAX_CAP variable"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused import issue",
+            "description": "Unused import in the contract code",
+            "severity": "info",
+            "location": "Staking.sol, import statement"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-657"
+                ]
+            },
+            "title": "Hardcoded address issue",
+            "description": "Hardcoded address in renounceOwnership() function can cause issues on different networks",
+            "severity": "info",
+            "location": "Staking.sol, renounceOwnership() function"
+        }
+    ]
+}

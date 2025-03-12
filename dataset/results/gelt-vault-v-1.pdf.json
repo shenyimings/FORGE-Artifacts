@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/gelt-vault-v-1.pdf",
+    "project_info": {
+        "url": "https://github.com/GeltFinance/gelt-contracts-v1/tree/b2b87fe0f2e5fa1a1d757d1ef65ec5cd86bdc9ad",
+        "commit_id": "b2b87fe0f2e5fa1a1d757d1ef65ec5cd86bdc9ad",
+        "address": "0xe840b73e5287865eec17d250bfb1536704b43b21",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.5.17+commit.d19bba13"
+        ],
+        "project_path": {
+            "CErc20Delegator": "contracts/gelt-vault-v-1/CErc20Delegator"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Redemption Fee Precision Check May Lead to Revert",
+            "description": "The internal function _getStrategyRedeemFeeBps may revert if mAsset's redemption fee is lowered.",
+            "severity": "medium",
+            "location": "contracts/MstableGeltVault.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unclear Access Control Policy May Lead to Griefing",
+            "description": "The functions mintWithAuthorization and redeemWithAuthorization are operator-only, potentially leading to griefing scenarios.",
+            "severity": "info",
+            "location": "contracts/MstableGeltVault.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "minOutputQuantity During Redeems May Lead to Unfavorable Exchanges",
+            "description": "The function emergencyExitStrategy may cause unfavorable exchanges if there are issues with the underlying mAsset contract.",
+            "severity": "low",
+            "location": "contracts/MstableGeltVault.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Privileged Roles and Ownership",
+            "description": "Public user-facing documentation should detail actions that can be performed by privileged users.",
+            "severity": "low",
+            "location": "contracts/MstableGeltVault.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Input Validation",
+            "description": "The initialize function lacks input validation checks, potentially leading to costly re-deployments.",
+            "severity": "low",
+            "location": "contracts/MstableGeltVault.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unclear +1 Compensation in _calcStrategyRedeemAmount",
+            "description": "The necessity of the +1 calculation in _calcStrategyRedeemAmount is unclear.",
+            "severity": "n/a",
+            "location": "contracts/MstableGeltVault.sol"
+        }
+    ]
+}

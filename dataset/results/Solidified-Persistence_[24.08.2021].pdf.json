@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/Solidified-Persistence_[24.08.2021].pdf",
+    "project_info": {
+        "url": "https://github.com/persistenceOne/pStake-smartContracts",
+        "commit_id": "ca3e035454dc565a762a1cc03fdd99c7bf52da37",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "pStake-smartContracts": "contracts/Solidified-Persistence_[24/pStake-smartContracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "TokenWrapper.sol: Allows fee that is more than 100%",
+            "description": "The function setFees() contains a require statement that ensures the deposit fee and withdrawal fee are less than 100% of the amount, but the require statement is missing brackets while validating multiple AND/OR which results in wrong conditions.",
+            "severity": "low",
+            "location": "TokenWrapper.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "StakeLPCore.sol: The function removeLiquidity() does not follow the Checks-Effects-Interactions pattern",
+            "description": "The function reduce user's balance after transferring the lpToken tokens to the user.",
+            "severity": "low",
+            "location": "StakeLPCore.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "TokenWrapper.sol: Event emitted only for the last token",
+            "description": "The method generateUTokensInBatch() emits the GenerateUTokens event only for the last generated token.",
+            "severity": "low",
+            "location": "TokenWrapper.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "StakeLPCore.sol: Missing emit keyword for events",
+            "description": "Some events do not use the emit keyword while emitting an event.",
+            "severity": "low",
+            "location": "StakeLPCore.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "HolderUniswap.sol: Wrong variable updated",
+            "description": "The contract defines two different variables _sTokenContract and _sTokens to store the ISTokens address.",
+            "severity": "low",
+            "location": "HolderUniswap.sol"
+        }
+    ]
+}

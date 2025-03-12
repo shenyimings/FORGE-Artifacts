@@ -1,0 +1,236 @@
+{
+    "path": "artifacts/MesonProtocolFixReview.pdf",
+    "project_info": {
+        "url": "https://github.com/MesonFi/meson-contracts-solidity/tree/d89ccc23d3c28d12d7110578d08903864b75b434",
+        "commit_id": "d89ccc23d3c28d12d7110578d08903864b75b434",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "meson-contracts-solidity": "contracts/MesonProtocolFixReview/meson-contracts-solidity"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Hash collisions in untyped signatures",
+            "description": "Hash collisions could be used to facilitate attacks.",
+            "severity": "high",
+            "location": "contracts/utils/MesonHelpers.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-172"
+                ]
+            },
+            "title": "Typed signatures implement insecure nonstandard encodings",
+            "description": "Non-compliant encoding may lead to collisions with other protocols.",
+            "severity": "info",
+            "location": "contracts/utils/MesonHelpers.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing validation in the _addSupportToken function",
+            "description": "Insufficient input validation allows duplicate token registration.",
+            "severity": "info",
+            "location": "contracts/utils/MesonTokens.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Insufficient event generation",
+            "description": "Lack of events makes it difficult to track contract operations.",
+            "severity": "info",
+            "location": "contracts/Pools/MesonPools.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Use of an uninitialized state variable in functions",
+            "description": "Uninitialized _mesonContract address may lead to unexpected behavior.",
+            "severity": "medium",
+            "location": "contracts/Token/UCTUpgradeable.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Risk of upgrade issues due to missing __gap variable",
+            "description": "Missing __gap variable makes it difficult to add new variables without breaking the contract.",
+            "severity": "high",
+            "location": "contracts/**/*.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of a zero-value check on the initialize function",
+            "description": "Failure to validate minter address may lead to unexpected behavior.",
+            "severity": "info",
+            "location": "contracts/Token/UCTUpgradeable.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ],
+                "3": [
+                    "CWE-440"
+                ]
+            },
+            "title": "Solidity compiler optimizations can be problematic",
+            "description": "Enabled compiler optimizations may introduce security issues.",
+            "severity": "n/a",
+            "location": "Meson protocol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Service fees cannot be withdrawn",
+            "description": "Service fees charged for a swap are stored at index zero of the `_balanceOfPoolToken` mapping, but the fee withdrawal function does not allow withdrawals from index zero.",
+            "severity": "info",
+            "location": "contracts/Pools/MesonPools.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of contract existence check on transfer/transferFrom calls",
+            "description": "The MesonHelpers contract uses the low-level call function to execute the transfer/transferFrom function of an ERC20 token, but it does not first perform a contract existence check.",
+            "severity": "high",
+            "location": "contracts/utils/MesonHelpers.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "USDT transfers to third-party contracts will fail",
+            "description": "The increaseAllowance method is used to prevent race conditions when token allowances are changed via top-level calls, but it's not part of the ERC20 specification and not implemented by all tokens, including USDT.",
+            "severity": "high",
+            "location": "contracts/utils/MesonHelpers.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-330"
+                ]
+            },
+            "title": "SDK function _randomHex returns low-quality randomness",
+            "description": "The _randomHex function uses JavaScript Math.random to generate random hexadecimal strings, but it's not suitable for applications where the output should be unpredictable.",
+            "severity": "info",
+            "location": "packages/sdk/src/Swap.ts"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-300"
+                ]
+            },
+            "title": "EncodedSwap values are used as primary swap identifier",
+            "description": "The primary identifier of swaps in the MesonSwap contract is the encodedSwap structure, which can be front-run by a malicious actor or MEV bot.",
+            "severity": "medium",
+            "location": "contracts/Swap/MesonSwap.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Unnecessary _releasing mutex increases gas costs",
+            "description": "A flag is set before and cleared after the untrusted contract call to prevent reentrancy attacks, but it's not strictly necessary.",
+            "severity": "info",
+            "location": "contracts/Pools/MesonPools.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Misleading result returned by view function getPostedSwap",
+            "description": "The value returned by the getPostedSwap function can be misleading, as it returns true only if the swap's value is 1.",
+            "severity": "low",
+            "location": "contracts/Swap/MesonSwap.sol"
+        }
+    ]
+}

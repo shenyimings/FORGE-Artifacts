@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/Morpho-Audit-Report.pdf",
+    "project_info": {
+        "url": "https://github.com/morpho-dao/morpho-aave-v3",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "morpho-aave-v3": "contracts/Morpho-Audit-Report/morpho-aave-v3"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rounding errors in PositionManagerInternal.sol",
+            "description": "Incorrect rounding direction mistakes in accounting functions can lead to user funds drainage.",
+            "severity": "medium",
+            "location": "PositionManagerInternal.sol, _accountSupply, _accountBorrow, _accountRepay, _accountWithdraw, and _accountSupplyCollateral functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "AAVE pool address changes are not handled",
+            "description": "Morpho only obtains the AAVE pool address once during deployment and does not reflect subsequent changes.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Risk of infinite approvals",
+            "description": "Infinite approvals lead to security risks, including draining assets and creating markets for tokens with balance checks.",
+            "severity": "high",
+            "location": "Morpho Labs"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Morpho can end-up in AAVE’s isolation mode",
+            "description": "An attacker can put Morpho into isolation mode by manipulating debt ceilings and reserves.",
+            "severity": "high",
+            "location": "Morpho Labs"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Potential deadlock when disabling reserves as collateral",
+            "description": "Deadlock can occur when marking reserves as non-collateral on Morpho and AAVE.",
+            "severity": "medium",
+            "location": "Morpho Labs"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy in Morpho.claimRewards",
+            "description": "An attacker might be able to reorder the RewardsClaimed events.",
+            "severity": "low",
+            "location": "Morpho.sol#262-279"
+        }
+    ]
+}

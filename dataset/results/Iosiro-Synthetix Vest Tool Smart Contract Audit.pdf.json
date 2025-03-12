@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/Iosiro-Synthetix Vest Tool Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/tokenvest",
+        "commit_id": "36573f264d42d4549b9f903a014783e01029c978",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "tokenvest": "contracts/Iosiro-Synthetix Vest Tool Smart Contract Audit/tokenvest"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Use of unsafe ERC-20 transfer functions",
+            "description": "Contracts did not use safeTransfer and safeTransferFrom functions from OpenZeppelin SafeERC20 library, which could lead to issues if ERC-20 token returns false on failed transfers.",
+            "severity": "info",
+            "location": "Vester.sol#L43,54,93"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Re-entrancy in redeemWithTransfer and mint functions",
+            "description": "Statements in redeemWithTransfer and mint functions were ordered in a manner that could lead to re-entrancy bugs.",
+            "severity": "info",
+            "location": "redeemWithTransfer and mint functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Struct not cleared on token burn",
+            "description": "The burn function did not clear the associated Grant struct when burning a grant token.",
+            "severity": "info",
+            "location": "Vester.sol#L136"
+        }
+    ]
+}

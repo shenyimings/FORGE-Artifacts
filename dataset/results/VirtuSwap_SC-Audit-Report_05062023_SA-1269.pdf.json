@@ -1,0 +1,416 @@
+{
+    "path": "artifacts/VirtuSwap_SC-Audit-Report_05062023_SA-1269.pdf",
+    "project_info": {
+        "url": "https://github.com/Virtuswap/tokenomics",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "tokenomics": "contracts/VirtuSwap_SC-Audit-Report_05062023_SA-1269/tokenomics"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "C01. Invalid Calculations",
+            "description": "Incorrect calculations in _availableTokens() and _availableTokensForNextEpoch() functions.",
+            "severity": "critical",
+            "location": "./contracts/vChainMinter.sol : _availableTokens(), _availableTokensForNextEpoch()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "H02. Token Supply Manipulation",
+            "description": "In newVesting() and arbitraryTransfer() functions, the requirement to only release unlocked tokens is executed incorrectly.",
+            "severity": "high",
+            "location": "./contracts/vGlobalMinter.sol : newVesting(), arbitraryTransfer()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "M02. Missing Validation",
+            "description": "The project should be consistent and contain no self-contradictions; missing validations for certain variables.",
+            "severity": "medium",
+            "location": "./contracts/vVestingWallet.sol : newVesting()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "M03. Non-Finalized Code",
+            "description": "TODO comments in the code imply that it is not finalized and additional changes will be introduced in the future.",
+            "severity": "medium",
+            "location": "./contracts/vStakerFactory.sol : createPoolStaker()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "M04. Requirements Violation; Invalid Hardcoded Value",
+            "description": "The amount released each year does not match the required annual percentage decrease of 20%.",
+            "severity": "medium",
+            "location": "./contracts/libraries/EmissionMath.sol : _calculateEmission()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L01. Floating Pragma",
+            "description": "Locking the pragma helps ensure that contracts do not accidentally get deployed using, for example, an outdated compiler version.",
+            "severity": "low",
+            "location": "./contracts/ : *"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L02. Unscalable Functionality - Same Checks In Functions",
+            "description": "Same checks used in several functions overwhelm code and make further development difficult.",
+            "severity": "low",
+            "location": "./contracts/vStaker.sol : *"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "L03. Missing Zero Address Validation",
+            "description": "Address parameters are being used without checking against the possibility of 0x0.",
+            "severity": "medium",
+            "location": "Multiple paths (see report)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04. Best Practice Violation",
+            "description": "The input arrays are not validated for having equal lengths, violating best practices.",
+            "severity": "low",
+            "location": "./contracts/vChainMinter.sol : setAllocationPoints()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L05. State Variables Can Be Declared Immutable",
+            "description": "Variable’s gVrsw and vrsw values can be declared as immutable to lower Gas usage.",
+            "severity": "low",
+            "location": "./contracts/vGlobalMinter.sol : gVrsw, vrsw"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "L06. Missing Validation",
+            "description": "Lack of validation of the _emissionStartTs argument in vGlobalMinter.sol constructor(); Emission should not start in the past.",
+            "severity": "low",
+            "location": "./contracts/vGlobalMinter.sol : constructor()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "L07. Unauthorized Access",
+            "description": "The release() function can be called by anyone, allowing external users to release tokens on behalf of the beneficiary.",
+            "severity": "low",
+            "location": "./contracts/vVestingWallet.sol : release()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-667"
+                ],
+                "4": [
+                    "CWE-413"
+                ]
+            },
+            "title": "Partial Lock of Rewards",
+            "description": "Calling setEpochParams() with block.timestamp can cause a partial lock of rewards paid when calling nextEpochTransfer().",
+            "severity": "n/a",
+            "location": "./contracts/vGlobalMinter.sol : setEpochParams(), nextEpochTransfer()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unusable Staking System",
+            "description": "Changing the stakerFactory variable after it is set and in use will lead to an unusable staking system.",
+            "severity": "high",
+            "location": "./contracts/vChainMinter.sol : setStakerFactory()"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "L08. Missing Events",
+            "description": "Events for critical state changes should be emitted for tracking things off-chain.",
+            "severity": "low",
+            "location": "./contracts/vTokenomicsParams.sol : constructor()"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "L09. NatSpec Comment Contradiction",
+            "description": "The NatSpec comments of the transferRewards() imply that the caller must be a registered staker with a non-zero allocation point.",
+            "severity": "low",
+            "location": "./contracts/IvChainMinter.sol : transferRewards()"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "I01. Solidity Style Guide Violation - Single Quotes",
+            "description": "The project violates the style guidelines by using single quotes for strings.",
+            "severity": "info",
+            "location": "./*"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "I02. Solidity Style Guide Violation - Contract Names",
+            "description": "The name of the contracts and types should begin with uppercase letters.",
+            "severity": "info",
+            "location": "./*"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-1230"
+                ]
+            },
+            "title": "I03. Indexed Inputs in Events",
+            "description": "Events have the possibility to track their inputs as indexed.",
+            "severity": "info",
+            "location": "./contracts/interfaces/IvChainMinter.sol : TransferRewards, ./contracts/interfaces/IvStaker.sol"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "I04. Misleading Function Parameter Name",
+            "description": "Function parameters should represent the function logic and should not mislead it.",
+            "severity": "info",
+            "location": "./contracts/interfaces/IvChainMinter.sol : burnGVrsw()"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "I05. Functions That Can Be Declared External",
+            "description": "Public functions that are never called in the contract should be declared as external.",
+            "severity": "info",
+            "location": "./contracts/GVrsw.sol : mint(), ./contracts/vVestingWallet.sol : release()"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "I06. Redundant Events",
+            "description": "In order to save Gas, code should not have unused events.",
+            "severity": "info",
+            "location": "./contracts/interfaces/IvChainMinter.sol : NewStakerFactory, TransferRewards"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "I07. Unused Variable",
+            "description": "Unused variables should be removed from the contracts.",
+            "severity": "info",
+            "location": "./contracts/libraries/EmissionMath.sol : TOTAL_PROJECT_EMISSION"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-188"
+                ]
+            },
+            "title": "I08. State Variables That Can Be Packed",
+            "description": "The state variables in the vChainMinter contract can be downcast and packed together to save Gas.",
+            "severity": "info",
+            "location": "./contracts/vChainMinter.sol : *"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "I09. Redundant Import",
+            "description": "Unused imports should be removed from the contracts.",
+            "severity": "info",
+            "location": "./contracts/vStaker.sol : Math.sol, ./contracts/vGlobalMinter.sol : Math.sol, ./contracts/vStakerFactory.sol : types.sol, IvStaker.sol"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "I10. Redundant Payable",
+            "description": "Unused function's modifiers should be removed from the contracts.",
+            "severity": "info",
+            "location": "./contracts/vVestingWallet.sol : constructor()"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "I11. Style Guide Violation - Order of Functions",
+            "description": "The project should follow the official code style guidelines.",
+            "severity": "info",
+            "location": "./contracts/vVestingWallet.sol, ./contracts/vStakerFactory.sol, ./contracts/stakeVrsw.sol, ./contracts/vChainMinter.sol"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "I12. Missing Getters",
+            "description": "Data from allStakers and vestingWallets can be accessed only by index.",
+            "severity": "info",
+            "location": "./contracts/vStakerFactory.sol : allStakers, ./contracts/vGlobalMinter.sol : vestingWallets"
+        }
+    ]
+}

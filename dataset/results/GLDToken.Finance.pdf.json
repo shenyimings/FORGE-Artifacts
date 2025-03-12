@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/GLDToken.Finance.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xCcA240D09f4Db3a66f9e9607856B0b03613D3567",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "GLD": "contracts/GLDToken/GLD"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Loop iteration leading to out-of-gas exception",
+            "description": "Functions `includeInReward` and `_getCurrentSupply` use loops that may lead to out-of-gas exceptions if the excluded addresses list is long.",
+            "severity": "low",
+            "location": "GLD contract, functions `includeInReward` and `_getCurrentSupply`"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized control by owner",
+            "description": "The owner has various privileges that can be used to manipulate the contract even after ownership renouncement.",
+            "severity": "low",
+            "location": "GLD contract, various functions (tax/liquidity fee changes, max transaction amount changes, exclusion from fee, lock/unlock)"
+        }
+    ]
+}

@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/Dfyn Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/dfyn/dual-farm",
+        "commit_id": "f44a4dcbeb41f38a9c02cb877a8c95b92685f972",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "dual-farm": "contracts/Dfyn Smart Contract Audit Report - QuillAudits/dual-farm"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Costly Loop",
+            "description": "The loop in the contract includes state variables like .length of a non-memory array, in the condition of the for loops.",
+            "severity": "medium",
+            "location": "notifyRewardAmounts(), notifyRewardAmount(), Deploy(), stakerBalances(), getReward(), rescueFunds() functions in StakingRewardsFactory.sol and StakingRewards.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "SWC-102: Outdated Compiler Version",
+            "description": "Using an outdated compiler version can be problematic especially if there are publicly disclosed bugs and issues that affect the current compiler version.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "SWC-103: Floating Pragma",
+            "description": "Contracts should be deployed with the same compiler version and flags that they have been tested thoroughly. Locking the pragma helps to ensure that contracts do not accidentally get deployed using, for example, an outdated compiler version that might introduce bugs that affect the contract system negatively.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1287"
+                ]
+            },
+            "title": "Potential use of \"block.timestamp\" as source of randomness",
+            "description": "Contracts often need access to time values to perform certain types of functionality. Values such as block.timestamp, and block.number can give you a sense of the current time or a time delta, however, they are not safe to use for most purposes.",
+            "severity": "low",
+            "location": "Lines 35 & 120 in StakingRewardsFactory.sol, lines 85, 220, 222, 224, 235, 239 in StakingRewards.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Prefer external to public visibility level",
+            "description": "A function with a public visibility modifier that is not called internally.",
+            "severity": "low",
+            "location": "lastTimeRewardApplicable(), rewardPerToken(), Earned(), Withdraw(), getReward() functions in StakingRewards.sol, rescueFunds(), rescueFactoryFunds(), notifyRewardAmounts(), notifyRewardAmount(), stakingRewardsInfo() functions in StakingRewardsFactory.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Missing reentrancy protection",
+            "description": "The getReward function did not make use of a modifier to protect against potential reentrancy attacks.",
+            "severity": "info",
+            "location": "getReward() function in StakingRewards.sol"
+        }
+    ]
+}

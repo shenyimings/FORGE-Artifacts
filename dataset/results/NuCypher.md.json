@@ -1,0 +1,233 @@
+{
+    "path": "artifacts/NuCypher.md",
+    "project_info": {
+        "url": "https://github.com/nucypher/nucypher",
+        "commit_id": "436ae0f134255fabcd49a1d6b5b1eae4fd8c9d51",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "nucypher": "contracts/NuCypher/nucypher"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Reward sniffing",
+            "description": "User can deposit-withdraw tokens several times in one transaction, causing reward sniffing.",
+            "severity": "critical",
+            "location": "PoolingStakingContractV2.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentry in `withdrawAll`",
+            "description": "Malicious token/workerOwner may have a reentry callback to the contract.",
+            "severity": "high",
+            "location": "PoolingStakingContractV2.sol#L236"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of docs",
+            "description": "The purpose of the contract and its logic are not clear from the code.",
+            "severity": "info",
+            "location": "PoolingStakingContractV2.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentry causing events misordering",
+            "description": "Reentry can cause events misordering at several locations in the contract.",
+            "severity": "info",
+            "location": "Multiple lines in PoolingStakingContractV2.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Deflation tokens support",
+            "description": "The contract may not support deflation tokens.",
+            "severity": "info",
+            "location": "PoolingStakingContractV2.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Use different tokens as deposit and rewards",
+            "description": "It is recommended to split deposit tokens and rewards tokens into 2 different types of tokens.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Uninformative names of an event and a function",
+            "description": "The event and function names are not informative.",
+            "severity": "info",
+            "location": "PoolingStakingContractV2.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Rough BASIS_FRACTION",
+            "description": "The BASIS_FRACTION is set to 100, which may be too rough.",
+            "severity": "info",
+            "location": "PoolingStakingContractV2.sol#L37"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Const `workerOwner`",
+            "description": "It's not clear why `workerOwner` is a const.",
+            "severity": "info",
+            "location": "PoolingStakingContractV2.sol#L40"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Explicit visibility of `workerFraction`",
+            "description": "The visibility modifier for `workerFraction` should be explicit.",
+            "severity": "info",
+            "location": "PoolingStakingContractV2.sol#L46"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "External `initialize`",
+            "description": "The `initialize` function should have an `external` modifier.",
+            "severity": "info",
+            "location": "PoolingStakingContractV2.sol#L59"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "`getWorkerFraction` is not needed",
+            "description": "The `getWorkerFraction` method is redundant.",
+            "severity": "info",
+            "location": "PoolingStakingContractV2.sol#L91"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Comment required",
+            "description": "Some lines require comments to explain the logic.",
+            "severity": "info",
+            "location": "Multiple lines in PoolingStakingContractV2.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Avoid ternary",
+            "description": "Ternary operators should be avoided for complex conditions.",
+            "severity": "info",
+            "location": "PoolingStakingContractV2.sol#L168"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "Not clear TODO-comment",
+            "description": "A TODO comment is unclear and requires more details.",
+            "severity": "info",
+            "location": "PoolingStakingContractV2.sol#L226"
+        }
+    ]
+}

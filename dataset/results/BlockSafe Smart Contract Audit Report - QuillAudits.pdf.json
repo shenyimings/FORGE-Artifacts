@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/BlockSafe Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x160dbe5c43e98e7897a54451545ba46111a8550c",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "WaitStaking": "contracts/BlockSafe Smart Contract Audit Report - QuillAudits/WaitStaking"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "A.1: Rewards are reset without any record on-chain",
+            "description": "Rewards are accumulated in the contract for the whole staking period and stored in `accumulatedRewards` at a constant rate, but when the stake period ends, the tokens staked are sent back to the user and the reward details are reset without emitting an event.",
+            "severity": "low",
+            "location": "WaitStaking.sol, Rewards accumulation function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "A.2: Check-effect-interaction pattern",
+            "description": "The function stake() uses a transferFrom call before updating the states which violates solidity’s recommended check-effect-interaction pattern.",
+            "severity": "medium",
+            "location": "WaitStaking.sol, Stake function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-544"
+                ]
+            },
+            "title": "A.3: Custom Errors",
+            "description": "The contract uses require statement for validating states, but it is recommended to use custom errors instead to reduce gas costs for returning long strings.",
+            "severity": "info",
+            "location": "WaitStaking.sol, Require statements"
+        }
+    ]
+}

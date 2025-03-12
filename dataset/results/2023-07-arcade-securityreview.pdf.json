@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/2023-07-arcade-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/arcadexyz/arcade-protocol",
+        "commit_id": "4f510e0e2287901abb21265f72aa4465166ab09d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "arcade-protocol": "contracts/2023-07-arcade-securityreview/arcade-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Different zero-address errors",
+            "description": "WithdrawBatch function throws a custom error (AV_ZeroAddress) if the to parameter is set to the zero address, while single NFT withdrawal functions do not explicitly check the to parameter.",
+            "severity": "info",
+            "location": "Single and batch NFT withdrawal functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Problematic Solidity compiler optimizations",
+            "description": "Enabled optional compiler optimizations in Solidity may introduce latent bugs.",
+            "severity": "n/a",
+            "location": "Smart contract compilations"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "CallApprove does not follow approval best practices",
+            "description": "The AssetVault.callApprove function has undocumented behaviors and lacks the increase/decrease approval functions.",
+            "severity": "info",
+            "location": "AssetVault contract, callApprove function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Risk of confusing events due to missing checks in whitelist contracts",
+            "description": "The CallWhitelist contract’s add and remove functions do not check whether the given call has been registered in the whitelist.",
+            "severity": "low",
+            "location": "Whitelist contracts"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Asset vault nesting can lead to loss of assets",
+            "description": "Allowing asset vaults to be nested could result in a deadlock preventing assets from being withdrawn again.",
+            "severity": "low",
+            "location": "Asset vault contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Borrowers cannot realize full loan value without risking default",
+            "description": "Due to the blockchain's nature, a borrower may become vulnerable to liquidation by the lender if they wait until the loan's maturity date to repay it.",
+            "severity": "medium",
+            "location": "Loan repayment process"
+        }
+    ]
+}

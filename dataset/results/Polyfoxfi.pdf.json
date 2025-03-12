@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/Polyfoxfi.pdf",
+    "project_info": {
+        "url": "https://github.com/polyfoxfi/polyfox-contracts/tree/812e1edc176208d04be9b4741854abab0e3f3779",
+        "commit_id": "812e1edc176208d04be9b4741854abab0e3f3779",
+        "address": "0x84259e4c4207Ec8F2e6DB22Ba30d283180baCdB5, 0x159AAd97c625C7eAC5ddDDbC088c639490b9c55a, 0x089b6142d96b62d8d9E11198cedEA9BC3bE596aC, 0xd57A8D9dedD3764060d94ff3DcEBAe0B2E28D947",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "FoxToken": "contracts/Polyfoxfi/FoxToken",
+            "MasterChef": "contracts/Polyfoxfi/MasterChef",
+            "FoxReferral": "contracts/Polyfoxfi/FoxReferral",
+            "Timelock": "contracts/Polyfoxfi/Timelock"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "Sending tokens to the dead address instead of burning them in function _transfer.",
+            "severity": "medium",
+            "location": "FoxToken.sol, function _transfer, line 19"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "The updateEmissionRate function can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "UpdateEmissionRate function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "add function issue",
+            "description": "If some LP token is added to the contract twice using function add, then the total amount of reward foxReward in function updatePool will be incorrect.",
+            "severity": "low",
+            "location": "add function"
+        }
+    ]
+}

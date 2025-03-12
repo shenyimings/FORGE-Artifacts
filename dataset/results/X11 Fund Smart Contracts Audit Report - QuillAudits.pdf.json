@@ -1,0 +1,623 @@
+{
+    "path": "artifacts/X11 Fund Smart Contracts Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/x11-finance/X11Fund-Smart-Contracts/tree/main/contracts",
+        "commit_id": "b936e3c686aa5fd8a98d757f3def5c104467b6c5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "X11Fund-Smart-Contracts": "contracts/X11 Fund Smart Contracts Audit Report - QuillAudits/X11Fund-Smart-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "A.1 Missing mint functionality in X11 token",
+            "description": "X11 Token contract does not have mint feature.",
+            "severity": "medium",
+            "location": "Contract - X11 contract, Function -"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "B.1 poolId and tokenId should also be indexed",
+            "description": "Indexed fields help the backend listen to events. Unique and important fields should be indexed for easier search on the backend.",
+            "severity": "low",
+            "location": "Contract - X721 Contract, Line 30"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "B.2 Inefficient implementation of _getBalancePool",
+            "description": "Loop is used in getBalanceInPool method to find the token which belongs to caller.",
+            "severity": "info",
+            "location": "Contract - X721 Contract, Line 169"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "B.3 Redundant Inheritance",
+            "description": "X721 Contract inherits both Ownable and AccessControl contracts.",
+            "severity": "n/a",
+            "location": "Contract - X721 Contract, computeClaimableTokens()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "B.4 Unnecessary Variable",
+            "description": "Variable tokens is being used to store newItemId which is being incremented with each new minted X721.",
+            "severity": "n/a",
+            "location": "Contract - X721 Contract, computeClaimableTokens()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "B.5 method _setTokenURI is not being used",
+            "description": "This method is setting the tokenURI but it is not being used anywhere.",
+            "severity": "n/a",
+            "location": "Contract - X721 Contract, Line 95"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "B.6 Unused Import",
+            "description": "ERC721.sol imported but not used",
+            "severity": "n/a",
+            "location": "Contract - X721 Contract, Line 4"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "B.7 Unused Import",
+            "description": "_burn function is declared and implementation overrides the implementation of ERC721 and ERC721URIstorage.",
+            "severity": "n/a",
+            "location": "Contract - X721 Contract, Line 15"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-561"
+                ]
+            },
+            "title": "B.8 Unused code",
+            "description": "formatTokenURI2 has been declared and implemented but not being used anywhere in the codebase.",
+            "severity": "n/a",
+            "location": "Contract - X721 Contract, batchMint(), _batchTransfer 129"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "C.1 Vote calculation logic flaw",
+            "description": "Total votes count does not involve the weight of the vote.",
+            "severity": "high",
+            "location": "Contract - Fund, Line Function - 303"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "C.2 _castVote implementation flaw",
+            "description": "At line 330 canVote corresponding to a wrong tokenId is set to false.",
+            "severity": "high",
+            "location": "Contract - Fund, Line Function - 330"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "C.3 DoS attack",
+            "description": "The for loop in these methods will run through all the stakes in all the pools.",
+            "severity": "high",
+            "location": "Contract - Fund, Line 169"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "C.4 transferFrom flaw",
+            "description": "transferFrom is used by a third party to transfer balance on behalf of someone who has provided approval to that third party.",
+            "severity": "high",
+            "location": "Contract - Fund, Line Function - 398, 463"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "C.5 Close pool check",
+            "description": "As per discussion on telegram, the FundPool method should only be callable when the pool is closed.",
+            "severity": "medium",
+            "location": "Contract - Fund, Line Function - 411, 457"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "C.6 Update reward method should be called from withdrawBUSDRewardWithToken",
+            "description": "to BUSD reward with token a user will have to make two transactions if these two methods are separate",
+            "severity": "medium",
+            "location": "Contract - Fund, Line Function - 262"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "C.7 tokenId and poolId should also be indexed",
+            "description": "Indexed fields help the backend listen to events. Unique and important fields should be indexed for easier search on the backend.",
+            "severity": "low",
+            "location": "Contract - Fund, Line 99"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1103"
+                ]
+            },
+            "title": "C.8 Contract design limitation",
+            "description": "Contract is designed to only support BUSD and cannot support a new stablecoin after deployment, contracts are not upgradeable as well",
+            "severity": "info",
+            "location": "Contract - Fund"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "C.9 Unnecessary variables",
+            "description": "No need of poolId as Stake is already mapped from poolId.",
+            "severity": "n/a",
+            "location": "Contract - Fund, Line 18"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "C.10 Unused variables",
+            "description": "rewards in Stake struct, since in BUSDStake and CanVote are not used anywhere.",
+            "severity": "n/a",
+            "location": "Contract - Fund, Line 23, 32, 64"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "C.11 Unnecessary variables that can be maintained on backend",
+            "description": "No need to maintain this on contract as it costs storage and can be maintained on backend instead by listening to events.",
+            "severity": "n/a",
+            "location": "Contract - Fund, Line 77,79,80,90"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "C.12 Unnecessary require checks",
+            "description": "No need to check as _idInPool is a unit and will always >= 0",
+            "severity": "n/a",
+            "location": "Contract - Fund, Line 192"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "C.13 Unused variables inside methods",
+            "description": "unused variables inside methods. Unnecessary computations",
+            "severity": "n/a",
+            "location": "Contract - Fund, Line 265, 266, 285, 286, 287"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "C.14 Unused Code",
+            "description": "Structure Company is declared but not being used anywhere.",
+            "severity": "n/a",
+            "location": "Contract - Fund, Function -"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "C.15 Unused Function",
+            "description": "No use of getPoolInfoAdmin method as getPoolInfo already defined.",
+            "severity": "n/a",
+            "location": "Contract - Fund, Function - 154"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "D.1 _unstake logic flaw",
+            "description": "Logical flaw. Last tokenId is being popped from the tokenIds array even if the tokenId being unstaked is some other index on the array.",
+            "severity": "high",
+            "location": "Contract - ERC721Staking, Line 160"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "D.2 _unstake balance flaw",
+            "description": "_stake.balance is never subtracted when a token is unstaked.",
+            "severity": "high",
+            "location": "Contract - ERC721Staking, Line 160"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "D.3 updateReward logic flaw",
+            "description": "tokenRewards calculated will be flawed as stakedToken.peggedAmount already has 10**18 in it which is not considered in this calculation.",
+            "severity": "high",
+            "location": "Contract - ERC721Staking, Line 188"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "D.4 getInvestmentTier logic flaw",
+            "description": "Logical flaw. Pegged amount has 10**18 multiplied into itself so here always the logic will go into the last else if.",
+            "severity": "high",
+            "location": "Contract - ERC721Staking, Line 160"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Cannot stop staking",
+            "description": "Can only set initialised to true, cannot set it back to false.",
+            "severity": "medium",
+            "location": "Line 67, Function -"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unstake one leads to claimReward for all",
+            "description": "Unstaking one tokenId leads to claiming rewards for all tokenIds.",
+            "severity": "medium",
+            "location": "Line 67, Function -"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Use of for loop in updateReward method",
+            "description": "For loop can lead to DoS attack due to block gas limit if ids array gets too long.",
+            "severity": "medium",
+            "location": "Line 214"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "setRateToUSD should be set using oracle service",
+            "description": "This price should not be set by owner instead should be set using chainlink price oracles.",
+            "severity": "medium",
+            "location": "Line 214"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "tokenId should also be indexed",
+            "description": "Indexed fields help the backend listen to events. Unique and important fields should be indexed for easier search on the backend.",
+            "severity": "low",
+            "location": "Lines 46,47,49"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unnecessary require in emergencyUnstake method",
+            "description": "The require in this method is already available in _unstake method.",
+            "severity": "low",
+            "location": "Line 146"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary variables",
+            "description": "No need of this as already set in xUSD token contract. Unnecessary storage and computation.",
+            "severity": "info",
+            "location": "Line 18"
+        },
+        {
+            "id": 35,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Inheritance",
+            "description": "Pausable not used anywhere.",
+            "severity": "info",
+            "location": "Lines 30,31,38"
+        },
+        {
+            "id": 36,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Methods can be set from public to external",
+            "description": "Should be set to external to save gas.",
+            "severity": "info",
+            "location": "Line 192"
+        },
+        {
+            "id": 37,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Imports",
+            "description": "IERC721 interface imported but not used",
+            "severity": "info",
+            "location": "Line 4"
+        },
+        {
+            "id": 38,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused variables",
+            "description": "Not used anywhere.",
+            "severity": "info",
+            "location": "Lines 4, 165"
+        },
+        {
+            "id": 39,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Confusing variable name",
+            "description": "StakingTime name is confusing. Constants should be declared in capital letters.",
+            "severity": "info",
+            "location": "Line 40"
+        }
+    ]
+}

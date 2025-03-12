@@ -1,0 +1,185 @@
+{
+    "path": "artifacts/Chocoswap Final Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/chocoswap/chocoswap/",
+        "commit_id": "04c2aa7e4b58b54d980edf5aa8b16fd6c05c1fd0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "chocoswap": "contracts/Chocoswap Final Audit Report/chocoswap"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Unaudited dependency",
+            "description": "The `Migrator` contract is not provided, which is a critical dependency of the `VNLADistribution` contract.",
+            "severity": "low",
+            "location": "`VNLADistribution` contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect investment amount check",
+            "description": "In `chocoPresale` contract, the system does not check if the investment amount is bigger than phase 2 limit when the contract is in phase 1.",
+            "severity": "low",
+            "location": "`chocoPresale` contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of documentation and code comments",
+            "description": "The contracts lack documentation and code comments, making it difficult to verify business logic without documented requirements.",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary manual check for owner",
+            "description": "In `chocoPresale` contract, the `onlyOwner` modifier can be used instead of manually checking that the `msg.sender` is the owner.",
+            "severity": "low",
+            "location": "`chocoPresale` contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Fallback function not used",
+            "description": "The fallback function can be used instead of `receive` in the `chocoPresale` contract.",
+            "severity": "low",
+            "location": "`chocoPresale` contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing package.json file",
+            "description": "The codebase is missing the `package.json` file, making it hard to verify the dependency versions that are intended to be used without this file.",
+            "severity": "low",
+            "location": "Codebase"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1106"
+                ]
+            },
+            "title": "Use of uint256 instead of enum for clarity",
+            "description": "`preSalePhase` can be made an enum instead of `uint256` for clarity.",
+            "severity": "low",
+            "location": "`chocoPresale` contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Non-ERC20 compliant token",
+            "description": "The `pChoc` token is not ERC20 compliant since it is missing functions like `approve`, and only the owner can transfer the `pChoc` token.",
+            "severity": "low",
+            "location": "`chocoPresale` contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Excessive owner control",
+            "description": "The owner controls multiple critical aspects of the system, which could lead to potential issues.",
+            "severity": "medium",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Duplicate pool addition possible",
+            "description": "It is possible to add duplicate pools in the `VNLADistribution` contract, which can result in critical malfunctions.",
+            "severity": "medium",
+            "location": "`VNLADistribution` contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentry attacks possible",
+            "description": "Reentry attacks are possible in `withdraw`, `deposit`, `emergencyWithdraw`, and `updatePool` functions of the `VNLADistribution` contract.",
+            "severity": "medium",
+            "location": "`VNLADistribution` contract"
+        }
+    ]
+}

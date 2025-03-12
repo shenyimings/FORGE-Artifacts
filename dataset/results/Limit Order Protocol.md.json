@@ -1,0 +1,122 @@
+{
+    "path": "artifacts/Limit Order Protocol.md",
+    "project_info": {
+        "url": "https://github.com/1inch/limit-order-protocol",
+        "commit_id": "a14bde6a260458de5083cee117d734221e1cbc05",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "limit-order-protocol": "contracts/Limit Order Protocol/limit-order-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Possible call for zero address",
+            "description": "Zero address not checked in the function.",
+            "severity": "info",
+            "location": "LimitOrderProtocol.sol#L145, LimitOrderProtocol.sol#L349"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Cancel of already cancelled order",
+            "description": "User can cancel already filled order, so incorrect event would emit.",
+            "severity": "info",
+            "location": "LimitOrderProtocol.sol#L161"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Possible reentrancy",
+            "description": "Reentrancy can occur in the function.",
+            "severity": "info",
+            "location": "LimitOrderProtocol.sol#L280-L345"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Possible filling of already filled order",
+            "description": "User can try to fill already filled order by mistake.",
+            "severity": "n/a",
+            "location": "LimitOrderProtocol.sol#L294"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Possible DDoS attack",
+            "description": "Malicious maker can block bots for filling order if he calls unbounded operation in `notifyFillOrder`.",
+            "severity": "info",
+            "location": "LimitOrderProtocol.sol#L338"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-241"
+                ]
+            },
+            "title": "Incorrect signature can lead to incorrect call",
+            "description": "If signature is incorrect and maker is a user, then this function would revert because of static call for user.",
+            "severity": "n/a",
+            "location": "LimitOrderProtocol.sol#L397"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unclear check",
+            "description": "If user passes incorrect amount to filling the order, then this function reverts because of static call with zero parameters.",
+            "severity": "n/a",
+            "location": "LimitOrderProtocol.sol#L441, LimitOrderProtocol.sol#L452"
+        }
+    ]
+}

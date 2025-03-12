@@ -1,0 +1,227 @@
+{
+    "path": "artifacts/POA-Network-Wizard-audit-report.pdf",
+    "project_info": {
+        "url": "https://github.com/poanetwork/auth-os-applications/tree/2840b97dea33c8cf455a67b2b9c7229e2cda1843",
+        "commit_id": "2840b97dea33c8cf455a67b2b9c7229e2cda1843",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "auth-os-applications": "contracts/POA-Network-Wizard-audit-report/auth-os-applications"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "No access control",
+            "description": "No onlyOwner modifier at the configure function.",
+            "severity": "critical",
+            "location": "Auth-os: ScriptExec, Contract.sol#L55"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Contract does not prevent accidental Ether transferring",
+            "description": "No prevention for accidental Ether transferring.",
+            "severity": "high",
+            "location": "DutchProxy"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Math improvement",
+            "description": "Improvement suggestion for math operation.",
+            "severity": "low",
+            "location": "Auth-os: Contract, Contract.sol#L494"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code reuse",
+            "description": "Code snippet used 16 times without separation into a function.",
+            "severity": "low",
+            "location": "Auth-os: Contract, Contract.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant code",
+            "description": "Duplicate code that can lead to errors in the future.",
+            "severity": "low",
+            "location": "Auth-os: Contract, Contract.sol#L333 and #L327"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Documentation mistype or logical flaw",
+            "description": "Mistyped parameter name leading to misunderstanding.",
+            "severity": "low",
+            "location": "DutchCrowdsale: Token, Token.sol#L198"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "There is no “isWhitelisted” check during purchase",
+            "description": "No whitelist check during token purchase.",
+            "severity": "low",
+            "location": "DutchCrowdsale: Sale, Sale.sol#L292"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Documentation mistype",
+            "description": "Mistyped parameter name leading to misunderstanding.",
+            "severity": "low",
+            "location": "DutchCrowdsale: Admin, Admin.sol#L378"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "There is no check that _min_token_purchase <= _max_token_purchase",
+            "description": "No validation for purchase limits.",
+            "severity": "low",
+            "location": "DutchCrowdsale: Admin, Admin.sol#L63"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ]
+            },
+            "title": "Payment can be delivered via transfer only",
+            "description": "Limited payment option.",
+            "severity": "n/a",
+            "location": "Auth-os: Abstract storage, AbstractStorage.sol#L392"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Contract.Sender() can be spoofed (exec func)",
+            "description": "Potential for sender spoofing due to architectural feature.",
+            "severity": "n/a",
+            "location": "Auth-os: Abstract storage, AbstractStorage.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No input validation",
+            "description": "Lack of input validation in configure and setProvider functions.",
+            "severity": "n/a",
+            "location": "Auth-os: ScriptExec, ScriptExec.sol#L56"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "DutchProxy contract payable fallback function",
+            "description": "May cause potential issues with the crowdsale app, allowing users to send Ether and lose it.",
+            "severity": "high",
+            "location": "DutchProxy contract (inherits from Proxy.sol#L26)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "No overflow checks in getRateAndTimeRemaining function",
+            "description": "May cause uint underflow and current rate becomes huge.",
+            "severity": "low",
+            "location": "DutchCrowdsaleIdx.sol#L362, L377"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary functionality in ProxiesRegistry",
+            "description": "renounceOwnership function is inherited from OpenZeppelin's Ownable contract.",
+            "severity": "low",
+            "location": "ProxiesRegistry (inherits from Ownable.sol#L42)"
+        }
+    ]
+}

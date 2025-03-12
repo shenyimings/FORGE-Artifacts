@@ -1,0 +1,167 @@
+{
+    "path": "artifacts/Primitive-Spearbit-Security-Review-July.pdf",
+    "project_info": {
+        "url": "https://github.com/primitivefinance/portfolio",
+        "commit_id": "f8302e0e9d406c70dfd5178157f75bbd8d3a21de",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "portfolio": "contracts/Primitive-Spearbit-Security-Review-July/portfolio"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "tradingFunction returns wrong invariant at bounds, allowing to steal all pool reserves",
+            "description": "The trading function computing the invariant value of k returns the wrong value at the bounds of x and y, allowing an attacker to steal the pool reserves.",
+            "severity": "critical",
+            "location": "NormalStrategyLib.sol#L157-L165"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "getSpotPrice, approximateReservesGivenPrice, getStrategyData ignore time to maturity",
+            "description": "The functions getSpotPrice, approximateReservesGivenPrice, and getStrategyData ignore the time to maturity field when transforming the pool config into a NormalCurve struct.",
+            "severity": "medium",
+            "location": "NormalStrategyLib.sol#L375"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Numerical error on larger trades favors the swapper relative to mathematically ideal pricing",
+            "description": "Larger trades favor the swapper due to numerical errors in Solidity's numerical methods, leading to deviations from the ideal swap price.",
+            "severity": "low",
+            "location": "Portfolio.sol#L473"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "getMaxOrder overestimates output values",
+            "description": "The getMaxOrder function adds +1 to the output value, overestimating the output value.",
+            "severity": "low",
+            "location": "NormalStrategy.sol#L230-L237"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Improve reentrancy guards",
+            "description": "The current reentrancy lock has no \"depth information\" and can be bypassed.",
+            "severity": "low",
+            "location": "Portfolio.sol#L124"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Pools can use malicious strategies",
+            "description": "Anyone can create pools and configure the pool to use a custom strategy.",
+            "severity": "info",
+            "location": "Portfolio.sol#L671"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "findRootForSwappingIn functions should use MINIMUM_INVARIANT_DELTA",
+            "description": "Instead of adding + 1, consider using adding + MINIMUM_INVARIANT_DELTA instead.",
+            "severity": "info",
+            "location": "NormalStrategyLib.sol#L654, NormalStrategy.sol#L11"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unused Errors",
+            "description": "The NormalStrategyLib_UpperPriceLimitReached and NormalStrategyLib_LowerPriceLim itReached errors are not used.",
+            "severity": "info",
+            "location": "NormalStrategyLib.sol#L48-L49"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "getSwapInvariants order output can be 1 instead of 2",
+            "description": "The getSwapInvariants function is used to simulate swaps for the getAmountOut and beforeSwap functions.",
+            "severity": "info",
+            "location": "NormalStrategy.sol#L91, NormalStrategy.sol#L180, SwapLib.sol#L133"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "AfterCreate event uses wrong durationSeconds value if pool is perpetual",
+            "description": "The AfterCreate uses the cached config.durationSeconds value but the real value the config storage struct is initialized with will be SECONDS_PER_YEAR in the case of perpetual pools.",
+            "severity": "info",
+            "location": "NormalStrategy.sol#L74, NormalStrategyLib.sol#L408"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unnecessary fee reserves check",
+            "description": "The fee amount is always taken on the input and the fee percentage is always less than 100%.",
+            "severity": "info",
+            "location": "SwapLib.sol#L119"
+        }
+    ]
+}

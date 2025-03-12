@@ -1,0 +1,284 @@
+{
+    "path": "artifacts/MetaGenesis_SC-Audit-Report_07112023_SA-1991.pdf",
+    "project_info": {
+        "url": "https://github.com/Metatime-Technology-Inc/genesis-contracts",
+        "commit_id": "e187053ae4654e4ff25e6b55c5a7435e9fc2bb34",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "genesis-contracts": "contracts/MetaGenesis_SC-Audit-Report_07112023_SA-1991/genesis-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Drain of funds by calling unsubscribe() function due to reentrancy",
+            "description": "Lack of Check-Effect-Interaction pattern application or missing reentrancy protection mutex, allowing users to drain the contract constantly.",
+            "severity": "critical",
+            "location": "Metaminer contract, _unsubscribe() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Over-rewarding users due to inconsistency on MinerFormulas",
+            "description": "Incorrect definitions for hardcap calculations in MinerFormulas contract, allowing users to earn more rewards than expected.",
+            "severity": "high",
+            "location": "MinerFormulas contract, various hardcap formulas"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-654"
+                ]
+            },
+            "title": "Vote functionality in TxValidator is open to manipulation",
+            "description": "Users are most likely to vote for NO since that code block excludes the handlerReward from total rewards, making the vote functionality open to manipulation.",
+            "severity": "high",
+            "location": "TxValidator contract, voteTransaction() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Macrominer nodes can gain full authority over reward decisions in short period",
+            "description": "Macrominer nodes can manipulate voting to gain full control over reward decisions due to the weight of their MetaPoint token balance on votes.",
+            "severity": "high",
+            "location": "TxValidator contract, _calculateVotePoint() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unpaid validators can get paid and deny unsubscribe right to paid validators",
+            "description": "Metaminer nodes can benefit from STAKE_AMOUNT payment through unsubscribe() function without paying",
+            "severity": "high",
+            "location": "Metaminer contract, unsubscribe function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Macrominers can cast unlimited votes to kick inactive miners",
+            "description": "Macrominer nodes can cast unlimited votes to kick inactive miners",
+            "severity": "medium",
+            "location": "Macrominer contract, checkMinerStatus function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Loss of voting weight due to precision loss",
+            "description": "Votes of Macrominer nodes with less than 1 day of subscription are deemed invalid due to precision loss",
+            "severity": "medium",
+            "location": "TxValidator contract, vote point calculation formula"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Shareholder incomes set by admin can be eliminated by paying ANNUAL_AMOUNT",
+            "description": "Metaminer nodes can eliminate shareholders set by the protocol owner by paying ANNUAL_AMOUNT",
+            "severity": "medium",
+            "location": "Metaminer contract, setMiner function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Malicious validator can drain all Metaminer funds via Reentrancy on _shareIncome() function",
+            "description": "Missing reentrancy guard and incorrect Check-Effect-Interaction pattern in `_shareIncome()` function",
+            "severity": "medium",
+            "location": "_shareIncome() function in Metaminer contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Macrominer nodes can gain full authority over kicking inactive nodes",
+            "description": "Macrominer nodes can vote to kick other inactive nodes out of the protocol and influence the reward mechanism",
+            "severity": "medium",
+            "location": "_utils/Macrominer.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Share incomes may not be distributed due to incorrect allocation",
+            "description": "The share distribution can fail if the owner calls the setPercentages() function with a total allocation amount more than 5_000",
+            "severity": "medium",
+            "location": "_utils/Metaminer.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-656"
+                ]
+            },
+            "title": "Centralization risks",
+            "description": "Risk of centralization in the protocol, undermining decentralization and trust principles.",
+            "severity": "low",
+            "location": "Protocol owners, Metaminer contract, BlockValidator contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "VoteId can be incremented with ghost votes",
+            "description": "Missing sanity check allows Macrominer nodes to increase voteId variable via ghost votes.",
+            "severity": "low",
+            "location": "Macrominer contract, `checkMinerStatus()` function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Inactive Macrominer nodes are entitled to vote",
+            "description": "Inactive miners can participate in voting, creating inconsistency.",
+            "severity": "low",
+            "location": "Macrominer contract"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing sanity checks on adding and deleting miner functionalities",
+            "description": "No checks for duplicate miner additions or deletions, leading to unexpected results.",
+            "severity": "low",
+            "location": "MinerList contract"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Ignored return values",
+            "description": "Return values from functions are not checked, potentially leading to silent failures.",
+            "severity": "low",
+            "location": "MinerHealthCheck contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ]
+            },
+            "title": "Bridge contracts are frozen by default",
+            "description": "Bridge contracts are initially frozen, preventing them from functioning properly.",
+            "severity": "low",
+            "location": "Freezeable contract, Bridge contract, MainnetBridge contract"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Missing reentrancy guard",
+            "description": "Functions lack reentrancy guards, making them vulnerable to reentrancy attacks.",
+            "severity": "info",
+            "location": "Multiple contracts (see report)"
+        }
+    ]
+}

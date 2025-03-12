@@ -1,0 +1,124 @@
+{
+    "path": "artifacts/Inspex-WSwap.pdf",
+    "project_info": {
+        "url": "https://github.com/WaultFinance/WAULT",
+        "commit_id": "9f4ab8afc581d74ab881522c14c2a4d23cd0f6eb",
+        "address": "0xb42e3fe71b7e0673335b3331b3e1053bd9822570, 0xd48745e39bbed146eec15b79cbf964884f9877c2",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.5.16+commit.9c3226ce",
+            "v0.6.6+commit.6c089d02"
+        ],
+        "project_path": {
+            "WaultSwapFactory": "contracts/Inspex-WSwap/WaultSwapFactory",
+            "WaultSwapRouter": "contracts/Inspex-WSwap/WaultSwapRouter"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "WEX Reward Miscalculation",
+            "description": "The wexPerBlock variable is modified without updating the rewards, leading to unfair WEX token distribution.",
+            "severity": "medium",
+            "location": "WaxMaster.sol, setWexPerBlock() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "WEX Reward Miscalculation",
+            "description": "The totalAllocPoint variable is modified without updating the rewards, leading to unfair WEX token distribution.",
+            "severity": "medium",
+            "location": "WaxMaster.sol, add() and set() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Design Flaw in massUpdatePools() Function",
+            "description": "The massUpdatePools() function will eventually be unusable due to excessive gas usage.",
+            "severity": "low",
+            "location": "WaxMaster.sol, massUpdatePools() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Deduction of User's Pending Reward",
+            "description": "The emergencyWithdraw() function can cause a loss of accumulated pending rewards to the user.",
+            "severity": "low",
+            "location": "WexMaster.sol, emergencyWithdraw() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Compiler Version",
+            "description": "The Solidity compiler versions specified in the smart contracts were outdated.",
+            "severity": "low",
+            "location": "WswapV2Router02.sol, WswapV2Factory.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Function Calling",
+            "description": "The pairFor() function is called inside the getReserves() function without any purpose, resulting in unnecessarily wasted gas.",
+            "severity": "info",
+            "location": "WswapV2Router02.sol (function: getReserves())"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "WEX.sol (functions: mint(), setBurnrate(), addWhitelistedAddress(), removeWhitelistedAddress()), WexMaster.sol (functions: add(), set())"
+        }
+    ]
+}

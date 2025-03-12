@@ -1,0 +1,341 @@
+{
+    "path": "artifacts/ArtGobblers-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/artgobblers/art-gobblers",
+        "commit_id": "fe647c8a7e4539c586c25ac68b6e29da83f4043a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "art-gobblers": "contracts/ArtGobblers-Spearbit-Security-Review/art-gobblers"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "The claimGobbler function does not enforce the MINTLIST_SUPPLY on-chain",
+            "description": "The public constant MINTLIST_SUPPLY (2000) is supposed to represent the number of gobblers that can be minted by using merkle proofs, but this is not explicitly enforced in the claimGobbler function.",
+            "severity": "low",
+            "location": "ArtGobblers.sol#L287-L304"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Feeding a gobbler to itself may lead to an infinite loop in the off-chain renderer",
+            "description": "The contract allows feeding a gobbler to itself, which will cause potential problems with the off-chain rendering for the gobblers.",
+            "severity": "low",
+            "location": "ArtGobblers.sol#L653"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ],
+                "4": [
+                    "CWE-226"
+                ],
+                "5": [
+                    "CWE-244"
+                ]
+            },
+            "title": "The function toString() does not manage memory properly",
+            "description": "The toString() function does not manage the memory of the returned string correctly and assumes that the free memory is clean.",
+            "severity": "low",
+            "location": "LibString.sol#L7-L72"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Declare GobblerReserve artGobblers as immutable",
+            "description": "The artGobblers in the GobblerReserve can be declared as immutable to save gas.",
+            "severity": "info",
+            "location": "GobblerReserve.sol#L17"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "LogisticVRGDA is importing wadExp from SignedWadMath but never uses it",
+            "description": "The LogisticVRGDA is importing the wadExp function from the SignedWadMath library but is never used.",
+            "severity": "info",
+            "location": "LogisticVRGDA.sol#L4"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Pages.tokenURI does not revert when pageId is the ID of an invalid or not minted token",
+            "description": "The tokenURI function in Pages does not correctly handle the case of a special tokenId equal to 0",
+            "severity": "info",
+            "location": "Pages.sol#L207-L211"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Consider checking if the token fed to the Gobbler is a real ERC1155 or ERC721 token",
+            "description": "The current implementation of ArtGobblers.feedArt function allows users to specify from the value of the bool isERC1155 input parameter",
+            "severity": "info",
+            "location": "ArtGobblers.sol#L672-L674"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rounding down in legendary auction leads to legendaryGobblerPrice being zero earlier than the auction interval",
+            "description": "The expression below rounds down.",
+            "severity": "info",
+            "location": "ArtGobblers.sol#L443"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Typos in code comments or natspec comments",
+            "description": "A list of typos encountered in the code base and/or natspec comments",
+            "severity": "info",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing natspec comments for contract's constructor, variables or functions",
+            "description": "Some of the contract's constructor variables and functions are missing natespec comments.",
+            "severity": "info",
+            "location": "Multiple contracts and functions"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential issues due to slippage when minting legendary gobblers",
+            "description": "Slippage issues can lead to transaction reverts.",
+            "severity": "info",
+            "location": "ArtGobblers.sol#L358-L360"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Users who claim early have an advantage in goo production",
+            "description": "Early claimers may have an advantage in goo production.",
+            "severity": "info",
+            "location": "ArtGobblers.sol#L287 and #L505"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Add a negativity check for decayConstant in the constructor",
+            "description": "Missing negativity check can lead to incorrect price calculation.",
+            "severity": "info",
+            "location": "VRGDA.sol#L26"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Improvements in toString()",
+            "description": "Optimizations and improvements for toString() function.",
+            "severity": "info",
+            "location": "LibString.sol#L31, #L17, and #L10"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Consideration on possible Chainlink integration concerns",
+            "description": "Dependency on Chainlink VRF v1 can lead to issues.",
+            "severity": "info",
+            "location": "ArtGobblers.sol#L485 and #L489-L496"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-135"
+                ]
+            },
+            "title": "The function toString() does not return a string aligned to a 32-byte word boundary",
+            "description": "toString() function may not align strings correctly.",
+            "severity": "info",
+            "location": "LibString.sol#L38"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Considerations on Legendary Gobbler price mechanics",
+            "description": "Auction price model can lead to undesirable outcomes.",
+            "severity": "info",
+            "location": "ArtGobblers.sol#L408 and #L418-L445"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Define a LEGENDARY_GOBBLER_INITIAL_START_PRICE constant",
+            "description": "Hardcoded value should be replaced with a constant.",
+            "severity": "info",
+            "location": "ArtGobblers.sol#L274 and #L408"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Update ArtGobblers comments about some variable/functions",
+            "description": "Comments need to be updated for clarity.",
+            "severity": "info",
+            "location": "Various locations in ArtGobblers.sol"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Mark functions not called internally as external",
+            "description": "Functions can be marked as external to improve code quality.",
+            "severity": "info",
+            "location": "Goo.sol#L51, #L58, #L65 and GobblerReserve.sol#L30"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Smoothness problem in Page's VRGDA",
+            "description": "Sudden drop in time during switch to linear issuance",
+            "severity": "medium",
+            "location": "Pages's VRGDA contract implementation"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Solution uniqueness for the differential equation",
+            "description": "Non-unique solution for c = 0",
+            "severity": "low",
+            "location": "rate of GOO issuance differential equation"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Legendary gobbler mints without revealing gobblers",
+            "description": "Allowing un-revealed gobblers to mint legendary gobblers",
+            "severity": "medium",
+            "location": "ArtGobblers.sol (mintLegendaryGobbler function)"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Approval indexing bug in ERC-721 implementation",
+            "description": "Approvals not removed after burning tokens",
+            "severity": "high",
+            "location": "ERC-721 implementation (PR #144)"
+        }
+    ]
+}

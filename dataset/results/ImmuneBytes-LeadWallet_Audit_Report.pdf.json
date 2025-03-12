@@ -1,0 +1,167 @@
+{
+    "path": "artifacts/ImmuneBytes-LeadWallet_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/leadwallet/LEAD-Stake-DApp-Backend",
+        "commit_id": "1099c116912516f60e4fd78bc5fba3148b5c8676",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "LEAD-Stake-DApp-Backend": "contracts/ImmuneBytes-LeadWallet_Audit_Report/LEAD-Stake-DApp-Backend"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Denial of Service (DoS)",
+            "description": "The LeadStake smart contract stores user addresses in an array, which may become too large to iterate over within the Ethereum block gas limit.",
+            "severity": "high",
+            "location": "LeadStake contract, stakeholders[] array"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Admin can drain out all Lead balance",
+            "description": "The adminWithdraw() function allows the admin to withdraw all LEAD tokens from the LeadStaker smart contract.",
+            "severity": "high",
+            "location": "LeadStaker contract, adminWithdraw() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No check for address inputs variables in ERC20 transfer",
+            "description": "The transfer() function in ERC20.sol does not check the validity of input addresses by the user.",
+            "severity": "medium",
+            "location": "ERC20 contract, transfer() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No check for referrer address",
+            "description": "The registerAndStake() function does not check the validity of the referrer address input by the user.",
+            "severity": "medium",
+            "location": "LeadStaker contract, registerAndStake() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Too much Admin controls",
+            "description": "The LeadStake contract has too many admin rights which can be misused intentionally or unintentionally.",
+            "severity": "medium",
+            "location": "LeadStaker contract, various functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ]
+            },
+            "title": "Users cannot stake again within 7 days",
+            "description": "The stake() function has a time restriction that prevents users from staking again within 7 days.",
+            "severity": "medium",
+            "location": "LeadStaker contract, stake() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No input checking in unstake() function",
+            "description": "The unstake() function does not check the validity of the amount input by the user.",
+            "severity": "medium",
+            "location": "LeadStaker contract, unstake() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "In adminWithdraw() balance check is incorrect",
+            "description": "The adminWithdraw() function checks the LEAD token balance of the admin, which is inappropriate.",
+            "severity": "medium",
+            "location": "LeadStaker contract, adminWithdraw() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "SupplyPool() implementation is incorrect",
+            "description": "The supplyPool() function contains an incorrect statement in the For loop.",
+            "severity": "medium",
+            "location": "LeadStaker contract, supplyPool() function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "ERC20 functions should be wrapped in require",
+            "description": "The return value of standard ERC20 functions is neglected in the LeadStake contract.",
+            "severity": "medium",
+            "location": "LeadStaker contract, various functions"
+        }
+    ]
+}

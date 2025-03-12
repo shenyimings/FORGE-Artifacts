@@ -1,0 +1,53 @@
+{
+    "path": "artifacts/Hachiko.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x87ffc48c9f89fc5dfa05836e083406d684fd6331",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "Hachiko": "contracts/Hachiko/Hachiko"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of Gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can cause an OUT_OF_GAS exception if the excluded addresses list is too long. Similarly, the `_getCurrentSupply` function also uses a loop for evaluating total supply, which can lead to an OUT_OF_GAS exception.",
+            "severity": "low",
+            "location": "includeInReward() and _getCurrentSupply functions in the smart contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-271"
+                ],
+                "4": [
+                    "CWE-273"
+                ]
+            },
+            "title": "Owner Privileges",
+            "description": "The owner has several privileges, including changing tax and liquidity fee, maximum transaction amount, excluding from fee, locking, and unlocking. Even after renouncing ownership, the owner can retake privileges.",
+            "severity": "low",
+            "location": "Various functions in the smart contract related to owner privileges"
+        }
+    ]
+}

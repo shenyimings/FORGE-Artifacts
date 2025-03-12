@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Radpie-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/magpiexyz/Radpie",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Radpie": "contracts/PeckShield-Audit-Report-Radpie-v1/Radpie"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect setFee()/removeFee() Logic in RadiantStaking",
+            "description": "The implementation of setFee() and removeFee() routines does not follow the intended logic.",
+            "severity": "medium",
+            "location": "RadiantStaking contract, setFee() and removeFee() functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Nonfunctional _onlyWhiteListed Modifier in MasterRadpie",
+            "description": "The modifier does not work as expected, allowing unauthorized access to update the allocation of reward pools.",
+            "severity": "high",
+            "location": "MasterRadpie contract, updatePoolsAlloc() function and _onlyWhiteListed modifier"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Reward-Sending Logic in RadiantStaking",
+            "description": "The leftover funds are sent with the wrong token (_asset instead of _rewardToken) and the leftover amount is computed incorrectly.",
+            "severity": "medium",
+            "location": "RadiantStaking contract, _sendRewards() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible Costly Share From Improper Liquidity Initialization",
+            "description": "Manipulatable pool share calculation during initialization can lead to precision issues and expensive shares.",
+            "severity": "low",
+            "location": "RadiantStaking contract, depositAssetFor() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged admin account poses a counter-party risk to protocol users; possible mitigation using multi-sig or DAO governance.",
+            "severity": "medium",
+            "location": "Multiple contracts, including RDNTRewardManager contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20-Compliant Tokens",
+            "description": "approve() function may not work correctly with non-compliant ERC20 tokens; use safeApprove() instead.",
+            "severity": "low",
+            "location": "RadiantStaking::_deleverage() and MasterRadpie::_depositAsset() functions"
+        }
+    ]
+}

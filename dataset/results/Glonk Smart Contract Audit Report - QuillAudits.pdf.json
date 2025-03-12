@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/Glonk Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xbD5612F129e081E2a6289ADa05E04014ce7C0810",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "GLONK": "contracts/Glonk Smart Contract Audit Report - QuillAudits/GLONK"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Centralized risk",
+            "description": "The _owner address will accumulate a significant portion of LP tokens over time.",
+            "severity": "medium",
+            "location": "addLiquidity function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Non-withdrawable BNB",
+            "description": "A small amount of BNB remains in the contract, which will be locked forever.",
+            "severity": "medium",
+            "location": "swapAndLiquify function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Costly Loop",
+            "description": "Loops include state variables like .length of a non-memory array, consuming extra gas.",
+            "severity": "low",
+            "location": "Various functions (includeInReward, _getCurrentSupply())"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Compiler Version",
+            "description": "Using an outdated compiler version can be problematic.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Contracts should be deployed with the same compiler version and flags as tested.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Timestamp Dependence",
+            "description": "Values such as block.timestamp are not safe to use for most purposes.",
+            "severity": "low",
+            "location": "Lines 800 & 815"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Public Visibility",
+            "description": "Changing the visibility level to external increases code readability and reduces gas consumption.",
+            "severity": "low",
+            "location": "Various functions (renounceOwnership, transferOwnership, etc.)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "SWC-114: Transaction Order Dependence",
+            "description": "Using the approve function of the ERC-20 token standard is vulnerable to front-running attacks.",
+            "severity": "low",
+            "location": "approve function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Timestamp Dependence (SWC-116)",
+            "description": "Values such as block.timestamp are not safe to use for most purposes.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy (SWC-107)",
+            "description": "Reentrancy issue found in the contract.",
+            "severity": "low",
+            "location": "n/a"
+        }
+    ]
+}

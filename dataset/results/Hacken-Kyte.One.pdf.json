@@ -1,0 +1,161 @@
+{
+    "path": "artifacts/Hacken-Kyte.One.pdf",
+    "project_info": {
+        "url": "https://github.com/Kyte-Research/kyte-core-contracts/",
+        "commit_id": "D5685AD1298CAFE91BED5D96F34496EC93C50B3C",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "kyte-core-contracts": "contracts/Hacken-Kyte/kyte-core-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Token amount is not being updated after withdraw",
+            "description": "The contract's token balance is not updated after the withdraw function execution, leading to possible double spending.",
+            "severity": "critical",
+            "location": "TokenVesting.sol, Function: withdraw() between lines #173-179"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "User may get no funds",
+            "description": "Vesting does not guarantee a user will receive any token if the project owner doesn't transfer funds to this contract prior to vestings.",
+            "severity": "high",
+            "location": "TokenVesting.sol, Function: createVestingSchedule() between lines #76 - #119"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Potential High Gas Cost Risk",
+            "description": "The getAllVestingScheduleForHolder function may fail due to high Gas consumption if the underlying array size is too big.",
+            "severity": "medium",
+            "location": "TokenVesting.sol, Function: getAllVestingScheduleForHolder() between lines #290-306"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "The createVestingSchedule function's _beneficiary parameter and the getAllVestingScheduleForHolder function's holder parameter can be 0x0.",
+            "severity": "low",
+            "location": "TokenVesting.sol, Function: createVestingSchedule() between lines #76 - #119, getAllVestingScheduleForHolder() between lines #290 - #310"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "The contracts use a floating pragma ^0.8.0.",
+            "severity": "low",
+            "location": "TokenVesting.sol, KTEToken.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Missing Control for Existing Elements",
+            "description": "There are no checks to confirm that the holder is a vester address in the getAllVestingScheduleForHolder function.",
+            "severity": "low",
+            "location": "TokenVesting.sol, Function: getAllVestingScheduleForHolder() between lines #290-306"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential zero Parameter",
+            "description": "The amount parameter can be zero in the withdraw and release functions.",
+            "severity": "low",
+            "location": "TokenVesting.sol, Function: withdraw() between lines #173-179, release() between lines #202-226"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Boolean Equality",
+            "description": "Boolean constants are used in equality checks.",
+            "severity": "low",
+            "location": "TokenVesting.sol, Function: revoke() between lines #140-162, _computeReleasableAmount() between lines #322-350"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Functions that can be Declared as external",
+            "description": "Public functions that are never called in the contract should be declared as external to save Gas.",
+            "severity": "low",
+            "location": "token_poa.sol, 2_Owner.sol (multiple functions)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Modifier",
+            "description": "The onlyIfVestingScheduleExists modifier is defined but never used.",
+            "severity": "low",
+            "location": "TokenVesting.sol, Function: onlyIfVestingScheduleExists between lines #29-35"
+        }
+    ]
+}

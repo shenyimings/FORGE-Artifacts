@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/peckshield-audit-report-dyp-v1.0.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x961C8c0B1aaD0c0b10a51FeF6a867E3091BCef17",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "DeFiYieldProtocol": "contracts/peckshield-audit-report-dyp-v1/DeFiYieldProtocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Return Statements in delegate() And delegateBySig()",
+            "description": "The delegate() and delegateBySig() functions have unnecessary return statements.",
+            "severity": "info",
+            "location": "DeFiYieldProtocol contract, lines 856 and 908"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unnecessary safe32() Check in _writeCheckpoint()",
+            "description": "The helper routine safe32() is called to verify that block.number will not be out of boundary, but it might not be necessary since the Ethereum block number would not exceed 2**32 in any foreseeable future.",
+            "severity": "info",
+            "location": "DeFiYieldProtocol contract, _writeCheckpoint() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Voting Amplification With Sybil Attacks",
+            "description": "The DYP tokens can be used for governance in allowing for users to cast and record the votes, but it is vulnerable to a new type of so-called Sybil attacks.",
+            "severity": "high",
+            "location": "DeFiYieldProtocol contract, _delegate() function"
+        }
+    ]
+}

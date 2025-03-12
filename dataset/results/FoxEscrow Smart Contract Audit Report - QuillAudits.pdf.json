@@ -1,0 +1,269 @@
+{
+    "path": "artifacts/FoxEscrow Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/FarmersOnlyFi/fox-escrow-contracts/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "fox-escrow-contracts": "contracts/FoxEscrow Smart Contract Audit Report - QuillAudits/fox-escrow-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Possibility of reentrancy",
+            "description": "External call detected in cancel() and fill() functions, potentially allowing malicious code execution.",
+            "severity": "medium",
+            "location": "contract LockedTokenOffer, functions cancel() and fill()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing value verification",
+            "description": "Functions lack safety checks for input values, which may affect contract functionality.",
+            "severity": "low",
+            "location": "Various functions in contracts OfferFactory and LockedTokenOffer"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing address verification",
+            "description": "Functions lack safety checks for input addresses, which may lead to inaccessible tokens or unexpected behavior.",
+            "severity": "low",
+            "location": "Various functions in contracts OfferFactory and LockedTokenOffer"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Ownership",
+            "description": "Single-entity ownership poses centralization risks, and renounce ownership may lead to inaccessible tokens and fees.",
+            "severity": "low",
+            "location": "contract OfferFactory"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Critical address changes",
+            "description": "Changing critical addresses without accessibility checks may lead to inaccessible tokens and fees.",
+            "severity": "low",
+            "location": "contracts OfferFactory and LockedTokenOffer"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Costly functions with loops",
+            "description": "Looping through arrays in getter functions may lead to high gas costs and potential function failures.",
+            "severity": "low",
+            "location": "contract OfferFactory, function getActiveOffersByOwner()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Floating pragma",
+            "description": "Using floating pragma versions may result in different compiler versions used for testing and production.",
+            "severity": "info",
+            "location": "contracts OfferFactory, LockedTokenOffer, and LockedTokenLens"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Natspec",
+            "description": "Lack of commenting in code, particularly in Natspec format.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "Missing test cases",
+            "description": "Some functions lack test cases, which may lead to undetected errors and unexpected behavior.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State variable ordering gas savings",
+            "description": "Inefficient storage packing and variable ordering may lead to unnecessary gas costs.",
+            "severity": "low",
+            "location": "contract LockedTokenOffer"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No error messages in require functions",
+            "description": "Lack of informative error messages in require statements may negatively impact user experience.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Public functions that can be made external",
+            "description": "Public functions not called within the contract can be made external to reduce gas costs.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ],
+                "3": [
+                    "CWE-1060"
+                ]
+            },
+            "title": "Gas Optimization",
+            "description": "Making public functions external can save on gas costs.",
+            "severity": "n/a",
+            "location": "OfferFactory.sol, getActiveOffersByRange function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code Reusability",
+            "description": "Similar looping logic in multiple functions may lead to maintainability issues and higher costs due to large size code base.",
+            "severity": "n/a",
+            "location": "OfferFactory.sol, getActiveOffers and getActiveOffersByRange functions"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Missing Events",
+            "description": "Critical updates need to emit events for off-chain monitoring and incident response functionality.",
+            "severity": "medium",
+            "location": "setFee function"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Unindexed Event Parameters",
+            "description": "Events without indexed parameters may lead to challenges for off-chain tooling.",
+            "severity": "n/a",
+            "location": "Various event declarations (e.g. OfferFilled, OfferCanceled)"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Spelling and Grammar Errors",
+            "description": "Incorrect spellings may impact code readability and understanding.",
+            "severity": "low",
+            "location": "setFee function"
+        }
+    ]
+}

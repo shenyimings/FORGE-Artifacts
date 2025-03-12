@@ -1,0 +1,140 @@
+{
+    "path": "artifacts/SlowMist Audit Report - Earning.Farm v3_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/Shata-Capital/ENF_V3",
+        "commit_id": "3686154870acbffc1a846781574abdd0b5295bd5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ENF_V3": "contracts/SlowMist Audit Report - Earning/ENF_V3"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code redundancy issue",
+            "description": "The convertToShares function is defined but not used in the contract.",
+            "severity": "info",
+            "location": "contracts/core/vault.sol, function convertToShares"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant code issue",
+            "description": "Redundant code related to changing pathBytes in the removePath function.",
+            "severity": "info",
+            "location": "contract/exchanges/*.sol, function removePath"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Invalid minimum output calculation",
+            "description": "The calc_token_amount function and calc_withdraw_one_coin function are easily affected by the last transaction of CurvePool, so they cannot play the role of slippage protection.",
+            "severity": "medium",
+            "location": "contracts/subStrategies/convex/*.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Risk of pid acquisition",
+            "description": "The getPID function may return 0 if LpToken does not exist, but pid0 has a value in the ConvexBooster contract.",
+            "severity": "low",
+            "location": "contracts/subStrategies/convex/Alusd.sol, function getPID"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Redundant approval issue",
+            "description": "The swapExactTokenInput function approves the router contract again, which is unnecessary.",
+            "severity": "info",
+            "location": "contracts/core/Exchange.sol, function swapExactTokenInput"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Incorrect storage of temporary variables",
+            "description": "The removePath function uses storage to store balancerBatchAssets variable, then deletes it, and then uses this variable for event recording after deletion.",
+            "severity": "medium",
+            "location": "contracts/exchanges/*.sol, function removePath"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-358"
+                ]
+            },
+            "title": "Compound interest slippage check issue",
+            "description": "No slippage check is performed during the swap operation.",
+            "severity": "medium",
+            "location": "contracts/exchanges/*.sol, function swap"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of access control",
+            "description": "The swap function in the UniswapV3 contract is not subject to permission control.",
+            "severity": "medium",
+            "location": "contracts/exchanges/UniswapV3.sol, function swap"
+        }
+    ]
+}

@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/dmn.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x3Ffbe849A2666657B729a6bf19befD54D9E57c8b",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "Domain": "contracts/dmn/Domain"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Contract Owner can stop transactions for all sales or buys excluding the owner",
+            "description": "The contract owner has the authority to stop transactions, which could be exploited by setting a high maxTxAmountBuy and maxTxAmountSell value.",
+            "severity": "critical",
+            "location": "contract.sol#L1026,1032,1076"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can increase fees more than a reasonable percentage (25%)",
+            "description": "The contract owner has the authority to increase the fees more than 25%, which could be exploited by calling the setSellFees function with a high percentage value.",
+            "severity": "critical",
+            "location": "contract.sol#L1155,1168"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Public functions that are never called by the contract should be declared external to save gas",
+            "description": "Public functions should be declared as external if not used in the contract",
+            "severity": "low",
+            "location": "contract.sol#L887,L879,L875 and 14 more"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Constant state variables should be declared constant to save gas",
+            "description": "Constant state variables should be declared as constant if they never change",
+            "severity": "low",
+            "location": "contract.sol#L593,L584"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Solidity naming conventions are not followed",
+            "description": "The code does not follow the solidity naming conventions",
+            "severity": "low",
+            "location": "contract.sol#L605,L601,L600 and 20 more"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused functions should be removed",
+            "description": "Functions that are not used in the contract, and make the code's size bigger",
+            "severity": "low",
+            "location": "contract.sol#L20,L540,L371 and 8 more"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Events for critical arithmetic parameters are missing",
+            "description": "There are functions that have no event emitted, so it is difficult to track off-chain changes",
+            "severity": "low",
+            "location": "contract.sol#L1189,L1181"
+        }
+    ]
+}

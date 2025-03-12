@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/1-thr.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x18541F86AEB777A6a41188a1207664735C9b3431",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "THRToken": "contracts/1-thr/THRToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can stop transactions for all users excluding themselves",
+            "description": "The contract owner has the authority to stop transactions, which could be exploited by setting `_maxTxAmount` to zero.",
+            "severity": "medium",
+            "location": "contract.sol#L641"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Contract Owner can increase fees more than a reasonable percent (25%)",
+            "description": "The contract owner has the authority to increase fees, which could be exploited by calling `setTaxFeePercent` with a high percentage value.",
+            "severity": "critical",
+            "location": "contract.sol#L523,526,529"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "The swap address is assigned once in the constructor and cannot be changed",
+            "description": "The contract may not be able to catch up with decentralized swaps updates if the swap address is fixed.",
+            "severity": "low",
+            "location": "contract.sol#L1"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Public functions that are never called by the contract should be declared external to save gas",
+            "description": "Functions like `isExcludedFromFee` and others can be declared external to optimize gas usage.",
+            "severity": "low",
+            "location": "contract.sol#L167,171,417,420,423,..."
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Constant state variables should be declared constant to save gas",
+            "description": "Variables like `_symbol`, `_name`, and others can be declared constant to optimize gas usage.",
+            "severity": "low",
+            "location": "contract.sol#L381,374,379,380,376,..."
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "The contract does not follow Solidity naming conventions",
+            "description": "Variables and functions do not conform to Solidity naming conventions.",
+            "severity": "low",
+            "location": "contract.sol#L202,203,217,235,..."
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Critical arithmetic parameters lack events",
+            "description": "Functions like `_maxTxAmount` and others do not emit events for critical parameter changes.",
+            "severity": "low",
+            "location": "contract.sol#L523,526,529,..."
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused functions increase code size",
+            "description": "Functions like `sendValue` and others are not used in the contract and make the code larger.",
+            "severity": "low",
+            "location": "contract.sol#L137,106,109,..."
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Potential Owner Abuse",
+            "description": "The owner can abuse certain functions, stopping transactions and manipulating fees up to 100%.",
+            "severity": "high",
+            "location": "THRToken contract (functions with onlyOwner modifier)"
+        }
+    ]
+}

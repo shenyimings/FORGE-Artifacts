@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/Flashloan.md",
+    "project_info": {
+        "url": "https://github.com/CreamFi/compound-protocol",
+        "commit_id": "e414160eb8a774140457c885bb099baae528df04",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "compound-protocol": "contracts/Flashloan/compound-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Excess reserve amount",
+            "description": "Increasing internalCash and totalReserves values without proper splitting of user-paid totalFee.",
+            "severity": "high",
+            "location": "CCapableErc20.sol, L250-L252"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Suspicious manipulation of `totalReserves` and `internalCash`",
+            "description": "Re-entrancy vulnerability in the gulp function that changes totalReserves and internalCash variables.",
+            "severity": "high",
+            "location": "CCapableErc20.sol, L132"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Magic number used",
+            "description": "Using \"magic number\" 10000 to calculate totalFee without explanation or constant definition.",
+            "severity": "low",
+            "location": "CCapableErc20.sol, L237"
+        }
+    ]
+}

@@ -1,0 +1,158 @@
+{
+    "path": "artifacts/Solidified-Aventus_Protocol_[15.11.2019].pdf",
+    "project_info": {
+        "url": "https://github.com/AventusProtocolFoundation/protocol/tree/audit_ready",
+        "commit_id": "5826e607d18602a7ac198651f4a20a24ddcbba2b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol": "contracts/Solidified-Aventus_Protocol_[15/protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Owner and accounts who can write have too much control",
+            "description": "AventusStorage.sol manages almost all the state of AventusProtocol, including balances, granting too much control to owners and accounts with write permissions.",
+            "severity": "low",
+            "location": "AventusStorage.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Signatures Validation is Vulnerable to Malleable Signatures",
+            "description": "Signature recovery function in LECRecovery.sol allows for malleable signatures, which should be rejected.",
+            "severity": "low",
+            "location": "LECRecovery.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Arbitrary crafting of user-controlled function calls should be avoided",
+            "description": "LProposals.sol uses delegatecall to a user-controlled function id, allowing for potential modification and failed function call introduction.",
+            "severity": "info",
+            "location": "LProposals.sol (LProposals.endGovernanceProposal)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Solidity Compiler Version should be locked",
+            "description": "Pragma should be simplified and version should be locked for published contracts, ideally using the most recent Solidity compiler version supported by the build framework.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Library to get current time can be avoided",
+            "description": "LAventusTime.sol is redundant and can be avoided as it only gets the current block time, which can be achieved directly.",
+            "severity": "info",
+            "location": "LAventusTime.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Insecure use of delegatecall and call",
+            "description": "Low level calls like call and delegatecall are not recommended except for some cases where it is part of the feature.",
+            "severity": "info",
+            "location": "_LProposalsEnact, L84-L97"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-920"
+                ]
+            },
+            "title": "High gas usage",
+            "description": "Gas usage of some functions can be very high depending on factors like rules and other inputs.",
+            "severity": "info",
+            "location": "multiple functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Lack of revoke event role function",
+            "description": "Current event roles only support adding roles in the event for validators. It is recommended to have a revoke role function which can be used to remove a user from a role if needed for usability purposes.",
+            "severity": "info",
+            "location": "Event role management"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Access Management allows arbitrary access types",
+            "description": "The contract allows registering any string as a key for access types in access management, but only two roles are actually used.",
+            "severity": "info",
+            "location": "AventusStorage.sol"
+        }
+    ]
+}

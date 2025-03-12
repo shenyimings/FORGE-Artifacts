@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/Hacken-Tenderize.pdf",
+    "project_info": {
+        "url": "https://github.com/Tenderize/tender-core",
+        "commit_id": "1FD606141625171FE792045AE9233890262D2D62",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "tender-core": "contracts/Hacken-Tenderize/tender-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "The contract allows Transfer to Arbitrary Addresses",
+            "description": "Users can transfer funds to arbitrary addresses.",
+            "severity": "high",
+            "location": "Tenderizer.sol, execute(), batchExecute()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Unstake allows without burning tokens",
+            "description": "Unstake() function allows governors to unstake() without burning tokens, leading to contract depletion.",
+            "severity": "high",
+            "location": "Tenderizer.sol, unstake()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "_claimSecondaryRewards() function ignores errors and return values",
+            "description": "In Livepeer.sol, _claimSecondaryRewards() function ignores errors and returns values during reward conversion to Uniswap.",
+            "severity": "high",
+            "location": "Livepeersol.sol, _claimSecondaryRewards()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missing Allowance Configurations",
+            "description": "In Tenderizer.sol, deposit function transfers tokens via transferFrom without allowance control.",
+            "severity": "medium",
+            "location": "Tenderizer.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked Return",
+            "description": "In integration contracts, _stake functions use approve() methods but never check their returns.",
+            "severity": "medium",
+            "location": "Livepeer.sol, Matic.sol, Graph.sol, _stake()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked Transfer",
+            "description": "In integration contracts, _withdraw functions call transfer without checking its return value.",
+            "severity": "medium",
+            "location": "Livepeer.sol, Matic.sol, Graph.sol, _withdraw()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Function Call Order Assumption",
+            "description": "In Livepeer.sol, setUniwapRouter() function is never called in the constructor.",
+            "severity": "medium",
+            "location": "Livepeer.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Useless Event Description",
+            "description": "In Tenderizer.sol, GovernanceUpdate event is ambiguous and lacks address information.",
+            "severity": "medium",
+            "location": "Tenderizer.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "Multiple contracts lack zero address checks for various functions.",
+            "severity": "low",
+            "location": "Livepeer.sol, Matic.sol, Graph.sol, WithdrawPool.sol, TenderFram.sol, TenderToken.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Return",
+            "description": "In TenderToken.sol, _mint and _mintShare functions return unnecessary uint values.",
+            "severity": "low",
+            "location": "TenderToken.sol, _mint(), _mintShare()"
+        }
+    ]
+}

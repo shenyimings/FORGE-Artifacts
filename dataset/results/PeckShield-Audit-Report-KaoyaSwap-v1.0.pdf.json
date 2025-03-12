@@ -1,0 +1,131 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-KaoyaSwap-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/kaoya1125/contracts/tree/fe8c070e8bf62145ae96b54960e7cc5eea9a880c",
+        "commit_id": "fe8c070e8bf62145ae96b54960e7cc5eea9a880c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/PeckShield-Audit-Report-KaoyaSwap-v1/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Implicit Assumption Enforcement In AddLiquidity()",
+            "description": "The UniswapV2Router02 contract has implicit assumptions on the _addLiquidity() routine that can lead to slippage control not being checked in certain scenarios.",
+            "severity": "low",
+            "location": "UniswapV2Router02, addLiquidity()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Revisited Logic Of Staking::clearUserDepositTime()",
+            "description": "The clearUserDepositTime() routine has an improper implementation that allows users to claim airdrop rewards repeatedly.",
+            "severity": "high",
+            "location": "Staking, clearUserDepositTime()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential Reentrancy Risk In MasterChef::deposit()",
+            "description": "The deposit() routine in the MasterChef contract has potential reentrancy risk due to ERC777-like token implementation.",
+            "severity": "high",
+            "location": "MasterChef, deposit()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ],
+                "3": [
+                    "CWE-837"
+                ]
+            },
+            "title": "Timely massUpdatePools During Pool Weight Changes",
+            "description": "The reward distribution may be unfair if massUpdatePools() is not timely invoked when pool weights are updated.",
+            "severity": "medium",
+            "location": "MasterChef, set()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incompatibility With Deflationary/Rebasing Tokens",
+            "description": "MasterChef contract's asset-transferring routines may introduce balance inconsistencies with deflationary/rebasing tokens.",
+            "severity": "low",
+            "location": "MasterChef/Staking"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Duplicate Pool Detection And Prevention",
+            "description": "Addition of a new pool did not perform necessary sanity checks to prevent duplicate token addition.",
+            "severity": "low",
+            "location": "MasterChef contract's add() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue Of Admin Keys",
+            "description": "Privileged owner account may be compromised, allowing an attacker to modify sensitive system parameters.",
+            "severity": "medium",
+            "location": "Multiple Contracts (UniswapV2Router02 and Kaoya)"
+        }
+    ]
+}

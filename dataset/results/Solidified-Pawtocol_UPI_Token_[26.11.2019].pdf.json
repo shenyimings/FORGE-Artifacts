@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/Solidified-Pawtocol_UPI_Token_[26.11.2019].pdf",
+    "project_info": {
+        "url": "https://github.com/pawtocol/Token",
+        "commit_id": "19e42b9eba9af4c75b0af46649efa0d8fb95c4eb",
+        "address": "0x70D2b7C19352bB76e4409858FF5746e500f2B67c",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Token": "contracts/Solidified-Pawtocol_UPI_Token_[26/Token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Variable shadowing",
+            "description": "Private variables declared in UPIToken overshadow variables in OpenZeppelin's ERC20Detailed.",
+            "severity": "low",
+            "location": "UPIToken contract, variable declarations"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Suboptimal minting function",
+            "description": "Minting function can be optimized by removing ERC20Mintable and using ERC20's internal _mint() function.",
+            "severity": "low",
+            "location": "UPIToken contract, minting function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Fallback function does not prevent ETH reception",
+            "description": "The fallback function reverts by default but can still receive ether from self-destructed contracts.",
+            "severity": "low",
+            "location": "UPIToken contract, fallback function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary ERC20 import",
+            "description": "ERC20 is inherited by both ERC20Mintable and ERC20Burnable, making its import in UPIToken unnecessary.",
+            "severity": "low",
+            "location": "UPIToken contract, imports"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Readability improvement for INITIAL_SUPPLY variable",
+            "description": "Using the \"ether\" keyword can improve readability and provide minor gas savings.",
+            "severity": "low",
+            "location": "UPIToken contract, INITIAL_SUPPLY variable declaration"
+        }
+    ]
+}

@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/ParaSpaceV1.4P3_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/para-space/paraspace-core",
+        "commit_id": "b0a957fc7b6df9109a8a617d7dddce102088d43c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "paraspace-core": "contracts/ParaSpaceV1/paraspace-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "PSV-2: MarketplaceLogic._checkAllowance approves marketplace to use uint256.max amount of creditToken",
+            "description": "Marketplace can deplete tokens in the POOL",
+            "severity": "medium",
+            "location": "code/contracts/misc/marketplaces/LooksRareAdapter.sol#L68-L75, code/contracts/dependencies/look srare/contracts/LooksRareExchange.sol#L218-L225, code/contracts/protocol/libraries/logic/MarketplaceLogic.sol#L615-L620, L688-L707"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PSV-3: NFT listing price could be incorrectly calculated",
+            "description": "NFT listing price is calculated without considering ERC20 decimals",
+            "severity": "info",
+            "location": "code/contracts/protocol/libraries/logic/MarketplaceLogic.sol#L688"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "executeBurnMultiple should validate user is not address 0",
+            "description": "The function does not check if the tokenId exists before checking ownership, allowing a user to pass an invalid tokenId and an address of 0.",
+            "severity": "low",
+            "location": "MintableERC721Logic.sol - executeBurnMultiple function (L407)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "MarketplaceLogic.sol - _flashSupplyFor function does not handle creditToken without a corresponding PToken.",
+            "description": "When creditAmount == 0 and supplyAmount == 0, _flashSupplyFor tries to get the PToken corresponding to the creditToken, which can cause a transaction revert if the creditToken does not have a corresponding PToken.",
+            "severity": "low",
+            "location": "MarketplaceLogic.sol - _flashSupplyFor function (L440-L465)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "safetransferfrom does not have the callback check",
+            "description": "The _safeTransfer function does not follow the EIP-721 standard, which requires a check for the onERC721Received callback function on the 'to' address.",
+            "severity": "info",
+            "location": "MintableIncentivizedERC721.sol - _safeTransfer function (L380)"
+        }
+    ]
+}

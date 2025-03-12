@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Aave_Token.pdf",
+    "project_info": {
+        "url": "https://github.com/aave/aave-token/tree/master",
+        "commit_id": "master",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "aave-token": "contracts/ConsenSys_Diligence-Aave_Token/aave-token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Pin the Solidity version to the latest stable 0.6.x",
+            "description": "VersionedInitializable is only compilable with Solidity 0.6.x versions.",
+            "severity": "n/a",
+            "location": "contract utils/VersionedInitializable.sol, line 1"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Permit expiration can be set indefinite by using MAX_UINT",
+            "description": "In the permit() function, a deadline of 0 is treated as non-expiring.",
+            "severity": "n/a",
+            "location": "contract token/AaveToken.sol, line 114"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Remove nonce argument from permit functions",
+            "description": "The current implementation does not match the EIP-2612 standard.",
+            "severity": "n/a",
+            "location": "contract token/AaveToken.sol, multiple lines"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Timestamp Dependence",
+            "description": "A control flow decision is made based on the block.timestamp environment variable.",
+            "severity": "low",
+            "location": "contract token/AaveToken.sol, line 110"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-183"
+                ]
+            },
+            "title": "Weak Sources of Randomness from Chain Attributes",
+            "description": "Potential use of “block.number” as source of randomness.",
+            "severity": "low",
+            "location": "contract token/AaveToken.sol, line 140"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "DoS With Block Gas Limit",
+            "description": "Implicit loop over unbounded data structure.",
+            "severity": "low",
+            "location": "contract token/AaveToken.sol, line 47"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Presence of unused variables",
+            "description": "Unused function parameters “from”, “to”, and “amount”.",
+            "severity": "low",
+            "location": "contract token/AaveToken.sol, multiple lines"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Presence of unused variables",
+            "description": "Unused state variable “______gap”.",
+            "severity": "low",
+            "location": "contract utils/VersionedInitializable.sol, line 43"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused function parameter",
+            "description": "Remove or rename unused function parameters to avoid confusion and potential security risks.",
+            "severity": "n/a",
+            "location": "contracts/utils/MockTransferHook.sol (multiple lines)"
+        }
+    ]
+}

@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/BlockSec-blocksec_coordinape_v1.1_signed.pdf",
+    "project_info": {
+        "url": "https://github.com/coordinape/coordinape-protocol/",
+        "commit_id": "7a8e6173305696c72195fa4242126d284611270c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "coordinape-protocol": "contracts/BlockSec-blocksec_coordinape_v1/coordinape-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect delay time in schedule",
+            "description": "The schedule function in TimeLock has an implementation error that can make the TimeLock mechanism work unexpectedly.",
+            "severity": "medium",
+            "location": "TimeLock.sol, line 58"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential unsafe check in TimeLock",
+            "description": "The require check of the execute() function could be bypassed if timestamps[id] is accidentally set to 0.",
+            "severity": "medium",
+            "location": "TimeLock.sol, lines 70-71"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Insufficient check for _token and _simpleToken",
+            "description": "There does not exist a verification in the init() function that _token and _simpleToken cannot be zero at the same time.",
+            "severity": "low",
+            "location": "wrapper/beacon/ApeVault.sol, lines 72-91"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Lack of authorization of the apeWithdrawSimpleToken function",
+            "description": "The public function apeWithdrawSimpleToken lacks a modifier, allowing anyone to withdraw the simple token from the contract.",
+            "severity": "high",
+            "location": "wrapper/beacon/ApeVault.sol, lines 131-133"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Insufficient sanitation in uploadEpochRoot",
+            "description": "The function does not have enough sanitation and could be abused by attackers to claim tokens.",
+            "severity": "high",
+            "location": "ApeDistributor.sol, lines 52-76"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Do not use unlimited approval",
+            "description": "The delegateDeposit uses unlimited approval, which is controversial and widely debated due to some relevant security incidents.",
+            "severity": "n/a",
+            "location": "ApeRouter.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Use safeTransfer",
+            "description": "The _tapBase uses the transfer function while _tapOnlyProfit uses safeTransfer.",
+            "severity": "n/a",
+            "location": "wrapper/beacon/ApeVault.sol, lines 126-128 and MultiSigs.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-188"
+                ]
+            },
+            "title": "Ensure that the same storage layout of the proxy",
+            "description": "The proxy behaves unexpectedly when the new implementation of ApeVault has a different storage layout.",
+            "severity": "n/a",
+            "location": "Proxy contract, storage layout"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Ensure that state variables in ApeRegistry must be properly initialized",
+            "description": "State variables (e.g., treasury) are not initialized in the constructor(), leading to fund loss when performing tapping operations.",
+            "severity": "n/a",
+            "location": "ApeRegistry.sol, state variables"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove unused variables in ApeVault.sol",
+            "description": "There are two unused variables (hasAccess and allowanceModule) in ApeVault.sol.",
+            "severity": "n/a",
+            "location": "wrapper/beacon/ApeVault.sol, unused variables"
+        }
+    ]
+}

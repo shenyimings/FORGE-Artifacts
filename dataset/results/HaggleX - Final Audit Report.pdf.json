@@ -1,0 +1,152 @@
+{
+    "path": "artifacts/HaggleX - Final Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/HagglexHQ/Hag-token",
+        "commit_id": "9c2d7821bf5740afc4437c9a2bd3ace7ec883137",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Hag-token": "contracts/HaggleX - Final Audit Report/Hag-token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Uncontrolled array length in staking function",
+            "description": "The function staking allows users to set the array length of variable `_staking[_msgSender()][].`",
+            "severity": "high",
+            "location": "staking function, line number 1076"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Non-updateable account addresses",
+            "description": "Non-updateable account addresses could lead to address recovery problems.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Less flexible bulk mint function",
+            "description": "The function mintToMultipleAddresses takes a single amount parameter, making it less flexible.",
+            "severity": "low",
+            "location": "mintToMultipleAddresses function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inefficient gas usage in for loops",
+            "description": "Calculating array length inside for loop definitions uses more gas than necessary.",
+            "severity": "low",
+            "location": "multiple functions, e.g., mintToMultipleAddresses and _removeIndexInArray"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Array Length Assignment",
+            "description": "The contract sets array length with a user-controlled value.",
+            "severity": "high",
+            "location": "HaggleToken.sol#679-1110, _staking[_msgSender()].push(temp) (HaggleToken.sol#1076)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Dangerous Strict Equalities",
+            "description": "The contract uses a dangerous strict equality.",
+            "severity": "n/a",
+            "location": "HaggleToken.sol#1030-1037, require(bool,string)(isStakeLocked(stake_) == true,Withdrawal no longer available, you can only Unstake now!) (HaggleToken.sol#1031)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Uninitialized Local Variables",
+            "description": "The contract has a local variable that is never initialized.",
+            "severity": "n/a",
+            "location": "HaggleToken.sol#1070, temp"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero-Address Validation",
+            "description": "The contract lacks a zero-check on the new owner and minter addresses.",
+            "severity": "n/a",
+            "location": "Owned.transferOwnership(address).newOwner (HaggleToken.sol#275), HaggleXToken.setMinter(address).minter_ (HaggleToken.sol#816)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Dangerous Comparisons (Timestamp)",
+            "description": "The contract uses timestamp for comparisons.",
+            "severity": "n/a",
+            "location": "Various functions in HaggleToken.sol including isStakeLocked, getRemainingLockTime, withdrawStakeReward, withdrawLeadershipBoardReward, withdrawUBIReward, withdrawDevelopmentReward, unstake"
+        }
+    ]
+}

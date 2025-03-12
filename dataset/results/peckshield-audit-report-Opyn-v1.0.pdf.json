@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/peckshield-audit-report-Opyn-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/opynfinance/GammaProtocol/tree/8ba3d7b3825ac34defbbe9e08b7502eea6e696f9",
+        "commit_id": "8ba3d7b3825ac34defbbe9e08b7502eea6e696f9",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "GammaProtocol": "contracts/peckshield-audit-report-Opyn-v1/GammaProtocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Incompatibility With Deflationary Tokens in MarginPool::transferToPool()",
+            "description": "Unexpected balance inconsistencies when comparing internal asset records with external ERC20 token contracts in cases of deflationary tokens.",
+            "severity": "medium",
+            "location": "MarginPool contract, transferToPool() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Insufficient Collateral in Controller::_settleVault()",
+            "description": "The price of collateral may drop significantly, preventing payment for options.",
+            "severity": "medium",
+            "location": "Controller contract, _settleVault() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Uncovered Cases in Otoken::_getMonth()",
+            "description": "The _getMonth() function does not handle input values outside the expected range.",
+            "severity": "info",
+            "location": "Otoken contract, _getMonth() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Incompatibility With _redeem() in PayableProxyController::operate()",
+            "description": "The PayableProxyController::operate() function is incompatible with the Controller::_redeem() function, leading to operation failure.",
+            "severity": "low",
+            "location": "PayableProxyController contract, operate() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Allowance Increasement in PayableProxyController::operate()",
+            "description": "Multiple calls to `PayableProxyController::operate()` can lead to excessive allowance increase due to the cumulative effects of `msg.value` on the WETH allowance.",
+            "severity": "low",
+            "location": "PayableProxyController contract, operate() function"
+        }
+    ]
+}

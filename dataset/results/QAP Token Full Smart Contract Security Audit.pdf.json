@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/QAP Token Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x1EB68d088fD07D15b481DbaF219AC2aB61A6c073",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "QAPToken": "contracts/QAP Token Full Smart Contract Security Audit/QAPToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Design issue",
+            "description": "The _maxTxAmount and numTokensSellToAddToLiquidity values are less than _tTotal(total supply), making it impossible to add liquidity and rendering the _maxTxAmount checking useless.",
+            "severity": "high",
+            "location": "QAP Token contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function includeInReward() may cause an OUT_OF_GAS exception if there are too many addresses in the _excluded list. Similarly, the _getCurrentSupply function may also face this issue.",
+            "severity": "low",
+            "location": "QAP Token contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges to change tax and liquidity fees, max transaction amount, exclude from fee, lock, and unlock.",
+            "severity": "n/a",
+            "location": "QAP Token contract"
+        }
+    ]
+}

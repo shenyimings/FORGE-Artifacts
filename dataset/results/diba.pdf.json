@@ -1,0 +1,200 @@
+{
+    "path": "artifacts/diba.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xE5094E58042e5332CfD25Ed18e4d805e86Fb8f05",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "MadibaBEP20": "contracts/diba/MadibaBEP20"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unlimited liquidity to team wallet",
+            "description": "Contract owner can transfer funds without limit to the team wallet",
+            "severity": "critical",
+            "location": "contract.sol#L338"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unlimited minting of tokens",
+            "description": "Contract owner can mint tokens unlimitedly, leading to inflation",
+            "severity": "critical",
+            "location": "contract.sol#L202,236,503,338"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unauthorized token burning",
+            "description": "Contract owner can burn tokens from any address",
+            "severity": "critical",
+            "location": "contract.sol#L206"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect total supply calculation",
+            "description": "Token holdings increased without updating total supply",
+            "severity": "critical",
+            "location": "contract.sol#L338,342"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inefficient gas usage",
+            "description": "Public functions should be declared external to save gas",
+            "severity": "low",
+            "location": "@openzeppelin/contracts/access/Ownable.sol#L54,62, contracts/MadibaBEP20.sol, BaseToken.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inefficient gas usage",
+            "description": "Constant state variables should be declared constant to save gas",
+            "severity": "low",
+            "location": "contracts/MadibaBEP20.sol#L60"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Unused state variable",
+            "description": "Remove unused state variables",
+            "severity": "low",
+            "location": "contracts/MadibaBEP20.sol#L34,36"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-conformant naming convention",
+            "description": "Follow Solidity naming conventions",
+            "severity": "low",
+            "location": "contracts/MadibaBEP20.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused code",
+            "description": "Remove unused functions to reduce code size",
+            "severity": "low",
+            "location": "@openzeppelin/contracts/utils/Address.sol, contracts/MadibaBEP20.sol, @uniswap/lib/contracts/libraries/TransferHelper.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant boolean comparison",
+            "description": "Remove unnecessary boolean comparisons",
+            "severity": "low",
+            "location": "contracts/MadibaBEP20.sol#L453,485"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Incorrect comparison",
+            "description": "Fix incorrect comparisons",
+            "severity": "low",
+            "location": "contracts/MadibaBEP20.sol#L67"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Loss of precision",
+            "description": "Perform multiplications before divisions to avoid loss of precision",
+            "severity": "low",
+            "location": "contracts/MadibaBEP20.sol#L485"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner abuse",
+            "description": "Functions that can be abused by the owner, like minting and burning tokens.",
+            "severity": "medium",
+            "location": "MadibaBEP20 contract, mint and burn functions"
+        }
+    ]
+}

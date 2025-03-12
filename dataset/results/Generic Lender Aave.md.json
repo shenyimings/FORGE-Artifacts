@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/Generic Lender Aave.md",
+    "project_info": {
+        "url": "https://github.com/Grandthrax/yearnV2-generic-lender-strat",
+        "commit_id": "55b4d3b03845b7b71b24b50baa30823b3e42ebcf",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "yearnV2-generic-lender-strat": "contracts/Generic Lender Aave/yearnV2-generic-lender-strat"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Deposit will be unavailable if lending pool address is updated by AAVE",
+            "description": "The `deposit` function assumes recent approval of token transfer, but the `safeApprove()` is called once during contract initialization and possible changes of lending pool address are not tracked properly.",
+            "severity": "high",
+            "location": "GenericAave.sol, line 132"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "The approval value obtained in the `_initialize()` function may not be enough for the long term of the smart contract",
+            "description": "The `safeApprove()` function is called with an initial value that may decrease to zero over time, locking tokens in the contract forever.",
+            "severity": "medium",
+            "location": "GenericAave.sol, line 49"
+        }
+    ]
+}

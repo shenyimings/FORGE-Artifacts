@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/harmony-busd.pdf",
+    "project_info": {
+        "url": "https://github.com/paxosglobal/busd-contract",
+        "commit_id": "c09ebc5",
+        "address": "0xf0b1eef88956b0a307fa87b5f5671aad6a5d330f",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "busd-contract": "contracts/harmony-busd/busd-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Potential storage of real keys in the simulated keystore",
+            "description": "The simulated keystore file may contain sensitive information, and if any of it refers to the actual accounts that are used for deployment or administration of the BUSD contract.",
+            "severity": "info",
+            "location": "server/simulated-keystore.js"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Domain separator not initialized by default",
+            "description": "The initializeDomainSeparator() method is not called by the initialize() method by default, leaving EIP712_DOMAIN_HASH unset.",
+            "severity": "high",
+            "location": "contracts/BUSDImplementation.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Potentially sensitive account information in code comments",
+            "description": "Account ids are kept in code comments in server/app.js.",
+            "severity": "info",
+            "location": "server/app.js"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Recommended use of hardware wallets",
+            "description": "It is recommended to use cold storage (hardware) wallets for deployment or administration of accounts on the main network.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-311"
+                ],
+                "3": [
+                    "CWE-312"
+                ]
+            },
+            "title": "Insecure approach to key management in the server code",
+            "description": "Private key information is stored as a single, atomic piece of information.",
+            "severity": "low",
+            "location": "server/*"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ],
+                "3": [
+                    "CWE-368"
+                ]
+            },
+            "title": "Non-atomic deployment/initialization of the contracts",
+            "description": "Deployment/initialization of the BUSD contacts is not atomic.",
+            "severity": "low",
+            "location": "migrations/2_deploy_contracts.js"
+        }
+    ]
+}

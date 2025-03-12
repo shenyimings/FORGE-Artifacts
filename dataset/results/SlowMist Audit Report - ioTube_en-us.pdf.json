@@ -1,0 +1,158 @@
+{
+    "path": "artifacts/SlowMist Audit Report - ioTube_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/iotubeproject/iotube-contracts/tree/master/contracts",
+        "commit_id": "2de0aedb74c04cd08ecb69a1378e1efd0ae81aaf",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "iotube-contracts": "contracts/SlowMist Audit Report - ioTube_en-us/iotube-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Business logic error",
+            "description": "originalAssets[_assetID] cannot read data when _assetID == originalAssets.length, and business logic needs to be confirmed.",
+            "severity": "high",
+            "location": "contracts/AssetRegistry.sol#L101-L133"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "The range of values ​ is not limited",
+            "description": "No limit on the value range of upperBounds[_asset] and fees.",
+            "severity": "low",
+            "location": "contracts/AssetUpperBound.sol#L12-L15, contracts/Tube.sol#L92-L94"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Authority transfer enhancement",
+            "description": "No pending and accept mechanism for authority transfer to avoid loss of authority.",
+            "severity": "info",
+            "location": "contracts/CrosschainERC20.sol#L34-L37, contracts/CrosschainERC721.sol#L29-L32"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "unsafe external call risk",
+            "description": "Unsafe external call (success,) = _recipient.call(_data); without checking the whitelist of _recipient and _data.",
+            "severity": "critical",
+            "location": "contracts/Tube.sol#L179-L207"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Excessive authority issue",
+            "description": "The Owner of the Tube contract has too much authority, affecting user assets.",
+            "severity": "high",
+            "location": "contracts/Tube.sol#L71-L78, contracts/Lord.sol#L94-L131"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Business logic flaws",
+            "description": "The swapCoinForCrosschainCoin function will call cerc20.depositTo with msg.sender as the CrosschainCoinRouter contract.",
+            "severity": "medium",
+            "location": "contracts/CrosschainCoinRouter.sol#L37-L40, contracts/CrosschainERC20.sol#L43-L47"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Excessive authority issue",
+            "description": "Owner can set the relayfee arbitrarily with no limit on the value range.",
+            "severity": "medium",
+            "location": "contracts/TubeRouter.sol#L49-L55"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Coding optimization",
+            "description": "withdrawCoin and withdrawToken are used to extract assets, role of fee management should be set to multi-signature.",
+            "severity": "info",
+            "location": "contracts/TubeRouter.sol#L97-L106, contracts/Tube.sol#L229-L238"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Other safety reminders",
+            "description": "Ensure that the K value cannot be the same and that the contract address to which the event belongs is iotube's project contract.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

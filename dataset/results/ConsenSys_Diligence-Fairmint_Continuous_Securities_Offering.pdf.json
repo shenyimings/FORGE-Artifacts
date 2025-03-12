@@ -1,0 +1,152 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Fairmint_Continuous_Securities_Offering.pdf",
+    "project_info": {
+        "url": "https://github.com/Fairmint/c-org",
+        "commit_id": "14f4e3e02b1d756d4d3caad34fbed07a9c0f09a1",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "c-org": "contracts/ConsenSys_Diligence-Fairmint_Continuous_Securities_Offering/c-org"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "FAIR can be stolen using ERC-777 hooks",
+            "description": "Reentrancy vulnerability in ERC-777 token transfers allows attackers to steal FAIR tokens.",
+            "severity": "critical",
+            "location": "DecentralizedAutonomousTrust contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "BigDiv does not prevent overflow in some cases where it should",
+            "description": "BigDiv functions fail to prevent overflows in certain scenarios, leading to unexpected failures and potential exploits.",
+            "severity": "medium",
+            "location": "BigDiv contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Square roots are not calculated accurately for inputs below ~10^30",
+            "description": "The square rooting logic loses accuracy for small input values due to rounding, potentially causing issues in certain scenarios.",
+            "severity": "low",
+            "location": "DecentralizedAutonomousTrust contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate calculations in BigDiv",
+            "description": "BigDiv returns estimates in some cases where it could easily calculate a precise answer.",
+            "severity": "low",
+            "location": "BigDiv contract, functions simpleDiv and bigDiv2x1"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused code in BigDiv functions",
+            "description": "Some parameters and associated logic can be removed from BigDiv’s functions to simplify the code.",
+            "severity": "low",
+            "location": "BigDiv contract, functions bigDiv2x1, bigDiv3x1, and bigDiv3x3"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Unnecessary Approval event emission in transferFrom",
+            "description": "The method transferFrom() sends already approved tokens to some address but also emits an Approval event.",
+            "severity": "low",
+            "location": "FAIR contract, function transferFrom"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Insufficient on-chain logic for beneficiary token purchases",
+            "description": "The buy() function contains unique logic for identifying and processing an investment by the beneficiary, which can be easily circumvented.",
+            "severity": "low",
+            "location": "DecentralizedAutonomousTrust contract, function buy"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ]
+            },
+            "title": "Non-compliance with ERC-777 standard",
+            "description": "The contract does not allow per-user revocation of the default operator and does not call the ERC777 tokensToSend and tokensReceived hooks within transfer and transferFrom.",
+            "severity": "low",
+            "location": "FAIR contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Non-compliance with ERC1404 standard",
+            "description": "The ERC1404 standard is an extension of the ERC20 standard, which has been implemented as a standalone contract but does not contain all of the extra functions required by ERC1404.",
+            "severity": "low",
+            "location": "FAIR contract"
+        }
+    ]
+}

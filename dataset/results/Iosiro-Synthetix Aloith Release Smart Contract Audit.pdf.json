@@ -1,0 +1,53 @@
+{
+    "path": "artifacts/Iosiro-Synthetix Aloith Release Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix",
+        "commit_id": "1159c8aad0a1880d71e77e3b14f3a17826819136",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix": "contracts/Iosiro-Synthetix Aloith Release Smart Contract Audit/synthetix"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect invalid rate logic",
+            "description": "Using `AND` instead of `OR` operator to determine whether any rates were invalid.",
+            "severity": "low",
+            "location": "BaseDebtCache.sol#L154, BaseDebtCache.sol#L200, BaseDebtCache.sol#L218, DebtCache.sol#L96"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "sETH rate may be invalid when remitting fee",
+            "description": "Not validating the sETH rate to ensure it is valid before remitting fees.",
+            "severity": "low",
+            "location": "EtherWrapper.sol#L228"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Use of transfer function",
+            "description": "Using `transfer()` function which relies on the receiving contract to have a fallback function below the gas limit.",
+            "severity": "low",
+            "location": "NativeEtherWrapper.sol#L81"
+        }
+    ]
+}

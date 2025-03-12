@@ -1,0 +1,143 @@
+{
+    "path": "artifacts/2-cod.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x7abf508c022d38f8ecae6258129a96545086fef6",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "Codifi": "contracts/2-cod/Codifi"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "CCR - Contract Centralization Risk",
+            "description": "The `startTrading` function introduces a centralization risk due to the requirement for the contract owner to manually supply an amount higher than `_tTotal.mul(_initialBuyTax).div(100)` to the contract.",
+            "severity": "low",
+            "location": "Codifi.sol#L296"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "RRS - Redundant Require Statement",
+            "description": "The `add` function uses a `require` statement to prevent overflow errors, which is redundant in Solidity versions 0.8.0 and later.",
+            "severity": "low",
+            "location": "Codifi.sol#L46"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RSML - Redundant SafeMath Library",
+            "description": "The usage of the SafeMath library adds complexity, overhead, and increases gas consumption unnecessarily in Solidity versions 0.8.0 and later.",
+            "severity": "low",
+            "location": "Codifi.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "IDI - Immutable Declaration Improvement",
+            "description": "State variables can be declared as immutable to save gas when defined.",
+            "severity": "low",
+            "location": "Codifi.sol#L158"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "L02 - State Variables could be Declared Constant",
+            "description": "State variables can be declared as constant using the `constant` keyword to ensure they cannot be changed after they have been set.",
+            "severity": "low",
+            "location": "Codifi.sol#L152,153"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the Solidity naming conventions, which can make it harder to understand and maintain.",
+            "severity": "low",
+            "location": "Codifi.sol#L120,148,149,150,151,152,153,154,155"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "L05 - Unused State Variable",
+            "description": "An unused state variable is declared in the contract.",
+            "severity": "low",
+            "location": "Codifi.sol#L137"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "L07 - Missing Events Arithmetic",
+            "description": "The events in the contract are not properly triggered and logged.",
+            "severity": "low",
+            "location": "Codifi.sol#L325,326"
+        }
+    ]
+}

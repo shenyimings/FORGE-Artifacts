@@ -1,0 +1,131 @@
+{
+    "path": "artifacts/Hacken-thrivecoin.pdf",
+    "project_info": {
+        "url": "https://github.com/ThriveCoin/thc-smart-contracts-sol",
+        "commit_id": "db78d6b4cf6dcb9e49e7a1f146851f77fa872bbf",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "thc-smart-contracts-sol": "contracts/Hacken-thrivecoin/thc-smart-contracts-sol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "The old owner keeps admin roles",
+            "description": "Admin roles are not removed from the old owner on transferring ownership.",
+            "severity": "high",
+            "location": "ThriveCoinERC20Token.sol, function: transferOwnership; ThriveCoinERC20TokenPolygon.sol, function: transferOwnership"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Missing revocable validation",
+            "description": "The function should be available to call only if the revocable parameter was set as true on contract deploying, but now the validation is missing.",
+            "severity": "high",
+            "location": "ThriveCoinVestingSchedule.sol, function: revoke"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Claiming logic corrupted",
+            "description": "Users may not withdraw any tokens if deposited only part of the vested amount due to lack of validation.",
+            "severity": "high",
+            "location": "ThriveCoinVestingSchedule.sol, function: claim"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Depositing and withdrawing logic corrupted",
+            "description": "Revoking vesting may block some tokens on the contract if there were deposited more tokens than the vested amount.",
+            "severity": "medium",
+            "location": "ThriveCoinVestingSchedule.sol, function: revoke"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Public access to service function",
+            "description": "A service function is accessible by users and should be internal.",
+            "severity": "medium",
+            "location": "ERC20DynamicCap.sol, function: updateCap"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Locked tokens may not be spent",
+            "description": "Even if tokens are locked for a spender, the spender may not transfer them without allowance.",
+            "severity": "medium",
+            "location": "ERC20LockedFunds.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating pragma",
+            "description": "The contracts use floating pragma ^0.8.0.",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Functions that can be declared as external",
+            "description": "Public functions that are never called in the contract should be declared as external to save Gas.",
+            "severity": "low",
+            "location": "Multiple contracts"
+        }
+    ]
+}

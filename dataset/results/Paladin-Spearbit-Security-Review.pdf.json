@@ -1,0 +1,185 @@
+{
+    "path": "artifacts/Paladin-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/PaladinFinance/Warden-Quest",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Warden-Quest": "contracts/Paladin-Spearbit-Security-Review/Warden-Quest"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Verify user has indeed voted",
+            "description": "Error in merkle trees can lead to unintended rewards assignment",
+            "severity": "high",
+            "location": "MultiMerkleDistributor.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Tokens could be sent / withdrawn multiple times by accident",
+            "description": "Functions closeQuestPeriod() and closePartOfQuestPeriod() interfere with each other",
+            "severity": "high",
+            "location": "QuestBoard.sol#L678-L815"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Limit possibilities of recoverERC20()",
+            "description": "Function recoverERC20() allows retrieval of all ERC20 tokens, enabling rug pull",
+            "severity": "medium",
+            "location": "MultiMerkleDistributor.sol#L296-L300, QuestBoard.sol#L986-L991"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Updating QuestBoard in MultiMerkleDistributor.sol will not work",
+            "description": "Updating QuestManager/QuestBoard can overwrite previous quests",
+            "severity": "medium",
+            "location": "MultiMerkleDistributor.sol#L285-L287"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Old quests can be extended via increaseQuestDuration()",
+            "description": "Function increaseQuestDuration() allows extending past quests",
+            "severity": "medium",
+            "location": "QuestBoard.sol#L380-L438"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Accidental call of addQuest could block contracts",
+            "description": "addQuest() function can be called accidentally, blocking QuestBoard functionality",
+            "severity": "medium",
+            "location": "MultiMerkleDistributor.sol#L240, QuestBoard.sol#L276-L369"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Reduce impact of emergencyUpdatequestPeriod()",
+            "description": "Function emergencyUpdatequestPeriod() can lead to claiming issues",
+            "severity": "medium",
+            "location": "MultiMerkleDistributor.sol#L311-L322"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Verify the correct merkle tree is used",
+            "description": "No verification of correct merkle tree usage",
+            "severity": "medium",
+            "location": "MultiMerkleDistributor.sol#L260-L275, balance-tree.ts#L30-L35, MultiMerkleDistributor.sol#L126-L144"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Prevent mixing rewards from different quests and periods",
+            "description": "No verification of sum of amounts in merkle tree",
+            "severity": "medium",
+            "location": "MultiMerkleDistributor.sol#L260-L275"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Prevent accidental call of emergencyUpdatequestPeriod()",
+            "description": "Functions updateQuestPeriod() and emergencyUpdatequestPeriod() are very similar, which may lead to an incorrect usage.",
+            "severity": "low",
+            "location": "MultiMerkleDistributor.sol#L260-L275, MultiMerkleDistributor.sol#L311-L322"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Events for owner only functions are missing",
+            "description": "Several key actions are defined without event declarations.",
+            "severity": "info",
+            "location": "QuestBoard.sol#L914, #924, #934, #944, #954, #964, #974"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy in includeInReward() function",
+            "description": "The function `includeInReward()` uses a loop to...",
+            "severity": "low",
+            "location": "includeInReward()"
+        }
+    ]
+}

@@ -1,0 +1,284 @@
+{
+    "path": "artifacts/Solidified-Sifchain_Peggy.pdf",
+    "project_info": {
+        "url": "https://github.com/Sifchain/sifnode",
+        "commit_id": "289a0fdb2c6d41c545a2e87054b9d306980f6174",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "sifnode": "contracts/Solidified-Sifchain_Peggy/sifnode"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Potential namespace collisions through token symbol",
+            "description": "Tokens are identified by their symbol in both EthereumBank.sol and CosmosBank.sol, leading to namespace collisions.",
+            "severity": "high",
+            "location": "EthereumBank.sol, CosmosBank.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing checks for maximum consensus threshold",
+            "description": "No maximum is enforced for the consensus threshold, which can lead to unreachable consensus.",
+            "severity": "high",
+            "location": "Oracle.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-74"
+                ],
+                "3": [
+                    "CWE-75"
+                ],
+                "4": [
+                    "CWE-76"
+                ]
+            },
+            "title": "Malleable signatures",
+            "description": "The verify() function in Valset.sol uses the built-in ecrecover() function, which allows malleable signatures.",
+            "severity": "high",
+            "location": "Valset.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Duplicate validators are accepted in validator set",
+            "description": "The Valset.sol contract does not check for duplicate validator additions, producing inconsistencies related to voting power and consensus.",
+            "severity": "low",
+            "location": "Valset.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Ether transfers depending on gas stipend may not work if the recipient is a smart contract",
+            "description": "The transfer() function in EthereumBank.sol uses a fixed gas stipend that may be insufficient for smart contract recipients.",
+            "severity": "low",
+            "location": "EthereumBank.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Compiler version",
+            "description": "The code uses an outdated compiler version (pragma solidity ^0.5.0;).",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Misleading behavior for recoverGas function",
+            "description": "The refund is capped at half the transaction cost, making it misleading.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Bridge bank can receive ETH directly",
+            "description": "The BridgeBank.sol contract has a leftover test code that allows direct ETH receipt.",
+            "severity": "high",
+            "location": "BridgeBank contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary modifier",
+            "description": "EthereumBank.sol has an unnecessary modifier for avoiding nonce overflow.",
+            "severity": "info",
+            "location": "EthereumBank.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-358"
+                ]
+            },
+            "title": "Unnecessary protection in view function",
+            "description": "The checkBridgeProphecy() function checks the caller, but it's a view function and doesn’t change state.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Optimization on token deployment costs",
+            "description": "Token deployment can be optimized using a proxy pattern.",
+            "severity": "low",
+            "location": "Token deployment"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ],
+                "3": [
+                    "CWE-595"
+                ]
+            },
+            "title": "Consider using a mock address for ETH",
+            "description": "Using a mock address (0xeeeee...) instead of 0x0 for ETH would avoid confusion with uninitialized addresses.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect natspect comments",
+            "description": "Functions burnFunds() and lockFunds() have incorrect natspec comments.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Node package inclusion in Solidity files breaks build system",
+            "description": "Relative path imports break the build system; direct import is recommended.",
+            "severity": "low",
+            "location": "Solidity files"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ],
+                "3": [
+                    "CWE-1104"
+                ]
+            },
+            "title": "Outdated indirect dependency with multiple known security vulnerabilities",
+            "description": "The codebase uses an outdated version of the ecdt library with known vulnerabilities.",
+            "severity": "critical",
+            "location": "Go Components"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Relayer quits silently on failure to connect to subscribe to Ethereum events",
+            "description": "The relayer terminates silently if Ethereum connection fails, making monitoring and automatic relaunch difficult.",
+            "severity": "high",
+            "location": "Relay service"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Missing default case in switch statement",
+            "description": "A default case is missing in the switch statement for processing Ethereum event data.",
+            "severity": "low",
+            "location": "Go Components"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Empty code blocks",
+            "description": "Unimplemented functions are marked as TODO, which should be avoided in production code.",
+            "severity": "info",
+            "location": "Go components"
+        }
+    ]
+}

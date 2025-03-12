@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/LunarCRUSH_SC-Audit-Report_03052023_SA-1204.pdf",
+    "project_info": {
+        "url": "https://github.com/Zilliqa/zilliqa-developer/tree/ZT-13_burning_zrc2_tokens",
+        "commit_id": "ZT-13_burning_zrc2_tokens",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "zilliqa-developer": "contracts/LunarCRUSH_SC-Audit-Report_03052023_SA-1204/zilliqa-developer"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "H01. Requirements Violation",
+            "description": "CancelBurn function ignores paused state of the contract.",
+            "severity": "high",
+            "location": "./contracts/BurnTokensAnyZRC2.sol : CancelBurn()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "M01. CEI Pattern Violation",
+            "description": "Checks-Effects-Interactions pattern is violated in CancelBurn function.",
+            "severity": "medium",
+            "location": "./contracts/BurnTokensAnyZRC2.sol : CancelBurn()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-358"
+                ]
+            },
+            "title": "M02. Requirements Violation",
+            "description": "Recovering tokens pending for burn should not be possible after the specified burncancelblocks threshold, but implementation violates this requirement.",
+            "severity": "medium",
+            "location": "./contracts/BurnTokensAnyZRC2.sol : ProcessBurnTokensHelper()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "L01. Missing Events",
+            "description": "Events for critical state changes should be emitted for tracking things off-chain.",
+            "severity": "low",
+            "location": "./contracts/BurnTokensAnyZRC2.sol : ChangeBurnCancelBlocks(), CancelBurn()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L02. Unused Error",
+            "description": "Unused errors should be removed from the contract.",
+            "severity": "low",
+            "location": "./contracts/BurnTokensAnyZRC2.sol : ZRC2AddressNoMatch"
+        }
+    ]
+}

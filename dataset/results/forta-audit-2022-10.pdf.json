@@ -1,0 +1,173 @@
+{
+    "path": "artifacts/forta-audit-2022-10.pdf",
+    "project_info": {
+        "url": "https://github.com/forta-network/forta-contracts",
+        "commit_id": "50a985c4ca106840f38b2dcb728e00c50ebc7b26",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "forta-contracts": "contracts/forta-audit-2022-10/forta-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Logic Error",
+            "description": "The getCurrentEpochTimestamp() function incorrectly calculates the start date of the current epoch due to a mistake in offset handling.",
+            "severity": "high",
+            "location": "FortaStaking contract, Accumulators.sol:L103-L110"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Unintended Behavior",
+            "description": "The _unfreeze() function does not check for other active proposals, allowing malicious actors to avoid punishment.",
+            "severity": "high",
+            "location": "SlashingController contract, code/contracts/components/staking/slashing/SlashingController.sol:L174-L179"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Storage Layout Issue",
+            "description": "The __gap variables in some contracts are not calculated correctly, which may lead to storage collisions during upgrades.",
+            "severity": "medium",
+            "location": "Various contracts (e.g., BaseComponentUpgradeable, AgentRegistryCore, Dispatch, NodeRunnerRegistryCore)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Denial of Service",
+            "description": "AgentRegistryCore allows anyone to mint an agentID for a desired owner address, leading to potential DoS.",
+            "severity": "medium",
+            "location": "AgentRegistryCore contract, code/contracts/components/agents/AgentRegistryCore.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Logic Error",
+            "description": "RewardsDistributor contract does not check if a shareId already received rewards for that epochNumber.",
+            "severity": "medium",
+            "location": "RewardsDistributor contract, code/contracts/components/staking/rewards/RewardsDistributor.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy Vulnerability",
+            "description": "Reentrancy occurs on all mints in the FortaStaking contract due to a smart contract acceptance check.",
+            "severity": "medium",
+            "location": "FortaStaking contract, code/contracts/components/staking/FortaStaking.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Inefficient Code",
+            "description": "RewardsDistributor function performs the same check twice in a row.",
+            "severity": "low",
+            "location": "RewardsDistributor contract, code/contracts/components/staking/rewards/RewardsDistributor.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Event Spam",
+            "description": "Users can claim rewards without checking if they have any associated rewards at all.",
+            "severity": "low",
+            "location": "RewardsDistributor contract, code/contracts/components/staking/rewards/RewardsDistributor.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Dead Code",
+            "description": "SubjectTypes.sol file is not being utilized and has duplicate functionality with SubjectTypeValidator.sol.",
+            "severity": "low",
+            "location": "SubjectTypes.sol file, code/contracts/components/staking/SubjectTypes.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Insufficient Validation",
+            "description": "SlashingController contract does not check if a subject has any stake at all before adjusting the slashing proposal.",
+            "severity": "low",
+            "location": "SlashingController contract, code/contracts/components/staking/slashing/SlashingController.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Code Readability Issue",
+            "description": "Inconsistencies were found between comments and implemented code logic.",
+            "severity": "low",
+            "location": "SubjectTypeValidator.sol, Dispatch.sol, NodeRunnerRegistryCore.sol, ScannerToNodeRunnerMigration.sol (multiple locations)"
+        }
+    ]
+}

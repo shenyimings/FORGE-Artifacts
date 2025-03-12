@@ -1,0 +1,167 @@
+{
+    "path": "artifacts/Astaria-Spearbit-Security-Review-July.pdf",
+    "project_info": {
+        "url": "https://github.com/AstariaXYZ/astaria-core",
+        "commit_id": "b9d76c2fe3eb3418362ad280fbf1e5e98dd385a4",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "astaria-core": "contracts/Astaria-Spearbit-Security-Review-July/astaria-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unvalidated extra data in CollateralToken callback",
+            "description": "An attacker can spoof extra data and take advantage of this vulnerability, allowing them to own an NFT token and receive the loaned amount from a public vault.",
+            "severity": "critical",
+            "location": "CollateralToken.sol#L125"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Multiple calls to AstariaRouter.liquidate() for expired lien/stack",
+            "description": "Multiple adversaries can manipulate storage parameters by calling AstariaRouter.liquidate(...) multiple times, leading to unwanted consequences.",
+            "severity": "critical",
+            "location": "AstariaRouter.sol#L681"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrectly set maxStrategistFee in AstariaRouter's constructor",
+            "description": "In AstariaRouter's constructor, `s.maxStrategistFee` is set to `uint256(50e17)`, whereas it should be set to `0.5 * 1e18`.",
+            "severity": "high",
+            "location": "AstariaRouter.sol#L111 and L325-L329"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Shutdown vault still allows user commitments to liens using the vault",
+            "description": "When a vault is shut down, users should not be able to take more liens using the funds from this vault.",
+            "severity": "high",
+            "location": "AstariaRouter.sol#L864-L872 and VaultImplementation.sol#L142-L151"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "DoS vulnerability in vault creation by lien owners",
+            "description": "Lien owners can front-run and compute the to-be-deployed vault address, and then transfer their lien token to this address, causing the vault creation process to fail.",
+            "severity": "high",
+            "location": "AstariaRouter.sol#L118-L173, AstariaRouter.sol#L202"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Locked native tokens sent to DepositHelper",
+            "description": "DepositHelper has the following two endpoints: fallback() external payable {} and receive() external payable {}",
+            "severity": "low",
+            "location": "DepositHelper.sol#L43-L45"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Updated EpochLength values are not validated",
+            "description": "Sanity check is missing for updated s.minEpochLength and s.maxEpochLength.",
+            "severity": "low",
+            "location": "AstariaRouter.sol#L319-L322"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "CollateralToken's conduit would have an open channel to an old Seaport when Seaport is updated",
+            "description": "After filing for a new Seaport, the old Seaport would still have an open channel to it from the CollateralToken's conduit.",
+            "severity": "low",
+            "location": "CollateralToken.sol#L343-L365"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Cache VAULT().ROUTER().LIEN_TOKEN()",
+            "description": "In WithdrawProxy.onERC721Received(), VAULT().ROUTER().LIEN_TOKEN() is read twice from the storage.",
+            "severity": "info",
+            "location": "WithdrawProxy.sol#L394-L399"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Reentrancy in includeInReward() function",
+            "description": "The function `includeInReward()` uses a loop to...",
+            "severity": "low",
+            "location": "includeInReward()"
+        }
+    ]
+}

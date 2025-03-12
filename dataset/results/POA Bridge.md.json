@@ -1,0 +1,335 @@
+{
+    "path": "artifacts/POA Bridge.md",
+    "project_info": {
+        "url": "https://github.com/poanetwork/poa-parity-bridge-contracts/tree/",
+        "commit_id": "d796891477e15823c7bdd5b0b2f9a38e10f17b94",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "poa-parity-bridge-contracts": "contracts/POA Bridge/poa-parity-bridge-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unverified validator removal",
+            "description": "No verification that a `_validator` being removed is an actual validator, causing `validatorCount()` to be inconsistent.",
+            "severity": "high",
+            "location": "U_BridgeValidators.sol, Line 37"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect use of `hashSender`",
+            "description": "Using `hashSender` instead of `hash`, causing signatures number for `message` to never exceed 1.",
+            "severity": "high",
+            "location": "U_ForeignBridge.sol, Lines 124 and 139"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Multiple token releases",
+            "description": "Increasing `requiredSignatures` can lead to multiple token releases.",
+            "severity": "high",
+            "location": "U_ForeignBridge.sol, Line 103"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Repeated generation of `CollectedSignatures`",
+            "description": "Increasing `requiredSignatures` can cause repeated generation of `CollectedSignatures`.",
+            "severity": "high",
+            "location": "U_ForeignBridge.sol, Line 143"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Quadratic complexity algorithm",
+            "description": "Algorithm has quadratic complexity, risking block gas limit.",
+            "severity": "info",
+            "location": "Helpers.sol, Line 49"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Initialization security risk",
+            "description": "Any participant can initialize the contract, posing a security risk.",
+            "severity": "info",
+            "location": "U_BridgeValidators.sol, Line 14"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Endless loop due to uint8 overflow",
+            "description": "Overflow of `uint8`-type loop count when `requiredSignatures` is equal or greater than 256.",
+            "severity": "info",
+            "location": "Helpers.sol, Line 46"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Incorrect use of `false`",
+            "description": "Use of `false` where `require` should be used",
+            "severity": "n/a",
+            "location": "Helpers.sol, line 50"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unmasked bits reading",
+            "description": "Reading 32 bytes without applying a mask",
+            "severity": "n/a",
+            "location": "Message.sol, line 27"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Outdated free memory pointer",
+            "description": "Not updating the free memory pointer",
+            "severity": "n/a",
+            "location": "Proxy.sol, line 30"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-283"
+                ]
+            },
+            "title": "Missing owner check in initialize method",
+            "description": "Failing to check for zero address as owner",
+            "severity": "n/a",
+            "location": "U_BridgeValidators.sol, line 14"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant condition",
+            "description": "Duplicated condition in addValidator method",
+            "severity": "n/a",
+            "location": "U_BridgeValidators.sol, line 20"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "Incorrect use of `assert`",
+            "description": "Using `assert` instead of `require`",
+            "severity": "n/a",
+            "location": "U_BridgeValidators.sol, line 28"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Function can be declared as view",
+            "description": "Declaring function without `view` modifier",
+            "severity": "n/a",
+            "location": "POA20.sol, line 46"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary use of `super`",
+            "description": "Using `super` when not necessary",
+            "severity": "n/a",
+            "location": "POA20.sol, line 31"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "No verification of transfer output",
+            "description": "Not checking the output of a transfer function",
+            "severity": "n/a",
+            "location": "POA20.sol, line 31"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Ignoring onTokenTransfer output",
+            "description": "Not processing the output of the onTokenTransfer function",
+            "severity": "n/a",
+            "location": "POA20.sol, line 43"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant check",
+            "description": "Duplicate address zero check",
+            "severity": "n/a",
+            "location": "U_ForeignBridge.sol, line 45"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Event emission logic mismatch",
+            "description": "Emission of Withdraw event does not match documentation",
+            "severity": "n/a",
+            "location": "U_ForeignBridge.sol, line 50"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Tokens burned immediately",
+            "description": "Burning tokens immediately instead of after validation",
+            "severity": "n/a",
+            "location": "U_ForeignBridge.sol, line 49"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing daily limit check",
+            "description": "Not checking for zero daily limit",
+            "severity": "n/a",
+            "location": "U_HomeBridge.sol, line 22"
+        }
+    ]
+}

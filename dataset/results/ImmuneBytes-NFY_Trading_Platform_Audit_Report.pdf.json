@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/ImmuneBytes-NFY_Trading_Platform_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/NFYFinance/NFY-Trading-Platform/",
+        "commit_id": "a5c653e59aca07751c1b7891b7564cf3c4676511",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "NFY-Trading-Platform": "contracts/ImmuneBytes-NFY_Trading_Platform_Audit_Report/NFY-Trading-Platform"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Non handling of zero address can result in funds getting locked",
+            "description": "No check for zero (0x00) address for devAddress and communityFund address variables.",
+            "severity": "high",
+            "location": "NFYTradingPlatform.sol, setDevFeeAddress() and setCommunityFeeAddress() functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Same token can be added multiple times via addToken() function",
+            "description": "The addToken() function lacks a check for duplicacy of a token.",
+            "severity": "medium",
+            "location": "NFYTradingPlatform.sol, addToken() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Precision error during fee calculation",
+            "description": "Precision error can occur at line 200 and 201 due to division before multiplication.",
+            "severity": "low",
+            "location": "NFYTradingPlatform.sol, createLimitOrder() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Unused variable - ETH",
+            "description": "Unused bytes32 constant variable named as ETH is declared but never used.",
+            "severity": "low",
+            "location": "NFYTradingPlatform.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant balance check in createLimitOrder() function",
+            "description": "Redundant require statement which checks the NFY token balance of the caller.",
+            "severity": "low",
+            "location": "NFYTradingPlatform.sol, createLimitOrder() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked return value of ERC20 functions",
+            "description": "Unchecked return value of transferFrom() functions of ERC20 token.",
+            "severity": "low",
+            "location": "NFYTradingPlatform smart contract"
+        }
+    ]
+}

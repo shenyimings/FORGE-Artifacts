@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/Izar Release Smart Contract Audit _ iosiro.md",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix",
+        "commit_id": "f5e26cba9355469ebcfbd3f9c24e5447dcd52bb2",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix": "contracts/Izar Release Smart Contract Audit _ iosiro/synthetix"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Restrict functions that could affect positions with pending delayed orders",
+            "description": "To thoroughly protect the system from users being able to control the execution of their delayed orders, all user-controlled functions that could impact the execution of a pending delayed order should be protected.",
+            "severity": "medium",
+            "location": "_transferMargin() function in PerpsV2Market.sol contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Accrue funding for flagged positions with commit deposits",
+            "description": "When flagging a position for liquidation that has a pending delayed order with a commit deposit, the margin does not accrue funding and recompute the margin.",
+            "severity": "low",
+            "location": "Margin calculation in PerpsV2MarketLiquidate.sol contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing events",
+            "description": "Events should be emitted to indicate that the commit deposit is returned to the account’s margin and include the price to facilitate tracking price movements between flagging and liquidation.",
+            "severity": "info",
+            "location": "Event emission in PerpsV2Market.sol contract"
+        }
+    ]
+}

@@ -1,0 +1,233 @@
+{
+    "path": "artifacts/Warped_SC-Audit-Report_20_06_23_SA-1317.pdf",
+    "project_info": {
+        "url": "https://github.com/warpedgames/contracts-warped-token",
+        "commit_id": "9b59231f2093f29d486d596c7891c311cb9ebe63",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts-warped-token": "contracts/Warped_SC-Audit-Report_20_06_23_SA-1317/contracts-warped-token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ],
+                "4": [
+                    "CWE-825"
+                ],
+                "5": [
+                    "CWE-416"
+                ]
+            },
+            "title": "Denial of Service",
+            "description": "Using the delete keyword to remove NFTs from an array, leading to a zero address in the array.",
+            "severity": "critical",
+            "location": "./contracts/WarpedTaxHandler.sol, removeNFTs()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Front Running",
+            "description": "Setting amount out values to 0 when interacting with Uniswap allows attackers to perform front running attacks.",
+            "severity": "high",
+            "location": "./contracts/WarpedTokenManager.sol, addLiquidity(), ./contracts/WarpedTreasuryHandler.sol, _addLiquidity(), _swapTokensForEth()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Denial Of Service",
+            "description": "The _getTaxBasisPoints function looping over all NFTs and tax rates can exceed the block Gas limit.",
+            "severity": "high",
+            "location": "./contracts/WarpedTokenManager.sol, _getTaxBasisPoints()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Data Consistency",
+            "description": "The primary pool address may be removed from the _exchangePools without updating the primaryPool variable.",
+            "severity": "medium",
+            "location": "./contracts/WarpedPoolManager.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-237"
+                ],
+                "4": [
+                    "CWE-240"
+                ]
+            },
+            "title": "Data Consistency",
+            "description": "NFTs are not checked for uniqueness when added, resulting in duplicates and inconsistent contract state.",
+            "severity": "low",
+            "location": "./contracts/WarpedTaxHandler.sol, addNFTs()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Requirement Violation - Data Consistency",
+            "description": "The requirement for thresholds to be placed in ascending order is not checked in the setTaxRates function.",
+            "severity": "medium",
+            "location": "./contracts/WarpedTaxHandler.sol, setTaxRates()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing Event",
+            "description": "Events are not emitted for critical state changes.",
+            "severity": "low",
+            "location": "Various contracts (WarpedTaxHandler, WarpedToken, WarpedTreasuryHandler)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked Transfer",
+            "description": "The function withdraw() does not use SafeERC20 library for checking the result of ERC20 token transfer.",
+            "severity": "medium",
+            "location": "./contracts/WarpedTreasuryHandler.sol, withdraw()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Modification Of Well Known Contract",
+            "description": "The nonReentrant modifier does not revert in case of reentrancy but executes return.",
+            "severity": "n/a",
+            "location": "./contracts/LenientReentrancyGuard.sol, nonReentrant()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "Address parameters are being used without checking against the possibility of 0x0.",
+            "severity": "medium",
+            "location": "./contracts/WarpedTreasuryHandler.sol, initialize(), ./contracts/WarpedToken.sol, constructor()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Empty Constructor",
+            "description": "The constructor is empty and redundant.",
+            "severity": "low",
+            "location": "./contracts/WarpedPoolManager.sol, constructor()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "State Variable That Should be Constant",
+            "description": "State variables that do not change their value should be declared constant to save Gas.",
+            "severity": "low",
+            "location": "./contracts/WarpedTaxHandler.sol, maxTaxRate"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Inefficient Gas Model",
+            "description": "String variables are attributed with the keyword unicode, which is unnecessary and costs additional Gas.",
+            "severity": "low",
+            "location": "./contracts/WarpedToken.sol, _NAME, _SYMBOL"
+        }
+    ]
+}

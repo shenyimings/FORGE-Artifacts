@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/CompliFi.pdf",
+    "project_info": {
+        "url": "https://github.com/CompliFi/complifi-protocol/tree/912e93014aa16a9b6987556d971ed2b599b8cba7",
+        "commit_id": "912e93014aa16a9b6987556d971ed2b599b8cba7",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "complifi-protocol": "contracts/CompliFi/complifi-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Vault.changeState does not correctly emit the old state",
+            "description": "The changeState function updates the state variable before emitting an event, causing the previous state to be lost and the new state to be logged twice.",
+            "severity": "info",
+            "location": "Vault contract, changeState function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Contracts used as dependencies do not track upstream changes",
+            "description": "The contracts used as dependencies do not track upstream changes, which may lead to outdated or insecure code being used.",
+            "severity": "low",
+            "location": "*/contracts/libs"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Initialization functions can be front-run",
+            "description": "The FeeLoggerProxy and VaultFactory implementation contracts have initializer functions that can be front-run, allowing an attacker to incorrectly initialize the contracts.",
+            "severity": "low",
+            "location": "FeeLoggerProxy and VaultFactory contracts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of access modifiers on Vault.initialize leaves it susceptible to front-running",
+            "description": "The Vault contract's initialization function lacks access modifiers, making it susceptible to front-running attacks.",
+            "severity": "medium",
+            "location": "Vault.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of zero-value checks on setter functions",
+            "description": "Certain setter functions fail to validate incoming arguments, allowing callers to accidentally set important state variables to the zero address.",
+            "severity": "info",
+            "location": "DerivativeSpecification contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Solidity compiler optimizations can be problematic",
+            "description": "The enabled optional compiler optimizations in Solidity may introduce security vulnerabilities due to optimization bugs.",
+            "severity": "info",
+            "location": "truffle-config.js, hardhat.config.ts"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of contract and user documentation",
+            "description": "Parts of the codebase lack proper documentation, making it difficult for users and developers to understand the contracts correctly.",
+            "severity": "info",
+            "location": "Throughout the codebase"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing events for critical operations",
+            "description": "Several critical operations do not trigger events, making it difficult to review the correct behavior of the contracts.",
+            "severity": "info",
+            "location": "Throughout the codebase"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Vault.constructor would benefit from an additional check of collateralSplit",
+            "description": "The Vault constructor would benefit from an additional check of collateralSplit to ensure data integrity.",
+            "severity": "info",
+            "location": "Vault.sol"
+        }
+    ]
+}

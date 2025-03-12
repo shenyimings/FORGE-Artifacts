@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/peckshield-audit-report-defiyieldprotocol-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/dypfinance/DYP-staking-governance-dapp/tree/92c497f0ff831e55b0b93a57d82b65604526ede1",
+        "commit_id": "92c497f0ff831e55b0b93a57d82b65604526ede1",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "DYP-staking-governance-dapp": "contracts/peckshield-audit-report-defiyieldprotocol-v1/DYP-staking-governance-dapp"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missed Sanity Check in Governance::noContractsAllowed()",
+            "description": "The internal function, isContract, called by noContractsAllowed modifier determines whether the caller is a contract by checking extcodesize of the caller.",
+            "severity": "low",
+            "location": "Governance::noContractsAllowed() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent DYP Disbursed in Staking::disburseTokens()",
+            "description": "The amount of DYP to be paid out is calculated according to the time passed since the contract is deployed, and there are couple corner cases that make the distribution inconsistent.",
+            "severity": "info",
+            "location": "disburseTokens() function in Staking contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Unfair Token Lockup Mechanism",
+            "description": "Tokens locked for old proposals could be locked for more than VOTE_DURATION.",
+            "severity": "info",
+            "location": "Governance contract, functions withdrawAllTokens() and addVotes()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unsafe Ownership Transition",
+            "description": "If the newOwner is not the exact address of the new owner, nobody could own that contract anymore.",
+            "severity": "low",
+            "location": "Owned contract, function transferOwnership()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Functions in Interfaces",
+            "description": "There are unused functions in interfaces such as IUniswapV2Router01.",
+            "severity": "info",
+            "location": "Staking contract, interfaces IUniswapV2Router01, etc."
+        }
+    ]
+}

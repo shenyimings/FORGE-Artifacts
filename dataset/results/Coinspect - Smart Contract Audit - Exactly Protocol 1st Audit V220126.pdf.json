@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/Coinspect - Smart Contract Audit - Exactly Protocol 1st Audit V220126.pdf",
+    "project_info": {
+        "url": "https://github.com/exactly-finance/protocol",
+        "commit_id": "n/a",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol": "contracts/Coinspect - Smart Contract Audit - Exactly Protocol 1st Audit V220126/protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "EXA-1 Attackers can steal all available EXA reward tokens",
+            "description": "Attackers can subvert the reward claiming mechanism to steal all the available EXA reward tokens.",
+            "severity": "high",
+            "location": "ExaLib.sol, EToken.sol, Auditor.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "EXA-2 FixedLender mints more ETokens than it should",
+            "description": "The FixedLender contract does not verify if collateral tokens are transferred correctly, allowing for more ETokens to be minted.",
+            "severity": "medium",
+            "location": "depositToSmartPool, _repayLiquidate, supply, _repay, and _seize functions in FixedLender contract."
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-358"
+                ]
+            },
+            "title": "EXA-3 Borrowers are forced to accept arbitrary rates",
+            "description": "The borrow function does not allow users to specify a maximum acceptable lending rate, exposing them to unexpected rates.",
+            "severity": "high",
+            "location": "borrow function in FixedLender contract."
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "EXA-4 Administrator can seize all user funds",
+            "description": "System administrators can seize all user deposits at will.",
+            "severity": "high",
+            "location": "Auditor.sol, FixedLender.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unfair Reward Distribution",
+            "description": "Rewards are miscalculated when EToken shares are transferred, leading to duplicate rewards.",
+            "severity": "high",
+            "location": "_distributeSmartPoolExa function in Auditor contract."
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "EXA-5 Wrong accounting results in maturity pool not repaying its debt",
+            "description": "Inconsistent accounting of funds owed by maturity pools to the smart pool could result in lost funds or unexpected behaviors.",
+            "severity": "high",
+            "location": "FixedLender.sol"
+        }
+    ]
+}

@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/SelfKeyPoI Locking Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/SelfKeyDAO/selfkey-poi-lock",
+        "commit_id": "e07657581ee6b47f4040d2ffc3ce8511ac87b719",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "selfkey-poi-lock": "contracts/SelfKeyPoI Locking Smart Contract Audit Report - QuillAudits/selfkey-poi-lock"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "TimeLock becomes insignificant after a few locks and unlocks",
+            "description": "availableOf() function calculates how much amount is allowed to be withdrawn according to the lock time after Locking, but when a significant number of Locks have been made then the sum becomes so large that the user can withdraw any amount which is less than equal to his balance immediately after Locking.",
+            "severity": "low",
+            "location": "Contract - SelfkeyPoILock"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing require statement while setting Mintable Token rate",
+            "description": "In the contract SelfkeyPoILock, Mintable Token rate is getting set using function setMintableTokenRate() function but it is not checking if the Mintable Token Rates are active or not.",
+            "severity": "info",
+            "location": "Contract - SelfkeyPoILock"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong event emission",
+            "description": "In the contract SelfkeyPOILock, in updateLockingMintableTokenStatus() function when status is changed the events are emitted but the emitted events suggest otherwise.",
+            "severity": "info",
+            "location": "Contract - SelfkeyPoILock"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Redundant timestamp assignment",
+            "description": "Storage variable updatedAt is being reassigned block.timestamp in the functions which already are using checkpoint() modifier which updates that variable.",
+            "severity": "low",
+            "location": "Contract - SelfkeyPoILock"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "rewardsTokenAddress cannot call notifyMintableTokenWithdraw()",
+            "description": "There is a check in the notifyMintableTokenWithdraw() function to confirm that the caller of the function is the rewardsTokenAddress.",
+            "severity": "low",
+            "location": "Contract - SelfkeyPoILock"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Use of whenNotPaused() modifier",
+            "description": "whenNotPaused() modifier is only used with mint() and selfMint() functions, but burning and transfer is unrestricted.",
+            "severity": "info",
+            "location": "Contract - SelfToken"
+        }
+    ]
+}

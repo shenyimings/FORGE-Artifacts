@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/Rhythm Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xE4318F2aCf2b9c3f518A3a03B5412F4999970Ddb",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "Rhythm": "contracts/Rhythm Full Smart Contract Security Audit/Rhythm"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can lead to an OUT_OF_GAS exception if the excluded addresses list is long. Similarly, `_getCurrentSupply` also uses a loop for evaluating total supply, which can cause an OUT_OF_GAS exception.",
+            "severity": "low",
+            "location": "_includeInReward() and _getCurrentSupply functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges (In the period when the owner is not renounced)",
+            "description": "Owner has various privileges that can be exploited, such as changing fees, maximum transaction amount, excluding from fee, and withdrawing contract BNBs.",
+            "severity": "low",
+            "location": "Various functions with `onlyOwner` modifiers"
+        }
+    ]
+}

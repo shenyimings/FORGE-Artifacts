@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/tokenize-it-audit-2023-11.pdf",
+    "project_info": {
+        "url": "https://github.com/corpus-io/tokenize.it-smart-contracts/tree/9973fc31043e8500bc187d852fc50494f1007f96",
+        "commit_id": "9973fc31043e8500bc187d852fc50494f1007f96",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "tokenize.it-smart-contracts": "contracts/tokenize-it-audit-2023-11/tokenize.it-smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Limiting the Price in the buy and onTokenTransfer Functions",
+            "description": "No limitation on the amount of tokens that can be spent during a transaction, allowing the owner to front-run the transaction and twist the price.",
+            "severity": "medium",
+            "location": "Crowdinvesting contract, buy function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential Re-Entrancy Attack in the Crowdinvesting Contract",
+            "description": "A re-entrancy attack opportunity inside the token transfer from the _msgSender() to the feeCollector.",
+            "severity": "low",
+            "location": "Crowdinvesting contract, buy function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of Validation of PrivateOffer Initialization Parameters",
+            "description": "The parameters tokenAmount, token, and currency lack validation during initialization in the PrivateOffer contract.",
+            "severity": "low",
+            "location": "PrivateOffer contract, initialize function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of Validation of Crowdinvesting Initialization Parameters",
+            "description": "The parameters tokenAmount, token, and currency lack validation during initialization in the Crowdinvesting contract.",
+            "severity": "low",
+            "location": "Crowdinvesting contract, initialize function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Non-Normalized Salt Computation",
+            "description": "Inconsistent salt computation methods across different contracts can lead to issues.",
+            "severity": "n/a",
+            "location": "Multiple contracts (CrowdinvestingCloneFactory, PriceLinearCloneFactory, PrivateOfferFactory, TokenProxyFactory, VestingCloneFactory)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused or Redundant Imports in Multiple Contracts",
+            "description": "Unused or redundant imports in multiple contracts can increase code size and complexity.",
+            "severity": "n/a",
+            "location": "Multiple contracts (PrivateOffer, PriceLinear, VestingCloneFactory)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing Events on Important State Changes",
+            "description": "setLastBuyDate() function updates the lastBuyDate state variable without emitting an event.",
+            "severity": "n/a",
+            "location": "contracts/Crowdinvesting.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "DynamicPricingActivated Event Is Emited Twice",
+            "description": "The DynamicPricingActivated event is emitted twice when activating the dynamic price feature.",
+            "severity": "n/a",
+            "location": "contracts/Crowdinvesting.sol"
+        }
+    ]
+}

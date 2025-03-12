@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/ParaSpaceApeYield_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/para-space/paraspace-core",
+        "commit_id": "b698c7d3a26311bdecf519dcc83147286742ba05",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "paraspace-core": "contracts/ParaSpaceApeYield_final_Secure3_Audit_Report/paraspace-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "In the Pause state, users cannot redeem ApeCoin",
+            "description": "Users cannot redeem their ApeCoins when the system is in the Pause state",
+            "severity": "info",
+            "location": "AutoCompoundApe.sol#L48-L64, CApe.sol#L391-L404"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "User can withdraw for free",
+            "description": "Users can burn 0 shares but get apeCoins transferred out for free due to calculation precision issues",
+            "severity": "medium",
+            "location": "AutoCompoundApe.sol#L34, #L51"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "_transfer duplicate checks for the zero address",
+            "description": "Duplicate 0 address checks in _transferShares function",
+            "severity": "info",
+            "location": "CApe.sol#L344-L357"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Function Call",
+            "description": "Anyone can call PoolApeStaking.claimApeAndCompound to deposit any user's unclaimed ApeCoin rewards into APE_COMPOUND, putting the user at risk of being liquidated.",
+            "severity": "high",
+            "location": "claimApeAndCompound function in PoolApeStaking contract"
+        }
+    ]
+}

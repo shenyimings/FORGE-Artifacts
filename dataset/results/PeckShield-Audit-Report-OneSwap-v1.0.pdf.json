@@ -1,0 +1,212 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-OneSwap-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/oneswap/oneswap_contract_ethereum/tree/49b5c8d0392e828b735445980e364d5ddc1c8542",
+        "commit_id": "49b5c8d0392e828b735445980e364d5ddc1c8542",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "oneswap_contract_ethereum": "contracts/PeckShield-Audit-Report-OneSwap-v1/oneswap_contract_ethereum"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Front-Running of Proposal Tallies",
+            "description": "The tally phase can be front-run by a malicious actor with enough voting assets, allowing them to control the tally results.",
+            "severity": "high",
+            "location": "Time and State"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Overlapped Time Windows Between Vote and Tally",
+            "description": "The logic to enforce the voting period introduces a corner case where votes may or may not be counted depending on transaction ordering within a block.",
+            "severity": "low",
+            "location": "Time and State"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Incompatibility with Deflationary Tokens",
+            "description": "Inconsistent internal asset records and external ERC20 token contracts when using deflationary tokens.",
+            "severity": "medium",
+            "location": "OneSwapRouter.sol, function swapToken()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Non-Payable removeLiquidityETH()",
+            "description": "The `removeLiquidityETH()` function allows users to remove liquidity from the pool, but it should not accept ETH deposits.",
+            "severity": "medium",
+            "location": "OneSwapRouter contract, `removeLiquidityETH()` function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Cached/Randomized ID For Unused OrderID Lookup",
+            "description": "The `_getUnusedOrderID()` function assigns IDs in a predictable manner, which may lead to inefficiencies.",
+            "severity": "low",
+            "location": "OneSwapPair contract, `_getUnusedOrderID()` function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ],
+                "3": [
+                    "CWE-440"
+                ]
+            },
+            "title": "Gas-Efficient New Pair Deployment",
+            "description": "The `createPair()` function consumes a significant amount of gas, which may discourage liquidity providers.",
+            "severity": "medium",
+            "location": "OneSwapFactory contract, `createPair()` function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Burnability of Assets Owned By Blacklisted Addresses",
+            "description": "Blacklisted accounts can still burn owned assets, contrary to the expected behavior.",
+            "severity": "info",
+            "location": "OneSwapToken.sol, _burn() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Accommodation of approve() Idiosyncrasies",
+            "description": "The `approve()` routine may fail due to idiosyncrasies in certain token contracts.",
+            "severity": "low",
+            "location": "OneSwapBuyback.sol, _swapForOnesAndBurn() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Improved Handling of Corner Cases in SupervisedSend",
+            "description": "Missed corner cases in `beforeUnlockTime` and `afterUnlockTime` modifiers.",
+            "severity": "low",
+            "location": "SupervisedSend.sol, beforeUnlockTime and afterUnlockTime modifiers"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Inconsistent Adherence to Checks-Effects-Interactions Principle",
+            "description": "Violation of the checks-effects-interactions principle, potentially leading to reentrancy attacks.",
+            "severity": "low",
+            "location": "SupervisedSend contract, supervisedSend function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Precision Loss in Trading Fee Calculation",
+            "description": "Floor division operation leads to precision loss in trading fee calculation, potentially causing losses for liquidity providers.",
+            "severity": "medium",
+            "location": "OneSwapPair contract, _dealWithPoolAndCollectFee function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Unnecessary Reversion",
+            "description": "The `_removeLiquidity()` function reverts the entire transaction when `amt` is 0, which can be avoided by skipping it during batch processing.",
+            "severity": "n/a",
+            "location": "OneSwapBuyback contract, _removeLiquidity() function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Front-running/Back-running issues",
+            "description": "The protocol inherits front-running/back-running issues from traditional DEXs.",
+            "severity": "n/a",
+            "location": "OneSwapPair contract"
+        }
+    ]
+}

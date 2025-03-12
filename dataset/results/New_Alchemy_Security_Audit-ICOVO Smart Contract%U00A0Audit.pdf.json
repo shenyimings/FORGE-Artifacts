@@ -1,0 +1,230 @@
+{
+    "path": "artifacts/New_Alchemy_Security_Audit-ICOVO Smart Contract%U00A0Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/icovo/DAICOVO",
+        "commit_id": "417b33a6159a21df73221dbdc942cbd73a9c2b06",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "DAICOVO": "contracts/New_Alchemy_Security_Audit-ICOVO Smart Contract%U00A0Audit/DAICOVO"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Negative-outcome vote stalls voting system",
+            "description": "A negative-outcome vote can stall the voting system by reverting the transaction and making it impossible to finalize the proposal.",
+            "severity": "critical",
+            "location": "Voting contract, function `finalizeVoting()`"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Loss of integer arithmetic precision",
+            "description": "The order of operations in the `raiseTap` function can lead to a loss of precision, resulting in only two possible multiplier values.",
+            "severity": "critical",
+            "location": "DaicoPool.sol, function `raiseTap(uint256 tapMultiplierRate)`"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Logic bug in WhitepaperVersioning.sol",
+            "description": "An attacker can submit a malicious post transaction to stall the WhitepaperVersioning contract by creating an entry with version equal to MAX_INT8.",
+            "severity": "critical",
+            "location": "WhitepaperVersioning.sol, function `post(string _ipfsHash, uint8 _version, string _prev)`"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Unbounded for loops may hit gas limits",
+            "description": "May result in loss of functionality.",
+            "severity": "medium",
+            "location": "Various contracts"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Inadequate dependency management",
+            "description": "Loses visibility into emerging vulnerabilities, fixes and improvements in reused open-source components.",
+            "severity": "medium",
+            "location": "Dependency management system"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Block timestamp manipulation vulnerability",
+            "description": "Value can be manipulated by block miner by approximately 30 seconds.",
+            "severity": "n/a",
+            "location": "Lines 72, 73, 85, 144, 153 (no specific contract or function mentioned)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Deprecated constant function modifier",
+            "description": "The constant function modifier was deprecated in Solidity v0.4.17 and will be dropped in v0.5.0.",
+            "severity": "n/a",
+            "location": "Lines 124, 133, 141, 150, 159, 164, 169, 174, 179, 185 (no specific contract or function mentioned)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unorganized functions with identical visibility",
+            "description": "The contract does not follow the practice of grouping functions of identical visibility together.",
+            "severity": "n/a",
+            "location": "Lines 159, 174 (getReason() and getVoterCount() functions in an unspecified contract)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Missing emit keyword for events",
+            "description": "Solidity v0.4.21 added support for the emit keyword to help differentiate events from functions.",
+            "severity": "n/a",
+            "location": "Lines 43, Lines 19, 22 (SafeMath.sol), Lines 36, 54, 70, 112, 133 (ERC20Standard.sol), Lines 14-16, 24 (ERC20Interface.sol), Lines 46, 73, 37, 49 (other unspecified contracts or functions)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Public visibility of state variables",
+            "description": "The balances mapping and totalSupply_ variable should have their visibility explicitly specified.",
+            "severity": "n/a",
+            "location": "Lines 19, 22 (ERC20Standard.sol)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Misleading function and event naming",
+            "description": "Function and event names with close similarities may cause confusion.",
+            "severity": "n/a",
+            "location": "Line 24 (ERC20Interface.sol), Line 17 (ERC223Standard.sol), Line 37 (MintableToken.sol)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Deprecated syntax for events",
+            "description": "The emit keyword is deprecated in Solidity v0.4.21 and will be required in v0.5.0.",
+            "severity": "n/a",
+            "location": "Lines 36, 54, 70, 112, 133 (ERC20Standard.sol), Lines 46, 73 (ERC223Standard.sol), Lines 40, 41, 51 (MintableToken.sol)"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Hardcoded return value",
+            "description": "The mint() and finishMinting() functions have hardcoded return values.",
+            "severity": "n/a",
+            "location": "Lines 42, 53 (MintableToken.sol)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "ERC20 double-spend attack",
+            "description": "Design flaw in standard ERC20 interface allows for potential double-spending of allowances.",
+            "severity": "n/a",
+            "location": "ERC20Token implementation"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Short-address attack vulnerability",
+            "description": "Lack of protection against short-address attacks in token transfer methods.",
+            "severity": "n/a",
+            "location": "Multiple contracts (ERC223ReceivingContract.sol, ERC20Standard.sol, TokenController.sol, etc.)"
+        }
+    ]
+}

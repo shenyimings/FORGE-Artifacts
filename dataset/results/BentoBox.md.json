@@ -1,0 +1,194 @@
+{
+    "path": "artifacts/BentoBox.md",
+    "project_info": {
+        "url": "https://github.com/sushiswap/bentobox",
+        "commit_id": "c2e150b16b8764ebfe2e1e6e267ae14e10738065",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bentobox": "contracts/BentoBox/bentobox"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ],
+                "3": [
+                    "CWE-595"
+                ]
+            },
+            "title": "Incorrect Events Parameter",
+            "description": "`msg.sender` is wrongly used as a parameter in events.",
+            "severity": "high",
+            "location": "LendingPair.sol, Lines 252, 267, 282, 291, 306, 321"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No Validation of Address Parameter",
+            "description": "The variable is assigned a value without checking if it's zero.",
+            "severity": "info",
+            "location": "BentoBox.sol, Line 46; LendingPair.sol, Line 123; SushiSwapSwapper.sol, Lines 17-18"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Loss of Tokens When Sent to Zero Address",
+            "description": "Tokens are transferred without checking if the recipient is a zero address.",
+            "severity": "info",
+            "location": "ERC20.sol, Lines 22, 31-33, 39; BentoBox.sol, Lines 107, 122, 126, 133, 161, 179"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Array Element Processing Issue",
+            "description": "The length of the arrays is not checked before processing.",
+            "severity": "info",
+            "location": "LendingPair.sol, Lines 467; BentoBox.sol, Line 122"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-369"
+                ]
+            },
+            "title": "Division by Zero",
+            "description": "Division operations are performed without checking for zero denominators.",
+            "severity": "info",
+            "location": "Multiple locations (see report)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Using 'magic' numbers",
+            "description": "The use of unknown values in the source code impairs its understanding.",
+            "severity": "info",
+            "location": "Various lines in ERC20.sol, BentoBox.sol, and LendingPair.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "The function returns a public variable",
+            "description": "The updateExchangeRate() function returns a value that is not processed.",
+            "severity": "high",
+            "location": "Lines 243, 155, and 457 in LendingPair.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "The function returns a variable but it is not processed",
+            "description": "The swap() function returns a variable of type uint256 that is not processed.",
+            "severity": "info",
+            "location": "Lines 12 in ISwapper.sol, and lines 428, 498, and 519 in LendingPair.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Define `symbol` and `name` methods as `external`",
+            "description": "The symbol and name methods are defined as public instead of external.",
+            "severity": "info",
+            "location": "Lines 85 and 95 in LendingPair.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Remove unnecessary comment",
+            "description": "A TODO comment about reentrancy issue is not needed.",
+            "severity": "info",
+            "location": "Line 429 in LendingPair.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Forward success status",
+            "description": "The success variable is not returned after getting the oracle value.",
+            "severity": "info",
+            "location": "Lines 236 and 243 in LendingPair.sol"
+        }
+    ]
+}

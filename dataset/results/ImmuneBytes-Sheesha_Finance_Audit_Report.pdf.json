@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/ImmuneBytes-Sheesha_Finance_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/smartchain2030/sheesha-finance",
+        "commit_id": "36adeff12204228c1473b00199c1a35bfb61e943",
+        "address": "0x75b7524c355F67cff7D16e51f0C5CdF26bBBb2fe",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "sheesha-finance": "contracts/ImmuneBytes-Sheesha_Finance_Audit_Report/sheesha-finance"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Admin/owner privileges can be misused",
+            "description": "The admin/owner of Sheesha Finance smart contracts has various privileges over the smart contracts that can be misused either intentionally or unintentionally.",
+            "severity": "high",
+            "location": "SHEESHAGlobals.sol, initialize(), setSheeshaToken(), setSheeshaVaultAddress(), and setSheeshaVaultLPAddress() functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "transferVaultRewards() and transferVaultLPewards() can be called with any address as input",
+            "description": "The functions take an address variable as input, which creates room for human error.",
+            "severity": "medium",
+            "location": "SHEESHA.sol, transferVaultRewards() and transferVaultLPewards() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Funds can be drained by emergencyDrain24hAfterLiquidityGenerationEventIsDone() function",
+            "description": "The function can be used to transfer all ETH and SHEESHA tokens from the LGE contract to the admin wallet if the admin’s private key gets compromised.",
+            "severity": "medium",
+            "location": "SHEESHA.sol, emergencyDrain24hAfterLiquidityGenerationEventIsDone() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "PoolInfo.lastRewardBlock is not updated in updatePool() function",
+            "description": "The lastRewardBlock is only updated when the Pool is initialised for the first time and when the contract’s pool token balance is zero.",
+            "severity": "medium",
+            "location": "SheeshaVault and SheeshaVaultLP contracts, updatePool() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "isActive() function always returns false value",
+            "description": "The Userinfo.status stores whether a user has interacted with the contract previously or not, but there is no logic present inside the smart contract which updates the value of Userinfo.status.",
+            "severity": "medium",
+            "location": "SheeshaVaultLP contract, isActive() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unwanted updation of UserInfo.checkpoint variable",
+            "description": "The UserInfo.checkpoint for a user gets updated unintentionally in certain scenarios.",
+            "severity": "medium",
+            "location": "SheeshaVaultLP contract, deposit() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-821"
+                ]
+            },
+            "title": "Updation of userCount and userList are not handled properly",
+            "description": "The userCount variable will be incremented and the user’s address will get stored with more than one uint key in userList mapping if a user adds liquidity more than once.",
+            "severity": "low",
+            "location": "LGE smart contract, addLiquidity() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant variables stored in SHEESHA smart contract",
+            "description": "The SHEESHA smart contract stores unnecessary state variables that are never used inside the smart contract.",
+            "severity": "low",
+            "location": "SHEESHA smart contract, devAddress, teamAddress, marketingAddress and reserveAddress variables"
+        }
+    ]
+}

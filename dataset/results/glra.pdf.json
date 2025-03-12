@@ -1,0 +1,158 @@
+{
+    "path": "artifacts/glra.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xF9881a0Bf01b1ec048506A188B06d48808087657",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.10+commit.fc410830"
+        ],
+        "project_path": {
+            "CoinToken": "contracts/glra/CoinToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ST - Stop Transactions",
+            "description": "Contract owner can set sellTaxes to a high value, making the contract operate as a honeypot.",
+            "severity": "critical",
+            "location": "contract.sol#L912"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "ELFM - Exceed Limit Fees Manipulation",
+            "description": "Contract owner can increase fees more than 25% using setSellTax function.",
+            "severity": "critical",
+            "location": "contract.sol#L1088"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "BC - Blacklisted Contracts",
+            "description": "Contract owner can stop contracts from transactions using enableBlacklist function.",
+            "severity": "medium",
+            "location": "contract.sol#L1002"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L01 - Public Function could be Declared External",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "Various locations in contract.sol (e.g., #L177,185,202,209,216,228,236,247,265,293)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L02 - State Variables could be Declared Constant",
+            "description": "Constant state variables should be declared constant to save gas.",
+            "severity": "low",
+            "location": "Various locations in contract.sol (e.g., #L838,843,848,831,835,840,845,837,842,847)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "Non-conformity to Solidity naming conventions.",
+            "severity": "low",
+            "location": "contract.sol#L638,639,656,692"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "L05 - Unused State Variable",
+            "description": "Unused state variables exist in the code.",
+            "severity": "low",
+            "location": "Various locations in contract.sol (e.g., #L835,836,837,838,840,841,842,843,845,846)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L13 - Divide before Multiply Operation",
+            "description": "Performing divisions before multiplications may cause loss of precision.",
+            "severity": "low",
+            "location": "Various locations in contract.sol (e.g., #L890 and 10 more)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ]
+            },
+            "title": "L14 - Uninitialized Variables in Local Scope",
+            "description": "Variables defined in local scope are not initialized.",
+            "severity": "low",
+            "location": "contract.sol#L896"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner Manipulation of Fees, Token Transactions, and Blacklisting",
+            "description": "The owner can abuse admin functions to manipulate fees, stop transactions, and blacklist addresses.",
+            "severity": "high",
+            "location": "CoinToken contract, various functions (e.g., handleTax, triggerTax, pause, unpause, etc.)"
+        }
+    ]
+}

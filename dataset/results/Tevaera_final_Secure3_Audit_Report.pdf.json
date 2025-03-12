@@ -1,0 +1,365 @@
+{
+    "path": "artifacts/Tevaera_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/tevaera-labs/contracts",
+        "commit_id": "69107a13161632915a625837fd84bed08d92f4a2",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Tevaera_final_Secure3_Audit_Report/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Logical issue in Claim contract initialization",
+            "description": "Claim contract doesn't introduce upgradeability or update functions for core contracts CitizenIDV1 and KarmaPoint.",
+            "severity": "low",
+            "location": "Claim contract constructor"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Medium severity issue in claim() function",
+            "description": "Allows claimContract to mint tokens even when claiming is disabled",
+            "severity": "medium",
+            "location": "CitizenIDV1 contract, claim() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Integer overflow risk in buy function",
+            "description": "Integer overflow risk in KarmaPointV1 contract buy function",
+            "severity": "critical",
+            "location": "KarmaPointV1 contract, buy function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Logical issue in _transfer function",
+            "description": "Data input boolean logic error in KarmaPointV1 _transfer function",
+            "severity": "critical",
+            "location": "KarmaPointV1 contract, _transfer function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Code style issue in ETH transfer",
+            "description": "Use of unsafe and outdated functions to transfer ETH",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Weak sources of randomness",
+            "description": "Weak sources of randomness used in the contract",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Logical issue in mint function",
+            "description": "mint() function will revert with high probability due to incorrect implementation of getRandomAvailableTokenId",
+            "severity": "critical",
+            "location": "Multiple locations including Magical PhoenixV1.sol#L202 and NomadicYetiV1.sol#L202"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Logical issue in claim function",
+            "description": "msg.value is not strictly checked in claim() function",
+            "severity": "medium",
+            "location": "code/contracts/karmapoint/Claim.sol#L32-L40"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Code style issue in zkSync compatibility",
+            "description": "send method is not supported in zkSync",
+            "severity": "critical",
+            "location": "Multiple locations including code/contracts/karmapoint/KarmaPointV1.sol#L133 and more"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistent comment in _transfer function",
+            "description": "Comment 'sender should have citizenship' is not consistent with the actual code",
+            "severity": "low",
+            "location": "code/contracts/karmapoint/Karma PointV1.sol#L231-L235"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect usage of solidity builtin function blockhash",
+            "description": "Using current blockhash returns zero, making randomNum less 'random'",
+            "severity": "low",
+            "location": "code/contracts/guardians/Nomadi cYetiV1.sol#L196, Magical PhoenixV1.sol#L196"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Meaningless judgment",
+            "description": "The nft transfer is allowed, which causes the mint function's first check to fail",
+            "severity": "info",
+            "location": "stSphinxV1.sol#L81, PhoenixV1.sol#L109, cYetiV1.sol#L109"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zksloc configuration",
+            "description": "Need to use zksolc to compile the solidity files and configure hardhat.config.ts correctly",
+            "severity": "info",
+            "location": "code/contracts/karmapoint/Karma PointV1.sol#L133, cYetiV1.sol#L135, PhoenixV1.sol#L138, CitizenID V1.sol#L263"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing input data validation",
+            "description": "Function sync has no input data validation, leading to potential errors.",
+            "severity": "low",
+            "location": "code/contracts/citizenid/CitizenID V1.sol#L229"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing 0 address check",
+            "description": "The updateClaimCapability function lacks a 0 address check.",
+            "severity": "low",
+            "location": "code/contracts/guardians/Magical PhoenixV1.sol#L155-L159, code/contracts/citizenid/CitizenID V1.sol#L214-L220"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1284"
+                ]
+            },
+            "title": "Missing array length validation",
+            "description": "The updateRep function lacks an array length validation, leading to potential setup errors.",
+            "severity": "low",
+            "location": "code/contracts/citizenid/CitizenID V1.sol#L225-L240"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unauthorized token minting",
+            "description": "An EOA can mint multiple tokens, violating the requirement of one token per wallet.",
+            "severity": "low",
+            "location": "code/contracts/guardians/Nomadi cYetiV1.sol#L109"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unclaimed KP balance overwrite",
+            "description": "The unclaimed KP balance for each user is being overwritten, leading to potential loss of unclaimed balances.",
+            "severity": "low",
+            "location": "code/contracts/karmapoint/Karma PointV1.sol#L172"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant modifier",
+            "description": "The nonReentrant modifier is redundant in the initialize function.",
+            "severity": "info",
+            "location": "code/contracts/guardians/Reformi stSphinxV1.sol#L51, code/contracts/guardians/Magical PhoenixV1.sol#L57, code/contracts/guardians/Nomadi cYetiV1.sol#L57, code/contracts/citizenid/CitizenID V1.sol#L71"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Unlocked pragma",
+            "description": "Contracts should be deployed using the same compiler version/flags with which they have been tested.",
+            "severity": "info",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Unused variables",
+            "description": "Unused variables are declared but not used in the contracts.",
+            "severity": "info",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Flashloan attack vulnerability",
+            "description": "SetTokenPrice can be exploited in a flash loan attack",
+            "severity": "low",
+            "location": "CitizenIDV1.sol#L205-L209"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Governance Manipulation",
+            "description": "UpdatePrice can be exploited by governance manipulation",
+            "severity": "low",
+            "location": "KarmaPointV1.sol#L186"
+        }
+    ]
+}

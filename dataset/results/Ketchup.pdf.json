@@ -1,0 +1,70 @@
+{
+    "path": "artifacts/Ketchup.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x714a84632ed7edbbbfeb62dacf02db4beb4c69d9, 0xD622a8500c2B098F722ec1CCb2EC09B8A8e1016f, 0xE1d614beD46571f9c7D98381397fae70D98546A2",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "KetchupToken": "contracts/Ketchup/KetchupToken",
+            "MasterChef": "contracts/Ketchup/MasterChef",
+            "KetchupReferral": "contracts/Ketchup/KetchupReferral"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "Sending tokens to the dead address instead of burning them in token contract.",
+            "severity": "medium",
+            "location": "Overridden _transfer functions, token contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "UpdateEmissionRate function can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "UpdateEmissionRate function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Owner privileges (multiple)",
+            "description": "Various privileges granted to owner/operator, including draining tokens, changing operator, and modifying tax rates.",
+            "severity": "low",
+            "location": "Referral contract"
+        }
+    ]
+}

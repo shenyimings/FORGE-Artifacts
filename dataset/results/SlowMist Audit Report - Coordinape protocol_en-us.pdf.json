@@ -1,0 +1,122 @@
+{
+    "path": "artifacts/SlowMist Audit Report - Coordinape protocol_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/coordinape/coordinape-protocol/tree/feat/fix_from_audit/contracts/ApeProtocol",
+        "commit_id": "29823a493eb5b9b47b6ddd33a0a933b5f2a3b787",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "coordinape-protocol": "contracts/SlowMist Audit Report - Coordinape protocol_en-us/coordinape-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Risk of replay attack",
+            "description": "DOMAIN_SEPARATOR is defined at contract deployment and not reconstructed for every signature, leading to a risk of possible replay attacks between chains in the event of a future chain split.",
+            "severity": "info",
+            "location": "ApeToken contract, permit function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Coding optimization",
+            "description": "getVariableFee function does not modify contract data but does not use view.",
+            "severity": "info",
+            "location": "FeeRegistry contract, getVariableFee function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Business logic is not clear",
+            "description": "Various business logic issues in CoordinapeCircle and ApeVault contracts",
+            "severity": "high",
+            "location": "CoordinapeCircle and ApeVault contracts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Coding standards issues",
+            "description": "Executed first _call(id, _target, _data); and then executed timestamps[id] = _DONE_TIMESTAMP;, which does not meet the specification (Checks-Effects-Interactions).",
+            "severity": "info",
+            "location": "TimeLock contract, execute function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "The external call does not judge the return value",
+            "description": "External calls in _withdraw function do not evaluate the return value.",
+            "severity": "medium",
+            "location": "BaseWrapperImplementation contract, _withdraw function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Excessive authority issue",
+            "description": "Owner can transfer assets in the contract.",
+            "severity": "high",
+            "location": "ApeVault.sol#L129, ApeVault.sol#L139, Vesting.sol#L77"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Lack of permission checks",
+            "description": "The createApeVault function does not perform permission checks.",
+            "severity": "low",
+            "location": "ApeVaultFactory.sol#L22-L27"
+        }
+    ]
+}

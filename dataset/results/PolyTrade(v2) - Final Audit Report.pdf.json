@@ -1,0 +1,422 @@
+{
+    "path": "artifacts/PolyTrade(v2) - Final Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/polytrade-finance/lender-pool/tree/develop",
+        "commit_id": "develop",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "lender-pool": "contracts/PolyTrade(v2) - Final Audit Report/lender-pool"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Absence of adequate access control in the registerUser() function",
+            "description": "The registerUser() function lacks the onlyRole(LENDER_POOL) modifier, making it accessible by any third-party actor.",
+            "severity": "high",
+            "location": "RewardManager contract, Line 38-47"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "startTime not validated before registering users",
+            "description": "The registerUser() function does not validate the startTime state variable, allowing zero values to be passed.",
+            "severity": "medium",
+            "location": "RewardManager contract, Line 38-47"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "DoS due to Block Gas Limit. Pull over Push Payments could be preferred.",
+            "description": "The claim functions in the LenderPool contract may lead to a DoS vector due to block gas limit issues.",
+            "severity": "medium",
+            "location": "LenderPool contract, Line 187, 200"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "No Events emitted after imperative State Variable modification",
+            "description": "The registerRewardManager() function updates the startTime state variable but does not emit an event.",
+            "severity": "low",
+            "location": "RewardManager contract, Line 53"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "rewardOf() function provides misleading values in case of failure",
+            "description": "The rewardOf() function returns zero if the token address passed as an argument doesn't match the reward token address.",
+            "severity": "low",
+            "location": "RewardManager contract, Line 130-142"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant modifier found with _withdrawFromStrategy() function",
+            "description": "The _withdrawFromStrategy() private function has a redundant onlyOwner modifier.",
+            "severity": "low",
+            "location": "LenderPool contract, Line 312"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Storage Reads could be avoided to save gas",
+            "description": "Unnecessary storage reads in the withdrawAllDepost() function increase gas consumption.",
+            "severity": "low",
+            "location": "LenderPool contract, Line 151"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Absence of input validations found",
+            "description": "The setReward function does not validate the newReward argument, allowing zero values to be passed.",
+            "severity": "low",
+            "location": "Reward contract, Line 23, 55"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No Events emitted after imperative State Variable modification",
+            "description": "Functions in the Reward contract update state variables but do not emit events.",
+            "severity": "low",
+            "location": "Reward contract, Line 101-114, 126-136"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "require statements should be used instead of IF-ELSE statements",
+            "description": "The registerUser() functions include strict validations using IF-ELSE statements instead of require statements.",
+            "severity": "info",
+            "location": "RewardManager contract, Line 39, 41 and Reward contract, Line 40"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ],
+                "3": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Hardcoded address",
+            "description": "The address for AAVE is hard coded in the strategy contract.",
+            "severity": "medium",
+            "location": "Strategy.sol, Line 20"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Edge case in _isUserRegistered",
+            "description": "If there is only one rewardManager then the require check will pass without checking whether the user is registered with that rewardManager or not.",
+            "severity": "medium",
+            "location": "LenderPool.sol, Line 342"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Missing approval to new treasury",
+            "description": "The method switchTreasury removes all approval from old treasury but doesn't grant any to the new treasury.",
+            "severity": "low",
+            "location": "LenderPool.sol, Line 11"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Unused Variables",
+            "description": "These contracts define the given state variables but never use them.",
+            "severity": "info",
+            "location": "RedeemPool.sol, Line 19"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Imports",
+            "description": "The contract contains imports that are not used within the contract and make the contract heavy.",
+            "severity": "info",
+            "location": "LenderPool.sol, Line 5"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Redundant mappings",
+            "description": "The following mapping state variable is defined and maintained in three contracts increasing the chances of inconsistencies and increasing operational gas costs.",
+            "severity": "info",
+            "location": "LenderPool.sol, Reward.sol, RewardManager.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant require check",
+            "description": "The following require checks are also present within the burn and mint functions making these require checks redundant.",
+            "severity": "info",
+            "location": "RedeemPool.sol, Line 68"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Redundancy in switchStrategy",
+            "description": "switchStrategy sets strategy address twice if oldStrategy is not zero.",
+            "severity": "info",
+            "location": "LenderPool.sol, Line 55"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Refactor _isUserRegistered",
+            "description": "The method does nothing if the rewardManager is zero address, which is clear on the first line and yet it is checked again in the if condition.",
+            "severity": "info",
+            "location": "LenderPool.sol, Line 341"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Refactor methods",
+            "description": "withdrawDeposit and withdrawAllDeposit share common lines of code which increases the contract size.",
+            "severity": "info",
+            "location": "LenderPool.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Pragma Unlocked",
+            "description": "Every Solidity file specifies in the header a version number of the format.",
+            "severity": "info",
+            "location": "All Contracts"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing events in setValidation",
+            "description": "The method setValidation doesn't emit any event.",
+            "severity": "info",
+            "location": "Verification.sol"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect event name in netspec comment",
+            "description": "The netspec comment before updateValidationLimit states that it emits an event called NewValidationLimit but it emits ValidationLimitUpdated instead.",
+            "severity": "info",
+            "location": "Verification.sol"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1118"
+                ]
+            },
+            "title": "Contract name in revert messages",
+            "description": "It is recommended to have all require error messages be preceded with the contract name for better understanding and debugging of reasons.",
+            "severity": "info",
+            "location": "Not specified"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Missing validation",
+            "description": "Some of the best practices are not followed throughout the repo, and some simple recommendations can be implemented.",
+            "severity": "info",
+            "location": "RewardManager.sol, Line 119"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-657"
+                ]
+            },
+            "title": "Hardcoded values",
+            "description": "Hardcoded values are used to initialize an year variable and to mint tokens in the tokens contract.",
+            "severity": "info",
+            "location": "Reward.sol, Token.sol"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading variable name",
+            "description": "Reward contract defines pauseReward to reset reward but the name suggests it pauses contract for use.",
+            "severity": "info",
+            "location": "Reward.sol"
+        }
+    ]
+}

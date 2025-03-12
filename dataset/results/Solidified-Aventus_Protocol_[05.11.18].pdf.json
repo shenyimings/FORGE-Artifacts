@@ -1,0 +1,206 @@
+{
+    "path": "artifacts/Solidified-Aventus_Protocol_[05.11.18].pdf",
+    "project_info": {
+        "url": "https://github.com/Arachnid/uscc/tree/master",
+        "commit_id": "master",
+        "address": "0xfcf572fbd48b76b5c90b2c4ff12c7fcc6e5eb903",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "uscc": "contracts/Solidified-Aventus_Protocol_[05/uscc"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out-of-Gas issue in distributeWinningsAmongVoters function",
+            "description": "The function loops over all revealed winning voters and adjusts deposits, which can run out of gas for a large number of voters.",
+            "severity": "high",
+            "location": "Libraries/LChallengeWinnings.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Non-upgradeable library functions",
+            "description": "Internal library functions are inlined to the bytecode of any contract that references the library, and thus cannot be modified for upgradeability reasons.",
+            "severity": "high",
+            "location": "Multiple libraries (e.g., LApps.sol, LAventusTime.sol)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistent reward calculation mechanism",
+            "description": "The whitepaper describes a specific mechanism for distributing losing party's deposit to the winning party, but this is not implemented in the provided smart contracts.",
+            "severity": "high",
+            "location": "n/a (Whitepaper inconsistency)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unauthorized storage modification",
+            "description": "All values in AventusStorage.sol can be modified by the contract's owner arbitrarily.",
+            "severity": "high",
+            "location": "AventusStorage.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Inconsistent AVT price",
+            "description": "The price of AVT is set once through ParameterRegistry and never adjusted again.",
+            "severity": "high",
+            "location": "ParameterRegistry.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Limitation on voting multiple proposals",
+            "description": "Users cannot vote on multiple proposals; their full amount of staked AVT will be 'used' against their first revealed vote.",
+            "severity": "low",
+            "location": "LProposal.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Inconsistent storage contract address modification",
+            "description": "AventusVote allows the storage address to be modified through updateStorage, but this is not consistent with other contracts.",
+            "severity": "low",
+            "location": "AventusVote.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Disincentivizing voting on challenges due to transaction costs",
+            "description": "The total transaction costs for a user's voting process can be more than the amount of funds that they get as a result of staking.",
+            "severity": "low",
+            "location": "n/a (System design)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unable to modify fixedDepositAmount without loss of funds",
+            "description": "If fixedDepositAmount changes between App registration and de-registration, ExpectedDeposits value may be inconsistent.",
+            "severity": "low",
+            "location": "LApps.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Inappropriate data types",
+            "description": "Using string variables to check user actions instead of booleans",
+            "severity": "n/a",
+            "location": "LLock.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Incorrect ordering for modifiers and functions",
+            "description": "Modifiers and functions are interleaved in the code, deviating from best practices",
+            "severity": "n/a",
+            "location": "LEvents.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Multiple TODOs and unimplemented whitepaper features",
+            "description": "Several features are not yet implemented, including deposit calculation and revenue sharing",
+            "severity": "n/a",
+            "location": "Various contracts"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Ambiguity in hashing arguments for events",
+            "description": "Dynamically sized inputs can cause ambiguity in the hashing function",
+            "severity": "n/a",
+            "location": "LEvents.sol, hashEventParameters function"
+        }
+    ]
+}

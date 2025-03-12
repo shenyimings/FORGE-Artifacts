@@ -1,0 +1,179 @@
+{
+    "path": "artifacts/HAECHI_AUDIT-UniverseXYZ_Contract.pdf",
+    "project_info": {
+        "url": "https://github.com/UniverseXYZ/AuctionContracts",
+        "commit_id": "_126eab22b60d475a07455685dfb41453bd318265.",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "AuctionContracts": "contracts/HAECHI_AUDIT-UniverseXYZ_Contract/AuctionContracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Bidding algorithm behaves in an unintended direction",
+            "description": "The bidding function does not compare the total bid amount with the previous bidder's amount correctly, allowing bids to be made without following the intended rules.",
+            "severity": "low",
+            "location": "UniverseAuctionHouse#ethBid() and UniverseAuctionHouse#erc20Bid()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unnecessary royaltyFee may be paid to Dao",
+            "description": "The captureSlotRevenue() function allocates royaltyFee even when the auction owner does not earn any revenue.",
+            "severity": "low",
+            "location": "UniverseAuctionHouse#captureSlotRevenue()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Withdrawing NFT does not decrease the totalDepositedERC721s value of the contract",
+            "description": "The withdrawDepositedERC721() function does not update the totalDepositedERC721s value after withdrawing NFTs.",
+            "severity": "low",
+            "location": "UniverseAuctionHouse#withdrawDepositedERC721()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "The Revenue of the Auction is allocated to the Auction Owner, not the NFT Depositor",
+            "description": "The revenue generated from an auction is allocated to the auction owner, not the NFT depositor.",
+            "severity": "low",
+            "location": "UniverseAuctionHouse#createAuction()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Users can bid with invalid amount",
+            "description": "The bidding function does not check for valid bid amounts, allowing users to bid with 0 or other invalid values.",
+            "severity": "low",
+            "location": "UniverseAuctionHouse#ethBid() and UniverseAuctionHouse#erc20Bid()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "UniverseAuctionHouse#batchDepositToAuction() may not work as intended",
+            "description": "The batchDepositToAuction() function does not check for duplicate slot IDs, allowing NFTs to be added to the same slot multiple times.",
+            "severity": "low",
+            "location": "UniverseAuctionHouse#batchDepositToAuction()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused modifier exists",
+            "description": "The onlyIfWhitelistSupported() modifier is implemented but not used",
+            "severity": "low",
+            "location": "onlyIfWhitelistSupported modifier"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Modifier outputs a wrong error message",
+            "description": "Inconsistent error message and code in onlyAuctionOwner modifier",
+            "severity": "low",
+            "location": "UniverseAuctionHouse#onlyAuctionOwner() modifier"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Abnormal value may be registered in reservePrice of the slot",
+            "description": "reservePrice of a later slot can be set higher than that of a previous slot",
+            "severity": "low",
+            "location": "reservePrice variable"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Contract Owner can change the URI of NFT",
+            "description": "The contract owner, not the token owner, can change URI of NFT.",
+            "severity": "n/a",
+            "location": "UniverseERC721#updateTokenURI()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "The privilege of Dao is too large",
+            "description": "Dao address can change the royaltyFeeBps for an auction already in progress.",
+            "severity": "n/a",
+            "location": "UniverseAuctionHouse#setRoyaltyFeeBps()"
+        }
+    ]
+}

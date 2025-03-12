@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/KimJongMoon.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x737f0e47c4d4167a3eecde5fa87306b6eee3140e",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "KimJongMoon": "contracts/KimJongMoon/KimJongMoon"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong _tFeeTotal display",
+            "description": "_tFeeTotal value will be wrongly updated in function includeInReward because there is an error in the logic.",
+            "severity": "low",
+            "location": "Function includeInReward"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Functions includeInReward() and _getCurrentSupply use loops that may cause OUT_OF_GAS exceptions if there are long excluded addresses lists.",
+            "severity": "low",
+            "location": "Functions includeInReward() and _getCurrentSupply"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Owner has excessive privileges to change tax and liquidity fees, maximum transaction amount, exclude from fee, withdraw BNB and tokens, and change Router and LP pair contract.",
+            "severity": "n/a",
+            "location": "Various functions with onlyOwner modifiers"
+        }
+    ]
+}

@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/QuillAudit-Yearnyfi_Audit_Report.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xdeaa665ab71785ccf576dc76e5fcb5a2283ea0c6",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.5.17+commit.d19bba13"
+        ],
+        "project_path": {
+            "YEARNYFINETWORK": "contracts/QuillAudit-Yearnyfi_Audit_Report/YEARNYFINETWORK"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Inclusion of Fallback function is Redundant",
+            "description": "The token contract includes a fallback function which simply reverts whenever it is triggered, making the payment rejection process inadequate.",
+            "severity": "medium",
+            "location": "Fallback function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Arithmetic Operations might lead to Integer Overflow or Underflow",
+            "description": "The token contract doesn’t use the SafeMath library and implements arithmetic operations simply, which could lead to an Arithmetic Overflow or Underflow exploit scenario.",
+            "severity": "low",
+            "location": "Token contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Require Statements",
+            "description": "The transferFrom function in the token contract includes redundant require statements to check the sender and receiver addresses.",
+            "severity": "low",
+            "location": "TransferFrom function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "External visibility should be preferred",
+            "description": "Functions that are never called throughout the contract should be marked as external visibility instead of public visibility for gas optimization.",
+            "severity": "low",
+            "location": "Various functions (allowance, approve, etc.)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Absence of Error messages in Require Statements",
+            "description": "No require statement in the contract includes an error message, making it difficult to detect the reason behind a particular function revert.",
+            "severity": "info",
+            "location": "Various functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Compiler Version is not Fixed",
+            "description": "The compiler version in the contract file is not fixed, which is considered bad practice.",
+            "severity": "low",
+            "location": "Contract file"
+        }
+    ]
+}

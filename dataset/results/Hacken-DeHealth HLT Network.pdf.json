@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/Hacken-DeHealth HLT Network.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x7f389b5fb10b85b2dcdd7228bc8695855da70d79, 0xb148DF3C114B1233b206160A0f2A74999Bb2FBf",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.11+commit.d7f03943"
+        ],
+        "project_path": {
+            "DeHealthToken": "contracts/Hacken-DeHealth HLT Network/DeHealthToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "High severity - Pausing functionality",
+            "description": "All transfers can be stopped by a user with the “DEFAULT_ADMIN_ROLE” role without clear rules and documentation.",
+            "severity": "high",
+            "location": "DeHealthToken.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "High severity - Unlimited token minting",
+            "description": "The contract allows the user with the “DEFAULT_ADMIN_ROLE” role to mint more tokens than the specified limit, leading to impossibility of token activation.",
+            "severity": "high",
+            "location": "DeHealthToken.sol, function __loadBalances"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Medium severity - Incorrect token information",
+            "description": "The contract does not match the token information from the documentation (symbol and address).",
+            "severity": "medium",
+            "location": "DeHealthToken.sol, function initialize"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Low severity - Functions that can be declared as external",
+            "description": "Public functions in contracts are not used internally and can be declared as external to use less Gas.",
+            "severity": "low",
+            "location": "DeHealthToken.sol (functions version, pause, unpause, setGuardContract, __loadBalances)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1127"
+                ]
+            },
+            "title": "Low severity - Unlocked pragma",
+            "description": "Contracts with unlocked pragmas may be deployed by the latest compiler, which may have higher risks of undiscovered bugs.",
+            "severity": "low",
+            "location": "DeHealthToken.sol, DProxy.sol"
+        }
+    ]
+}

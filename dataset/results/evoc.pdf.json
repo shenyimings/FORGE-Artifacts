@@ -1,0 +1,317 @@
+{
+    "path": "artifacts/evoc.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x70f1666484ee1fce87a71dc238565c23ffc9a91c",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.6+commit.7338295f"
+        ],
+        "project_path": {
+            "EvocPlus": "contracts/evoc/EvocPlus"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Stops Transactions",
+            "description": "The contract owner can stop transactions for all users except themselves by setting `_maxTxAmount` to zero.",
+            "severity": "critical",
+            "location": "EvocPlus.sol, _maxTxAmount function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Exceeds Fees Limit",
+            "description": "The contract owner can increase fees over the allowed limit of 25% by calling specific functions.",
+            "severity": "critical",
+            "location": "EvocPlus.sol, setTransferBuyFee, setFeeDistribution, and setFeeSwap functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Transfers Liquidity to Team Wallet",
+            "description": "The contract owner can set `totalFee` to zero, allowing them to swap the contract's tokens to native currency and send it to the marketing fee receiver.",
+            "severity": "critical",
+            "location": "EvocPlus.sol, swapBack function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Mints Tokens",
+            "description": "The minter role can mint tokens up to 10000000000, which is 330% more than the initial supply.",
+            "severity": "critical",
+            "location": "EvocPlus.sol, mint function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Blacklists Addresses",
+            "description": "Authorized users can stop addresses from transactions by calling the `devListAddress` function.",
+            "severity": "critical",
+            "location": "EvocPlus.sol, devListAddress function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-369"
+                ]
+            },
+            "title": "Zero Division",
+            "description": "Contract uses variables that may be set to zero as denominators, leading to unpredictable results.",
+            "severity": "critical",
+            "location": "Unknown"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Price Volatility Concern",
+            "description": "Contract swaps tokens for ETH without limiting the amount, potentially causing price volatility.",
+            "severity": "medium",
+            "location": "Unknown"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Missing Revert Messages",
+            "description": "Contract is missing error messages, making it difficult to identify and fix issues.",
+            "severity": "medium",
+            "location": "Unknown"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Decimal Division Precision",
+            "description": "Division of decimal numbers can result in rounding errors due to Solidity's implementation.",
+            "severity": "medium",
+            "location": "Unknown"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Storage Keyword",
+            "description": "Contract uses the `storage` keyword in a view function, which is unnecessary and can make the code less readable.",
+            "severity": "low",
+            "location": "Unknown"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Immutable Declaration Improvement",
+            "description": "Variables initialized only in the constructor should be declared as immutable for optimization and gas efficiency.",
+            "severity": "low",
+            "location": "Unknown"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "State Variables could be Declared Constant",
+            "description": "State variables can be declared as constant to ensure their values cannot be changed and decrease gas consumption.",
+            "severity": "low",
+            "location": "Unknown"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Conformance to Solidity Naming Conventions",
+            "description": "Contract does not follow Solidity naming conventions, affecting code readability and maintainability.",
+            "severity": "low",
+            "location": "Unknown"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing Events Arithmetic",
+            "description": "Events are not properly designed or implemented, which can cause issues with arithmetic operations.",
+            "severity": "medium",
+            "location": "Unknown"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Validate Variable Setters",
+            "description": "Contract performs operations on variables without proper checks for zero values, leading to potential problems.",
+            "severity": "medium",
+            "location": "Unknown"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Stable Compiler Version",
+            "description": "Version lock is not specified, which can lead to compilation with incompatible Solidity versions.",
+            "severity": "low",
+            "location": "Unknown"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Succeeded Transfer Check",
+            "description": "Contract does not check if transfer methods are successful, potentially leading to incorrect assumptions.",
+            "severity": "medium",
+            "location": "Unknown"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unauthorized access and manipulation by owner",
+            "description": "The contract owner has excessive admin privileges, allowing them to stop transactions, manipulate fees, transfer funds, mint tokens, and blacklist addresses.",
+            "severity": "n/a",
+            "location": "Evocardano contract"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Potential honeypot trap",
+            "description": "If the owner abuses the admin functions, the contract can be converted into a honeypot, preventing users from selling their tokens.",
+            "severity": "n/a",
+            "location": "Evocardano contract"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Token inflation risk",
+            "description": "The owner's ability to mint tokens can lead to highly inflated token values if abused.",
+            "severity": "n/a",
+            "location": "Evocardano contract"
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "path": "artifacts/Xterio Tech Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/XterioTech/smart-contracts",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smart-contracts": "contracts/Xterio Tech Contract Audit Report - QuillAudits/smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Malicious user can replay the signatures",
+            "description": "Off-chain computed signature is provided that does not have any expiry or nonce, allowing the recipient to re-use the same signature to mint the badge or a xSoul.",
+            "severity": "high",
+            "location": "Badge.sol#L155 and XSoul.sol#L84"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Missing sanity check on expiry during setting user",
+            "description": "Expiry value does not get validated before setting the user, allowing an expired user to be added.",
+            "severity": "low",
+            "location": "ERC4907.sol#L38"
+        }
+    ]
+}

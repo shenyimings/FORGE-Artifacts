@@ -1,0 +1,247 @@
+{
+    "path": "artifacts/rara.pdf",
+    "project_info": {
+        "url": "https://github.com/rara-social/rara-protocol/tree/a4a2474c9cbc8238f0ee7f6c1d1e9924bf9da95d",
+        "commit_id": "a4a2474c9cbc8238f0ee7f6c1d1e9924bf9da95d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "rara-protocol": "contracts/rara/rara-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Use of unsafe cast operations",
+            "description": "Primitive cast operations are used, which are prone to over-/underflows.",
+            "severity": "medium",
+            "location": "SigmoidCuratorVault.sol, Sigmoid.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-821"
+                ]
+            },
+            "title": "Violating Checks Effects Interactions pattern",
+            "description": "External calls are made before updating the contract state.",
+            "severity": "low",
+            "location": "ReactionVault.sol, SigmoidCuratorVault.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Privileged roles and ownership",
+            "description": "Certain contracts have state variables that provide certain addresses with privileged roles.",
+            "severity": "low",
+            "location": "CuratorToken1155.sol, AddressManager.sol, RoleManager.sol, ParameterManager.sol, SigmoidCuratorVault.sol, ReactionNft1155.sol"
+        },
+        {
+            "id": 3,
+            "category": {},
+            "title": "Missing input validation",
+            "description": "Inputs are not properly validated in certain functions.",
+            "severity": "low",
+            "location": "ParameterManager.sol, RoleManager.sol, SigmoidCuratorVault.sol, ReactionVault.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Re-registering NFTs transfers taker rewards",
+            "description": "The rewards for takers are stored in the nftOwnerRewards mapping and can be claimed by the current owner.",
+            "severity": "low",
+            "location": "ReactionVault.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Re-registering NFTs without de-registering is possible",
+            "description": "The _registerForOwner function in MakerRegistrar does not check if the NFT is already registered.",
+            "severity": "low",
+            "location": "MakerRegistrar.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Front running fxRootTunnel setting",
+            "description": "fxRootTunnel and fxChildTunnel can be set by anyone.",
+            "severity": "low",
+            "location": "ChildRegistrar.sol, RootRegistrar.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible wrong taker amount value",
+            "description": "Executing info.totalCuratorLiability -= info.referrerCut in ReactionVault._spendReaction() before computing takerAmount reduces the taker value.",
+            "severity": "low",
+            "location": "ReactionVault.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Events not emitted on state change",
+            "description": "Events are not always emitted when a state change is performed.",
+            "severity": "info",
+            "location": "AddressManager.sol, ParameterManager.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-172"
+                ]
+            },
+            "title": "Using low-level calls",
+            "description": "The _verifyOwnership function uses staticcall directly by encoding the parameters with abi.encodeWithSignature and decoding the results with abi.decode.",
+            "severity": "info",
+            "location": "NftOwnership.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Duplicate overflow checks",
+            "description": "The pow2 and pow3 functions from the ExtendedMath library implement explicit overflow checks, which are already checked by the compiler.",
+            "severity": "info",
+            "location": "ExtendedMath.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Bonding curve parameters modification",
+            "description": "Modifying the bonding curve parameters using ParameterManager.setBondingCurveParams(...) can be problematic if a curator id is already set.",
+            "severity": "info",
+            "location": "ParameterManager.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Upgradeable contracts",
+            "description": "Many contracts are implemented using the proxy pattern to be upgradeable, which can be a security risk if not properly managed.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Access Control Issue",
+            "description": "Inconsistent access control in CuratorToken1155.sol and ReactionNft1155.sol",
+            "severity": "n/a",
+            "location": "CuratorToken1155.sol, ReactionNft1155.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Logging Issue",
+            "description": "Missing indexed keyword for address parameters in events",
+            "severity": "n/a",
+            "location": "SigmoidCuratorVault.sol, MakerRegistrar.sol, etc."
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Magic Constants",
+            "description": "Using magic constants instead of declared constants",
+            "severity": "n/a",
+            "location": "ReactionVault.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Unclear Error Message",
+            "description": "Incorrect error message in CuratorToken1155.sol",
+            "severity": "n/a",
+            "location": "CuratorToken1155.sol"
+        }
+    ]
+}

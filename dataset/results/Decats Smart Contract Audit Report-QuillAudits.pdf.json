@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/Decats Smart Contract Audit Report-QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x198f1d316aad1c0bfd36a79bd1a8e9dba92daa18",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.6.9+commit.3e3065ac"
+        ],
+        "project_path": {
+            "InitializableERC20": "contracts/Decats Smart Contract Audit Report-QuillAudits/InitializableERC20"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Not protected for the ERC20 approval race condition",
+            "description": "No protection for race condition through the approve function, allowing an attacker to steal tokens.",
+            "severity": "low",
+            "location": "InitializableERC20.sol, Function: Approve"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-940"
+                ]
+            },
+            "title": "Front running of init function",
+            "description": "Attackers can front-run the init call transaction by looking at the mempool and setting values mentioned above, potentially stealing tokens.",
+            "severity": "info",
+            "location": "InitializableERC20.sol, Function: Init"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Reduce number storage slots used",
+            "description": "Inefficient use of storage slots due to variable ordering.",
+            "severity": "low",
+            "location": "InitializableERC20.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Use the latest version of Solidity",
+            "description": "Using an old version of Solidity (0.6.9) that contains vulnerabilities.",
+            "severity": "info",
+            "location": "InitializableERC20.sol"
+        }
+    ]
+}

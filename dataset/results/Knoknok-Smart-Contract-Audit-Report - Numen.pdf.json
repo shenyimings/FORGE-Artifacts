@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/Knoknok-Smart-Contract-Audit-Report - Numen.pdf",
+    "project_info": {
+        "url": "https://github.com/Knoknok/chaindata/blob/main",
+        "commit_id": "489daf31ce76db8ff59f9053db0397c11abcbf0b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "chaindata": "contracts/Knoknok-Smart-Contract-Audit-Report - Numen/chaindata"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Token burn function",
+            "description": "Any address with minter permission can call the \"burn\" function to burn tokens of a specified amount in a specified address, affecting user asset security.",
+            "severity": "medium",
+            "location": "AnyswapV6ERC20.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Mint unlimited",
+            "description": "Addresses with minter permissions can call the \"mint\" function to mint a specified amount of tokens without limitation.",
+            "severity": "low",
+            "location": "AnyswapV6ERC20.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Repeatedly set the vault function",
+            "description": "There are two similar mechanisms when modifying the \"vault\" address, which is unnecessary and has low security impact.",
+            "severity": "low",
+            "location": "AnyswapV6ERC20.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "RevokeMinter function",
+            "description": "When the \"vault\" address calls the \"revokeMinter\" function to remove minter permission, only the status is changed to false, and \"_auth\" is not removed from the minters array.",
+            "severity": "info",
+            "location": "AnyswapV6ERC20.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Deposit and withdraw function",
+            "description": "According to project design, as long as the underlying is 0 address, deposit and withdraw functions cannot be used, with no security risk.",
+            "severity": "info",
+            "location": "AnyswapV6ERC20.sol"
+        }
+    ]
+}

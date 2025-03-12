@@ -1,0 +1,173 @@
+{
+    "path": "artifacts/lybra-finance-audit-2023-07.pdf",
+    "project_info": {
+        "url": "https://github.com/LybraFinance/LybraV2/tree/48c98f288c77f57fa17e87964394f98e1e2ee636",
+        "commit_id": "48c98f288c77f57fa17e87964394f98e1e2ee636",
+        "address": "0xa2e3356610840701bdf5611a53974510ae27e2e1",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "FiatTokenProxy": "contracts/lybra-finance-audit-2023-07/FiatTokenProxy"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Re-Entrancy Risks Associated With External Calls With Other Liquid Staking Systems.",
+            "description": "Reentrancy risks in external calls to third-party contracts may cause critical damage to the Lybra Protocol.",
+            "severity": "high",
+            "location": "LybraWstETHVault, LybraWBETHVault, and LybraRETHVault contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "The configurator.getEUSDMaxLocked() Condition Can Be Bypassed During a Flashloan.",
+            "description": "An attacker can get a flash loan, reducing the visible amount of locked tokens.",
+            "severity": "medium",
+            "location": "PeUSDMainnet.sol, convertToPeUSD function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Liquidation Keepers Automatically Become eUSD Debt Providers for Other Liquidations.",
+            "description": "A liquidator could use another address's allowance to provide debt tokens without their consent.",
+            "severity": "medium",
+            "location": "LybraEUSDVaultBase.sol, liquidation function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Duplication of Bad Collateral Ratio.",
+            "description": "The bad collateral ratio is duplicated in two different contracts with different values.",
+            "severity": "low",
+            "location": "LybraConfigurator.sol and LybraEUSDVaultBase.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing Events.",
+            "description": "Contracts are missing events in significant scenarios, such as important configuration changes.",
+            "severity": "low",
+            "location": "Multiple contracts (esLBRBoost.sol, ProtocolRewardsPool.sol, EUSDMiningIncentives.sol, stakerewardV2pool.sol)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Incorrect Interfaces.",
+            "description": "Incorrect interfaces are used on top of contracts.",
+            "severity": "low",
+            "location": "LybraConfiugurator.sol, ProtocolRewardsPool.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Improper Withdrawal Logic in RigidRedemption.",
+            "description": "The checkWithdrawal check is made on the user instead of the provider, leading to potential collateral withdrawal issues.",
+            "severity": "medium",
+            "location": "rigidRedemption function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Event Emission Error in RigidRedemption.",
+            "description": "The emitted event RigidRedemption has an incorrect amount, which should be corrected by the checkWithdrawal function.",
+            "severity": "medium",
+            "location": "rigidRedemption function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Inconsistent getVaultWeight Logic.",
+            "description": "The vault is checked to be active if there is no special weight assigned to it, but if weight is assigned and disabled, this will still return a value.",
+            "severity": "medium",
+            "location": "getVaultWeight function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "DAO Role Allows Unrestricted Access.",
+            "description": "The DAO role assigned to the deployer allows them to perform any action they want with the system.",
+            "severity": "critical",
+            "location": "GovernanceTimelock contract, DAO role assignment"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent Solidity Version Usage.",
+            "description": "Different contracts use different solidity versions, which may cause issues and inconsistencies.",
+            "severity": "n/a",
+            "location": "Various contracts, including StakingRewardsV2 contract"
+        }
+    ]
+}

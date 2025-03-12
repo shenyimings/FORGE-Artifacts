@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/Brink-Spearbit-Security-Review-Engagement-2.pdf",
+    "project_info": {
+        "url": "https://github.com/brinktrade/brink-core/tree/db0027533b228a6994acdbcb06713b5a3a3ecb38",
+        "commit_id": "db0027533b228a6994acdbcb06713b5a3a3ecb38",
+        "address": "0x94324fcF2cC42F702F7dCBEe5e61E947DC9e2D91",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "brink-core": "contracts/Brink-Spearbit-Security-Review-Engagement-2/brink-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Inline assembly leaves dirty higher order bits for `_proxyOwner` variable",
+            "description": "The inline assembly code in `proxyOwner()` function may read from an unpredictable memory location, leaving \"dirty\" higher-order bits.",
+            "severity": "low",
+            "location": "Account.sol#L160-L165"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "The function `deployAndCall` may silently fail during account creation",
+            "description": "The `deployAndCall` function may fail to create an account and call it, especially when running out of call depth.",
+            "severity": "low",
+            "location": "AccountFactory.sol#L23 & DeployAndCall.sol#L17"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Vanity address optimization",
+            "description": "Finding an appropriate salt for the implementation contract to make the deployment address have as many zeros as possible, saving gas.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Use file-level constant for SALT",
+            "description": "Duplicate salt values in AccountFactory and SaltedDeployer contracts.",
+            "severity": "info",
+            "location": "AccountFactory.sol#L9, SaltedDeployer.sol#L20"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use constants for offsets in proxyOwner",
+            "description": "Hardcoded offset value in Account contract.",
+            "severity": "info",
+            "location": "Account.sol#L162"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Using underscores to improve readability of hex value",
+            "description": "Improving code readability.",
+            "severity": "info",
+            "location": "AccountFactory.sol#L19"
+        }
+    ]
+}

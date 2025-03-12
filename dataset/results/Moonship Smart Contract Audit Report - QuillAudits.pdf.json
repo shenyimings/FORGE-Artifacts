@@ -1,0 +1,200 @@
+{
+    "path": "artifacts/Moonship Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/moonshipfinance/contracts/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Moonship Smart Contract Audit Report - QuillAudits/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Taxation issue",
+            "description": "Tax is not correctly implemented for large transactions",
+            "severity": "high",
+            "location": "function disruptiveTransfer(address recipient, uint256 amount) public payable returns (bool)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy vulnerability",
+            "description": "Possible reentrancy attacks due to missing checks",
+            "severity": "medium",
+            "location": "function transfer(address recipient, uint256 amount) public override returns (bool), function transferFrom(address sender, address recipient, uint256 amount) public override returns (bool)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization risks",
+            "description": "Owner has too much control over settings and contract management",
+            "severity": "medium",
+            "location": "function setMaxTxPercent(uint256 maxTxPercent) public onlyOwner()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect variable initialization",
+            "description": "_maxTxAmount is not initialized correctly",
+            "severity": "medium",
+            "location": "function setMaxTxPercent(uint256 maxTxPercent) public onlyOwner()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant comparison",
+            "description": "Useless comparison that wastes gas",
+            "severity": "low",
+            "location": "require(balanceOf(msg.sender) >= 0, 'Error: must own MRAT to claim reward')"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate code",
+            "description": "Duplicated code in _transferStandard function",
+            "severity": "low",
+            "location": "else if (!_isExcluded[sender] && !_isExcluded[recipient])"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing input validation",
+            "description": "Lack of range checks for input variables",
+            "severity": "low",
+            "location": "function setTaxFeePercent(uint256 taxFee) external onlyOwner(), function setLiquidityFeePercent(uint256 liquidityFee) external onlyOwner(), function setMaxTxPercent(uint256 maxTxPercent) public onlyOwner()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Typo in variable name",
+            "description": "Typo in tokensIntoLiqudity",
+            "severity": "info",
+            "location": "uint256 tokensIntoLiqudity"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing events",
+            "description": "Lack of events for significant transactions",
+            "severity": "info",
+            "location": "Multiple functions (setLiquidityFeePercent, setTaxFeePercent, includeInFee, excludeFromFee, setMaxTxPercent, setExcludeFromMaxTx)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Incorrect constant declaration location",
+            "description": "Constants declared in the middle of the contract",
+            "severity": "info",
+            "location": "rewardCycleBlock, easyRewardCycleBlock, disruptiveCoverageFee, winningDoubleRewardPercentage"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant settings",
+            "description": "Redundant variable settings",
+            "severity": "info",
+            "location": "Multiple lines (rewardCycleBlock, easyRewardCycleBlock, disruptiveCoverageFee, winningDoubleRewardPercentage)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Solidity version",
+            "description": "Using an outdated version of Solidity",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Reentrancy Vulnerability possibility",
+            "description": "Relying on other contracts might cause reentrancy vulnerability.",
+            "severity": "n/a",
+            "location": "n/a"
+        }
+    ]
+}

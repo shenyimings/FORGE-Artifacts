@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-SorbettoFragola-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/Popsicle-Finance/SorbettoFragola/tree/6201770",
+        "commit_id": "6201770",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "SorbettoFragola": "contracts/PeckShield-Audit-Report-SorbettoFragola-v1/SorbettoFragola"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Suggested Use Of Safemath In init()",
+            "description": "Potential overflow and underflow issues in calculations.",
+            "severity": "medium",
+            "location": "SorbettoFragola::init() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-283"
+                ]
+            },
+            "title": "Two-Step Transfer Of Privileged Account Ownership",
+            "description": "No event is emitted to record the change of governance.",
+            "severity": "info",
+            "location": "SorbettoStrategy::acceptGovernance()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Logic Error In _calcShare()",
+            "description": "The calculation of shares is incorrect, leading to unfair treatment of users.",
+            "severity": "low",
+            "location": "SorbettoFragola::_calcShare()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The governance account can be compromised, allowing an attacker to modify system parameters.",
+            "severity": "medium",
+            "location": "SorbettoFragola::withdraw()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Amount Calculation In burnLiquidityShare()",
+            "description": "The calculation of amount0 and amount1 is incorrect.",
+            "severity": "medium",
+            "location": "PoolActions::burnLiquidityShare()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Reentrancy Risk In MultisigWallet::execute()",
+            "description": "The collectFees() function can be re-entered, leading to a potential attack vector.",
+            "severity": "medium",
+            "location": "SorbettoFragola::collectFees()"
+        }
+    ]
+}

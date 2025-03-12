@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/ImmuneBytes-SIGH_Finance_Final_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/SIGH-Finance/SIGH-Finance-Contracts",
+        "commit_id": "9feee84e18cabb4015ca60dc016340f2c94af27a",
+        "address": "0x0e4e1135eb9de57b48cd5119ca6900cbf2e23bab, 0x4d89ac60b01e050c1af1de45a68ded14189d97ac",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "SIGH-Finance-Contracts": "contracts/ImmuneBytes-SIGH_Finance_Final_Audit_Report/SIGH-Finance-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "setApprovalForAll() function does not function as intended",
+            "description": "The function reverts the approval transactions due to require statements.",
+            "severity": "high",
+            "location": "SIGHBoosters contract, Line 236 and 237"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "SIGH Boosters can be bought at zero price",
+            "description": "Anyone can purchase a Booster before its price is updated by admin.",
+            "severity": "high",
+            "location": "SIGHBoostersSale contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "The onERC721Received() function is open for anyone to call anytime",
+            "description": "Anyone can call the function with any tokenId, preventing actual owners from selling their tokens.",
+            "severity": "high",
+            "location": "SIGHBoostersSale contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Failing test case for updateDiscountMultiplier() function",
+            "description": "No logic is present to revert the transaction on zero input.",
+            "severity": "low",
+            "location": "SIGHBoosters_test.py, Line 121"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Incorrect require statement in getTokenBalance()",
+            "description": "The function checks tokenAcceptedAsPayment instead of token variable.",
+            "severity": "low",
+            "location": "SIGHBoostersSale contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant check in safeTransferFrom() function",
+            "description": "A redundant require statement is present at Line 247 and 252.",
+            "severity": "low",
+            "location": "SIGHBoosters contract, Line 247"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Spelling mistake in the developer’s comment",
+            "description": "The comment spells By instead of Buy.",
+            "severity": "low",
+            "location": "SIGHBoostersSale contract, Line 92"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Funds collected via Booster sale are not transferred to the Booster seller",
+            "description": "Funds remain inside the SIGHBoostersSale contract until claimed by admin.",
+            "severity": "low",
+            "location": "SIGHBoostersSale contract"
+        }
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/RickMortyDoxx Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x5D29011D843B0b1760C43E10d66F302174bcCd1A",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "LiquidityGeneratorToken": "contracts/RickMortyDoxx Full Smart Contract Security Audit/LiquidityGeneratorToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function _getCurrentSupply() uses a loop to evaluate total supply, which could be aborted with an OUT_OF_GAS exception if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "LiquidityGeneratorToken contract, _getCurrentSupply() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has various privileges that can be used maliciously, such as changing tax and liquidity fees, locking/unlocking, including/excluding from fee, changing maximum transaction amount, enabling/disabling swap and liquify, and enabling/disabling fees.",
+            "severity": "low",
+            "location": "LiquidityGeneratorToken contract, various functions (e.g. setTaxFeePercent(), lock(), excludeFromFee())"
+        }
+    ]
+}

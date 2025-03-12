@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/BuyBot-Audit-by-BlockSAFU.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x174a21E9761F198195a7b7a05247CD74bFc3f688",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.11+commit.d7f03943"
+        ],
+        "project_path": {
+            "BuyBotCoin": "contracts/BuyBot-Audit-by-BlockSAFU/BuyBotCoin"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Unbounded transaction limit",
+            "description": "The contract contains maximum transaction without a limit, which can cause issues when the user tries to sell and the max transaction is 0 (Zero).",
+            "severity": "critical",
+            "location": "setTxLimit function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges and honeypot indication",
+            "description": "The owner can stop trading status and can sell tokens even in the stopped trading status, which is a honeypot indication.",
+            "severity": "critical",
+            "location": "tradingstatus function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unbounded fee setting",
+            "description": "The owner can set fees without a limit, which is a honeypot indication.",
+            "severity": "critical",
+            "location": "setFees function"
+        }
+    ]
+}

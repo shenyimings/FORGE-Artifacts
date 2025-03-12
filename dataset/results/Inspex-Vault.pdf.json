@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/Inspex-Vault.pdf",
+    "project_info": {
+        "url": "https://github.com/aleswap-finance/aleswap-vault",
+        "commit_id": "efd3f777b2e9aaa2c635d3d0f463f1884e998112",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "aleswap-vault": "contracts/Inspex-Vault/aleswap-vault"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Token Draining Using SetVault() Function",
+            "description": "The owner can drain all staked tokens by setting a new vault address.",
+            "severity": "high",
+            "location": "Advanced, SetVault() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Transaction Ordering Dependence",
+            "description": "Front-running attacks can result in less favorable token prices during swapping.",
+            "severity": "high",
+            "location": "General"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Use of Upgradable Contract",
+            "description": "The logic of affected contracts can be arbitrarily changed, allowing the proxy owner to perform malicious actions.",
+            "severity": "high",
+            "location": "AleVault StrategyWardenLP WardenSwapper contracts (TransparentUpgradeableProxy)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change the critical state variables to gain additional profit, which is unfair to other users.",
+            "severity": "medium",
+            "location": "StrategyWardenLP contract (setVault() function)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Liquidity Token Amount Miscalculation (_swapWBNBToLp)",
+            "description": "A small amount of the users' token will be stuck in the contract on deposit, resulting in the users gaining a lower amount of shares.",
+            "severity": "medium",
+            "location": "Advanced, _swapWBNBToLp function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Liquidity Token Amount Miscalculation (addliquidity)",
+            "description": "The `addLiquidity` function miscalculates the token amount used for liquidity addition, resulting in fewer LP tokens received.",
+            "severity": "low",
+            "location": "Advanced, addliquidity function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Improper Usage of SafeERC20.safeApprove()",
+            "description": "The `_approveTokenIfNeeded()` function will only work for the first time and may cause the contract to be unable to spend tokens as it intends to.",
+            "severity": "low",
+            "location": "WardenSwapper.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Improper Price Tolerance Design",
+            "description": "The price tolerance mechanism is not implemented in the WardenSwapper contract, allowing front-running attacks.",
+            "severity": "info",
+            "location": "WardenSwapper"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "AleVault.sol (L:50), AleVault.sol (L:70), AleVault.sol (L:88), StrategyWardenLP.sol (L:168), WardenSwapper.sol (L:75)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Inexplicit Solidity Compiler Version",
+            "description": "The Solidity compiler versions declared in the smart contracts were not explicit.",
+            "severity": "info",
+            "location": "AleVault.sol, StrategyWardenLP.sol, WardenSwapper.sol"
+        }
+    ]
+}

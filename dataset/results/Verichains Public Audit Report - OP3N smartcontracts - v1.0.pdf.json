@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/Verichains Public Audit Report - OP3N smartcontracts - v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/EST-Media/op3n-nft-audit-contracts",
+        "commit_id": "b41d45d0123b099efe67ebbf4cd5340f20943a36",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "op3n-nft-audit-contracts": "contracts/Verichains Public Audit Report - OP3N smartcontracts - v1/op3n-nft-audit-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Fee is not collected",
+            "description": "In mint function, when token is used to pay, only transferAmount (order.amount - order.fee) is sent to creator, order.fee is not collected.",
+            "severity": "critical",
+            "location": "NFTPackageTrade.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Signature replay",
+            "description": "In the mint function, signature is not checked whether it is used or not. User can replay this signature and mint many times.",
+            "severity": "high",
+            "location": "NFTPackageTrade.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Unused modifier onlyOwner",
+            "description": "There is onlyOwner modifier in the contract but the contract checks for owner() == msg.sender everywhere instead of using the modifier.",
+            "severity": "info",
+            "location": "NFTUpgradeable.sol and NFTPackage.sol"
+        }
+    ]
+}

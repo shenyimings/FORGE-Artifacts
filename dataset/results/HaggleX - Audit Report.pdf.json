@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/HaggleX - Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/HagglexHQ/Hag-token",
+        "commit_id": "9c2d7821bf5740afc4437c9a2bd3ace7ec883137",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Hag-token": "contracts/HaggleX - Audit Report/Hag-token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Uncontrolled array length in staking function",
+            "description": "The function staking gives control to the user to set the array length of variable `_staking[_msgSender()][].` This can lead to unstake function running out of gas.",
+            "severity": "high",
+            "location": "Function staking, line 1076"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Non-updateable account addresses",
+            "description": "Account addresses should be updateable to avoid address recovery problems.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ],
+                "3": [
+                    "CWE-440"
+                ]
+            },
+            "title": "Less flexible bulk mint function",
+            "description": "The function mintToMultipleAddresses takes a single amount parameter, making the bulk mint function less flexible.",
+            "severity": "low",
+            "location": "Function mintToMultipleAddresses"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inefficient array length calculation",
+            "description": "Array length is calculated inside for loop definition, using a lot of gas.",
+            "severity": "low",
+            "location": "Multiple instances in the contract (e.g., functions mintToMultipleAddresses, _removeIndexInArray)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Unoptimized variable usage",
+            "description": "Variables STAKERS_PERCENTAGE, LEADERSHIP_BOARD_PERCENTAGE, UNIVERSAL_BASIC_INCOME_PERCENTAGE, DEVELOPMENT_PERCENTAGE can be made constants to optimize gas costs.",
+            "severity": "low",
+            "location": "n/a"
+        }
+    ]
+}

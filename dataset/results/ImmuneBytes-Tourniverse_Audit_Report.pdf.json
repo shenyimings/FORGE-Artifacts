@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/ImmuneBytes-Tourniverse_Audit_Report.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xF3dcCb92A98D0196a270FbA7a1D0125c89313e9b",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.3+commit.8d00100c"
+        ],
+        "project_path": {
+            "Tourniverse": "contracts/ImmuneBytes-Tourniverse_Audit_Report/Tourniverse"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Loops are extremely costly",
+            "description": "The Tourniverse contract has some for loops in the contract that include state variables like .length of a non-memory array, in the condition of the for loops.",
+            "severity": "medium",
+            "location": "includeInReward and _getCurrentSupply functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Violation of Check_Effects_Interaction Pattern in the Withdraw function",
+            "description": "The constructor of the contract includes an external call, but this external call is made before updating the imperative state variable of the contract.",
+            "severity": "medium",
+            "location": "Withdraw function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Absence of Input Validations",
+            "description": "No input validation is included in certain functions that update crucial state variables of the contract.",
+            "severity": "medium",
+            "location": "Various functions (not specified)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "No Events emitted after imperative State Variable modification",
+            "description": "Functions that modify arithmetic state variables do not emit events after modification.",
+            "severity": "medium",
+            "location": "setTaxFeePercent, setCharityFeePercent, and setLiquidityFeePercent functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Absence of Zero Address Validation",
+            "description": "No zero address validation is implemented in certain functions while updating the address state variables of the contract.",
+            "severity": "low",
+            "location": "setUniswapPair function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "External Visibility should be preferred",
+            "description": "Functions that are never called throughout the contract should be marked as external visibility instead of public visibility.",
+            "severity": "low",
+            "location": "Various functions (not specified)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Contract includes Hardcoded Addresses",
+            "description": "The contract includes some hardcoded addresses in the code before deployment.",
+            "severity": "low",
+            "location": "Lines 451-457"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Constant declaration should be preferred",
+            "description": "State variables that are not supposed to change throughout the contract should be declared as constant.",
+            "severity": "low",
+            "location": "Various state variables (not specified)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Too many Digits used",
+            "description": "There is a large number of digits that reduces the readability of the code.",
+            "severity": "low",
+            "location": "Lines 798, 820, and 821"
+        }
+    ]
+}

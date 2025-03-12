@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Venus-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/VenusProtocol/venus-protocol/tree/d0e0a70",
+        "commit_id": "d0e0a70",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "venus-protocol": "contracts/PeckShield-Audit-Report-Venus-v1/venus-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper dsrPerBlock() Calculation",
+            "description": "The computation assumes the block time of 15 seconds per block, which should be 3 seconds per block on Binance Smart Chain (BSC).",
+            "severity": "low",
+            "location": "DAIInterestRateModelV2 contract, function dsrPerBlock()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Non ERC20-Compliance Of VToken",
+            "description": "The VToken implementation is not fully ERC20-compliant.",
+            "severity": "medium",
+            "location": "VToken contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20-Compliant Tokens",
+            "description": "Using non-compliant ERC20 tokens may cause issues if not handled properly.",
+            "severity": "low",
+            "location": "Coding practice, VTreasury, function transfer() and related idiosyncrasies from current widely-used token contracts."
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Interface Inconsistency Between VBep20 And VBNB",
+            "description": "Interfaces between VBep20 and VBnb types are different.",
+            "severity": "low",
+            "location": "VBep20 and VBNB interfaces, Multiple Contracts, functions repayBorrow(), mint(), liquidateBorrow(), etc."
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant State/Code Removal",
+            "description": "Unused code or unnecessary redundancies in multiple contracts, including VToken and VAIController.",
+            "severity": "info",
+            "location": "Multiple Contracts (Comptroller, VToken, VAIToken, VAIController), functions (_acceptAdmin() in Unitroller and VToken)"
+        }
+    ]
+}

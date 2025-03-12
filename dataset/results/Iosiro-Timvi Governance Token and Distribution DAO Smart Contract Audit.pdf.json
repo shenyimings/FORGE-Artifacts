@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/Iosiro-Timvi Governance Token and Distribution DAO Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/TimviOfficial/Timvi-Governance",
+        "commit_id": "a6e5929701b5da5ef9980b668216410245da59b7",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Timvi-Governance": "contracts/Iosiro-Timvi Governance Token and Distribution DAO Smart Contract Audit/Timvi-Governance"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Reward Amount Overflow",
+            "description": "An overflow bug was discovered in the Distribution contract, similar to one found in Synthetix StakingRewards contract.",
+            "severity": "high",
+            "location": "Distribution.notifyRewardAmount(...) function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1127"
+                ]
+            },
+            "title": "Floating Pragma Version",
+            "description": "Contracts were compiled with any version of Solidity ^0.6.0, which could lead to situations where contracts are compiled using a compiler version they have not been extensively tested on.",
+            "severity": "low",
+            "location": "General (pragma statement at the top of each contract)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Insufficient Unit Test Quality and Coverage",
+            "description": "Certain functionality had insufficient unit test quality and coverage, particularly in Distribution.sol and TimviGovernanceToken.sol.",
+            "severity": "info",
+            "location": "Distribution.sol (lines 133-135) and TimviGovernanceToken.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Design Comments",
+            "description": "Actions to improve the functionality and readability of the codebase were outlined, including using block.timestamp instead of now keyword.",
+            "severity": "info",
+            "location": "General (Solidity version 0.7.0)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of array length check",
+            "description": "The distributeAdditionalRewards(...) function did not validate that the users list and reward amounts list were the same length, which could lead to errors.",
+            "severity": "info",
+            "location": "Distribution.distributeAdditionalRewards(...) function"
+        }
+    ]
+}

@@ -1,0 +1,479 @@
+{
+    "path": "artifacts/2021-04-balancer-balancerv2-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/balancer-labs/balancer-core-v2",
+        "commit_id": "2c84113",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "balancer-core-v2": "contracts/2021-04-balancer-balancerv2-securityreview/balancer-core-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Malicious manager can reinvest tokens to drain the pool",
+            "description": "A malicious manager can borrow tokens, swap them for all other tokens, and drain the pool.",
+            "severity": "high",
+            "location": "Balancer V2, Vault contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Transfer to zero can lead to unexpected burns",
+            "description": "Transfer-to-zero event can be triggered without burning tokens, causing confusion among off-chain monitors.",
+            "severity": "info",
+            "location": "BalancerPoolToken.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Solidity compiler optimizations can be dangerous",
+            "description": "Solidity compiler optimizations may not be safe and could cause security vulnerabilities in contracts.",
+            "severity": "info",
+            "location": "hardhat.config.ts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing events for critical operations",
+            "description": "Critical operations do not trigger events, making it difficult to check contract behavior.",
+            "severity": "info",
+            "location": "BasePool.sol, VaultAuthorization.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of zero check on functions",
+            "description": "Setter functions fail to validate incoming arguments, allowing callers to accidentally set important state variables to the zero address.",
+            "severity": "low",
+            "location": "BasePoolFactory.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of robust safeguards for pools with an empty token in WeightedPool",
+            "description": "Corner cases in WeightedPool could enable users to receive tokens for free or trap liquidity if a pool has an empty balance.",
+            "severity": "high",
+            "location": "WeightedMath.sol, WeightedPool.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Free swaps possible due to rounding issues",
+            "description": "Rounding issues in StableMath._calcOutGivenIn, _calcInGivenOut, and _calcTokenInGivenExactBptOut can allow free swaps.",
+            "severity": "medium",
+            "location": "StableMath.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Emergency period toggling can be used to selectively block transactions",
+            "description": "A malicious admin could cause transactions of the admin’s choosing to fail by front-running them and then quickly enabling the emergency period.",
+            "severity": "low",
+            "location": "EmergencyPeriod.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Balancer StablePool's invariant can differ significantly from Curve's invariant",
+            "description": "The implementations employ different orders of operations and rounding strategies, leading to different results.",
+            "severity": "n/a",
+            "location": "StableMath.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "StablePool's invariant is not monotonically increasing",
+            "description": "The pool’s invariant could decrease over time due to the incorrect application of _calculateInvariant.",
+            "severity": "low",
+            "location": "StableMath.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Swap Tokens for Free",
+            "description": "An attacker may be able to swap tokens for free if one of the tokens has a balance of zero.",
+            "severity": "medium",
+            "location": "WeightedMath.sol, function _calcInGivenOut"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Trapped Pool",
+            "description": "If one of the balances is zero, the pool’s invariant will be zero.",
+            "severity": "n/a",
+            "location": "WeightedPool.sol, function _calculateInvariant"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Emptying a Pool",
+            "description": "A code refactoring or a specific edge case might allow an attacker to use swap/exit operations to turn a profit.",
+            "severity": "n/a",
+            "location": "pools/weighted/WeightedMath.sol, pools/weighted/WeightedPool.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Protocol Fee Front-run",
+            "description": "Privileged users can front-run withdrawal operations to increase withdrawal fees, reducing the amount of assets other users will receive.",
+            "severity": "low",
+            "location": "PoolRegistry.sol, InternalBalance.sol, ProtocolFeesCollector.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Sum of Normalized Weights Can Be Different From 1",
+            "description": "The sum of normalized weights can be slightly higher or lower than 1 due to arithmetic precision loss.",
+            "severity": "low",
+            "location": "WeightedPool.sol, constructor"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Deflationary tokens",
+            "description": "Unexpected behavior due to fee-taking.",
+            "severity": "medium",
+            "location": "Token contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Insufficient interest accounting",
+            "description": "Trapped interest in the contract.",
+            "severity": "low",
+            "location": "Token contract"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Complex code",
+            "description": "Increased risk of issues.",
+            "severity": "medium",
+            "location": "Token contract"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Non-use of SafeMath",
+            "description": "Arithmetic errors possible.",
+            "severity": "high",
+            "location": "Token contract"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-657"
+                ]
+            },
+            "title": "Multiple non-token-related functions",
+            "description": "Increased attack surface.",
+            "severity": "medium",
+            "location": "Token contract"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Upgradeable contracts",
+            "description": "Potential rule changes over time.",
+            "severity": "high",
+            "location": "Token contract"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Malicious or compromised owner",
+            "description": "Abuse of minting capabilities.",
+            "severity": "high",
+            "location": "Owner privileges"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Pausable tokens",
+            "description": "Trapped contracts relying on pausable tokens.",
+            "severity": "medium",
+            "location": "Token contract"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Blacklisting features",
+            "description": "Malicious or compromised owners can trap contracts.",
+            "severity": "medium",
+            "location": "Token contract"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Anonymous development teams",
+            "description": "Higher risk of review required.",
+            "severity": "high",
+            "location": "Team behind the token"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Low total supply",
+            "description": "Easily manipulated tokens.",
+            "severity": "low",
+            "location": "Token scarcity issues"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Flash minting",
+            "description": "Unsecured balance and total supply updates.",
+            "severity": "high",
+            "location": "Token contract"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-501"
+                ]
+            },
+            "title": "Arbitrary pool risks",
+            "description": "Additional security issues due to unvetted code.",
+            "severity": "high",
+            "location": "Balancer arbitrary pools"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-424"
+                ]
+            },
+            "title": "Upgradeable pools",
+            "description": "Inherited risks from upgradeability.",
+            "severity": "high",
+            "location": "Balancer arbitrary pools"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Destructible pools",
+            "description": "Risks of malicious upgrades or trap funds.",
+            "severity": "high",
+            "location": "Balancer arbitrary pools"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "High fee schematics",
+            "description": "Unfair fees in pool transactions.",
+            "severity": "medium",
+            "location": "Balancer arbitrary pools"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Immutable parameter issues",
+            "description": "Weight updates can be abused by attackers.",
+            "severity": "high",
+            "location": "Pool tokens' weight"
+        }
+    ]
+}

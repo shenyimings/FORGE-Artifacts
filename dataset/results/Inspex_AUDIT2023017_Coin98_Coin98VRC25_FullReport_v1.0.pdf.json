@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/Inspex_AUDIT2023017_Coin98_Coin98VRC25_FullReport_v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/coin98/coin98-token-contract",
+        "commit_id": "99506cbcf9917f19d4db225434034db44c4909e3",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "coin98-token-contract": "contracts/Inspex_AUDIT2023017_Coin98_Coin98VRC25_FullReport_v1/coin98-token-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "Critical state variables can be updated at any time by the controlling authorities without notifying the users.",
+            "severity": "high",
+            "location": "Coin98Token.sol (functions: mint(), setFee(), transferOwnership())"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Unusable Token via Contract Freezing",
+            "description": "The contract owner can freeze the tokens, preventing holders from using them.",
+            "severity": "medium",
+            "location": "Coin98Token.sol (functions: freeze(), unfreeze())"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Public functions that are never called internally by the contract itself should have external visibility.",
+            "severity": "info",
+            "location": "Coin98Token.sol (functions: mint(), burn(), burnFrom(), freeze(), unfreeze(), setFee(), acceptOwnership(), transferOwnership())"
+        }
+    ]
+}

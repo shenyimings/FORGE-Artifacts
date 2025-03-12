@@ -1,0 +1,71 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-InvtAI-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/InvtAIOfficial/tokensale-smartcontract/tree/b26d171",
+        "commit_id": "b26d171",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "tokensale-smartcontract": "contracts/PeckShield-Audit-Report-InvtAI-v1/tokensale-smartcontract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect computeVestingScheduleIdForAddressAndPid() Logic",
+            "description": "The generated identifier assumes the given address has no more than 2 vesting schedules, which can be relaxed.",
+            "severity": "medium",
+            "location": "InvtAI token sale contract, function computeVestingScheduleIdForAddressAndPid()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved Validation in Sale Pool Addition",
+            "description": "The update logic on pool-wide parameters can be improved by applying more rigorous sanity checks.",
+            "severity": "low",
+            "location": "InvtAI token sale contract, function setPool()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Incorrect vestingStartTime Activation in harvestPool()",
+            "description": "The global start time needs to coordinate with all remaining pools as there is a need to ensure all pools have passed their end times.",
+            "severity": "medium",
+            "location": "InvtAI token sale contract, function harvestPool()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged administrative account needs to be scrutinized as it may pose a counter-party risk to the protocol users.",
+            "severity": "medium",
+            "location": "Multiple Contracts, various functions (e.g., finalWithdraw, recoverWrongTokens, setOfferingToken, setPool)"
+        }
+    ]
+}

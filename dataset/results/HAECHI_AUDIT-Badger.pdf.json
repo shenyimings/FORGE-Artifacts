@@ -1,0 +1,53 @@
+{
+    "path": "artifacts/HAECHI_AUDIT-Badger.pdf",
+    "project_info": {
+        "url": "https://github.com/badger-finance/badger-system/",
+        "commit_id": "537ef9c44196893cb9760beca2dcc501952e9a4a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "badger-system": "contracts/HAECHI_AUDIT-Badger/badger-system"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "RewardPool#notifyRewardAmount() does not check if it received reward",
+            "description": "StakingRewards#notifyRewardAmount() does not check if it has received the reward to distribute, leading to a high reward rate for farmers who get rewards faster than others.",
+            "severity": "low",
+            "location": "RewardPool contract, notifyRewardAmount function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "StakingRewards#notifyRewardAmount() can decrease rewardRate",
+            "description": "StakingRewards#notifyRewardAmount() does not check if the rewardRate decreases after notification.",
+            "severity": "low",
+            "location": "StakingRewards contract, notifyRewardAmount function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Numerators can be larger than denominators",
+            "description": "Multiple functions do not check if numerators are larger than denominators, leading to contract reverts.",
+            "severity": "low",
+            "location": "Various contracts and functions"
+        }
+    ]
+}

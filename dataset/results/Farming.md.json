@@ -1,0 +1,143 @@
+{
+    "path": "artifacts/Farming.md",
+    "project_info": {
+        "url": "https://github.com/1inch/farming",
+        "commit_id": "7a007ec7784cca2899889e99e46cf06d5788a7d9",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "farming": "contracts/Farming/farming"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reward tokens may be frozen in `FarmingPool`",
+            "description": "Farmed tokens amount is calculated when a farm duration > 0, so if the distributor starts farming with duration 0, nobody will farm and, starting the next farming, won't save prev farming rewards because a contract accounts only unfinished prev farming, but in this case the farming with duration 0 finishes immediately.",
+            "severity": "high",
+            "location": "FarmingPool contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Actual transferred amount may differ than expected",
+            "description": "Some ERC20 tokens, for example, USDT, have fees on transfer. It may affect reward accounting on farming, a farm contract may receive fewer tokens than expected and start farming with an expected amount of rewards, which will lead to insufficiency of liquidity for rewards.",
+            "severity": "high",
+            "location": "Farm contract and FarmingPool contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rebasable as reward tokens breaks logic",
+            "description": "With rebasable reward tokens, the calculation of farmed rewards will be incorrect because it relies on a strict amount of distributed tokens while the underlying reward balance will float.",
+            "severity": "high",
+            "location": "FarmAccounting contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Possible arithmetic overflow",
+            "description": "The number with the type `int256` is converted to the number with the type `uint256`. The number is taken with a minus sign.",
+            "severity": "medium",
+            "location": "UserAccounting contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Gas overflow during iteration (DoS)",
+            "description": "Each iteration of the cycle requires a gas flow. A moment may come when more gas is required than it is allocated to record one block. In this case, all iterations of the loop will fail.",
+            "severity": "medium",
+            "location": "ERC20Farmable contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Zero Token",
+            "description": "There is no address checking for tokens params in constructor.",
+            "severity": "medium",
+            "location": "FarmingPool contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Using 'magic' numbers",
+            "description": "The use in the source code of some unknown where taken values impairs its understanding.",
+            "severity": "low",
+            "location": "FarmAccounting contract and UserAccounting contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "It is possible to block tokens on the balance of the contract",
+            "description": "At the line rewardsToken is transferred to the balance of the contract.",
+            "severity": "low",
+            "location": "FarmingPool contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missed events",
+            "description": "There are missed events for claim, deposit, withdraw, join/quit farming.",
+            "severity": "low",
+            "location": "FarmingPool contract and ERC20Farmable contract"
+        }
+    ]
+}

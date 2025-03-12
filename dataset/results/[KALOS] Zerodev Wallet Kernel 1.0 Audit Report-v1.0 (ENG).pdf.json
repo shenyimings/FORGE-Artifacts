@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/[KALOS] Zerodev Wallet Kernel 1.0 Audit Report-v1.0 (ENG).pdf",
+    "project_info": {
+        "url": "https://github.com/ZeroDevapp/ZeroDev-wallet-kernel",
+        "commit_id": "ae356c5478fc7c500bf270d864ef5eee70f292e6",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ZeroDev-wallet-kernel": "contracts/[KALOS] Zerodev Wallet Kernel 1/ZeroDev-wallet-kernel"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Signature Replay Attack can be done on MinimalAccount",
+            "description": "Nonce is only increased when userOp.initCode exists, allowing replay attacks.",
+            "severity": "low",
+            "location": "src/factory/MinimalAccount.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Signature Replay Attack can be done on validateUserOp of Kernel",
+            "description": "Nonce is not increased when per UserOperation is executed, allowing replay attacks.",
+            "severity": "low",
+            "location": "src/Kernel.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Wrong condition checking logic in checkUserOpOffset",
+            "description": "The function checkUserOpOffset returns success as 1 even if the userOp passes only the first condition, ignoring the second and third conditions.",
+            "severity": "info",
+            "location": "src/utils/ExtendedUserOpLib.sol, function checkUserOpOffset"
+        }
+    ]
+}

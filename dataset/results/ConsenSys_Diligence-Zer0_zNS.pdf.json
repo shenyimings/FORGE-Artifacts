@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Zer0_zNS.pdf",
+    "project_info": {
+        "url": "https://github.com/zer0-os/ZNS",
+        "commit_id": "b05e503ea1ee87dbe62b1d58426aaa518068e395",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ZNS": "contracts/ConsenSys_Diligence-Zer0_zNS/ZNS"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Uninitialized implementations of upgradeable contracts",
+            "description": "Implementations/logic contracts used with the OZ upgradability pattern may be left uninitialized, allowing anyone to claim them.",
+            "severity": "medium",
+            "location": "zNS"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-116"
+                ]
+            },
+            "title": "Potential domain name canonicalisation and injection vectors in zNS",
+            "description": "Failing to canonicalize domain names or properly encode them before displaying or consuming them with other applications may allow someone to register visually indistinguishable domain names or contain payloads that exploit injection vectors.",
+            "severity": "medium",
+            "location": "zNS"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Potential gas optimizations in zNS",
+            "description": "Redundant check for registrar.domainExists(domain) and potential gas savings by calling registerSubdomain instead of registerDomain.",
+            "severity": "low",
+            "location": "zNS/contracts/BasicController.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ],
+                "3": [
+                    "CWE-1061"
+                ]
+            },
+            "title": "Using address type instead of specific contract type in function arguments and declarations",
+            "description": "Accepting address and later casting it to the correct type, which may lead to issues.",
+            "severity": "low",
+            "location": "zAuction/contracts/zAuction.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Inconsistent use of ERC-721 safe* family of methods in zNS and zAuction",
+            "description": "Not using the safeTransferFrom method, which would perform additional checks.",
+            "severity": "medium",
+            "location": "zNS/contracts/Registrar.sol, zAuction/contracts/zAuction.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Domain bid might be approved by non-owner account in zNS",
+            "description": "Anyone can approve a domain bid, even if they do not own the parent domain.",
+            "severity": "critical",
+            "location": "zNS/contracts/StakingController.sol"
+        }
+    ]
+}

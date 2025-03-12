@@ -1,0 +1,362 @@
+{
+    "path": "artifacts/Morpho-Av3-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/morpho-dao/morpho-aave-v3/tree/76525db269a530c679a95e05144e5a6011bc0855",
+        "commit_id": "76525db269a530c679a95e05144e5a6011bc0855",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "morpho-aave-v3": "contracts/Morpho-Av3-Spearbit-Security-Review/morpho-aave-v3"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Side effects of LTV = 0 assets",
+            "description": "Morpho's users will not be able to withdraw, borrow, and liquidate due to AToken with LTV = 0 restrictions.",
+            "severity": "critical",
+            "location": "Morpho contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Attackers sending LTV = 0 collateral tokens",
+            "description": "Attackers can supply an underlying associated with an LTV = 0 AToken, causing side effects for Morpho users.",
+            "severity": "critical",
+            "location": "PositionsManager.sol (multiple lines), ValidationLogic.sol, SupplyLogic.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect asset price handling in _getAssetPrice",
+            "description": "Morpho's _getAssetPrice function returns the asset's price based on isInEMode and oracle.getAssetPrice, leading to potential reverts or incorrect prices.",
+            "severity": "critical",
+            "location": "MorphoInternal.sol#L524-L536"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Isolated assets treated as collateral in Morpho",
+            "description": "Morpho sets isolated assets as collateral, allowing users to borrow any asset and increasing the risk of liquidation on Aave.",
+            "severity": "critical",
+            "location": "SupplyLogic.sol, ValidationLogic.sol, UserConfiguration.sol, PositionsManagerInternal.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Logic divergence with Aave",
+            "description": "Morpho's logic to handle LTV = 0 AToken diverges from the Aave logic and could decrease the user's HF/borrowing power compared to what the same user would have on Aave.",
+            "severity": "high",
+            "location": "Morpho contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "RewardsManager not considering direct pool suppliers",
+            "description": "RewardsManager does not take into account users that have supplied collateral directly to the pool.",
+            "severity": "high",
+            "location": "RewardsManager contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Accounting issue when repaying P2P fees while having a borrow delta",
+            "description": "Repaying debt on Morpho with a potential borrow delta is not correctly decreasing the scaledP2PAmount.",
+            "severity": "high",
+            "location": "PositionsManagerInternal.sol#L308, DeltasLib.sol#L88, MarketSideDeltaLib.sol#L63"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Repaying with ETH does not refund excess",
+            "description": "When repaying WETH debt with excess ETH, the excess is stuck in the WETHGateway contract.",
+            "severity": "high",
+            "location": "WETHGateway.sol#L67"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Morpho can end up in isolation mode",
+            "description": "Morpho's Aave position can enter isolation mode due to isolated assets being supplied as collateral.",
+            "severity": "high",
+            "location": "aave-v3/SupplyLogic.sol#L78, aave-v3/ValidationLogic.sol#L711, aave-v3/UserConfiguration.sol#L194"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Collateral setters for Morpho / Aave can end up in a deadlock",
+            "description": "Potential deadlock when changing the Aave pool or Morpho collateral state.",
+            "severity": "medium",
+            "location": "MorphoSetters.sol#L87-L107"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "First reward claim is zero for newly listed reward tokens",
+            "description": "Incorrect initialization of reward token index, resulting in unfair rewards distribution.",
+            "severity": "medium",
+            "location": "RewardsManager.sol#L291, RewardsDistributor.sol#L261"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Disable creating markets for siloed assets",
+            "description": "Potential restrictions on borrowing and supplying assets if created as siloed assets.",
+            "severity": "medium",
+            "location": "aave-v3/UserConfiguration.sol#L214"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "A high value of _defaultIterations could make the withdrawal and repay operations revert because of OOG",
+            "description": "Potential Out-of-Gas reverts due to high iteration values in withdraw and repay logic.",
+            "severity": "medium",
+            "location": "PositionsManager.sol#L146-L147, MatchingEngine.sol#L128-L158"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Morpho should check that the _positionsManager used has the same _E_MODE_CATEGORY_ID and _ADDRESSES_PROVIDER values used by the Morpho contract itself",
+            "description": "Inconsistent variable values between Morpho and PositionsManager contracts.",
+            "severity": "medium",
+            "location": "Morpho.sol#L48, MorphoSetters.sol#L59"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "In _authorizeLiquidate, when healthFactor is equal to Constants.DEFAULT_LIQUIDATION_THRESHOLD Morpho is wrongly setting close factor to DEFAULT_CLOSE_FACTOR",
+            "description": "Incorrect liquidation close factor calculation.",
+            "severity": "medium",
+            "location": "PositionsManagerInternal.sol#L181-L190"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "_authorizeBorrow does not check if the Aave price oracle sentinel allows the borrowing operation",
+            "description": "Missing check for price oracle sentinel allowance in borrow operation validation.",
+            "severity": "medium",
+            "location": "PositionsManagerInternal.sol#L106-L126"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "_updateInDS does not 'bubble up' the updated values of `onPool` and `inP2P`",
+            "description": "Updated values of `onPool` and `inP2P` are not returned to the caller.",
+            "severity": "low",
+            "location": "MorphoInternal.sol (lines 352-353, 410)"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "There is no guarantee that the `_rewardsManager` is set when calling `claimRewards`",
+            "description": "_rewardsManager address may not be set, causing failures in `claimRewards`.",
+            "severity": "low",
+            "location": "Morpho.sol (line 268)"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "It's impossible to set `_isClaimRewardsPaused`",
+            "description": "No setter function for `_isClaimRewardsPaused` boolean value.",
+            "severity": "low",
+            "location": "Morpho.sol (line 266)"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "User rewards can be claimed to treasury by DAO",
+            "description": "Excess rewards remain in the Morpho contract, which could be claimed by the DAO.",
+            "severity": "low",
+            "location": "Morpho.sol#L283"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Missing user markets check when liquidating",
+            "description": "The liquidation does not check if the user who gets liquidated actually joined the collateral and borrow markets.",
+            "severity": "info",
+            "location": "PositionsManager.sol#L238"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Consider reverting instead of returning zero inside repayLogic, withdrawLogic, withdrawCollateralLogic and liquidateLogic functions",
+            "description": "The functions should revert with a specific error code when the re-calculated amount is equal to zero.",
+            "severity": "info",
+            "location": "PositionsManager.sol#L142, PositionsManager.sol#L174, PositionsManager.sol#L204, PositionsManager.sol#L249"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "PERMIT2 operations revert if amount is greater than type(uint160).max",
+            "description": "The permit2 lib restricts the amount of token to uint160, but Morpho.sol and PositionsManager.sol use uint256, which can cause a transaction to revert.",
+            "severity": "info",
+            "location": "Morpho.sol#L90-L92, Morpho.sol#L121-L123, Morpho.sol#L166-L168, PositionsManager(sol)#L62, PositionsManager(sol)#L87, PositionsManager(sol)#L144, PositionsManager(sol)#L251"
+        }
+    ]
+}

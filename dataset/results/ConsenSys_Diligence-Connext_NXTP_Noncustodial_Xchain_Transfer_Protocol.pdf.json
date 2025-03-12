@@ -1,0 +1,317 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Connext_NXTP_Noncustodial_Xchain_Transfer_Protocol.pdf",
+    "project_info": {
+        "url": "https://github.com/connext/nxtp",
+        "commit_id": "0656436d654cfe0313fa3c2bbc81aa86232ade16",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "nxtp": "contracts/ConsenSys_Diligence-Connext_NXTP_Noncustodial_Xchain_Transfer_Protocol/nxtp"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ],
+                "4": [
+                    "CWE-551"
+                ]
+            },
+            "title": "TransactionManager - User might steal router’s locked funds",
+            "description": "A user can initiate a prepare transaction, wait for the router to lock his funds, then call removeLiquidity, and fulfill (on the receiving chain), thus stealing router’s locked funds while claiming his locked funds back.",
+            "severity": "critical",
+            "location": "TransactionManager.removeLiquidity"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "TransactionManager - Receiver-side check also on sending side",
+            "description": "The functions prepare, cancel, and fulfill in the TransactionManager have a “common part” that is executed on both the sending and the receiving chain and side-specific parts that are only executed either on the sending or on the receiving side. The receiver-side check is also performed on the sending side.",
+            "severity": "high",
+            "location": "TransactionManager.prepare, cancel, and fulfill"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "TransactionManager - Flawed shares arithmetic",
+            "description": "To support a wide variety of tokens, the TransactionManager uses a per-asset shares system to represent fractional ownership of the contract’s balance in a token, but there are several flaws in the shares-related arithmetic.",
+            "severity": "high",
+            "location": "TransactionManager.addLiquidity and prepare"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Router handleMetaTxRequest - gas grieving / race conditions / missing validations / free meta transactions",
+            "description": "Missing validation of data before interacting with the contract, leading to gas grieving vector on the router side.",
+            "severity": "high",
+            "location": "Router.handleMetaTxRequest"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Router - subgraphLoop may process transactions the router was not configured for (code fragility)",
+            "description": "SubgraphLoop processes transactions for chains the router is not configured for, leading to potential issues.",
+            "severity": "high",
+            "location": "Router.subgraphLoop"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Router - handler reports an error condition but continues execution instead of aborting it",
+            "description": "Error conditions are reported but execution continues, potentially leading to griefing vectors.",
+            "severity": "high",
+            "location": "Router.handler"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Router - spawns unauthenticated admin API endpoint listening on all interfaces",
+            "description": "Unauthenticated API endpoint allows potential liquidity theft.",
+            "severity": "high",
+            "location": "Router.admin API endpoint"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "TransactionManager - Missing nonReentrant modifier on removeLiquidity",
+            "description": "Missing nonReentrant modifier allows potential reentrancy issues.",
+            "severity": "medium",
+            "location": "TransactionManager.removeLiquidity"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Router handleSenderPrepare - missing validation, unchecked bidExpiry, unchecked expiry, unchecked chainids/swaps, race conditions",
+            "description": "Multiple issues with handleSenderPrepare method, including missing validation and potential race conditions.",
+            "severity": "medium",
+            "location": "Router.handleSenderPrepare"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Relayer may use user's cancel after expiry signature to steal user's funds by colluding with a router",
+            "description": "Relayer can collude with router to steal user's funds using cancel signature.",
+            "severity": "medium",
+            "location": "TransactionManager.cancel"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Router - Cancel is not implemented",
+            "description": "Canceling of failed/expired swaps does not seem to be implemented in the router, which can lead to a potential DoS.",
+            "severity": "medium",
+            "location": "Router.cancel"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Router - handleNewAuction fragile code",
+            "description": "HandleNewAuction method has fragile code that appears to have multiple issues.",
+            "severity": "medium",
+            "location": "Router.handleNewAuction"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-940"
+                ]
+            },
+            "title": "Possible griefing/denial of service by front-running",
+            "description": "A call to TransactionManager.prepare might be front-run with a transaction using the same invariantData but with a different amount and/or expiry values.",
+            "severity": "medium",
+            "location": "TransactionManager.prepare"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-283"
+                ]
+            },
+            "title": "ProposedOwnable - two-step ownership transfer should be confirmed by the new owner",
+            "description": "In order to avoid losing control of the contract, the two-step ownership transfer should be confirmed by the new owner’s address.",
+            "severity": "medium",
+            "location": "ProposedOwnable.transferOwnership"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "FulfillInterpreter - Wrong order of actions in fallback handling",
+            "description": "The logically correct order is to decrease the allowance first and transfer later in the fallback scenario.",
+            "severity": "low",
+            "location": "FulfillInterpreter.fallback handling"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "event can’t be linked to TransactionFulfilled event",
+            "description": "It is not possible to link an Executed event unambiguously to its corresponding TransactionFulfilled event.",
+            "severity": "low",
+            "location": "Event handlers"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Sdk.finishTransfer - missing validation",
+            "description": "Sdk.finishTransfer should validate that the router that locks liquidity in the receiving chain is the same router the user had committed to in the sending chain.",
+            "severity": "low",
+            "location": "Sdk.finishTransfer"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "FulfillInterpreter - Missing check whether callTo address contains code",
+            "description": "The receiver-side prepare checks do not guarantee that callTo still contains code when the call to this address is executed in FulfillInterpreter.execute.",
+            "severity": "low",
+            "location": "FulfillInterpreter.execute"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Router - handling of native assetID (0x000...00, e.g. ETH) not implemented",
+            "description": "The native Asset (0x000...000; ETH) is not implemented in Contract.ts.",
+            "severity": "low",
+            "location": "contract.ts"
+        }
+    ]
+}

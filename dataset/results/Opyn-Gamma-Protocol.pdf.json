@@ -1,0 +1,179 @@
+{
+    "path": "artifacts/Opyn-Gamma-Protocol.pdf",
+    "project_info": {
+        "url": "https://github.com/opynfinance/GammaProtocol/tree/9a75da2ad8beefdaa4caa97d17799b50552ca450",
+        "commit_id": "9a75da2ad8beefdaa4caa97d17799b50552ca450",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "GammaProtocol": "contracts/Opyn-Gamma-Protocol/GammaProtocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted Fallback Function",
+            "description": "The reward token has a fallback function, and when the Controller calls it, the Controller can execute arbitrary behavior.",
+            "severity": "high",
+            "location": "Reward token contract, fallback function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "Sparse Arrays",
+            "description": "Short, long, collateral, and vault data structures may be sparse arrays, leading to confusion for external parties.",
+            "severity": "info",
+            "location": "MarginVault.sol, Vault struct"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unstable Price Volatility",
+            "description": "USDC price volatility can affect the system's ability to redeem long put oTokens correctly.",
+            "severity": "n/a",
+            "location": "Oracle.setStablePrice, Oracle.setAssetPricer"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Insecure Transfer and transferFrom functions",
+            "description": "Several tokens do not return a boolean on these functions, which can cause calls in the contract to fail.",
+            "severity": "n/a",
+            "location": "Token integration"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Incorrect Decimals function",
+            "description": "Some tokens incorrectly return a uint256 instead of a uint8, which can lead to errors.",
+            "severity": "n/a",
+            "location": "Token integration"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Unmitigated ERC20 race condition",
+            "description": "The ERC20 standard has a known race condition that must be mitigated to prevent attackers from stealing tokens.",
+            "severity": "n/a",
+            "location": "Token integration"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "External function calls in transfer or transferFrom",
+            "description": "External calls in the transfer functions can lead to reentrancies.",
+            "severity": "n/a",
+            "location": "Token integration"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Deflationary tokens",
+            "description": "Transfer and transferFrom should not take a fee, as deflationary tokens can lead to unexpected behavior.",
+            "severity": "n/a",
+            "location": "Token integration"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Unupgradeable contract",
+            "description": "Upgradeable contracts may change their rules over time.",
+            "severity": "n/a",
+            "location": "Contract composition"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unlimited minting capabilities",
+            "description": "Malicious or compromised owners can abuse minting capabilities.",
+            "severity": "n/a",
+            "location": "Owner privileges"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Pausable token",
+            "description": "Malicious or compromised owners can trap contracts relying on pausable tokens.",
+            "severity": "n/a",
+            "location": "Owner privileges"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Blacklist feature",
+            "description": "Malicious or compromised owners can trap contracts relying on tokens with a blacklist.",
+            "severity": "n/a",
+            "location": "Owner privileges"
+        }
+    ]
+}

@@ -1,0 +1,182 @@
+{
+    "path": "artifacts/Inspex_AUDIT2023002_AlpacaFinance_Alperp_FullReport_v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/inspex-archive/Alpaca-Finance_Alperp",
+        "commit_id": "7c39197db2",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Alpaca-Finance_Alperp": "contracts/Inspex_AUDIT2023002_AlpacaFinance_Alperp_FullReport_v1/Alpaca-Finance_Alperp"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Use of Upgradable Contract Design",
+            "description": "The logic of affected contracts can be arbitrarily changed, allowing the proxy owner to perform malicious actions.",
+            "severity": "high",
+            "location": "Various contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Arbitrary ALP Token Minting",
+            "description": "The contract owner can mint unlimited $ALP by adding an arbitrary minter address to the contract.",
+            "severity": "high",
+            "location": "ALP"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "External Call to Untrusted Third Party Component",
+            "description": "An untrusted third-party smart contract may harm the user's funds that are deposited by strategy.",
+            "severity": "high",
+            "location": "FarmFacet contract, setStrategyOf() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Miscalculation in getAum() function",
+            "description": "The getAum() function may return a slightly lower value when there are short positions opened in the platform.",
+            "severity": "medium",
+            "location": "GetterFacet contract, getAum() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Denial of Service in PoolRouter03",
+            "description": "Insufficient fee calculation leads to denial of service when transferring native tokens after paying a fee.",
+            "severity": "medium",
+            "location": "PoolRouter03 contract, _updatePrices function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Design Flaw in Fixed Rate Token Swap",
+            "description": "Insufficient price reference mechanism leads to arbitrage opportunities.",
+            "severity": "medium",
+            "location": "PoolOracle, LiquidityFacet.sol (lines 413-414)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent swap() function in RewardDistributor",
+            "description": "Incorrect implementation of the swap function leading to fee distribution issues.",
+            "severity": "medium",
+            "location": "RewardDistributor, RewardDistributor.sol (line 369) and PoolRouter03.sol (function swap())"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Unsafe Token Transfer in RewardDistributor",
+            "description": "Improperly implemented ERC20 tokens can cause failed transfers without reverting, leading to token loss.",
+            "severity": "low",
+            "location": "RewardDistributor contract, specifically in functions _collectDevFund(), _collectGovReward(), and _collectBurn() at lines 341, 348, and 355"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Oracle Price Update Bypass",
+            "description": "The secondary price oracle's update logic does not enforce; the attacker can select prices sources while interacting with the platform.",
+            "severity": "low",
+            "location": "PoolOracle, PythPriceFeed"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Input Validation in bulkClaim() Function",
+            "description": "The bulkClaim() function can be reverted due to the array being out of bounds in looping.",
+            "severity": "low",
+            "location": "MerkleAirdrop"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Unnecessary Zero Amount Transfer",
+            "description": "Transferring zero tokens to the _feeReceiver address results in an unnecessary gas-consuming operation.",
+            "severity": "info",
+            "location": "OrderBook02.sol, functions executeSwapOrder(), executeIncreaseOrder(), and executeDecreaseOrder()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Irrelevant Code (CWE-1164)",
+            "description": "The `_path.length - 1` expression can be replaced with a constant to save gas cost from the calculation.",
+            "severity": "info",
+            "location": "OrderBook02 contract, `validateSwapOrderPriceWithTriggerAboveThreshold()` function, line 474"
+        }
+    ]
+}

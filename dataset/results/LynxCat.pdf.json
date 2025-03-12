@@ -1,0 +1,44 @@
+{
+    "path": "artifacts/LynxCat.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xf12424fda9f9af16bc6fa61e5ddbe6bb3d4701e6",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.10+commit.fc410830"
+        ],
+        "project_path": {
+            "LynxCat": "contracts/LynxCat/LynxCat"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "The function _takeburnFee() decreases _tTotal value but doesn’t decrease _rTotal value, so it is changing reflection rate, not burning.",
+            "severity": "high",
+            "location": "_takeburnFee()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The functions includeInReward(), _getCurrentSupply(), and whitelistMultipleAddress() use loops that could lead to OUT_OF_GAS exceptions if there are long excluded addresses or whitelisted address lists.",
+            "severity": "low",
+            "location": "includeInReward(), _getCurrentSupply(), whitelistMultipleAddress()"
+        }
+    ]
+}

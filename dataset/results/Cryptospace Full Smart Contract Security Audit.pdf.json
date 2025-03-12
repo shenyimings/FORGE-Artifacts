@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/Cryptospace Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xDe14FddB9260a4E2676765a9B68dcDBF8e3A3D11",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "MasterChef": "contracts/Cryptospace Full Smart Contract Security Audit/MasterChef"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "add function could invoke massUpdatePools function, which can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "MasterChef contract, add function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "add function issue",
+            "description": "If some LP token is added to the contract twice using the add function, then the total amount of reward in the updatePool function will be incorrect.",
+            "severity": "low",
+            "location": "MasterChef contract, add function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Multiple issues related to owner and operator privileges",
+            "severity": "n/a",
+            "location": "Various contracts and functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Sending tokens to dead address",
+            "description": "Sending tokens to the dead address in overridden _transfer functions instead of burning them in the token contract.",
+            "severity": "n/a",
+            "location": "Token contract, _transfer function"
+        }
+    ]
+}

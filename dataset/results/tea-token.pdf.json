@@ -1,0 +1,158 @@
+{
+    "path": "artifacts/tea-token.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "b7c74ea41b4a8ce1bfbb2428635fbf651b627d9f6569413e4882c19f4279dc84",
+        "address": "0x5e18Be2A7cE626B33C539919EAca06303f1Db568",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "TeaToken": "contracts/tea-token/TeaToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ST - Stop Transactions",
+            "description": "The contract owner has the authority to stop transactions for all users excluding the owner.",
+            "severity": "medium",
+            "location": "contract.sol#L1003"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "ELFM - Exceed Limit Fees Manipulation",
+            "description": "The contract owner has the authority to increase over the allowed limit of 25%.",
+            "severity": "critical",
+            "location": "contract.sol#L883, 887"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "FSA - Fixed Swap Address",
+            "description": "The swap address is assigned once in the constructor and it cannot be changed.",
+            "severity": "low",
+            "location": "contract.sol#L743"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L01 - Public Function could be Declared External",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "contract.sol#L439,448,454,459,467,760,764,768,772,781,786,790,795,801,806,811,816,825,842,875,879,897,983"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "L02 - State Variables could be Declared Constant",
+            "description": "Constant state variables should be declared constant to save gas.",
+            "severity": "low",
+            "location": "contract.sol#L709,707,708,703,724"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the Solidity naming convention.",
+            "severity": "low",
+            "location": "contract.sol#L511,512,529,551,897,956,962,711,714,723"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L07 - Missing Events Arithmetic",
+            "description": "Detected missing events for critical arithmetic parameters.",
+            "severity": "low",
+            "location": "contract.sol#L883,887,891"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L09 - Dead Code Elimination",
+            "description": "Functions that are not used in the contract and make the code's size bigger.",
+            "severity": "low",
+            "location": "contract.sol#L365,325,335,350,360,272,299"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-184"
+                ]
+            },
+            "title": "Unchecked maximum fee percentage",
+            "description": "No check for the maximum fee percentage that can be set by the owner.",
+            "severity": "high",
+            "location": "TeaToken contract, functions setTaxFeePercent and setLiquidityFeePercent"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner manipulation",
+            "description": "Functions that can be abused by the owner to stop transactions and manipulate fees.",
+            "severity": "medium",
+            "location": "TeaToken contract, various functions"
+        }
+    ]
+}

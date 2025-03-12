@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/ackee-blockchain-axelar-7-report.pdf",
+    "project_info": {
+        "url": "https://github.com/axelarnetwork/axelar-cgp-solidity",
+        "commit_id": "1cd26b36a4757d300b18834cffd448808a98b225",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "axelar-cgp-solidity": "contracts/ackee-blockchain-axelar-7-report/axelar-cgp-solidity"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-283"
+                ]
+            },
+            "title": "M1: Dangerous ownership transfer",
+            "description": "No robust verification mechanism for new proposed owner in transferOwnership function.",
+            "severity": "medium",
+            "location": "AxelarAuthWeighted contract, Upgradable.sol, Ownable.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "M2: Unauthorized sending of tokens",
+            "description": "No authorization techniques to prevent anyone from sending tokens on behalf of users.",
+            "severity": "medium",
+            "location": "AxelarDepositServiceProxy.sol, ReceiverImplementation.sol, AxelarDepositService"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "W2: Stealing tokens from Deposit Proxy",
+            "description": "Unauthorized token transfer possible through AxelarDepositServiceProxy.",
+            "severity": "info",
+            "location": "AxelarDepositServiceProxy.sol, sendToken function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-269"
+                ]
+            },
+            "title": "W3: High privileged owner and single point of failure",
+            "description": "Single point of failure due to high-privileged owner.",
+            "severity": "info",
+            "location": "Upgradable.sol, AxelarAuthWeighted.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "I1: Public functions without internal calls",
+            "description": "Public functions not called internally, following best practices.",
+            "severity": "info",
+            "location": "AxelarDepositService.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "I2: Confusing naming of errors",
+            "description": "Confusing error naming in the codebase.",
+            "severity": "info",
+            "location": "AxelarDepositService.sol"
+        }
+    ]
+}

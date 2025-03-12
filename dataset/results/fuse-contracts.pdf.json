@@ -1,0 +1,212 @@
+{
+    "path": "artifacts/fuse-contracts.pdf",
+    "project_info": {
+        "url": "https://github.com/Rari-Capital/compound-protocol/tree/f162ce512934a9e0642595b6e0cfef5cc869b981",
+        "commit_id": "f162ce512934a9e0642595b6e0cfef5cc869b981",
+        "address": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "compound-protocol": "contracts/fuse-contracts/compound-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Unset owner",
+            "description": "Owner is not initialized in FuseFeeDistrubutor; all funds withdrawn through FuseFeeDistrubutor.withdrawAssets will be sent to address(0).",
+            "severity": "high",
+            "location": "FuseFeeDistributor.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Limited tests and documentation for certain contracts",
+            "description": "In the diff versus existing open-oracle code, the newly added UniswapView.sol is significantly modified from the existing UniswapAnchorView.sol, but does not have corresponding tests.",
+            "severity": "medium",
+            "location": "UniswapView.sol, UniswapAnchorView.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "getSymbolHashIndex may consume excessive gas",
+            "description": "UniswapAnchoredView.getSymbolHashIndex iterates over _configs to get the symbol hash index.",
+            "severity": "low",
+            "location": "UniswapAnchoredView.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input validation",
+            "description": "The following functions should perform additional checks.",
+            "severity": "low",
+            "location": "UniswapConfig.sol, PreferredPriceOracle.sol, RariFundController.sol, FuseFeeDistributor.sol, FusePoolDirectory.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect return value",
+            "description": "FusePoolDirectory.registerPool does not return the index as expected.",
+            "severity": "low",
+            "location": "FusePoolDirectory.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Stale oracle price",
+            "description": "ChainlinkPriceOracle.getUnderlyingPrice calls AggregatorV3Interface.latestRoundData without checking startedAt and updatedAt values.",
+            "severity": "low",
+            "location": "ChainlinkPriceOracle.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Array not updated on market exit",
+            "description": "Users addresses added in Comptroller.addToMarketInternal are not removed later when Comptroller.exitMarket logic is executed.",
+            "severity": "low",
+            "location": "compound-protocol/contracts/Comptroller.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "_setFuseFee, _withdrawFuseFees, and _withdrawAdminFees are callable by any user",
+            "description": "It is not clear if non-privileged users should be able to invoke the fee withdrawal functions.",
+            "severity": "low",
+            "location": "CToken.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Non-view public functions design",
+            "description": "Multiple implemented functions in FusePoolDirectory consume excessive gas following the array length.",
+            "severity": "info",
+            "location": "FusePoolDirectory.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Fund sent by mistake can be withdrawn by any user",
+            "description": "The implemented internal functions transferSeizedFunds and exchangeAllEthOrTokens transfer all the contract ether or token balances to the target address.",
+            "severity": "info",
+            "location": "FuseSafeLiquidator.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ],
+                "3": [
+                    "CWE-839"
+                ]
+            },
+            "title": "Check of positive balances always true",
+            "description": "In withdrawAssets() on L54,60, checks ensure that balance >= 0, which always holds.",
+            "severity": "info",
+            "location": "FuseFeeDistributor.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unlisted price feed does not throw",
+            "description": "In ChainlinkPriceOracle getting the underlying price of a CToken using getUnderlyingPrice does not verify if the underlying token is listed in priceFeeds arrays.",
+            "severity": "info",
+            "location": "ChainlinkPriceOracle.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Unknown fuseAdmin address",
+            "description": "The address 0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6 currently has no transaction history.",
+            "severity": "n/a",
+            "location": "CTokenInterfaces.sol"
+        }
+    ]
+}

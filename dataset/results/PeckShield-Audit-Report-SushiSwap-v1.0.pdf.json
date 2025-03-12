@@ -1,0 +1,188 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-SushiSwap-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/sushiswap/sushiswap/tree/d76898b603aed60a776fc0ac529b199e1a6c8c9e",
+        "commit_id": "d76898b603aed60a776fc0ac529b199e1a6c8c9e",
+        "address": "0xc2edad668740f1aa35e4d8f227fb8e17dca888cd",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "MasterChef": "contracts/PeckShield-Audit-Report-SushiSwap-v1/MasterChef"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Potential Front-Running For Migration Blocking",
+            "description": "A potential front-running vulnerability in the migration process from UniswapV2 to SushiSwap, allowing an attacker to block the migration by minting new LP tokens before the migrator contract.",
+            "severity": "high",
+            "location": "SushiSwap contract, migration blocking function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Avoidance of Unnecessary (Small) Loss During Migration",
+            "description": "The mint function in the UniswapV2Pair contract causes an unnecessary loss of assets due to the burning of MINIMUM_LIQUIDITY tokens.",
+            "severity": "low",
+            "location": "UniswapV2Pair.sol, mint function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Duplicate Pool Detection and Prevention",
+            "description": "The add function in the MasterChef contract does not perform necessary sanity checks to prevent a new pool with a duplicate UniswapV2 LP token from being added.",
+            "severity": "medium",
+            "location": "MasterChef.sol, add function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Incompatibility with Deflationary Tokens",
+            "description": "In SushiSwap, the MasterChef contract operates as the main entry for interaction with staking users. The staking users deposit UniswapV2’s LP tokens into the SushiSwap pool and in return get proportion- ate share of the pool’s rewards. However, in the cases of deflationary tokens, the input amount may not be equal to the received amount due to the charged (and burned) transaction fee. As a result, this may not meet the assumption behind these low-level asset-transferring routines. In other words, the above operations, such as deposit() and withdraw(), may introduce unexpected balance inconsistencies when comparing internal asset records with external ERC20 token contracts in the cases of deflationary tokens.",
+            "severity": "low",
+            "location": "MasterChef contract, functions deposit() and withdraw()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improved Logic in getMultiplier()",
+            "description": "The getMultiplier function does not take into account the initial block (startBlock) from which inventive rewards start to apply.",
+            "severity": "medium",
+            "location": "MasterChef contract, getMultiplier function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No Pair Creation With Zero Migration Balance",
+            "description": "The migrate() function in Migrator.sol can unnecessarily spend gas to create a new pair when the balance is zero and no migration occurs.",
+            "severity": "low",
+            "location": "Migrator.sol, function migrate()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Full Charge of Proposal Execution Cost From Accompanying msg.value",
+            "description": "The execute() function in GovernorAlpha.sol may not properly attribute the cost of proposal execution to the transaction sender.",
+            "severity": "low",
+            "location": "GovernorAlpha.sol, function execute()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Better Clarification of SUSHI Inflation",
+            "description": "The documentation states that 100 SUSHI tokens will be created at every block, but the implementation actually creates 110 tokens, with 10% going to the development team.",
+            "severity": "low",
+            "location": "MasterChef.sol, updatePool() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improved EOA Detection Against Front-Running of Revenue Conversion",
+            "description": "The convert() function in SushiMaker.sol can be targeted for front-running to steal collected revenues, resulting in a loss for current stakers in SushiBar.",
+            "severity": "medium",
+            "location": "SushiMaker.sol, function convert()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Full Charge of Proposal Execution Cost From Accompanying msg.value",
+            "description": "It is likely the case that a majority of these actions do not require any ETHs, i.e., proposal. values[i] = 0, we may be less concerned on the payment of required ETHs for the proposal execution. However, in the unlikely case of certain particular actions that do need ETHs, the issue of properly attributing the associated cost arises. With that, we need to better keep track of ETH charge for each action and ensure that the transaction sender (who initiates the proposal execution) actually pays the cost.",
+            "severity": "low",
+            "location": "GovernorAlpha.sol, propose() function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistency Between Documented and Implemented SUSHI Inflation",
+            "description": "Based on the smart contract code, there is a system-wide configuration, i.e., sushiPerBlock. This particular parameter is initialized as 100 when the contract is being deployed and it can only be changed at the contract’s constructor. The ini- tialized number of 100 seems consistent with the documentation and sushiPerBlock is fixed forever (and cannot be adjusted even via a governance process).",
+            "severity": "low",
+            "location": "Timelock contract"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Non-Governance-Based Admin of TimeLock And Related Privileges",
+            "description": "In SushiSwap, the governance contract, i.e., GovernorAlpha, plays a critical role in governing and regulating the system-wide operations (e.g., pool addition, reward adjustment, and migrator setting). It also has the privilege to control or govern the life-cycle of proposals and enact on them regarding their submissions, executions, and revocations. With great privilege comes great responsibility. Our analysis shows that the governance contract is indeed privileged, but it currently has NOT been deployed yet to govern the MasterChef contract that is the central to SushiSwap. In the following, we examine the current state of privilege assignment in SushiSwap.",
+            "severity": "high",
+            "location": "GovernorAlpha contract"
+        }
+    ]
+}

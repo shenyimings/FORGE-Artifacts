@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/SlowMist Audit Report - LightDAO_en-us.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x9e63ff8003C33D264Be368729EA525d8f5881EdD",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "RestrictedList": "contracts/SlowMist Audit Report - LightDAO_en-us/RestrictedList"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Risk of excessive authority",
+            "description": "The owner can add currency that can buy HOPE token、delete the currency, and change the currency exchange rate.",
+            "severity": "medium",
+            "location": "contracts/agents/HOPESalesAgent.sol#L120-165"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Risk of excessive authority",
+            "description": "The owner can change the weight of gomboc and the gomboc type weight.",
+            "severity": "medium",
+            "location": "GombocController contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Risk of excessive authority",
+            "description": "The owner role can change the agent's expiration date, mint status and credit limit.",
+            "severity": "medium",
+            "location": "AgentManager contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "DoS issue",
+            "description": "The user can pass in the gombocAddressList array through the mintMany function to mint the LT, causing DoS due to the number of for loops.",
+            "severity": "low",
+            "location": "Minter contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Lack of event logs",
+            "description": "No event logs are emitted when sensitive parameters are modified in multiple contracts.",
+            "severity": "n/a",
+            "location": "Minter, VotingEscrow, and PoolGomboc contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zero address check",
+            "description": "The incoming address is not checked whether it's a zero address when modifying important addresses in the contract.",
+            "severity": "info",
+            "location": "AbsGomboc and AbsExternalLTRewardDistributor contracts"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Missing return value check",
+            "description": "When transferring ERC20 tokens, the return value after the transfer is not checked.",
+            "severity": "info",
+            "location": "PoolGomboc contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unauthorized token purchase",
+            "description": "Owner's privileges can be lost, allowing malicious addition of a worthless currency to buy large amounts of HOPE tokens.",
+            "severity": "n/a",
+            "location": "contracts/agents/HOPESalesAgent.sol#L120-165"
+        }
+    ]
+}

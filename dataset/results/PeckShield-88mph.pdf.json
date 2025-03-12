@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/PeckShield-88mph.pdf",
+    "project_info": {
+        "url": "https://github.com/88mphapp/88mph-contracts/tree/29c81174bd1652633821e517503bce1435bf08f9",
+        "commit_id": "29c81174bd1652633821e517503bce1435bf08f9",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "88mph-contracts": "contracts/PeckShield-88mph/88mph-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Possible Front-Running Resulting Losing Ownership",
+            "description": "The init function is defined as public, allowing anyone to call it and take ownership of MPHToken.",
+            "severity": "low",
+            "location": "MPHToken contract, init() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Check in Market::constructor()",
+            "description": "The first check on address(0) is redundant and can be safely removed.",
+            "severity": "medium",
+            "location": "AaveMarket, CompoundERC20Market, HarvestMarket, YVaultMarket contracts, constructor()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Gas Optimization in DInterest::_deposit()",
+            "description": "The check on amount > 0 can be safely removed if setMinDepositAmount() checks that the newValue is bigger than 0.",
+            "severity": "info",
+            "location": "DInterest contract, _deposit() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Unsafe Ownership Transition",
+            "description": "When transferring ownership, if the newOwner is not the exact address, nobody can own the contract anymore.",
+            "severity": "low",
+            "location": "Ownable contract, transferOwnership() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Events in MPHIssuanceModel01",
+            "description": "The unused event ESetParamAddress could be safely removed.",
+            "severity": "info",
+            "location": "MPHIssuanceModel01 contract"
+        }
+    ]
+}

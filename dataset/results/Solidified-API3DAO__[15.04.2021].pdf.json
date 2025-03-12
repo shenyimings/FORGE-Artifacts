@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/Solidified-API3DAO__[15.04.2021].pdf",
+    "project_info": {
+        "url": "https://github.com/api3dao/api3-dao/tree/solidified",
+        "commit_id": "0f3347673210129a28cfd5a0e27ef7bf1285845d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "api3-dao": "contracts/Solidified-API3DAO__[15/api3-dao"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "StakeUtils.sol: Contract users can potentially be indefinitely locked out of unstaking their tokens",
+            "description": "The `scheduleUnstake()` function calls `getValue()`, which searches the given array for the checkpoint at the current block, and if the arrays grow too large, it will exceed the block gas limit, preventing users from unstaking their tokens.",
+            "severity": "high",
+            "location": "StakeUtils.sol, function scheduleUnstake()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Api3Template.sol: Element count discrepancy for _votingSettings array",
+            "description": "The documentation states that `_votingSettings` should be an array of 4 elements, while the actual parameter declaration declares it as an array of 3 elements only.",
+            "severity": "info",
+            "location": "Api3Template.sol"
+        }
+    ]
+}

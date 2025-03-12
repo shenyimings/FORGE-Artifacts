@@ -1,0 +1,83 @@
+{
+    "path": "artifacts/stake-hound.pdf",
+    "project_info": {
+        "url": "https://github.com/stakehound/stakehound-core/tree/0f1d6e4d35b841bcf09d3b66f62c62bebb67308a",
+        "commit_id": "0f1d6e4d35b841bcf09d3b66f62c62bebb67308a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "stakehound-core": "contracts/stake-hound/stakehound-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "QSP-1 Token Distribution",
+            "description": "Implicit supply restriction in `StakedToken.mint` allows minting more tokens than `_maxSupply`.",
+            "severity": "low",
+            "location": "`StakedToken` contract, `mint` function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "QSP-2 Gas Consumption",
+            "description": "Excessive gas consumption in `executeTransactions` due to array length.",
+            "severity": "low",
+            "location": "`DownstreamCaller` and `StakedToken` contracts, `executeTransactions` function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "QSP-3 Execute Transactions",
+            "description": "Publicly accessible `executeTransactions` function in `DownstreamCaller`.",
+            "severity": "low",
+            "location": "`DownstreamCaller` contract, `executeTransactions` function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "QSP-4 Unlocked Pragma",
+            "description": "Unlocked pragma in Solidity files.",
+            "severity": "info",
+            "location": "`DownstreamCaller` and `StakedToken` contracts, Solidity files"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "QSP-5 Allowance Double-Spend Exploit",
+            "description": "ERC20 token vulnerable to allowance double-spend exploit.",
+            "severity": "info",
+            "location": "`StakedToken` contract"
+        }
+    ]
+}

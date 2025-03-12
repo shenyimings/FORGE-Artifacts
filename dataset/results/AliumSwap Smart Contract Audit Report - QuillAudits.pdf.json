@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/AliumSwap Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/Alium-Finance/alium-swap-periphery/tree/feature",
+        "commit_id": "feature",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "alium-swap-periphery": "contracts/AliumSwap Smart Contract Audit Report - QuillAudits/alium-swap-periphery"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Missing two step process to change privileged role Owner",
+            "description": "Lack of a two-step approach to change privileged roles, which may result in accidental proposals or loss of control over the contract's operational logic.",
+            "severity": "low",
+            "location": "Token contract, Ownable contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "The contract lacks zero address checks for _factory and _WETH, leading to incorrect initialization.",
+            "severity": "n/a",
+            "location": "AliumSwap Contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Misleading operational logic",
+            "description": "The fee mechanism affects the intended operational logic of some functions (e.g., swapTokensForExactTokens), resulting in users not receiving the exact desired tokens.",
+            "severity": "info",
+            "location": "AliumSwap Contract, function: swapTokensForExactTokens"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Misleading operational logic",
+            "description": "The fee mechanism affects the intended operational logic of some functions (e.g., swapTokensForExactETH), resulting in users not receiving the exact desired tokens.",
+            "severity": "info",
+            "location": "AliumSwap Contract, function: swapTokensForExactETH"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Getter functions not accounting fee factor",
+            "description": "Getter functions don't account for the fee factor, producing incorrect results unless users manually account for it.",
+            "severity": "n/a",
+            "location": "AliumSwap Contract, getter functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Multiple pragma directives have been used",
+            "description": "Using multiple pragma directives can lead to deployment with an older compiler version containing unfixed bugs.",
+            "severity": "low",
+            "location": "pragma solidity directive"
+        }
+    ]
+}

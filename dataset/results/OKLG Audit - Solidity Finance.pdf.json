@@ -1,0 +1,407 @@
+{
+    "path": "artifacts/OKLG Audit - Solidity Finance.pdf",
+    "project_info": {
+        "url": "https://github.com/moontography/contracts",
+        "commit_id": "e167d0d742d21bcc62d7a5b770a1f0ed1cf31eca",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/OKLG Audit - Solidity Finance/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unchecked Token Type in withdrawLockedTokens()",
+            "description": "No check for token type (NFT or ERC20) when withdrawing tokens",
+            "severity": "high",
+            "location": "OKLGTokenLocker, withdrawLockedTokens() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate amountWithdrawn Update",
+            "description": "amountWithdrawn not updated correctly after token transfer",
+            "severity": "high",
+            "location": "OKLGTokenLocker"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Token ID Clash",
+            "description": "Custom minted token ID can clash with standard minted token ID",
+            "severity": "high",
+            "location": "OKLetsApe"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Insufficient Funds Check in bulkSendMainTokens()",
+            "description": "No check to ensure sufficient funds for product cost payment",
+            "severity": "high",
+            "location": "OKLGAirdropper, bulkSendMainTokens() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Unbounded Gas Usage in setOracleAddress()",
+            "description": "Potential gas usage exceedance due to unbounded loop",
+            "severity": "high",
+            "location": "AtomicSwap, setOracleAddress() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unlimited Rewards Claim",
+            "description": "Users can claim rewards repeatedly by transferring funds and claiming again",
+            "severity": "high",
+            "location": "OKLGFaasToken"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Bypassing Fee Limit",
+            "description": "Individual fee setters can bypass total fee limit",
+            "severity": "medium",
+            "location": "OKLG"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent Pricing",
+            "description": "Same price for single and bulk store despite intended difference",
+            "severity": "medium",
+            "location": "OKLGPasswordManager"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-281"
+                ]
+            },
+            "title": "Overwriting Accounts",
+            "description": "Users can overwrite existing accounts with same ID",
+            "severity": "medium",
+            "location": "OKLGPasswordManager"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Predictable Randomness in drawWinner()",
+            "description": "On-chain calculation for drawing winner can be predicted by miners and bots",
+            "severity": "low",
+            "location": "OKLGRaffle, drawWinner() function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Excess Funds Not Refunded",
+            "description": "Excess funds sent for product payment not returned to users",
+            "severity": "low",
+            "location": "OKLGSpend"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Unreturned Excess Funds in KetherNFTLoaner",
+            "description": "Excess funds not returned to users after loanee is paid",
+            "severity": "low",
+            "location": "KetherNFTLoaner"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-300"
+                ]
+            },
+            "title": "Frontrunning Risk in Buyback Amount Calculation",
+            "description": "Large buyback amount can cause frontrunning susceptibility",
+            "severity": "info",
+            "location": "OKLG"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Unverified interaction with KetherNFT contract",
+            "description": "The audit scope did not include the KetherNFT contract, which may pose unknown security risks",
+            "severity": "info",
+            "location": "KetherNFTLoaner"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Tax fee redistribution mechanism",
+            "description": "If not implemented correctly, this mechanism could be vulnerable to frontrunning attacks",
+            "severity": "info",
+            "location": "OKLG Contract"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Owner can update tax fee and project fee",
+            "description": "If not properly validated, these updates could lead to unauthorized changes to the token's economy",
+            "severity": "info",
+            "location": "OKLG Contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Unverified PriceFeed contract",
+            "description": "The audit did not assess the security of this contract, which affects product pricing",
+            "severity": "info",
+            "location": "OKLGSpend Contract"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Fake swap ID vulnerability",
+            "description": "The owner must ensure that users had actually initiated the swap on the original chain to prevent fraudulent activities",
+            "severity": "info",
+            "location": "OKLGAtomicSwapInstance Contract"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Owner responsibilities require off-chain logic",
+            "description": "This may introduce security risks if not implemented correctly",
+            "severity": "info",
+            "location": "OKLGAtomicSwapInstance Contract"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Emergency unstake function",
+            "description": "If not properly validated, this function could be exploited for unauthorized token withdrawals",
+            "severity": "info",
+            "location": "OKLGFaasToken Contract"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Creator can update pool's base supply or current supply",
+            "description": "Unauthorized changes to these values could impact the reward distribution mechanism",
+            "severity": "info",
+            "location": "OKLGFaasToken Contract"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Unverified Oracle address",
+            "description": "The audit did not assess the security of this contract, which affects swap functionality",
+            "severity": "info",
+            "location": "OKLGAtomicSwap Contract"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Owner can update oracle address for each created AtomicSwapInstance",
+            "description": "If not properly validated, this update could lead to unauthorized changes to the swap process",
+            "severity": "info",
+            "location": "OKLGAtomicSwap Contract"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization of Control",
+            "description": "The owner has the permissions listed above",
+            "severity": "info",
+            "location": "OKLGProduct contracts"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Frontrunning",
+            "description": "If the buyback token is not set OKLG token in the OKLG Contract, and the buyback token may be susceptible to frontrunning",
+            "severity": "info",
+            "location": "OKLG Contract"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Logical Issues",
+            "description": "Issues mentioned above",
+            "severity": "info",
+            "location": "Various contracts"
+        }
+    ]
+}

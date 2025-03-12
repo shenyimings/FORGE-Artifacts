@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/dloop-art-registry-smart-contract.pdf",
+    "project_info": {
+        "url": "https://github.com/dloop-ltd/art-registry/tree/2ccd432a6628aabf5934a24d165100e65b448e7f",
+        "commit_id": "2ccd432a6628aabf5934a24d165100e65b448e7f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "art-registry": "contracts/dloop-art-registry-smart-contract/art-registry"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Potential denial-of-service or misleading behaviour",
+            "description": "It is currently possible for an admin to remove all minters using the removeMinter(...) method.",
+            "severity": "info",
+            "location": "DloopGovernance.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing assertions on the output values",
+            "description": "The splitTokenId(...) method does not check if the resulting artworkId, editionNumber, and artistProofNumber are still valid.",
+            "severity": "info",
+            "location": "DloopUtil.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Inability to remove or fix incorrect artwork items",
+            "description": "It is currently impossible to recover from incorrect artwork data.",
+            "severity": "info",
+            "location": "(Multiple)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Managed tokens are transferable independently from minters",
+            "description": "Regular users are able to move their managed tokens to a new holder, without authorization from minters.",
+            "severity": "n/a",
+            "location": "(Multiple)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Block Timestamp Manipulation",
+            "description": "Miners may be able to manipulate timestamps for their own purposes.",
+            "severity": "n/a",
+            "location": "DloopWithdraw.sol"
+        }
+    ]
+}

@@ -1,0 +1,131 @@
+{
+    "path": "artifacts/MarshaSC-Audit-ReportSA-2039_final.pdf",
+    "project_info": {
+        "url": "https://github.com/IziumenkoViacheslav/MarshaPlusSolidityContract",
+        "commit_id": "3194e22652cca3e7fa13485676a05be066c28ae4",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "MarshaPlusSolidityContract": "contracts/MarshaSC-Audit-ReportSA-2039_final/MarshaPlusSolidityContract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "C01. Funds lock because of denial of transfer service",
+            "description": "The transfer() function will be locked after the 3 years period, because the deployed contract will have no tokens to distribute.",
+            "severity": "critical",
+            "location": "./contracts/MarshaPlus.sol : transfer(), transferFrom(), teamRewardAfter3Years()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "M01. Overriding inherited functions violation",
+            "description": "The contract overrides the transfer() and transferFrom() functions, introducing extra functionality.",
+            "severity": "medium",
+            "location": "./contracts/MarshaPlus.sol : transfer(), transferFrom()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "L01. Missing zero address validation",
+            "description": "The zero address validation check is not implemented for the constructor().",
+            "severity": "low",
+            "location": "./contracts/MarshaPlus.sol : constructor()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "L02. Incorrect state variables updating",
+            "description": "The lastBurnTimestamp variable can only be updated if the burnIfNeeded() function is called.",
+            "severity": "low",
+            "location": "./contracts/MarshaPlus.sol : burnIfNeeded()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "I01. Floating pragma used in the contract",
+            "description": "The project uses floating pragma ^0.8.0.",
+            "severity": "info",
+            "location": "./contracts/MarshaPlus.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "I02. State variables can be declared immutable",
+            "description": "Immutable variables are evaluated once at construction time and their value is copied to all the places in the code where they are accessed.",
+            "severity": "info",
+            "location": "./contracts/MarshaPlus.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "I03. State variable default visibility is not set",
+            "description": "Labeling the visibility explicitly makes it easier to catch incorrect assumptions about who can access the variable.",
+            "severity": "info",
+            "location": "./contracts/MarshaPlus.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "I04. Style guide violation",
+            "description": "Contract readability and code quality are influenced significantly by adherence to established style guidelines.",
+            "severity": "info",
+            "location": "./contracts"
+        }
+    ]
+}

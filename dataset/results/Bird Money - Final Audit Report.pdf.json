@@ -1,0 +1,200 @@
+{
+    "path": "artifacts/Bird Money - Final Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/bird-money/bird-farm-contracts",
+        "commit_id": "dfd2502b73c8f54c9081682c3eb070fcd3c00629",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bird-farm-contracts": "contracts/Bird Money - Final Audit Report/bird-farm-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Similar LP Token Address can be added more than once",
+            "description": "The add() function allows storing a similar LP Token Address more than once.",
+            "severity": "high",
+            "location": "Line 261-284"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unstake Time increases 72 Hours with every new Deposit",
+            "description": "The unstake time for a particular user keeps increasing whenever any new deposit is made.",
+            "severity": "high",
+            "location": "Line 278"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "User is capable of depositing ZERO amount of LP Tokens",
+            "description": "The deposit function allows users to deposit ZERO amount of Lp Tokens as well.",
+            "severity": "high",
+            "location": "Line 261-284"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Violation of Check_Effects_Interaction Pattern in the Withdraw function",
+            "description": "The withdraw function makes external calls within the function and updates user state after external call.",
+            "severity": "medium",
+            "location": "Line 292-305"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "updatePool and massUpdatePools functions have been assigned a Public visibility",
+            "description": "The updatePool and massUpdatePools functions are marked as public instead of internal.",
+            "severity": "medium",
+            "location": "Line 229-234, 237-258"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Multiplication is being performed on the result of Division",
+            "description": "Some functions perform multiplication on the result of a division, which might lead to loss of precision.",
+            "severity": "medium",
+            "location": "Line 214-219, 248-256"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "safeRewardTokenTransfer function should include require statement instead of IF-Else Statement",
+            "description": "The safeRewardTokenTransfer function includes an if statement to check block.number, which can be replaced with a require statement.",
+            "severity": "low",
+            "location": "Line 320-322"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "External Visibility should be preferred",
+            "description": "Some functions are marked as public instead of external, which affects gas optimization.",
+            "severity": "low",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "withdraw function should include require statement instead of IF-Else Statement",
+            "description": "The withdraw function includes an if statement to check user deposit amount and unstake time, which can be replaced with a require statement.",
+            "severity": "low",
+            "location": "Line 292"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Return Value of an External Call is never used Effectively",
+            "description": "The external calls made in the contract do return a boolean value that indicates whether or not the external call made was successful, but these boolean return values are never used throughout the contract.",
+            "severity": "n/a",
+            "location": "MasterChef contract, lines 325, 327, 345, 349"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "No Events emitted after imperative State Variable modification",
+            "description": "Functions that update an imperative arithmetic state variable contract should emit an event after the updation.",
+            "severity": "n/a",
+            "location": "MasterChef contract, lines 118, 122, 129, 133, 137"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "NatSpec Annotations must be included",
+            "description": "Smart contract does not include the NatSpec annotations adequately.",
+            "severity": "n/a",
+            "location": "BirdFarm.sol contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Commented codes must be wiped-out before deployment",
+            "description": "The Masterchef contract includes quite a few commented codes regarding a devAddress state variable.",
+            "severity": "n/a",
+            "location": "MasterChef contract, lines 51, 85"
+        }
+    ]
+}

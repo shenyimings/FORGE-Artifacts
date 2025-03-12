@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/Hacken-HODLVERSE.pdf",
+    "project_info": {
+        "url": "https://github.com/hodlverse/contracts",
+        "commit_id": "94C670DE90E97D6225847C19DD9D91EA97D1C9CE",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Hacken-HODLVERSE/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "mintTo function mints tokens to Owner instead of recipient",
+            "description": "The function is supposed to mint tokens to the recipient, but mints them to the Owner of the contract.",
+            "severity": "critical",
+            "location": "MoneyTokenBridge.sol, mintTo function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Contract owners can withdraw all tokens",
+            "description": "Contract owners can withdraw all tokens, even tokens that have been sold but not yet claimed.",
+            "severity": "critical",
+            "location": "IDO.sol, withdrawRest function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Users cannot claim their tokens when contract is suspended",
+            "description": "When the contract is suspended, users cannot claim their tokens.",
+            "severity": "critical",
+            "location": "IDO.sol, claim function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Users can deposit tokens despite insufficient MONEY balance",
+            "description": "Users can deposit tokens even if the contract does not have sufficient MONEY balance.",
+            "severity": "critical",
+            "location": "IDO.sol, deposit function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Inconsistent decimal places in USDT and MONEY exchangeRate",
+            "description": "USDT and MONEY have different numbers of decimal places (6 and 18), which must be accounted for in exchangeRate.",
+            "severity": "high",
+            "location": "IDO.sol, exchangeRate"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owners can withdraw sold but unclaimed tokens using emergencyWithdraw function",
+            "description": "Owners can withdraw sold but unclaimed tokens using the emergencyWithdraw function, potentially causing users to lose funds.",
+            "severity": "high",
+            "location": "IDO.sol, emergencyWithdraw function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Approval amount exceeds uint96 number range",
+            "description": "If the approval amount exceeds the uint96 number range, it is better to set it to max uint96 than throw an error.",
+            "severity": "medium",
+            "location": "MoneyToken.sol, MoneyTokenBridge.sol, approve function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "EXTCODESIZE check can be subverted by a constructor call",
+            "description": "Using the EXTCODESIZE check to prevent smart contracts from calling a function is not foolproof and can be subverted by a constructor call.",
+            "severity": "medium",
+            "location": "BasicBridge.sol, isContract function"
+        }
+    ]
+}

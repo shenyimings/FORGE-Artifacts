@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/Flexa.pdf",
+    "project_info": {
+        "url": "https://github.com/trufflesuite/truffle",
+        "commit_id": "6128af62da3923d007e44637bfb2676c23e7ab54",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "truffle": "contracts/Flexa/truffle"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Withdrawal root can be added again after removal",
+            "description": "A deleted withdrawal root can be added again, leading to unexpected behavior for users.",
+            "severity": "info",
+            "location": "Staking.sol, addWithdrawalRoot function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing validations on administration functions",
+            "description": "Several administration functions lack proper input validation, which might lead to a misconfigured system or loss of privileged access.",
+            "severity": "medium",
+            "location": "Staking.sol, setOwner, addWithdrawalRoot, and setFallbackRoot functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "setOwner should be split into two separate functions",
+            "description": "setOwner changes ownership of the contract in a single transaction, which can lead to accidental transfer of ownership to an uncontrolled address.",
+            "severity": "info",
+            "location": "Staking.sol, setOwner function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy could cause incorrect information to be emitted",
+            "description": "Reentrancies on token transfer might trigger the incorrect order of events.",
+            "severity": "info",
+            "location": "Staking.sol, withdraw, refundPendingDeposit, and deposit functions"
+        }
+    ]
+}

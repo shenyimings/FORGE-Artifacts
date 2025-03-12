@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/Iosiro-Thales Airdrop and Staking Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/thales-markets/contracts",
+        "commit_id": "a7a15db435b70be959f36c64f4367d54d68f3848",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Iosiro-Thales Airdrop and Staking Smart Contract Audit/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Custom transferFrom does not remove amount from allowance",
+            "description": "The custom `transferFrom` function did not subtract the transferred amount from the user's allowance.",
+            "severity": "high",
+            "location": "Thales.sol, `transferFrom` function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Underflow in fund function",
+            "description": "An underflow of the `unallocatedSupply` variable was identified in the `fund()` function.",
+            "severity": "high",
+            "location": "VestingEscrow.sol, `fund()` function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Unstaking does not account for cooldown period",
+            "description": "The `unstake()` function did not include a check that the cooldown period had elapsed.",
+            "severity": "high",
+            "location": "StakingThales.sol, `unstake` function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Comparison between weeks and seconds",
+            "description": "A comparison was made between `vesting_week` (denominated in seconds) and `periodsOfVesting` (denominated in weeks).",
+            "severity": "medium",
+            "location": "EscrowThales.sol, `getVestingNotAvailable()` function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Reentrancy guard prevents additional staking",
+            "description": "The reentrancy guard prevented additional staking under certain conditions.",
+            "severity": "medium",
+            "location": "StakingThales.sol, `stake()` function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Restaking fails under certain conditions",
+            "description": "If a user unstaked while reward claiming was disabled, they would not be able to restake in a later period.",
+            "severity": "low",
+            "location": "StakingThales.sol, `stake()` function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing events",
+            "description": "Several state-changing functions did not emit events.",
+            "severity": "info",
+            "location": "EscrowThales.sol and StakingThales.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use of unsafe ERC-20 transfer functions",
+            "description": "The contracts did not make consistent use of safe ERC-20 transfer functions.",
+            "severity": "info",
+            "location": "General"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Design comments",
+            "description": "Recommendations for improving code clarity, consistency, and concision were provided.",
+            "severity": "info",
+            "location": "General"
+        }
+    ]
+}

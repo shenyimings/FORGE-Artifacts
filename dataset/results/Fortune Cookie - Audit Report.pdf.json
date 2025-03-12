@@ -1,0 +1,164 @@
+{
+    "path": "artifacts/Fortune Cookie - Audit Report.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xca94698f5a683939700ea611d6ada30cae632a9d",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "FortuneCookieV2": "contracts/Fortune Cookie - Audit Report/FortuneCookieV2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Similar operation twice in _handleLottery function",
+            "description": "Undesirable situation where _txCounter state variable will be initialized twice.",
+            "severity": "high",
+            "location": "Line 1159-1242, _handleLottery function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "insertUser function is public and accessible to users",
+            "description": "Anyone can call this function with any arguments they want.",
+            "severity": "high",
+            "location": "Line 586-597, insertUser function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Inadequate design of addWinner function",
+            "description": "Function is not designed effectively, lacks input validations and onlyOwner modifier.",
+            "severity": "high",
+            "location": "Line 621-629, addWinner function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Loops are extremely costly",
+            "description": "Loops consume extra gas for every iteration.",
+            "severity": "medium",
+            "location": "Lines 716, 797, 1251 (functions: includeInReward, _getCurrentSupply, airDrop)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No input validations performed on insertUser function",
+            "description": "Invalid arguments can be passed to the function.",
+            "severity": "medium",
+            "location": "Line 586, insertUser function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant IF statement condition in _handleLottery function",
+            "description": "Unnecessary validation checks.",
+            "severity": "medium",
+            "location": "Line 1198, _handleLottery function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ]
+            },
+            "title": "Comparison to boolean constant",
+            "description": "Equality to boolean constants should be removed.",
+            "severity": "low",
+            "location": "Line 580"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Absence of zero address validation",
+            "description": "No validation checks for zero addresses in certain functions.",
+            "severity": "low",
+            "location": "Functions: addWinner, setUniswapPair"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "External visibility should be preferred",
+            "description": "Functions should be marked as external instead of public for gas optimization.",
+            "severity": "low",
+            "location": "Various functions (e.g., insertUser, getTotalWon)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ],
+                "3": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Contract includes hardcoded addresses",
+            "description": "Hardcoded addresses should be initialized in the constructor at deployment time.",
+            "severity": "low",
+            "location": "Lines 451-457"
+        }
+    ]
+}

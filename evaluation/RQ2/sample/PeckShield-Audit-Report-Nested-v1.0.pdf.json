@@ -1,0 +1,88 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Nested-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/NestedFinance/nested-core/",
+        "commit_id": "34d527",
+        "address": "n/a",
+        "chain": "n/a"
+    },
+    "findings": [
+        {
+            "id": 0,
+            "title": "Confused Spender Allowance In revokeGrant()",
+            "description": "The Nested protocol has its own governance token NST that has the flexible support with grantable ERC20 token vesting schedules. While examining the vesting schedule support, we observe an issue that may incorrectly give the grantor a wrong allowance.",
+            "severity": "Medium",
+            "location": "revokeGrant() function"
+        },
+        {
+            "id": 1,
+            "title": "Vesting Bypass With transferFrom()",
+            "description": "the Nested protocol has its own governance token NST with the unique support of dynamic vesting schedules. The analysis shows that the vesting may be bypassed.",
+            "severity": "Medium",
+            "location": "transferFrom() function"
+        },
+        {
+            "id": 2,
+            "title": "Accommodation Of Possible Non-Compliant Entities",
+            "description": "Though there is a standardized ERC-20 specification, many token contracts may not strictly follow the specification or have additional functionalities beyond the specification. In this section, we examine the approve() routine and possible idiosyncrasies from current widely-used token contracts",
+            "severity": "Low",
+            "location": "Not specified"
+        },
+        {
+            "id": 3,
+            "title": "Possible Claim of Fee By Unrelated Entities",
+            "description": "The FeeSplitter contract has a permissionless function that allows anyone to add themselves as a share recipient.",
+            "severity": "Low",
+            "location": "FeeSplitter contract, specifically the sendFeesWithRoyalties() function"
+        },
+        {
+            "id": 4,
+            "title": "Possible Royalty OverCollection In sendFeesWithRoyalties()",
+            "description": "The VIP discount is not taken into account when calculating the _royaltiesTarget share, leading to possible royalty overcollection.",
+            "severity": "Medium",
+            "location": "FeeSplitter contract, function sendFeesWithRoyalties()"
+        },
+        {
+            "id": 5,
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged owner account is not governed by a DAO-like structure, making it vulnerable to compromise.",
+            "severity": "Medium",
+            "location": "Multiple Contracts"
+        },
+        {
+            "id": 6,
+            "title": "Possible Drained Reserve From exchangeAndStoreTokens()",
+            "description": "This issue is not provided in the given fragments.",
+            "severity": "n/a",
+            "location": "exchangeAndStoreTokens() function"
+        },
+        {
+            "id": 7,
+            "title": "Improved Security with nonReentrant modifier",
+            "description": "The withdraw() function does not adhere to the nonReentrant modifier, making it susceptible to reentrancy attacks.",
+            "severity": "n/a",
+            "location": "withdraw() function"
+        },
+        {
+            "id": 8,
+            "title": "Reentrancy issue in withdraw() function",
+            "description": "The withdraw() function violates the checks-effects-interactions principle, leading to a reentrancy issue.",
+            "severity": "n/a",
+            "location": "withdraw() function"
+        },
+        {
+            "id": 9,
+            "title": "Improved Security with Checks-Effects-Interactions Principle",
+            "description": "The withdraw() function violates the checks-effects-interactions principle, leading to a reentrancy issue.",
+            "severity": "n/a",
+            "location": "withdraw() function"
+        },
+        {
+            "id": 10,
+            "title": "Improved Contract Structure and Organization",
+            "description": "The overall code structure and organization of the Nested protocol is well-designed.",
+            "severity": "n/a",
+            "location": "Multiple Contracts"
+        }
+    ]
+}

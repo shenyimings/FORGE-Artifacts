@@ -1,0 +1,200 @@
+{
+    "path": "artifacts/Aspida Network.md",
+    "project_info": {
+        "url": "https://github.com/aspidanet/aspida-contract",
+        "commit_id": "a94928e27a72baabb8c73b42634350ca934b3353",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "aspida-contract": "contracts/Aspida Network/aspida-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Staking deposit can be stolen by a 3rd party",
+            "description": "The specification of ETH2.0 staking allows for two types of deposits, but the current implementation does not sufficiently distinguish between them, allowing an attacker to front-run Aspida's deposit with their own initial deposit.",
+            "severity": "critical",
+            "location": "Mainnet deposit contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Slashing and strategy losses not taken into design",
+            "description": "Inequitable distribution of losses among users",
+            "severity": "high",
+            "location": "CorePrimary contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Excessive minting aETH permissions for strategies",
+            "description": "Unrestricted minting of AETH to arbitrary address",
+            "severity": "high",
+            "location": "strategyMinting function in CorePrimary contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "RewardOracle accepts arbitrary epochId",
+            "description": "Potential DoS attack on RewardOracle contract",
+            "severity": "high",
+            "location": "_updateEpochReward function in RewardOracle.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Actions limits manipulation",
+            "description": "Manipulation of submit/withdraw limits leading to action lock-ups",
+            "severity": "high",
+            "location": "CorePrimary.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-654"
+                ]
+            },
+            "title": "Centralization risks",
+            "description": "Centralized structure posing risks to users' funds",
+            "severity": "medium",
+            "location": "Multiple contracts (Owner, Strategies, RewardOracle)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "The supplyReward function doesn't check the balance increase",
+            "description": "Risk of uncontrolled supply increase",
+            "severity": "medium",
+            "location": "supplyReward function in RewardOracle.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Race condition in submitEpochReward start epoch ID",
+            "description": "Potential for miscalculation of start epoch ID leading to extra rewards",
+            "severity": "medium",
+            "location": "_updateEpochReward function in RewardOracle.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Redundant require statement due to non-decreasing queueId",
+            "description": "Unnecessary check for existing queueId entries",
+            "severity": "low",
+            "location": "_withdrawalQueue function in WithdrawalQueue.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "The Claim.amount field can be omitted",
+            "description": "Optimization opportunity by eliminating use of Claim.amount",
+            "severity": "low",
+            "location": "_withdrawalQueue function in WithdrawalQueue.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Constructors may use _disableInitializers instead of initialization routine",
+            "description": "More elegant way to disable initialization using OpenZeppelin's _disableInitializers",
+            "severity": "low",
+            "location": "Multiple contracts (CorePrimary, dETH, RewardOracle, StETHMinter)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "The public burn function",
+            "description": "Potential for total supply manipulation due to public burn function",
+            "severity": "low",
+            "location": "aETH contract"
+        }
+    ]
+}

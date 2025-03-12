@@ -1,0 +1,131 @@
+{
+    "path": "artifacts/Ritestream Subcription Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/ritestream/ritestream-contract/tree/master",
+        "commit_id": "master",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ritestream-contract": "contracts/Ritestream Subcription Smart Contract Audit Report - QuillAudits/ritestream-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Subscription can be overwritten",
+            "description": "Function signature is the same, and the hash created also follows the same pattern, making it possible to overwrite a subscription by mistake.",
+            "severity": "medium",
+            "location": "Contract - Subscription.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-1270"
+                ]
+            },
+            "title": "Signature can be reused multiple times",
+            "description": "Message hash created follows the same pattern in subscribe and updateSubscriptionPlan, making it possible to reuse it any number of times.",
+            "severity": "low",
+            "location": "Contract - Subscription.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Check Effect Interaction pattern not followed",
+            "description": "Functions transfer RITE tokens from msg.sender before updating contract states, which can be used to reenter the functions and exploit the function to double spend subscription in updateSubscriptionPlan.",
+            "severity": "low",
+            "location": "Contract - Subscription.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing checks",
+            "description": "It is recommended to add a check for address(0) while setting the operator as it is used in validating signatures in subscriptions.",
+            "severity": "info",
+            "location": "Contract - Subscription.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Contracts without storage gap",
+            "description": "It is recommended to add a gap in the contract to avoid storage collision in future if the current contract is upgraded and extended.",
+            "severity": "info",
+            "location": "Contract - Subscription.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing event emission in setOperator",
+            "description": "The function setOperator does not emit an event on updating operator.",
+            "severity": "info",
+            "location": "Contract - Subscription.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unwanted require statements",
+            "description": "Following require statements can be removed as msg.sender can never be zero address.",
+            "severity": "info",
+            "location": "Contract - Subscription.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Naming Convention issues",
+            "description": "Various naming convention issues in the contracts.",
+            "severity": "info",
+            "location": "Contracts/Subscription.sol and others"
+        }
+    ]
+}

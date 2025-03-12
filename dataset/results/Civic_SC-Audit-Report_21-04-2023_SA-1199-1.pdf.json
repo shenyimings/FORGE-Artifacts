@@ -1,0 +1,284 @@
+{
+    "path": "artifacts/Civic_SC-Audit-Report_21-04-2023_SA-1199-1.pdf",
+    "project_info": {
+        "url": "https://github.com/identity-com/on-chain-identity-gateway/tree/develop/ethereum/smart-contract/",
+        "commit_id": "55547cc6",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "on-chain-identity-gateway": "contracts/Civic_SC-Audit-Report_21-04-2023_SA-1199-1/on-chain-identity-gateway"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "The Super Admin role has permissions for performing any change in the state of the protocol, making it very centralized and potentially impacting security.",
+            "severity": "n/a",
+            "location": "FlagsStorage contract, GatewayToken contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1106"
+                ]
+            },
+            "title": "Implicit Variable Size",
+            "description": "Some uint variables do not have their size explicitly specified, which can lead to readability issues.",
+            "severity": "n/a",
+            "location": "Various contracts (IGatewayToken.sol, BitMask.sol, CommonErrors.sol, GatewayToken.sol, MultiERC2771Context.sol)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent Data",
+            "description": "execute() function does not verify if msg.value is equal to req.value and does not return unused Ether to the caller.",
+            "severity": "high",
+            "location": "./contracts/FlexibleNonceForwarder.sol : execute()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Only EOA Allowed",
+            "description": "withdraw() function restricts smart contract calls by performing high-level payable(address).transfer().",
+            "severity": "medium",
+            "location": "./contracts/GatewayToken.sol : withdraw()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Best Practice Violation",
+            "description": "Forwarder contract is a direct implementation of OpenZeppelin’s MinimalForwarder contract with no added functionalities.",
+            "severity": "medium",
+            "location": "./contracts/Forwarder.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Override Keyword",
+            "description": "override keyword is used on state variables when not needed.",
+            "severity": "low",
+            "location": "./contracts/FlagsStorage.sol : superAdmin, supportedFlagsMask, flagIndexes"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ]
+            },
+            "title": "Functions that Can Be Declared External",
+            "description": "public functions can be declared external to save Gas.",
+            "severity": "low",
+            "location": "Multiple contracts and functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reading Array Length in a Loop",
+            "description": "Array length should be saved in a local variable instead of being computed in each loop cycle.",
+            "severity": "low",
+            "location": "./contracts/FlagsStorage.sol : addFlags(), removeFlags() and ./contracts/GatewayToken.sol : _getTokenIdsByOwnerAndNetwork()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-1235"
+                ]
+            },
+            "title": "Variable Can Be Set Immutable",
+            "description": "Variable _blockAgeTolerance can be declared immutable to save Gas on computations.",
+            "severity": "low",
+            "location": "./contracts/FlexibleNonceForwarder.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Locking the pragma helps ensure that contracts do not accidentally get deployed using an outdated compiler version.",
+            "severity": "low",
+            "location": "All contracts"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Zero Address Check",
+            "description": "Address parameters are being used without checking against the possibility of 0x0.",
+            "severity": "low",
+            "location": "./contracts/GatewayToken.sol : initialize()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Best Practice Violation",
+            "description": "Since OpenZeppelin’s contracts v4.6.0, it is recommended to use _disableInitializers() in the constructor instead of the initializer modifier.",
+            "severity": "low",
+            "location": "./contracts/FlagsStorage.sol : constructor(), ./contracts/GatewayToken.sol : constructor(), and ./contracts/MultiERC2771Context.sol : constructor()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Variable",
+            "description": "Unused variables should be removed from the contracts.",
+            "severity": "low",
+            "location": "./contracts/GatewayToken.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Function Can Be Pure",
+            "description": "The function transfersRestricted() does not read or modify the variables of the state and should be declared pure.",
+            "severity": "low",
+            "location": "./contracts/GatewayToken.sol : transfersRestricted()"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Function",
+            "description": "withdraw() function is redundant and can be removed by overriding the ERC3525 approve() function.",
+            "severity": "low",
+            "location": "./contracts/GatewayToken.sol : withdraw()"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Empty Constructor",
+            "description": "The constructor in the Forwarder contract is empty and redundant due to default Solidity behavior.",
+            "severity": "low",
+            "location": "./contracts/Forwarder.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Unfinalized NatSpec",
+            "description": "The NatSpec placed before the contract definition is not finalized.",
+            "severity": "low",
+            "location": "./contracts/Forwarder.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation",
+            "description": "The function ordering does not follow the official guidelines.",
+            "severity": "low",
+            "location": "./contracts/GatewayToken.sol"
+        }
+    ]
+}

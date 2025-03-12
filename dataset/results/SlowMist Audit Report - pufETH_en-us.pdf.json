@@ -1,0 +1,71 @@
+{
+    "path": "artifacts/SlowMist Audit Report - pufETH_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/PufferFinance/pufETH/tree/feature/simple-timelock",
+        "commit_id": "9a2a470bd276b850daf66b15463d0a9ad9b38a0f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "pufETH": "contracts/SlowMist Audit Report - pufETH_en-us/pufETH"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Risk of unintended claim operations",
+            "description": "Malicious user can directly call requestWithdrawals function in Lido to generate requestIds, and then call claimWithdrawalsFromLido function, lidoLockedETH will be deducted additionally, resulting in a normal claim operation failing due to insufficient lidoLockedETH.",
+            "severity": "medium",
+            "location": "PufferVault contract, claimWithdrawalsFromLido function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Potential issues when permitData.owner is inconsistent with msg.sender",
+            "description": "If permitData.owner passed in by the user is not msg.sender, this can lead to unexpected token transfers.",
+            "severity": "low",
+            "location": "PufferDepositor contract, swapAndDepositWithPermit1Inch/swapAndDepositWithPermit functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Authority transfer enhancement",
+            "description": "The pauserMultisig role does not adopt the pending and access processes. If the pauserMultisig is incorrectly set, the owner permission will be lost.",
+            "severity": "info",
+            "location": "Timelock contract, _setPauser function"
+        }
+    ]
+}

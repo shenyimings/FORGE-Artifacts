@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Aave_Balancer_and_Uniswap_v2_Price_Providers.pdf",
+    "project_info": {
+        "url": "https://github.com/balancer-labs/balancer-core",
+        "commit_id": "3e8367ab211a137afff87dd8dadc0efe235257d4",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "balancer-core": "contracts/ConsenSys_Diligence-Aave_Balancer_and_Uniswap_v2_Price_Providers/balancer-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Unvalidated Constructor Arguments",
+            "description": "The constructor does not validate whether the provided price provider arguments actually make sense.",
+            "severity": "medium",
+            "location": "BalancerSharedPoolPriceProvider.sol, UniswapV2PriceProvider.sol (constructor)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistent Use of SafeMath",
+            "description": "The Uniswap price provider imports the SafeMath library but does not always use it for integer arithmetic operations.",
+            "severity": "medium",
+            "location": "UniswapV2PriceProvider.sol (multiple lines)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Integer Underflow if a Token Specifies More Than 18 Decimals",
+            "description": "Decimals are provided by the account deploying the price provider contract, and it's assumed that decimals[index] is less or equal to 18.",
+            "severity": "medium",
+            "location": "BalancerSharedPoolPriceProvider.sol (getEthBalanceByToken function), UniswapV2PriceProvider.sol (getEthBalanceByToken function)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unchecked Specification Requirement - Token Limit",
+            "description": "The number of tokens returned by pool.getFinalTokens() is not checked to be between 2 and 3.",
+            "severity": "medium",
+            "location": "BalancerSharedPoolPriceProvider.sol (constructor)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Rename priceDeviation to maxPriceDeviation for Code Readability",
+            "description": "Improve code readability by renaming the state variable priceDeviation to maxPriceDeviation.",
+            "severity": "low",
+            "location": "BalancerSharedPoolPriceProvider.sol"
+        }
+    ]
+}

@@ -1,0 +1,158 @@
+{
+    "path": "artifacts/[HAECHI AUDIT] Meter Bridge Smart Contract Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/meterio/chainbridge-solidity-v2.0.0-eth",
+        "commit_id": "1a02abfe86e7a87d1de61bb64328ff2382938ce0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "chainbridge-solidity-v2.0.0-eth": "contracts/[HAECHI AUDIT] Meter Bridge Smart Contract Audit Report/chainbridge-solidity-v2.0.0-eth"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ],
+                "4": [
+                    "CWE-567"
+                ]
+            },
+            "title": "Using EnumerableSet Index may lead to undesired behavior",
+            "description": "Using EnumerableSet index to keep track of relayers and their votes can lead to undesired behavior, such as a relayer voting multiple times or not being able to vote on a proposal.",
+            "severity": "low",
+            "location": "handlers/Bridge(Upgradeable).sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Various optimizations are possible",
+            "description": "Removing unnecessary code and repeated computation can lead to various optimizations.",
+            "severity": "info",
+            "location": "ERC1967Upgrade.sol, Signatures contracts, ERC20Safe.sol, Bridge contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ERC721Handler can be used to steal other's bridged NFTs",
+            "description": "Attackers can steal NFTs if the owner has approved the ERC721Handler address.",
+            "severity": "critical",
+            "location": "handlers/ERC721Handler(Upgradeable).sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Signatures.sol’s incorrect usage of signatures may lead to DoS",
+            "description": "A relayer can send valid signatures for a proposal repeatedly, which may lead to DoS.",
+            "severity": "high",
+            "location": "Signatures(Upgradeable).sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Signatures.sol’s insufficient input validation may lead to DoS",
+            "description": "Insufficient input validation in submitSignature function can lead to DoS.",
+            "severity": "high",
+            "location": "Signatures(Upgradeable).sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "FeeHandler token check is missing",
+            "description": "Missing token check in FeeHandler leads to reverts if non-native tokens are used for bridging fees.",
+            "severity": "low",
+            "location": "Bridge(Upgradeable).sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "ResourceID is not checked properly in proposal execution",
+            "description": "Not checking resourceID properly allows tokens with the same ERCHandler to be withdrawn.",
+            "severity": "critical",
+            "location": "Bridge(Upgradeable).sol, function voteProposal()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy in voteProposals() leads to double spending",
+            "description": "A reentrancy attack allows an ERC1155 double spending with low difficulty.",
+            "severity": "critical",
+            "location": "Bridge(Upgradeable).sol, function voteProposals()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Handler change for a resourceID leads to Signature Replay",
+            "description": "Changing the handler address without changing its resourceID allows signatures to be replayed.",
+            "severity": "low",
+            "location": "Bridge(Upgradeable).sol"
+        }
+    ]
+}

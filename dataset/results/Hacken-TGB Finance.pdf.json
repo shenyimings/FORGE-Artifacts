@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/Hacken-TGB Finance.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xffef225b4a1b5de683d53dd745664c4ef8840f61",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "TGB": "contracts/Hacken-TGB Finance/TGB"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect fee calculations",
+            "description": "The “totalFees” amount is calculated incorrectly in TGB.sol contract, specific functions (setMarketingFee, setLiquiditFee, setBUSDRewardsFee).",
+            "severity": "high",
+            "location": "Contract: TGB.sol, Functions: setMarketingFee, setLiquiditFee, setBUSDRewardsFee"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Not including in dividends back",
+            "description": "Calling _setAutomatedMarketMakerPair with value=true will exclude specified address from dividends but doesn’t include it back when calling with value=false in TGB.sol contract, specific function (_setAutomatedMarketMakerPair).",
+            "severity": "high",
+            "location": "Contract: TGB.sol, Functions: _setAutomatedMarketMakerPair"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "No functionality to include back in dividends",
+            "description": "Calling excludeFromDividends by mistake will exclude provided address from dividends and there is no ability to include it back in TGB.sol contract, specific function (excludeFromDividends).",
+            "severity": "high",
+            "location": "Contract: TGB.sol, Functions: excludeFromDividends"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "No events on fee changes",
+            "description": "While changing fees it’s suggested to emit corresponding events so the community could track such changes off-chain in TGB.sol contract, specific functions (noFees, setBUSDRewardsFee, setLiquiditFee, setMarketingFee, setBurnFee).",
+            "severity": "low",
+            "location": "Contract: TGB.sol, Functions: noFees, setBUSDRewardsFee, setLiquiditFee, setMarketingFee, setBurnFee"
+        }
+    ]
+}

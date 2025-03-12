@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/tlife.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xc9f8c639135fc1412f011cc84810635d6bbca19d",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.11+commit.d7f03943"
+        ],
+        "project_path": {
+            "TLIFE_Coin": "contracts/tlife/TLIFE_Coin"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unauthorized token minting",
+            "description": "The contract owner can mint tokens, potentially inflating the contract.",
+            "severity": "critical",
+            "location": "TLIFE_Coin.sol (mint function)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ]
+            },
+            "title": "Unauthorized token transfer",
+            "description": "The contract owner can claim all tokens held by the contract.",
+            "severity": "low",
+            "location": "TLIFE_Coin.sol#L109 (recoverToken function)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Lack of event emission",
+            "description": "The contract performs actions without emitting events.",
+            "severity": "low",
+            "location": "TLIFE_Coin.sol#L424 (mint function)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1099"
+                ]
+            },
+            "title": "Non-compliance with naming conventions",
+            "description": "The contract does not follow the Solidity style guide for naming conventions.",
+            "severity": "low",
+            "location": "TLIFE_Coin.sol#L11,12,495"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Conflicting pragma directives",
+            "description": "The contract includes multiple conflicting pragma directives.",
+            "severity": "low",
+            "location": "TLIFE_Coin.sol#L8,29,51,87,106,116,408,440,455,493"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Unstable compiler version",
+            "description": "The contract uses the ^ symbol, which can lead to unexpected compiler versions.",
+            "severity": "low",
+            "location": "TLIFE_Coin.sol#L8,29,51,106,116,408,440,455,493"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Lack of transfer check",
+            "description": "The contract does not check if the token transfer is successful.",
+            "severity": "low",
+            "location": "TLIFE_Coin.sol#L110"
+        }
+    ]
+}

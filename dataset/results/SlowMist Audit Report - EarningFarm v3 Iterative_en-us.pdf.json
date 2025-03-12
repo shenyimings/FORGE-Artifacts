@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/SlowMist Audit Report - EarningFarm v3 Iterative_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/Shata-Capital/ENF_V3",
+        "commit_id": "ba8e800b5482725e9b5daf3e6e74a4953d6e4451",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ENF_V3": "contracts/SlowMist Audit Report - EarningFarm v3 Iterative_en-us/ENF_V3"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Risk of excessive authority",
+            "description": "Owner role can set sensitive parameters through certain functions, leading to excessive owner permissions.",
+            "severity": "medium",
+            "location": "contracts/core/Exchange.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Variable storage issue",
+            "description": "Inefficient use of storage in the Curve3Pool contract's swap function, consuming more gas.",
+            "severity": "info",
+            "location": "contracts/exchange/Curve3Pool.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-274"
+                ]
+            },
+            "title": "Slippage issue",
+            "description": "The _min_received variable is set to 0, making the exchange process susceptible to sandwich attacks in the Curve3Pool contract's swap function.",
+            "severity": "medium",
+            "location": "contracts/exchange/Curve3Pool.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "get_dy index issue",
+            "description": "Incorrect indexing in the CDai contract's _totalAssets function, potentially affecting calculations.",
+            "severity": "info",
+            "location": "contracts/subStrategies/notional/CDai.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Risk of breaching contract integrity",
+            "description": "Malicious users can manipulate LP tokens to destroy totalLP value in the withdraw function of the SS contract.",
+            "severity": "high",
+            "location": "contracts/subStrategies/convex/*.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Risk of slippage checks being bypassed",
+            "description": "Malicious users can manipulate CurvePool with large sums to steal collateral that does not belong to them in the CDai contract's totalAssets function.",
+            "severity": "high",
+            "location": "contracts/subStrategies/notional/CDai.sol"
+        }
+    ]
+}

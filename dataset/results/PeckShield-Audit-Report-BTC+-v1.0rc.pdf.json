@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-BTC+-v1.0rc.pdf",
+    "project_info": {
+        "url": "https://github.com/nutsfinance/BTC-Plus/tree/8178bf",
+        "commit_id": "8178bf",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "BTC-Plus": "contracts/PeckShield-Audit-Report-BTC+-v1/BTC-Plus"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Arbitrary Share Increment in Base Tokens",
+            "description": "Allows for arbitrary balance increments due to improper handling of a corner case when both sender and recipient refer to the same account.",
+            "severity": "critical",
+            "location": "Plus::_transfer() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Proper harvest() In BadgerRenCRV+",
+            "description": "Incorrect conversion path from DIGG to WBTC in the harvest() operation.",
+            "severity": "medium",
+            "location": "BadgerRenCRV+::harvest() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Staking Amount In setRewards()",
+            "description": "Incorrect staking amount calculation in the `setRewards()` function.",
+            "severity": "medium",
+            "location": "LiquidityGauge contract, `setRewards()` function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible Costly Pool LPs From Improper Initialization",
+            "description": "Malicious actor can manipulate the pool token price during initialization.",
+            "severity": "low",
+            "location": "LiquidityGauge contract, `deposit()` function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ]
+            },
+            "title": "Hardcoded Business Logic In redeemBTCBPlus()",
+            "description": "Hardcoded intermediate token in the `redeemBTCBPlus()` function.",
+            "severity": "low",
+            "location": "BTCZapBsc contract, `redeemBTCBPlus()` function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Governance account is not governed by a DAO-like structure, making it vulnerable to compromise.",
+            "severity": "medium",
+            "location": "Multiple contracts, governance account"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Event Removal in GaugeController",
+            "description": "The event FeeProcessed is defined but never used or emitted.",
+            "severity": "info",
+            "location": "GaugeController, line 40"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Possible Sandwich/MEV For Reduced Gains",
+            "description": "The swap operation in the harvest() function is vulnerable to possible front-running attacks, resulting in a smaller converted amount.",
+            "severity": "medium",
+            "location": "Multiple Contracts (VenusBTC+, AcryptoSBTC+, AutoBTC+/AutoBTCv2+, ForTubeBTCB+), harvest() function"
+        }
+    ]
+}

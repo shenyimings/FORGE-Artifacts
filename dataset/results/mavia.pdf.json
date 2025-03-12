@@ -1,0 +1,71 @@
+{
+    "path": "artifacts/mavia.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x24fcfc492c1393274b6bcd568ac9e225bec93584",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "MaviaToken": "contracts/mavia/MaviaToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "ST - Stops Transactions",
+            "description": "The `_EDITOR_ROLE` can stop sales for all users by setting `tfMaxAmount` to zero or `tfStartTime` to a very high value, operating as a honeypot.",
+            "severity": "critical",
+            "location": "project:/src/active/token/MaviaToken.sol#L100"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "BC - Blacklists Addresses",
+            "description": "The `_EDITOR_ROLE` can blacklist addresses from transactions using the `fSetBlacklist` function.",
+            "severity": "critical",
+            "location": "project:/src/active/token/MaviaToken.sol#L70"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "OCTD - Transfers Contract's Tokens",
+            "description": "The `_EMERGENCY_ROLE` can claim the contract's balance using the `fEmerERC20Tokens` function.",
+            "severity": "low",
+            "location": "project:/src/active/token/MaviaToken.sol#L88"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The code does not follow the Solidity naming conventions, affecting readability and maintainability.",
+            "severity": "low",
+            "location": "project:/src/active/token/MaviaToken.sol#L14,66,70,76,82,88"
+        }
+    ]
+}

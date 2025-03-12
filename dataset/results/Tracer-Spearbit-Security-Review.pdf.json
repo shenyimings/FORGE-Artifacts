@@ -1,0 +1,209 @@
+{
+    "path": "artifacts/Tracer-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/tracer-protocol/perpetual-pools-contracts",
+        "commit_id": "fc55a2b47a61426971a5c533e60927a9c3efb113",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "perpetual-pools-contracts": "contracts/Tracer-Spearbit-Security-Review/perpetual-pools-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Pool token price is incorrect when there is more than one pending upkeep",
+            "description": "The amount of pool tokens to mint and quote tokens to burn is determined by the pool token price, but it includes the current total supply, which leads to an attacker getting a better pool token price.",
+            "severity": "critical",
+            "location": "PoolFactory.deployPool()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "No price scaling in SMAOracle",
+            "description": "The update() function of the SMAOracle contract doesn't scale the latestPrice although a scaler is set in the constructor.",
+            "severity": "high",
+            "location": "SMAOracle.sol#L82-L96, ChainlinkOracleWrapper.sol#L36-L60"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Two different invariantCheck variables used in PoolFactory.deployPool()",
+            "description": "The deployPool() function in the PoolFactory contract uses two different invariantCheck variables: the one defined as a contract’s instance variable and the one supplied as a parameter.",
+            "severity": "high",
+            "location": "PoolFactory.sol#L93-L174, IPoolFactory.sol#L14"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Duplicate user payments for long commits when paid from balance",
+            "description": "When minting pool tokens in commit(), the fromAggregateBalance parameter indicates if the user wants to pay from their internal balances or by transferring the tokens.",
+            "severity": "high",
+            "location": "PoolCommitter.sol#L299-L306"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Initial executionPrice is too high",
+            "description": "When a pool is deployed, the initial executionPrice is calculated as mintingFee + burningFee, which can result in an excessively high price.",
+            "severity": "high",
+            "location": "PoolKeeper.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Missing Validity Check for Pool Committer",
+            "description": "AutoClaim checks that the committer creating the claim request is a valid committer for the PoolFactory used in the AutoClaim initializer, but this check is missing in other functions.",
+            "severity": "low",
+            "location": "AutoClaim contract, multiPaidClaimMultiplePoolCommitters(), multiPaidClaimSinglePoolCommitter(), and withdrawClaimRequest() functions"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Custom errors should be used",
+            "description": "In the latest Solidity versions it is possible to replace the strings used to encode error messages with custom errors, which are more gas efficient.",
+            "severity": "info",
+            "location": "Contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Different updateIntervals in SMAOracle and pools",
+            "description": "The updateIntervals for pools and SMAOracles differ, potentially allowing attackers to manipulate SMAOracle price updates.",
+            "severity": "info",
+            "location": "LeveragedPool.sol, SMAOracle.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Tight coupling between LeveragedPool and PoolCommitter",
+            "description": "The contracts call each other back and forth, potentially making the code unclear and gas-inefficient.",
+            "severity": "info",
+            "location": "LeveragedPool.sol, PoolCommitter.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Code in SMA() is hard to read",
+            "description": "The SMA() function uses hardcoded values, making the code difficult to understand.",
+            "severity": "info",
+            "location": "SMAOracle.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1103"
+                ]
+            },
+            "title": "Code is chain-dependant due to fixed block time and no support for EIP-1559",
+            "description": "The PoolKeeper contract makes hardcoded assumptions about the blockchain, which can lead to issues with future changes.",
+            "severity": "info",
+            "location": "PoolKeeper.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "ABDKQuad-related constants defined outside PoolSwapLibrary",
+            "description": "ABDKQuad-related constants are defined outside the library, potentially leading to errors.",
+            "severity": "info",
+            "location": "PoolCommitter.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Lack of a state to allow withdrawal of tokens",
+            "description": "The pool lacks a separate state for withdrawals, potentially allowing unpause actions.",
+            "severity": "info",
+            "location": "LeveragedPool.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-656"
+                ]
+            },
+            "title": "Undocumented frontrunning protection",
+            "description": "The deployPool() function has an undocumented mechanism to prevent frontrunning attacks.",
+            "severity": "info",
+            "location": "PoolFactory.sol"
+        }
+    ]
+}

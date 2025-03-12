@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Symmetry-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/symmetrytrade/symmetry-contracts/tree/6ce6c8255b8cc869b4a04f4636917250204e6804",
+        "commit_id": "6ce6c8255b8cc869b4a04f4636917250204e6804",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "symmetry-contracts": "contracts/PeckShield-Audit-Report-Symmetry-v1/symmetry-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Revisited Deficit Loss Payment in PositionManager::liquidatePosition()",
+            "description": "The deficit will be paid by the protocol insurance and/or LPs for the user's open position instead of the liquidated position.",
+            "severity": "medium",
+            "location": "PositionManager contract, function liquidatePosition()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Revisited Logic of Market::_logTrade()",
+            "description": "Incorrect calculation of baseToken amount used as incentives in _logTrade() routine.",
+            "severity": "medium",
+            "location": "Market contract, function _logTrade()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20-Compliant Tokens",
+            "description": "The transfer() routine may not revert when the message caller's account balance does not have enough tokens to spend.",
+            "severity": "low",
+            "location": "VotingEscrow contract, function unstake()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged accounts are plain EOA accounts, which can be compromised and allow attackers to modify sensitive system parameters.",
+            "severity": "medium",
+            "location": "Multiple Contracts (ABF, LPToken, Market)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Lack of Meaningful Events for Important State Changes",
+            "description": "Privileged routines lack meaningful events to reflect their changes.",
+            "severity": "info",
+            "location": "Multiple Contracts (Market)"
+        }
+    ]
+}

@@ -1,0 +1,251 @@
+{
+    "path": "artifacts/ParallelFinance2FixReview.pdf",
+    "project_info": {
+        "url": "https://github.com/para-space/paraspace-core/tree/4d981e53a06c7188547eecbe1acd8867753c00b0",
+        "commit_id": "4d981e53a06c7188547eecbe1acd8867753c00b0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "paraspace-core": "contracts/ParallelFinance2FixReview/paraspace-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unconventional test structure",
+            "description": "Difficult-to-run tests may not be run, hindering development.",
+            "severity": "info",
+            "location": "test-suites"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient event generation",
+            "description": "Lack of events makes it difficult to monitor and detect suspicious activity.",
+            "severity": "low",
+            "location": "Various targets"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing supportsInterface functions",
+            "description": "Contracts do not implement the supportsInterface function as required by EIP-165.",
+            "severity": "low",
+            "location": "Various contracts (e.g., MoonBirdsGateway, UniswapV3Gateway)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "ERC1155 asset type is defined but not implemented",
+            "description": "The ERC1155 asset type is defined in the code but not supported.",
+            "severity": "info",
+            "location": "contracts/protocol/libraries/types/DataTypes.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-241"
+                ]
+            },
+            "title": "executeMintToTreasury silently skips non-ERC20 tokens",
+            "description": "The executeMintToTreasury function ignores non-ERC20 assets, which could lead to unnoticed errors.",
+            "severity": "low",
+            "location": "contracts/protocol/libraries/logic/PoolLogic.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-237"
+                ],
+                "4": [
+                    "CWE-238"
+                ]
+            },
+            "title": "getReservesData does not set all AggregatedReserveData fields",
+            "description": "The getReservesData function does not fill in the name and assetType fields of the AggregatedReserveData structure.",
+            "severity": "low",
+            "location": "contracts/ui/interfaces/IUiPoolDataProvider.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Excessive type repetition in returned tuples",
+            "description": "Functions return tuples with many adjacent fields of the same type, making them error-prone.",
+            "severity": "info",
+            "location": "contracts/protocol/libraries/logic/GenericLogic.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing documentation for calculateUserAccountData function",
+            "description": "The documentation does not accurately reflect the implementation.",
+            "severity": "n/a",
+            "location": "GenericLogic.sol#L58-L302"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Incorrect grace period could result in denial of service",
+            "description": "Setting the 'grace period' too high could result in a denial-of-service condition.",
+            "severity": "low",
+            "location": "PriceOracleSentinel.sol#L69-L88"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect accounting in _transferCollaterizable",
+            "description": "The function mishandles the collaterizedBalance and _isUsedAsCollateral fields.",
+            "severity": "info",
+            "location": "NToken.sol, MintableIncentivizedERC721.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "IPriceOracle interface is used only in tests",
+            "description": "The interface appears alongside production code, increasing the risk that a developer will try to use it in production code.",
+            "severity": "info",
+            "location": "IPriceOracle.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Manual ERC721 transfers could be claimed as NTokens by anyone",
+            "description": "Unauthorized users can take ownership of manually transferred ERC721 assets.",
+            "severity": "high",
+            "location": "NToken.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Inconsistent behavior between NToken and PToken liquidations",
+            "description": "PTokens are automatically registered as collateral, but NTokens are not.",
+            "severity": "info",
+            "location": "LiquidationLogic.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing asset type checks in ValidationLogic library",
+            "description": "Some validation functions involving assets do not check the given asset's type.",
+            "severity": "info",
+            "location": "ValidationLogic.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Uniswap v3 NFT flash claims may lead to undercollateralization",
+            "description": "Flash claims enable users with collateralized NFTs to assume ownership of the underlying asset for the duration of a single transaction, leading to potential undercollateralization.",
+            "severity": "high",
+            "location": "contracts/protocol/libraries/logic/FlashClaimLogic.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Non-injective hash encoding in getClaimKeyHash",
+            "description": "The getClaimKeyHash function may result in identical hashes through a collision in the unpacked encoding, potentially causing off-chain clients to mistakenly believe that an unclaimed airdrop has already been claimed.",
+            "severity": "info",
+            "location": "contracts/misc/flashclaim/AirdropFlashClaimReceiver.sol"
+        }
+    ]
+}

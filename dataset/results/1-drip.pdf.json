@@ -1,0 +1,164 @@
+{
+    "path": "artifacts/1-drip.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "main",
+        "address": "0xed47f3c464a3e44de5f1bd05231f6f4a80c5b0e8",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.18+commit.87f61d96"
+        ],
+        "project_path": {
+            "DripToken": "contracts/1-drip/DripToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Stops Transactions",
+            "description": "The owner can enable transactions for all users, but cannot disable them again.",
+            "severity": "critical",
+            "location": "DripToken.sol#L342"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Untrusted Source",
+            "description": "The contract uses an external untrusted contract to determine the transaction's flow.",
+            "severity": "critical",
+            "location": "DripToken.sol#L212"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Router Argument Validation",
+            "description": "The contract does not validate the `_router` address passed as a parameter to the `updateRouter` function.",
+            "severity": "low",
+            "location": "DripToken.sol#L208"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Transfers Contract's Tokens",
+            "description": "The contract owner can claim all the token balance of the contract using the `clearStuckToken` function.",
+            "severity": "low",
+            "location": "DripToken.sol#L244"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing Events Emission",
+            "description": "The contract performs actions and state mutations from external methods that do not result in the emission of events.",
+            "severity": "low",
+            "location": "DripToken.sol#L186,195,208,222,233"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Redundant Storage Writes",
+            "description": "The contract updates the `isFeeExempt` status even if its current state is the same as the one passed as an argument.",
+            "severity": "low",
+            "location": "DripToken.sol#L208,294,233"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Misleading Variables Naming",
+            "description": "The contract uses misleading variable names that do not accurately reflect the value they contain or the purpose they serve.",
+            "severity": "low",
+            "location": "DripToken.sol#L347"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the Solidity style guide for naming conventions.",
+            "severity": "low",
+            "location": "contracts/DripToken.sol#L62,71,72,74,81,89,96,208,212,222,227,233,299"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Divide before Multiply Operation",
+            "description": "Performing divisions before multiplications may cause loss of precision.",
+            "severity": "low",
+            "location": "contracts/DripToken.sol#L274,277"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ],
+                "3": [
+                    "CWE-483"
+                ]
+            },
+            "title": "Uninitialized Variables in Local Scope",
+            "description": "Using an uninitialized local variable can lead to unpredictable behavior.",
+            "severity": "low",
+            "location": "contracts/DripToken.sol#L234"
+        }
+    ]
+}

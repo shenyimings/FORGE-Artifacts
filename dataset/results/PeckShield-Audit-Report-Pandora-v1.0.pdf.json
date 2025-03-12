@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Pandora-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/PandoraDigital/smart-contract/tree/b3b7db8",
+        "commit_id": "b3b7db8",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smart-contract": "contracts/PeckShield-Audit-Report-Pandora-v1/smart-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Possible Sandwich/MEV For Reduced Returns",
+            "description": "Front-running or MEV attacks may result in a smaller amount of swapped tokens.",
+            "severity": "medium",
+            "location": "Trading mechanism, Multiple Contracts (Treasury, InitialLiquidityPool)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Timely Minting of Rewards Before Allocation/Rate Update",
+            "description": "Unfair reward distribution if `massUpdatePools()` is not invoked before updating pool weights.",
+            "severity": "low",
+            "location": "Reward system, Farming, PSRStaking"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "System Fee Bypass With Direct safeTransferFrom()",
+            "description": "Sellers and buyers can bypass system fees by directly negotiating prices without using the `buy()` function.",
+            "severity": "high",
+            "location": "Transfer function, safeTransferFrom(), NftMarket"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The owner account has excessive privileges and is not governed by a DAO-like structure, allowing an attacker to drain funds and subvert protocol operations.",
+            "severity": "high",
+            "location": "Admin role configuration, Multiple Contracts, function setMigrator() and migrate(), Security Features"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Proper Withdrawal Logic in Farming",
+            "description": "Inconsistency between withdrawAll() and withdraw() functions, causing confusion for farming users.",
+            "severity": "medium",
+            "location": "Farming mechanism, Multiple Contracts, function withdrawAll()"
+        }
+    ]
+}

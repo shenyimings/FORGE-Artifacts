@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/Champions League Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xdeea8fdb85503531f6a5d2a036d3268bd7c06c09",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "CLEToken": "contracts/Champions League Smart Contract Audit Report - QuillAudits/CLEToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Variable Shadowing",
+            "description": "Shadowing-state issue where local variables `CLEToken.allowance.owner` and `CLEToken._approve.owner` shadow `Ownable.owner`",
+            "severity": "high",
+            "location": "CLE.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Calls Inside a Loop",
+            "description": "Potential denial-of-service attack due to calls inside a loop in function `includeInReward(address account)`",
+            "severity": "low",
+            "location": "Function `includeInReward` (CLE.sol)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Functions that can be declared external",
+            "description": "Various functions should be declared as external, including `Ownable.renounceOwnership`, `Ownable.transferOwnership`, etc.",
+            "severity": "low",
+            "location": "Multiple functions in CLE.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Inconsistent Naming Conventions",
+            "description": "Various function and variable names do not follow mixedCase convention, e.g., `Function 'Context._msgSender'`",
+            "severity": "low",
+            "location": "Multiple locations in CLE.sol"
+        }
+    ]
+}

@@ -1,0 +1,419 @@
+{
+    "path": "artifacts/rari-capital-v-2.pdf",
+    "project_info": {
+        "url": "https://github.com/Rari-Capital/rari-stable-pool-contracts/tree/master",
+        "commit_id": "master",
+        "address": "0xe2f2a5C287993345a840Db3B0845fbC70f5935a5",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.5.16+commit.9c3226ce"
+        ],
+        "project_path": {
+            "MassetProxy": "contracts/rari-capital-v-2/MassetProxy"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate token prices",
+            "description": "The getRawFundBalance() function assumes that all currencies are worth 1 USD.",
+            "severity": "high",
+            "location": "RariFundManager.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Incorrect Rari Governance Token amount",
+            "description": "Typo in RariGovernanceToken.sol, namely 8570000 should be 8750000.",
+            "severity": "high",
+            "location": "RariGovernanceToken.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Uninitialized _ethUsdPriceFeed",
+            "description": "The _ethUsdPriceFeed state variable is never initialized and always returns 0.",
+            "severity": "high",
+            "location": "RariGovernanceTokenDistributor.sol in rari-governance-contracts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Divergent mirrored states",
+            "description": "Mirrored state variables in multiple contracts can lead to ambiguity and errors.",
+            "severity": "medium",
+            "location": "RariFundManager.sol, RariFundController.sol, RariFundProxy.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Gas Usage / for Loop Concerns",
+            "description": "Several instances of gas-intensive loops that may cause out-of-gas errors.",
+            "severity": "medium",
+            "location": "Various contracts (RariFundController.sol, RariFundManager.sol, RariFundProxy.sol)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked Return Value",
+            "description": "The return value of cErc20.accrueInterest() is not checked.",
+            "severity": "medium",
+            "location": "CompoundPoolController.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-768"
+                ]
+            },
+            "title": "Unfinished token upgrades",
+            "description": "Tokens received after an upgrade cannot be upgraded, and conditional logic may never hold true.",
+            "severity": "medium",
+            "location": "RariFundTokenUpgrader.sol (removed)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Incorrect value for supported currencies",
+            "description": "Array index out of bounds issue in the acceptedCurrencies array.",
+            "severity": "medium",
+            "location": "RariFundManager.sol in rari-stable-pool-contracts and rari-yield-pool-contracts"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Amount in pools may be incorrect",
+            "description": "The amounts withdrawn from pools is discarded, leading to potential errors.",
+            "severity": "medium",
+            "location": "RariFundManager.sol (all repos)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input argument validation",
+            "description": "Functions are missing input parameter validation, leading to potential unauthorized actions.",
+            "severity": "low",
+            "location": "RariFundController.sol, RariFundManager.sol, RariFundProxy.sol, AavePoolController.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misaligned comments and implementation",
+            "description": "Comment says 20 million tokens will be minted, but only 10 million are minted.",
+            "severity": "low",
+            "location": "RariGovernanceToken.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Stale ETH/USD prices",
+            "description": "Functions do not check if the ETH/USD price is stale.",
+            "severity": "low",
+            "location": "RariGovernanceTokenDistributor.sol, RariFundPriceConsumer.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Off-by-one error",
+            "description": "Condition allows claiming RGT one block after distribution starts instead of at the start.",
+            "severity": "low",
+            "location": "RariFundToken.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input argument validation (2)",
+            "description": "Functions are missing input parameter validation, leading to potential unauthorized actions.",
+            "severity": "low",
+            "location": "RariFundController.sol, RariFundManager.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization of power",
+            "description": "Contract owners have significant privileges, which can be risky if not properly managed.",
+            "severity": "info",
+            "location": "RariFundController.sol, RariFundManager.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted fallback function",
+            "description": "Fallback function can be called by anyone, potentially leading to unauthorized fund transfers.",
+            "severity": "info",
+            "location": "RariFundController.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ],
+                "3": [
+                    "CWE-196"
+                ]
+            },
+            "title": "Potential cast error",
+            "description": "Cast from uint256 to int256 can cause a large unsigned value to be converted to a negative value.",
+            "severity": "info",
+            "location": "RariFundManager.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Allowance double-spend exploit",
+            "description": "ERC20 token is vulnerable to the allowance double-spend exploit.",
+            "severity": "info",
+            "location": "ERC20RFT.sol"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma",
+            "description": "Pragma solidity version is not locked, potentially leading to unexpected behavior.",
+            "severity": "info",
+            "location": "All contracts"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Use of experimental feature",
+            "description": "ABIEncoderV2 feature is still in an experimental state and should be used judiciously.",
+            "severity": "info",
+            "location": "Several contracts"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Failure to follow Checks-Effects-Interactions pattern",
+            "description": "Code does not follow the recommended Checks-Effects-Interactions pattern, potentially leading to reentrancy attacks.",
+            "severity": "info",
+            "location": "RariFundManager.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Block timestamp manipulation",
+            "description": "Relying on block timestamps can be risky due to potential miner manipulation.",
+            "severity": "info",
+            "location": "RariFundController.sol"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate distribution duration",
+            "description": "Distribution period is set in blocks, which can lead to a different duration than intended.",
+            "severity": "info",
+            "location": "RariGovernanceTokenDistributor.sol"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ],
+                "3": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Hardcoded values",
+            "description": "Using hardcoded values can lead to issues with scalability and maintainability.",
+            "severity": "medium",
+            "location": "RariGovernanceTokenDistributor.sol"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Controller unable to pause specific stablecoins",
+            "description": "Stablecoins, like other financial assets on-chain, are likely victims of recurrent attacks or attempted attacks.",
+            "severity": "low",
+            "location": "rari-stable-pool-contracts/.../DydxPoolController.sol, rari-stable-pool-contracts/.../AavePoolController.sol, rari-stable-pool contracts/.../CompoundPoolController.sol"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "PotentialStorageLayoutIncompatibility",
+            "description": "Using `unsafeAllowCustomTypes` flag to skip storage checks for structs and enums.",
+            "severity": "n/a",
+            "location": "RariFundManager, DummyRariFundManager"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-241"
+                ]
+            },
+            "title": "EventDecodingIssue",
+            "description": "Unable to decode events emitted during test.",
+            "severity": "n/a",
+            "location": "RariFundController, RariFundManager"
+        }
+    ]
+}

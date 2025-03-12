@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/SlowMist Audit Report - MYKEY_zh-cn.pdf",
+    "project_info": {
+        "url": "https://github.com/mykeylab/keyid-eth-contracts/",
+        "commit_id": "6eaf676c83d975b50fa32ca8f3bd1577fa94c3",
+        "address": "0xe9737a94eABf50D4E252D7ab68E006639eA73E0D",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.5.4+commit.9549d8ff"
+        ],
+        "project_path": {
+            "AccountLogic": "contracts/SlowMist Audit Report - MYKEY_zh-cn/AccountLogic"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Gas malicious consumption issue",
+            "description": "Unrestricted gas usage in TransferLogic and DAppLogic contracts allows attackers to steal users' assets.",
+            "severity": "medium",
+            "location": "TransferLogic and DAppLogic contracts, fallback function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Transfer module functionality missing",
+            "description": "Data validation in enter() function restricts account operations, causing ERC721 and ERC20 token transfers to fail.",
+            "severity": "medium",
+            "location": "TransferLogic contract, enter() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Event Recording Error",
+            "description": "Malicious users can cause event recording errors by inputting an arbitrary token address, including the zero address.",
+            "severity": "low",
+            "location": "transferERC20 function in transferLogic.sol contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Event Declaration Confusion",
+            "description": "BaseLogic and TransferLogic contracts have identical event declarations for initAccount functions, which may cause confusion.",
+            "severity": "low",
+            "location": "initAccount functions in BaseLogic and TransferLogic contracts"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "No Limitation on User Public Keys and Emergency Contact Accounts",
+            "description": "Users can upload an arbitrary number of public keys, potentially causing functionality issues.",
+            "severity": "low",
+            "location": "getKeyIndex function in Account contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Expired Delay Operations Can Be Canceled",
+            "description": "The cancelDelayed function does not check the delay time, allowing expired operations to be canceled.",
+            "severity": "low",
+            "location": "cancelDelayed function in AccountLogic contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "No Consistency Check for Operation Keys",
+            "description": "The changeAllOperationKeys function does not check for duplicate keys.",
+            "severity": "low",
+            "location": "changeAllOperationKeys function in AccountLogic contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "No Minimum Limitation on Backup Keys",
+            "description": "A single backup account can propose and execute a proposal to change the admin key, potentially stealing user assets.",
+            "severity": "low",
+            "location": "proposeByBackup and changeAdminKeyByBackup functions in AccountLogic contract"
+        }
+    ]
+}

@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/Cryptocup_ ERC721 Token Smart Contract Audit _ CoinFabrik Blog.pdf",
+    "project_info": {
+        "url": "https://github.com/ripio/rcn-network/tree/v2",
+        "commit_id": "_7b55e9afe2f9818d523e62a89141702c175a8504_",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "rcn-network": "contracts/Cryptocup_ ERC721 Token Smart Contract Audit _ CoinFabrik Blog/rcn-network"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Token deletion uses a wrong index at transfer function",
+            "description": "The variable `tokensOfOwnerMap[fromAddress]` is an array holding tokens of `fromAddress`, but it's not indexable by `tokenId`.",
+            "severity": "critical",
+            "location": "_transfer function in CryptocupToken.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "The precondition of emergency withdraw is contrary to the specification",
+            "description": "The modifier `hasFinished` checks the opposite of what's stated in the comment.",
+            "severity": "medium",
+            "location": "finishedGameWithdraw function in CoreLayer.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Some functions may have gas cost issues",
+            "description": "Functions like `resetWinners` and `withdrawPrize` may have a gas cost higher than the block limit.",
+            "severity": "medium",
+            "location": "GameLogicLayer.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Some functions need documentation",
+            "description": "Some functions in `GameLogicLayer.sol` lack proper documentation.",
+            "severity": "low",
+            "location": "GameLogicLayer.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Solidity warnings",
+            "description": "There are some irrelevant solidity warnings that should be fixed.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Non-exhaustive safe math usage",
+            "description": "Consider replacing instances of non-safe math operations with SafeMath equivalents.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Function getPayoutDistributionId is not necessary",
+            "description": "The function `getPayoutDistributionId` can be removed as it's not necessary.",
+            "severity": "info",
+            "location": "GameLogicLayer.sol"
+        }
+    ]
+}

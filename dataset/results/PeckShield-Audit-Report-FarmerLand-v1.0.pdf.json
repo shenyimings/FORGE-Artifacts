@@ -1,0 +1,71 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-FarmerLand-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/LithiumSwapTech/farmerland-contracts/tree/0142b09",
+        "commit_id": "0142b09",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "farmerland-contracts": "contracts/PeckShield-Audit-Report-FarmerLand-v1/farmerland-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Improved Precision in calcStakeCollecting()",
+            "description": "Lack of precision protection for USDC dividend calculation may result in profit loss for small stakes.",
+            "severity": "low",
+            "location": "WHEAT contract, calcStakeCollecting() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improved lastUSDCDistroTimestamp State Initialization",
+            "description": "Incorrect initialization of lastUSDCDistroTimestamp may prevent USDC reward accumulation for the first deposit.",
+            "severity": "low",
+            "location": "MasterChef contract, updatePool() and getUSDCDrip() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Revisited Calculation of WHEAT Amount in clcTokenValue()",
+            "description": "Incorrect calculation of users' share of WHEAT tokens using the current day's lobby pool instead of the target day's.",
+            "severity": "medium",
+            "location": "WHEAT contract, clcTokenValue() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged accounts need to be scrutinized, as they have critical roles in governing and regulating system-wide operations.",
+            "severity": "medium",
+            "location": "Multiple Contracts (specifically the WHEAT contract), functions set_nftMasterChefAddress, changeDaoAddress, set_lastLobbyPool, flushLottyPool"
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/[HAECHI AUDIT] Pangea Protocol_Stone Staking Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/pangea-protocol/stone-staking",
+        "commit_id": "c601bc412a390924086686bf6f2b95b08f5aa75c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "stone-staking": "contracts/[HAECHI AUDIT] Pangea Protocol_Stone Staking Audit Report/stone-staking"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Dividend miscalculation when user share is updated after dividend record",
+            "description": "The user's share update between dividend record time and execution time leads to a miscalculation of the dividend.",
+            "severity": "high",
+            "location": "contracts/StakedStone.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "CollectByPage, collectFrom DOS",
+            "description": "A malicious token developer can block fee distribution to Pangea users and use it as liquidity in the swap pool.",
+            "severity": "high",
+            "location": "contracts/ProtocolRevenueShare.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Check-Effect-Interaction pattern not followed",
+            "description": "The CEI pattern is not followed in `StakedStone.sol#withdraw()` and `StakedStone.sol#claimDividend()` functions, which may lead to reentrancy attacks.",
+            "severity": "info",
+            "location": "StakedStone.sol, withdraw() and claimDividend() functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "The pendingReward sweep issue",
+            "description": "The first person to stake a token can monopolize the pendingReward, which is not distributed per user.",
+            "severity": "info",
+            "location": "ProtocolRevenueShare.sol"
+        }
+    ]
+}

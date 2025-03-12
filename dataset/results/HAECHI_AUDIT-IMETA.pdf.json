@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/HAECHI_AUDIT-IMETA.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xa430e30ad770DCA9e64F5F95b07F7A8656a93723",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "IMETACoin223Token_13": "contracts/HAECHI_AUDIT-IMETA/IMETACoin223Token_13"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ],
+                "3": [
+                    "CWE-835"
+                ]
+            },
+            "title": "Out-of-gas issue in IMETACoin223Token_13#getLast24hSendingValue() function.",
+            "description": "The function may cause an out-of-gas issue due to the unbounded loop, leading to a revert.",
+            "severity": "high",
+            "location": "IMETACoin223Token_13 contract, getLast24hSendingValue() function."
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Underflow in `getLast24hSendingValue` function",
+            "description": "The function has an underflow vulnerability due to the incorrect usage of a for loop, which can cause a revert when `tc` is greater than 1.",
+            "severity": "n/a",
+            "location": "IMETACoin223Token_13#getLast24hSendingValue()` function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Incorrect logic in `getLast24hSendingValue` function",
+            "description": "The function has incorrect logic that prevents the 100th token transfer, causing a revert.",
+            "severity": "n/a",
+            "location": "IMETACoin223Token_14#getLast24hSendingValue()` function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Event in `transferFrom` function",
+            "description": "The function is missing the `Approval` event, making it difficult to track changes in real-time.",
+            "severity": "n/a",
+            "location": "IMETACoin223Token_13#transferFrom()` function"
+        }
+    ]
+}

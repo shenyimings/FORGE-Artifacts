@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/Rubic.md",
+    "project_info": {
+        "url": "https://github.com/Cryptorubic/multi-proxy-rubic",
+        "commit_id": "8843336c50ca43e5b5bbe970f17e284f63a96763",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "multi-proxy-rubic": "contracts/Rubic/multi-proxy-rubic"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Incorrect blacklisting of unsafe calls",
+            "description": "Blacklisting issue in LibSwap library allows unauthorized calls to ERC20Proxy contract, permitting an attacker to steal user's ERC20 tokens.",
+            "severity": "critical",
+            "location": "LibSwap library, Executor contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Arbitrary calls execution in `Executor` and `GenericCrossChainFacet`",
+            "description": "Execution of arbitrary calls in shared context allows an attacker to setup ERC777 hooks, provoke blacklisting, and steal ERC777 tokens.",
+            "severity": "critical",
+            "location": "Executor contract, GenericCrossChainFacet contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "The administrator can modify trusted functionality",
+            "description": "Administrator can add unaudited code or new smart contracts to the list of trusted contracts, potentially leading to users' wallets being drained.",
+            "severity": "medium",
+            "location": "DiamondCutFacet contract, ERC20Proxy contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unused logic",
+            "description": "Modifiers use balances differences before and after swaps to calculate leftovers but no token is supposed to be on the balance before a swap.",
+            "severity": "low",
+            "location": "Modifiers `noLeftovers` and `refundExcessNavtive` in `SwapperV2.sol` contract."
+        }
+    ]
+}

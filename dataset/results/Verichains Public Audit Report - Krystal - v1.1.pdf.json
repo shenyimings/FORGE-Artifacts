@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/Verichains Public Audit Report - Krystal - v1.1.pdf",
+    "project_info": {
+        "url": "https://github.com/KYRDTeam/krystal-core",
+        "commit_id": "4f9b12268669ba6b9dc33941ac3a146f38a69614",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "krystal-core": "contracts/Verichains Public Audit Report - Krystal - v1/krystal-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Transferred amount calculation can be wrong if token is ERC777",
+            "description": "The safeTransferWithFee function in the SmartWalletImplementation contract can lead to wrong calculation of the amountTransferred variable if the token transferred is an ERC777 token.",
+            "severity": "medium",
+            "location": "SmartWalletImplementation.sol, function safeTransferWithFee"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Old spenders' allowances are not revoked when approving new spenders",
+            "description": "Leaving old lending pool allowances unhandled can lead to future attacks.",
+            "severity": "low",
+            "location": "_updateAaveData in AaveV1Lending and AaveV2Lending contracts, _updateCompoundData in CompoundLending contract, and _swap in KyberDmm, KyberProxy, UniSwap, and UniSwapV3 contracts."
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Unlimited token allowances",
+            "description": "Approving unlimited allowance for external contracts can lead to bad security practice.",
+            "severity": "low",
+            "location": "_safeApproveAllowance function in BaseLending and BaseSwap contracts, used in various functions such as _updateAaveData, _updateCompoundData, and _swap."
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Potential chaining bug with external services",
+            "description": "Returning the wrong value can be used as a chaining bug if the platform is chained to other services.",
+            "severity": "medium",
+            "location": "Various functions in Krystal's smart contracts, including those that use `_safeTransferWithFee` function."
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Improper usage of enum variables which increase gas cost",
+            "description": "Enum variable usage can lead to increased gas cost due to value range checking.",
+            "severity": "n/a",
+            "location": "Various contracts, including Test contract and Krystal smart contracts."
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Comparison with unilateral outcome in a loop",
+            "description": "Comparisons in loops can be optimized by moving them outside the loop.",
+            "severity": "n/a",
+            "location": "SmartWalletProxy contract, updateSupportedSwaps function, and other similar functions."
+        }
+    ]
+}

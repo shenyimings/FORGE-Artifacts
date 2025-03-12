@@ -1,0 +1,122 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Fei_Protocol_v2_Phase_1.pdf",
+    "project_info": {
+        "url": "https://github.com/fei-protocol/fei-protocol-core",
+        "commit_id": "5e3e2ab889f06831f4fe2e8460066ded40ccf0a8",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "fei-protocol-core": "contracts/ConsenSys_Diligence-Fei_Protocol_v2_Phase_1/fei-protocol-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "Incorrect Tribe Token Handling",
+            "description": "The BalancerLBPSwapper may not have enough Tribe tokens for re-initializing the pool.",
+            "severity": "low",
+            "location": "code_new/contracts/pcv/balancer/BalancerLBPSwapper.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "No Emergency Exit Strategy for BalancerLBPSwapper",
+            "description": "There is no function to withdraw liquidity from the pool in case of an emergency.",
+            "severity": "n/a",
+            "location": "code_new/contracts/pcv/balancer/BalancerLBPSwapper.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "ResistantFei Value not Correct",
+            "description": "The resistantBalanceAndFei function returns incorrect values for protocol-controlled FEI tokens.",
+            "severity": "high",
+            "location": "code/contracts/pcv/curve/StableSwapOperatorV1.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Fei in Excluded Deposits Contributes to userCirculatingFei",
+            "description": "The CollateralizationOracle includes FEI from excluded deposits in the userCirculatingFei calculation, leading to incorrect protocolEquity and collateralization ratio.",
+            "severity": "high",
+            "location": "code/contracts/oracle/CollateralizationOracle.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading comments",
+            "description": "Comments in the `isOvercollateralized` and `pcvStats` functions do not accurately reflect their behavior.",
+            "severity": "low",
+            "location": "CollateralizationOracle.sol, L332-L339, L283-L284"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Inconsistent minting procedures",
+            "description": "The TRIBE token minting process in the `TribeReserveStabilizer` contract can lead to inconsistencies.",
+            "severity": "n/a",
+            "location": "TribeReserveStabilizer.sol, L117-L133"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "Missing Natspec documentation",
+            "description": "The `token` variable in the ERC20Splitter contract is missing Natspec documentation.",
+            "severity": "low",
+            "location": "ERC20Splitter.sol, L6-L28"
+        }
+    ]
+}

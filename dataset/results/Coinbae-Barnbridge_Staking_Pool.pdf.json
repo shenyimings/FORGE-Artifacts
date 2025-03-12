@@ -1,0 +1,125 @@
+{
+    "path": "artifacts/Coinbae-Barnbridge_Staking_Pool.pdf",
+    "project_info": {
+        "url": "https://github.com/BarnBridge/BarnBridge-Whitepaper",
+        "commit_id": "n/a",
+        "address": "0xb0fa2beee3cf36a7ac7e99b885b48538ab364853",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "Staking": "contracts/Coinbae-Barnbridge_Staking_Pool/Staking"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "EmptyByteArrayCopy",
+            "description": "Copying an empty byte array (or string) from memory or calldata to storage can result in data corruption if the target array's length is increased subsequently without storing new data.",
+            "severity": "medium",
+            "location": "Compiler related issues, likely affecting multiple contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ],
+                "4": [
+                    "CWE-226"
+                ]
+            },
+            "title": "DynamicArrayCleanup",
+            "description": "When assigning a dynamically-sized array with types of size at most 16 bytes in storage causing the assigned array to shrink, some parts of deleted slots were not zeroed out.",
+            "severity": "medium",
+            "location": "Compiler related issues, likely affecting multiple contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Function could be marked as external (SWC-000)",
+            "description": "Public functions can be optimized by using the \"external\" keyword instead, reducing gas costs.",
+            "severity": "medium",
+            "location": "Functions deposit, withdraw, emergencyWithdraw, balanceOf, and getEpochPoolSize"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "DoS With Block Gas Limit (SWC-128)",
+            "description": "Modifying an array of unknown size can lead to a Denial of Service condition.",
+            "severity": "medium",
+            "location": "Line 293, while loop"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "A floating pragma is set (SWC-103)",
+            "description": "Using a floating pragma directive instead of a fixed Solidity version can lead to varying bytecode between builds.",
+            "severity": "low",
+            "location": "Line 2, pragma solidity ^0.6.0;"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Requirement violation (SWC-123)",
+            "description": "Misusing the require() construct for internal validation instead of external input validation.",
+            "severity": "low",
+            "location": "Lines 8 and 61"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Assert violation (SWC-110)",
+            "description": "Improper use of assert() statements, which should only be used to validate invariants.",
+            "severity": "low",
+            "location": "Line 320"
+        }
+    ]
+}

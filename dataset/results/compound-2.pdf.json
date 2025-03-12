@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/compound-2.pdf",
+    "project_info": {
+        "url": "https://github.com/zeppelinos/zos/tree/master",
+        "commit_id": "master",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "zos": "contracts/compound-2/zos"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Error propagation instead of reverting is inefficient and dangerous",
+            "description": "The contracts in Compound version 2.1 retain an unusual error handling pattern that reports errors as a second return argument rather than immediately throwing an assertion.",
+            "severity": "info",
+            "location": "All smart contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Potential reentrancy from malicious tokens",
+            "description": "Failure to use \"Checks-Effects-Interactions\" pattern allows reentrancy attack.",
+            "severity": "high",
+            "location": "CToken.sol and MoneyMarket.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Race condition in the ERC20 approve function may lead to token theft",
+            "description": "Known race condition in ERC20 standard's approve function.",
+            "severity": "high",
+            "location": "CToken.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "A malicious contract can reentrantly bypass administrative checks in the Comptroller",
+            "description": "Reentrancy attack through adminOrInitializing function.",
+            "severity": "high",
+            "location": "Comptroller.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Variable shadowing between the Unitroller and Comptroller",
+            "description": "Shadowed functions do not change contract state, but may lead to unexpected behavior if called on the Unitroller or Comptroller contracts.",
+            "severity": "info",
+            "location": "Comptroller.sol, ComptrollerStorage.sol, and Unitroller.sol"
+        }
+    ]
+}

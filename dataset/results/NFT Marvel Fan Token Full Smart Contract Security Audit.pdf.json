@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/NFT Marvel Fan Token Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xd0d486034c857ab4ba532ea053e2e7a32cdc23ab",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "NFTMarvelFan": "contracts/NFT Marvel Fan Token Full Smart Contract Security Audit/NFTMarvelFan"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ],
+                "4": [
+                    "CWE-825"
+                ],
+                "5": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Wrong account including",
+            "description": "The function includeInReward() changes the current address with the last one in the excluded array, but there is no index changing in _excludedAddressToId of this last address that came to a new place.",
+            "severity": "high",
+            "location": "NFTMarvelFan contract, includeInReward() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function _getCurrentSupply also uses the loop for evaluating total supply and could be aborted with OUT_OF_GAS exception if there will be a long excluded addresses list.",
+            "severity": "low",
+            "location": "NFTMarvelFan contract, _getCurrentSupply() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "The function _sendBurnFee() sends burn to burnWallet instead of decreasing rTotal and tTotal.",
+            "severity": "low",
+            "location": "NFTMarvelFan contract, _sendBurnFee() function"
+        }
+    ]
+}

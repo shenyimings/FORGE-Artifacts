@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/Hacken-PolkaBridge.pdf",
+    "project_info": {
+        "url": "https://github.com/cyclese96/PolkaBridge-DEX",
+        "commit_id": "21b662c48caf08242bfa01621bbbafc957e4ff31",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "PolkaBridge-DEX": "contracts/Hacken-PolkaBridge/PolkaBridge-DEX"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible rewards lost or receive more",
+            "description": "Changing allocPoint in the set method while _withUpdate flag set to false may lead to rewards lost or receiving rewards more than deserved.",
+            "severity": "high",
+            "location": "PolkaBridgeFarm.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Gas consumption grows with array size",
+            "description": "The function iterates over an array of unpredictable size, which could become inoperable due to gas consumption growth.",
+            "severity": "low",
+            "location": "PolkaBridgeFarm.sol, Function: massUpdatePools"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing event for changing poolInfo[], totalAllocPoint, migrator",
+            "description": "Changing critical values should be followed by the event emitting for better tracking off-chain.",
+            "severity": "low",
+            "location": "PolkaBridgeFarm.sol, Functions: add, set, setMigrator"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "A public function that could be declared external",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "PolkaBridgeFarm.sol, UniswapV2Router02.sol, Functions: add, set, setMigrator, migrate, deposit, withdraw, emergencyWithdraw, removeLiquidityETH, quote, getAmountOut, getAmountIn"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Using SafeMath in Solidity >= 0.8.0",
+            "description": "Starting solidity version 0.8.0 arithmetic operations revert on underflow and overflow; there's no more need to assert the result of operations.",
+            "severity": "low",
+            "location": "PolkaBridgeFarm.sol, UniswapV2Pair.sol, UniswapV2ERC20.sol"
+        }
+    ]
+}

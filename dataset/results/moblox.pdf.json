@@ -1,0 +1,203 @@
+{
+    "path": "artifacts/moblox.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "main",
+        "address": "0xac3b15e41e4f284536305c55bb4163f7faa6f2b9",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "Mobsterblox": "contracts/moblox/Mobsterblox"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ST - Stops Transactions",
+            "description": "The contract owner can stop transactions for all users except themselves.",
+            "severity": "critical",
+            "location": "Contract owner's authority to set `_maxTxAmount` to zero."
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "ELFM - Exceeds Fees Limit",
+            "description": "The contract owner can increase fees limit exceeding 25%.",
+            "severity": "info",
+            "location": "Functions `setTaxFeePercent`, `setDevFeePercent`, and `setLiquidityFeePercent`."
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "PVC - Price Volatility Concern",
+            "description": "The contract can accumulate tokens to swap for ETH, potentially leading to significant price volatility.",
+            "severity": "info",
+            "location": "Variable `numTokensSellToAddToLiquidity` threshold."
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RSML - Redundant SafeMath Library",
+            "description": "The usage of the SafeMath library is unnecessary and adds complexity.",
+            "severity": "low",
+            "location": "SafeMath library usage."
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "IDI - Immutable Declaration Improvement",
+            "description": "Variables initialized only in the constructor can be declared as immutable.",
+            "severity": "low",
+            "location": "Contract variables initialization."
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L02 - State Variables could be Declared Constant",
+            "description": "State variables can be declared as constant using the `constant` keyword.",
+            "severity": "low",
+            "location": "State variables declaration."
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow Solidity naming conventions.",
+            "severity": "low",
+            "location": "Contract, struct, and enum names."
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L07 - Missing Events Arithmetic",
+            "description": "The contract is missing events that could cause issues with arithmetic.",
+            "severity": "low",
+            "location": "Event implementation."
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-561"
+                ]
+            },
+            "title": "L09 - Dead Code Elimination",
+            "description": "Dead code can make the contract difficult to understand and maintain.",
+            "severity": "low",
+            "location": "Unreachable code."
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L13 - Divide before Multiply Operation",
+            "description": "Performing divisions before multiplications may cause loss of precision.",
+            "severity": "low",
+            "location": "Arithmetic calculations."
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "L16 - Validate Variable Setters",
+            "description": "Variables are missing proper checks for zero values.",
+            "severity": "low",
+            "location": "Variable setters."
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "L17 - Usage of Solidity Assembly",
+            "description": "Using assembly can be error-prone and difficult to read.",
+            "severity": "low",
+            "location": "Assembly code usage."
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "L19 - Stable Compiler Version",
+            "description": "The contract does not lock the pragma version, which may lead to unexpected behavior.",
+            "severity": "low",
+            "location": "Pragma version declaration."
+        }
+    ]
+}

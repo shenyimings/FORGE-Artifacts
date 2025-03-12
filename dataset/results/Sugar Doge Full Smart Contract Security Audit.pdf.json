@@ -1,0 +1,50 @@
+{
+    "path": "artifacts/Sugar Doge Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x531c2724ce9dd053c6685beca9aa19e72d1a519f",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.8+commit.0bbfe453"
+        ],
+        "project_path": {
+            "SugarDogeToken": "contracts/Sugar Doge Full Smart Contract Security Audit/SugarDogeToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Wrong supply burning",
+            "description": "The function burnSupply() do not check sender to be excluded from reward consequently do not decrease _tOwned balance of sender if it would be excluded.",
+            "severity": "high",
+            "location": "burnSupply() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function includeInReward() uses the loop to find and remove addresses from the _excluded list which could be aborted with OUT_OF_GAS exception if there will be a long excluded addresses list.",
+            "severity": "low",
+            "location": "includeInReward() function"
+        }
+    ]
+}

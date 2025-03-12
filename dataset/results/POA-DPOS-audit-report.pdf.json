@@ -1,0 +1,236 @@
+{
+    "path": "artifacts/POA-DPOS-audit-report.pdf",
+    "project_info": {
+        "url": "https://github.com/poanetwork/posdao-contracts",
+        "commit_id": "fdaa685de851378b35741bdab986414dfd9042b1",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "posdao-contracts": "contracts/POA-DPOS-audit-report/posdao-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Redundant modifier",
+            "description": "Redundant onlyValidatorSetContract modifier forbids using getCurrentSeed by any DApp in the network.",
+            "severity": "high",
+            "location": "collectRoundLength"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "collectRoundLength should have more restrictions",
+            "description": "The _collectRoundLength variable should be even and more than zero.",
+            "severity": "medium",
+            "location": "collectRoundLength"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible weak random using _getRandomIndex",
+            "description": "The _getRandomIndex function is used to get a random index for validators array using randomNumber, but it can return 0 for some range of the _randomNumber values.",
+            "severity": "medium",
+            "location": "ValidatorSetBase.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Reward mechanism",
+            "description": "Paying block rewards in loops is not safe and can be exploited.",
+            "severity": "high",
+            "location": "Reward mechanism"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Members’ hashes access",
+            "description": "The constants with the hashes of members’ names are used unsafely in multiple smart contracts.",
+            "severity": "medium",
+            "location": "Multiple smart contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rounding errors",
+            "description": "A rounding error occurs in the _setSnapshot during reward percentages distribution, leading to unexpected results.",
+            "severity": "high",
+            "location": "BlockRewardBase.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Token stake and withdraw methods",
+            "description": "The token implementation contains special methods for staking contract interaction, but they can be optimized.",
+            "severity": "low",
+            "location": "Token implementation"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ]
+            },
+            "title": "Consider extracting pool structure",
+            "description": "Pools are stored in the map and have reverse lookup, which can be extracted into a separate struct.",
+            "severity": "low",
+            "location": "Pool storage"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reward function optimization",
+            "description": "The current algorithm pseudocode provides a distribution that does not depend on the order of candidates.",
+            "severity": "high",
+            "location": "Reward function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Random validators algorithm problem",
+            "description": "The current algorithm provides a distribution that is shifted from the original one.",
+            "severity": "high",
+            "location": "Validators algorithm"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "TransferAndCall does not restrict transfers to stakingContract",
+            "description": "transferAndCall does not restrict transfers to the staking contract, which can be exploited.",
+            "severity": "high",
+            "location": "ERC677BridgeTokenRewardableMock.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "transferOwnership + claimOwnership",
+            "description": "Perhaps it will make sense to implement the transferOwnership + claimOwnership scheme instead of just transferOwnership without proper knowledge.",
+            "severity": "medium",
+            "location": "EternalStorageProxy.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "require for upgradeTo",
+            "description": "Using “return false in case of fail” instead of require(someCheck(), “useful message”) for upgradeTo method is not recommended.",
+            "severity": "low",
+            "location": "EternalStorageProxy.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1093"
+                ]
+            },
+            "title": "Allowed senders storing",
+            "description": "TXPermission stores allowed senders as an array, which can be optimized using a mapping.",
+            "severity": "low",
+            "location": "TxPermission.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Hardcoded value",
+            "description": "A hardcoded value is used without any explanation.",
+            "severity": "low",
+            "location": "ValidatorSetBase.sol"
+        }
+    ]
+}

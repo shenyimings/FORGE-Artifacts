@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/2022-10-fraxfinance-fraxlend-fraxferry-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/FraxFinance/frax-solidity/tree/df18ee61854f99e38bbc26fba3193f6653458880",
+        "commit_id": "df18ee61854f99e38bbc26fba3193f6653458880",
+        "address": "0xec72d46011d67a6ac4fa7d3f476fa2049dc807ee",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.6+commit.7338295f"
+        ],
+        "project_path": {
+            "AccessControlledOffchainAggregator": "contracts/2022-10-fraxfinance-fraxlend-fraxferry-securityreview/AccessControlledOffchainAggregator"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect application of penalty fee rate",
+            "description": "The penalty interest rate is incorrectly applied to a period of time within the loan maturity window.",
+            "severity": "medium",
+            "location": "src/contracts/FraxlendPairCore.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing checks in setter functions",
+            "description": "setFee and setMinWaitPeriods functions do not have appropriate checks, allowing for enormous fees or invalid waiting periods.",
+            "severity": "low",
+            "location": "Fraxferry.sol (setFee and setMinWaitPeriods functions)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-241"
+                ]
+            },
+            "title": "Risk of invalid batches due to unsafe cast in depart function",
+            "description": "An unsafe cast operation in the depart function makes it possible to create an invalid batch that cannot be processed when run.",
+            "severity": "high",
+            "location": "depart function in Fraxferry.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Transactions that were already executed can be canceled",
+            "description": "jettison and jettisonGroup functions incorrectly use the executeIndex variable to determine whether a transaction has already been executed.",
+            "severity": "low",
+            "location": "Fraxferry.sol (jettison and jettisonGroup functions)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Events could be improved",
+            "description": "The Fraxferry contract’s events could be improved with additional details.",
+            "severity": "info",
+            "location": "event emissions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Underflow in SSTORE2.read function",
+            "description": "Underflow in SSTORE2.read function can cause panic if creation code is less than 13,000 bytes.",
+            "severity": "n/a",
+            "location": "_deployFirst function in FraxlendPairDeployer.sol"
+        }
+    ]
+}

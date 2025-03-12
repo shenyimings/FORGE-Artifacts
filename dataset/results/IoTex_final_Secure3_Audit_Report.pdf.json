@@ -1,0 +1,245 @@
+{
+    "path": "artifacts/IoTex_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/iotexproject/account-abstraction-contracts",
+        "commit_id": "a9434741eb635b601c61fa395e05b03c8a0fc496",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "account-abstraction-contracts": "contracts/IoTex_final_Secure3_Audit_Report/account-abstraction-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Replay attack on the signature",
+            "description": "In `withdrawDepositTo()` function, an attacker can reuse a signature and if the `withdrawAddress` is not controlled by the user, it may lead to permanent loss of funds.",
+            "severity": "critical",
+            "location": "contracts/accounts/secp256r1/P256Account.sol#L160"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "executeBatch() will not involve any transfer of ether",
+            "description": "In `executeBatch()` function, the value parameter is hardcoded to 0, making it impossible to transfer ether to a destination address.",
+            "severity": "medium",
+            "location": "contracts/accounts/secp256r1/P256Account.sol#L84"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ],
+                "3": [
+                    "CWE-1104"
+                ]
+            },
+            "title": "Outdated OpenZeppelin dependencies",
+            "description": "The project uses an outdated version of openzeppelin-contracts (4.2.0), which may lead to security vulnerabilities.",
+            "severity": "medium",
+            "location": "package.json#L46"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "No Storage Gap for Upgradeable Contract in P256Account.sol",
+            "description": "The contract lacks a storage gap, which may lead to unintended consequences and security vulnerabilities during upgrades.",
+            "severity": "medium",
+            "location": "contracts/accounts/secp256r1/P256Account.sol#L20"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "staticall uses a hardcoded address to verify the signature",
+            "description": "The contract uses a hardcoded address (0x8001) for verification, which may lead to reverts and security vulnerabilities.",
+            "severity": "medium",
+            "location": "contracts/accounts/secp256r1/Secp256r1.sol#L31"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1177"
+                ]
+            },
+            "title": "Avoid using reserved keywords as variables",
+            "description": "The `value` keyword is used as a variable name, which may lead to confusion and security vulnerabilities.",
+            "severity": "low",
+            "location": "contracts/accounts/secp256r1/P256Account.sol#L131"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of zero address check",
+            "description": "Zero addresses assigned to contract addresses by mistake will incur unexpected results.",
+            "severity": "low",
+            "location": "P256Account.sol, P256AccountFactory.sol, VerifyingPaymaster.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Roles",
+            "description": "The centralized role owner can update the verifyingSigner with the changeSigner function, which may result in the signature from the old verifyingSigner failing to pass the validation.",
+            "severity": "low",
+            "location": "VerifyingPaymaster.sol, SimpleEmailGuardian.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing event record",
+            "description": "The functions that update key state variables need to emit events for logging the updates of the key state variables.",
+            "severity": "info",
+            "location": "VerifyingPaymaster.sol, SimpleEmailGuardian.sol, P256Account.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant payable keyword",
+            "description": "The parameter withdrawAddress is declared as a type address payable.",
+            "severity": "info",
+            "location": "P256Account.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Missing 2-Step-Process pattern for transferring ownership",
+            "description": "The contracts do not implement a 2-Step-Process for transferring ownership.",
+            "severity": "info",
+            "location": "SimpleEmailGuardian.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use the latest solidity version",
+            "description": "The project is using solidity version ^0.8.0.",
+            "severity": "info",
+            "location": "Multiple files"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas optimization: Use calldata instead of memory",
+            "description": "The storage variable publicKey is read twice with the same value.",
+            "severity": "info",
+            "location": "P256Account.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Missing error message",
+            "description": "There is no error message for the require check.",
+            "severity": "info",
+            "location": "P256Account.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "immutable variables used in upgradable contract P25Account may cause DoS",
+            "description": "The UUPS upgradable contract P256Account has some variables defined as immutable.",
+            "severity": "info",
+            "location": "P256Account.sol"
+        }
+    ]
+}

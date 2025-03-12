@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/TAJIRI.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xf1b6059dbc8b44ca90c5d2be77e0cbea3b1965fe",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "TAJIRI": "contracts/TAJIRI/TAJIRI"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "The function _burn() reduces _tTotal and adds token amount to zero address, which means sum of users' balances will not equal total supply and it does not decrease _rTotal.",
+            "severity": "high",
+            "location": "_burn() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function includeInReward() and _getCurrentSupply use loops that can be aborted with OUT_OF_GAS exception if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "includeInReward() and _getCurrentSupply functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has unchecked privileges to change tax, fees, maximum transaction amount, exclude from fee, lock, and unlock.",
+            "severity": "n/a",
+            "location": "Owner's permissions"
+        }
+    ]
+}

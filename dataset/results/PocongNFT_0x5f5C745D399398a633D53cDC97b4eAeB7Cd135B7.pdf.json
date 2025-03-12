@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/PocongNFT_0x5f5C745D399398a633D53cDC97b4eAeB7Cd135B7.pdf",
+    "project_info": {
+        "url": "https://github.com/interfinetwork/audited-codes/blob/main/PocongNFT.sol",
+        "commit_id": "29deb1df94f59e34382e1790a35ec1cdb79476c2",
+        "address": "0x5f5c745d399398a633d53cdc97b4eaeb7cd135b7",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "PocongNFT": "contracts/PocongNFT_0x5f5C745D399398a633D53cDC97b4eAeB7Cd135B7/PocongNFT"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected functions",
+            "description": "Multiple private functions were exposed as public, potentially allowing unauthorized access and manipulation.",
+            "severity": "high",
+            "location": "Various contract functions (_takeLiquidity, swapAndLiquify, addLiquidity)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missing access control",
+            "description": "Some functions lacked proper access control, enabling any user to perform critical operations.",
+            "severity": "critical",
+            "location": "Functions like excludeFromFee, includeInFee, enableAllFees"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unsecured ownership transfer",
+            "description": "The contract allowed for unauthorized transfer of ownership due to missing access control on certain functions.",
+            "severity": "high",
+            "location": "Functions like setDevWallet, setMaxTxPercent, setMaxWalletPercent"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unprotected Max Transaction Limit",
+            "description": "Smart contract owner can change max transaction limit to zero.",
+            "severity": "low",
+            "location": "Contract (Max Transaction function)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Unprotected Max Wallet Limit",
+            "description": "Smart contract owner can change max wallet limit to zero.",
+            "severity": "low",
+            "location": "Contract (Max Wallet function)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Missing Re-entrancy Guard",
+            "description": "Smart contract does not utilize re-entrancy guard to prevent re-entrant calls.",
+            "severity": "low",
+            "location": "Contract (Re-entrancy prone functions)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "Active contract ownership identified, which can impact smart contract safety and security.",
+            "severity": "medium",
+            "location": "Contract (Ownership and control)"
+        }
+    ]
+}

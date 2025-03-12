@@ -1,0 +1,50 @@
+{
+    "path": "artifacts/LASEREYES.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x7a0fc0f70a3028e4f6d6f61d5f0dfbc2aa300e5e",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "LASEREYES": "contracts/LASEREYES/LASEREYES"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can lead to an OUT_OF_GAS exception if the excluded addresses list is too long. Similarly, the function `_getCurrentSupply` also uses a loop for evaluating total supply, which can also be aborted with OUT_OF_GAS exception if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "_includeInReward() and _getCurrentSupply functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has extensive privileges, including changing fees, maximum transaction amounts, excluded addresses, wallet addresses, token balances, router addresses, and more. This can lead to potential security issues if the owner's account is compromised.",
+            "severity": "low",
+            "location": "Various functions and variables throughout the contract"
+        }
+    ]
+}

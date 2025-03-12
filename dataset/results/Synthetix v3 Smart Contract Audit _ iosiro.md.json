@@ -1,0 +1,533 @@
+{
+    "path": "artifacts/Synthetix v3 Smart Contract Audit _ iosiro.md",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix-v3",
+        "commit_id": "d7cb00a91a06f03f80d5088aebfee93c6fd44eda",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix-v3": "contracts/Synthetix v3 Smart Contract Audit _ iosiro/synthetix-v3"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Inflexible waiting period for pool configurations",
+            "description": "Pools must observe the waiting period between configurations regardless of whether a new configuration would increase or decrease capacity to a market.",
+            "severity": "low",
+            "location": "PoolModule.sol, L121"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Collateral agnostic pools",
+            "description": "Pools are collateral agnostic, limiting the risk management tools available to pool managers.",
+            "severity": "info",
+            "location": "General (system-wide configuration)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Potential for atomic cascading liquidations",
+            "description": "Multiple liquidations can be performed atomically, reducing the collateralization ratio of other accounts in the vault.",
+            "severity": "info",
+            "location": "General (Synthetix v3 implementation)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unfair pattern for lock periods",
+            "description": "Using \"time of last interaction\" instead of \"time of unlock\" may be unfair.",
+            "severity": "info",
+            "location": "General"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ],
+                "3": [
+                    "CWE-837"
+                ]
+            },
+            "title": "Inflexible pool reconfiguration",
+            "description": "Pool configuration changes can only be made after the longest minimum delegation time of the pool's attached markets has elapsed.",
+            "severity": "info",
+            "location": "General"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Unintended consequences of lock period offsets",
+            "description": "Lock periods between pools and accounts may introduce unintended consequences.",
+            "severity": "info",
+            "location": "General"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Collateral locks do not prevent withdrawal",
+            "description": "Addresses with the ADMIN permission can create collateral locks on an account to prevent withdrawal of a specified amount of a specified collateral type before a specified expiry date, but the `CollateralModule.withdraw(...)` function does not consider the locked collateral amount when validating the amount to withdraw.",
+            "severity": "high",
+            "location": "CollateralModule.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "`IssueUSDModule` does not reduce connected markets' capacities",
+            "description": "The debt created when accounts issue USDToken against the collateral delegated to any pool is assigned to the account and tracked as consolidated debt, but the same collateral used to back the USDToken can be reused by any connected market, resulting in uncollateralized debt.",
+            "severity": "high",
+            "location": "IssueUSDModule.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Temporary market conditions can permanently prevent pools from rejoining",
+            "description": "If a Market's reported debt exceeds the `maxDebtShareValue` of all of its associated pools at any point in time, all the pools will be moved from in-range to out-of-range, and if the reported debt was to reduce again, the Market will fail to reassociate the pools, leaving it permanently without in-range pools.",
+            "severity": "high",
+            "location": "Market.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy in `MarketCollateralModule.depositMarketCollateral()`",
+            "description": "A malicious market could exploit a reentrancy condition to deposit collateral beyond the collateral type's `maximumDepositableD18` by implementing a user-controlled post-transfer hook.",
+            "severity": "high",
+            "location": "MarketCollateralModule.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Division by zero in `Pool.currentAccountCollateralizationRatio()`",
+            "description": "If an account has negative or zero debt, the `currentAccountCollateralizationRatio()` function will attempt to divide by zero, causing the transaction to revert.",
+            "severity": "high",
+            "location": "Pool.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Potential reentrancy in `claimRewards()`",
+            "description": "If a reward token that implements a callback or alternative mechanism for reentering the function is added, it may be susceptible to reentrancy attacks.",
+            "severity": "high",
+            "location": "RewardsManagerModule.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "`AccountModule._isPermissionValid()` does not consider the `_REWARDS_PERMISSION` permission",
+            "description": "The function does not include the `_REWARDS_PERMISSION` permission, so users will not be able to grant other users the ability to claim rewards.",
+            "severity": "medium",
+            "location": "AccountModule.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "_postTransfer hook is not called for ERC-721 mint and burn operations",
+            "description": "In the `_mint()` and `_burn()` implementations in `ERC721.sol`, the `_beforeTransfer()` hook is called, while the `_postTransfer()` hook is not.",
+            "severity": "medium",
+            "location": "ERC721.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Logic for `!exhausted` never reached in `Market.distributeDebtToPools()`",
+            "description": "The code in `distributeDebtToPools()` that only executes when `!exhausted` is unlikely to ever be hit during coverage tests, and could be considered redundant if `maxIter` is sufficiently large.",
+            "severity": "medium",
+            "location": "Market.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect calculation of `getSystemMaxDebtPerShare`",
+            "description": "The calculation produces values significantly lower than intended.",
+            "severity": "medium",
+            "location": "Pool.sol, `getSystemMaxDebtPerShare` function"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Fee not included in issuance ratio validation",
+            "description": "The `IssueUSDModule.mintUsd()` function does not include the fee when validating the account's issuance ratio.",
+            "severity": "medium",
+            "location": "IssueUSDModule.sol, `mintUsd` function"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Withdrawal does not consider fee in issuance check",
+            "description": "The `MarketManagerModule.withdrawMarketUSD()` function does not consider the `feeAmount` when determining whether the market's balance allows for the withdrawal.",
+            "severity": "medium",
+            "location": "MarketManagerModule.sol, `withdrawMarketUSD` function"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing fee address validation",
+            "description": "Functions which mint fees do not ensure that the address these fees are minted to is non-zero.",
+            "severity": "medium",
+            "location": "IssueUSDModule.sol and MarketManagerModule.sol"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "No approval for account transfer in `createAccount()`",
+            "description": "The `createAccount()` function includes functionality to transfer existing accounts with high IDs to the requesting user, but this may not be a safe assumption.",
+            "severity": "medium",
+            "location": "AccountModule.sol, `createAccount` function"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Arbitrary account transfers",
+            "description": "The `createAccount()` function allows for arbitrary account transfers.",
+            "severity": "medium",
+            "location": "AccountModule.sol, `createAccount` function"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "`createAccount()` does not check account creation feature flag",
+            "description": "The `createAccount()` function does not check the value of the `_CREATE_ACCOUNT_FEATURE_FLAG` feature flag before executing.",
+            "severity": "medium",
+            "location": "AccountModule.sol, `createAccount` function"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential reentrancy in `createAccount()`",
+            "description": "In `AccountModule.createAccount()`, the `accountId` variable is incremented after an external call to `accountTokenModule.safeMint()`.",
+            "severity": "medium",
+            "location": "AccountModule.sol, `createAccount` function"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "`convertTokenToSystemAmount(...)` relies on optional ERC-20 `decimals()` function",
+            "description": "The `ConvertTokenToSystemAmount` function does not account for ERC-20 tokens that do not implement the `decimals()` function.",
+            "severity": "low",
+            "location": "CollateralConfiguration.sol"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Pool can be removed",
+            "description": "Under certain edge-cases, a pool may be removed while it still contains collateral from the account.",
+            "severity": "low",
+            "location": "VaultModule.sol"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "New collateral amount can be the same as current",
+            "description": "`VaultModule.delegateCollateral()` could be called with a `newCollateralAmount` value equal to the `currentCollateralAmount`.",
+            "severity": "low",
+            "location": "VaultModule.sol"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Non-functional implementation of test utility function `assertBn.near(...)`",
+            "description": "The utility function for testing that a number was within a certain range produced false positives for all values.",
+            "severity": "low",
+            "location": "assert-bignumber.ts"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "`setConfig()` does not validate system values",
+            "description": "The function does not enforce any validation of system values.",
+            "severity": "low",
+            "location": "UtilsModule.sol, L58"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Minimum delegation time can be zero",
+            "description": "Markets can set a minimum delegation time of zero, which could open them up to exploitation.",
+            "severity": "low",
+            "location": "MarketManagerModule.sol, L239"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Consider allowing account delegation increases during waiting period",
+            "description": "The minimum delegation time applies to both decreases and increases in collateral delegation.",
+            "severity": "low",
+            "location": "VaultModule.sol, L66"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Per-market minimum delegation is unresponsive to global minimum changes",
+            "description": "Markets are not forced to adhere to the new limit unless they update their own minimum delegation configuration after the change.",
+            "severity": "low",
+            "location": "Pool.sol, L448"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "`removeRewardsDistributor(...)` does not delete reward entry storage",
+            "description": "The function does not delete the storage of the reward entry.",
+            "severity": "info",
+            "location": "RewardsManagerModule.sol"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Permissions can be removed for the account owner",
+            "description": "The account permissions model allows for an account's owner to revoke permissions or have permissions removed from them by an address with ADMIN control over the account.",
+            "severity": "info",
+            "location": "AccountModule.sol"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Fee amount not emitted by relevant events",
+            "description": "The `feeAmount` is not emitted in any events emitted to log actions where it is charged.",
+            "severity": "info",
+            "location": "IssueUSDModule.sol, L106, L156, MarketManagerModule.sol, L153, L190"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "Mint and burn fees may complicate access to collateral",
+            "description": "Charging a fee for minting and burning USD may make it difficult for accounts to access their underlying collateral.",
+            "severity": "info",
+            "location": "General"
+        }
+    ]
+}

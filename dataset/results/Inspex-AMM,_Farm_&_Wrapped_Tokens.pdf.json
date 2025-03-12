@@ -1,0 +1,176 @@
+{
+    "path": "artifacts/Inspex-AMM,_Farm_&_Wrapped_Tokens.pdf",
+    "project_info": {
+        "url": "https://github.com/foodcourtofficial/contracts",
+        "commit_id": "c43ad98c58c518bc9faa350246ce33a94983f638",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Inspex-AMM,_Farm_&_Wrapped_Tokens/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unrestricted Minting of Reward Token",
+            "description": "Anyone can mint an unlimited amount of feeToken.",
+            "severity": "critical",
+            "location": "WSafeToken, distributeReward() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Token Manual Minting by Contract Owner",
+            "description": "The contract owner can arbitrarily mint the affected tokens.",
+            "severity": "critical",
+            "location": "CouponToken, mint() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation (Same Token)",
+            "description": "The reward of the pool that has the same staking token as the reward token will be slightly lower than what it should be.",
+            "severity": "high",
+            "location": "Cafeteria contract, add() function and updatePool() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Design Flaw in withdrawFee100 Pool",
+            "description": "The product owner can use destroyed tokens from the fee wallet to restake in available pools.",
+            "severity": "high",
+            "location": "`deposit` function, lines 216, contract: Cafeteria.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change critical state variables to gain additional profit, which is unfair to other users.",
+            "severity": "high",
+            "location": "Multiple contracts and functions (Cafeteria.sol, SnackBar.sol, Mintable.sol, WSafeToken.sol, Ownable.sol)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unsafe Token Transfer",
+            "description": "The feeToken can be minted without transferring safeToken into the contract.",
+            "severity": "medium",
+            "location": "WSafeToken, function wrap(uint256 amount)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Design Flaw in massUpdatePool() Function",
+            "description": "The massUpdatePool() function will eventually be unusable due to excessive gas usage.",
+            "severity": "low",
+            "location": "Cafeteria, function massUpdatePools()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improper Condition Checking in emergencyWithdraw() Function",
+            "description": "Users can withdraw staked tokens from withdrawFee100 pools, but all rewards will be revoked.",
+            "severity": "low",
+            "location": "Cafeteria contract, emergencyWithdraw() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Addition of Pool With Duplicated ibToken",
+            "description": "Adding pools with duplicated ibToken can cause the reward calculation of those pools to be incorrect.",
+            "severity": "low",
+            "location": "Cafeteria contract, add() function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "Various contracts (Cafeteria, CouponToken, FoodcourtRouter, Mintable, WSafeToken, RSafeToken) and multiple functions"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Inexplicit Solidity Compiler Version",
+            "description": "The Solidity compiler version declared in the smart contracts was not explicit, which may potentially result in compatibility issues.",
+            "severity": "info",
+            "location": "CouponToken.sol, RSafeToken.sol, WSafeToken.sol (pragma solidity ^0.8.0;)"
+        }
+    ]
+}

@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/Iosiro-Synthetix Alnitak Release Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix",
+        "commit_id": "f141ab9cb6a5bdc66f9334a6479c5dcdd12cde2e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix": "contracts/Iosiro-Synthetix Alnitak Release Smart Contract Audit/synthetix"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Potentially dangerous integration with third-party applications",
+            "description": "Using `tx.origin` as the destination address of the exchange performed may be incompatible with certain third-party applications, such as multi-signature wallets.",
+            "severity": "low",
+            "location": "SIP-140 Exchanger.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Exchange rates are not validated",
+            "description": "The `resetLastExchangeRate` function did not verify whether the exchange rates were valid at the time of being reset.",
+            "severity": "low",
+            "location": "SIP-139 Exchanger.sol#L663"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary gas consumption due to redundant validation check",
+            "description": "The `rewardAddress` was validated twice, unnecessarily consuming gas.",
+            "severity": "low",
+            "location": "SIP-140 Exchanger.sol#L343, Exchanger.sol#L362"
+        }
+    ]
+}

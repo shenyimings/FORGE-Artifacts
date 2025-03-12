@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/HAECHI_AUDIT-Universe_NFT.pdf",
+    "project_info": {
+        "url": "https://github.com/UniverseXYZ/packs-contracts",
+        "commit_id": "_c7804e7c2626e778cab96b6a4811fddacc7f41aa",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "packs-contracts": "contracts/HAECHI_AUDIT-Universe_NFT/packs-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Users can mint packs before saleStartTime with the free claim feature.",
+            "description": "Users who are able to free claim can mint the pack from saleStartTime - mintPassDuration, which is prior to the official saleStartTime.",
+            "severity": "low",
+            "location": "mintChecks function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "The input parameter of functions should be checked.",
+            "description": "The input parameter of functions like Packs#addCollectible() should be checked for correct format.",
+            "severity": "low",
+            "location": "addCollectible function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unnecessary gas may be used as a transaction fee.",
+            "description": "The bulkMintPack function enables minting multiple packs at once, but it does not check if the amount is greater than 0, leading to unnecessary gas spending.",
+            "severity": "low",
+            "location": "bulkMintPack function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Licenses can be added to non-existing collections.",
+            "description": "The addNewLicense function has no statement that checks whether cid exists, thus licenses on non-existing collections can be added.",
+            "severity": "low",
+            "location": "addNewLicense function"
+        }
+    ]
+}

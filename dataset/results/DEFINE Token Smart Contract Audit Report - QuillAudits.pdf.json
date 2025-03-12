@@ -1,0 +1,368 @@
+{
+    "path": "artifacts/DEFINE Token Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/playtimeprofit/definetics",
+        "commit_id": "517febe6052669b30f3bf7993c49ac90d6e5545a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "definetics": "contracts/DEFINE Token Smart Contract Audit Report - QuillAudits/definetics"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Business Logic Of The Transaction Fees",
+            "description": "Fees were sent to Define.sol contract address instead of Definetics holders.",
+            "severity": "high",
+            "location": "Define.sol contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Business Logic Of The swapAndSendToOwner() function",
+            "description": "Issues with token exchange and sending to owner.",
+            "severity": "high",
+            "location": "Define.sol contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ],
+                "3": [
+                    "CWE-1095"
+                ]
+            },
+            "title": "Loops in the Contract are extremely costly",
+            "description": "For loops consuming extra gas due to state variables .length.",
+            "severity": "medium",
+            "location": "Entire codebase"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing zero address validation",
+            "description": "Zero address validation missing in several functions.",
+            "severity": "medium",
+            "location": "Multiple functions (constructor, updateDividendTracker, etc.)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Avoid to use tx.origin",
+            "description": "Using tx.origin instead of msg.sender for authorization.",
+            "severity": "medium",
+            "location": "ProcessedDividendTracker function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-183"
+                ]
+            },
+            "title": "Missing Range Check for Input Variable",
+            "description": "No range check for input variables in some functions.",
+            "severity": "medium",
+            "location": "Multiple functions (canSwap, swapTokens, etc.)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Dead code",
+            "description": "Unused function addLiquidity() not removed from codebase.",
+            "severity": "low",
+            "location": "Define.sol contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Pragma version floating, potential for outdated compiler versions.",
+            "severity": "low",
+            "location": "Entire codebase"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent coding style",
+            "description": "Deviations from Solidity Style Guide throughout the codebase.",
+            "severity": "low",
+            "location": "Entire codebase"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "nextClaimTime and withdrawableDividends are not checked",
+            "description": "Lack of validation for nextClaimTime and withdrawableDividends.",
+            "severity": "low",
+            "location": "DefineDividendTracker.sol contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected EtherWithdrawal",
+            "description": "Functions that send ether to arbitrary destinations",
+            "severity": "high",
+            "location": "Define.sol, addLiquidity function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy",
+            "description": "Potential reentrancy issue in _transfer function",
+            "severity": "critical",
+            "location": "Define.sol, _transfer function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy",
+            "description": "Potential reentrancy issue in updateDividendTracker function",
+            "severity": "critical",
+            "location": "Define.sol, updateDividendTracker function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Uninitialized Local Variables",
+            "description": "Iterations, claims, and lastProcessedIndex are potentially used before declaration",
+            "severity": "medium",
+            "location": "Define.sol, _transfer function"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unused Return Value",
+            "description": "Ignored return values by dividendTracker.processAccount and others",
+            "severity": "low",
+            "location": "Multiple locations in Define.sol and DividendPayingToken.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Local Variable Shadowing",
+            "description": "_name and _symbol variables are shadowed in constructor",
+            "severity": "low",
+            "location": "DividendPayingToken.sol, constructor function"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected ETH Transfer",
+            "description": "setAutomatedMarketMakerPair function can be used to drain contract's balance",
+            "severity": "high",
+            "location": "Define.sol, setAutomatedMarketMakerPair function"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Use of tx.origin",
+            "description": "Authentication vulnerability using tx.origin instead of msg.sender",
+            "severity": "high",
+            "location": "Define.sol (lines 293, 418)"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential violation of Checks-Effects-Interaction pattern",
+            "description": "Could potentially lead to re-entrancy vulnerability",
+            "severity": "medium",
+            "location": "Define.sol (multiple functions), DividendPayingToken.sol"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Use of block.timestamp",
+            "description": "Block timestamp can be influenced by miners, affecting transaction outcomes",
+            "severity": "medium",
+            "location": "Define.sol (multiple lines)"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Low level calls",
+            "description": "Unhandled return values from low-level calls can lead to unexpected behavior",
+            "severity": "medium",
+            "location": "Define.sol (lines 493, 94)"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1127"
+                ]
+            },
+            "title": "Compiler version mismatch",
+            "description": "Incompatible compiler versions may cause issues",
+            "severity": "low",
+            "location": "Define.sol"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Variable naming conventions not followed",
+            "description": "Variable names do not follow mixedCase convention",
+            "severity": "low",
+            "location": "Define.sol (lines 28, 111)"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Empty blocks in code",
+            "description": "Unnecessary empty blocks in code",
+            "severity": "low",
+            "location": "Define(sol (multiple lines)"
+        }
+    ]
+}

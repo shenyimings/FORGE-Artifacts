@@ -1,0 +1,179 @@
+{
+    "path": "artifacts/Hybrid Doge Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xece1728E4b431f8F571e30464c4DB9A579332493",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "CoinToken": "contracts/Hybrid Doge Smart Contract Audit Report - QuillAudits/CoinToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Possible to gain ownership",
+            "description": "Owner can regain ownership after renouncing contract ownership.",
+            "severity": "low",
+            "location": "renounceOwnership function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ],
+                "3": [
+                    "CWE-835"
+                ]
+            },
+            "title": "Infinite loop",
+            "description": "In includeInReward and _getCurrentSupply functions, for loops do not have _excluded.length limit, which costs more gas.",
+            "severity": "low",
+            "location": "includeInReward and _getCurrentSupply functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Function input parameters lack check",
+            "description": "Input parameters are not checked for values between 0 and 100 in several functions.",
+            "severity": "low",
+            "location": "setTaxFeePercent, setDevFeePercent, setLiquidityFeePercent functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Centralized risk in addLiquidity",
+            "description": "Owner gets tokens from the pool, which can create a problem if the private key of the owner's wallet is compromised.",
+            "severity": "low",
+            "location": "addLiquidity function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Centralization Risks",
+            "description": "Missing zero address validation in several functions.",
+            "severity": "low",
+            "location": "excludeFromReward, includeInReward, excludeFromFee, includeInFee functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Critical operation lacks event log",
+            "description": "Several critical operations lack event logs.",
+            "severity": "info",
+            "location": "various functions"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1116"
+                ]
+            },
+            "title": "Spelling mistakes",
+            "description": "Typing mistakes in comments.",
+            "severity": "info",
+            "location": "receive function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Presence of unused code",
+            "description": "Unused code should be declared as external instead of public to save gas.",
+            "severity": "info",
+            "location": "various functions"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1099"
+                ]
+            },
+            "title": "Ambiguous function and parameter name",
+            "description": "Variable and function names are not relevant to the task done inside the function.",
+            "severity": "info",
+            "location": "setMaxTxPercent function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State variables that could be declared constant",
+            "description": "Constant state variables should be declared as constants to save gas.",
+            "severity": "info",
+            "location": "various functions"
+        }
+    ]
+}

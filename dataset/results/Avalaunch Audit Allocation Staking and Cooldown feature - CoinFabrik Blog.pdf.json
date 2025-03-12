@@ -1,0 +1,50 @@
+{
+    "path": "artifacts/Avalaunch Audit Allocation Staking and Cooldown feature - CoinFabrik Blog.pdf",
+    "project_info": {
+        "url": "https://github.com/avalaunch-app/xava-protocol",
+        "commit_id": "fc32d84a67233ebba6f980182a951076858d30c0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "xava-protocol": "contracts/Avalaunch Audit Allocation Staking and Cooldown feature - CoinFabrik Blog/xava-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Failure to Use safeMath Library (MI-01)",
+            "description": "The functions `fund()`, `totalPending()` and `erc20Transfer()` make use of standard arithmetic which are susceptible to overflows and underflows.",
+            "severity": "low",
+            "location": "contracts/AllocationStaking.sol, lines 120, 196, and 412"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unvalidated Input in Function and Constructor (EN-01)",
+            "description": "The parameter `_token` in `setSaleParams()` is not checked to be non-null. The input `addresses _erc20 and `_salesFactory` in the AllocationStaking constructor are not checked to be non-null.",
+            "severity": "info",
+            "location": "contracts/AllocationStaking.sol, AllocationStaking constructor"
+        }
+    ]
+}

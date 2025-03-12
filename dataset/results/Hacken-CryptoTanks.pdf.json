@@ -1,0 +1,56 @@
+{
+    "path": "artifacts/Hacken-CryptoTanks.pdf",
+    "project_info": {
+        "url": "https://github.com/cryptotanks/exchange_token",
+        "commit_id": "328c9883d8a391cea47058ee6098b73547b86db4",
+        "address": "0x4444A19C8bb86E9BDbC023709A363bbCE91aF33E",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.10+commit.fc410830"
+        ],
+        "project_path": {
+            "BEP20": "contracts/Hacken-CryptoTanks/BEP20"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Too many digits",
+            "description": "Literals with many digits are difficult to read and review. Also, while the token decimals number is already known and it’s a standard 18, why not use ether suffix instead of calling the function?",
+            "severity": "low",
+            "location": "Contract: BEP20, Function: constructor"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "A public function that could be declared external",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "Contract: BEP20, Functions: addToWhiteList, removeFromWhiteList, name, enableTransfer, addressInWhiteList, symbol, totalSupply, balanceOf, transfer, allowance, approve, transferFrom, increaseAllowance, decreaseAllowance"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicated code",
+            "description": "Right now transferFrom and decreaseAllowance have totally the same part of the code.",
+            "severity": "low",
+            "location": "Contract: BEP20, Function: transferFrom"
+        }
+    ]
+}

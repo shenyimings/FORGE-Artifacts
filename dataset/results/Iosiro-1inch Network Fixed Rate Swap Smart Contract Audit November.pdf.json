@@ -1,0 +1,53 @@
+{
+    "path": "artifacts/Iosiro-1inch Network Fixed Rate Swap Smart Contract Audit November.pdf",
+    "project_info": {
+        "url": "https://github.com/1inch/fixed-rate-swap/tree/0b5a75e9f56e7d21c290dd28c59dc140dcbcc1d5",
+        "commit_id": "0b5a75e9f56e7d21c290dd28c59dc140dcbcc1d5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "fixed-rate-swap": "contracts/Iosiro-1inch Network Fixed Rate Swap Smart Contract Audit November/fixed-rate-swap"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Token pairs must have the same number of decimals",
+            "description": "Require statements were added to prevent creation of pools for asset pairs with different decimals, but a more flexible approach would be to implement logic that correctly scales between assets based on their number of decimals.",
+            "severity": "info",
+            "location": "Constructor"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Token transfer fees could lead to incorrect system states",
+            "description": "USDT's optional transfer fee could lead to inconsistencies when exchanging from USDT to USDC, as the transfer fee would not be accounted for in the exchanged amount.",
+            "severity": "info",
+            "location": "Mainnet contract (USDC-USDT pair)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Binary search inflates gas price",
+            "description": "The binary search method used to calculate virtual swap amounts scales transaction gas price linearly as the virtual swap amount increases.",
+            "severity": "info",
+            "location": "Function to determine virtual swap amount (binary search solution)"
+        }
+    ]
+}

@@ -1,0 +1,212 @@
+{
+    "path": "artifacts/Soul_Society_SC-Audit-Report_06102023_SA-1951-2-1.pdf",
+    "project_info": {
+        "url": "https://github.com/SoulSocietyDev/soulsociety-sbt-contract/tree/master",
+        "commit_id": "13f46a1",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "soulsociety-sbt-contract": "contracts/Soul_Society_SC-Audit-Report_06102023_SA-1951-2-1/soulsociety-sbt-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Requirements Violation: The Supply of HON Tokens Is Not Limited",
+            "description": "Mismatch between documentation and implementation, allowing the owner to mint as many HON tokens as they want.",
+            "severity": "high",
+            "location": "HON Token contract, ./contracts/HONToken.sol: mint()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Token Burn Does Not Follow ERC721 Standard And Leads To Inconsistencies",
+            "description": "Tokens are burned without updating balances and owners, leading to inconsistencies.",
+            "severity": "high",
+            "location": "SoulSocietySBT contract, ./v2/contracts/SoulSocietySBT.sol: burn(), _setGrowthToZero()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Too Highly Permissive Role Allows Owner To Burn Tokens From Users Without Their Consent Or Previous Notice",
+            "description": "The owner can burn tokens without notice or consent.",
+            "severity": "high",
+            "location": "SoulSocietySBT contract, ./v2/contracts/SoulSocietySBT.sol: burn(), Owner role"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Safety Check for Non-EOA Receivers of Tokens Can Lead to Locked Tokens",
+            "description": "Recipient contract's ability to receive and handle ERC-721 tokens is not validated.",
+            "severity": "medium",
+            "location": "Token transfer functionality, ./v2/contracts/SoulSocietySBT.sol: _safeMint()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missing User Approval For Growth Level Update Results In Highly Centralized Growth System",
+            "description": "The owner can increase or decrease growth level without on-chain user request.",
+            "severity": "high",
+            "location": "Growth-Type feature, SoulSocietySBT contract, ./v2/contracts/SoulSocietySBT.sol: growUp(), _setGrowthToZero()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Contracts should be deployed with the same compiler version and flags.",
+            "severity": "low",
+            "location": "Compiler configuration, ./contracts/*.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing Events for Critical Value Updates",
+            "description": "No events are emitted after sensitive changes take place.",
+            "severity": "low",
+            "location": "Event emission mechanism, ./v2/contracts/SoulSocietySBT.sol: constructor(), setTokenURI()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing URI Length Check",
+            "description": "Empty URI string is not checked in tokenURI() function.",
+            "severity": "low",
+            "location": "URI handling, SoulSocietySBT contract, ./v2/contracts/SoulSocietySBT.sol: tokenURI()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Inefficient Checks in setProtected() Result In Inefficient Code",
+            "description": "Unnecessary checks and lack of check for address having minted SBT tokens.",
+            "severity": "low",
+            "location": "SoulSocietySBT contract, ./v2/contracts/SoulSocietySBT.sol: setProtected()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Initialization Is Not Gas Efficient",
+            "description": "Unnecessary initialization of state variables to 0.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Function tokenURI Is Not Gas Efficient",
+            "description": "The call _requireMinted(tokenId_) is redundant, since it performs a check included in _isProtectedTokenId().",
+            "severity": "info",
+            "location": "SoulSocietySBT contract, ./v2/contracts/SoulSocietySBT.sol: tokenURI()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant onlyOwner Requirements Are Not Gas Efficient",
+            "description": "The onlyOwner modifier is not necessary in internal functions called by public functions with the same check.",
+            "severity": "info",
+            "location": "SoulSocietySBT.sol: _safeMint(), _setGrowthToZero(), _growUp()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Lack Of Clear Code In _growUp() Function",
+            "description": "The increase of _tokenGrowths is mixed with the declaration of tokenGrowth.",
+            "severity": "info",
+            "location": "SoulSocietySBT.sol: _growUp()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation: Order Of Layout",
+            "description": "The code layout does not follow Solidity's recommended order.",
+            "severity": "info",
+            "location": "SoulSocietySBT.sol"
+        }
+    ]
+}

@@ -1,0 +1,236 @@
+{
+    "path": "artifacts/rage-trade-core.pdf",
+    "project_info": {
+        "url": "https://github.com/RageTrade/core/tree/ea881f6204f1bf7f065bd9a4b11ee792592c7230",
+        "commit_id": "ea881f6204f1bf7f065bd9a4b11ee792592c7230",
+        "address": "0xFfefE40b54a0Eb3B35ee345ed356670B5AE50F5a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "core": "contracts/rage-trade-core/core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Funds Drainable to teamMultisig()",
+            "description": "An attacker could drain the ClearingHouse.sol contract of funds by deploying a smart contract that returns an arbitrary amount.",
+            "severity": "high",
+            "location": "contracts/protocol/clearinghouse/ClearingHouse.sol, function withdrawProtocolFee()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "No Guarantee that the Global Funding State for All Pools Will Be Updated",
+            "description": "The list of pools to update on pause/unpause must be supplied as an argument, introducing a manual error risk.",
+            "severity": "high",
+            "location": "contracts/protocols/clearinghouse/ClearingHouse.sol, functions pause() and unpause()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "fixFee Not Reflected in Liquidation Related Operations",
+            "description": "The internal functions handling liquidation mechanisms pass 0 as the fixFee argument instead of referencing the _getFixFee() function.",
+            "severity": "medium",
+            "location": "contracts/protocols/clearinghouse/ClearingHouse.sol, functions _removeLimitOrder(), _liquidateLiquidityPositions(), and _liquidateTokenPosition()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Multicall Cannot Be Used by Keepers to Liquidate",
+            "description": "The accountId variable is always passed as the liquidation target, preventing keepers from liquidating another account.",
+            "severity": "medium",
+            "location": "contracts/protocols/clearinghouse/ClearingHouse.sol, function multicallWithSingleMarginCheck()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Privileged Roles and Ownership",
+            "description": "The ClearingHouse.sol contract contains privileged roles that can be renounced or assigned to arbitrary addresses.",
+            "severity": "low",
+            "location": "contracts/protocol/clearinghouse/ClearingHouse.sol, functions transferGovernance() and transferTeamMultisig()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Use of Unsafe Casts",
+            "description": "Primitive cast operations are used, which are prone to over-/underflows.",
+            "severity": "low",
+            "location": "contracts/libraries/Protocol.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inverted Sign in the Funding Rate Calculation",
+            "description": "The funding rate calculation has an inverted sign, which could lead to errors in future development.",
+            "severity": "low",
+            "location": "contracts/libraries/FundingPayment.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Token 1 Is Cast to the IVToken Interface",
+            "description": "Token1 is cast to IVToken(vPool.token1()) instead of IVQuote(vPool.token1()).",
+            "severity": "low",
+            "location": "contracts/protocols/wrapper/VPoolWrapper.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Governance and Team Multisig Address Transfer Is Finalized Without Requiring Confirmation from the New Governance/Multisig Address",
+            "description": "The governance or team multisig privileges can be transferred to another address without requiring confirmation.",
+            "severity": "low",
+            "location": "contracts/utils/Governable.sol, functions transferGovernance() and transferTeamMultisig()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "VToken.setVPoolWrapper() Can Be Called by Anyone",
+            "description": "The function setVPoolWrapper() is an external function without permission check, allowing anyone to call it.",
+            "severity": "low",
+            "location": "contracts/protocol/tokens/VToken.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of Input Validations",
+            "description": "There are no checks on whether the values being supplied on collateral, pool, or protocol parameter changes are reasonable.",
+            "severity": "low",
+            "location": "contracts/protocol/clearinghouse/ClearingHouse.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked Pragma",
+            "description": "Every Solidity file specifies an unlocked pragma, which may lead to unexpected behavior in the future.",
+            "severity": "info",
+            "location": "all contracts"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Settlement Token Oracle Always Returning 1",
+            "description": "The settlement token oracle function always returns 1, as a healthy stablecoin value is assumed.",
+            "severity": "info",
+            "location": "contracts/oracles/SettlementTokenOracle.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Removed LiquidityPosition Is Still Calculated in maxNetPosition",
+            "description": "LiquidityPositionSet.maxNetPosition does not stop even when encountering a removed/uninitialized LiquidityPosition.",
+            "severity": "n/a",
+            "location": "contracts/libraries/LiquidityPositionSet.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Removed LiquidityPosition Is Still Calculated in longSideRisk",
+            "description": "LiquidityPositionSet.longSideRisk does not stop even when encountering a removed/uninitialized LiquidityPosition.",
+            "severity": "n/a",
+            "location": "contracts/libraries/LiquidityPositionSet.sol"
+        }
+    ]
+}

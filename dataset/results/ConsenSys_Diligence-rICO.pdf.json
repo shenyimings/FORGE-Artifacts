@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-rICO.pdf",
+    "project_info": {
+        "url": "https://github.com/lukso-network/rICO-smart-contracts",
+        "commit_id": "dc6b22ba8991d77560e574eac7f4f1e17f643115",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "rICO-smart-contracts": "contracts/ConsenSys_Diligence-rICO/rICO-smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Test code present in the code base",
+            "description": "Test code is present in the code base.",
+            "severity": "medium",
+            "location": "Code base, ReversibleICO.sol:L243­L247"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "FreezerAddress has more power than required",
+            "description": "_FreezerAddress is designed to have the ability of freezing the contract in case of emergency.",
+            "severity": "medium",
+            "location": "FreezerAddress functionality, ReversibleICO.sol, Freeze function and others"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "frozenPeriod is subtracted twice for calculating the current price",
+            "description": "If the contract had been frozen, the current stage price will calculate the price by subtracting the same number again.",
+            "severity": "medium",
+            "location": "Price calculation function, ReversibleICO.sol:L617­L619, L711­L714, and L654­L656"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lockup condition in getStageAtBlock()",
+            "description": "Given that the contract has been frozen at least once, if the frozenPeriod is longer than the period, the following require in getStageAtBlock() will revert.",
+            "severity": "low",
+            "location": "getStageAtBlock() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inadequate use of events",
+            "description": "Events are useful for UI changes and user notifications. The code base overall can use more use of events to update the UI and participants.",
+            "severity": "low",
+            "location": "rICO contract, freeze(), unfreeze(), disableEscapeHatch(), escapeHatch() functions"
+        }
+    ]
+}

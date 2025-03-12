@@ -1,0 +1,53 @@
+{
+    "path": "artifacts/BlueLotusDao DEX.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x6A397FCe59CB8282d1D05E58eF23534934607eF1",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.5.16+commit.9c3226ce"
+        ],
+        "project_path": {
+            "GenesysFactory": "contracts/BlueLotusDao DEX/GenesysFactory"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "add, set, updateGsysRate, burnGsys, and updateEmissionRate functions could invoke massUpdatePools function that can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "Multiple functions (add, set, updateGsysRate, burnGsys, updateEmissionRate)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "add() function issue",
+            "description": "nonDuplicated modifier will work for all lp tokens except _gsys because there is no adding it in contract constructor. Be careful about updatePool() function.",
+            "severity": "low",
+            "location": "add() function"
+        }
+    ]
+}

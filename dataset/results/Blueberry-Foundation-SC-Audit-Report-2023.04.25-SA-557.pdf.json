@@ -1,0 +1,308 @@
+{
+    "path": "artifacts/Blueberry-Foundation-SC-Audit-Report-2023.04.25-SA-557.pdf",
+    "project_info": {
+        "url": "https://github.com/Blueberryfi/blueberry-core",
+        "commit_id": "13040356e26a0405f26b67ecc4b63c1631411ebe",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "blueberry-core": "contracts/Blueberry-Foundation-SC-Audit-Report-2023/blueberry-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "Lack of initialization of PausableUpgradeable",
+            "description": "The code is missing initialization of PausableUpgradeable.",
+            "severity": "medium",
+            "location": "n/a (general code quality issue)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Insecure use of ERC20-approve function",
+            "description": "The code performs calls to the ERC20-approve function without checking the return value.",
+            "severity": "medium",
+            "location": "n/a (general code quality issue)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Excessive trust in vaults and tokens",
+            "description": "The code highly trusts vaults, tokens, etc.",
+            "severity": "medium",
+            "location": "n/a (general code quality issue)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Risk of liquidation due to high borrowing interest rates",
+            "description": "In case of high borrowing interest rates, it may be impossible to withdraw lent funds and collaterals until someone’s debt is not repaid.",
+            "severity": "high",
+            "location": "BlueBerryBank contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Risk of loss of user funds due to dependence on Band Protocol, Chainlink, Uniswap prices",
+            "description": "The system uses prices received from Band Protocol, Chainlink, Uniswap (at previous blocks), and possibly other sources.",
+            "severity": "high",
+            "location": "Oracle contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Risk of price manipulation due to single source oracle",
+            "description": "In case only one source responds with a price, that value is used.",
+            "severity": "medium",
+            "location": "AggregatorOracle contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Risk of Admin manipulating token prices",
+            "description": "The owner is able to manipulate token prices received by the project.",
+            "severity": "high",
+            "location": "Oracle contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Risk of uncommon ERC20 tokens",
+            "description": "The system may be vulnerable to uncommon ERC20 tokens such as tokens with floating decimals (and 19+ decimals), fee-on-transfer tokens, or tokens with a non-failing approve function implemented.",
+            "severity": "medium",
+            "location": "n/a (general code quality issue)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Risk of pool address draining allowances to IchiSpell contract",
+            "description": "The pool address received from the vault contract is able to drain any allowances to the IchiSpell contract.",
+            "severity": "high",
+            "location": "IchiSpell contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Risk of repaying not being enabled on the contract",
+            "description": "In case repaying is not enabled on the contract, it is impossible to liquidate risky positions.",
+            "severity": "high",
+            "location": "BlueBerryBank contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code Duplication",
+            "description": "The functionality of price deviation in bounds is implemented twice with the same code and purpose.",
+            "severity": "n/a",
+            "location": "./contracts/oracle/AggregatorOracle.sol: _isValidPrices(), _setPrimarySources(), ./contracts/oracle/IchiVaultOracle.sol: _isValidPrices(), setPriceDeviation()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Implementation Initialization",
+            "description": "Upgradable contracts pattern documentation recommends disabling the possibility of initialization on the logic contract.",
+            "severity": "n/a",
+            "location": "./contracts/ProtocolConfig.sol, ./contracts/BlueBerryBank.sol, ./contracts/wrapper/WIchiFarm.sol, ./contracts/wrapper/WERC20.sol, ./contracts/vault/SoftVault.sol, ./contracts/vault/HardVault.sol, ./contracts/spell/IchiSpell.sol, ./contracts/oracle/CoreOracle.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading Names",
+            "description": "The function naming does not correspond to the contract’s purpose.",
+            "severity": "n/a",
+            "location": "./contracts/oracle/CoreOracle.sol: getPositionValue(), getTokenValue()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Imports",
+            "description": "Redundant import statements are present as the imported objects are unused.",
+            "severity": "n/a",
+            "location": "Various contracts with redundant imports"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Actions",
+            "description": "Implicit upcasting and explicit downcasting is performed, and unnecessary function calls are made.",
+            "severity": "n/a",
+            "location": "./contracts/oracle/IchiVaultOracle.sol: twapPrice0InToken1(), ./contracts/spell/IchiSpell.sol: reducePosition()"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "Address parameters are used without checking against the possibility of 0x0.",
+            "severity": "n/a",
+            "location": "./contracts/spell/IchiSpell.sol: initialize(), ./contracts/spell/BasicSpell.sol: __BasicSpell_init(), ./contracts/wrapper/WIchiFarm.sol: initialize()"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicated Hardcoded Values",
+            "description": "Constant values are hardcoded across multiple contracts.",
+            "severity": "n/a",
+            "location": "./contracts/ProtocolConfig.sol: setDepositFee(), setWithdrawFee(), setMaxSlippageOfClose(), setRewardFee()"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code Duplication",
+            "description": "ERC20 being wrapped to an ERC1155 functionality is implemented twice.",
+            "severity": "n/a",
+            "location": "./contracts/vault/HardVault.sol, ./contracts/wrapper/WERC20.sol"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Default Visibility",
+            "description": "Functions and state variables visibility should be set explicitly.",
+            "severity": "n/a",
+            "location": "./contracts/FeeManager.sol: config"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Best Practice Violation",
+            "description": "Same code style over the project is broken, mixing default approve and custom _ensureApprove functions.",
+            "severity": "n/a",
+            "location": "Various contracts with mixed approval functionality"
+        }
+    ]
+}

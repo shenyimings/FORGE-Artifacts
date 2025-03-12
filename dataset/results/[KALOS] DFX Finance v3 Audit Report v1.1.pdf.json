@@ -1,0 +1,125 @@
+{
+    "path": "artifacts/[KALOS] DFX Finance v3 Audit Report v1.1.pdf",
+    "project_info": {
+        "url": "https://github.com/dfx-finance/protocol-v2/tree/universal",
+        "commit_id": "acdc5fbe8e96f8c800c6f546a7469f513da14c1c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol-v2": "contracts/[KALOS] DFX Finance v3 Audit Report v1/protocol-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-439"
+                ]
+            },
+            "title": "Potential Storage Layout Collision Risk due to ReentrancyGuard",
+            "description": "No concern related to Storage Layout Collision in previous AssimilatorV2, but with the update, AssimilatorV2 now inherits ReentrancyGuard.",
+            "severity": "info",
+            "location": "src/assimilators/AssimilatorV2.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Potential Read-only Reentrancy Vulnerability during LP Token Redemption",
+            "description": "The code can trigger the fallback function of the recipient when receiving Native Tokens, introducing a risk of Read-only Reentrancy vulnerability.",
+            "severity": "info",
+            "location": "src/ProportionalLiquidity.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Loss of User or Pool Funds Due to Incorrect Amount during Wrapped Native Token Refunds",
+            "description": "Incorrect amount received from users, resulting in a loss of user's funds.",
+            "severity": "critical",
+            "location": "src/Zap.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Pool Fund Drainage Risk due to Rounding Error in targetSwap",
+            "description": "Rounding-down error occurs during multiplication and division operations.",
+            "severity": "critical",
+            "location": "AssimilatorV2.sol, intakeNumeraire() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Fund Loss for Liquidity Providers due to wrong truncation for bug fix",
+            "description": "Wrong bug fix causes deposited amount to be less than intended.",
+            "severity": "critical",
+            "location": "ProportionalLiquidity.sol, intakeNumeraireLPRatio() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Malicious Oracle Address Registration Risk within Curve Contract",
+            "description": "Malicious actors can register malicious oracles that mimic Chainlink's interface.",
+            "severity": "critical",
+            "location": "CurveFactoryV2.sol, newCurve function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential Loss Risk in Output Token Transfer Functions",
+            "description": "Rounding-down error causes token transfer outcomes to result in a value of zero.",
+            "severity": "high",
+            "location": "Assimilators/AssimilatorV2.sol, outputRawAndGetBalance(), outputRaw(), and outputNumeraire() functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "balanceOf() in the loop leads to stealing the LP providers’ tokens",
+            "description": "LP deposit doesn't work as intended since the increased token balance is used in the next iteration, allowing a user to steal from another user who deposited tokens into the LP.",
+            "severity": "high",
+            "location": "src/assimilators/AssimilatorV2.sol"
+        }
+    ]
+}

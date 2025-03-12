@@ -1,0 +1,215 @@
+{
+    "path": "artifacts/Sense-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/sense-finance/sense-v1",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "sense-v1": "contracts/Sense-Spearbit-Security-Review/sense-v1"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "The Variable maxscale Is Not Saved",
+            "description": "Temporary variable not written back to origin",
+            "severity": "high",
+            "location": "sense-finance/sense-v1 (commit 1b14c79bdf9925c143d311c0f948eedc9810d2ea), Divider.sol#L334-382, function _collect()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Reserves Not Always Updated In onJoinPool()",
+            "description": "Reserves not updated in certain conditions",
+            "severity": "high",
+            "location": "Space.sol#L148-223"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong Amount in sponsorSeries",
+            "description": "Different amounts used for safeTransferFrom() and safeApprove()",
+            "severity": "high",
+            "location": "Periphery.sol#L66-76, function sponsorSeries()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Return value missing in wrapUnderlying() WstETHAdapter",
+            "description": "Function does not return a value, causing issues in contract Periphery",
+            "severity": "high",
+            "location": "WstETHAdapter.sol#L136-142"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-405"
+                ],
+                "4": [
+                    "CWE-408"
+                ]
+            },
+            "title": "Send Reward And Stake Once",
+            "description": "Reward and stake sent multiple times",
+            "severity": "high",
+            "location": "Divider.sol#L157-180, function settleSeries() and backfillScale()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Untrusted ERC-20 decimals() Return Values Could Be Mutated",
+            "description": "Decimals() return value can be mutated by an attacker",
+            "severity": "high",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "LP Oracle Does Not Handle Underlying Price Changes Correctly",
+            "description": "The LP oracle does not correctly handle changes in the underlying price.",
+            "severity": "high",
+            "location": "LP.sol, ZeroOracle.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-1419"
+                ],
+                "4": [
+                    "CWE-1188"
+                ]
+            },
+            "title": "Inconsistent Window Definitions (SPONSOR_WINDOW)",
+            "description": "SPONSOR_WINDOW provides a window before and after some preconditions, effectively doubling its set time from 4 hours to 8 hours.",
+            "severity": "info",
+            "location": "Divider.sol#L29, Divider.sol#L30, Divider.sol#L564, Divider.sol#L566"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Variables",
+            "description": "Unused variables could indicate a developer error or unnecessary deployment overhead.",
+            "severity": "info",
+            "location": "Periphery.sol#L32, LP.sol#L57"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1111"
+                ]
+            },
+            "title": "Incomplete Documentation (Function Parameters and Return Values)",
+            "description": "Function parameters are documented less frequently, especially with unnamed return values.",
+            "severity": "info",
+            "location": "Periphery.sol#L253-265"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Complex Token Ordering Code",
+            "description": "The contract Space has complex code to manage the order of tokens in an array.",
+            "severity": "info",
+            "location": "Space.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unexpected Functionality of _swapTargetForClaims()",
+            "description": "The function tries to swap target tokens for claim tokens, but issues new zero and claim tokens and moves the supplied target to the adapter.",
+            "severity": "info",
+            "location": "Periphery.sol#L414-431"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Outdated Build Instructions and Scripts",
+            "description": "The provided instructions within the README were not sufficient to successfully build the project.",
+            "severity": "info",
+            "location": "README.md"
+        }
+    ]
+}

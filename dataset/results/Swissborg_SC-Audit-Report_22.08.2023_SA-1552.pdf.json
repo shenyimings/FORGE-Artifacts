@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/Swissborg_SC-Audit-Report_22.08.2023_SA-1552.pdf",
+    "project_info": {
+        "url": "https://github.com/SwissBorg/borg-token",
+        "commit_id": "856cce0b4c37514314e73fe6447b10caa8497f36",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "borg-token": "contracts/Swissborg_SC-Audit-Report_22/borg-token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "M01. Copy Of Well Known Contract",
+            "description": "The contract utilizes the OwnableUpgradeable library to grant privileges to the contract owner, but it is recommended to use AccessControlUpgradeable from OpenZeppelin for managing role-based access control.",
+            "severity": "medium",
+            "location": "ChsbToBorgMigrator.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "L01. Missing Zero Address Validation",
+            "description": "Address parameters are being used without checking against the possibility of 0x0, which can lead to unwanted external calls to 0x0.",
+            "severity": "low",
+            "location": "SwissBorgToken.sol : constructor()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L02. Unused Variable",
+            "description": "The variable totalChsbMigrated is only incremented by migrated tokens in migrate(). This variable isn't used in other places of code.",
+            "severity": "low",
+            "location": "contracts/ChsbToBorgMigrator.sol : totalChsbMigrated;"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "I01. Public Functions That Should Be External",
+            "description": "Functions that are only called from outside the contract should be defined as external.",
+            "severity": "low",
+            "location": "contracts/ChsbToBorgMigrator.sol : initialize();"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "I02. Style Guide Violation",
+            "description": "Contract readability and code quality are influenced significantly by adherence to established style guidelines.",
+            "severity": "info",
+            "location": "contracts/ChsbToBorgMigrator.sol;"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "I03. Invalid Unit",
+            "description": "ether keyword should be used only when dealing with native tokens. ERC20 tokens aren't native tokens.",
+            "severity": "low",
+            "location": "contracts/SwissBorgToken.sol : INITIAL_SUPPLY;"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "I04. Use of Hard-Coded Values",
+            "description": "Hard-coded values are used in computations.",
+            "severity": "low",
+            "location": "contracts/ChsbToBorgMigrator.sol : decimalsScale; migrate() - 1_000_000_000 * 10 ** 8"
+        }
+    ]
+}

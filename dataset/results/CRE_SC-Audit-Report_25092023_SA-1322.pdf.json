@@ -1,0 +1,280 @@
+{
+    "path": "artifacts/CRE_SC-Audit-Report_25092023_SA-1322.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "960021aa8ac1e55820688d7ceedbc405453403cc",
+        "address": "0x21b8bfbbefc9e2b9a994871ecd742a5132b98aed",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "CryptoRealEstate": "contracts/CRE_SC-Audit-Report_25092023_SA-1322/CryptoRealEstate"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {},
+            "title": "Incorrect comparison in changeSwapAmount() function",
+            "description": "The total supply of the CRE token is constantly decreasing due to burning, but the constant variable of initial mint is used for comparison.",
+            "severity": "medium",
+            "location": "contracts/CryptoRealEstate.sol : changeSwapAmount()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-439"
+                ]
+            },
+            "title": "Unscalable functionality due to copying well-known contract",
+            "description": "The contract may lead to new issues during further development and unexpected errors.",
+            "severity": "low",
+            "location": "contracts/CryptoRealEstate.sol : *"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked ERC20 token transfer",
+            "description": "The function does not use SafeERC20 library for checking the result of ERC20 token transfer.",
+            "severity": "low",
+            "location": "contracts/CryptoRealEstate.sol : withdrawToken()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing zero address validation",
+            "description": "Address parameters are being used without checking against the possibility of 0x0.",
+            "severity": "low",
+            "location": "contracts/CryptoRealEstate.sol : constructor(), setTreasury()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing events for critical state changes",
+            "description": "Events should be emitted for tracking things off-chain.",
+            "severity": "low",
+            "location": "contracts/CryptoRealEstate.sol : multiple functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-821"
+                ]
+            },
+            "title": "Checks-Effects-Interactions pattern violation",
+            "description": "The function violates the CEI pattern, leading to potential reentrancies and race conditions.",
+            "severity": "medium",
+            "location": "contracts/CryptoRealEstate.sol : constructor()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Undocumented functionality contradiction",
+            "description": "The function has undocumented functionality that may lead to confusion.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Documentation mismatch contradiction",
+            "description": "There is a mismatch between the code and documentation.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Undocumented Function",
+            "description": "The changeSwapAmount() function is not documented.",
+            "severity": "n/a",
+            "location": "./contracts/CryptoRealEstate.sol : changeSwapAmount()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Contradiction - Documentation Mismatch",
+            "description": "There is a mismatch between the documentation and implementation of the withdrawToken() function.",
+            "severity": "medium",
+            "location": "./contracts/CryptoRealEstate.sol : withdrawToken()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Informational - State Variables That Can Be Packed",
+            "description": "The state variables sellTaxFeePercent, transferTaxFeePercent, and buyTaxFeePercent can be downcast and packed together to save gas.",
+            "severity": "n/a",
+            "location": "./contracts/CryptoRealEstate.sol : sellTaxFeePercent, transferTaxFeePercent, buyTaxFeePercent"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Informational - Floating Pragma",
+            "description": "The pragma version is not locked in the contracts.",
+            "severity": "n/a",
+            "location": "./contracts/CryptoRealEstate.sol : *, ./contracts/IPancakeFactory.sol : *, ./contracts/IPancakeRouter.sol : *, ./contracts/CustomOwnable.sol : *"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Informational - Style Guide Violation - Order of Functions",
+            "description": "The order of functions does not follow the official code style guidelines.",
+            "severity": "n/a",
+            "location": "./contracts/CryptoRealEstate.sol, ./contracts/CustomOwnable.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Informational - Unused Functions",
+            "description": "There are unused functions in the IPancakeRouter contract.",
+            "severity": "n/a",
+            "location": "./contracts/IPancakeRouter.sol : swapExactETHForTokensSupportingFeeOnTransferTokens(), swapExactTokensForETH(), addLiquidityETH()"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Informational - Redundant Code Block",
+            "description": "The withdrawBNB() function is redundant and can be removed.",
+            "severity": "n/a",
+            "location": "./contracts/CryptoRealEstate.sol : withdrawBNB(), receive()"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Empty String Check",
+            "description": "There is no empty string check for the _name and _symbol parameters in the constructor.",
+            "severity": "medium",
+            "location": "./contracts/CryptoRealEstate.sol : constructor()"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1099"
+                ]
+            },
+            "title": "Typo",
+            "description": "There is a typo in the pancekeRouter state variable.",
+            "severity": "n/a",
+            "location": "./contracts/CryptoRealEstate.sol : pancekeRouter"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation - Naming Conventions",
+            "description": "The constant TOTALSUPPLY does not follow the naming conventions.",
+            "severity": "n/a",
+            "location": "./contracts/CryptoRealEstate.sol : TOTALSUPPLY"
+        }
+    ]
+}

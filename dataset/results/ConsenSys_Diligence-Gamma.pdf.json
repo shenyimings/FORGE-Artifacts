@@ -1,0 +1,83 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Gamma.pdf",
+    "project_info": {
+        "url": "https://github.com/GammaStrategies/hypervisor/tree/41fd4abf79864478523e87924d4e80d80df04879",
+        "commit_id": "41fd4abf79864478523e87924d4e80d80df04879",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "hypervisor": "contracts/ConsenSys_Diligence-Gamma/hypervisor"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Possible reentrancy in Hypervisor.withdraw function",
+            "description": "A user can get his deposited liquidity back in exchange for the burn of his shares.",
+            "severity": "high",
+            "location": "Hypervisor contract, withdraw function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "UniProxy.depositSwap doesn't deposit all the user's funds",
+            "description": "The contract tries to deposit a lower amount than the actual swap amount.",
+            "severity": "medium",
+            "location": "UniProxy contract, depositSwap function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Multiple 'sandwiching' front running vectors in Hypervisor",
+            "description": "Calls to pool.swap, pool.mint, and pool.burn are susceptible to 'sandwiching' attacks.",
+            "severity": "medium",
+            "location": "Hypervisor contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Uniswap v3 callbacks access control should be hardened",
+            "description": "The callback functions can be called by a random caller, including a hacked pool contract.",
+            "severity": "low",
+            "location": "Hypervisor contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Code quality comments",
+            "description": "Various code quality issues (e.g., unused parameters, duplicated code).",
+            "severity": "low",
+            "location": "UniProxy and Hypervisor contracts"
+        }
+    ]
+}

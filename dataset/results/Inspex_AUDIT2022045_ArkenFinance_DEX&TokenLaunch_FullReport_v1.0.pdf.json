@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/Inspex_AUDIT2022045_ArkenFinance_DEX&TokenLaunch_FullReport_v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/arken-lab/arken-swap-protocol",
+        "commit_id": "4aacac74293a6864a8dc5d4fde9803816a04637c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "arken-swap-protocol": "contracts/Inspex_AUDIT2022045_ArkenFinance_DEX&TokenLaunch_FullReport_v1/arken-swap-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "Critical state variables can be updated at any time by controlling authorities without notifying users.",
+            "severity": "high",
+            "location": "ArkenSmithy, ArkenSmithyPool, ArkenPairFactory contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Division Before Multiplication",
+            "description": "Rounding error caused by division before multiplication can result in miscalculated rewards.",
+            "severity": "medium",
+            "location": "ArkenStaker contract, ArkenStaker.sol, function updatePool()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ],
+                "3": [
+                    "CWE-1104"
+                ]
+            },
+            "title": "Outdated Compiler Version",
+            "description": "Using unmaintained third-party components (outdated solidity compiler version)",
+            "severity": "low",
+            "location": "Multiple contracts (ArkenPair, ArkenPairFactory, ArkenRouter, ArkenSmithy, ArkenSmithyPool, ArkenStaker, ArkenToken)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions are not logged properly by emitting events",
+            "severity": "info",
+            "location": "ArkenPairFactory.sol, function setFeeToSetter()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Public functions that are never called internally should have external visibility",
+            "severity": "info",
+            "location": "Multiple contracts (ArkenRouter and ArkenStaker)"
+        }
+    ]
+}

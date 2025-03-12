@@ -1,0 +1,338 @@
+﻿Tool,Detectable Vulnerabilities,Description,CWE,Parent Pillar
+conkas,Integer_Overflow,n/a,CWE-190,CWE-682
+conkas,Integer_Underflow,n/a,CWE-191,CWE-682
+conkas,Reentrancy,n/a,CWE-1265,CWE-691
+conkas,Time_Manipulation,n/a,CWE-829,CWE-664
+conkas,Transaction_Ordering_Dependence,n/a,CWE-362,CWE-691
+conkas,Unchecked_Low_Level_Call,n/a,"CWE-252, CWE-695","CWE-703, CWE-710"
+Manticore,delegatecall,Problematic uses of DELEGATECALL,"CWE-20, CWE-829, CWE-749","CWE-707, CWE-664, CWE-284"
+Manticore,overflow,Integer overflows,CWE-190,CWE-682
+Manticore,reentrancy,Reentrancy bug,CWE-1265,CWE-691
+Manticore,reentrancy-adv,Reentrancy bug (different method),CWE-1265,CWE-691
+Manticore,env-instr,Use of potentially unsafe/manipulable instructions,CWE-749,CWE-284
+Manticore,ext-call-leak,Reachable external call or ether leak to sender or arbitrary address,CWE-20,CWE-707
+Manticore,suicidal,Reachable selfdestruct instructions,"CWE-826, CWE-749","CWE-664, CWE-284"
+Manticore,uninitialized-memory,Uninitialized memory usage,"CWE-908, CWE-665",CWE-664
+Manticore,uninitialized-storage,Uninitialized storage usage,"CWE-908, CWE-665",CWE-664
+Manticore,invalid,Enable INVALID instruction detection,CWE-561,CWE-710
+Manticore,unused-return,Unused internal transaction return values,CWE-561,CWE-710
+Mythril,Delegatecall_to_user_supplied_address,The smart contract delegates execution to a user-supplied address. This could allow an attacker to execute arbitrary code in the context of this contract account and manipulate the state of the contract account or execute actions on its behalf.,"CWE-20, CWE-829, CWE-749","CWE-707, CWE-664, CWE-284"
+Mythril,Dependence_on_predictable_environment_variable,"One or more of block.coinbase, block.gaslimit, block.timestamp or block.number are used to determine a control flow decision. Note that the values of these variables are predictable and can be manipulated by a malicious miner. Also keep in mind that attackers know hashes of earlier blocks. Don't use any of those environment variables as sources of randomness and be aware that use of these variables introduces a certain level of trust into miners.",CWE-829,CWE-664
+Mythril,Dependence_on_tx_origin,The tx.origin environment variable has been found to influence a control flow decision. Note that using tx.origin as a security control might cause a situation where a user inadvertently authorizes a smart contract to perform an action on their behalf. It is recommended to use msg.sender instead.,"CWE-477, CWE-346","CWE-710, CWE-284"
+Mythril,Exception_State,"It is possible to trigger an assertion violation. Note that Solidity assert() statements should only be used to check invariants. Review the transaction trace generated for this issue and either make sure your program logic is correct, or use require() instead of assert() if your goal is to constrain user inputs or enforce preconditions. Remember to validate inputs from both callers (for instance, via passed arguments) and callees (for instance, via return values).","CWE-670, CWE-754","CWE-691, CWE-703"
+Mythril,External_Call_To_User_Supplied_Address,An external message call to an address specified by the caller is executed. Note that the callee account might contain arbitrary code and could re-enter any function within this contract. Reentering the contract in an intermediate state may lead to unexpected behaviour. Make sure that no state modifications are executed after this call and/or reentrancy guards are in place.,"CWE-20, CWE-1265","CWE-707, CWE-1265"
+Mythril,Integer_Arithmetic_Bugs,Integer overflows & underflows,"CWE-190, CWE-191",CWE-682
+Mythril,Jump_to_an_arbitrary_instruction,It is possible to redirect the control flow to arbitrary locations in the code. This may allow an attacker to bypass security controls or manipulate the business logic of the smart contract. Avoid using low-level-operations and assembly to prevent this issue.,CWE-695,CWE-710
+Mythril,Multiple_Calls_in_a_Single_Transaction,"This call is executed following another call within the same transaction. It is possible that the call never gets executed if a prior call fails permanently. This might be caused intentionally by a malicious callee. If possible, refactor the code such that each transaction only executes one external call or make sure that all callees can be trusted (i.e. they’re part of your own codebase).",CWE-691,CWE-691
+Mythril,State access after external call,"The contract account state is accessed after an external call to a user-defined/fixed address. To prevent reentrancy issues, consider accessing the state only before the call, especially if the callee is untrusted. Alternatively, a reentrancy lock can be used to prevent untrusted callees from re-entering the contract in an intermediate state.",CWE-1265,CWE-691
+Mythril,Unchecked return value from external call,"External calls return a boolean value. If the callee halts with an exception, 'false' is returned and execution continues in the caller. The caller should check whether an exception happened and react accordingly to avoid unexpected behavior. For example it is often desirable to wrap external calls in require() so the transaction is reverted if the call fails.",CWE-252,CWE-703
+Mythril,Unprotected Ether Withdrawal,Arbitrary senders other than the contract creator can profitably extract Ether from the contract account. Verify the business logic carefully and make sure that appropriate security controls are in place to prevent unexpected loss of funds.,"CWE-285, CWE-862",CWE-284
+Mythril,Unprotected Selfdestruct,Any sender can trigger execution of the SELFDESTRUCT instruction to destroy this contract account. Review the transaction trace generated for this issue and make sure that appropriate security controls are in place to prevent unrestricted access.,"CWE-826, CWE-749","CWE-664, CWE-284"
+Mythril,Write to an arbitrary storage location,"It is possible to write to arbitrary storage locations. By modifying the values of storage variables, attackers may bypass security controls or manipulate the business logic of the smart contract.",CWE-123,CWE-664
+Mythril,Transaction Order Dependence,"The value of the call is dependent on balance or storage write. This can lead to race conditions. An attacker may be able to run a transaction after our transaction, which can change the value of the call.",CWE-362,CWE-691
+Mythril,requirement violation,A requirement was violated in a nested call and the call was reverted as a result.,CWE-670,CWE-691
+Mythril,Strict Ether balance check,Checks for strict equality checks with contract balance. Ether can be forcefully sent to this contract. This may make the contract unusable.,CWE-667,CWE-664
+semgrep,unnecessary_checked_arithmetic_in_loop,A lot of times there is no risk that the loop counter can overflow. Using Solidity's unchecked block saves the overflow checks.,CWE-1164,CWE-710
+semgrep,proxy_storage_collision,Proxy declares a state var that may override a storage slot of the implementation,"CWE-188, CWE-787","CWE-435, CWE-664"
+semgrep,erc20_public_burn,Anyone can burn tokens of other accounts,"CWE-285, CWE-862, CWE-749",CWE-284
+semgrep,non_payable_constructor,Consider making costructor payable to save gas.,CWE-710,CWE-710
+semgrep,use_prefix_increment_not_postfix,The prefix increment expression is cheaper in terms of gas.,CWE-710,CWE-710
+semgrep,balancer_readonly_reentrancy_getrate,This detector identifies instances of reentrancy in the getRate function of Balancer’s read_only smart contracts that do not alter contract state but may still present risks in specific contexts.,CWE-1265,CWE-691
+semgrep,erc777_reentrancy,Detects reentrancy vulnerabilities in ERC777 tokens that can be triggered in the tokenReceived callback.,CWE-1265,CWE-691
+semgrep,use_short_revert_string,"Finds places where revert messages are too short, potentially obscuring the clarity and usefulness of error messages.",CWE-1265,CWE-691
+semgrep,init_variables_with_default_value,"Flags variables that are explicitly initialized to their default values, which is redundant and can be omitted.",CWE-710,CWE-710
+semgrep,unrestricted_transferownership,Detects when the transferOwnership function of an Ownable contract lacks necessary access restrictions.,CWE-282,CWE-284
+semgrep,erc20_public_transfer,"Identifies ERC20 contracts where the transfer function is unexpectedly public, possibly allowing unintended interactions.",CWE-749,CWE-284
+semgrep,openzeppelin_ecdsa_recover_malleable,"Detects malleability issues in the ECDSA recover function from OpenZeppelin, potentially leading to signature vulnerabilities.",CWE-347,CWE-693
+semgrep,erc721_reentrancy,Detects reentrancy vulnerabilities in ERC721 smart contracts during transfer and other state_changing operations.,CWE-1265,CWE-691
+semgrep,erc677_reentrancy,"Identifies reentrancy vulnerabilities specific to ERC677 token interactions, particularly in the tokenFallback method.",CWE-1265,CWE-691
+semgrep,array_length_outside_loop,"Highlights instances where the length of an array is accessed inside loops, which can lead to repeated state reads and increased gas costs.",CWE-710,CWE-710
+semgrep,no_slippage_check,"Detects absence of slippage checks in decentralized exchange implementations, which can lead to unfavorable trading conditions.",CWE-682,CWE-682
+semgrep,basic_arithmetic_underflow,Looks for underflows in basic arithmetic operations that can lead to unexpected behaviors and security vulnerabilities.,CWE-191,CWE-682
+semgrep,oracle_price_update_not_restricted,"Detects oracle price updates that are not properly restricted to authorized parties, potentially leading to price manipulation.",CWE-940,CWE-284
+semgrep,use_multiple_require,Points out situations where multiple require statements could be consolidated into a single statement to save gas and simplify code complexity.,CWE-1041,CWE-710
+semgrep,compound_borrowfresh_reentrancy,Flags potential reentrancy vulnerabilities in the borrowFresh function of Compound finance contracts.,CWE-1265,CWE-691
+semgrep,use_prefix_decrement_not_postfix,Suggests using prefix decrements over postfix to optimize gas costs in loops and other frequent operations.,CWE-710,CWE-710
+semgrep,use_nested_if,Identifies deeply nested if statements that can be simplified to improve code readability and maintainability.,CWE-1124,CWE-710
+semgrep,gearbox_tokens_path_confusion,Detects incorrect implementation in token path setups that may lead to unexpected behavior or token loss in Gearbox protocol.,CWE-1285,CWE-707
+semgrep,redacted_cartel_custom_approval_bug,Identifies a specific bug in Redacted Cartel’s custom approval implementation that could lead to unintended allowance modifications.,CWE-688,CWE-710
+semgrep,erc721_arbitrary_transferfrom,Detects issues in ERC721 implementations that could allow arbitrary addresses to initiate unwarranted TransferFrom operations.,"CWE-862, CWE-285",CWE-284
+semgrep,balancer_readonly_reentrancy_getpooltokens,This detector checks for reentrancy vulnerabilities in the getPoolTokens function of Balancer’s read_only contracts which can be exploited despite not altering the state.,CWE-1265,CWE-691
+semgrep,incorrect_use_of_blockhash,"Identifies incorrect usage of the blockhash function, which should not be relied upon for randomness or other sensitive operations.",CWE-829,CWE-664
+semgrep,curve_readonly_reentrancy,Highlights reentrancy vulnerabilities in Curve’s read_only functions that could still present indirect risks.,CWE-1265,CWE-691
+semgrep,sense_missing_oracle_access_control,"Finds missing or insufficient access control mechanisms on oracle_related functions, potentially allowing unauthorized influence on crucial data points.",CWE-940,CWE-284
+semgrep,encode_packed_collision,"Detects potential hash collisions due to the use of tightly packed encoding, which can lead to data inconsistency or exploits.","CWE-20, CWE-347","CWE-707, CWE-693"
+semgrep,uniswap_callback_not_protected,Finds Uniswap interfaces where callback functions lack sufficient protection against unauthorized or unexpected use.,"CWE-862, CWE-285",CWE-284
+semgrep,keeper_network_oracle_manipulation,"Identifies potential manipulations or misuses of oracle updates within the Keeper network, impacting price feeds or contract behaviors.",CWE-940,CWE-284
+semgrep,tecra_coin_burnfrom_bug,Flags a specific bug in Tecra Coin’s BurnFrom function that might allow burning tokens without proper authorization.,"CWE-862, CWE-285, CWE-749",CWE-284
+semgrep,use_ownable2step,Recommends implementing a two_step ownership transfer pattern to prevent mistakes and unauthorized,CWE-282,CWE-284
+semgrep,state_variable_read_in_a_loop,Replace state variable reads and writes within loops with local variable reads and writes.,CWE-1126,CWE-710
+semgrep,use_abi_encodecall_instead_of_encodewithselector,To guarantee arguments type safety it is recommended to use abi.encodeCall instead of abi.encodeWithSelector.,CWE-710,CWE-710
+semgrep,delegatecall_to_arbitrary_address,An attacker may perform delegatecall() to an arbitrary address.,"CWE-20, CWE-829, CWE-749","CWE-707, CWE-284"
+semgrep,arbitrary_low_level_call,An attacker may perform call() to an arbitrary address with controlled calldata.,CWE-20,CWE-707
+semgrep,superfluid_ctx_injection,A specially crafted calldata may be used to impersonate other accounts.,"CWE-345, CWE-20","CWE-693, CWE-707"
+semgrep,non_optimal_variables_swap,"Consider swapping variables using ($VAR1, $VAR2) = ($VAR2, $VAR1) to save gas.",CWE-710,CWE-710 
+semgrep,use_custom_error_not_require,Consider using custom errors as they are more gas efficient while allowing developers to describe the error in detail using NatSpec.,CWE-710,CWE-710
+semgrep,inefficient_state_variable_increment,<x> += <y> costs more gas than <x> = <x> + <y> for state variables.,CWE-710,CWE-710
+semgrep,compound_sweeptoken_not_restricted,Function sweepToken is allowed to be called by anyone.,"CWE-862, CWE-285, CWE-749",CWE-284
+semgrep,accessible_selfdestruct,Contract can be destructed by anyone in $FUNC.,"CWE-862, CWE-285, CWE-749",CWE-284
+semgrep,no_bidi_characters,The code must not contain any of Unicode Direction Control Characters.,"CWE-150, CWE-451","CWE-707, CWE-710"
+semgrep,basic_oracle_manipulation,getSharePrice() can be manipulated via flashloan.,CWE-940,CWE-284
+semgrep,msg_value_multicall,Function with constant msg.value can be called multiple times.,CWE-837,CWE-691
+semgrep,rigoblock_missing_access_control,setMultipleAllowances() is missing onlyOwner modifier.,CWE-282,CWE-284
+slither,abiencoderv2-array,solc versions 0.4.7-0.5.9 contain a compiler bug leading to incorrect ABI encoder usage.,CWE-477,CWE-710
+slither,arbitrary-send-erc20,Detect when msg.sender is not used as from in transferFrom.,"CWE-862, CWE-285",CWE-284
+slither,arbitrary-send-erc20-permit,Detect when msg.sender is not used as from in transferFrom and permit is used.,"CWE-863, CWE-285",CWE-284
+slither,arbitrary-send-eth,Unprotected call to a function sending Ether to an arbitrary address.,"CWE-862, CWE-285, CWE-749",CWE-284
+slither,array-by-reference,Detect arrays passed to a function that expects reference to a storage array,CWE-188,CWE-435
+slither,assembly,The use of assembly is error-prone and should be avoided.,CWE-695,CWE-710
+slither,assert-state-change,Incorrect use of `assert()`.,CWE-710,CWE-710
+slither,backdoor,n/a,CWE-506,CWE-710
+slither,boolean-cst,Detects the misuse of a Boolean constant.,CWE-710,CWE-710
+slither,boolean-equal,Detects the comparison to boolean constants.,CWE-1024,CWE-697
+slither,cache-array-length,Detects `for` loops that use `length` member of some storage array in their loop condition and don't modify it.,CWE-710,CWE-710
+slither,calls-loop,Calls inside a loop might lead to a denial-of-service attack.,CWE-391,CWE-703
+slither,codex,Use codex (a code LLM) to find vulnerabilities,CWE-710,CWE-710
+slither,constable-states,State variables that are not updated following deployment should be declared constant to save gas.,CWE-710,CWE-710
+slither,constant-function-asm,Functions declared as `constant`/`pure`/`view` using assembly code.,CWE-710,CWE-710
+slither,constant-function-state,Functions declared as `constant`/`pure`/`view` change the state.,CWE-710,CWE-710
+slither,controlled-array-length,Detects the direct assignment of an array's length.,CWE-119,CWE-664
+slither,controlled-delegatecall,Delegatecall or callcode to an address controlled by the user.,"CWE-20, CWE-829, CWE-749","CWE-707, CWE-664, CWE-284"
+slither,costly-loop,"Costly operations inside a loop might waste gas, so optimizations are justified.",CWE-710,CWE-710
+slither,cyclomatic-complexity,Detects functions with high (> 11) cyclomatic complexity.,CWE-1124,CWE-710
+slither,dead-code,Functions that are not sued.,CWE-561,CWE-710
+slither,delegatecall-loop,Detect the use of `delegatecall` inside a loop in a payable function.,"CWE-20, CWE-829, CWE-749","CWE-707, CWE-664, CWE-284"
+slither,deprecated-standards,Detect the usage of deprecated standards.,CWE-477,CWE-710
+slither,divide-before-multiply,"Solidity's integer division truncates. Thus, performing division before multiplication can lead to precision loss.",CWE-682,CWE-682
+slither,domain-separator-collision,"An ERC20 token has a function whose signature collides with EIP-2612's DOMAIN_SEPARATOR(), causing unanticipated behavior for contracts using `permit` functionality.",CWE-439,CWE-435
+slither,encode-packed-collision,Detect collision due to dynamic type usages in `abi.encodePacked`,"CWE-20, CWE-347","CWE-707, CWE-693"
+slither,enum-conversion,Detect out-of-range `enum` conversion (`solc` < `0.4.5`).,CWE-1285,CWE-707
+slither,erc20-indexed,Detects whether events defined by the `ERC20` specification that should have some parameters as `indexed` are missing the `indexed` keyword.,CWE-778,CWE-664
+slither,erc20-interface,"Incorrect return values for `ERC20` functions. A contract compiled with Solidity > 0.4.22 interacting with these functions will fail to execute them, as the return value is missing.",CWE-439,CWE-435
+slither,erc721-interface,"Incorrect return values for `ERC721` functions. A contract compiled with solidity > 0.4.22 interacting with these functions will fail to execute them, as the return value is missing.",CWE-439,CWE-435
+slither,events-access,Detect missing events for critical access control parameters.,"CWE-778, CWE-284","CWE-664, CWE-284"
+slither,events-maths,Detect missing events for critical arithmetic parameters.,"CWE-778, CWE-682","CWE-664, CWE-682"
+slither,external-function,"`public` functions that are never called by the contract should be declared `external`, and its immutable parameters should be located in `calldata` to save gas.",CWE-1126,CWE-710
+slither,function-init-state,"Detects the immediate initialization of state variables through function calls that are not pure/constant, or that use non-constant state variable.",CWE-710,CWE-710
+slither,immutable-states,State variables that are not updated following deployment should be declared immutable to save gas.,CWE-710,CWE-710
+slither,incorrect-equality,Use of strict equalities that can be easily manipulated by an attacker.,"CWE-667, CWE-1025","CWE-664, CWE-697"
+slither,incorrect-exp,Detect use of bitwise `xor ^` instead of exponential `**`,CWE-682,CWE-682
+slither,incorrect-modifier,"If a modifier does not execute `_` or revert, the execution of the function will return the default value, which can be misleading for the caller.",CWE-710,CWE-710
+slither,incorrect-return,Detect if `return` in an assembly block halts unexpectedly the execution.,"CWE-670, CWE-695","CWE-691, CWE-710"
+slither,incorrect-shift,Detect if the values in a shift operation are reversed,CWE-1335,CWE-682
+slither,incorrect-unary,Unary expressions such as `x=+1` probably typos.,CWE-682,CWE-682
+slither,incorrect-using-for,"In Solidity, it is possible to use libraries for certain types, by the `using-for` statement (`using <library> for <type>`). However, the Solidity compiler doesn't check whether a given library has at least one function matching a given type. If it doesn't, such statement has no effect and may be confusing.",CWE-710,CWE-710
+slither,locked-ether,"Contract with a `payable` function, but without a withdrawal capacity.","CWE-282, CWE-758, CWE-664","CWE-284, CWE-710, CWE-664"
+slither,low-level-calls,The use of low-level calls is error-prone. Low-level calls do not check for [code existence](https://solidity.readthedocs.io/en/v0.4.25/control-structures.html#error-handling-assert-require-revert-and-exceptions) or call success.,CWE-695,CWE-710
+slither,mapping-deletion,A deletion in a structure containing a mapping will not delete the mapping (see the [Solidity documentation](https://solidity.readthedocs.io/en/latest/types.html##delete)). The remaining data may be used to compromise the contract.,CWE-404,CWE-664
+slither,missing-inheritance,Detect missing inheritance.,CWE-1068,CWE-710
+slither,missing-zero-check,Detect missing zero address validation.,CWE-20,CWE-707
+slither,msg-value-loop,Detect the use of `msg.value` inside a loop.,CWE-841,CWE-691
+slither,multiple-constructors,Detect multiple constructor definitions in the same contract (using new and old schemes).,CWE-665,CWE-664
+slither,name-reused,"If a codebase has two contracts the similar names, the compilation artifacts will not contain one of the contracts with the duplicate name.",CWE-710,CWE-710
+slither,naming-convention,Solidity defines a [naming convention](https://solidity.readthedocs.io/en/v0.4.25/style-guide.html#naming-conventions) that should be followed.,CWE-1087,CWE-710
+slither,out-of-order-retryable,Out-of-order retryable transactions,CWE-841,CWE-691
+slither,pragma,Detect whether different Solidity versions are used.,CWE-710,CWE-710
+slither,protected-vars,Detect unprotected variable that are marked protected,CWE-282,CWE-284
+slither,public-mappings-nested,"Prior to Solidity 0.5, a public mapping with nested structures returned [incorrect values](https://github.com/ethereum/solidity/issues/5520).",CWE-439,CWE-435
+slither,redundant-statements,Detect the usage of redundant statements that have no effect.,CWE-1041,CWE-710
+slither,reentrancy-benign,Detection of the reentrancy bug. Only report reentrancy that is based on transfer or send.,CWE-1265,CWE-691
+slither,reentrancy-eth,Detection of the reentrancy bug. Only report reentrancy that relates to Ether transfer.,CWE-1265,CWE-691
+slither,reentrancy-events,Detect missing events after the execution of each reentrant function.,CWE-1265,CWE-691
+slither,reentrancy-no-eth,Detection of non-ether-based reentrancy attacks.,CWE-1265,CWE-691
+slither,reentrancy-unlimited-gas,Detect reentrancy attacks that manipulate the state of a contract without restrictions on gas usage.,"CWE-1265, CWE-400","CWE-691, CWE-664"
+slither,return-bomb,A low level callee may consume all callers gas unexpectedly.,"CWE-695, CWE-400",CWE-664
+slither,return-leave,Detect if a `return` is used where a `leave` should be used.,CWE-710,CWE-710
+slither,reused-constructor,Detects if the same base constructor is called with arguments from two different locations in the same inheritance hierarchy.,CWE-665,CWE-664
+slither,rtlo,An attacker can manipulate the logic of the contract by using a right-to-left-override character (`U+202E)`.,CWE-451,CWE-710
+slither,shadowing-abstract,Detection of state variables shadowed from abstract contracts.,CWE-1109,CWE-710
+slither,shadowing-builtin,"Detection of shadowing built-in symbols using local variables, state variables, functions, modifiers, or events.",CWE-1109,CWE-710
+slither,shadowing-local,Detection of shadowing using local variables.,CWE-1109,CWE-710
+slither,shadowing-state,Detection of state variables shadowed.,CWE-1109,CWE-710
+slither,similar-names,Detect variables with names that are too similar.,CWE-1099,CWE-710
+slither,solc-version,`solc` frequently releases new compiler versions. Using an old version prevents access to new Solidity security checks. We also recommend avoiding complex `pragma` statement.,CWE-710,CWE-710
+slither,storage-array,`solc` versions `0.4.7`-`0.5.9` contain a [compiler bug](https://blog.ethereum.org/2019/06/25/solidity-storage-array-bugs) leading to incorrect ABI encoder usage.,CWE-477,CWE-710
+slither,suicidal,Unprotected call to a function executing `selfdestruct`/`suicide`.,"CWE-826, CWE-749","CWE-664, CWE-284"
+slither,tautological-compare,"A variable compared to itself is probably an error as it will always return `true` for `==`, `>=`, `<=` and always `false` for `<`, `>` and `!=`.","CWE-570, CWE-571",CWE-710
+slither,tautology,Detects expressions that are tautologies or contradictions.,CWE-684,CWE-710
+slither,timestamp,Dangerous usage of `block.timestamp`. `block.timestamp` can be manipulated by miners.,CWE-829,CWE-664
+slither,token-reentrancy,Detection of reentrancy vulnerable patterns following a token transfer.,CWE-1265,CWE-691
+slither,too-many-digits,Literals with many digits are difficult to read and review. Use scientific notation or suffixes to make the code more readable.,CWE-710,CWE-710
+slither,tx-origin,`tx.origin`-based protection can be abused by a malicious contract if a legitimate user interacts with the malicious contract.,"CWE-477, CWE-284","CWE-710, CWE-284"
+slither,unchecked-lowlevel,The return value of a low-level call is not checked.,"CWE-252, CWE-695","CWE-703, CWE-710"
+slither,unchecked-send,The return value of a `send` is not checked.,CWE-252,CWE-703
+slither,unchecked-transfer,The return value of an external transfer/transferFrom call is not checked,CWE-252,CWE-703
+slither,unimplemented-functions,Detect functions that are not implemented on derived-most contracts.,CWE-1068,CWE-710
+slither,uninitialized-fptr-cst,solc versions `0.4.5`-`0.4.26` and `0.5.0`-`0.5.8` contain a compiler bug leading to unexpected behavior when calling uninitialized function pointers in constructors.,"CWE-824, CWE-665",CWE-664
+slither,uninitialized-local,Uninitialized local variables.,"CWE-457, CWE-665",CWE-664
+slither,uninitialized-state,Uninitialized state variables.,"CWE-457, CWE-665",CWE-664
+slither,uninitialized-storage,"An uninitialized storage variable will act as a reference to the first state variable, and can.override a critical variable.","CWE-908, CWE-665",CWE-664
+slither,unprotected-upgrade,Detects logic contract that can be destructed.,"CWE-665, CWE-862, CWE-285, CWE-749","CWE-664, CWE-284"
+slither,unused-import,Importing a file that is not used in the contract likely indicates a mistake. The import should be removed until it is needed.,CWE-561,CWE-710
+slither,unused-return,The return value of an external call is not stored in a local or state variable.,CWE-561,CWE-710
+slither,unused-state,Unused state variable.,CWE-561,CWE-710
+slither,variable-scope,"Detects the possible usage of a variable before the declaration is stepped over (either because it is later declared, or declared in another scope).",CWE-1126,CWE-710
+slither,var-read-using-this,"The contract reads its own variable using `this`, adding overhead of an unnecessary STATICCALL.",CWE-710,CWE-710
+slither,void-cst,Detect the call to a constructor that is not implemented,CWE-710,CWE-710
+slither,weak-prng,"Weak PRNG due to a modulo on `block.timestamp`, `now` or `blockhash`. These can be influenced by miners to some extent so they should be avoided.","CWE-330, CWE-829","CWE-693, CWE-664"
+slither,write-after-write,Detects variables that are written but never read and written again.,CWE-561,CWE-710
+solhint,code-complexity,Function has cyclomatic complexity “current” but allowed no more than maxcompl.,CWE-1120,CWE-710
+solhint,explicit-types,"Forbid or enforce explicit types (like uint256) that have an alias (like uint).	",CWE-710,CWE-710
+solhint,function-max-lines,"Function body contains “count” lines but allowed no more than maxlines.	",CWE-710,CWE-710
+solhint,max-line-length,Line length must be no more than maxlen.,CWE-710,CWE-710
+solhint,max-states-count,Contract has “some count” states declarations but allowed no more than maxstates.,CWE-710,CWE-710
+solhint,no-console,No console.log/logInt/logBytesX/logString/etc & No hardhat and forge-std console.sol import statements.,CWE-778,CWE-664
+solhint,no-empty-blocks,No console.log/logInt/logBytesX/logString/etc & No hardhat and forge-std console.sol import statements.,CWE-778,CWE-664
+solhint,no-global-import,"Import statement includes an entire file instead of selected symbols.	",CWE-710,CWE-710
+solhint,no-unused-import,Imported object name is not being used by the contract.,CWE-561,CWE-710
+solhint,no-unused-vars,"Variable “name” is unused.	",CWE-561,CWE-710
+solhint,one-contract-per-file,Enforces the use of ONE Contract per file,CWE-710,CWE-710
+solhint,payable-fallback,When fallback is not payable and there is no receive function you will not be able to receive currency.,CWE-710,CWE-710
+solhint,reason-string,"Require or revert statement must have a reason string and check that each reason string is at most N characters long.	",CWE-710,CWE-710
+solhint,constructor-syntax,"Constructors should use the new constructor keyword.	",CWE-1076,CWE-710
+solhint,interface-starts-with-i,"Solidity Interfaces names should start with an I	",CWE-1076,CWE-710
+solhint,const-name-snakecase,"Constant name must be in capitalized SNAKE_CASE. (Does not check IMMUTABLES, use immutable-vars-naming)	",CWE-1076,CWE-710
+solhint,contract-name-camelcase,"Contract, Structs and Enums should be in CamelCase.	",CWE-1076,CWE-710
+solhint,event-name-camelcase,Event name must be in CamelCase.,CWE-1076,CWE-710
+solhint,foundry-test-functions,"Enforce naming convention on functions for Foundry test cases	",CWE-1076,CWE-710
+solhint,func-name-mixedcase,"Function name must be in mixedCase.	",CWE-1076,CWE-710
+solhint,func-named-parameters,"Enforce named parameters for function calls with 4 or more arguments. This rule may have some false positives	",CWE-1076,CWE-710
+solhint,func-param-name-mixedcase,"Function param name must be in mixedCase.	",CWE-1076,CWE-710
+solhint,immutable-vars-naming,"Check Immutable variables. Capitalized SNAKE_CASE or mixedCase depending on configuration.	",CWE-1076,CWE-710
+solhint,imports-order,"Order the imports of the contract to follow a certain hierarchy (read “Notes section”)	",CWE-1076,CWE-710
+solhint,modifier-name-mixedcase,"Modifier name must be in mixedCase.	",CWE-1076,CWE-710
+solhint,named-parameters-mapping,Solidity v0.8.18 introduced named parameters on the mappings definition.,CWE-1076,CWE-710
+solhint,private-vars-leading-underscore,"Non-external functions and state variables should start with a single underscore. Others, shouldn’t	",CWE-1076,CWE-710
+solhint,use-forbidden-name,"Avoid to use letters ‘I’, ‘l’, ‘O’ as identifiers.",CWE-1076,CWE-710
+solhint,var-name-mixedcase,"Variable name must be in mixedCase. (Does not check IMMUTABLES, use immutable-vars-naming)",CWE-1076,CWE-710
+solhint,func-order,"Function order is incorrect.	",CWE-1076,CWE-710
+solhint,imports-on-top,Import statements must be on top.,CWE-1076,CWE-710
+solhint,ordering,"Check order of elements in file and inside each contract, according to the style guide.	",CWE-1076,CWE-710
+solhint,visibility-modifier-order,"Visibility modifier must be first in list of modifiers.	",CWE-1076,CWE-710
+solhint,gas-calldata-parameters,"Suggest calldata keyword on function arguments when read only	",CWE-710,CWE-710
+solhint,gas-custom-errors,"Enforces the use of Custom Errors over Require and Revert statements	",CWE-710,CWE-710
+solhint,gas-increment-by-one,"Suggest incrementation by one like this ++i instead of other type	",CWE-710,CWE-710
+solhint,gas-indexed-events,"Suggest indexed arguments on events for uint, bool and address	",CWE-710,CWE-710
+solhint,gas-length-in-loops,"Suggest replacing object.length in a loop condition to avoid calculation on each lap	",CWE-710,CWE-710
+solhint,gas-multitoken1155,"ERC1155 is a cheaper non-fungible token than ERC721	",CWE-710,CWE-710
+solhint,gas-named-return-values,"Enforce the return values of a function to be named	",CWE-710,CWE-710
+solhint,gas-small-strings,"Keep strings smaller than 32 bytes	",CWE-710,CWE-710
+solhint,gas-strict-inequalities,"Suggest Strict Inequalities over non Strict ones	",CWE-710,CWE-710
+solhint,gas-struct-packing,Suggest to re-arrange struct packing order when it is inefficient,CWE-710,CWE-710
+solhint,comprehensive-interface,"Check that all public or external functions are override. This is iseful to make sure that the whole API is extracted in an interface.	",CWE-1076,CWE-710
+solhint,quotes,"Enforces the use of double or simple quotes as configured for string literals. Values must be ‘single’ or ‘double’.	",CWE-1076,CWE-710
+solhint,avoid-call-value,"Avoid to use “.call.value()()”.	","CWE-1177, CWE-400","CWE-710, CWE-664"
+solhint,avoid-low-level-calls,"Avoid to use low level calls.	",CWE-695,CWE-710
+solhint,avoid-sha3,"Use “keccak256” instead of deprecated “sha3”.	","CWE-328, CWE-477","CWE-693, CWE-710"
+solhint,avoid-suicide,"Use “selfdestruct” instead of deprecated “suicide”.	",CWE-477,CWE-710
+solhint,avoid-throw,"“throw” is deprecated, avoid to use it.	",CWE-477,CWE-710
+solhint,avoid-tx-origin,"Avoid to use tx.origin.	","CWE-477, CWE-284","CWE-710, CWE-284"
+solhint,check-send-result,"Check result of “send” call.	",CWE-252,CWE-703
+solhint,compiler-version,"Compiler version must satisfy a semver requirement.	",CWE-710,CWE-710
+solhint,func-visibility,"Explicitly mark visibility in function.	",CWE-710,CWE-710
+solhint,mark-callable-contracts,"Explicitly mark all external contracts as trusted or untrusted.	",CWE-710,CWE-710
+solhint,multiple-sends,"Avoid multiple calls of “send” method in single transaction.	",CWE-573,CWE-710
+solhint,no-complex-fallback,"Fallback function must be simple.	",CWE-1120,CWE-710
+solhint,no-inline-assembly,"Avoid to use inline assembly. It is acceptable only in rare cases.	",CWE-695,CWE-710
+solhint,not-rely-on-block-hash,"Do not rely on “block.blockhash”. Miners can influence its value.	",CWE-829,CWE-664
+solhint,not-rely-on-time,"Avoid making time-based decisions in your business logic.	",CWE-829,CWE-664
+solhint,reentrancy,"Possible reentrancy vulnerabilities. Avoid state changes after transfer.	",CWE-1265,CWE-691
+solhint,state-visibility,"Explicitly mark visibility of state.	",CWE-710,CWE-710
+oyente,Callstack_Depth_Attack_Vulnerability,,CWE-400,CWE-664
+oyente,Integer_Overflow,,CWE-190,CWE-682
+oyente,Integer_Underflow,,CWE-191,CWE-682
+oyente,Parity_Multisig_Bug_2,,CWE-282,CWE-284
+oyente,Re-Entrancy_Vulnerability,,CWE-1265,CWE-691
+oyente,Timestamp_Dependency,,CWE-829,CWE-664
+oyente,Transaction-Ordering_Dependence_TOD,,CWE-362,CWE-691
+maian,Destructible,,"CWE-749, CWE-285",CWE-284
+maian,Destructible_(verified),,"CWE-749, CWE-285",CWE-284
+maian,Ether_leak,,"CWE-285, CWE-862",CWE-284
+maian,Ether_leak_(verified),,"CWE-285, CWE-862",CWE-284
+maian,Ether_lock,,"CWE-282, CWE-758, CWE-667","CWE-284, CWE-710, CWE-664"
+maian,Ether_lock_(Ether_accepted_without_send),,"CWE-282, CWE-758, CWE-667","CWE-284, CWE-710, CWE-664"
+osiris,Callstack_bug,,CWE-834,CWE-691
+osiris,Concurrency_bug,,CWE-362,CWE-691
+osiris,Division_bugs,,CWE-369,CWE-682
+osiris,Modulo_bugs,,CWE-369,CWE-682
+osiris,Overflow_bugs,,CWE-190,CWE-682
+osiris,Reentrancy_bug,,CWE-1265,CWE-691
+osiris,Signedness_bugs,,"CWE-195, CWE-682","CWE-664, CWE-682"
+osiris,Time_dependency_bug,,CWE-829,CWE-664
+osiris,Timedependency_bug,,CWE-829,CWE-664
+osiris,Truncation_bugs,,CWE-197,"CWE-664, CWE-682"
+osiris,Underflow_bugs,,CWE-191,CWE-682
+securify,DAO,,CWE-1265,CWE-691
+securify,DAOConstantGas,,CWE-1265,CWE-691
+securify,MissingInputValidation,,CWE-20,CWE-707
+securify,TODAmount,,CWE-362,CWE-691
+securify,TODReceiver,,CWE-362,CWE-691
+securify,TODTransfer,,CWE-362,CWE-691
+securify,UnhandledException,,CWE-391,CWE-703
+securify,UnrestrictedEtherFlow,,"CWE-285, CWE-862",CWE-284
+smartcheck,SOLIDITY_ADDRESS_HARDCODED,,"CWE-657, CWE-798",CWE-710
+smartcheck,SOLIDITY_ARRAY_LENGTH_MANIPULATION,,"CWE-188, CWE-787","CWE-435, CWE-664"
+smartcheck,SOLIDITY_BALANCE_EQUALITY,,CWE-667,CWE-664
+smartcheck,SOLIDITY_BYTE_ARRAY_INSTEAD_BYTES,,CWE-710,CWE-710
+smartcheck,SOLIDITY_CALL_WITHOUT_DATA,,CWE-477,CWE-710
+smartcheck,SOLIDITY_CONSTRUCTOR_RETURN,,CWE-657,CWE-710
+smartcheck,SOLIDITY_DELETE_ON_DYNAMIC_ARRAYS,,CWE-400,CWE-664
+smartcheck,SOLIDITY_DEPRECATED_CONSTRUCTIONS,,CWE-477,CWE-710
+smartcheck,SOLIDITY_DIV_MUL,,CWE-1339,CWE-682
+smartcheck,SOLIDITY_DOS_WITH_THROW,,CWE-755,CWE-703
+smartcheck,SOLIDITY_DO_WHILE_CONTINUE,,CWE-835,CWE-691
+smartcheck,SOLIDITY_ERC20_APPROVE,,CWE-362,CWE-691
+smartcheck,SOLIDITY_ERC20_FUNCTIONS_ALWAYS_RETURN_FALSE,,CWE-670,CWE-691
+smartcheck,SOLIDITY_ERC20_INDEXED,,CWE-778,CWE-664
+smartcheck,SOLIDITY_ERC20_TRANSFER_SHOULD_THROW,,CWE-755,CWE-703
+smartcheck,SOLIDITY_EXACT_TIME,,CWE-829,CWE-664
+smartcheck,SOLIDITY_EXTRA_GAS_IN_LOOPS,,CWE-834,CWE-691
+smartcheck,SOLIDITY_FUNCTIONS_RETURNS_TYPE_AND_NO_RETURN,,CWE-665,CWE-664
+smartcheck,SOLIDITY_FUNCTION_RETURNS_TYPE_AND_NO_RETURN,,CWE-665,CWE-664
+smartcheck,SOLIDITY_GAS_LIMIT_IN_LOOPS,,"CWE-835, CWE-400","CWE-691, CWE-664"
+smartcheck,SOLIDITY_INCORRECT_BLOCKHASH,,CWE-477,CWE-710
+smartcheck,SOLIDITY_LOCKED_MONEY,,"CWE-282, CWE-758, CWE-667","CWE-284, CWE-710, CWE-664"
+smartcheck,SOLIDITY_MSGVALUE_EQUALS_ZERO,,CWE-571,CWE-710
+smartcheck,SOLIDITY_OVERPOWERED_ROLE,,CWE-269,CWE-284
+smartcheck,SOLIDITY_PRAGMAS_VERSION,,CWE-710,CWE-710
+smartcheck,SOLIDITY_PRIVATE_MODIFIER_DOES_NOT_HIDE_DATA,,CWE-710,CWE-710
+smartcheck,SOLIDITY_PRIVATE_MODIFIER_DONT_HIDE_DATA,,CWE-710,CWE-710
+smartcheck,SOLIDITY_REDUNDANT_FALLBACK_REJECT,,CWE-710,CWE-710
+smartcheck,SOLIDITY_REVERT_REQUIRE,,CWE-710,CWE-710
+smartcheck,SOLIDITY_REWRITE_ON_ASSEMBLY_CALL,,CWE-695,CWE-710
+smartcheck,SOLIDITY_SAFEMATH,,CWE-710,CWE-710
+smartcheck,SOLIDITY_SEND,,CWE-710,CWE-710
+smartcheck,SOLIDITY_SHOULD_NOT_BE_PURE,,CWE-1126,CWE-710
+smartcheck,SOLIDITY_SHOULD_NOT_BE_VIEW,,CWE-710,CWE-710
+smartcheck,SOLIDITY_SHOULD_RETURN_STRUCT,,CWE-710,CWE-710
+smartcheck,SOLIDITY_TRANSFER_IN_LOOP,,CWE-252,CWE-703
+smartcheck,SOLIDITY_TX_ORIGIN,,"CWE-477, CWE-346","CWE-710, CWE-284"
+smartcheck,SOLIDITY_UINT_CANT_BE_NEGATIVE,,CWE-190,CWE-682
+smartcheck,SOLIDITY_UNCHECKED_CALL,,CWE-754,CWE-703
+smartcheck,SOLIDITY_UNUSED_FUNCTION_SHOULD_BE_EXTERNAL,,CWE-1164,CWE-710
+smartcheck,SOLIDITY_UPGRADE_TO_050,,CWE-710,CWE-710
+smartcheck,SOLIDITY_USING_INLINE_ASSEMBLY,,CWE-695,CWE-710
+smartcheck,SOLIDITY_VAR,,CWE-190,CWE-682
+smartcheck,SOLIDITY_VAR_IN_LOOP_FOR,,CWE-190,CWE-682
+smartcheck,SOLIDITY_VISIBILITY,,CWE-1126,CWE-710
+smartcheck,SOLIDITY_WRONG_SIGNATURE,,CWE-710,CWE-710
+honeybadger,Balance_disorder,,CWE-506,CWE-710
+honeybadger,Hidden_state_update,,CWE-506,CWE-710
+honeybadger,Hidden_transfer,,CWE-506,CWE-710
+honeybadger,Inheritance_disorder,,CWE-684,CWE-710
+honeybadger,Money_flow,,CWE-506,CWE-710
+honeybadger,Skip_empty_string,,CWE-506,CWE-710
+honeybadger,Straw_man_contract,,CWE-506,CWE-710
+honeybadger,Type_overflow,,CWE-506,CWE-710
+honeybadger,Uninitialised_struct,,CWE-665,CWE-664
+confuzzius,Arbitrary_Memory_Access,,CWE-123,CWE-664
+confuzzius,Assertion_Failure,,CWE-670,CWE-691
+confuzzius,Block_Dependency,,CWE-829,CWE-664
+confuzzius,Integer_Overflow,,CWE-190,CWE-682
+confuzzius,Leaking_Ether,,"CWE-285, CWE-862",CWE-284
+confuzzius,Locking_Ether,,"CWE-282, CWE-758, CWE-667","CWE-284, CWE-710, CWE-664"
+confuzzius,Reentrancy,,CWE-1265,CWE-691
+confuzzius,Transaction_Order_Dependency,,CWE-362,CWE-691
+confuzzius,Unhandled_Exception,,CWE-391,CWE-703
+confuzzius,Unprotected_Selfdestruct,,"CWE-826, CWE-749","CWE-664, CWE-284"
+confuzzius,Unsafe_Delegatecall,,"CWE-20, CWE-282","CWE-707, CWE-284"

@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Orchid_BitwaveMultiSen.pdf",
+    "project_info": {
+        "url": "https://github.com/OrchidTechnologies/orchid/tree/3187d0716f16eeb59552d2c103c02efd5a530a76",
+        "commit_id": "3187d0716f16eeb59552d2c103c02efd5a530a76",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "orchid": "contracts/ConsenSys_Diligence-Orchid_BitwaveMultiSen/orchid"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-241"
+                ]
+            },
+            "title": "Warning about ERC20 handling function",
+            "description": "Potential issue with non-ERC20-conforming tokens not implementing return values in transfer functions.",
+            "severity": "low",
+            "location": "code/BitwaveMultiSend.sol:L55"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Discussion on the permissioning of send functions",
+            "description": "No security concerns, but potential issue with attribution of disbursements if contract is made publicly available.",
+            "severity": "n/a",
+            "location": "code/BitwaveMultiSend.sol (ERC20 disbursement function)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improve function visibility",
+            "description": "Restricting function visibility to external can be more gas efficient and simpler to reason about.",
+            "severity": "low",
+            "location": "BitwaveMultiSend.sendEth() and BitwaveMultiSend.sendErc20()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unnecessary refund logic",
+            "description": "Refund logic is unnecessary since individual sends would revert themselves if more Ether than available is specified.",
+            "severity": "n/a",
+            "location": "code/BitwaveMultiSend.sol:L22-L43 (Ether send function)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unneeded type cast of contract type",
+            "description": "Typecast on address parameter is unneeded and can be changed to the right type at function definition.",
+            "severity": "low",
+            "location": "code/BitwaveMultiSend.sol:L51"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Inadequate use of assert",
+            "description": "Assert should only be used for internal errors, not for external component integrity checks.",
+            "severity": "low",
+            "location": "Various lines using assert statements (e.g., code/BitwaveMultiSend.sol:L34, L40, L55)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Ethlint security related issues",
+            "description": "Various warnings and errors from Ethlint scan.",
+            "severity": "n/a",
+            "location": "code/BitwaveMultiSend.sol (various lines)"
+        }
+    ]
+}

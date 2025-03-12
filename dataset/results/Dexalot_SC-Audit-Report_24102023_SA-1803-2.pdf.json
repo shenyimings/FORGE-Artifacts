@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/Dexalot_SC-Audit-Report_24102023_SA-1803-2.pdf",
+    "project_info": {
+        "url": "https://github.com/Dexalot/contracts",
+        "commit_id": "f8881f901e3680cdf281de7ef8e2812e4a89ec8d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Dexalot_SC-Audit-Report_24102023_SA-1803-2/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "H01. Upgradeability Issues",
+            "description": "The contract is upgradable but does not follow the upgradability best practices by not adding a gap in the contract storage.",
+            "severity": "high",
+            "location": "./contracts/MainnetRFQ.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "H02. Unsafe Approval",
+            "description": "The contract MainnetRFQ uses the approve() function inside of the _executeSwap(), which does not update the allowance, but replaces it.",
+            "severity": "high",
+            "location": "./contracts/MainnetRFQ.sol: _executeSwap()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "M01. EIP Standard Violation: Missing Value Check",
+            "description": "EIP-1271 implementation does not check against an upper bound for variable s in signature verification process.",
+            "severity": "medium",
+            "location": "./contracts/MainnetRFQ.sol: _recoverSigner()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "L01. Missing Zero Address Validation",
+            "description": "Address parameters are used without checking against 0x0, leading to unwanted external calls to 0x0.",
+            "severity": "low",
+            "location": "./contracts/MainnetRFQ.sol: initialize(), addAdmin(), addTrustedContract()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "L02. Missing Array Length Check",
+            "description": "Function batchClaimBalance lacks array length equality checks, leading to unexpected behavior if lengths are different.",
+            "severity": "low",
+            "location": "./contracts/MainnetRFQ.sol: batchClaimBalance()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Inefficient Gas Model - Loop of Storage Interactions",
+            "description": "The variable rebalancer is read from storage in every loop iteration, affecting gas efficiency.",
+            "severity": "info",
+            "location": "./contracts/MainnetRFQ.sol: batchClaimBalance()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Functions that Can Be Declared External",
+            "description": "\"public\" functions that are never called by the contract should be declared \"external\" to save Gas.",
+            "severity": "info",
+            "location": "./contracts/MainnetRFQ.sol: initialize()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Boolean Equality",
+            "description": "Boolean constants can be used directly and do not need to be compared to true or false.",
+            "severity": "info",
+            "location": "./contracts/MainnetRFQ.sol: simpleSwap(), claimBalance(), batchClaimBalance()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate Code",
+            "description": "Repeated require statements throughout the contract code can lead to unnecessary code duplication.",
+            "severity": "info",
+            "location": "./contracts/MainnetRFQ.sol: claimBalance(), batchClaimBalance(), receive()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Solidity Style Guides Violation",
+            "description": "Deviation from established style guidelines affects contract readability and maintainability.",
+            "severity": "info",
+            "location": "./contracts/MainnetRFQ.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Missing Events for Critical Value Updates",
+            "description": "Events should be emitted after sensitive changes take place, to facilitate tracking and notify off-chain clients.",
+            "severity": "n/a",
+            "location": "./contracts/MainnetRFQ.sol: addTrustedContract(), removeTrustedContract()"
+        }
+    ]
+}

@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-DeFi_Saver.pdf",
+    "project_info": {
+        "url": "https://github.com/DecenterApps/defisaver-v3-contracts/tree/478e9cdc586ab669cf9ef69222f8886b4771d163",
+        "commit_id": "478e9cdc586ab669cf9ef69222f8886b4771d163",
+        "address": "0xaba8cac6866b83ae4eec97dd07ed254282f6ad8a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "defisaver-v3-contracts": "contracts/ConsenSys_Diligence-DeFi_Saver/defisaver-v3-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy vulnerability in executeOperation function",
+            "description": "Malicious external calls can inject tasks, stealing user funds or draining approved tokens.",
+            "severity": "critical",
+            "location": "DeFi Saver V3 contracts, executeOperation function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Overflow vulnerability in token handling",
+            "description": "Uncommon tokens with >18 decimals can cause broken code and unpredictable outcomes.",
+            "severity": "high",
+            "location": "DeFi Saver V3 contracts, various functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unchecked error codes in Compound interactions",
+            "description": "Failure to check error codes returned from Compound can cause unexpected behavior.",
+            "severity": "high",
+            "location": "DeFi Saver V3 contracts, Compound helpers"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Parameter reversal vulnerability in TokenUtils",
+            "description": "Incorrect parameter ordering in allowance function calls can cause unexpected behavior.",
+            "severity": "medium",
+            "location": "DeFi Saver V3 contracts, TokenUtils"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1093"
+                ]
+            },
+            "title": "Incomplete test suite",
+            "description": "Insufficient test coverage increases the risk of undetected issues.",
+            "severity": "medium",
+            "location": "DeFi Saver V3 contracts, testing framework"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Unclear code in KyberWrapperV3",
+            "description": "Undocumented assumptions and unclear function names can lead to misunderstandings.",
+            "severity": "low",
+            "location": "DeFi Saver V3 contracts, KyberWrapperV3"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing check in IOffchainWrapper.takeOrder implementation",
+            "description": "The user-provided minimum amount for swap is not taken into consideration, and the external contract should not be trusted upon.",
+            "severity": "low",
+            "location": "IOffchainWrapper.takeOrder implementation"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Return values not used for DFSExchangeCore.onChainSwap",
+            "description": "The return values from DFSExchangeCore.onChainSwap are not used.",
+            "severity": "low",
+            "location": "DFSExchangeCore.onChainSwap function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Return value is not used for TokenUtils.withdrawTokens",
+            "description": "The return value of TokenUtils.withdrawTokens, which represents the actual amount of tokens that were transferred, is never used.",
+            "severity": "low",
+            "location": "TokenUtils.withdrawTokens function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missing access control for DefiSaverLogger.Log",
+            "description": "Anyone can create logs using DefiSaverLogger because it lacks access control.",
+            "severity": "n/a",
+            "location": "DefiSaverLogger.sol, Log function"
+        }
+    ]
+}

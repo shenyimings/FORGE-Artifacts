@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/202208101129.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x1B79549Bb3cAe5614f1A10D5E033F35C42d570BC",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.15+commit.e14f2714"
+        ],
+        "project_path": {
+            "Farm": "contracts/202208101129/Farm"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reward issues of add and modify pool",
+            "description": "When the owner adds or modifies the pool, he can choose not to update the reward, which will reduce the allocation ratio of the pool where the original mortgaged user is located, thus reducing the original amount of reward.",
+            "severity": "low",
+            "location": "Farm.sol #L84-107, 109-126"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reward query questions",
+            "description": "When a user queries, the calculated roselleReward value is updated to 85%, while the actual update function usage is 100%, resulting in inconsistent query and actual results.",
+            "severity": "low",
+            "location": "Farm.sol #L139-166, L177-196"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "Reward token issuance issues",
+            "description": "When the user receives the reward token, if there is not enough reward token stored in the contract in advance, the user will fail to receive the reward.",
+            "severity": "low",
+            "location": "Farm.sol #L285-291"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Centralization risk",
+            "description": "The owner can set the open state through the open function to restrict users from withdrawing reward tokens.",
+            "severity": "low",
+            "location": "Farm.sol #L452-459"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Reward tokens cannot be staked",
+            "description": "When adding a pool, the owner needs to pay attention that the roselle reward token cannot be used as a stake token. If a user stakes roselle tokens, other users will withdraw the roselle tokens as reward tokens.",
+            "severity": "low",
+            "location": "Farm.sol #L84-104"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Excess reward tokens cannot be withdrawn",
+            "description": "When the amount of reward tokens of the Farm contract is too large, the contract has no function to withdraw.",
+            "severity": "low",
+            "location": "Farm.sol #L277-282, 199-228, 230-253"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing event trigger",
+            "description": "Events are not triggered in dao, open, takeToken, setadd, set, and add functions.",
+            "severity": "info",
+            "location": "Farm.sol #L280-284, 274-279, 285-290, 109-125, 84-107"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Fake recharge risk",
+            "description": "When users stake and withdraw fon and fonos tokens through the contract, there is a risk of fake recharge.",
+            "severity": "low",
+            "location": "Nodes.sol #L94-112, 113-123, 179-201, 203-220"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing event trigger",
+            "description": "The rankDel function is missing an event trigger.",
+            "severity": "info",
+            "location": "Nodes.sol #L168-177"
+        }
+    ]
+}

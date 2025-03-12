@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/Inspex-SuperLauncher_V.2.pdf",
+    "project_info": {
+        "url": "https://github.com/SuperLauncher/v2-core",
+        "commit_id": "610d5a017c0ecc177d5425a45d5e74d20b4e3a80",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "v2-core": "contracts/Inspex-SuperLauncher_V/v2-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy Attack",
+            "description": "The `_transferOut()` function is vulnerable to reentrancy attacks, allowing an attacker to drain the whole native token balance of the contract.",
+            "severity": "critical",
+            "location": "MainWorkflow.sol, `_transferOut()` function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Transaction Ordering Dependence",
+            "description": "The swap transaction can be front-run by the deployer or front-running bots, causing the $WBNB amount received to be lower than expected.",
+            "severity": "low",
+            "location": "swapCurrencyToWBnb() function in LpProvision library and swapToWBnbBase() function in Campaign contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Bad Randomness",
+            "description": "The owner can control the winnerStartIndex number, which can be unfair to other users.",
+            "severity": "low",
+            "location": "randomIndex() function in Lottery contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Input Validation for feePcnt",
+            "description": "The `finishUp()` function is unusable if the configurator role sets the fee to be over 100%, which can cause raised funds to get stuck in the contract.",
+            "severity": "low",
+            "location": "Campaign contract, `_getFinishUpStats()` and `initialize()` functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Parameter Size Validation",
+            "description": "The pack algorithm used by pack() and subscribe() functions is missing parameter size checking, leading to improper data logging.",
+            "severity": "low",
+            "location": "Campaign and Helper contracts, pack() and subscribe() functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions' executions cannot be monitored easily by users due to insufficient logging.",
+            "severity": "low",
+            "location": "RolesRegistry, Campaign, Factory, Manager contracts (_setRole(), setupLp(), setupVestingPeriods(), setupWhitelistFcfs(), approveConfig(), finalize() functions)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Public functions copy calldata to memory when being executed instead of reading directly from calldata.",
+            "severity": "info",
+            "location": "Campaign contract (addAndLockLP() function)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Inexplicit Solidity Compiler Version",
+            "description": "The Solidity compiler versions declared in the smart contracts were not explicit, which may result in compatibility issues.",
+            "severity": "info",
+            "location": "DataStore, Helper, Manager, RolesRegistry, Campaign contracts"
+        }
+    ]
+}

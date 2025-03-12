@@ -1,0 +1,188 @@
+{
+    "path": "artifacts/YieldProtocol.pdf",
+    "project_info": {
+        "url": "https://github.com/yieldprotocol/fyDai",
+        "commit_id": "4422fda75931f2bfea49f5041ec90dc026e5c03d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "fyDai": "contracts/YieldProtocol/fyDai"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Flash minting can be used to redeem fyDAI",
+            "description": "The flash-minting feature from the fyDAI token can be used to redeem an arbitrary amount of funds from a mature token.",
+            "severity": "high",
+            "location": "YDai contract, flash-minting feature"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Permission-granting is too simplistic and not flexible enough",
+            "description": "The Yield Protocol contracts implement an oversimplified permission system that can be abused by the administrator.",
+            "severity": "medium",
+            "location": "Controller contract, permission-granting mechanism"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "pot.chi() value is never updated",
+            "description": "The Yield contracts do not properly call a function to update its value.",
+            "severity": "low",
+            "location": "YDai.sol, mature function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Lack of validation when setting the maturity value",
+            "description": "No validation on the maturity date timestamp in the YDai contract constructor",
+            "severity": "low",
+            "location": "YDai.sol, constructor"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Delegates can be added or removed repeatedly to bloat logs",
+            "description": "Redundant events can be emitted by repeatedly adding or removing a delegation.",
+            "severity": "info",
+            "location": "helpers/Delegable.sol, addDelegate and revokeDelegate functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Withdrawing from the controller allows accounts to contain dust",
+            "description": "The withdraw operation can break the assumption that no account can contain dust for certain collaterals.",
+            "severity": "low",
+            "location": "Controller.sol, withdraw function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ]
+            },
+            "title": "Solidity compiler optimizations can be dangerous",
+            "description": "Enabled optional compiler optimizations in Solidity may not be safe.",
+            "severity": "n/a",
+            "location": "truffle-config.js, buidler.config.ts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Lack of chainID validation allows signatures to be re-used across forks",
+            "description": "Signatures used in calls to permit do not account for chainsplits.",
+            "severity": "high",
+            "location": "helpers/ERC20Permit.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Front-running of permit calls",
+            "description": "The permit function can be front-run to break the workflow from third-party smart contracts.",
+            "severity": "info",
+            "location": "ERC20Permit.sol, permit function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected pool initialization",
+            "description": "Any user can call init and provide some initial liquidity.",
+            "severity": "low",
+            "location": "Pool.sol, init function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inverse functions do not behave as expected",
+            "description": "The yDaiOutForDaiIn and daiInForYDaiOut functions do not behave as inverses.",
+            "severity": "n/a",
+            "location": "YieldMath.sol, yDaiOutForDaiIn and daiInForYDaiOut functions"
+        }
+    ]
+}

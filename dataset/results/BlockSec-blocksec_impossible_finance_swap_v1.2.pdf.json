@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/BlockSec-blocksec_impossible_finance_swap_v1.2.pdf",
+    "project_info": {
+        "url": "https://github.com/ImpossibleFinance/impossible-swap-core",
+        "commit_id": "29aaef89f996acdbee92b67c4d95fb608dc8b876",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "impossible-swap-core": "contracts/BlockSec-blocksec_impossible_finance_swap_v1/impossible-swap-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Reentrancy Vulnerability in ImpossibleWrappedToken",
+            "description": "Potential reentrancy vulnerability in ImpossibleWrappedToken due to callback mechanism.",
+            "severity": "high",
+            "location": "ImpossibleWrappedToken, deposit(address) and deposit(address, uint256) functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Incorrect Emitted Event",
+            "description": "Emitting an incorrect Transfer event with msg.sender instead of dst.",
+            "severity": "low",
+            "location": "ImpossibleWrappedToken, deposit(address, uint256) function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Deposit Front-running Vulnerability",
+            "description": "Separated transfer and deposit operations allow an attacker to launch a front-running attack.",
+            "severity": "medium",
+            "location": "ImpossibleWrappedToken.deposit(address)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Requirement Inconsistency in ImpossibleLibrary and ImpossiblePair",
+            "description": "Inconsistent requirements between ImpossibleLibrary.getAmountsOut() and ImpossiblePair.swap()",
+            "severity": "low",
+            "location": "ImpossibleLibrary.getAmountsOut() and ImpossiblePair.swap()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Hardstop Mechanism Inconsistency",
+            "description": "ImpossibleLibrary.getAmountOut() does not consider the hardstop mechanism.",
+            "severity": "low",
+            "location": "ImpossibleLibrary.getAmountOut()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Does Not Consider the Impact of Deflation/Rebasing Tokens",
+            "description": "ImpossibleWrappedToken.deposit(address, uint256) does not account for deflation/rebasing tokens.",
+            "severity": "medium",
+            "location": "ImpossibleWrappedToken.deposit(address, uint256)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Avoid to Empty the Pair",
+            "description": "In xybk scenario, a swap that empties a pool should not be allowed.",
+            "severity": "low",
+            "location": "xybk scenario in ImpossiblePair"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Design of kLast in Fees Collection",
+            "description": "_mintFee() function will fail to collect fees due to improper design of kLast.",
+            "severity": "medium",
+            "location": "ImpossiblePair._mintFee()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Documentation Inconsistency",
+            "description": "Calculation formulas of k in code implementation and documentation are different.",
+            "severity": "n/a",
+            "location": "Documentation"
+        }
+    ]
+}

@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/Iosiro-SNX FlashBurn Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/snxgrants/flashburn",
+        "commit_id": "e6e5248bcb4ecb4b3b362cc4c3618f32007ba7b2",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "flashburn": "contracts/Iosiro-SNX FlashBurn Smart Contract Audit/flashburn"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Aave LendingPool address not fetched dynamically",
+            "description": "The Aave LendingPool address is stored as an immutable state variable, but it should be fetched dynamically from the LendingPoolAddressesProvider contract.",
+            "severity": "info",
+            "location": "SNXFlashLoanTool.sol#L30"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-439"
+                ]
+            },
+            "title": "Deprecated safeApprove() function used",
+            "description": "The contract uses the deprecated SafeERC20.safeApprove() function, which is vulnerable to transaction reordering issues.",
+            "severity": "info",
+            "location": "SNXFlashLoanTool.sol#L54, SNXFlashLoanTool.sol#L117"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Arbitrary call leads to possible token theft and reentrancy (medium risk)",
+            "description": "The user-specified exchange address parameter could be used to call a user-controlled contract, leading to possible token theft and reentrancy.",
+            "severity": "medium",
+            "location": "SNXFlashLoanTool.sol#L140"
+        }
+    ]
+}

@@ -1,0 +1,413 @@
+{
+    "path": "artifacts/sturdy-aura-integration-and-leverage.pdf",
+    "project_info": {
+        "url": "https://github.com/balancer-labs/balancer-v2-monorepo/tree/d2794ef7d8f6d321cde36b7c536e8d51971688bd",
+        "commit_id": "d2794ef7d8f6d321cde36b7c536e8d51971688bd",
+        "address": "0x8401Eb5ff34cc943f096A32EF3d5113FEbE8D4Eb",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "balancer-v2-monorepo": "contracts/sturdy-aura-integration-and-leverage/balancer-v2-monorepo"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Draining Collateral with Reentrancy Attack",
+            "description": "In this audit, we found an exploit path in which the attacker can drain the collateral of other users.",
+            "severity": "high",
+            "location": "protocol/leverage/GeneralLevSwap.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Broken Slippage Controls Will Result in Lost Funds",
+            "description": "The functions withdrawWithFlashloan(), zapDeposit(), and zapLeverageWithFlashloan() within the GeneralLevSwap contract have ineffective slippage mechanisms.",
+            "severity": "high",
+            "location": "protocol/leverage/GeneralLevSwap.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Incorrect Price May Be Used From Chainlink Feed",
+            "description": "The BALWSTETHWETHOracle.sol contract retrieves the price of STETH by querying a Chainlink price feed with unchecked assumptions.",
+            "severity": "medium",
+            "location": "misc/BALWSTETHWETHOracle.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate price calculation",
+            "description": "The price calculation for the Balancer LP token may be inaccurate due to WETH/STETH price divergence.",
+            "severity": "medium",
+            "location": "misc/BALWSTETHWETHOracle.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-654"
+                ]
+            },
+            "title": "Single point of failure in price feed",
+            "description": "The BALWSTETHWETHOracle contract relies solely on the Chainlink price feed, which could be vulnerable to large-scale attacks or disruptions.",
+            "severity": "low",
+            "location": "misc/BALWSTETHWETHOracle.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Incorrect validation check",
+            "description": "A strict inequality check in the _withdrawWithFlashloan() function could cause validation to fail for valid data.",
+            "severity": "low",
+            "location": "protocol/leverage/GeneralLevSwap.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Overflow risk in yield calculation",
+            "description": "An overflow could occur when calculating the yield amount due to extreme fee setups.",
+            "severity": "low",
+            "location": "protocol/vault/GeneralVault.sol, protocol/vault/ethereum/AuraBalancerLPVault.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unlimited allowance for vault interactions",
+            "description": "The GeneralLevSwap contract sets an unlimited allowance for the vault, which could be insecure.",
+            "severity": "low",
+            "location": "protocol/leverage/GeneralLevSwap.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Hardcoded slippage limit",
+            "description": "A hardcoded 10% slippage limit could cause swap failures in unusual market conditions.",
+            "severity": "low",
+            "location": "protocol/leverage/ethereum-eth/AURAWSTETHWETHLevSwap.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Lack of input validation",
+            "description": "Several functions lack sufficient input parameter validation.",
+            "severity": "low",
+            "location": "Multiple files (see description)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Precision loss due to division order",
+            "description": "Calculations could result in precision loss due to division before multiplication.",
+            "severity": "low",
+            "location": "protocol/leverage/GeneralLevSwap.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Unsafe casting",
+            "description": "Multiple instances of unsafe casts could lead to overflow or underflow.",
+            "severity": "low",
+            "location": "misc/BALWSTETHWETHOracle.sol, protocol/leverage/ethereum-eth/AURAWSTETHWETHLevSwap.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy risks",
+            "description": "The protocol is vulnerable to reentrancy risks due to lack of nonReentrant modifier.",
+            "severity": "low",
+            "location": "protocol/vault/ethereum/AuraVault/AuraBalancerLPVault.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Sanity check error",
+            "description": "The sanity check for _vaultFee and _incentiveRatio could lead to revert in the _transferYield() function.",
+            "severity": "low",
+            "location": "protocol/leverage/ethereum-eth/AURAWSTETHWETHLevSwap.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-669"
+                ]
+            },
+            "title": "Unexpected Token Transfer",
+            "description": "Accidentally sent tokens can be returned to the next user swapping to that asset, leading to unexpected behavior.",
+            "severity": "info",
+            "location": "AURAWSTETHWETHLevSwap contract"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Misleading Leverage Definition",
+            "description": "The protocol's leverage definition may differ from user expectations, leading to unexpectedly high leverage.",
+            "severity": "info",
+            "location": "protocol/leverage/GeneralLevSwap.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading Function Signatures",
+            "description": "Function signatures may be misleading, leading to confusion about their purpose.",
+            "severity": "info",
+            "location": "protocol/leverage/ethereum-eth/AURAWSTETHWETHLevSwap.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Risk of Fund Loss due to External Contract Hacking",
+            "description": "The platform's reliance on external contracts to generate yields may lead to fund loss if those contracts are hacked.",
+            "severity": "info",
+            "location": "protocol/vault/ethereum/AuraVault/AuraBalancerLPVault.sol"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked Pragma Version",
+            "description": "The use of an unlocked pragma version may lead to unexpected behavior in the future.",
+            "severity": "info",
+            "location": "Multiple files (misc/BALWSTETHWETHOracle.sol, protocol/vault/ethereum/AuraVault/AuraBalancerLPVault.sol, etc.)"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Assumed Maximum Slippage",
+            "description": "The function enterPositionWithFlashloan() assumes maximum slippage when calculating the amount to borrow for the flash loan.",
+            "severity": "n/a",
+            "location": "protocol/leverage/GeneralLevSwap.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Vault Yield",
+            "description": "The GeneralVault.vaultYieldInPrice() function always returns 0 and is not overridden by any vault contracts.",
+            "severity": "n/a",
+            "location": "protocol/vault/ethereum/AuraVault/AuraBalancerLPVault.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Yield Amount",
+            "description": "The AuraBalancerLPVault.getYieldAmount() function returns the incorrect pending yield.",
+            "severity": "n/a",
+            "location": "protocol/vault/ethereum/AuraVault/AuraBalancerLPVault.sol"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Excessive Leverage",
+            "description": "The functions zapLeverageWithFlashloan() and enterPositionWithFlashloan() do not validate the _leverage input to be less than or equal to nine.",
+            "severity": "n/a",
+            "location": "protocol/leverage/GeneralLevSwap.sol"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Unclear Oracle Usage",
+            "description": "The integration of BALWSTETHWETHOracle with the remainder of the system is unclear.",
+            "severity": "n/a",
+            "location": "misc/BALWSTETHWETHOracle.sol"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Amplified Slippage due to Leverage",
+            "description": "The effect of swap slippage can be greatly amplified due to the need to pay back the exact amount of borrowed tokens (plus any flash loan fees) to the flash loan provider.",
+            "severity": "n/a",
+            "location": "protocol/leverage/GeneralLevSwap.sol"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Inadequate Testing",
+            "description": "Critical scenarios, such as slippage constraints of leveraged swap functionality, are not tested.",
+            "severity": "medium",
+            "location": "AuraBalancerLPVault.vaultYieldInPrice() function"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Assertions",
+            "description": "Events like AuraBalancerLPVault.SetParameters are not asserted in the test suite.",
+            "severity": "low",
+            "location": "Various functions and events throughout the contract"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "Lack of Code Coverage Script",
+            "description": "No code coverage script is implemented to determine which parts of the contracts' code have not been tested.",
+            "severity": "medium",
+            "location": "Test suite setup"
+        }
+    ]
+}

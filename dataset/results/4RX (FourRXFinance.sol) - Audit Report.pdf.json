@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/4RX (FourRXFinance.sol) - Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/FourRX/4rx",
+        "commit_id": "f7d395e86028056ba5e88ee50ddbd933a1a0779d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "4rx": "contracts/4RX (FourRXFinance/4rx"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "State Variables Updated After External Call",
+            "description": "Violation of Check-Effects-Interaction Pattern, updating state variables after external calls.",
+            "severity": "medium",
+            "location": "FourRXFinance contract, deposit at Line 102, withdraw at Line 185, withdrawDevFee at Line 246"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Multiplication is being performed on the result of Division",
+            "description": "Performance of division before multiplication might lead to loss of precision.",
+            "severity": "medium",
+            "location": "FourRXFinance contract, pendingRewardToken at 214-219, updatePool at 248-256; RewardsAndPenalties contract, _calcContractBonus at 52-53, _calcHoldRewards at 63-64"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Return Value of an External Call is never used Effectively",
+            "description": "The external calls made do return a boolean value that indicates whether the external call was successful, but it's not used effectively.",
+            "severity": "low",
+            "location": "FourRXFinance contract, Line no -185, 215, 246"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "updateDevAddress function does not include Zero Address Validation",
+            "description": "The updateDevAddress function initializes a crucial address in the contract without implementing zero address checks.",
+            "severity": "low",
+            "location": "FourRXFinance contract, Line no: 250-253"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Absence of Error messages in Require Statements",
+            "description": "The require statements do not include any error message, making it difficult to detect the reason behind a particular function revert.",
+            "severity": "low",
+            "location": "FourRXFinance contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-369"
+                ]
+            },
+            "title": "calcPercentage allows passing ZERO as its second argument",
+            "description": "The calcPercentage function includes a require statement that allows basisPoints arguments to be equal to ZERO, leading to unwanted scenarios.",
+            "severity": "high",
+            "location": "PercentageCalculator contract, Line no - 13"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Function design of _addSponsorPoolRecord does not match to _addRefPoolRecord",
+            "description": "The function _addRefPoolRecord includes an IF_ELSE mechanism to check whether the provided information is already present in the list, but no such mechanism was found in the _addSponsorPoolRecord function.",
+            "severity": "medium",
+            "location": "ReferralPool and SponsorPool contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Constant declaration should be preferred",
+            "description": "State variables that are not supposed to change throughout the contract should be declared as constant.",
+            "severity": "low",
+            "location": "SharedVariables contract, Line no: 15"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Contract includes Hardcoded Addresses",
+            "description": "Including hardcoded addresses in the contract before deployment is not a good practice.",
+            "severity": "low",
+            "location": "SharedVariables contract, Line no - 17"
+        }
+    ]
+}

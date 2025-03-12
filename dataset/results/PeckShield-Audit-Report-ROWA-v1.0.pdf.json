@@ -1,0 +1,56 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-ROWA-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/rowagames/ROWA-Token/tree/a22118e",
+        "commit_id": "a22118e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ROWA-Token": "contracts/PeckShield-Audit-Report-ROWA-v1/ROWA-Token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Revisited Cliff Consideration in _computeReleasableAmount()",
+            "description": "The current computation in _computeReleasableAmount() either takes no consideration on the intended cliff or cannot release any initial amount before the cliff.",
+            "severity": "low",
+            "location": "RowaToken, RowaVesting::_computeReleasableAmount()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improved Revoke Logic in RowaVesting",
+            "description": "The current revoke logic adjusts the various states, including totalPSVested, totalPRIVSVested, and totalSEEDSVested, which is redundant for non-revocable vesting schedules.",
+            "severity": "low",
+            "location": "RowaVesting::revoke()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue Of Admin Keys",
+            "description": "The privileged account (owner) in the RowaVesting contract has critical roles, but its power may also be a counter-party risk to protocol users.",
+            "severity": "medium",
+            "location": "RowaVesting contract, Security Features"
+        }
+    ]
+}

@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/Blockchain_Labs_NZ-Mothership.pdf",
+    "project_info": {
+        "url": "https://github.com/BlockchainLabsNZ/Back-to-Earth-audit",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Back-to-Earth-audit": "contracts/Blockchain_Labs_NZ-Mothership/Back-to-Earth-audit"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unnecessary Gas Spending",
+            "description": "burn transfer and burnFrom functions accept a value of 0 tokens, which spends gas on a transaction that does not alter the state.",
+            "severity": "low",
+            "location": "burn, burnFrom functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect ERC20 Spec Implementation",
+            "description": "transfer should return boolean true/false",
+            "severity": "low",
+            "location": "transfer function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Incorrect Approval Event Trigger",
+            "description": "Approval event is triggered when approve is called, but with incorrect parameters",
+            "severity": "low",
+            "location": "approve function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Unnecessary Event Emission",
+            "description": "mintToken emits the Transfer event twice, which can be simplified to one emission",
+            "severity": "low",
+            "location": "mintToken function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Gas Consumption on Throws",
+            "description": "throwing will consume all gas, consider returning in some cases to preserve the user's gas",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Frozen Token Vulnerability",
+            "description": "burn function doesn’t check whether the address is frozen, allowing 'melt' of frozen tokens and decreasing total supply",
+            "severity": "medium",
+            "location": "burn function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Unchecked Overflow in mintToken",
+            "description": "mintToken isn't checking for overflows",
+            "severity": "medium",
+            "location": "mintToken function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Unauthorized Token Burning",
+            "description": "burnFrom never decreases the allowance amount, allowing someone with an allowance to burn all tokens belonging to that token holder",
+            "severity": "high",
+            "location": "burnFrom function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unauthorized Access to burnFrom",
+            "description": "burnFrom should only be callable by the contract owner otherwise anyone with an allowance can burn tokens",
+            "severity": "high",
+            "location": "burnFrom function"
+        }
+    ]
+}

@@ -1,0 +1,313 @@
+{
+    "path": "artifacts/ROWA_Games_SC-Audit-Report_04_05_2023_SA-1295-1.pdf",
+    "project_info": {
+        "url": "https://github.com/rowagames/ROWA-Token",
+        "commit_id": "2ecddd50",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ROWA-Token": "contracts/ROWA_Games_SC-Audit-Report_04_05_2023_SA-1295-1/ROWA-Token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "C01. Requirements Violation",
+            "description": "Vesting cliff times do not match documentation.",
+            "severity": "critical",
+            "location": "./RowaVesting.sol : startVGPVesting(), startLPVesting(), startLiqVesting(), startReserveVesting(), createPublicSaleVesting(), createPrivateSaleVesting(), createSeedSaleVesting(), createTeamVesting(), createAdvisorVesting(), createPartnershipVesting()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "C02. Compilation Error",
+            "description": "Trivial error in NatSpec prevents contract compilation.",
+            "severity": "critical",
+            "location": "./RowaVesting.sol : createSeedSaleVesting()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "H01. Requirement Violation",
+            "description": "Initial funds can be released before vesting schedule starts.",
+            "severity": "high",
+            "location": "./RowaVesting.sol : _computeReleasableAmount()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "H02. Requirement Violation",
+            "description": "Cliff period is not implemented correctly.",
+            "severity": "high",
+            "location": "./RowaVesting.sol : _computeReleasableAmount()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "H03. Invalid Calculations; Requirement Violation",
+            "description": "Wrong vested amount calculation leads to premature vesting.",
+            "severity": "high",
+            "location": "./RowaVesting.sol : createSeedSaleVesting()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "M01. Lock of Native Tokens",
+            "description": "Contracts accept native tokens but do not allow withdrawals.",
+            "severity": "medium",
+            "location": "./RowaVesting.sol : receive(), fallback()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "M02. Invalid Calculations",
+            "description": "Wrong calculation of releasable amount.",
+            "severity": "medium",
+            "location": "./RowaVesting.sol : _computeReleasableAmount()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "M03. Redundant Safemath Library",
+            "description": "SafeMath library is redundant since Solidity ^0.8.0.",
+            "severity": "medium",
+            "location": "./RowaVesting.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "M04. Hash Collision",
+            "description": "Vesting schedule ID generation allows for collisions.",
+            "severity": "medium",
+            "location": "./RowaVesting.sol : computeVestingScheduleIdForAddressAndIndex()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "L01. Functions That Can Be Declared External",
+            "description": "Public functions can be declared as external to save Gas.",
+            "severity": "low",
+            "location": "./RowaVesting.sol, ./RowaToken.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L02. Redundant Code",
+            "description": "Unnecessary total supply enforcement in _beforeTokenTransfer().",
+            "severity": "low",
+            "location": "./RowaToken.sol : _beforeTokenTransfer()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "L03. Missing Events",
+            "description": "Critical state changes should emit events.",
+            "severity": "low",
+            "location": "./RowaVesting.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Immutable Variables",
+            "description": "Multiple variables can be declared immutable to save gas on tx executions.",
+            "severity": "low",
+            "location": "./RowaVesting.sol : _VGP_FUND, _LP_FUND, _LIQ_FUND, _RESERVE_FUND"
+        },
+        {
+            "id": 13,
+            "category": {},
+            "title": "Constant Variables",
+            "description": "Multiple variables can be declared constant to save Gas on tx executions.",
+            "severity": "low",
+            "location": "./RowaVesting.sol : VGP_INITIAL_VESTING_PERCENTAGE, LP_INITIAL_VESTING_PERCENTAGE, PS_INITIAL_VESTING_PERCENTAGE, PRIVS_INITIAL_VESTING_PERCENTAGE, SEEDS_INITIAL_VESTING_PERCENTAGE, RESERVE_INITIAL_VESTING_PERCENTAGE, TEAM_INITIAL_VESTING_PERCENTAGE, ADVISORS_INITIAL_VESTING_PERCENTAGE, PARTNERSHIPS_INITIAL_VESTING_PERCENTAGE"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation",
+            "description": "The provided projects should follow the official guidelines.",
+            "severity": "info",
+            "location": "./RowaVesting.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ]
+            },
+            "title": "Boolean Equality",
+            "description": "Boolean constants can be used directly and do not need to be compared to true or false.",
+            "severity": "info",
+            "location": "./RowaVesting.sol : onlyInitialized(), onlyActive(), _computeReleasableAmount()"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Payable Variable",
+            "description": "The release() function uses address payable variables for transferring ERC20 tokens.",
+            "severity": "info",
+            "location": "./RowaVesting.sol : release()"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "The project uses floating pragmas ^0.8.19.",
+            "severity": "info",
+            "location": "./RowaVesting.sol; ./RowaToken.sol;"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Virtual Keyword",
+            "description": "The function getCurrentTime() is declared virtual, but since this contract is not meant to be inherited it can be removed.",
+            "severity": "info",
+            "location": "./RowaVesting.sol : getCurrentTime()"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Redundant Token Transfer",
+            "description": "The RowaToken contract mints the initial supply to the deployer in the constructor, and then in the startVesting() function it transfers this sum from the deployer to the vesting contract.",
+            "severity": "info",
+            "location": "./RowaToken.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Variable Declaration",
+            "description": "These functions use the currentTime variable inside for storing the block.timestamp value.",
+            "severity": "info",
+            "location": "./RowaToken.sol and ./RowaVesting.sol : StartVGPVesting(), startLPVesting(), startLiqVesting(), startReserveVesting(), createPublicSaleVesting(), createPrivateSaleVesting(), createSeedSaleVesting(), createTeamVesting(), createAdvisorVesting(), createPartnershipsVesting()"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Identifier",
+            "description": "The structure VestingSchedule contains a cliff field which is never used in the code.",
+            "severity": "info",
+            "location": "./RowaVesting.sol : VestingSchedule"
+        }
+    ]
+}

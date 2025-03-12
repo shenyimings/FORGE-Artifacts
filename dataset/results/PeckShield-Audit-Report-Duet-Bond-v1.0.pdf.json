@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Duet-Bond-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/duet-protocol/duet-bond-contract/tree/655a706",
+        "commit_id": "655a706",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "duet-bond-contract": "contracts/PeckShield-Audit-Report-Duet-Bond-v1/duet-bond-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Exposure Of Permissioned VaultFarm::massUpdatePools()",
+            "description": "The massUpdatePools() function is currently permissionless, allowing anyone to update reward variables for all pools.",
+            "severity": "high",
+            "location": "VaultFarm contract, massUpdatePools() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Incorrect Epoch Removal Logic In VaultFarm::removePoolEpoch",
+            "description": "The removePoolEpoch() function lacks pending rewards handling and related storage arrays epochs/epochRewards updates before removing an epoch token from a pool.",
+            "severity": "medium",
+            "location": "VaultFarm contract, removePoolEpoch() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect start Update Logic In SingleBond::renewal()",
+            "description": "The update of the state variables newstart/start is not implemented correctly.",
+            "severity": "low",
+            "location": "SingleBond contract, renewal() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged owner account needs to be scrutinized and may pose counter-party risk to the protocol users.",
+            "severity": "medium",
+            "location": "Multiple contracts"
+        }
+    ]
+}

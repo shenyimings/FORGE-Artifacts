@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/1inch Rewards Manager.md",
+    "project_info": {
+        "url": "https://github.com/lidofinance/1inch-rewards-manager",
+        "commit_id": "c2cd9665666deda9452fa9e3461fbf3537413945",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "1inch-rewards-manager": "contracts/1inch Rewards Manager/1inch-rewards-manager"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No check of the address parameter for zero",
+            "description": "The `_to` parameter is not checked for zero, which could block function calls.",
+            "severity": "info",
+            "location": "RewardsManager.vy, Line 66, set_rewards_period_duration() and recover_erc20()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "No logging of important events",
+            "description": "Important events are not logged, making maintenance more difficult.",
+            "severity": "info",
+            "location": "RewardsManager.vy, Lines 100-120 (start_next_rewards_period()) and Lines 124-131 (set_rewards_period_duration())"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "No setter for the address of the interacting contract",
+            "description": "There is no way to change the address of the `FarmingRewards` contract.",
+            "severity": "info",
+            "location": "RewardsManager.vy, Line 39"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Test scripts problem",
+            "description": "Two tests (test_owner_recovers_erc20_to_own_address and test_owner_recovers_erc20_zero_amount) do not work correctly.",
+            "severity": "info",
+            "location": "Test scripts"
+        }
+    ]
+}

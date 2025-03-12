@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/token-mint.pdf",
+    "project_info": {
+        "url": "https://github.com/token-mint/ngnt/tree/master",
+        "commit_id": "master",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ngnt": "contracts/token-mint/ngnt"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Allowance Double-Spend Exploit",
+            "description": "The contract is vulnerable to an allowance double-spend exploit.",
+            "severity": "low",
+            "location": "NGNT.sol, increaseAllowance() and decreaseAllowance() functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Race Conditions / Front-Running",
+            "description": "A miner attacker can manipulate the ordering of transactions to benefit themselves.",
+            "severity": "low",
+            "location": "NGNT.sol, updateGsnFee(), acceptRelayedCall() and _postRelayedCall() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization of Power",
+            "description": "The owner has special privileges to make modifications to the contract.",
+            "severity": "low",
+            "location": "NGNT.sol, Pausable.sol, Ownable.sol, and Blacklistable.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Reliance on Other Contracts",
+            "description": "The contract relies on external contracts, such as Gas Station Network (GSN).",
+            "severity": "low",
+            "location": "NGNT.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Unlocked Pragma",
+            "description": "The pragma solidity version is not locked to a specific version.",
+            "severity": "info",
+            "location": "Blacklistable.sol, LimitedUpgradesProxyAdmin.sol, NGNT.sol, Ownable.sol, Pausable.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ]
+            },
+            "title": "Clone-and-Own",
+            "description": "The clone-and-own approach involves copying and adjusting open source code.",
+            "severity": "info",
+            "location": "Ownable.sol, Pausible.sol"
+        }
+    ]
+}

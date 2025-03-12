@@ -1,0 +1,83 @@
+{
+    "path": "artifacts/Euroe Stablecoin Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/membranefi/euroe-stablecoin",
+        "commit_id": "48681778aebfb11844c5c2f3ff2fa32df4f4c398",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "euroe-stablecoin": "contracts/Euroe Stablecoin Audit/euroe-stablecoin"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "A blocked address can unblock itself",
+            "description": "A blocked address can call the renounceRole function and get unblocked again, violating P13.",
+            "severity": "high",
+            "location": "EUROe.sol, renounceRole function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Missing check that permit spender has the BURNER_ROLE",
+            "description": "No check that the spender of the permit has the BURNER_ROLE, allowing a different permit to burn tokens.",
+            "severity": "n/a",
+            "location": "EUROe.sol, burnFromWithPermit function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "No restrictions on which addresses can be blocked or unblocked",
+            "description": "BLOCKLISTER can block or unblock any address, including address 0.",
+            "severity": "n/a",
+            "location": "EUROe.sol, BLOCKLISTER role"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "BLOCKED addresses can still perform critical operations",
+            "description": "Blocked addresses with certain roles can still perform critical operations.",
+            "severity": "n/a",
+            "location": "EUROe.sol, various functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "A BLOCKED address can still perform some operations",
+            "description": "Blocked addresses can still perform certain operations that change the state of the contract.",
+            "severity": "n/a",
+            "location": "EUROe.sol, various functions"
+        }
+    ]
+}

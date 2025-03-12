@@ -1,0 +1,71 @@
+{
+    "path": "artifacts/PeckShield-Security-Review-Alpha-Homora-v1.0.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x431ad2ff6a9c365805ebad47ee021148d6f7dbe0",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.5.2+commit.1df8f40c"
+        ],
+        "project_path": {
+            "DSToken": "contracts/PeckShield-Security-Review-Alpha-Homora-v1/DSToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "PVE-001: Missed approve(spender, 0) Call",
+            "description": "Alpha Homora fails to approve(spender,0) before approving the router contract to spend the fToken, which may lead to compatibility issues with certain ERC20 tokens.",
+            "severity": "low",
+            "location": "StrategyLiquidate and StrategyAllETHOnly contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "PVE-002: Improved Ether Transfer Call",
+            "description": "Inconsistent ether transfer calls, suggesting to use SafeToken.SafeTransferETH() instead.",
+            "severity": "low",
+            "location": "Gringotts::reducio()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "PVE-003: Randomly Received Ether Interfere With the Calculation",
+            "description": "Fallback function in Gringotts contract allows random users to send ether, which may interfere with totalETH() calculation.",
+            "severity": "info",
+            "location": "Gringotts contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "PVE-004: Known Issue in Solidity v0.5.16",
+            "description": "Private function override issue in Solidity v0.5.16, recommended to use Solidity 0.5.17 or above.",
+            "severity": "info",
+            "location": "Alpha Homora contracts"
+        }
+    ]
+}

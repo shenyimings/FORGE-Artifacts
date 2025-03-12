@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/Run4Life_0x2Fd6314c733b042bBf60f51b788A7E335B96AE05.pdf",
+    "project_info": {
+        "url": "https://github.com/interfinetwork/audited-codes/blob/main/Run4Life.sol",
+        "commit_id": "ec96f96b0bcac753fe5c351ac767324e37331b18",
+        "address": "0x2fd6314c733b042bbf60f51b788a7e335b96ae05",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.9+commit.e5eed63a"
+        ],
+        "project_path": {
+            "Run4LifeToken": "contracts/Run4Life_0x2Fd6314c733b042bBf60f51b788A7E335B96AE05/Run4LifeToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Blacklist",
+            "description": "Stops specified wallets from interacting with the smart contract function modules",
+            "severity": "low",
+            "location": "Blacklist function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected `receive()` function",
+            "description": "The `receive()` function can be called by anyone, which may lead to unauthorized Ether transfers.",
+            "severity": "n/a",
+            "location": "receive() external payable {}"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant code for `transferOwnership()`",
+            "description": "The ideal transfer ownership code should look like the provided example.",
+            "severity": "n/a",
+            "location": "transferOwnership() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected `burn()` function",
+            "description": "The contract owner can allow token burn from `msg.sender` to reduce the circulating supply.",
+            "severity": "n/a",
+            "location": "burn(uint256 amount) public {}"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Blacklisting wallets",
+            "description": "The contract owner can blacklist wallets from interacting with the contract function.",
+            "severity": "n/a",
+            "location": "setBlacklist(address _address) external onlyOwner {}"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-279"
+                ]
+            },
+            "title": "Whitelisting wallets",
+            "description": "The contract owner can whitelist wallets to exclude them from sell fees.",
+            "severity": "n/a",
+            "location": "setWhitelists(address[] calldata _whitelists) external onlyTreasury {}"
+        }
+    ]
+}

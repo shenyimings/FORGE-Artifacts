@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/PolyNuts Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xA98E88C974361015723E889CdCF63cd8D8004765",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "DeezNutsMasterChef": "contracts/PolyNuts Smart Contract Audit Report - QuillAudits/DeezNutsMasterChef"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risks",
+            "description": "The role owner has the authority to add new liquidity pool, set/modify settings of a pool, modify dev and fee address, update Nuts emission rate, set/modify referral commission rate, and update start block.",
+            "severity": "medium",
+            "location": "DeezNutsMasterChef"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "User's Lockdown period resets after withdraw()",
+            "description": "The function updateStartBlock() and massUpdatePools(), has loops which may run out of gas if a significant amount of pools are added to.",
+            "severity": "low",
+            "location": "DeezNutsMasterChef, Lines 1437-1448 and 1292-1297"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Deposits and withdrawals will revert when token maximum supply is reached",
+            "description": "When the maximum supply is reached, the _mint function will revert, causing updatePool() to fail.",
+            "severity": "low",
+            "location": "DeezNutsMasterChef"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Remove unused events",
+            "description": "The event \"IReferral\" is never used and should be removed to reduce gas costs.",
+            "severity": "info",
+            "location": "DeezNutsMasterChef, Line 1213"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Unused public functions",
+            "description": "Some public functions are never called from the contract and should be marked as external.",
+            "severity": "info",
+            "location": "DeezNutsMasterChef"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "MAXCAP has no other use",
+            "description": "The variable MAXCAP is not used anywhere else in the contract.",
+            "severity": "info",
+            "location": "NUTSToken"
+        }
+    ]
+}

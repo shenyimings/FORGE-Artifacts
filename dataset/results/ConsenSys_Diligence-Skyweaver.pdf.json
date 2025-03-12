@@ -1,0 +1,103 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Skyweaver.pdf",
+    "project_info": {
+        "url": "https://github.com/horizon-games/SkyWeaver-contracts",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "SkyWeaver-contracts": "contracts/ConsenSys_Diligence-Skyweaver/SkyWeaver-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Gold order size should be limited",
+            "description": "Unrestricted gold card orders can lead to gas issues during mining.",
+            "severity": "high",
+            "location": "GoldCardsFactory.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Re-entrancy attack allows to buy EternalHeroes cheaper",
+            "description": "Re-entrancy attack possible before items are minted.",
+            "severity": "high",
+            "location": "EternalHeroesFactory.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Supply limitation misbehaviors",
+            "description": "Unexpected state if maxSupply is set lower than currentSupply.",
+            "severity": "medium",
+            "location": "SWSupplyManager.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-330"
+                ]
+            },
+            "title": "Randomness manipulation by buyers",
+            "description": "Buyers can manipulate randomness to get a better gold card",
+            "severity": "medium",
+            "location": "GoldCardsFactory.sol, _commit function"
+        },
+        {
+            "id": 4,
+            "category": {},
+            "title": "Refund sent to recipient instead of from address",
+            "description": "In case users want to keep game items and money separate, refunds are sent to the wrong address.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-330"
+                ]
+            },
+            "title": "Randomness manipulation by miners",
+            "description": "Miners can manipulate randomness to get a better gold card if it's expensive enough",
+            "severity": "low",
+            "location": "GoldCardsFactory.sol, using future blockhash as a seed"
+        }
+    ]
+}

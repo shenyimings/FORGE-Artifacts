@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/SlowMist Audit Report - Coin98 Dollar (CUSD)_en-us.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xC285B7E09A4584D027E5BC36571785B515898246",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.13+commit.abaa5c0e"
+        ],
+        "project_path": {
+            "CUSD": "contracts/SlowMist Audit Report - Coin98 Dollar (CUSD)_en-us/CUSD"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "No Upper Limit on Token Minting",
+            "description": "The minter role can mint tokens arbitrarily through the mint function without an upper limit, leading to token inflation.",
+            "severity": "high",
+            "location": "mint function in CUSD contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owner Role Can Withdraw Any Tokens",
+            "description": "The owner role can withdraw any tokens from this contract to a specific address.",
+            "severity": "medium",
+            "location": "withdraw function in Withdrawable contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "No Upper Limit on Gas for Low-Level Call",
+            "description": "There is no upper limit on the gas to execute the low-level call to withdraw native tokens.",
+            "severity": "medium",
+            "location": "withdraw function in Withdrawable contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Losing control of the contract",
+            "description": "Transfer ownership of the contract to a new account (`newOwner`) without proper checks.",
+            "severity": "high",
+            "location": "Ownable.sol (transferOwnership function)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owner can withdraw any NFT tokens from the contract",
+            "description": "The owner role can withdraw any NFT tokens from this contract to a specific address.",
+            "severity": "high",
+            "location": "withdrawNft function in Withdrawable contract"
+        }
+    ]
+}

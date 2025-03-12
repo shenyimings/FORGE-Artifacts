@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/Dexalot_SC-Audit-Report_24042023_SA-1170_.pdf",
+    "project_info": {
+        "url": "https://github.com/Dexalot/contracts",
+        "commit_id": "f8881f901e3680cdf281de7ef8e2812e4a89ec8d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Dexalot_SC-Audit-Report_24042023_SA-1170_/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Upgradeability Issues",
+            "description": "Contract storage layout corruption during an upgrade due to not following upgradability best practices.",
+            "severity": "high",
+            "location": "./contracts/MainnetRFQ.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Inefficient Gas Model - Loop of Storage Interactions",
+            "description": "Reading a storage variable multiple times in every loop iteration, making it inefficient gas-wise.",
+            "severity": "low",
+            "location": "./contracts/MainnetRFQ.sol : batchClaimBalance()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "Failing to check against the possibility of 0x0 addresses, leading to unwanted external calls.",
+            "severity": "low",
+            "location": "./contracts/MainnetRFQ.sol : initialize(), addAdmin(), addTrustedContract()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Functions that Can Be Declared External",
+            "description": "Failure to declare public functions as external, which can save gas.",
+            "severity": "low",
+            "location": "./contracts/MainnetRFQ.sol : initialize()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Boolean Equality",
+            "description": "Comparing boolean constants to true or false instead of using them directly.",
+            "severity": "low",
+            "location": "./contracts/MainnetRFQ.sol : simpleSwap(), claimBalance(), batchClaimBalance()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate Code",
+            "description": "Repeating require statements throughout the contract code, making it harder to maintain and prone to errors.",
+            "severity": "low",
+            "location": "./contracts/MainnetRFQ.sol : claimBalance(), batchClaimBalance(), receive()"
+        }
+    ]
+}

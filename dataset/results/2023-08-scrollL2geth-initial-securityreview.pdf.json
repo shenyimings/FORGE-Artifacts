@@ -1,0 +1,182 @@
+{
+    "path": "artifacts/2023-08-scrollL2geth-initial-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/scroll-tech/go-ethereum",
+        "commit_id": "2dcc60a082ff89d1c57e497f23daad4823b2fdea",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "go-ethereum": "contracts/2023-08-scrollL2geth-initial-securityreview/go-ethereum"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Transaction pool fails to drop transactions that cannot afford L1 fees",
+            "description": "The Cost() function does not account for L1 fees, causing tx_list.Filter() to fail to demote unexecutable transactions.",
+            "severity": "info",
+            "location": "Transaction pool, core/types/transaction.go"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-248"
+                ]
+            },
+            "title": "Multiple instances of unchecked errors",
+            "description": "Various unhandled Go errors reported in finding TOB-L2GETH-2.",
+            "severity": "low",
+            "location": "trie/zkproof/writer.go, trie/sync.go, trie/proof.go, trie/committer.go, trie/database.go, go-ethereum code, l2geth changes"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-654"
+                ]
+            },
+            "title": "Risk of double-spend attacks due to use of single-node Clique consensus without finality API",
+            "description": "Using a single node in Clique consensus mode puts off-chain applications at risk of double-spend attacks if the sequencer is compromised.",
+            "severity": "medium",
+            "location": "l2geth sequencer, Clique consensus mechanism"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Improper use of panic",
+            "description": "Overuse of Go's panic mechanism introduces opportunities for denial of service. Instances in which panic is used instead of Go’s error management system.",
+            "severity": "low",
+            "location": "Various areas of the codebase, l2geth changes"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Risk of panic from nil dereference due to flawed error reporting in addressToKey",
+            "description": "The addressToKey function returns a nil pointer instead of a Go error when an error is returned by the preImage.Hash() function.",
+            "severity": "info",
+            "location": "addressToKey function, trie/zkproof/writer.go"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-358"
+                ]
+            },
+            "title": "Syncing nodes fail to check consensus rule for L1 message count",
+            "description": "Syncing nodes fail to check the maximum number of L1 messages per block restriction.",
+            "severity": "low",
+            "location": "Syncing nodes, ValidateL1Messages function in core/block_validator.go"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Denial of Service via ECDSA Recovery Operation",
+            "description": "An attacker can generate invalid transactions to exhaust the sequencer's resources.",
+            "severity": "n/a",
+            "location": "TxPool.add() function, specifically in the fees.VerifyFee() call"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Use of Magic Values",
+            "description": "The use of hard-coded magic values within code introduces ambiguity because they lack clear context.",
+            "severity": "n/a",
+            "location": "go-ethereum/core/state_transition.go#173–179, go-ethereum/core/rawdb/accessors_l1_message.go#108–112"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Code",
+            "description": "Clean up the redundant code related to handling uncle blocks and forks.",
+            "severity": "n/a",
+            "location": "Not specified"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "TODO Statements",
+            "description": "TODO statements should remain in a codebase only while the codebase is in a pre-release state.",
+            "severity": "n/a",
+            "location": "Not specified"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1177"
+                ],
+                "3": [
+                    "CWE-676"
+                ]
+            },
+            "title": "Use of Reflection or Magic Hashes",
+            "description": "Feature flags provide a better, more unified interface to enable or disable specific features or functionality.",
+            "severity": "n/a",
+            "location": "go-ethereum/trie/proof.go#106–115"
+        }
+    ]
+}

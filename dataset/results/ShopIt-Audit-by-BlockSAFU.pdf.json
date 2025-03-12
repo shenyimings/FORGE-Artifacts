@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/ShopIt-Audit-by-BlockSAFU.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xb35f0Dc7216100c722053e26D108c4986a3171C8",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.10+commit.fc410830"
+        ],
+        "project_path": {
+            "Contract": "contracts/ShopIt-Audit-by-BlockSAFU/Contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked return value of external transfer/transferFrom",
+            "description": "The return value of an external transfer/transferFrom is checked, but it's recommended to use SafeERC20 or ensure that the transfer/transferFrom return value is checked.",
+            "severity": "low",
+            "location": "function transferFrom(address sender, address recipient, uint256 amount) external returns (bool)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Wallet Holding and Transaction Limits",
+            "description": "The owner can set the max transaction amount with a limitation >0, but it can be filled with a very small amount, making the majority of transactions stop.",
+            "severity": "medium",
+            "location": "function Contract_Setup_Wallet_Limits(uint256 Max_Tokens_Per_Transaction, uint256 Max_Total_Tokens_Per_Wallet) external onlyOwner"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Excludes wallet from transaction and holding limits",
+            "description": "The owner can exclude the address from the wallet transaction limit.",
+            "severity": "medium",
+            "location": "function Wallet_Settings_Exempt_From_Limits(address Wallet_Address, bool true_or_false) external onlyOwner"
+        }
+    ]
+}

@@ -1,0 +1,152 @@
+{
+    "path": "artifacts/Inspex_AUDIT2022046_Powaa_Farm_FullReport_v5.0.pdf",
+    "project_info": {
+        "url": "https://github.com/powaa-protocol/powaa-contract",
+        "commit_id": "977b2c3267fff6d9760c486f6754d25629cb345f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "powaa-contract": "contracts/Inspex_AUDIT2022046_Powaa_Farm_FullReport_v5/powaa-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Token Manual Minting by Contract Owner",
+            "description": "The contract owner can arbitrarily mint tokens.",
+            "severity": "high",
+            "location": "POWAA contract, `mint` function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "Controlling authorities can change critical state variables to gain additional profit.",
+            "severity": "high",
+            "location": "BaseTokenVault, TokenVault, GovLPVault contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Improper Reward Update in Claim Functions",
+            "description": "User will lose reward that has not been updated when claiming $ETH before claiming the reward token.",
+            "severity": "medium",
+            "location": "GovLPVault, TokenVault (claimGov(), claimETH(), claimETHPOWAA() functions)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Transaction Ordering Dependence (Race Condition)",
+            "description": "Front-running attack can be performed resulting in a bad swapping rate and a lower bounty.",
+            "severity": "low",
+            "location": "UniswapV2GovLPVaultMigrator, UniswapV3TokenVaultMigrator, SushiSwapLPVaultMigrator"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Loop Over Unbounded Data Structure",
+            "description": "Gas consumption will increase as the size of tokenVaults increases.",
+            "severity": "low",
+            "location": "Controller.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged function’s executions cannot be monitored easily by users.",
+            "severity": "low",
+            "location": "SushiSwapLPVaultMigrator.sol (L:90), UniswapV2GovLPVaultMigrator.sol (L:50)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Public functions that are never called internally by the contract itself should have external visibility.",
+            "severity": "info",
+            "location": "Multiple contracts (GovLPVault, TokenVault, POWAA) and functions (initialize(), maxTotalSupply())"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Front-running attack due to zero amountOutMinimum parameter",
+            "description": "Front-running attack can be performed resulting in a bad swapping rate and a lower bounty.",
+            "severity": "low",
+            "location": "UniswapV3TokenVaultMigrator.sol (L:122), UniswapV2GovLPVaultMigrator.sol (L:73), SushiSwapLPVaultMigrator.sol (L:113, L:128)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Access Control",
+            "description": "Critical state variables can be updated at any time by the controlling authorities without notifying users.",
+            "severity": "high",
+            "location": "BaseTokenVault TokenVault GovLPVault (setRewardsDistribution(), notifyRewardAmount(), setMigrationOption(), migrate() functions)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Business Logic Errors",
+            "description": "User will lose reward that has not been updated when claiming $ETH before claiming the reward token.",
+            "severity": "medium",
+            "location": "GovLPVault, TokenVault (claimGov(), claimETH(), claimETHPOWAA() functions)"
+        }
+    ]
+}

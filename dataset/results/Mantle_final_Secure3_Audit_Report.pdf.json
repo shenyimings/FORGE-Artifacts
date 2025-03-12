@@ -1,0 +1,875 @@
+{
+    "path": "artifacts/Mantle_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/mantlenetworkio/mantle/",
+        "commit_id": "3e2b6dbcac7df08353d81d53ee41405211305432",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "mantle": "contracts/Mantle_final_Secure3_Audit_Report/mantle"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Deadlock Risk due to Blocking on an Empty Channel",
+            "description": "Blocking on an empty channel, which is never written to or closed elsewhere in the application, leading to a potential deadlock situation.",
+            "severity": "critical",
+            "location": "code/mt-batcher/mt_batcher.go#L44"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Insecure Seed Generation in DerivePrivateKey Function",
+            "description": "Using an empty string as the mnemonic password during seed generation, allowing anyone possessing the mnemonic to obtain the identical seed and private key.",
+            "severity": "critical",
+            "location": "code/mt-batcher/services/common/crypto.go#L59"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Logical Error in SetupIDMaps Function",
+            "description": "Attempting to return data using a non-pointer type variable, potentially causing errors in the TSS P2P ID.",
+            "severity": "critical",
+            "location": "code/tss/node/tsslib/conversion/conversion.go#L56-L65"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "ERC20 Bridge Arbitrage Attack",
+            "description": "Incorrect amount recording and potential token burning/inflation during deposit/withdrawal operations, leading to unexpected behavior such as locked funds or incorrect addresses.",
+            "severity": "critical",
+            "location": "code/packages/contracts/contracts/L2/messaging/L2StandardBridge.sol#L149-L196, code/packages/contracts/contracts/L1/messaging/L1StandardBridge.sol#L177-L230, #L268-L284"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Proposers can roll back the chain to the past rolled-back state again due to TSS signature replay",
+            "description": "Malicious proposers can use previous rollback signatures to roll back the chain maliciously.",
+            "severity": "critical",
+            "location": "StateCommitmentChain.sol (code/packages/contracts/contracts/L1/rollup/StateCommitmentChain.sol#L212)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy risk: Stop using Solidity's transfer()",
+            "description": "Potential reentrancy attack in `claimReward` function.",
+            "severity": "critical",
+            "location": "TssRewardContract.sol (code/packages/contracts/contracts/L2/predeploys/TssRewardContract.sol)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "The function does not check whether the deduction address exists in the deposits mapping",
+            "description": "Damage to the business",
+            "severity": "medium",
+            "location": "transformDeposit function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-167"
+                ]
+            },
+            "title": "Unchecked address existence",
+            "description": "The ParseAddress function checks only if the address is a hexadecimal value, but does not handle Ethereum checksum addresses.",
+            "severity": "low",
+            "location": "code/mt-batcher/services/common/crypto.go#L24-L29"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Burned sequencer fees can be spent normally after the burn mode close",
+            "description": "The fees that should be burned are still spent normally when close burn mode.",
+            "severity": "low",
+            "location": "code/packages/contracts/contracts/L2/predeploys/BVM_SequencerFeeVault.sol#L70"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Ignored Return Value",
+            "description": "In the storeData function of the BVM_EigenDataLayrChain contract, the return value of the initDataStore function call on the IDataLayrServiceManager contract is ignored.",
+            "severity": "low",
+            "location": "code/packages/contracts/contracts/da/BVM_EigenDataLayrChain.sol#L248-L255"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Inconsistent Logic in Private Key Generation",
+            "description": "The function assumes that if a mnemonic and HD path are given, it should generate a private key using these; and if a private key string is provided, it should use it to generate the private key. But when all inputs are valid, it returns an error.",
+            "severity": "low",
+            "location": "code/mt-batcher/services/common/crypto.go#L31-L46"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Incorrect handling of absent validator's signing information",
+            "description": "Missing error handling for absent validator's signing information leading to incorrect slashing decisions.",
+            "severity": "low",
+            "location": "code/tss/slash/slash.go#L81-L107"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ],
+                "3": [
+                    "CWE-595"
+                ]
+            },
+            "title": "Incorrect identification of contract accounts as EOAs",
+            "description": "Insecure use of Address.isContract() to identify contract accounts.",
+            "severity": "low",
+            "location": "code/packages/contracts/contracts/L1/messaging/L1StandardBridge.sol#L67-L71"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ]
+            },
+            "title": "Ineffective checkBalance verification",
+            "description": "Insufficient balance verification in updateReward function.",
+            "severity": "low",
+            "location": "code/packages/contracts/contracts/L2/predeploys/TssRewardContract.sol#L176-L189"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of address zero input validation and error handling",
+            "description": "Missing input validation for address zero in several functions.",
+            "severity": "low",
+            "location": "Multiple locations (see code references)"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Missing condition check",
+            "description": "Missing check for startL2Block being less than or equal to endL2Block in storeData function.",
+            "severity": "low",
+            "location": "code/packages/contracts/contracts/da/BVM_EigenDataLayrChain.sol#L236-L266"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing limiting condition",
+            "description": "Missing check for dust being greater than zero in withdrawDust function.",
+            "severity": "low",
+            "location": "code/packages/contracts/contracts/L2/predeploys/TssRewardContract.sol#L194-L201"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "Non-asynchronous execution of the HTTP server",
+            "description": "Blocking execution of the HTTP server in Start function.",
+            "severity": "low",
+            "location": "code/mt-batcher/metrics/metrics.go#L54-L62"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owner can take out all assets in TssRewardContract",
+            "description": "The contract's owner can withdraw the contract's assets arbitrarily.",
+            "severity": "low",
+            "location": "contracts/L2/predeploys/TssRewardContract.sol#L206"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-358"
+                ]
+            },
+            "title": "_threshold of the tss signature is allowed to be set to 0",
+            "description": "The _threshold of the tss signature in setTssGroupMember is allowed to be set to 0.",
+            "severity": "low",
+            "location": "contracts/L1/tss/TssGroupManager.sol#L58"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unintended Usage of NoSend Option during Transaction Creation",
+            "description": "The NoSend field in the options is set to true, which implies that the transaction will not be actually dispatched to the network.",
+            "severity": "low",
+            "location": "tss/node/signer/keygen.go#L147"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Use call for transferring funds instead of using transfer",
+            "description": "It is not recommended to use transfer for transferring funds because the gas consumption can vary.",
+            "severity": "low",
+            "location": "contracts/L2/predeploys/TssRewardContract.sol#L115, #L156, #L199, #L209"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "loop logic is bypassed in resetRollupBatchData()",
+            "description": "If you call the resetRollupBatchData() function twice, and the first time you pass in a value of 0, and the second time you pass in a value that is not 0, the second call will not execute the loop delete operation.",
+            "severity": "low",
+            "location": "contracts/da/BVM_EigenDataLayrChain.sol#L199"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Redundant code: The getTssGroupUnJailMembers function does unnecessarily loop",
+            "description": "The getTssGroupUnJailMembers function does an unnecessary loop to calculate the length of the returned array.",
+            "severity": "info",
+            "location": "contracts/L1/tss/TssGroupManager.sol#L177-L183"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Duplicate entries in _batchPublicKey array",
+            "description": "Allows duplicate public keys, leading to inconsistent states and erroneous behavior.",
+            "severity": "medium",
+            "location": "setTssGroupMember function"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Misbehaving _l2Token contracts",
+            "description": "Unexpected behavior from _l2Token contract's l1Token() function can cause errors.",
+            "severity": "medium",
+            "location": "finalizeDeposit function"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy in BVM_EigenDataLayrChain.confirmData",
+            "description": "Potential reentrancy bug in confirmData function.",
+            "severity": "medium",
+            "location": "confirmData function"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked return value may make the assertion fail to complete",
+            "description": "Failure to check the success variable can cause incorrect fraud proof window calculation.",
+            "severity": "medium",
+            "location": "newAssertionDeadline function"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential Reward Overpayments in TssRewardContract",
+            "description": "When the mechanism is block-based, lastBatchTime isn't updated.",
+            "severity": "medium",
+            "location": "code/packages/contracts/contracts/L2/predeploys/TssRewardContract.sol#L91-L128"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect buffer for gas limit",
+            "description": "The function EstimateGas adds an incorrect buffer to the gas limit.",
+            "severity": "low",
+            "location": "keygen.go, estimateGas function"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of address zero Input Validation",
+            "description": "There is a lack of input validation for address zero in multiple contracts.",
+            "severity": "low",
+            "location": "Multiple contracts (BVM_EigenDataLayrFee.sol, ChugSplashDictator.sol, TssGroupManager.sol, BVM_SequencerFeeVault.sol, BVM_EigenDataLayrChain.sol, Governor.sol)"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Loss of User Assets in _initiateETHDeposit Function",
+            "description": "If _l2Gas is not enough, IL2ERC20Bridge.finalizeDeposit may fail, resulting in loss of user assets.",
+            "severity": "medium",
+            "location": "code/packages/contracts/contracts/L1/messaging/L1StandardBridge.sol#L130"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Incorrect Returned Value in GetStateBatch Function",
+            "description": "The function returns true and a default StateBatchInfo when parsing fails.",
+            "severity": "medium",
+            "location": "code/tss/manager/store/state_batch.go#L16-L26"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistency between comments and implementation",
+            "description": "Comments in the code do not match the actual implementation.",
+            "severity": "low",
+            "location": "function completeChallenge, Rollup.sol"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing zero address validation",
+            "description": "Lack of input validation for addresses in set functions",
+            "severity": "low",
+            "location": "Various functions (setFeeAddress, setStakingSlash, etc.)"
+        },
+        {
+            "id": 35,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of check for db",
+            "description": "No check for nil db before calling Close() function",
+            "severity": "low",
+            "location": "storage.go#L35-L37"
+        },
+        {
+            "id": 36,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Logic risk in BVM_EigenDataLayrChain contract",
+            "description": "Missing input validation, no handling of failure condition, and duplicate batchIndex submissions",
+            "severity": "low",
+            "location": "BVM_EigenDataLayrChain.sol#L210-L224"
+        },
+        {
+            "id": 37,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Maximum Limit Issue with _batchPublicKey in setTssGroupMember Function",
+            "description": "Potential gas limit issue due to large input arrays",
+            "severity": "low",
+            "location": "TssGroupManager.sol#L58-L85"
+        },
+        {
+            "id": 38,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Uninitialized local variable provenString",
+            "description": "Variable provenString is not initialized",
+            "severity": "low",
+            "location": "Parse.sol#L6"
+        },
+        {
+            "id": 39,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "Response Id not checked in function unmarshalResponseBytes",
+            "description": "Inconsistent response ID checking between two functions",
+            "severity": "low",
+            "location": "decode.go#L107-L115"
+        },
+        {
+            "id": 40,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Returned value of function SendMsg not checked",
+            "description": "Return values of SendMsg function are not checked in multiple locations",
+            "severity": "low",
+            "location": "Various files (verify_slash.go, verify.go, sign_rollback.go, etc.)"
+        },
+        {
+            "id": 41,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unchecked return value of `SendMsg` function",
+            "description": "If `SendMsg` fails, errors returned back are not handled, causing serious problems.",
+            "severity": "n/a",
+            "location": "`p.wsClient.SendMsg(RpcResponse)` in multiple files"
+        },
+        {
+            "id": 42,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Integer Overflow and Underflow",
+            "description": "Account nonce can overflow because it is not limited according to EIP-2681.",
+            "severity": "low",
+            "location": "code/l2geth/core/vm/evm.go#L418-L428"
+        },
+        {
+            "id": 43,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Logical flaw in `advanceStake` function",
+            "description": "The condition `if (assertionID <= staker.assertionID && assertionID > lastCreatedAssertionID)` will always be false.",
+            "severity": "low",
+            "location": "code/packages/contracts/contracts/L1/fraud-proof/Rollup.sol#L211-L221"
+        },
+        {
+            "id": 44,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "`onlyWhenNotPaused` modifier does not take effect",
+            "description": "In `L1ChugSplashProxy`, the `onlyWhenNotPaused` modifier does not work because `isUpgrading` is always true.",
+            "severity": "low",
+            "location": "code/packages/contracts/contracts/L1/deployment/ChugSplashDictator.sol#L18"
+        },
+        {
+            "id": 45,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Lack of support for fee-on-transfer tokens",
+            "description": "`L1StandardBridge` does not handle fee-on-transfer tokens, leading to incorrect token amounts.",
+            "severity": "low",
+            "location": "code/packages/contracts/contracts/L1/messaging/L1StandardBridge.sol#L177-L230"
+        },
+        {
+            "id": 46,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect balance check in `TssRewardContract`",
+            "description": "The `checkBalance` function checks the balance before updating the reward amount.",
+            "severity": "low",
+            "location": "code/packages/contracts/contracts/L2/predeploys/TssRewardContract.sol#L179"
+        },
+        {
+            "id": 47,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Ignoring errors in `NewStateTransition`",
+            "description": "Errors are ignored when calculating L1 and DA fees.",
+            "severity": "low",
+            "location": "code/l2geth/core/state_transition.go#L141 and code/l2geth/core/state_transition.go#L150"
+        },
+        {
+            "id": 48,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "No receive ether function with fallback",
+            "description": "The contract lacks a receive ether function.",
+            "severity": "info",
+            "location": "code/packages/contracts/contracts/chugsplash/L1ChugSplashProxy.sol#L17"
+        },
+        {
+            "id": 49,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Division Before Multiplication",
+            "description": "Performs divisions before multiplications, which can sometimes cause loss of precision.",
+            "severity": "info",
+            "location": "code/mt-batcher/services/sequencer/driver.go#L564-L576"
+        },
+        {
+            "id": 50,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ],
+                "3": [
+                    "CWE-480"
+                ]
+            },
+            "title": "Gas Optimization - Replace Hardcoded require with revert",
+            "description": "Using \"require\" instead of \"revert\" can cause unnecessary gas consumption.",
+            "severity": "info",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 51,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unnecessary Gas Consumption in _initiateERC20Deposit Function",
+            "description": "The function does not check if the deposit amount is greater than zero, resulting in unnecessary gas consumption.",
+            "severity": "n/a",
+            "location": "_initiateERC20Deposit function"
+        },
+        {
+            "id": 52,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Gas Optimization in TssGroupManager::removeActiveTssMembers Function",
+            "description": "The function can be optimized for gas usage by swapping the element at the index position with the last element and popping the last element.",
+            "severity": "info",
+            "location": "TssGroupManager contract, removeActiveTssMembers function"
+        },
+        {
+            "id": 53,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Incorrect Error Message in accessors_chain.go",
+            "description": "The error message is not accurate when deletion fails, it should be \"Failed to delete fp challenge ctx\" instead of \"Failed to store fp challenge ctx\".",
+            "severity": "info",
+            "location": "accessors_chain.go, DeleteFPValidatorChallengeCtx function"
+        },
+        {
+            "id": 54,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "MTL-64: Redundant function",
+            "description": "The implementation of the functions ReadLatestEigenBatchIndex and ReadEigenBatchIndex is the same.",
+            "severity": "info",
+            "location": "rollup_indexes.go (functions Read Latest Eigen Batch Index and Read Eigen Batch Index)"
+        },
+        {
+            "id": 55,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-561"
+                ]
+            },
+            "title": "MTL-65: Unused variable",
+            "description": "The variable sccAddress is neither initialized nor used.",
+            "severity": "info",
+            "location": "BVM_GasPriceOracle.sol (variable sccAddress)"
+        },
+        {
+            "id": 56,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ],
+                "3": [
+                    "CWE-480"
+                ]
+            },
+            "title": "MTL-66: Use call instead of transfer to transfer ETH",
+            "description": "Using transfer instead of call can cause issues with gas costs and reentrancy.",
+            "severity": "info",
+            "location": "Various contracts (e.g., LiquidStakingToken.sol, wbit.sol, TssRewardContract.sol, L1StandardBridge.sol)"
+        }
+    ]
+}

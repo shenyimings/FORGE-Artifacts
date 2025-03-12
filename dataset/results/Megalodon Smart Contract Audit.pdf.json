@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/Megalodon Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xC2B4eCcAFF699B4D18524bE3bCFFa28754421595",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "Megalodon": "contracts/Megalodon Smart Contract Audit/Megalodon"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Approve Front Running Attack",
+            "description": "The approve() method overrides current allowance regardless of whether the spender already used it or not, so there is no way to increase or decrease allowance by a certain value atomically unless the token owner is a smart contract, not an account.",
+            "severity": "medium",
+            "location": "Lines 138-141 and Lines 143-157"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unchecked Transfer",
+            "description": "Some tokens do not revert the transaction when the transfer or transferFrom fails and returns False.",
+            "severity": "medium",
+            "location": "Lines 878, 1002, and 1008"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ]
+            },
+            "title": "Authorization through tx.origin",
+            "description": "Using tx.origin for authorization could make a contract vulnerable to attacks.",
+            "severity": "medium",
+            "location": "Lines 911 and 915"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked Array Length",
+            "description": "If array.length is large enough, the function exceeds the block gas limit, causing transactions calling it to never be confirmed.",
+            "severity": "medium",
+            "location": "Line 911"
+        }
+    ]
+}

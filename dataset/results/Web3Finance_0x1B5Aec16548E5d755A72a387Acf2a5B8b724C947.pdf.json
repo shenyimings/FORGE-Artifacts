@@ -1,0 +1,71 @@
+{
+    "path": "artifacts/Web3Finance_0x1B5Aec16548E5d755A72a387Acf2a5B8b724C947.pdf",
+    "project_info": {
+        "url": "https://github.com/interfinetwork/audited-codes/blob/main/Web3Finance.sol",
+        "commit_id": "d6aa29720f0ebc17a409303588ecee8ef963e6a6",
+        "address": "0x1B5Aec16548E5d755A72a387Acf2a5B8b724C947",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.15+commit.e14f2714"
+        ],
+        "project_path": {
+            "Web3Finance": "contracts/Web3Finance_0x1B5Aec16548E5d755A72a387Acf2a5B8b724C947/Web3Finance"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected `receive()` function",
+            "description": "The contract can receive tokens through a regular transaction, which can lead to unexpected behavior.",
+            "severity": "medium",
+            "location": "receive() external payable {}"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant code in `transferOwnership()`",
+            "description": "The code is not written optimally and can be improved for better security.",
+            "severity": "low",
+            "location": "function transferOwnership(address newOwner) public virtual onlyOwner"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Insecure use of `address(this)` in `addLiquidity()`",
+            "description": "The address is not unreachable, and liquidity can be sent to an inaccessible address.",
+            "severity": "medium",
+            "location": "uniswapV2Router.addLiquidityETH{value: ethAmount}(address(this), ...)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privilege escalation",
+            "description": "The owner has excessive privileges, allowing them to drain the contract token balance.",
+            "severity": "high",
+            "location": "withdraw(), recoverETHfromContract(), recoverTokensFromContract()"
+        }
+    ]
+}

@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/AnteProtocolFixReview.pdf",
+    "project_info": {
+        "url": "https://github.com/antefinance/ante-v0-core/tree/fdd0d8d68a5697415cde511aa5dc98c469871bb7",
+        "commit_id": "fdd0d8d68a5697415cde511aa5dc98c469871bb7",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ante-v0-core": "contracts/AnteProtocolFixReview/ante-v0-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "AntePoolFactory does not validate create2 return addresses",
+            "description": "The AntePoolFactory uses the create2 instruction to deploy an AntePool and then initializes it with an already-deployed AnteTest address, but it does not validate the address returned by create2.",
+            "severity": "info",
+            "location": "contracts/AntePoolFactory.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Events emitted during critical operations omit certain details",
+            "description": "Events are generally emitted for all critical state-changing operations within the system, but the AntePoolCreated event emitted by the AntePoolFactory does not capture the address of the msg.sender that deployed the AntePool.",
+            "severity": "info",
+            "location": "contracts/AntePoolFactory.sol, contracts/AntePool.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Insufficient gas can cause AnteTests to produce false positives",
+            "description": "An attacker could manipulate the result of an AnteTest by providing a limited amount of gas to the checkTest function, forcing the test to fail.",
+            "severity": "high",
+            "location": "contracts/AntePool.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Looping over an array of unbounded size can cause a denial of service",
+            "description": "The _calculateChallengerEligibility function loops through an unbounded array of challenger addresses, which could consume a large quantity of gas and lead to a denial-of-service attack.",
+            "severity": "medium",
+            "location": "contracts/AntePool.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy into AntePool.checkTest scales challenger eligibility amount",
+            "description": "A malicious AnteTest or underlying contract being tested can trigger multiple failed checkTest calls by reentering the AntePool.checkTest function, causing the eligibleAmount to scale unexpectedly.",
+            "severity": "high",
+            "location": "contracts/AntePool.sol"
+        }
+    ]
+}

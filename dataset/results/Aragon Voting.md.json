@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/Aragon Voting.md",
+    "project_info": {
+        "url": "https://github.com/lidofinance/aragon-apps",
+        "commit_id": "8c46da8704d0011c42ece2896dbf4aeee069b84a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "aragon-apps": "contracts/Aragon Voting/aragon-apps"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Changing shared variable affects previous votes",
+            "description": "Changing the `voteTime` variable in `unsafelyChangeVoteTime()` method affects existing voting results.",
+            "severity": "high",
+            "location": "Voting.sol#L126-L133"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Incorrect condition in `_canExecute()`",
+            "description": "Redundant check in `_canExecute()` function.",
+            "severity": "info",
+            "location": "Voting.sol#L382-L384, Voting.sol#L392-L394"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No variable check in initialize function",
+            "description": "Missing check for the `token` variable in the initialize function.",
+            "severity": "info",
+            "location": "Voting.sol#L87"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Function parameter not used in `canForward()`",
+            "description": "Unused second parameter in the `canForward()` function.",
+            "severity": "info",
+            "location": "Voting.sol#L211"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possibility of gas overuse in `_vote()`",
+            "description": "Gas inefficiency due to repeated calculations.",
+            "severity": "info",
+            "location": "Voting.sol#L331-L341"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate code in initialize and changeSupportRequiredPct functions",
+            "description": "Duplicate code can be refactored into an internal function.",
+            "severity": "info",
+            "location": "Voting.sol#L84-L85, Voting.sol#L88, Voting.sol#L101-L103"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "TODO comment in the source code",
+            "description": "TODO comments should be removed from deployed code.",
+            "severity": "info",
+            "location": "Voting.sol#L369"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Using empty function isForwarder()",
+            "description": "Empty function can be removed or commented out.",
+            "severity": "info",
+            "location": "Voting.sol#L191"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Unsuitable visibility modifier for certain functions",
+            "description": "Some functions should have external visibility to save gas.",
+            "severity": "info",
+            "location": "Multiple locations in `Voting.sol`"
+        }
+    ]
+}

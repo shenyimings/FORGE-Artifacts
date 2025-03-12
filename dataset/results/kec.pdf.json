@@ -1,0 +1,161 @@
+{
+    "path": "artifacts/kec.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "6085f310d7b417863d866c376e943539f30c42f0fc12639496a706935b5381e5",
+        "address": "0x0f10c9e30818cb77d0992d734203f3294027d4a6",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "Crowdsale": "contracts/kec/Crowdsale"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "DIO - Depositor Information Overwrite",
+            "description": "The depositor is stored in an informational struct, but if the same user deposits tokens more than once, the struct is overwritten and only the latest deposit is tracked.",
+            "severity": "low",
+            "location": "Crowdsale.sol#L794"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PTAI - Potential Transfer Amount Inconsistency",
+            "description": "The safeTransfer() and safeTransferFrom() functions are used to transfer a specified amount of tokens to an address, but the fee or tax is not taken into account.",
+            "severity": "low",
+            "location": "Crowdsale.sol#L799"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "TCDT - Transfers Contract's Deposited Tokens",
+            "description": "The contract owner has the authority to claim all deposited balance of the contract, which could be a security risk.",
+            "severity": "low",
+            "location": "Crowdsale.sol#L805"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "MC - Missing Check",
+            "description": "The contract is processing arguments that have not been properly sanitized and checked.",
+            "severity": "low",
+            "location": "Crowdsale.sol#L809,L814"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RSML - Redundant SafeMath Library",
+            "description": "The usage of the SafeMath library adds complexity, overhead, and increases gas consumption unnecessarily.",
+            "severity": "low",
+            "location": "Crowdsale.sol#L10"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The code does not follow the Solidity naming conventions, which can make it harder to read and maintain.",
+            "severity": "low",
+            "location": "Crowdsale.sol#L646,L754,L755,L769,L770,L790,L801"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L07 - Missing Events Arithmetic",
+            "description": "The contract is missing events that are necessary for its arithmetic to work correctly.",
+            "severity": "low",
+            "location": "Crowdsale.sol#L806"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "L08 - Tautology or Contradiction",
+            "description": "A tautology or contradiction is used in the code, which can lead to unintended behavior and make it harder to understand and maintain.",
+            "severity": "low",
+            "location": "Crowdsale.sol#L792"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L19 - Stable Compiler Version",
+            "description": "The pragma solidity version is not locked, which can cause compatibility issues with different compiler versions.",
+            "severity": "low",
+            "location": "Crowdsale.sol#L2"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "L20 - Succeeded Transfer Check",
+            "description": "The contract does not check if the transfer methods are successful, according to the ERC20 specification.",
+            "severity": "low",
+            "location": "Crowdsale.sol#L802"
+        }
+    ]
+}

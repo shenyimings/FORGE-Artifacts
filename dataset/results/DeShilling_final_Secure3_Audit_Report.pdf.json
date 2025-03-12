@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/DeShilling_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/StartfundInc/Des-Referral",
+        "commit_id": "f958986c2a1d1e445bf9cc475bb4e5ddcf45ab13",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Des-Referral": "contracts/DeShilling_final_Secure3_Audit_Report/Des-Referral"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "round's investedEth or investedToken can be manipulated by the vendor",
+            "description": "The contract cannot check whether the `_campaignWallet` is controlled by the vendor.",
+            "severity": "critical",
+            "location": "deShilling_3.3_v2.sol#L62-L109"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ],
+                "3": [
+                    "CWE-483"
+                ]
+            },
+            "title": "round.maxToken can be exceeded in ReferralInvestment::invest()",
+            "description": "The `if statement` will skip the first block of code and go to the second block, allowing maxToken to be exceeded.",
+            "severity": "medium",
+            "location": "deShilling_3.3_v2.sol#L77-L103"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Use safeTransferFrom function instead of TransferFrom",
+            "description": "The TransferFrom and Transfer functions do not return a bool value which can be used to judge if the call is successful.",
+            "severity": "medium",
+            "location": "deShilling_3.3_v2.sol#L122"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Anyone can withdraw the ETH in ReferralInvestment",
+            "description": "Anyone can call the distribute function to withdraw accidentally transferred ETH from the contract.",
+            "severity": "medium",
+            "location": "deShilling_3.3_v2.sol#L112-L117"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Gas optimization: use break to jump out the loop",
+            "description": "In invest() function, using a for loop to find the suitable round, once pass is set to true, it will jump out the loop.",
+            "severity": "info",
+            "location": "deShilling_3.3_v2.sol, L66-L73"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas optimization: cache array length outside for loop",
+            "description": "Caching the array length outside a loop saves reading it on each iteration.",
+            "severity": "info",
+            "location": "deShilling_3.3_v2.sol, L113 and L120"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant code in import",
+            "description": "During the testing process, some test dependencies may be introduced, such as hardhat/console.sol, which should be removed before deployment.",
+            "severity": "info",
+            "location": "deShilling_3.3_v2.sol, L4"
+        }
+    ]
+}

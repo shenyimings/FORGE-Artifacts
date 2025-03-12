@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/Inspex-0xStandard,_Sale,_Whitelisting_&_Wagyu.pdf",
+    "project_info": {
+        "url": "https://github.com/0xstudio/0xContract-audit",
+        "commit_id": "92b2888a7c9ff4a7e00d992fd4e9a46c6881ef32",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "0xContract-audit": "contracts/Inspex-0xStandard,_Sale,_Whitelisting_&_Wagyu/0xContract-audit"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Token Minting Amount",
+            "description": "The maximum token purchased amount depends on the maxSaleCapped state, but when the operator sets maxPublicSalePerTx state to be greater than 1, users can input a token amount more than the maxSaleCapped, resulting in users receiving fewer tokens than expected.",
+            "severity": "high",
+            "location": "WagyuV2.sol, function mintToken()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-311"
+                ],
+                "3": [
+                    "CWE-312"
+                ]
+            },
+            "title": "Improper Setting of Hashed Secret",
+            "description": "The hashedSecret parameter is hashed again before being stored, allowing miners to know the secret and withhold blocks if the random result is not desirable.",
+            "severity": "low",
+            "location": "OxStandardV2 contract, setBlockNumbertoGenSeed function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions do not emit events, making it difficult for users to monitor their execution.",
+            "severity": "low",
+            "location": "Multiple contracts (0xStandardV2, BlockBasedSale, WagyuV2, OGBlockBasedSale, EIP712Whitelisting), various privileged functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Unnecessary Condition Checking",
+            "description": "Unnecessary condition checks lead to unnecessary gas consumption.",
+            "severity": "info",
+            "location": "OGBlockBasedSale contract, setPriceDecayParams function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Improper Account Type Checking",
+            "description": "The `mintOg()` function of `0xStandardV2` contract checks whether the `msg.sender` is a smart contract or not using `Address.isContract()` function, which can be bypassed by calling from within the constructor function of a newly deployed contract.",
+            "severity": "info",
+            "location": "`0xStandardV2.sol`, `mintOg()` function (line 179)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-284"
+                ]
+            },
+            "title": "CWE-284: Improper Access Control",
+            "description": "The controlling authorities can change state variables without notifying users, gaining unfair advantages.",
+            "severity": "low",
+            "location": "0xStandard BlockBasedSale WagyuV2 OGBlockBasedSale EIP712Whitelisting contracts"
+        }
+    ]
+}

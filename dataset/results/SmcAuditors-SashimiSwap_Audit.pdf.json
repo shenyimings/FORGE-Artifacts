@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/SmcAuditors-SashimiSwap_Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/SashimiProject/sashimiswap",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "sashimiswap": "contracts/SmcAuditors-SashimiSwap_Audit/sashimiswap"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unspecified Migrator Contract",
+            "description": "migrate() function allows owner to set migrator contract at any time, potentially leading to LP token theft.",
+            "severity": "medium",
+            "location": "MasterChef.sol, Timelock.sol, GovernorAlpha.sol (migrate() function)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy in emergencyWithdraw()",
+            "description": "emergencyWithdraw() function does not follow checks-effects-interactions pattern, allowing reentrancy attacks.",
+            "severity": "medium",
+            "location": "MasterChef.sol (emergencyWithdraw() function)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Total Reward Amount",
+            "description": "Adding LP token twice using add() function causes incorrect total reward amount in updatePool() function.",
+            "severity": "low",
+            "location": "n/a (add() and updatePool() functions)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Out-of-Gas in massUpdatePools()",
+            "description": "massUpdatePools() function may run out of gas if too many tokens are added.",
+            "severity": "low",
+            "location": "n/a (massUpdatePools() function)"
+        }
+    ]
+}

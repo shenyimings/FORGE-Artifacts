@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/BlockSec-blocksec_mellow_vaults_v1.3-signed.pdf",
+    "project_info": {
+        "url": "https://github.com/mellow-finance/mellow-vaults",
+        "commit_id": "ed3e07e5b873dbe6f4e5d632d0adc1f5b47dec8e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "mellow-vaults": "contracts/BlockSec-blocksec_mellow_vaults_v1/mellow-vaults"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Avoid using shadowed variables",
+            "description": "A variable named `vaultTokens` shadows a state variable with the same name in the `_initialize` function of the AggregateVault contract.",
+            "severity": "n/a",
+            "location": "_initialize function, AggregateVault contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Use mulDiv to prevent precision losses",
+            "description": "The contracts have a mixed use of regular arithmetic expressions and the FullMath library, which can lead to precision losses.",
+            "severity": "n/a",
+            "location": "Multiple functions in different contracts (e.g., `_getTvlToken0` of ERC20RootVault contract, `tvl` of YearnVault contract)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Fix incorrect event variables",
+            "description": "The addresses logged into the `added` variable are always zero addresses, and the state variable `_pools` is never used in the `_addUniV3Pools` function.",
+            "severity": "n/a",
+            "location": "_addUniV3Pools function, UniV3Oracle.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Inconsistent slippage checks in deposit and withdraw",
+            "description": "The ERC20RootVault contract has inconsistent slippage checks in the deposit and withdraw functions.",
+            "severity": "n/a",
+            "location": "Deposit and withdraw functions, ERC20RootVault contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing price slippage checks",
+            "description": "Strategy contracts do not implement proper price slippage checks, which can lead to token swaps in imbalanced or manipulatable pools.",
+            "severity": "n/a",
+            "location": "ExternalCall interface, strategy contracts"
+        }
+    ]
+}

@@ -1,0 +1,218 @@
+{
+    "path": "artifacts/Enso Wallet.md",
+    "project_info": {
+        "url": "https://github.com/EnsoFinance/enso-weiroll",
+        "commit_id": "4902e55608f975f73772310955444110b1cfc4fc",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "enso-weiroll": "contracts/Enso Wallet/enso-weiroll"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Destruction of EnsoWallet implementation contract",
+            "description": "An attacker can destroy the current implementation contract by making a direct call to `EnsoWallet.initialize()` and executing the SELFDESTRUCT opcode.",
+            "severity": "critical",
+            "location": "EnsoWallet.sol, function `initialize()`"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Front-run attack on the deployment of EnsoWalletFactory",
+            "description": "An attacker can front-run the deployment of EnsoWalletFactory to specify themselves as the contract owner and gain control of deployed user wallets.",
+            "severity": "critical",
+            "location": "EnsoWalletFactory.sol, function `initialize()`"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Executor has full write access to the wallet storage",
+            "description": "EXECUTOR has a write access to any storage slots via the executeShortcut function and delegatecall to a specially crafted library.",
+            "severity": "medium",
+            "location": "EnsoWallet.sol#L57"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Admin can bypass the upgrade delay by `setDelay`",
+            "description": "The admin can force an immediate upgrade by reducing the delay using setDelay().",
+            "severity": "medium",
+            "location": "EnsoBeacon.sol#L208"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Admin can bypass the upgrade delay by `delegate` and `emergencyUpgrade`",
+            "description": "The admin can bypass the upgrade delay flow and immediately change the address of the wallet core.",
+            "severity": "medium",
+            "location": "EnsoBeacon.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "Conflicting flow of pending `upgradeFactory` and `setFactory`",
+            "description": "Calling finalizeUpgrade after setFactory can cause unexpected behavior.",
+            "severity": "low",
+            "location": "EnsoBeacon.sol#L74"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Insufficient event emitting",
+            "description": "In some edge cases, it may be not easy to obtain the wallet owner address and address of the factory that created it.",
+            "severity": "low",
+            "location": "EnsoWalletFactory.sol#L90"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Potential hash collisions for constants",
+            "description": "The constants for access roles `OWNER_ROLE` and `EXECUTOR_ROLE` are vulnerable to potential hash collisions.",
+            "severity": "low",
+            "location": "Roles.sol#L5"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Null checks",
+            "description": "Some parameters have no null checks.",
+            "severity": "low",
+            "location": "EnsoBeacon.sol#L201, EnsoBeacon.sol#L123, AccessController.sol#L21"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Using `memory` instead of `calldata`",
+            "description": "Using `memory` instead of `calldata` for input arrays in external functions.",
+            "severity": "low",
+            "location": "MinimalWallet.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1116"
+                ]
+            },
+            "title": "Spelling mistakes",
+            "description": "Some texts have spelling mistakes.",
+            "severity": "low",
+            "location": "EnsoShortcutsHelpers.sol#L14, EnsoBeacon.sol#L147, etc."
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unchecked timelock delay",
+            "description": "The administrator can inadvertently setup a timelock delay that is too long.",
+            "severity": "medium",
+            "location": "EnsoBeacon.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Passing the `return data` by the EVM state",
+            "description": "The implementation of the virtual `_executeCall` function may break the contract logic later.",
+            "severity": "n/a",
+            "location": "ModuleManager.sol#L45"
+        }
+    ]
+}

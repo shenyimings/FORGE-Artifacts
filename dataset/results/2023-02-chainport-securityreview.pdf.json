@@ -1,0 +1,557 @@
+{
+    "path": "artifacts/2023-02-chainport-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/chainport/smart-contracts/tree/f10179da0ed2ecaa4e10346023c245f69fd3478e",
+        "commit_id": "f10179da0ed2ecaa4e10346023c245f69fd3478e",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.4.18+commit.9cf6e910"
+        ],
+        "project_path": {
+            "TetherToken": "contracts/2023-02-chainport-securityreview/TetherToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Secrets checked into source control",
+            "description": "Secrets stored in source code accessible to anyone with repository access",
+            "severity": "low",
+            "location": "chainport-backend repository"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unvalidated setter function arguments",
+            "description": "Setter functions do not validate incoming arguments, allowing callers to set important state variables to zero addresses",
+            "severity": "medium",
+            "location": "ChainportMainBridge contract, initialize function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Missing Python type annotations",
+            "description": "Most functions are missing Python type annotations, leading to undefined behavior during runtime",
+            "severity": "low",
+            "location": "chainport-backend repository"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ],
+                "3": [
+                    "CWE-1104"
+                ]
+            },
+            "title": "Use of libraries with known vulnerabilities",
+            "description": "Outdated libraries with known vulnerabilities are used in the back-end repository",
+            "severity": "low",
+            "location": "chainport-backend repository"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use of JavaScript instead of TypeScript",
+            "description": "The ChainPort front end is developed with JavaScript instead of TypeScript, which can lead to type mismatches and security issues",
+            "severity": "low",
+            "location": "chainport-app repository"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-74"
+                ]
+            },
+            "title": "Use of .format to create SQL queries",
+            "description": "The back end builds SQL queries using the .format function, which is an anti-pattern and can lead to SQL injection attacks",
+            "severity": "info",
+            "location": "chainport-backend/project/data/db/postgres.py"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Many rules are disabled in ESLint configuration",
+            "description": "Disabling certain ESLint rules can reduce the code's security, reliability, and readability",
+            "severity": "info",
+            "location": "chainport-app/.eslintrc.js"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Congress can lose quorum after manually setting quorum value",
+            "description": "The congress can set a quorum number larger than the current membership, leading to unexpected behavior",
+            "severity": "medium",
+            "location": "contracts/governance/ChainportCongressMembersRegistry.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ]
+            },
+            "title": "Potential race condition could allow users to bypass PORTX fee payments",
+            "description": "A race condition in the ChainportFeeManager contract can allow users to withdraw their PORTX tokens before a fee payment transaction is confirmed",
+            "severity": "low",
+            "location": "contracts/ChainportFeeManager.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "Signature-related code lacks proper specification and documentation",
+            "description": "The signature-related code lacks clear documentation and specifications, making it difficult to understand its intended behavior",
+            "severity": "medium",
+            "location": "Signature-related code"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Cryptographic primitives lack sanity checks and clear function names",
+            "description": "Certain cryptographic primitives are missing sanity checks on their inputs and have unclear function names",
+            "severity": "info",
+            "location": "chainport-backend/modules/cryptography_2key/signatures.py"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Use of requests without the timeout argument",
+            "description": "The Python requests library is used in the ChainPort back end without the timeout argument",
+            "severity": "low",
+            "location": "chainport-backend/modules/coingecko/api.py, chainport-backend/modules/requests_2key/requests.py, chainport-backend/project/stats/cg_prices.py"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-357"
+                ]
+            },
+            "title": "Lack of noopener attribute on external links",
+            "description": "In the ChainPort front-end application, there are links to external websites that have the target attribute set to _blank but lack the noopener attribute",
+            "severity": "low",
+            "location": "chainport-app/src/modules/exchange/components/PortOutModal.jsx"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Use of urllib could allow users to leak local files",
+            "description": "The upload_media_from_url_to_s3 function uses the urllib library, which supports the file:// scheme; therefore, if a malicious actor controls a dynamic value uploaded to S3, she could read arbitrary local files",
+            "severity": "n/a",
+            "location": "chainport-backend/modules/infrastructure/aws/s3.py"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-300"
+                ]
+            },
+            "title": "The front end is vulnerable to iFraming",
+            "description": "The ChainPort front end does not prevent other websites from iFraming it",
+            "severity": "low",
+            "location": "chainport-app repository"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of CSP header in the ChainPort front end",
+            "description": "The ChainPort front end lacks a Content Security Policy (CSP) header, leaving it vulnerable to cross-site scripting (XSS) attacks",
+            "severity": "low",
+            "location": "chainport-app repository"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Useless if statements",
+            "description": "Useless if statement detected in the codebase",
+            "severity": "info",
+            "location": "Multiple locations in backend and frontend repositories"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Unreviewed Contract",
+            "description": "Interacting with contracts that lack a security review.",
+            "severity": "n/a",
+            "location": "General Considerations"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Complex Token Contract",
+            "description": "Tokens with complex code require a higher standard of review.",
+            "severity": "n/a",
+            "location": "Contract Composition"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "No SafeMath Usage",
+            "description": "Contracts that do not use SafeMath require a higher standard of review.",
+            "severity": "n/a",
+            "location": "Contract Composition"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Multiple Non-Token-Related Functions",
+            "description": "Non-token-related functions increase the likelihood of an issue in the contract.",
+            "severity": "n/a",
+            "location": "Contract Composition"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Multi-Address Tokens",
+            "description": "Tokens with multiple entry points for balance updates can break internal bookkeeping based on the address.",
+            "severity": "n/a",
+            "location": "Token Integration Checklist"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Upgradeable Contracts",
+            "description": "Upgradeable contracts may change their rules over time.",
+            "severity": "n/a",
+            "location": "Owner Privileges"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unlimited Minting Capabilities",
+            "description": "Malicious or compromised owners can abuse minting capabilities.",
+            "severity": "n/a",
+            "location": "Owner Privileges"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Pausable Tokens",
+            "description": "Malicious or compromised owners can trap contracts relying on pausable tokens.",
+            "severity": "n/a",
+            "location": "Owner Privileges"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Blacklist Features",
+            "description": "Malicious or compromised owners can trap contracts relying on tokens with a blacklist.",
+            "severity": "n/a",
+            "location": "Owner Privileges"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Anonymous Development Teams",
+            "description": "Contracts with anonymous development teams require a higher standard of review.",
+            "severity": "n/a",
+            "location": "Owner Privileges"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Non-Conforming ERC20 Tokens",
+            "description": "Transfer and transferFrom functions do not return a boolean.",
+            "severity": "n/a",
+            "location": "ERC20 Conformity Checks"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Name, Decimals, or Symbol Functions",
+            "description": "These functions are optional in the ERC20 standard and may not be present.",
+            "severity": "n/a",
+            "location": "ERC20 Conformity Checks"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Decimals Return Type",
+            "description": "Several tokens incorrectly return a uint256 instead of a uint8 for decimals.",
+            "severity": "n/a",
+            "location": "ERC20 Conformity Checks"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "ERC20 Race Condition",
+            "description": "The ERC20 standard has a known race condition that must be mitigated to prevent token stealing.",
+            "severity": "n/a",
+            "location": "ERC20 Conformity Checks"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Failing Unit Tests or Security Properties",
+            "description": "The contract fails unit tests or security properties generated by Slither.",
+            "severity": "n/a",
+            "location": "ERC20 Conformity Checks"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancies in Transfer Functions",
+            "description": "External calls in the transfer functions can lead to reentrancies.",
+            "severity": "n/a",
+            "location": "Risks of ERC20 Extensions"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Deflationary Tokens",
+            "description": "Deflationary tokens can lead to unexpected behavior.",
+            "severity": "n/a",
+            "location": "Risks of ERC20 Extensions"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Unaccounted Interest Distribution",
+            "description": "Some tokens distribute interest to token holders, which may be trapped in the contract if not taken into account.",
+            "severity": "n/a",
+            "location": "Risks of ERC20 Extensions"
+        },
+        {
+            "id": 35,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Token Scarcity Issues",
+            "description": "Various token scarcity issues, such as a few users owning most tokens or low total supply.",
+            "severity": "n/a",
+            "location": "Token Scarcity"
+        },
+        {
+            "id": 36,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Flash Minting",
+            "description": "Flash minting can lead to substantial swings in the balance and total supply, necessitating strict overflow checks.",
+            "severity": "n/a",
+            "location": "Token Scarcity"
+        }
+    ]
+}

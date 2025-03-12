@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/Holonym-P1_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/holonym-foundation/id-hub-contracts",
+        "commit_id": "3ad8ea611226343c337bdc4247ae5124f679a2f8",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "id-hub-contracts": "contracts/Holonym-P1_final_Secure3_Audit_Report/id-hub-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "One Person can verify one more time at each new contract redeployment in SybilGovID.sol",
+            "description": "`masalaWasUsed` can be reused on new deployments of SybilGovID, it does not check the legacy contract.",
+            "severity": "critical",
+            "location": "SybilGovID.sol (L37-L65)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ],
+                "3": [
+                    "CWE-480"
+                ]
+            },
+            "title": "use call() instead of transfer to transfer ETH",
+            "description": "`transfer()` function only allows 2300 gas, which might not be sufficient in future updates.",
+            "severity": "low",
+            "location": "PaidProof.sol (L15-L17)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "User overpaying for price in SybilGovID::prove()",
+            "description": "Users can send more ETH than required, and the contract doesn't return the excess.",
+            "severity": "low",
+            "location": "SybilGovID.sol (L59-L65)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-439"
+                ]
+            },
+            "title": "Using address.transfer to transfer Ether is not suggested",
+            "description": "`address.transfer` may not work correctly due to increased gas costs after Ethereum Istanbul upgrade.",
+            "severity": "low",
+            "location": "PaidProof.sol (L15-L17)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove unnecessary import",
+            "description": "Unused import \"hardhat/console.sol\" in Roots.sol",
+            "severity": "info",
+            "location": "Roots.sol (L3)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Lack of proper notification for important state changes",
+            "description": "Functions that change important states in the contract do not provide proper notification, which is crucial for on-chain and off-chain systems monitoring the contract.",
+            "severity": "info",
+            "location": "PaidProof.sol (functions: setPrice(), revokeIssuers(), allowIssuers())"
+        }
+    ]
+}

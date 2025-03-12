@@ -1,0 +1,143 @@
+{
+    "path": "artifacts/ExtractOre Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/ExtractOre/EXgold",
+        "commit_id": "467970cb54ab18b046b10210f4b4a5d7668e9219",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "EXgold": "contracts/ExtractOre Audit Report/EXgold"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Funds can be drained from MinerCardRewards.sol",
+            "description": "The setApprovals() function in MinerCardRewards.sol allows anyone to call it with any amount as input, potentially draining all funds held by the contract.",
+            "severity": "high",
+            "location": "MinerCardRewards.sol, setApprovals() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No input validation for mint() and mintMultiple() functions",
+            "description": "There is no check for the validity of _id parameter in mint() and mintMultiple() functions in MinerCards.sol.",
+            "severity": "medium",
+            "location": "MinerCards.sol, mint() and mintMultiple() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Too much Admin controls in MinerCard.sol",
+            "description": "The MinerCard contract has too many admin rights which can be misused intentionally or unintentionally.",
+            "severity": "medium",
+            "location": "MinerCard.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "No logic present to revoke admin rights",
+            "description": "There is no mechanism to revoke admin rights for an address in the MinerCard contract.",
+            "severity": "medium",
+            "location": "MinerCard.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading comments",
+            "description": "The comments for mint() in MinerCard.sol and for constructor() in MinerCardRewards.sol are somewhat misleading.",
+            "severity": "low",
+            "location": "MinerCard.sol, mint() function; MinerCardRewards.sol, constructor()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Erc20 function calls should be wrapped in require",
+            "description": "The returned boolean value from Erc20 function calls at line 128, 158 and 188 in MinerCardRewards.sol are not checked.",
+            "severity": "low",
+            "location": "MinerCardRewards.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No mechanism to deal with unforeseen bugs",
+            "description": "There is no logic implemented in MinerCard and MinerCardRewards smart contracts to deal with future unforeseen bugs/upgrades.",
+            "severity": "low",
+            "location": "MinerCard.sol, MinerCardRewards.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Functions should be declared as external",
+            "description": "Most functions in ExGold.sol, MinerCard.sol and MinerCardRewards.sol are declared as public instead of external.",
+            "severity": "low",
+            "location": "ExGold.sol, MinerCard.sol, MinerCardRewards.sol"
+        }
+    ]
+}

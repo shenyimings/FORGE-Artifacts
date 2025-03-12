@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/Verichains Public Audit Report - AVT Smartcontracts - v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/vhuarui/mw-avt-contracts",
+        "commit_id": "17ebf5ea371d62d12b6d567b40a37e29b894683f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "mw-avt-contracts": "contracts/Verichains Public Audit Report - AVT Smartcontracts - v1/mw-avt-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect ALP referral reward increasing",
+            "description": "The current implementation code includes both AVT staked and ALP staked in reward calculation.",
+            "severity": "medium",
+            "location": "contracts/staking/RewardRouterV2.sol, function handleRewards"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Outdated version of base GMX smart contracts",
+            "description": "The latest version of the GMX contracts includes numerous updates, including bug fixes and improvements.",
+            "severity": "n/a",
+            "location": "AVT contracts (based on outdated GMX contracts)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Incorrect check during trader referral code update in ReferralStorage",
+            "description": "The checking statement should be require(traderReferralCodes[_account] == bytes32(0), ...); instead of require(traderReferralCodes[msg.sender] == bytes32(0), ...) ",
+            "severity": "n/a",
+            "location": "contracts/referrals/ReferralStorage.sol, function setTraderReferralCode"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Use modifier instead of private view to validate handler",
+            "description": "Replace the usage of a private view (_validateHandler) with a modifier in AlpReferralReward contract.",
+            "severity": "n/a",
+            "location": "contracts/staking/AlpReferralReward.sol"
+        }
+    ]
+}

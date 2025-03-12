@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/2023-03-spool-platformv2-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/SpoolFi/spool-v2-core",
+        "commit_id": "8f90a7d7b930da80cabcfab6d5049d4d69e67c00",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "spool-v2-core": "contracts/2023-03-spool-platformv2-securityreview/spool-v2-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Risk of SmartVaultFactory DoS due to lack of access controls on grantSmartVaultOwnership",
+            "description": "Anyone can set the owner of the next smart vault to be created, resulting in a DoS of the SmartVaultFactory contract.",
+            "severity": "high",
+            "location": "SmartVaultFactory.sol, SpoolAccessControl.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of zero-value check on constructors and initializers",
+            "description": "Constructors and initialization functions fail to validate incoming arguments, which could result in important state variables being set to the zero address.",
+            "severity": "medium",
+            "location": "Several contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Reallocation process reverts when a ghost strategy is present",
+            "description": "The reallocation process reverts in multiple places when a ghost strategy is present.",
+            "severity": "high",
+            "location": "libraries/ReallocationLib.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ],
+                "3": [
+                    "CWE-835"
+                ]
+            },
+            "title": "Unbounded loops",
+            "description": "Guards and actions are run in unbounded loops, potentially trapping deposit and withdrawal functionality due to a lack of gas.",
+            "severity": "medium",
+            "location": "GuardManager.sol (specifically the `runGuards` function) and AuctionManager contract (specifically the `runActions` function)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Exponential Allocation Provider Reverts on Strategies without Risk Scores",
+            "description": "The `ExponentialAllocationProvider.calculateAllocation` function can revert due to division-by-zero error when a strategy's risk score has not been set by the risk provider.",
+            "severity": "medium",
+            "location": "ExponentialAllocationProvider.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Removing a Strategy Makes Smart Vault Unusable",
+            "description": "Removing a strategy from a smart vault causes every subsequent deposit transaction to revert, making the smart vault unusable.",
+            "severity": "medium",
+            "location": "DepositManager.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Issues with Management of Access Control Roles in Deployment Script",
+            "description": "The deployment script does not properly manage or assign access control roles, resulting in the protocol not working as expected and contracts being non-upgradeable.",
+            "severity": "low",
+            "location": "DeploySpool.s.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unclear events",
+            "description": "RoleGranted and RoleRevoked events do not indicate which vault was modified and what role was granted or revoked.",
+            "severity": "n/a",
+            "location": "SpoolAccessControl.sol lines 50-62"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unreachable or unnecessary code",
+            "description": "Imported @solmate/utils/SSTORE2.sol file is not used in the code.",
+            "severity": "n/a",
+            "location": "ActionManager.sol line 4"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Incorrect, inconsistent, and missing checks",
+            "description": "Access control methods should be consistent throughout the codebase.",
+            "severity": "n/a",
+            "location": "Multiple files"
+        }
+    ]
+}

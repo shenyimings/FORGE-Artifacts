@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/Verichains Public Audit Report - HeroFi Token And Reward - v1.1.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x3244b3b6030f374bafa5f8f80ec2f06aaf104b64",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "ROFIToken": "contracts/Verichains Public Audit Report - HeroFi Token And Reward - v1/ROFIToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Zero locked amount when mintReward with very small _reward",
+            "description": "In the mintReward function, the locked amount is calculated by a percentage with `_reward.div(100).mul(lockedPercentage)` but solidity does not support floating point number so if `_reward` is less than 100, locked will become zero instead of `lockedPercentage`. ",
+            "severity": "low",
+            "location": "Reward.sol, mintReward function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use calldata instead of memory for gas saving",
+            "description": "In external function with array arguments, using memory will force solidity to copy that array to memory thus wasting more gas than using directly from calldata.",
+            "severity": "info",
+            "location": "Reward.sol, claimReward and claimRewards functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused claimLimit storage variable",
+            "description": "The `claimLimit` storage variable is unused.",
+            "severity": "info",
+            "location": "Reward.sol"
+        }
+    ]
+}

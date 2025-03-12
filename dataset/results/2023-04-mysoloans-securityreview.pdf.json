@@ -1,0 +1,263 @@
+{
+    "path": "artifacts/2023-04-mysoloans-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/mysofinance/v2",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "v2": "contracts/2023-04-mysoloans-securityreview/v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Transaction Reordering Risks (MEV and/or sequencer reordering)",
+            "description": "Inherently by design, these contracts can be abused by MEV and/or sequencer reordering",
+            "severity": "low",
+            "location": "Contract design"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unreviewed Contracts",
+            "description": "Interacting with contracts that lack a security review.",
+            "severity": "high",
+            "location": "General Considerations"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Complex Token Contracts",
+            "description": "Tokens with complex code require higher standard of review.",
+            "severity": "medium",
+            "location": "Contract Composition"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "No SafeMath Usage",
+            "description": "Contracts that do not use SafeMath require higher standard of review.",
+            "severity": "medium",
+            "location": "Contract Composition"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Multiple Entry Points for Balance Updates",
+            "description": "Tokens with multiple entry points for balance updates can break internal bookkeeping based on the address.",
+            "severity": "high",
+            "location": "Token Integration Checklist"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Upgradeable Contracts",
+            "description": "Upgradeable contracts may change their rules over time.",
+            "severity": "medium",
+            "location": "Owner Privileges"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted Minting Capabilities",
+            "description": "Malicious or compromised owners can abuse minting capabilities.",
+            "severity": "high",
+            "location": "Owner Privileges"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Pausable Tokens",
+            "description": "Malicious or compromised owners can trap contracts relying on pausable tokens.",
+            "severity": "medium",
+            "location": "Owner Privileges"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Blacklisting",
+            "description": "Malicious or compromised owners can trap contracts relying on tokens with a blacklist.",
+            "severity": "medium",
+            "location": "Owner Privileges"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ERC20 Race Condition",
+            "description": "The ERC20 standard has a known race condition that must be mitigated to prevent attackers from stealing tokens.",
+            "severity": "high",
+            "location": "ERC20 Conformity Checks"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "External Function Call in Transfer or TransferFrom",
+            "description": "External calls in the transfer functions can lead to reentrancies.",
+            "severity": "medium",
+            "location": "Risks of ERC20 Extensions"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Deflationary Tokens",
+            "description": "Deflationary tokens can lead to unexpected behavior.",
+            "severity": "medium",
+            "location": "Risks of ERC20 Extensions"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unhandled Interest Earned from Token",
+            "description": "Some tokens distribute interest to token holders, which may be trapped in the contract if not taken into account.",
+            "severity": "low",
+            "location": "Risks of ERC20 Extensions"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Token Scarcity Issues",
+            "description": "Tokens with a low total supply can be easily manipulated.",
+            "severity": "medium",
+            "location": "Token Scarcity"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Flash Minting",
+            "description": "Flash minting can lead to substantial swings in the balance and the total supply, which necessitate strict and comprehensive overflow checks.",
+            "severity": "high",
+            "location": "Token Scarcity"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "ERC721 Standard Non-Compliance",
+            "description": "Certain contracts may differ from the original ERC721 specification.",
+            "severity": "medium",
+            "location": "ERC721 Tokens"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-280"
+                ]
+            },
+            "title": "Incorrect Transfer to 0x0 Address",
+            "description": "Transfers of tokens to the 0x0 address should revert, but some tokens allow such transfers and consider them burned.",
+            "severity": "high",
+            "location": "ERC721 Tokens"
+        }
+    ]
+}

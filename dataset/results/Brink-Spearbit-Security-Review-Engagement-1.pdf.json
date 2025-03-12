@@ -1,0 +1,361 @@
+{
+    "path": "artifacts/Brink-Spearbit-Security-Review-Engagement-1.pdf",
+    "project_info": {
+        "url": "https://github.com/brinktrade/brink-core/",
+        "commit_id": "feef7d92d2888e1ee062038f55a7301a2300ba3e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "brink-core": "contracts/Brink-Spearbit-Security-Review-Engagement-1/brink-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Overwriting storage slots corresponding to _implementation and _owner",
+            "description": "Accidentally changing these variables can result in changing the implementation and changing the owner, potentially stealing funds or making them inaccessible.",
+            "severity": "high",
+            "location": "ProxyStorage.sol#L7-L10"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Risk of replay attacks across chains",
+            "description": "Signed messages on one chain may be replayed on another chain if _chainId is not unique for different chains.",
+            "severity": "medium",
+            "location": "EIP712SignerRecovery.sol#L12-L14"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Selfdestruct risks in delegateCall()",
+            "description": "The address where Account.sol gets deployed can be directly called, which may result in a potential selfdestruct and user wallets getting bricked.",
+            "severity": "medium",
+            "location": "Account.sol#L48-L57"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Check for non-zero data",
+            "description": "A malicious verifier can redirect the call to another function if data is empty or less than 4 bytes in length.",
+            "severity": "medium",
+            "location": "Account.sol#L76-L78"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Implement SafeERC20 to avoid non-zero to non-zero approvals",
+            "description": "Non-zero to non-zero approvals may revert in some ERC20 tokens, and SafeERC20 should be implemented to prevent this.",
+            "severity": "low",
+            "location": "TransferHelper.sol#L12-L13"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary function storageLoad()",
+            "description": "The function storageLoad is unnecessary and can be obtained off-chain using getStorageAt JSON RPC method.",
+            "severity": "info",
+            "location": "Account.sol#L25-L27"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-648"
+                ]
+            },
+            "title": "Use _owner directly instead of proxyOwner",
+            "description": "Using _owner directly instead of the function proxyOwner can save gas.",
+            "severity": "info",
+            "location": "Account.sol#L35, L53, L83"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ]
+            },
+            "title": "Inline _delegate code in fallback() function",
+            "description": "Inlining the _delegate function inside the fallback() function can save gas.",
+            "severity": "info",
+            "location": "Proxy.sol#L27-L29"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Make functions payable to save gas",
+            "description": "Making functions metaDelegateCall and externalCall payable can save gas by omitting the check for the absence of ETH attached to the call.",
+            "severity": "info",
+            "location": "Account.sol#L34, L76"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Change memory to calldata for gas optimization",
+            "description": "Using calldata instead of memory for external function parameters can save gas.",
+            "severity": "info",
+            "location": "Various locations (Account.sol#L109-L116, DeployAndExecute.sol#L23, LimitSwapVerifier.sol#L33-L34, EIP712SignerRecovery.sol#L19)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Hardencode initCode to save gas",
+            "description": "Hardcoding initCode into the contract can save a significant amount of gas.",
+            "severity": "info",
+            "location": "DeployAndExecute.sol#L23"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove proxyCall function",
+            "description": "The function proxyCall is not needed and can be removed to save gas.",
+            "severity": "info",
+            "location": "CallExecutor.sol#L52"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Optimize keccak256() computation",
+            "description": "Computing the keccak hash as a constant and incrementing it can avoid computing the Keccak-256 hash at runtime.",
+            "severity": "info",
+            "location": "Bit.sol#L33"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-768"
+                ]
+            },
+            "title": "Use inline assembly to avoid short-circuiting",
+            "description": "Implementing the validBit function using inline assembly can avoid short-circuiting and save gas.",
+            "severity": "info",
+            "location": "Bit.sol#L26-L28"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Use nonces for Bit.sol",
+            "description": "Using nonces for storing transactions that are currently in flight can lead to some gas savings.",
+            "severity": "info",
+            "location": "Bit.sol#L8"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Upgrade to the latest compiler version",
+            "description": "Upgrading to the latest compiler version (0.8.10) can provide advantages such as external calls requiring less gas.",
+            "severity": "info",
+            "location": "All contracts."
+        },
+        {
+            "id": 16,
+            "category": {},
+            "title": "Use custom errors from version 0.8.4",
+            "description": "Using custom errors from Solidity 0.8.4 are more gas efficient than revert strings when the revert condition is met.",
+            "severity": "info",
+            "location": "All uses of revert strings, e.g., DeployAndExecute.sol#L29"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected delegatecall",
+            "description": "The contract LimitSwapVerifier is only meant to be delegatecalled and does not have call protection.",
+            "severity": "n/a",
+            "location": "Contract LimitSwapVerifier"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Not following solidity memory model in inline assembly usage",
+            "description": "Inline assembly snippets do not follow Solidity’s memory model, which may lead to overwriting the free memory pointer and writing beyond 0-64.",
+            "severity": "info",
+            "location": "Account.sol#L36 and DeployAndExecute.sol#L32-L42"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of documentation regarding delegatecalls",
+            "description": "The Account contract does not have explicit documentation stating that it is only supposed to be delegatecalled.",
+            "severity": "info",
+            "location": "Account.sol#L9"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Variables can be defined inline",
+            "description": "Constants are not defined inline, which affects readability.",
+            "severity": "info",
+            "location": "Account.sol#L12-L21"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Insufficient event emission",
+            "description": "There is no emit in functions other than cancel(), which makes it difficult to retrieve the execution state.",
+            "severity": "info",
+            "location": "CancelVerifier.sol#L16"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Public function can be made external",
+            "description": "The proxyCall function is marked public, but it is never called internally, and should be marked as external for best practices.",
+            "severity": "info",
+            "location": "CallExecutor.sol#L30"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Contracts that could be made abstract",
+            "description": "Some contracts are not meant to be instantiated directly and should be marked as abstract contracts.",
+            "severity": "info",
+            "location": "EIP712SignerRecovery, EIP712Validator, ProxySettable, ProxyGettable, and ProxyStorage"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating pragma is set",
+            "description": "The pragma Solidity directive is not locked to a specific version, which may cause issues with different compiler versions.",
+            "severity": "info",
+            "location": "All contracts."
+        }
+    ]
+}

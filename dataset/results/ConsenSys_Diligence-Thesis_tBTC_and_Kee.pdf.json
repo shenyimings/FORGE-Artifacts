@@ -1,0 +1,167 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Thesis_tBTC_and_Kee.pdf",
+    "project_info": {
+        "url": "https://github.com/keep-network/tbtc/tree/dcb1148025d6a1238b49a80fd56d8ca0beb93781",
+        "commit_id": "dcb1148025d6a1238b49a80fd56d8ca0beb93781",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "tbtc": "contracts/ConsenSys_Diligence-Thesis_tBTC_and_Kee/tbtc"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-451"
+                ]
+            },
+            "title": "Incentive Manipulation in Funding Flow",
+            "description": "No incentive for TDT holder to call out missing timed milestones for her deposit, leading to potential fraud.",
+            "severity": "medium",
+            "location": "Funding flow"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unpunished Signing Group Fraud",
+            "description": "Signing group not punished for committing fraud, allowing them to steal BTC collateral without consequences.",
+            "severity": "high",
+            "location": "Funding flow"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reward for Reporting Fraud Incomplete",
+            "description": "TDT holder only partially compensated for reporting fraud, losing funds if they provided BTC without proof and potentially winning funds if they did not transfer BTC.",
+            "severity": "medium",
+            "location": "Funding flow"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Front-Running in provideFundingECDSAFraudProof",
+            "description": "Signing group can front-run an attempt by the TDT holder to call out provideFundingECDSAFraudProof, terminating the deposit with notifyFundingTimeout.",
+            "severity": "medium",
+            "location": "Funding flow"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Reward for Reporting Fraud in Active State",
+            "description": "TDT holder does not profit from reporting fraud unless they also collude with the signing group.",
+            "severity": "low",
+            "location": "Active state"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ]
+            },
+            "title": "Undercollateralization Risk",
+            "description": "Deposit may become undercollateralized due to oracle price slippage, allowing malicious actors to call out undercollateralized deposits.",
+            "severity": "high",
+            "location": "Active state"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Front-Running in Auction",
+            "description": "Auction can be front-run by observing bids and bidding at the latest time possible to maximize rewards.",
+            "severity": "high",
+            "location": "Liquidation flow"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Seized or fully reassigned",
+            "description": "Keep cannot be closed if bonds have been completely reassigned or seized before.",
+            "severity": "medium",
+            "location": "closeKeep() function in BondedECDSAKeep.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Inconsistent type correction",
+            "description": "Type correction encodePacked().toBytes32() is not needed",
+            "severity": "low",
+            "location": "bitcoin-spv/solidity/contracts/BTCUtils.sol:L114-L117"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant functionality",
+            "description": "Exposing redundant implementations of Bitcoin's double sha256",
+            "severity": "low",
+            "location": "bitcoin-spv/solidity/contracts/BTCUtils.sol (multiple locations)"
+        }
+    ]
+}

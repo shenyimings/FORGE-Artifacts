@@ -1,0 +1,140 @@
+{
+    "path": "artifacts/betfi.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x44532511974DC451daAe046c47BA19529eA18960",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.10+commit.fc410830"
+        ],
+        "project_path": {
+            "CoinToken": "contracts/betfi/CoinToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "ST - Stop Transactions",
+            "description": "The contract owner has the authority to stop transactions for all users excluding the owner, potentially creating a honeypot.",
+            "severity": "critical",
+            "location": "contract.sol#L917"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ELFM - Exceed Limit Fees Manipulation",
+            "description": "The contract owner can increase fees over the allowed limit of 25%.",
+            "severity": "critical",
+            "location": "contract.sol#L903,917"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "STC - Succeeded Transfer Check",
+            "description": "The transfer methods do not check if the result is successful.",
+            "severity": "low",
+            "location": "contract.sol#L978"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "CR - Code Repetition",
+            "description": "Repetitive code segments increase the contract's code size unnecessarily.",
+            "severity": "low",
+            "location": "contract.sol#L903,917"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow Solidity's naming conventions.",
+            "severity": "low",
+            "location": "contract.sol#L639,656,638,692"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "L05 - Unused State Variable",
+            "description": "There are unused state variables in the contract.",
+            "severity": "low",
+            "location": "contract.sol#L842,846,837,847,845,840,848,835,841,836,838,843"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L13 - Divide before Multiply Operation",
+            "description": "Performing divisions before multiplications may cause loss of precision.",
+            "severity": "low",
+            "location": "contract.sol#L890"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Abuse of Admin Functions",
+            "description": "The owner can abuse admin functions, stopping transactions, manipulating fees, transferring funds to the team's wallet, and blacklisting addresses.",
+            "severity": "n/a",
+            "location": "Various functions (burn, enableBlacklist, disableBlacklist, etc.)"
+        }
+    ]
+}

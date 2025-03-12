@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/SlowMist Audit Report - ROTL_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/dominusrotl/rotl-contract",
+        "commit_id": "af8d0c310071767a8b7a9d57ed89fb8f4fadbfcc",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "rotl-contract": "contracts/SlowMist Audit Report - ROTL_en-us/rotl-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Excessive authority issue",
+            "description": "In the ROTL contract, the DEFAULT_ADMIN_ROLE can set the minter role, and the minter role can mint ERC721A tokens arbitrarily.",
+            "severity": "medium",
+            "location": "ROTL.sol#L18-25"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Pausable is not implemented",
+            "description": "In the ROLTMint contract, it inherits the Pausable contract but doesn't implement pause and unpause functions.",
+            "severity": "low",
+            "location": "ROTLsol#59-65, 92"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing event record",
+            "description": "In the ROTLMint contract, certain functions lack event logging for sensitive parameter modifications.",
+            "severity": "info",
+            "location": "ROTLsol#L27-29, ROTLMint.sol#L29-57"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Dev address setting enhancement suggestion",
+            "description": "In the ROTLMint contract, the owner role can withdraw native tokens through the withdraw function without protection against private key leaks.",
+            "severity": "info",
+            "location": "ROTLsol#L121-123"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Variable not used",
+            "description": "In the ROTL contract, certain variables are defined but not assigned or settable values.",
+            "severity": "info",
+            "location": "ROTL.sol#L11, 13"
+        }
+    ]
+}

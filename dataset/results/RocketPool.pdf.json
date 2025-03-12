@@ -1,0 +1,152 @@
+{
+    "path": "artifacts/RocketPool.pdf",
+    "project_info": {
+        "url": "https://github.com/rocket-pool/rocketpool",
+        "commit_id": "a65b203cf99c7a991c2d85a7468a97bfb5dbba31",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "rocketpool": "contracts/RocketPool/rocketpool"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Any network contract can change any node's withdrawal address",
+            "description": "RocketStorage contract uses eternal storage pattern, allowing any network contract to modify withdrawal addresses.",
+            "severity": "high",
+            "location": "RocketStorage.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1102"
+                ]
+            },
+            "title": "Current storage pattern fails to ensure type safety",
+            "description": "Use of assembly code for reading and writing to raw storage slots can lead to type mismatches.",
+            "severity": "high",
+            "location": "RocketStorage.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Solidity compiler optimizations can be problematic",
+            "description": "Enabled optional compiler optimizations may introduce optimization bugs with security implications.",
+            "severity": "info",
+            "location": "truffle.js"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Upgradeable contracts can block minipool withdrawals",
+            "description": "Upgradable RocketMinipoolManager contract can be modified to revert withdrawals, breaking the guarantee to node operators.",
+            "severity": "high",
+            "location": "RocketMinipoolDelegate.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of contract existence check on delegatecall will result in unexpected behavior",
+            "description": "Delegatecall function does not check for contract existence, leading to unexpected behavior.",
+            "severity": "high",
+            "location": "RocketMinipool.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ]
+            },
+            "title": "tx.origin in RocketStorage authentication may be an attack vector",
+            "description": "Use of tx.origin in RocketStorage authentication can lead to unauthorized access during initialization phase.",
+            "severity": "high",
+            "location": "RocketStorage.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Duplicated storage-slot computation can silently introduce errors",
+            "description": "Duplicated storage slot computation may lead to silent errors.",
+            "severity": "info",
+            "location": "Throughout the codebase"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Potential collisions between eternal storage and Solidity mapping storage slots",
+            "description": "Rocket Pool's use of eternal storage to store named mappings may lead to collisions with Solidity mapping storage slots, allowing an attacker to access inaccessible mapping values.",
+            "severity": "info",
+            "location": "Throughout the codebase (RocketMinipoolManager.sol#L216)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Inconsistent Storage Locations",
+            "description": "Duplicated computation of storage locations increases the risk of inconsistencies, and lack of existence and type checks may not detect developer errors.",
+            "severity": "n/a",
+            "location": "Throughout the codebase"
+        }
+    ]
+}

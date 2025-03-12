@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/Maker Dai Delegate.md",
+    "project_info": {
+        "url": "https://github.com/therealmonoloco/maker-dai-delegate",
+        "commit_id": "97949a51062df956fd0172b7b1c778f66844b634",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "maker-dai-delegate": "contracts/Maker Dai Delegate/maker-dai-delegate"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper handling of losses in Yearn DAI vault",
+            "description": "The strategy does not properly handle losses from the `DAI yVault`, which can lead to unfair penalties on withdraw and delayed recoveries.",
+            "severity": "high",
+            "location": "Strategy.sol, functions prepareReturn and liquidatePosition"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "Strategy migration reverts after Maker liquidation",
+            "description": "In the unlikely event of Maker collateral liquidation, strategy migration will be reverted due to owner change.",
+            "severity": "high",
+            "location": "Strategy.sol, function prepareMigration"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Unnecessary assert on immutable variable",
+            "description": "Assertion `address(investmentToken) != address(want)` is unnecessary during contract execution.",
+            "severity": "low",
+            "location": "Strategy.sol, function _buyInvestmentTokenWithWant"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas optimization in `_convertInvestmentTokenToWant`",
+            "description": "Two calls to `_convertInvestmentTokenToWant` can be saved at `estimatedTotalAssets`.",
+            "severity": "low",
+            "location": "Strategy.sol, function estimatedTotalAssets"
+        }
+    ]
+}

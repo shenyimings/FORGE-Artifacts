@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/Solidified-Sandbox_StarterPack_[29.09.2020].pdf",
+    "project_info": {
+        "url": "https://github.com/thesandboxgame/sandbox-private-contracts",
+        "commit_id": "fcb5ea804fddf8e94683405f39630ad61a16f120",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "sandbox-private-contracts": "contracts/Solidified-Sandbox_StarterPack_[29/sandbox-private-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unsecure source of randomness",
+            "description": "The computation for simulating pseudo-random numbers in CatalystDataBase.sol depends purely on user-supplied values passed as arguments to getValues(), allowing callers to pre-compute advantageous values.",
+            "severity": "high",
+            "location": "CatalystDataBase.sol, getValues() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Maker can update priceFeed",
+            "description": "The StarterPackV1 uses Maker’s medianizer to read the ETH/USD value pair, but this address could be upgraded by Maker and the price stops updating, affecting all sale prices.",
+            "severity": "high",
+            "location": "StarterPackV1.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Change can be sent to relayer",
+            "description": "When an exceeding amount is sent to the contract, the outstanding amount is returned to msg.sender which could be a meta transaction relayer, causing issues since transfer() only forwards a small amount of gas.",
+            "severity": "low",
+            "location": "StarterPackV1.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Potential Integer Overflow in StartPackV1.sol",
+            "description": "Possible integer overflow if quantities and prices are large enough in the _calculateTotalPriceInSand() function.",
+            "severity": "low",
+            "location": "StarterPackV1.sol, L286 & L290"
+        }
+    ]
+}

@@ -1,0 +1,227 @@
+{
+    "path": "artifacts/New_Alchemy_Security_Audit-CrowdVilla Smart Contract%U00A0Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/REIDAO/crowdvilla-token-sale",
+        "commit_id": "306147bcea3f9e2fc1435a1cd0a19e295d65c8e5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "crowdvilla-token-sale": "contracts/New_Alchemy_Security_Audit-CrowdVilla Smart Contract%U00A0Audit/crowdvilla-token-sale"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Locked CRV and CRP Tokens can be transferred",
+            "description": "Locked tokens can still be transferred because the contract does not override BasicToken.transfer or StandardToken.transferFrom.",
+            "severity": "medium",
+            "location": "REIDAOMintableLockableToken contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Contracts can become unowned",
+            "description": "A contract can become unowned if a single owner removes itself.",
+            "severity": "medium",
+            "location": "Owners contract (ownership/Owners.sol)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Late contributors pay for unnecessary state changes",
+            "description": "Contributors may have to pay for state changes to End if they call the fallback function after block 52800 but before an owner calls endTokenSale.",
+            "severity": "medium",
+            "location": "CrowdvillaTokenSale contract (contracts/CrowdvillaTokenSale.sol)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Early contributors in REI token sale pay for unnecessary state changes",
+            "description": "Contributors may have to refund their funds due to an early check in the function that only takes into account a paused sale state.",
+            "severity": "low",
+            "location": "REI token sale contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of short address attack protections",
+            "description": "The contracts are vulnerable to short address attacks because they do not validate user-provided addresses.",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1335"
+                ]
+            },
+            "title": "Short Address Attack",
+            "description": "Value is left-shifted by one byte, potentially causing a victim to transfer a larger number of tokens than intended.",
+            "severity": "high",
+            "location": "BasicToken.transfer, MintableToken.mint, StandardToken.transferFrom, StandardToken.approve, StandardToken.increaseApproval, StandardToken.decreaseApproval, REIDAOMintableLockableToken.canTransfer"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Insecure Ownership Transfer",
+            "description": "No check for the zero address when adding an owner.",
+            "severity": "low",
+            "location": "Owners.sol addOwner function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unchecked Allocation Percentages",
+            "description": "Allocation percentages do not add up to 100, which may cause CRPGeneration to malfunction.",
+            "severity": "medium",
+            "location": "CRPAllocationConfig contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing Event Trigger",
+            "description": "No event triggered when the configuration changes to notify users.",
+            "severity": "low",
+            "location": "contracts/registries/CRPGenerationConfig.sol addConfig function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Insecure Minting",
+            "description": "finishMinting can be called before all issuances are complete, potentially allowing a rogue owner to resume minting tokens.",
+            "severity": "medium",
+            "location": "MintableToken.sol startMinting function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unauthorized Wallet Flagging",
+            "description": "Public functions addHostedWallet and removeHostedWallet allow anyone to flag any wallet as 'hosted'.",
+            "severity": "low",
+            "location": "REIDAOBurnableToken.sol addHostedWallet and removeHostedWallet functions"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Checks",
+            "description": "Unnecessary checks for zero lockedTokens and numLocks in REIDAOMintableLockableToken contract.",
+            "severity": "low",
+            "location": "REIDAOMintableLockableToken.sol transferableTokens and getLockedTokens functions"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Hard to Follow Logic",
+            "description": "Deeply nested logic in disburseToREIDAO function is hard to follow.",
+            "severity": "low",
+            "location": "REIToken.sol disburseToREIDAO function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inefficient Gas Use",
+            "description": "Inefficient use of gas when calling the crpToken.mintAndLockTokens function in a for loop.",
+            "severity": "low",
+            "location": "contracts/CRPGeneration.sol generateCRP function"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant State Variables",
+            "description": "Unnecessary storage of certain variables that are not read or written outside of the constructor.",
+            "severity": "low",
+            "location": "CrowdvillaTokenSale.sol"
+        }
+    ]
+}

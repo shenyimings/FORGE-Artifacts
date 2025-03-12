@@ -1,0 +1,131 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Hegic-HardCore-Beta-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/hegic/hegic-hardcore-beta/tree/2da5c7d",
+        "commit_id": "2da5c7d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "hegic-hardcore-beta": "contracts/PeckShield-Audit-Report-Hegic-HardCore-Beta-v1/hegic-hardcore-beta"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent Implementation Of _calculatePeriodFee()",
+            "description": "Inconsistency in divisors used to calculate period fee",
+            "severity": "low",
+            "location": "PriceCalculator/_calculatePeriodFee() and PriceCalculatorUtilization/_calculatePeriodFee()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Non-Functional Logic Of HegicStakeAndCover::provide()",
+            "description": "Revert due to initial value of totalBalance being 0",
+            "severity": "low",
+            "location": "HegicStakeAndCover::provide()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Arithmetic Underflow Avoidance In HegicOperationalTreasury::_replenish()",
+            "description": "Potential revert due to addition and subtraction operations",
+            "severity": "low",
+            "location": "HegicOperationalTreasury/_replenish()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Incorrect lockedPremium Update In HegicOperationalTreasury::lockLiquidityFor()",
+            "description": "Incorrect update order of state variable lockedPremium",
+            "severity": "high",
+            "location": "HegicOperationalTreasury::lockLiquidityFor()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect withdraw Logic In HegicOperationalTreasury",
+            "description": "The require statement in the withdraw() function is not correct and needs to be revised.",
+            "severity": "medium",
+            "location": "HegicOperationalTreasury contract, withdraw() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The extra power to privileged accounts may be a counter-party risk to the contract users.",
+            "severity": "medium",
+            "location": "Multiple contracts, various functions (e.g. withdraw(), replenish(), lockLiquidityFor(), setBenchmark(), addTokens())"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved Sanity Checks For System/Function Parameters",
+            "description": "Lack of rigorous sanity checks on system-wide parameters can lead to undesirable consequences.",
+            "severity": "low",
+            "location": "HegicPool contract, setMaxDepositAmount(), setCollateralizationRatio(), and setPriceCalculator() functions."
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Improved Reentrancy Protection In HegicPool",
+            "description": "Potential reentrancy issue in the exercise() function due to ERC777-like standard token interactions.",
+            "severity": "n/a",
+            "location": "HegicPool contract, exercise() and _send() functions."
+        }
+    ]
+}

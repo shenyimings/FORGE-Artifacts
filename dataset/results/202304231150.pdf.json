@@ -1,0 +1,83 @@
+{
+    "path": "artifacts/202304231150.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x89c6f3422d6633F3fC3A077b42fBb6053D20e728",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "RESDAO": "contracts/202304231150/RESDAO"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "The _rescueToken_ function can withdraw the fees used for rewards in the contract, resulting in users not receiving rewards.",
+            "severity": "low",
+            "location": "RESDAO.sol#L1159-1165"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unevenly Distributed Rewards",
+            "description": "In transfer, when the dividend conditions are met, a dividend will be paid to all users who hold LP tokens that meet the minimum dividend based on the current balance of the contract.",
+            "severity": "low",
+            "location": "RESDAO.sol#L1210-1252"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Easily Bypassed Handling Fees",
+            "description": "The _isAddLiquidityV1 and _isDelLiquidityV1 functions are easily bypassed due to the lack of decimals of the judgment value, users only need to transfer a very small amount to pair address before swapping and add/remove liquidity to avoid handling fees.",
+            "severity": "low",
+            "location": "RESDAO.sol#L1167-1206"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Owner Modifies Key Parameters without Triggering an Event",
+            "description": "In the contract, the event is not triggered when the owner modifies key parameters.",
+            "severity": "info",
+            "location": "RESDAO.sol#L1077-1101"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Codes",
+            "description": "In the contract, the code related to automatedMarketMakerPairs and swapTokensAtAmount is a redundant code.",
+            "severity": "info",
+            "location": "RESDAO.sol#L1048-1105"
+        }
+    ]
+}

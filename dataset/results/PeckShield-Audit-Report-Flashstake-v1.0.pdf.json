@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Flashstake-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/BlockzeroLabs/flashv3-contracts/tree/03000ee",
+        "commit_id": "03000ee",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "flashv3-contracts": "contracts/PeckShield-Audit-Report-Flashstake-v1/flashv3-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Invalid Slippage Control",
+            "description": "The flashStake() function is vulnerable to front-running attacks, resulting in smaller returns due to invalid slippage control.",
+            "severity": "medium",
+            "location": "FlashProtocol contract, flashStake() function (line 293)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged account (owner) has critical roles in governing and regulating system-wide operations, posing a counter-party risk to protocol users.",
+            "severity": "medium",
+            "location": "Multiple contracts (FlashProtocol, FlashStrategyAAVEv2, FlashBack), specifically functions depositReward, addRewardTokens, setRewardRatio."
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Non-Compliance with ERC20 Standard in transfer() Function",
+            "description": "The transfer() function does not revert the transaction when the check fails, which is not compliant with the ERC20 standard.",
+            "severity": "low",
+            "location": "Multiple contracts, specifically ZRX token contract"
+        }
+    ]
+}

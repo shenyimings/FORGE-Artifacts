@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/YuGiOhProtocol Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x4B42CD75f7df97619e039bE8AC342ff88C3E080c",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "YuGiOhProtocol": "contracts/YuGiOhProtocol Full Smart Contract Security Audit/YuGiOhProtocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong burn fee taking",
+            "description": "The function _sendToBurn() adds rBurn value to _tOwned[currentBurn], instead of adding tBurn value, which is not multiplicated by current rate.",
+            "severity": "high",
+            "location": "YuGiOhProtocol contract, _sendToBurn() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The functions includeInReward() and _getCurrentSupply use loops that can be aborted with OUT_OF_GAS exception if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "YuGiOhProtocol contract, includeInReward() and _getCurrentSupply functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges to change fee settings and lock/unlock functionality even after ownership is renounced.",
+            "severity": "low",
+            "location": "YuGiOhProtocol contract, various functions related to owner privileges"
+        }
+    ]
+}

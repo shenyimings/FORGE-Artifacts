@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/reflexer-rai-curve-pool.pdf",
+    "project_info": {
+        "url": "https://github.com/stobiewan/curve-contract/tree/314dde1dc810209c2b80b58162134ff6fdd85937",
+        "commit_id": "314dde1dc810209c2b80b58162134ff6fdd85937",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "curve-contract": "contracts/reflexer-rai-curve-pool/curve-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Memory Corruption Due To Old Compiler Version",
+            "description": "Using an old version of the Vyper compiler which is known to contain high severity vulnerabilities such as memory corruption and storage variables overwritten by re-entrancy locks.",
+            "severity": "high",
+            "location": "DepositRAI.vy, StableSwapRAI.vy"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Outdated Redemption Price",
+            "description": "Using a slightly older version of the redemption price, which might enable arbitrage opportunities depending on how outdated the prices are.",
+            "severity": "medium",
+            "location": "StableSwapRAI.vy, MetaRAI.vy"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unlimited Allowance",
+            "description": "Approving the maximum value in ERC20(coin).approve, which is considered a security anti-pattern and could lead to end-user wallet funds being drained if the contract is exploited.",
+            "severity": "low",
+            "location": "MetaRAI.vy, DepositRAI.vy"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Input Validation",
+            "description": "Lack of input validation in several functions, which could lead to incidents caused by human error or incorrect values provided.",
+            "severity": "low",
+            "location": "StableSwapRAI.vy, DepositRAI.vy, MetaRAI.vy"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Addresses To Be Updated After Deployment",
+            "description": "Address placeholders in README.md and pooldata.json files need to be replaced with the actual deployment addresses.",
+            "severity": "info",
+            "location": "README.md, pooldata.json"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked Pragma",
+            "description": "Using unlocked pragma in Vyper files, which could lead to unexpected behavior in the future.",
+            "severity": "info",
+            "location": "DepositRAI.vy, StableSwapRAI.vy"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Variable Shadowing",
+            "description": "Local or calldata variables using the same name as storage variables, leading to ambiguities regarding which variable is actually used.",
+            "severity": "info",
+            "location": "DepositRAI.vy"
+        }
+    ]
+}

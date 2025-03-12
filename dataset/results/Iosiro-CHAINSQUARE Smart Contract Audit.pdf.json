@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/Iosiro-CHAINSQUARE Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xb41380174d0b06181513a5677b60200b93b5efb4",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.4.21+commit.dfe3193c"
+        ],
+        "project_path": {
+            "CHAINSQUARE": "contracts/Iosiro-CHAINSQUARE Smart Contract Audit/CHAINSQUARE"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use bool for Blacklist State",
+            "description": "An `int` type was used to store whether an address was blacklisted, which could be improved by using a boolean.",
+            "severity": "info",
+            "location": "ChainSquare Token Smart Contract (blacklist functionality)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Use require for Blacklist",
+            "description": "The `transfer(...)` and `transferFrom(...)` functions returned `false` if attempting to transfer from or to a blacklisted address, which could be improved by reverting through a `require` statement.",
+            "severity": "info",
+            "location": "ChainSquare Token Smart Contract (blacklist functionality)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Use require for onlyOwner",
+            "description": "The `onlyOwner` modifier returned `false` instead of reverting, which could be improved by using a `require` statement to explicitly revert if the function is called by a non-owner address.",
+            "severity": "info",
+            "location": "ChainSquare Token Smart Contract (onlyOwner functionality)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing Event Emission",
+            "description": "No event was emitted when allocating the total supply to `msg.sender`.",
+            "severity": "info",
+            "location": "contract.sol#L63"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Interface Incorrectly Defined",
+            "description": "The `ERC20Interface` implies that the code should be an interface, but the `contract` keyword was used.",
+            "severity": "info",
+            "location": "contact.sol#L25"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "No Function Visibility",
+            "description": "The `stop(...)` and `start(...)` functions had an implied public visibility, which could be improved by explicitly setting the visibility using the `public` keyword.",
+            "severity": "info",
+            "location": "ChainSquare Token Smart Contract (stop and start functionality)"
+        }
+    ]
+}

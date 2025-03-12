@@ -1,0 +1,311 @@
+{
+    "path": "artifacts/Paydece_SC-Audit-Report_02112023_SA-1881.pdf",
+    "project_info": {
+        "url": "https://github.com/PayDece/paydece-contracts/tree/v4",
+        "commit_id": "be0b8ce8b7a381dd89add981ba1dc32c6587ba0b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "paydece-contracts": "contracts/Paydece_SC-Audit-Report_02112023_SA-1881/paydece-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risk Due to Contract Owner Control",
+            "description": "The contract owner has significant control over the contract, which could pose a risk in case of account compromise.",
+            "severity": "medium",
+            "location": "Contract owner's ability to establish fees, disburse funds, issue refunds, and cancel escrow arrangements."
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Insecure Time Lock for Escrow Process",
+            "description": "The contract relies solely on the owner to define time locks, which could result in funds being indefinitely locked if the owner neglects or is compromised.",
+            "severity": "medium",
+            "location": "Escrow process."
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Whitelisted Currency Vulnerability",
+            "description": "The contract owner can whitelist any currency, including malicious ERC20 tokens, which could result in a loss of value for takers.",
+            "severity": "medium",
+            "location": "Contract owner's ability to whitelist currencies."
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of Dispute Resolution Mechanism",
+            "description": "Escrowed funds can be released by the maker or contract owner without a process for raising disputes, leading to potential trust issues.",
+            "severity": "medium",
+            "location": "Escrow release process."
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Events on Critical State Changes",
+            "description": "addStablesAddresses() and delStablesAddresses() do not emit events when important values change.",
+            "severity": "low",
+            "location": "./contracts/PaydeceEscrow.sol: setFeeTaker(), setFeeMaker(), setTimeProcess(), addStablesAddresses(), and delStablesAddresses()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Makers Can Omit Fee Payment",
+            "description": "Makers can omit fee payments even if they are not premium members.",
+            "severity": "medium",
+            "location": "./contracts/PaydeceEscrow.sol: createEscrowNativeCoin()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Usage of Built-in Transfer",
+            "description": "The built-in transfer() and send() functions process a hard-coded amount of Gas, which can lead to 'out of Gas' exceptions.",
+            "severity": "low",
+            "location": "./contracts/PaydeceEscrow.sol: cancelTakerNative()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Outdated Solidity Version",
+            "description": "Smart contract was compiled using an outdated Solidity version (0.8.7).",
+            "severity": "low",
+            "location": "Various contracts including ./contracts/Address.sol, ./contracts/IERC20.sol, etc."
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation",
+            "description": "Non-adherence to Solidity style guidelines affecting code readability and maintainability",
+            "severity": "low",
+            "location": "./contracts/PaydeceEscrow.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Functions That Can Be Declared External",
+            "description": "Public functions not called in the contract should be declared as external for better code understanding",
+            "severity": "medium",
+            "location": "./contracts/PaydeceEscrow.sol: getState(), addStablesAddresses(), delStablesAddresses(), CancelMaker(), CancelMakerOwner(), CancelTaker(), CancelTakerOwner(), setMarkAsPaid(), setMarkAsPaidOwner();"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused EscrowStatus Enum Values",
+            "description": "Unused functionality increases Gas deployment and decreases code quality",
+            "severity": "medium",
+            "location": "./contracts/PaydeceEscrow.sol: EscrowStatus;"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Solidity Style Guide Violation - Naming Conventions",
+            "description": "Function names do not follow mixedCase style, violating Solidity Style Guide",
+            "severity": "low",
+            "location": "./contracts/PaydeceEscrow.sol: CancelMaker(), CancelMakerOwner(), CancelTaker(), CancelTakerOwner();"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "State Variables Default Visibility",
+            "description": "Unclear state variable visibility affecting code quality and potential incorrect assumptions about access control",
+            "severity": "medium",
+            "location": "./contracts/PaydeceEscrow.sol: whitelistedStablesAddresses;"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Variables Can Be Downcasted to Smaller Size",
+            "description": "Downcasting variables from uint256 to smaller types reduces storage usage and saves Gas",
+            "severity": "medium",
+            "location": "./contracts/PaydeceEscrow.sol: feeTaker, feeMaker, timeProcess;"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1113"
+                ]
+            },
+            "title": "NatSpec and Error Messages Are Written in 2 Languages",
+            "description": "Multilingual comments and error messages decrease code readability",
+            "severity": "low",
+            "location": "./contracts/PaydeceEscrow.sol: *;"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unfinalized Code",
+            "description": "Commented-out code reduces code readability",
+            "severity": "medium",
+            "location": "./contracts/PaydeceEscrow.sol: *;"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code Duplication",
+            "description": "Redundant code segments increase deployment Gas costs and decrease code quality",
+            "severity": "medium",
+            "location": "./contracts/PaydeceEscrow.sol: CancelMaker(), CancelMakerOwner(), CreateEscrow(), createEscrowNativeCoin(), _releaseEscrow(), _releaseEscrowNativeCoin();"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Blacklisted Addresses in USDC",
+            "description": "Blacklisted users block escrow flow and fee collection",
+            "severity": "high",
+            "location": "./contracts/PaydeceEscrow.sol: *;"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Redundant Calculation",
+            "description": "Unnecessary fee calculations waste Gas",
+            "severity": "medium",
+            "location": "./contracts/PaydeceEscrow.sol: createEscrow(), createEscrowNativeCoin(), _releaseEscrow(), _releaseEscrowNativeCoin();"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Check",
+            "description": "Duplicate conditional checks increase complexity and potential confusion",
+            "severity": "medium",
+            "location": "./contracts/PaydeceEscrow.sol: createEscrow();"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Use Custom Errors Instead of Error Strings to Save Gas",
+            "description": "Custom errors offer Gas efficiency, deployment savings, and versatility",
+            "severity": "low",
+            "location": "./contracts/PaydeceEscrow.sol"
+        }
+    ]
+}

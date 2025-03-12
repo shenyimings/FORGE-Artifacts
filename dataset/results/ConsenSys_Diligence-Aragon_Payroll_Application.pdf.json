@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Aragon_Payroll_Application.pdf",
+    "project_info": {
+        "url": "https://github.com/aragon/ppf",
+        "commit_id": "68ab78db525bee218fd62e155cd76c68136abe3f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ppf": "contracts/ConsenSys_Diligence-Aragon_Payroll_Application/ppf"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "PriceFeed trustlessness issue",
+            "description": "The operator key can be compromised, resulting in fake prices.",
+            "severity": "high",
+            "location": "PPF contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Unfair exchange rates",
+            "description": "Employee has no control over the exchange rate feed.",
+            "severity": "high",
+            "location": "Payroll contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rounding error issue",
+            "description": "Losing up to a second's worth of salary on payday function call.",
+            "severity": "medium",
+            "location": "Payroll.sol, L751-L759"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "No exchange rate upper limit",
+            "description": "Employer has no way to set an upper limit for exchange rates.",
+            "severity": "medium",
+            "location": "Payroll contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Non-modifiable allowed tokens list",
+            "description": "The allowedTokens list cannot be modified except by adding new tokens before reaching the maximum limit.",
+            "severity": "medium",
+            "location": "Payroll contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Decimal calculation inconsistency",
+            "description": "The decimal calculation constant 'ONE' differs in types (uint128 vs uint256) but mainly for third-party IFEED interfaces.",
+            "severity": "low",
+            "location": "PPF.sol, L11 and Payroll.sol, L32"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "No external view function for employee balance",
+            "description": "There is no simple way to find out how much money an employee can withdraw.",
+            "severity": "low",
+            "location": "Payroll contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused import statement",
+            "description": "The SafeMath8 library is imported but never used in the Payroll contract.",
+            "severity": "low",
+            "location": "Payroll.sol, L10"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas optimization opportunity for internal role constants",
+            "description": "The internal role constants can be optimized to save gas.",
+            "severity": "low",
+            "location": "Payroll.sol, L23-L30"
+        }
+    ]
+}

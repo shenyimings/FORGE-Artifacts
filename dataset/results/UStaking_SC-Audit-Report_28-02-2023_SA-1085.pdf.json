@@ -1,0 +1,260 @@
+{
+    "path": "artifacts/UStaking_SC-Audit-Report_28-02-2023_SA-1085.pdf",
+    "project_info": {
+        "url": "https://github.com/Ustaking/Contracts",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Contracts": "contracts/UStaking_SC-Audit-Report_28-02-2023_SA-1085/Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Funds Lock",
+            "description": "No mechanism for withdrawing native tokens.",
+            "severity": "high",
+            "location": "./contracts/UStaking.sol:*"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Same checks in functions",
+            "description": "Overwhelming code and making further development difficult.",
+            "severity": "medium",
+            "location": "./contracts/UStaking.sol: claim(), cashBack(), withdraw()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "SafeMath in ^0.8.0",
+            "description": "Redundant functionality due to built-in SafeMath functions.",
+            "severity": "medium",
+            "location": "./contracts/UStaking.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Requirements Compliance",
+            "description": "Inconsistent token supply in the constructor.",
+            "severity": "medium",
+            "location": "./contracts/UStakingToken.sol: function constructor()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Copypasting Of Template Contracts",
+            "description": "Unnecessary copying of OZ contracts instead of importing them.",
+            "severity": "medium",
+            "location": "./contracts/UStaking.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Checks-Effects-Interactions Pattern Violation",
+            "description": "Code violates the Checks-Effects-Interactions pattern, leading to reentrancy attacks.",
+            "severity": "medium",
+            "location": "./contracts/UStaking.sol: claim(), stake(), withdraw()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1127"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Unlocked pragma can cause issues with outdated compiler versions.",
+            "severity": "low",
+            "location": "./contracts/UStaking.sol, ./contracts/UStakingToken.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "Lack of zero address checks can lead to unwanted external calls.",
+            "severity": "low",
+            "location": "./contracts/UStaking.sol: constructor(), refWalletUpdate()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Address instead of interface",
+            "description": "Passing contract addresses as raw addresses instead of interfaces or contract types.",
+            "severity": "low",
+            "location": "./contracts/UStaking.sol: constructor()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation - Naming Conventions",
+            "description": "Non-compliance with Solidity naming conventions.",
+            "severity": "low",
+            "location": "./contracts/UStaking.sol: struct user{}, event stakeEvent(), ..."
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "State variables can be declared immutable",
+            "description": "High gas costs for state variables that can be immutable.",
+            "severity": "low",
+            "location": "./contracts/UStaking.sol: token"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "State variables can be declared constant",
+            "description": "High gas costs for state variables that can be constants.",
+            "severity": "low",
+            "location": "./contracts/UStaking.sol: cashBackReward, refWalletReward, ..."
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation - Order of Layout",
+            "description": "Non-compliance with Solidity layout guidelines.",
+            "severity": "low",
+            "location": "./contracts/UStaking.sol: contract Ownable {}, struct user{}, ..."
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Functions that can be declared external",
+            "description": "Public functions that are never called in the contract can be declared as external to save gas.",
+            "severity": "low",
+            "location": "./contracts/UStaking.sol: refWalletUpdate(), cashBack(), ..."
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation - Naming Conventions",
+            "description": "Non-compliance with Solidity naming conventions for constants.",
+            "severity": "low",
+            "location": "./contracts/UStaking.sol: cashBackReward, refWalletReward"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "State variables default visibility",
+            "description": "Unspecified state variable visibility.",
+            "severity": "low",
+            "location": "./contracts/UStaking.sol: token"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing event",
+            "description": "Lack of events for critical state changes.",
+            "severity": "low",
+            "location": "./contracts/UStaking.sol: cashBack()"
+        }
+    ]
+}

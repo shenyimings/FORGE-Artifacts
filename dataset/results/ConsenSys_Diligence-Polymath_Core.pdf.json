@@ -1,0 +1,287 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Polymath_Core.pdf",
+    "project_info": {
+        "url": "https://github.com/PolymathNetwork/polymath-core/tree/3.0.0-audit",
+        "commit_id": "3.0.0-audit",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "polymath-core": "contracts/ConsenSys_Diligence-Polymath_Core/polymath-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "SecurityToken contract should always be initialized",
+            "description": "Potential Create2 attack to replace implementation with malicious contract and steal tokens.",
+            "severity": "critical",
+            "location": "SecurityToken contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unpredictable behavior due to front running or general bad timing",
+            "description": "Polymath can update or upgrade things in the system without warning, violating security goals.",
+            "severity": "critical",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Polymath can arbitrarily change prices during a USDTieredSTO token sale",
+            "description": "Polymath can set arbitrary prices for themselves to participate in an STO.",
+            "severity": "critical",
+            "location": "USDTieredSTO token sale"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "No new ST can be created after implementation upgrade",
+            "description": "No new security tokens can be created after implementation upgrade.",
+            "severity": "critical",
+            "location": "SecurityToken implementation contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Module.takeUsageFee() allows admins to drain a module's approved POLY tokens",
+            "description": "No limits on when and how often Module.takeUsageFee() can be called",
+            "severity": "low",
+            "location": "Module"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Vulnerability in getAllDocuments() function",
+            "description": "The function `getAllDocuments()` can block if too many documents are added, causing gas or memory issues.",
+            "severity": "low",
+            "location": "SecurityToken/STGetter (ERC1643)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant pause and unpause functions in TransferManager",
+            "description": "Duplicate checks from Module contract in TransferManager",
+            "severity": "low",
+            "location": "TransferManager"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1287"
+                ]
+            },
+            "title": "Modules shouldn't be casted to IBoot",
+            "description": "Casting modules to IBoot when they don't inherit from it",
+            "severity": "low",
+            "location": "ModuleFactory"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "public functions in TokenLib could be external instead",
+            "description": "Saving gas and making the code easier to read by making some functions external",
+            "severity": "low",
+            "location": "TokenLib"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-369"
+                ]
+            },
+            "title": "EtherDividendCheckpoint and ERC20DividendCheckpoint division by zero",
+            "description": "Division by zero possible in dividend calculations",
+            "severity": "low",
+            "location": "EtherDividendCheckpoint, ERC20DividendCheckpoint"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "SecurityToken / STGetter storage layout is hard to maintain",
+            "description": "Difficult and critical to maintain identical storage layouts between contracts",
+            "severity": "low",
+            "location": "SecurityToken, STGetter"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "LockUpTransferManager._removeLockUpFromUser checks for an impossible condition",
+            "description": "Checking for an impossible index value",
+            "severity": "low",
+            "location": "LockUpTransferManager"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Polymath Control Over Security Tokens",
+            "description": "Polymath has indirect control over security tokens via system components referenced in the security token (oracle, registries, ...).",
+            "severity": "n/a",
+            "location": "Polymath contract"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Polymath Can Delist and Relist Security Tokens",
+            "description": "Polymath can delist a security token and immediately list a new one with the same ticker, potentially causing issues for buyers.",
+            "severity": "n/a",
+            "location": "Polymath contract"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unverified Custom Modules by Issuers",
+            "description": "An issuer can create and add custom modules to security tokens that are unverified by Polymath, which may undermine trust assumptions.",
+            "severity": "n/a",
+            "location": "Issuer's contract"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ],
+                "3": [
+                    "CWE-940"
+                ]
+            },
+            "title": "Oracle Manipulation",
+            "description": "An oracle can try to provide untruthful responses to manipulate prices in the system.",
+            "severity": "n/a",
+            "location": "Oracle contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Custom Module Registration Spamming",
+            "description": "Other participants can attempt to spam custom module registration, causing DoS scenarios for other participants.",
+            "severity": "n/a",
+            "location": "Polymath's registry contract"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Ticker Squatting",
+            "description": "Other participants can attempt to register popular ticker names before others do, selling them or creating manual effort due to filed disputes.",
+            "severity": "n/a",
+            "location": "Issuer's contract"
+        }
+    ]
+}

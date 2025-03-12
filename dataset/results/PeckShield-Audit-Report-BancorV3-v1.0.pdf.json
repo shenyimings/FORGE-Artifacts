@@ -1,0 +1,71 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-BancorV3-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/bancorprotocol/contracts-v3/tree/4b75ec4",
+        "commit_id": "4b75ec4",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts-v3": "contracts/PeckShield-Audit-Report-BancorV3-v1/contracts-v3"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Possible Denial-Of-Service in Pool Creation",
+            "description": "The implementation may exhibit a denial-of-service situation that needs to be corrected.",
+            "severity": "low",
+            "location": "BancorNetwork::createPool()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect targetBalance Calculation in Token Swaps",
+            "description": "The current implementation is flawed and should be corrected, regarding the update to the pool's target balance not taking into account the network fee.",
+            "severity": "high",
+            "location": "PoolCollection::_processTrade()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Proper Fee Collection in BancorNetwork::_tradeBNT()",
+            "description": "The collected fees are calculated as tradeAmountsAndFee.tradingFeeAmount - tradeAmountsAndFee.networkFeeAmount, which should be tradeAmountsAndFee.tradingFeeAmount. This may lead to smaller returns for liquidity providers.",
+            "severity": "medium",
+            "location": "BancorNetwork contract, _tradeBNT() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The admin account has too much power and control over the protocol-wide operations, which can be a counter-party risk to contract users.",
+            "severity": "medium",
+            "location": "Multiple Contracts"
+        }
+    ]
+}

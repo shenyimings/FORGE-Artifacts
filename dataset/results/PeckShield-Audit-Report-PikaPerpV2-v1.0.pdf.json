@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-PikaPerpV2-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/PikaProtocol/PikaPerpV2/tree/b70c4fc",
+        "commit_id": "b70c4fc",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "PikaPerpV2": "contracts/PeckShield-Audit-Report-PikaPerpV2-v1/PikaPerpV2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Consistency in maxExposure Calculation",
+            "description": "Inconsistency in the enforcement of exposureMultiplier parameter in openPosition and closePosition routines.",
+            "severity": "low",
+            "location": "PikaPerpV2, openPosition()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Improved Function Argument Validation in PikaPerpV2",
+            "description": "Lack of validation for productId in addProduct() function.",
+            "severity": "low",
+            "location": "Multiple Contracts, addProduct()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential Reentrancy Risk in closePositionWithId()",
+            "description": "Violation of checks-effects-interactions principle in closePositionWithId() function.",
+            "severity": "high",
+            "location": "PikaPerpV2, closePositionWithId()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ],
+                "3": [
+                    "CWE-1060"
+                ]
+            },
+            "title": "Gas Optimization in Reward Distribution",
+            "description": "Opportunities for gas optimization in distributePikaReward() function.",
+            "severity": "low",
+            "location": "PikaPerpV2, distributePikaReward()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The owner account has a critical role in governing and regulating system-wide operations, but if the privileged owner account is a plain EOA account, it may pose counter-party risk to protocol users.",
+            "severity": "medium",
+            "location": "Multiple Contracts (PikaPerpV2)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant State/Code Removal",
+            "description": "Unused code or unnecessary redundancies can be safely removed, such as the storage state rewardTokenDecimal in PikaStaking contract and the state nextStakeId in PikaPerpV2 contract.",
+            "severity": "info",
+            "location": "Multiple Contracts (PikaStaking and PikaPerpV2)"
+        }
+    ]
+}

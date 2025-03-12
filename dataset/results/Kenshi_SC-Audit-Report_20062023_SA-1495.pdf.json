@@ -1,0 +1,83 @@
+{
+    "path": "artifacts/Kenshi_SC-Audit-Report_20062023_SA-1495.pdf",
+    "project_info": {
+        "url": "https://github.com/KenshiTech/contracts",
+        "commit_id": "db7dcf1",
+        "address": "0xf1264873436A0771E440E2b28072FAfcC5EEBd01",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "Kenshi": "contracts/Kenshi_SC-Audit-Report_20062023_SA-1495/Kenshi"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L01. Copy Of Well Known Contracts",
+            "description": "The smart contract copies the functionality of OpenZeppelin’s well-known ERC20 instead of using it directly.",
+            "severity": "low",
+            "location": "./contracts/ERC20.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L02. Redundant Function",
+            "description": "Two same functions exist in one contract: getOwner() and owner().",
+            "severity": "low",
+            "location": "./contracts/ERC20.sol : getOwner()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "L03. Unchecked Transfer",
+            "description": "The function does not use the SafeERC20 library for checking the result of ERC20 token transfers.",
+            "severity": "low",
+            "location": "./contracts/ERC20.sol : recoverERC20()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "I01. Style Guide Violation",
+            "description": "The provided projects should follow the official guidelines. There is an order of function violation.",
+            "severity": "info",
+            "location": "./contracts/ ERC20.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "I02. Function That Can Be Declared External",
+            "description": "Functions that are only called from outside the contract should be defined as external.",
+            "severity": "info",
+            "location": "./contracts/ERC20.sol : balanceOf(), approve(), transfer(), transferFrom()"
+        }
+    ]
+}

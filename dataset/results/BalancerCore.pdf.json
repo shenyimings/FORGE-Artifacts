@@ -1,0 +1,164 @@
+{
+    "path": "artifacts/BalancerCore.pdf",
+    "project_info": {
+        "url": "https://github.com/balancer-labs/balancer-core",
+        "commit_id": "942a51e202cc5bf9158bad77162bc72aa0a8afaf",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "balancer-core": "contracts/BalancerCore/balancer-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Single-asset liquidity functions allow stealing of assets",
+            "description": "Incorrect access control allows an attacker to withdraw all the assets.",
+            "severity": "high",
+            "location": "Join/exit swap functions, BPool.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Parameters’ order of single-asset functions is confusing",
+            "description": "API inconsistency is error-prone and might confuse users",
+            "severity": "low",
+            "location": "Join and exit swap functions, BPool.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Assets will be lost in case of token migration",
+            "description": "If a token is migrated to a new address, the pool will not follow this migration.",
+            "severity": "medium",
+            "location": "Token migrations, BPool.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Users can silently burn tokens with transfers to 0x0",
+            "description": "Accidental burning of tokens, Tokens can be burned without decreasing the totalSupply variable.",
+            "severity": "high",
+            "location": "Transfer and transferFrom functions, BToken.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Privileged addresses can be transferred without confirmation even to invalid values",
+            "description": "Prevent accidental loss of controller functionality, Incorrect use of functions to set privileged addresses can irreversibly set them to invalid addresses.",
+            "severity": "medium",
+            "location": "setController function, BPool.sol, BFactory.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Users can join and exit pools even where there are no tokens",
+            "description": "Incorrect access control in `joinPool` and `exitPool` functions allow calls to succeed even when there are no bound tokens, producing unexpected results.",
+            "severity": "medium",
+            "location": "BPool.sol (`joinPool` and `exitPool` functions)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Single-asset exit functions allow withdrawing a negligible amount of assets for free",
+            "description": "Rounding issue in `exitswapExternAmountOut` function allows users to withdraw assets without burning pool tokens.",
+            "severity": "medium",
+            "location": "BPool.sol (`exitswapExternAmountOut` function)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Assets with low decimals or low liquidity lead to withdrawing a negligible amount of assets for free",
+            "description": "Rounding issue in `joinPool` allows users to receive free tokens if one of the assets has a low decimal or low liquidity.",
+            "severity": "medium",
+            "location": "BPool.sol (`joinPool` function)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rounding issues in joinPool/exitPool allow for a negligible amount of free pool tokens",
+            "description": "Due to rounding issues, an attacker can generate free pool tokens by consecutively calling `joinPool` and `exitPool`.",
+            "severity": "medium",
+            "location": "BPool.sol (`joinPool` and `exitPool` functions)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Attacker with large funds can steal the pool's assets",
+            "description": "A pool with an empty asset balance allows anyone to generate unlimited free share tokens, which can be emptied by an attacker.",
+            "severity": "high",
+            "location": "BPool.sol (`joinswapPoolAmountOut` function)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "The swap-in and swap-out ratios are not correctly enforced",
+            "description": "Simplify the implementation of the ratio checks in the swap-in and swap-out operations.",
+            "severity": "low",
+            "location": "swapExactAmountIn and swapExactAmountOut functions in BPool.sol"
+        }
+    ]
+}

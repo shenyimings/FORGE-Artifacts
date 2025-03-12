@@ -1,0 +1,239 @@
+{
+    "path": "artifacts/Mute Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/razzorsec/RazzorSec-Contracts/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "RazzorSec-Contracts": "contracts/Mute Smart Contract Audit Report - QuillAudits/RazzorSec-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing Events for Significant Actions",
+            "description": "Events emission are relevant to deployed contracts because it allows for filtering of emitted information.",
+            "severity": "low",
+            "location": "MuteSwitchFactory.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-271"
+                ]
+            },
+            "title": "Renounce ownership",
+            "description": "The renounceOwnership function can be called accidentally by the admin leading to immediate renouncement of ownership to zero address after which any onlyOwner functions will not be callable.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Transfer ownership",
+            "description": "The transferOwnership() function in contract allows the current admin to transfer his privileges to another address.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Compiler version",
+            "description": "A different compiler version greater than 0.8.0 as opposed to previous compiler versions of Uniswap are used in the codebase.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of comment",
+            "description": "The code base has insufficient comments to describe the functions, parameters, its business logic and working.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zero address check",
+            "description": "This function omits the critical check to ensure that the feeTo is not set to address zero, for funds sent into this address is forever lost and irredeemable.",
+            "severity": "low",
+            "location": "MuteSwitchFactory.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing sanity checks",
+            "description": "_stakeDivisor parameter in the constructor has no sanity value checks.",
+            "severity": "medium",
+            "location": "MuteAmplifier.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralization issue in changeDivisor()",
+            "description": "Moreover the _stakeDivisor can be changed by the admin even after the staking has started.",
+            "severity": "medium",
+            "location": "MuteAmplifier.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Possible staking before initializeDeposit()",
+            "description": "Staking can be done once even if initializeDeposit() is not called.",
+            "severity": "medium",
+            "location": "MuteAmplifier.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralization of rescueTokens()",
+            "description": "Although this function can be used to rescue funds in case of any malicious activity, the contract can be drained of all the LP tokens as well as reward tokens by a malicious admin.",
+            "severity": "medium",
+            "location": "MuteAmplifier.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant If statement",
+            "description": "The if statement is not required because the require statement on line: 138 already takes care of the fact that lpTokenIn is always greater than zero.",
+            "severity": "info",
+            "location": "MuteAmplifier.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Comparison with boolean",
+            "description": "calculateMultiplier() has an if statement that compares to a boolean constant.",
+            "severity": "info",
+            "location": "MuteAmplifier.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Gas optimization",
+            "description": "changeDivisor(), initializeDeposit(), userStakedBlock(), dripInfo(), stake(), withdraw() payout() and rescueTokens() could be declared external instead of public to save gas.",
+            "severity": "info",
+            "location": "MuteAmplifier.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant statements",
+            "description": "Unnecessary deposit() and withdraw() to WETH in OrderMatchETHForToken() function",
+            "severity": "info",
+            "location": "SwitchLimitOrder.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Declare Functions As External To Save Gas",
+            "description": "When functions are not called internally, or intended to be called internally or by called by other contracts that inherits it, it is recommended that these functions are given the external visibility to save gas.",
+            "severity": "info",
+            "location": "MultiCall.sol"
+        }
+    ]
+}

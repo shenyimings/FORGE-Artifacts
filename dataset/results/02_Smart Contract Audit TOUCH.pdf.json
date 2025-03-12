@@ -1,0 +1,122 @@
+{
+    "path": "artifacts/02_Smart Contract Audit TOUCH.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x5e0af01930c8dc676a6dc7133bd86370a0be3953",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.4.22+commit.4cb486ee"
+        ],
+        "project_path": {
+            "Touch": "contracts/02_Smart Contract Audit TOUCH/Touch"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Using the approve function of the ERC-20 standard",
+            "description": "The approve function might lead to vulnerabilities.",
+            "severity": "medium",
+            "location": "function approve(address _spender, uint256 _value) public returns(bool)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unchecked math",
+            "description": "Solidity is prone to integer over- and underflow.",
+            "severity": "medium",
+            "location": "uint256 public maximumTokenIssue = 1000000000 * 10**18;"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-248"
+                ]
+            },
+            "title": "Unhandled Exception",
+            "description": "A call/send instruction returns a non-zero value if an exception occurs during the execution of the instruction.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Transactions May Affect Ether Receiver",
+            "description": "A contract is exposed to this vulnerability if a miner can reorder transactions within a block in a way that affects the receiver of ether.",
+            "severity": "low",
+            "location": "function approve(address _spender, uint256 _value) public"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Sending tokens (not Ethereum) to a Smart Contract",
+            "description": "Users without knowledge can send tokens to the contract address.",
+            "severity": "low",
+            "location": "function () external payable { revert(); }"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "ERC20 Short Address Attack",
+            "description": "An attacker can use an incomplete address ending with zeros to shift the value by 16 bits.",
+            "severity": "low",
+            "location": "function transfer(address _to, uint256 _value)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected contract moderator",
+            "description": "The contract moderator is not protected from unauthorized changes, allowing malicious actors to gain control of the contract.",
+            "severity": "high",
+            "location": "Moderated contract, reassignModerator function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected allowance increase and decrease",
+            "description": "The increaseApproval and decreaseApproval functions can be used to drain the owner's tokens by repeatedly calling them in a loop.",
+            "severity": "medium",
+            "location": "Touch contract, increaseApproval and decreaseApproval functions"
+        }
+    ]
+}

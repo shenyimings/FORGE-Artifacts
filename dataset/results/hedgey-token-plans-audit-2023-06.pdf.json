@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/hedgey-token-plans-audit-2023-06.pdf",
+    "project_info": {
+        "url": "https://github.com/hedgey-finance/Locked_VestingTokenPlans/tree/6a5ff58c2e83015b83c8de15f1cc61e9ac58f2c7",
+        "commit_id": "6a5ff58c2e83015b83c8de15f1cc61e9ac58f2c7",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Locked_VestingTokenPlans": "contracts/hedgey-token-plans-audit-2023-06/Locked_VestingTokenPlans"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Minor severity vulnerability in vesting admin revocation",
+            "description": "A vesting admin can transfer tokens on behalf of a plan holder, potentially preventing them from claiming their tokens.",
+            "severity": "low",
+            "location": "TokenVestingPlans and VotingTokenVestingPlans contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Minor severity vulnerability in revoking vesting",
+            "description": "Revoking a vesting plan can trigger a taxable event, which may not be desirable.",
+            "severity": "low",
+            "location": "TokenVestingPlans and VotingTokenVestingPlans contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Minor severity vulnerability in use of selfdestruct",
+            "description": "The use of selfdestruct has been deprecated and may lead to breaking changes in the future.",
+            "severity": "low",
+            "location": "VotingVault.sol contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Minor severity vulnerability in balance usage",
+            "description": "The TransferHelper library uses msg.sender balance instead of the actual token spender balance.",
+            "severity": "low",
+            "location": "TransferHelper.sol contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Refactor Large Functions for Readability",
+            "description": "Large functions are harder to read and reason about, making them prone to security vulnerabilities.",
+            "severity": "n/a",
+            "location": "Various contracts (VotingTokenLockupPlans._combinePlans, etc.)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Unused Code in Source Files",
+            "description": "Unused code can reduce confusion and decrease the attack surface.",
+            "severity": "n/a",
+            "location": "Various contracts (TimelockLibrary.sol, ERC721Delegate.sol)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Use Custom Errors to Save Gas",
+            "description": "Using custom errors can save gas when reporting error conditions.",
+            "severity": "n/a",
+            "location": "Various contracts (ERC721Delegate.sol, etc.)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Use _beforeTokenTransfer to Override Behavior in OpenZeppelin Token Contracts",
+            "description": "Overriding behavior using _beforeTokenTransfer can be error-prone and may break during future upgrades.",
+            "severity": "n/a",
+            "location": "Various contracts (TokenVestingPlans, VotingTokenVestingPlans, etc.)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use calldata Instead of memory for External Function Arguments Data Location",
+            "description": "Using calldata can reduce complexity and improve code readability.",
+            "severity": "n/a",
+            "location": "Various contracts (TokenLockupPlans.sol, VotingTokenVestingPlans.sol, etc.)"
+        }
+    ]
+}

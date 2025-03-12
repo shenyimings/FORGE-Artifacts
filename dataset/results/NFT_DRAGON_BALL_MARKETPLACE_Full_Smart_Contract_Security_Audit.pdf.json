@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/NFT_DRAGON_BALL_MARKETPLACE_Full_Smart_Contract_Security_Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xbc8f12d59c11c1c348f6a6f47dbe781c7fbdaf1e",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "NFTDRAGONBALLMARKETPLACE": "contracts/NFT_DRAGON_BALL_MARKETPLACE_Full_Smart_Contract_Security_Audit/NFTDRAGONBALLMARKETPLACE"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "The function _tokenTransfer() sends burn amount to burn address, instead of decreasing tTotal and rTotal.",
+            "severity": "medium",
+            "location": "_tokenTransfer()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Functions includeInReward() and _getCurrentSupply use loops that can lead to OUT_OF_GAS exceptions if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "includeInReward() and _getCurrentSupply"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has privilege issues, including changing fees, maximum transaction amounts, excluding from fees, locking, unlocking, disabling/enabling fees, and retaking privileges after renouncement.",
+            "severity": "n/a",
+            "location": "Various functions related to ownership"
+        }
+    ]
+}

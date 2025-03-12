@@ -1,0 +1,79 @@
+{
+    "path": "artifacts/EMDX - Protocol Audit - CoinFabrik Blog.pdf",
+    "project_info": {
+        "url": "https://github.com/ripio/rcn-network/tree/v2",
+        "commit_id": "ca34a5e9e254caca5056ab5002a3fdb0b4f3b004",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "rcn-network": "contracts/EMDX - Protocol Audit - CoinFabrik Blog/rcn-network"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Denial of Service in Ark.withdrawForLoss()",
+            "description": "Possible to withdraw more than the total balance of the token due to incorrect assumption about Decimal to uint256 conversion.",
+            "severity": "medium",
+            "location": "Ark.sol, function withdrawForLoss()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Invalid calculation in Ark.withdrawForLoss()",
+            "description": "Calculation doesn't consider that _amount might represent amounts of different tokens.",
+            "severity": "low",
+            "location": "Ark.sol, function withdrawForLoss()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Oracle manipulation on ChainlinkL1.updateLatestRoundData()",
+            "description": "Decimal conversion calculation will overflow in any token with more than 18 decimals, causing an exception.",
+            "severity": "low",
+            "location": "ChainlinkL1.sol, function updateLatestRoundData()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Solidity Compiler Version",
+            "description": "Using outdated solidity version (0.6.9) which may introduce bugs.",
+            "severity": "low",
+            "location": "All audited files"
+        },
+        {
+            "id": 4,
+            "category": {},
+            "title": "Uninitialized Contract address",
+            "description": "ChainlinkContract can be uninitialized, preventing the function from updating prices until setChainlink() is called.",
+            "severity": "info",
+            "location": "L2PriceFeed.sol"
+        }
+    ]
+}

@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/ackee-blockchain-goodghosting-report.pdf",
+    "project_info": {
+        "url": "https://github.com/Good-Ghosting/goodghosting-smart-contracts",
+        "commit_id": "b80271a65d16d6a72fd4fabce534d72d77a256d9",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "goodghosting-smart-contracts": "contracts/ackee-blockchain-goodghosting-report/goodghosting-smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated compiler",
+            "description": "Using outdated compiler version 0.6.11, which is very outdated and can lead to security issues.",
+            "severity": "low",
+            "location": "All contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Use of optimizer",
+            "description": "Optimizer can contain bugs and it could lead to unexpected behavior or even vulnerabilities.",
+            "severity": "low",
+            "location": "All contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Use of uint256 where uint8 is enough",
+            "description": "Using uint256 instead of uint8 can waste gas and has no security implications.",
+            "severity": "low",
+            "location": "GoodGhosting.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Variable packing",
+            "description": "State variables could have a more optimal ordering to save gas using variable packing (32 bytes).",
+            "severity": "low",
+            "location": "Nearly all contracts"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Unlimited allowance",
+            "description": "Contract sets allowance for a router and a staking pool to uint256 max value, which could lead to unlimited drain of funds in case the router or the staking pool gets hacked.",
+            "severity": "medium",
+            "location": "GoodGhosting_Polygon_Quickswap.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Renounce ownership",
+            "description": "Open Zeppelin's Ownable pattern allows the current owner to renounce the ownership of the contract, which could potentially cause inability to call pause(), unpause() and adminFeeWithdraw() methods.",
+            "severity": "medium",
+            "location": "GoodGhosting.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "First player doesn’t receive the bonus",
+            "description": "First player, who calls the withdraw() method, is responsible for calling redeemFromExternalPool() to calculate rewards for all players.",
+            "severity": "high",
+            "location": "GoodGhosting_Polygon_Quickswap.sol"
+        }
+    ]
+}

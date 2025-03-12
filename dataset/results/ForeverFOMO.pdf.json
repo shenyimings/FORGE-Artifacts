@@ -1,0 +1,72 @@
+{
+    "path": "artifacts/ForeverFOMO.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x95637d4fbe7153dcc3e26e71bde7a2d82621f083, 0xa670b6e4b63d36a2e2eb9e3dbd9c4be0ad4333b4",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.6+commit.7338295f",
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "ForeverFOMO": "contracts/ForeverFOMO/ForeverFOMO",
+            "Timelock": "contracts/ForeverFOMO/Timelock"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "sendPresale issues (OUT_OF_GAS exception)",
+            "description": "The function sendPresale() uses a loop to distribute values from the values list to recipients from the recipients list, which can lead to an OUT_OF_GAS exception if there is a long addresses list.",
+            "severity": "low",
+            "location": "sendPresale() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "sendPresale issues (mismatch between lists)",
+            "description": "The function sendPresale() does not check the recipients list length and values list length to avoid mismatch.",
+            "severity": "low",
+            "location": "sendPresale() function"
+        },
+        {
+            "id": 2,
+            "category": {},
+            "title": "Rounding errors",
+            "description": "At some calculation with division, it is performed first, which can lead to rounding errors in Solidity since there are no floating points.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges that can be exploited.",
+            "severity": "n/a",
+            "location": "Various functions and settings in the contract"
+        }
+    ]
+}

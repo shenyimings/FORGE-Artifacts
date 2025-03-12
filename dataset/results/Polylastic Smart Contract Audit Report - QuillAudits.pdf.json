@@ -1,0 +1,368 @@
+{
+    "path": "artifacts/Polylastic Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/Polylastic-POLX/Smart-Contracts/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Smart-Contracts": "contracts/Polylastic Smart Contract Audit Report - QuillAudits/Smart-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Review the logic for admin DAOs",
+            "description": "Whitelisted addresses may not have all the total supply of POLX/voteToken.",
+            "severity": "medium",
+            "location": "Contract - DAOAdmin, function - n/a"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Voting amplification attack",
+            "description": "Malicious user can perform a Voting amplification attack if he stakes, votes and withdraws on the proposal.endTimeOfVoting timestamp.",
+            "severity": "high",
+            "location": "Contract - DAOStandard, function - _vote()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ]
+            },
+            "title": "Possible flashloan attack",
+            "description": "Flashloan attack is possible on the proposal.endTimeOfVoting in the same way explained in C.1.",
+            "severity": "high",
+            "location": "Contract - DAOStandard, function - _vote()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Use of “tokens with fees” can lead to unexpected outcomes",
+            "description": "If _voteToken deducts some amount of fees on every transfer then it can create an unexpected scenario where the amount that will get transferred won’t be the same as the amount passed to the function.",
+            "severity": "medium",
+            "location": "Contract - DAOStandard, function - _deposit()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistency in use of PRECISION_E6",
+            "description": "PRECISION_E6 is getting used in denominator while calculating _minimumQuorumPercent in _finishVote() on L257.",
+            "severity": "medium",
+            "location": "Contract - DAOStandard, functions - _finishVote(), _finishPoll()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "Add time delays",
+            "description": "Some time delays can be added so that after voting completes and _finishVote() executes there would be a waiting period to actually execute the proposed transaction.",
+            "severity": "low",
+            "location": "Contract - DAOStandard, function - _finishVote()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Burning all amountLP and minting tax instead of transferring",
+            "description": "In _unstake() function while burning the indexLP it is burning the amountLP and its minting tax amount on L237.",
+            "severity": "low",
+            "location": "Contract - Index, function - _unstake()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Not getting exact amount back for the staked amount",
+            "description": "In stake() function there is call to _calcCost() function internally to get the price of LP token but what happens is that in _calcCost() when getPrice() is called...",
+            "severity": "medium",
+            "location": "Contract - Index, function - stake()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Dust value after staking is not returned",
+            "description": "In stake() function the amount required to buy token can be less than the calculated cost amount required to buy intended amountLP.",
+            "severity": "low",
+            "location": "Contract - Index, function - stake()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Rebalancing might fail with `UniswapV2Library: INSUFFICIENT_INPUT_AMOUNT`",
+            "description": "There can be an extreme condition where there is a need to rebalance assets of a certain index because it might not be doing well as users are unstaking.",
+            "severity": "low",
+            "location": "Contract - Index, function - rebalance()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Frontrunning and Sandwich attack possibility",
+            "description": "There is possibility of front-running and sandwich attacks happening while staking, unstaking and rebalancing when trades are getting performed via quickswap...",
+            "severity": "medium",
+            "location": "Contract - Index, functions - stake(), unstake(), rebalance()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centrailization in rebalancing process",
+            "description": "rebalance() can be called by only ADMIN_ROLE ,because of some design limitations mentioned in D.5 admin would be specifying calculatedPrice while calling the rebalance().",
+            "severity": "medium",
+            "location": "Contract - Index, function - rebalance()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Do not use fee on transfer token",
+            "description": "This contracts stake and unstake functionality doesn’t support for fee on transfer tokens.",
+            "severity": "info",
+            "location": "Contract - Index, functions - stake(), unstake()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Redundant variable calculation",
+            "description": "_amountTax variable in Index.sol contract is used for storing the whole tax amount but it is not used in any of the calculations.",
+            "severity": "info",
+            "location": "Contract - Index, variable - _amountTax"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Functions not used",
+            "description": "_exchangeDEX() and _buyNewAssets() functions have not been used or referenced anywhere in the code.",
+            "severity": "info",
+            "location": "Contract - Index, functions - _exchangeDEX(), _buyNewAssets()"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Self-referral vulnerability",
+            "description": "Users can create multiple accounts to mint rewards to themselves.",
+            "severity": "low",
+            "location": "PartnerProgram contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant minting",
+            "description": "Constructor mints 0 amount to the contract address which is redundant.",
+            "severity": "low",
+            "location": "IndexLP contract"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Fee bypass vulnerability",
+            "description": "Users can use transferFrom to bypass fee deduction.",
+            "severity": "medium",
+            "location": "POLX (PolylasticV3) contract"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant import statement",
+            "description": "Unnecessary import for \"hardhat/console.sol\" on L9.",
+            "severity": "low",
+            "location": "FactoryAdmin contract"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Incorrect event emission",
+            "description": "Wrong parameters are emitted in the ChangeIndexMaster event.",
+            "severity": "low",
+            "location": "FactoryCommunity contract"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect event emission",
+            "description": "First argument passed in the changeMainParam event is incorrect.",
+            "severity": "low",
+            "location": "FactoryCommunity contract"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Comment inconsistency",
+            "description": "Comment references a non-existent \"suspended\" modifier.",
+            "severity": "info",
+            "location": "ExtensionPause contract"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Unused _setOwner function",
+            "description": "The _setOwner function is not implemented in the PartnerProgram contract.",
+            "severity": "low",
+            "location": "ExtensionReferralSystem contract"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Unspecified compiler version",
+            "description": "Contracts use floating pragma, which may lead to deployment with a different compiler version.",
+            "severity": "low",
+            "location": "Multiple contracts"
+        }
+    ]
+}

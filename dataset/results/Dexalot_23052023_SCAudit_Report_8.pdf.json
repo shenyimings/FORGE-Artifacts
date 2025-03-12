@@ -1,0 +1,167 @@
+{
+    "path": "artifacts/Dexalot_23052023_SCAudit_Report_8.pdf",
+    "project_info": {
+        "url": "https://github.com/Dexalot/contracts",
+        "commit_id": "c9c806c909e0d4d2cf723914206c889e59ec2caf",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Dexalot_23052023_SCAudit_Report_8/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ]
+            },
+            "title": "Weak Source of Randomness",
+            "description": "Using predictable randomness can be exploited for profit.",
+            "severity": "critical",
+            "location": "ExchangeMain contract, ./contracts/bridgeApps/ExchangeMain.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Calculations",
+            "description": "Gas amount not deducted from tokenTotals, leading to leftover amounts.",
+            "severity": "high",
+            "location": "PortfolioSub contract, processXFerPayload() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Denial of Service Vulnerability",
+            "description": "withdrawFees function can fail due to excessive gas consumption.",
+            "severity": "high",
+            "location": "PortfolioSub contract, withdrawFees function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "Owners can siphon user funds without providing bridge proof.",
+            "severity": "high",
+            "location": "PortfolioBridge contract, refundTokens and refundNative functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Non-Finalized Code",
+            "description": "Version number hardcoded with no effect on implementation.",
+            "severity": "medium",
+            "location": "LzApp contract, lzEstimateFees() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Data inconsistency",
+            "description": "Auction mode updates not synchronized between ExchangeSub and TradePairs contracts.",
+            "severity": "medium",
+            "location": "ExchangeSub and TradePairs contracts, setAuctionMode() functions"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Unfinalized Code",
+            "description": "Test oracle address used with no final implementation.",
+            "severity": "medium",
+            "location": "ExchangeMain contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Missing Check Validation",
+            "description": "Base display decimal not checked against base decimal.",
+            "severity": "medium",
+            "location": "TradePairs contract, addTradePair() and addLimitOrder() functions"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Data Inconsistency",
+            "description": "Token details recorded twice in Portfolio and PortfolioBridge contracts.",
+            "severity": "medium",
+            "location": "PortfolioBridge contract, addToken() function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Invalid Calculations in Events",
+            "description": "Emitted value is always equal to 0 due to decreasing _tokenIds parameter in for loop.",
+            "severity": "n/a",
+            "location": "IncentiveDistributor.sol contract, claim() function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Invalid Comparison",
+            "description": "Unexpected behaviour may occur when the amount of tokens received is 0 due to incorrect comparison with fee charged.",
+            "severity": "n/a",
+            "location": "PortfolioSub.sol contract, safeDecreaseTotal() function"
+        }
+    ]
+}

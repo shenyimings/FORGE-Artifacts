@@ -1,0 +1,203 @@
+{
+    "path": "artifacts/mongoose.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x47f7b78436d5d93fa36953fd6540b397d305c0df",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "Mongoose": "contracts/mongoose/Mongoose"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Fee Variables",
+            "description": "The contract is using two separate variables for storing the same value, leading to unnecessary complexity and potential confusion.",
+            "severity": "low",
+            "location": "Mongoose.sol#L571,602"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Fixed Swap Address",
+            "description": "The swap address is assigned once and cannot be changed, which may not allow the contract to catch up with upgrades.",
+            "severity": "low",
+            "location": "Mongoose.sol#L472"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Transfers Contract's Tokens",
+            "description": "The contract owner has the authority to claim all the balance of the contract, which may be exploited.",
+            "severity": "low",
+            "location": "Mongoose.sol (rescueERC20 function)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Redundant Storage Writes",
+            "description": "The contract modifies the state of variables without checking if their current value is the same as the one given as an argument, leading to unnecessary gas consumption and inefficiencies.",
+            "severity": "low",
+            "location": "Mongoose.sol#L691,738,742,746,751,756"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Decimals Precision Inconsistency",
+            "description": "The decimals field of a contract's ERC20 token can cause problems when interacting with contracts that use different precision numbers.",
+            "severity": "low",
+            "location": "Mongoose.sol#L605,643,648"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Immutable Declaration Improvement",
+            "description": "The contract declares state variables that are initialized once in the constructor and are not modified afterwards, which can be optimized using the 'immutable' declaration.",
+            "severity": "low",
+            "location": "Mongoose.sol#L477"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the Solidity naming conventions, which can reduce readability and maintainability.",
+            "severity": "low",
+            "location": "Mongoose.sol (multiple locations)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing Events Arithmetic",
+            "description": "The contract may be missing events that are required for proper arithmetic operations, which can cause issues.",
+            "severity": "low",
+            "location": "Mongoose.sol#L696,720,734,766"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Divide before Multiply Operation",
+            "description": "The contract performs division before multiplication operations, which can cause loss of precision.",
+            "severity": "low",
+            "location": "Mongoose.sol#L635,636,643,648"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Uninitialized Variables in Local Scope",
+            "description": "The contract uses uninitialized local variables, which can lead to unpredictable behavior and errors.",
+            "severity": "low",
+            "location": "Mongoose.sol#L561,562,564"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Validate Variable Setters",
+            "description": "The contract performs operations on variables that have been configured with user-supplied input without proper validation.",
+            "severity": "low",
+            "location": "Mongoose.sol#L738,742"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1127"
+                ]
+            },
+            "title": "Stable Compiler Version",
+            "description": "The contract uses a non-stable compiler version, which can lead to vulnerabilities and undiscovered bugs.",
+            "severity": "low",
+            "location": "Mongoose.sol#L17"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Succeeded Transfer Check",
+            "description": "The contract does not check if the result of transfer methods is successful, which can wrongly assume that the transfer has been established.",
+            "severity": "low",
+            "location": "Mongoose.sol#L774"
+        }
+    ]
+}

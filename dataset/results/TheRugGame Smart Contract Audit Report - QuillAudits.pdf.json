@@ -1,0 +1,293 @@
+{
+    "path": "artifacts/TheRugGame Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/razzorsec/RazzorSec-Contracts/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "RazzorSec-Contracts": "contracts/TheRugGame Smart Contract Audit Report - QuillAudits/RazzorSec-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Centralization issue in rewards and transaction order dependence",
+            "description": "Rewards sent in terms of TRG tokens, but STRG contract does not hold TRG tokens.",
+            "severity": "medium",
+            "location": "Contract - STRG.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Arithmetic check",
+            "description": "Unsigned integer member can never be less than zero, unnecessary check.",
+            "severity": "low",
+            "location": "Contract - STRG.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Staking has no time delay",
+            "description": "No incentive for users to stake for a longer time.",
+            "severity": "medium",
+            "location": "Contract - STRG.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Insufficient checks in Bribe()",
+            "description": "Incorrect and insufficient check if a token in the game has been rugged or not.",
+            "severity": "medium",
+            "location": "Contract - THERUGGAME.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "_buyAndBurnToken and _rugLoser susceptible to Frontrun attacks",
+            "description": "Susceptible to frontrun attack, sandwich attack possible.",
+            "severity": "medium",
+            "location": "Contract - THERUGGAME.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Uncapped supply",
+            "description": "Supply variable does not guarantee no more tokens will be minted.",
+            "severity": "low",
+            "location": "Contract - THERUGGAME.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Naming convention",
+            "description": "Variable name misleading, should be renamed to balanceDifference.",
+            "severity": "info",
+            "location": "Contract - THERUGGAME.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "setsTrg() access control",
+            "description": "Lacks access control, can be called by anyone to change the sTrg address.",
+            "severity": "high",
+            "location": "Contract - TRG.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possibility of Miscalculation of Rewards",
+            "description": "If setsTrg() function is not called before deposit in STRG starts, incorrect calculation of pendingRewards and dividendPerToken.",
+            "severity": "medium",
+            "location": "Contract - TRG.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ]
+            },
+            "title": "Usage of Openzeppelin draft-eip contracts is not recommended",
+            "description": "Using Draft EIPs may result in breaking changes, use a more stable version.",
+            "severity": "medium",
+            "location": "Contract - TRG.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant inheritance",
+            "description": "ERC20Permit is not needed to be inherited as ERC20Votes already inherits it.",
+            "severity": "low",
+            "location": "Contract - TRG.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Unlocked pragma (pragma solidity ^0.8.9)",
+            "description": "Unlocked pragma may cause issues with breaking changes in deployed code.",
+            "severity": "info",
+            "location": "Contract - STRG.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Possible Manipulation of distributeRewardsAndRugLoser()",
+            "description": "performUpkeep() can be called by anyone to rug losers quickly, denial of service attack possible.",
+            "severity": "high",
+            "location": "Contract - Factory.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "onlyOwner functions can be exploited by a malicious admin resulting in Denial of Service attack.",
+            "severity": "medium",
+            "location": "Contract - Factory.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect variable added to array",
+            "description": "The day was being passed in the array instead of the gameEndTime, allowing rug pull.",
+            "severity": "medium",
+            "location": "Factory contract, line 346."
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ],
+                "3": [
+                    "CWE-595"
+                ]
+            },
+            "title": "Funds stuck and transfer to incorrect address",
+            "description": "Funds were sent to the TRG contract instead of the STRG contract.",
+            "severity": "medium",
+            "location": "THERUGGAME contract, function bribe(), Factory contract, function rugLoser()."
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect initialization of gameEndTime",
+            "description": "GameEndTime was incorrectly initialized, affecting the checkUpkeep() function.",
+            "severity": "medium",
+            "location": "CheckUpkeep() function."
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-369"
+                ]
+            },
+            "title": "Divide by zero panic",
+            "description": "Possible divide by zero scenario via validSupply in _distributeRewards() function.",
+            "severity": "low",
+            "location": "Line 226, _distributeRewards() function."
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ]
+            },
+            "title": "GameStartTime set every time",
+            "description": "GameStartTime was being set every time in the createToken function, not as per business logic requirement.",
+            "severity": "low",
+            "location": "CreateToken function."
+        }
+    ]
+}

@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/Nugen Token Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/nugenuniverse/nugencoin/tree/main",
+        "commit_id": "main",
+        "address": "0xA62a8a65013F789367bE37e5C0afc83445F77Cc2",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.11+commit.d7f03943"
+        ],
+        "project_path": {
+            "Nugentoken": "contracts/Nugen Token Smart Contract Audit Report - QuillAudits/Nugentoken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "The max transfer percent and blacklist functionality of this contract poses a centralization risk because if the owner wants, then they could simply halt all transfers by setting the max transfer percent as 0.",
+            "severity": "low",
+            "location": "setMaxTxPBEPent() and addBlacklist functions in Nugen Token contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Non-Compliant with BEP-20 standard",
+            "description": "The given contract doesn’t have a “getOwner” named function which is required in the BEP-20 method.",
+            "severity": "medium",
+            "location": "Nugen Token contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Transfer Ownership should be a two-step process",
+            "description": "The transfer of ownership is crucial functionality in token contracts and it should be done by a two-step process so that the owner doesn't mistakenly transfer ownership to a false address.",
+            "severity": "medium",
+            "location": "transferOwnership() function in Nugen Token contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Missing events",
+            "description": "Missing events don't pose any security risk, but it makes it difficult to track chain events.",
+            "severity": "info",
+            "location": "addBlacklist, removeBlacklist, setMaxTxPBEPent, and setAntibotPaused functions in Nugen Token contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma",
+            "description": "Contracts should be deployed with the same compiler version and flags that they have been tested with thoroughly.",
+            "severity": "info",
+            "location": "pragma solidity ^0.8.0 in Nugen Token contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "General Recommendation",
+            "description": "The max transfer percent check can be bypassed by a whale in a scenario where the whale wants to sell their 50% of tokens.",
+            "severity": "info",
+            "location": "Max transfer percent functionality in Nugen Token contract"
+        }
+    ]
+}

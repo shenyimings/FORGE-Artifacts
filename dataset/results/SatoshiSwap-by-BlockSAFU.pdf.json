@@ -1,0 +1,161 @@
+{
+    "path": "artifacts/SatoshiSwap-by-BlockSAFU.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x16d93ab88024607b52cC02b0e12D05aAdd0eec13",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "MYED": "contracts/SatoshiSwap-by-BlockSAFU/MYED"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "A floating pragma is set, which can cause problems with bytecode-level verification of the code.",
+            "severity": "low",
+            "location": "SatoshiSwap Token Contract (pragma solidity ^0.8.1; etc.)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Mint Function Accessibility",
+            "description": "The owner can mint after the initial deployment, which poses a risk to investors.",
+            "severity": "info",
+            "location": "SatoshiSwap Token Contract (mint function)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Add Minter Accessibility",
+            "description": "The owner can add minter after the initial deployment, which poses a risk to investors.",
+            "severity": "info",
+            "location": "SatoshiSwap Token Contract (addMinter function)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ],
+                "3": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Control Flow Decision Based on Block Timestamp",
+            "description": "The block.timestamp environment variable is used to determine a control flow decision, which can be manipulated by a malicious miner.",
+            "severity": "low",
+            "location": "Timelock Contract (require(c >= a, \"SafeMath: addition overflow\"); etc.)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Requirement violation",
+            "description": "A requirement was violated in a nested call and the call was reverted as a result.",
+            "severity": "low",
+            "location": "Contract SatoshiSwapFactory, function mint(address to)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Read of persistent state following external call",
+            "description": "The contract account state is accessed after an external call.",
+            "severity": "low",
+            "location": "Contract SatoshiSwapFactory"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ]
+            },
+            "title": "Potential use of \"block.number\" as source of randomness",
+            "description": "The environment variable \"block.number\" looks like it might be used as a source of randomness.",
+            "severity": "low",
+            "location": "Not specified (if (block.number < pool.startBlock), if (block.number > pool.lastRewardBlock && lpSupply != 0), etc.)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Requirement violation",
+            "description": "A requirement was violated in a nested call and the call was reverted as a result.",
+            "severity": "low",
+            "location": "Contract MasterChef, function withdraw(uint _pid, uint _amount)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ]
+            },
+            "title": "Multiple Calls Executed in the Same Transaction",
+            "description": "Executing multiple calls in the same transaction which can cause issues if a prior call fails permanently.",
+            "severity": "medium",
+            "location": "Contract, specifically the execution of multiple calls."
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-330"
+                ]
+            },
+            "title": "Potential Use of \"blockhash\" as Source of Randomness",
+            "description": "Using blockhash as a source of randomness which can be predictable and manipulated by a malicious miner.",
+            "severity": "low",
+            "location": "Contract, specifically the use of blockhash."
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "path": "artifacts/Cranchtoken.pdf",
+    "project_info": {
+        "url": "https://github.com/cranchtoken/smartcontract/",
+        "commit_id": "bc2ae707d83f02c78deece6ce5b39ce339e8cf76",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smartcontract": "contracts/Cranchtoken/smartcontract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong total supply restriction",
+            "description": "The function doAirdrop() checks that totalDistributed < totalSupply, but should check totalDistributed + _amount < totalSupply.",
+            "severity": "medium",
+            "location": "Function doAirdrop()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function adminClaimAirdropMultiple() uses the loop for distributing tokens as airdrop and may cause out-of-gas errors if the addresses array length is too big.",
+            "severity": "low",
+            "location": "Function adminClaimAirdropMultiple()"
+        }
+    ]
+}

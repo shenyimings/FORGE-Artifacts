@@ -1,0 +1,233 @@
+{
+    "path": "artifacts/CR2 Smart Contract Audit Report - QuillAudits .pdf",
+    "project_info": {
+        "url": "https://github.com/CR-Square/crsquareq/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "crsquareq": "contracts/CR2 Smart Contract Audit Report - QuillAudits /crsquareq"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Design Flaw in Vesting Contract",
+            "description": "Lack of data validation in Vesting contract allows users to execute deposits and withdrawals maliciously.",
+            "severity": "high",
+            "location": "contracts/Vesting.sol, Functions: depositFounderLinearTokens, depositFounderLinearTokensToInvestors, depositFounderNonLinearTokens, withdrawTGEFund, withdrawInstallmentAmount, withdrawBatch, setNonLinearInstallments"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of Verification Logic",
+            "description": "Founders can withdraw funds after anyone validates the milestone due to missing verification logic.",
+            "severity": "high",
+            "location": "contracts/PrivateRound.sol, Function: validateMilestone"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Reentrancy Vulnerability",
+            "description": "Admins can withdraw taxed tokens multiple times leading to potential rug pull due to ERC777 token reentrancy.",
+            "severity": "high",
+            "location": "contracts/PrivateRound.sol, Function: withdrawTaxTokens"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Front-Run Vulnerability",
+            "description": "Malicious investors can front-run other users to create a false _roundID, leading to transaction failures and potential DoS attacks.",
+            "severity": "medium",
+            "location": "contracts/PrivateRound.sol, Function: createPrivateRound"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of Token Whitelisting",
+            "description": "Users can provide any type of token contract, leading to unwanted behaviors and potential attacks.",
+            "severity": "low",
+            "location": "contracts/PrivateRound.sol, Function: depositTokens"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Fix investorLogin and Founder contract address",
+            "description": "Users can provide any type of _tokenContract to create a private round, which opens up opportunities for an attacker.",
+            "severity": "n/a",
+            "location": "contracts/PrivateRound.sol, functions createPrivateRound, depositTokens, withdrawInitialPercentage, milestoneValidationRequest, validateMilestone, withdrawIndividualMilestoneByFounder, withdrawIndividualMilestoneByInvestor, batchWithdrawByInvestors"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-669"
+                ]
+            },
+            "title": "Inexistent transfer of ownership",
+            "description": "Recommended to use two-step transfer of ownership.",
+            "severity": "n/a",
+            "location": "contracts/PrivateRound.sol, function changeAdminAddress"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Increase code readability",
+            "description": "Readability can be improved by following recommendations.",
+            "severity": "n/a",
+            "location": "contracts/Vesting.sol, contracts/PrivateRound.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use structs for Function Parameters",
+            "description": "Functions accept inputs in an ad hoc manner which can be confusing for users or DApps.",
+            "severity": "n/a",
+            "location": "contracts/Vesting.sol, functions depositFounderLinearTokens, depositFounderLinearTokensToInvestors, depositFounderNonLinearTokens, withdrawTGEFund, withdrawInstallmentAmount, withdrawBatch, setNonLinearInstallments"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Illogical use of require check",
+            "description": "Irrelevant require statement in functions.",
+            "severity": "n/a",
+            "location": "contracts/PrivateRound.sol, functions createPrivateRound, depositTokens, withdrawInitialPercentage, milestoneValidationRequest, validateMilestone, withdrawIndividualMilestoneByFounder, withdrawIndividualMilestoneByInvestor, batchWithdrawByInvestors, changeAdminAddress, withdrawTaxTokens"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-281"
+                ]
+            },
+            "title": "Improper ordering of round ID",
+            "description": "User can input any id which can collide with existing roundId.",
+            "severity": "n/a",
+            "location": "contracts/PrivateRound.sol, function createPrivateRound"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent order of layout",
+            "description": "Not following Solidity style guide for contract components ordering and visibility.",
+            "severity": "n/a",
+            "location": "contracts/PrivateRound.sol; contracts/Vesting.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing events emitted",
+            "description": "No events emitted in PrivateRound contract; Events and logs are important for communication between contracts and user interfaces.",
+            "severity": "n/a",
+            "location": "contracts/PrivateRound.sol; contracts/Vesting.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Inadequate Function calling",
+            "description": "Certain functions can be called by anyone without creating a private round.",
+            "severity": "n/a",
+            "location": "contracts/PrivateRound.sol (functions: depositTokens, withdrawInitialPercentage, milestoneValidationRequest, validateMilestone)"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing event emission",
+            "description": "No events emitted in PrivateRound contract.",
+            "severity": "n/a",
+            "location": "contracts/PrivateRound.sol"
+        }
+    ]
+}

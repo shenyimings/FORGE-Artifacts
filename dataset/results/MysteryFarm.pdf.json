@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/MysteryFarm.pdf",
+    "project_info": {
+        "url": "https://github.com/mysteryfarm/contracts",
+        "commit_id": "1dd5e145777898b746086db59001cf33beb03503",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/MysteryFarm/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Delegates moving in transfer",
+            "description": "No delegates move to zero address after funds are sent in the transfer function.",
+            "severity": "medium",
+            "location": "MysteryToken.sol, transfer function (L33)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "The updateEmissionRate function can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "MasterChef.sol, updateEmissionRate function (L239)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "add function issue",
+            "description": "If some LP token is added to the contract twice using function add, then the total amount of reward MYSTERYReward in function updatePool will be incorrect.",
+            "severity": "low",
+            "location": "MasterChef.sol, add function (L90)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Owner can change the deposit fee and mint tokens.",
+            "severity": "low",
+            "location": "MasterChef.sol, L107; MysteryToken.sol, constructor (L18)"
+        }
+    ]
+}

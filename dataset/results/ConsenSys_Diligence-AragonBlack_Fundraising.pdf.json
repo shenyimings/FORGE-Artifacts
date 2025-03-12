@@ -1,0 +1,452 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-AragonBlack_Fundraising.pdf",
+    "project_info": {
+        "url": "https://github.com/AragonBlack/fundraising/tree/5ad1332955bab9d36cfad345ae92b7ad7dc0bdbe",
+        "commit_id": "5ad1332955bab9d36cfad345ae92b7ad7dc0bdbe",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "fundraising": "contracts/ConsenSys_Diligence-AragonBlack_Fundraising/fundraising"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Reentrancy in MarketMaker and Presale Contracts",
+            "description": "Critical functionality of MarketMaker and Presale is protected from reentrancy, but this protection might not be sufficient.",
+            "severity": "medium",
+            "location": "MarketMaker and Presale contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Solidity Version",
+            "description": "The application compiles with an outdated solidity version lacking the latest security improvements.",
+            "severity": "high",
+            "location": "AragonOS framework"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Boilerplate Code in AragonFundraisingController",
+            "description": "The controller needs to be updated whenever there are changes in other contracts, leading to boilerplate code and potential synchronization issues.",
+            "severity": "low",
+            "location": "AragonFundraisingController"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ],
+                "3": [
+                    "CWE-1390"
+                ],
+                "4": [
+                    "CWE-308"
+                ]
+            },
+            "title": "Insecure Authentication System",
+            "description": "The authentication system could be improved by changing from auth() to authP(), allowing for rule setting on method parameters.",
+            "severity": "medium",
+            "location": "Authentication system"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Decreasing Shareholder Token Price",
+            "description": "The price of the Shareholder tokens gets lower with every second due to the Tap withdrawal allowance increasing at the same rate, decreasing the pool balance used for the Share token price calculation.",
+            "severity": "low",
+            "location": "Tap contract and Share token price calculation"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Insufficient Test Coverage",
+            "description": "The Presale contract lacks 100% test coverage, including negative test cases and security-focused test cases verifying permissions setup according to the security specification and trust model.",
+            "severity": "high",
+            "location": "Presale contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Permission Escalation",
+            "description": "An entity controlling the Shareholder voting application and colluding with one Board member may be able to configure critical parameters of the fundraising application.",
+            "severity": "n/a",
+            "location": "`Voting_SHARE` and `FundraisingController` contracts."
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Unsecured Role Management",
+            "description": "Critical permissions are assigned to the Shareholder voting application, allowing manipulation of critical parameters.",
+            "severity": "n/a",
+            "location": "`Voting_SHARE` and `DAO Kernel` components."
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Presale configuration vulnerability",
+            "description": "DAO deployer can configure presale to transfer funds to the Beneficiary account instead of providing collateral to the reserve.",
+            "severity": "high",
+            "location": "Presale contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Insecure upgrade mechanisms",
+            "description": "Presale contract cannot be upgraded through DAO/AragonApp upgrade mechanisms as it requires Shareholder approval and tokens are not vested yet.",
+            "severity": "medium",
+            "location": "Presale contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Front-running incentives",
+            "description": "Incentive to front-run transactions or act based on the fact that a presale appears to be successful soon.",
+            "severity": "high",
+            "location": "Presale contract"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Collateral tokens withdrawal vulnerability",
+            "description": "Beneficiary can potentially block presale funds or funds from sell orders if it reverts when receiving ETH or tokens.",
+            "severity": "medium",
+            "location": "Beneficiary account"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Price manipulation vulnerability",
+            "description": "MarketMaking is susceptible to price manipulations (Pump & Dump).",
+            "severity": "high",
+            "location": "Bonding Curves functionality"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ]
+            },
+            "title": "Batch cancellation vulnerability",
+            "description": "Traders may not receive their collateral tokens back if the batch is cancelled.",
+            "severity": "high",
+            "location": "Market maker contract (collateralsToBeClaimed)"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Unpredictable fees vulnerability",
+            "description": "Fees can be changed between opening an order and claiming it, making fees unpredictable.",
+            "severity": "high",
+            "location": "BatchedBancorMarketMaker contract (fees update during batch)"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Bancor formula update vulnerability",
+            "description": "Shareholders can vote to change the bancor formula contract, making prices in the current batch unpredictable.",
+            "severity": "high",
+            "location": "BatchedBancorMarketMaker contract (bancor formula update)"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ],
+                "4": [
+                    "CWE-567"
+                ]
+            },
+            "title": "Maximum slippage update vulnerability",
+            "description": "Maximum slippage can be updated during the batch, making prices unpredictable.",
+            "severity": "high",
+            "location": "BatchedBancorMarketMaker contract (maximum slippage update)"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Inconsistent token reset list vulnerability",
+            "description": "Inconsistency in toReset tokens list can block openTrading functionality.",
+            "severity": "medium",
+            "location": "AragonFundraisingController contract (toReset tokens list)"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Tap payments inconsistency",
+            "description": "Maximum withdrawal amount gets capped and remaining tokens cannot be claimed afterward.",
+            "severity": "high",
+            "location": "tap._maximumWithdrawal function"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Tapped collaterals can be bought by traders",
+            "description": "Intentional behaviour creates an additional incentive for the beneficiary to withdraw tapped tokens as soon and as often as possible, creating a race condition.",
+            "severity": "medium",
+            "location": "BatchedBancorMarketMaker.sol:L483-L485"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Presale - contributionToken double cast and invalid comparison",
+            "description": "Invalid comparison of contract type against address(0x00) and double casting the token to ERC20.",
+            "severity": "n/a",
+            "location": "Presale.sol:L163-L170"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-706"
+                ]
+            },
+            "title": "Fees are not returned for buy orders if a batch is canceled",
+            "description": "Fees are not returned to traders for buy orders if the batch is cancelled.",
+            "severity": "medium",
+            "location": "BatchedBancorMarketMaker.sol:L706-L713"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Tap - Controller should not be updateable",
+            "description": "Update functionality in Tap allows updating the Controller contract, which can lead to inconsistencies.",
+            "severity": "medium",
+            "location": "Tap.sol:L117-L125"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "n/a (cannot parse title)",
+            "description": "Updating reserve only in Tap is inconsistent with the system.",
+            "severity": "medium",
+            "location": "Tap.sol:L127-L135"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Presale can be opened earlier than initially assigned date",
+            "description": "openDate can be set to a non-zero value, but the presale can still be opened earlier by calling the open() function.",
+            "severity": "medium",
+            "location": "Presale.sol:L144-L146"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Presale - should not allow zero value contributions",
+            "description": "Rejecting zero value ETH or ERC20 contributions is necessary.",
+            "severity": "low",
+            "location": "Presale.sol:L163-L173"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-184"
+                ]
+            },
+            "title": "DAI/ANT token address cannot be zero",
+            "description": "The fundraising template allows the DAI and ANT token addresses to be set to address(0), which is not a valid option.",
+            "severity": "low",
+            "location": "FundraisingMultisigTemplate, contracts/FundraisingMultisigTemplate.sol:L71-L72"
+        }
+    ]
+}

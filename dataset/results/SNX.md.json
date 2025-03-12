@@ -1,0 +1,164 @@
+{
+    "path": "artifacts/SNX.md",
+    "project_info": {
+        "url": "https://github.com/jmonteer/yearnV2-strat-SNX-staking",
+        "commit_id": "91b839df4a350d80cb583795bccafe0836fdb732",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "yearnV2-strat-SNX-staking": "contracts/SNX/yearnV2-strat-SNX-staking"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Sandwich attack on user withdrawal",
+            "description": "Vulnerable to sandwich attack when withdrawing 100% of want from strategy.",
+            "severity": "high",
+            "location": "Strategy.sol#L348"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Insufficient approval value",
+            "description": "Approval value may decrease to zero, locking tokens forever.",
+            "severity": "medium",
+            "location": "Strategy.sol#L79-L85"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Unspecified max_loss parameter",
+            "description": "`withdrawFromSUSDVault()` function does not specify max_loss parameter.",
+            "severity": "medium",
+            "location": "Strategy.sol#L512"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Loss handling issue",
+            "description": "Losses from underlying SUSD vault may not be fairly distributed across vault users.",
+            "severity": "medium",
+            "location": "Strategy.sol (multiple lines)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Incorrect safeApprove usage",
+            "description": "Single `safeApprove` without setting to zero allowance.",
+            "severity": "n/a",
+            "location": "Strategy.sol#L129"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Missing protected tokens",
+            "description": "Array does not contain protected tokens.",
+            "severity": "n/a",
+            "location": "Strategy.sol#L470-L475"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Excessive Gas usage",
+            "description": "Redundant `_unlockedWant()` call and invoking `resolver()` dynamically.",
+            "severity": "n/a",
+            "location": "Strategy.sol#L260, L255"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Missing require message",
+            "description": "Revert occurs without providing user information.",
+            "severity": "n/a",
+            "location": "Strategy.sol#L100"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible gas saving",
+            "description": "Conversion in `estimatedProfit` function can be optimized.",
+            "severity": "n/a",
+            "location": "Strategy.sol#L148, L566"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary gas usage",
+            "description": "Refreshing unlockedWant value is redundant.",
+            "severity": "n/a",
+            "location": "Strategy.sol#L252, L260"
+        }
+    ]
+}

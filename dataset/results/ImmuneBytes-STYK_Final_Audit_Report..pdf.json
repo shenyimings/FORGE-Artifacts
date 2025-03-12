@@ -1,0 +1,266 @@
+{
+    "path": "artifacts/ImmuneBytes-STYK_Final_Audit_Report..pdf",
+    "project_info": {
+        "url": "https://github.com/Jill04/STYK",
+        "commit_id": "980ffcda83965aad8b6e8806b52aba9d13c3a3ad",
+        "address": "0xbfae05757d8401268039027e216bb516eccf8d41",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "STYK": "contracts/ImmuneBytes-STYK_Final_Audit_Report/STYK"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect calculation of user's token percentage in multiple functions",
+            "description": "Calculation errors in user's token balance percentage implementation",
+            "severity": "high",
+            "location": "STYK smart contract, lines 517, 660, 725"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Re-entrancy in STYKRewardsPayOuts() function",
+            "description": "Vulnerability to reentrancy attack due to incorrect ETH transfer implementation",
+            "severity": "high",
+            "location": "STYK contract, STYKRewardsPayOuts() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "monthlyRewardsPayOuts() function can be called infinite times by a user",
+            "description": "Lack of tracking for users who have claimed monthly rewards leads to drainable ETH",
+            "severity": "high",
+            "location": "monthlyRewardsPayOuts() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Re-entrancy in earlyAdopterBonus() function",
+            "description": "Vulnerability to reentrancy attack due to incorrect ETH transfer implementation",
+            "severity": "high",
+            "location": "STYK contract, earlyAdopterBonus() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "The setStakingRequirement() function is open for anyone to call",
+            "description": "Anyone can change staking requirement value",
+            "severity": "high",
+            "location": "setStakingRequirement() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "The setAuctionExpiryTime() function is open for anyone to call",
+            "description": "Anyone can change auction expiry time value",
+            "severity": "high",
+            "location": "setAuctionExppyTime() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "setInflationTime(), setStakeTime() and setAuctionEthLimit() functions are open for anyone to call",
+            "description": "Anyone can change crucial state variables",
+            "severity": "high",
+            "location": "mentioned functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Anyone can change the token name and symbol",
+            "description": "Users can update token name and symbol",
+            "severity": "medium",
+            "location": "setName() and setSymbol() functions"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Looping through unbounded arrays",
+            "description": "The STYKRewardsPayOuts() function of STYK contract loops through an unbounded array userAddress twice, which can cause issues when the number of elements in the array becomes large.",
+            "severity": "n/a",
+            "location": "STYK contract, STYKRewardsPayOuts() function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Non-compliance with ERC20 standard",
+            "description": "The implementation of STYK token differs from the standard ERC20 token interface and lacks certain functions such as approve(), transferFrom(), and allowance().",
+            "severity": "n/a",
+            "location": "STYK token"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Unbounded array growth",
+            "description": "The userAddress array in the STYK contract will continuously grow, potentially causing issues with gas limits.",
+            "severity": "n/a",
+            "location": "STYK contract, deflationAccumulatedRewards() function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Transfer event emission",
+            "description": "The Transfer event is not emitted when the user's balance changes in the sell() function.",
+            "severity": "n/a",
+            "location": "STYK contract, sell() function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Hardcoded address",
+            "description": "The constructor() of PriceConsumerV3 contains a hardcoded address for AggregatorV3Interface contract which should be manually changed for every Ethereum network deployment.",
+            "severity": "low",
+            "location": "PriceConsumerV3, constructor()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Inconsistent use of balanceOf() and tokenBalanceLedger_",
+            "description": "The balanceOf() function and tokenBalanceLedger_ mapping in the STYK contract returns the STYK token balance of a user but are used inconsistently.",
+            "severity": "low",
+            "location": "STYK contract"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing receive() function",
+            "description": "The solidity compiler shows a warning because the fallback() function is implemented in the STYK contract but lacks the receive() function.",
+            "severity": "low",
+            "location": "STYK contract"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent event emission syntax",
+            "description": "The contract mostly uses the emit keyword for emitting events, but at Line 287 it uses the older syntax for emitting the Transfer event.",
+            "severity": "low",
+            "location": "STYK contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Spelling mistake in calculateInfaltionHours() function",
+            "description": "The calculateInfaltionHours() function has a spelling error in its name, which will be accessed by off-chain elements like frontend and users.",
+            "severity": "low",
+            "location": "STYK contract"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused variable - lockTime",
+            "description": "The lockTime variable in STYK contract remains unused, increasing deployment cost and contract size.",
+            "severity": "low",
+            "location": "STYK contract"
+        }
+    ]
+}

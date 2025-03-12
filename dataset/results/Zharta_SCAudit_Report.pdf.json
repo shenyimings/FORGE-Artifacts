@@ -1,0 +1,311 @@
+{
+    "path": "artifacts/Zharta_SCAudit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/Zharta/protocol-v1",
+        "commit_id": "8e1875d7bcc14f8d56c20ac100517def469dd63b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol-v1": "contracts/Zharta_SCAudit_Report/protocol-v1"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Access Control Violation",
+            "description": "LiquidationsPeripheral.addLiquidation can be called by anybody.",
+            "severity": "critical",
+            "location": "./contracts/LiquidationsPeripheral.vy : addLiquidation()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Requirements Violation",
+            "description": "LiquidationsPeripheral.buyNFTLenderPeriod can be called by anybody, not necessarily a lender.",
+            "severity": "critical",
+            "location": "./contracts/LiquidationsPeripheral.vy : buyNFTLenderPeriod()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Denial of Service Vulnerability",
+            "description": "Potential DoS vulnerability in LiquidationsPeripheral._getNFTXVaultAddrFromCollateralAddr()",
+            "severity": "high",
+            "location": "./contracts/LiquidationsPeripheral.vy : _getNFTXVaultAddrFromCollateralAddr()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "Owner can set implementations that could break the system or impact users’ assets (multiple instances)",
+            "severity": "high",
+            "location": "Multiple contracts and functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "The owner could unexpectedly use LendingPoolPeripheral.setLiquidityControlsAddress to set an implementation that could break the system or impact users’ assets.",
+            "severity": "n/a",
+            "location": "./contracts/LendingPoolPeripheral.vy : setLiquidityControlsAddress()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "The owner could unexpectedly use LiquidationsCore.setLiquidationsPeripheralAddress to set an implementation that could break the system or impact users’ assets.",
+            "severity": "n/a",
+            "location": "./contracts/LiquidationsCore.vy : setLiquidationsPeripheralAddress()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "The owner could unexpectedly use LiquidationsPeripheral.setLiquidationsCoreAddress to set an implementation that could break the system or impact users’ assets.",
+            "severity": "n/a",
+            "location": "./contracts/LiquidationsPeripheral.vy : setLiquidationsCoreAddress()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "The owner could unexpectedly use LiquidationsPeripheral.addLoansCoreAddress to set an implementation that could break the system or impact users’ assets.",
+            "severity": "n/a",
+            "location": "./contracts/LiquidationsPeripheral.vy : addLoansCoreAddress()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "The owner could unexpectedly use LiquidationsPeripheral.setCollateralVaultPeripheralAddress to set an implementation that could break the system or impact users’ assets.",
+            "severity": "n/a",
+            "location": "./contracts/LiquidationsPeripheral.vy : setCollateralVaultPeripheralAddress()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "The owner could unexpectedly use LiquidityControls.changeLockPeriodConditions to block lender withdrawals.",
+            "severity": "n/a",
+            "location": "./contracts/LiquidityControls.vy : changeLockPeriodConditions()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "The owner could unexpectedly use Loans.changeInterestAccrualPeriod to instantly increase the amounts owed by borrowers without bound.",
+            "severity": "n/a",
+            "location": "./contracts/Loans.vy : changeInterestAccrualPeriod()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "The owner could unexpectedly use Loans.setLendingPoolPeripheralAddress to set an implementation that could break the system or impact users’ assets.",
+            "severity": "n/a",
+            "location": "./contracts/Loans.vy : setLendingPoolPeripheralAddress()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "The owner could unexpectedly use Loans.setCollateralVaultPeripheralAddress to set an implementation that could break the system or impact users’ assets.",
+            "severity": "n/a",
+            "location": "./contracts/Loans.vy : setCollateralVaultPeripheralAddress()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "The owner could unexpectedly use LoansCore.setLoansPeripheral to set an implementation that could break the system or impact users’ assets.",
+            "severity": "n/a",
+            "location": "./contracts/LoansCore.vy : setLoansPeripheral()"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Funds Lock",
+            "description": "LendingPoolPeripheral contract can receive native tokens with default payable function, but there is no mechanism for their withdrawals, which leads to native tokens lock in the contract.",
+            "severity": "medium",
+            "location": "./contracts/LendingPoolPeripheral.vy : __default__()"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Undocumented Behavior; Requirements Violation",
+            "description": "Existing logic will lock previous deposits in case of adding a new deposit when there are no ongoing lock periods, but according to the provided documentation, it is not obvious.",
+            "severity": "medium",
+            "location": "./contracts/LandingPoolCore.vy : deposit()"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Invalid Event Tracking",
+            "description": "Incorrect events are tracked, which breaks state observability.",
+            "severity": "medium",
+            "location": "./contracts/CollateralVaultPeripheral.vy : changeMaxCollectionShareConditions()"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate Code",
+            "description": "Duplicate code in various contracts and interfaces.",
+            "severity": "low",
+            "location": "Various contracts and interfaces"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code Duplication",
+            "description": "ownerIndexed and proposedOwnerIndexed are duplicated with owner and proposedOwner duplication inside OwnershipTransferred and OwnerProposed events.",
+            "severity": "n/a",
+            "location": "contracts/LiquidationsCore.vy, interfaces/ILendingPoolCore.vy, etc."
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Code",
+            "description": "Several unused functions and variables in various contracts (e.g., updateInvalidLoan, updateCanceledLoan, loansCoreAddresses, etc.)",
+            "severity": "n/a",
+            "location": "contracts/LoansCore.vy, contracts/LiquidationsCore.vy, contracts/CollateralVault Peripheral.vy, etc."
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Commented Code Parts",
+            "description": "Commented-out code may confuse a reader.",
+            "severity": "n/a",
+            "location": "./contracts/Loans.vy:525"
+        }
+    ]
+}

@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/Convex Platform.md",
+    "project_info": {
+        "url": "https://github.com/convex-eth/platform",
+        "commit_id": "754d9e700693246275b613e895b4044b63ce9ed5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "platform": "contracts/Convex Platform/platform"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Arbitrary calls on behalf of VoterProxy",
+            "description": "Function deposit accepts calls from anyone with any _token and _gauge, leading to undesired behavior.",
+            "severity": "critical",
+            "location": "VoterProxy contract, deposit function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unstable gauge version check",
+            "description": "Gauge version check based on call probes can be dangerous in case of new version added to curve.",
+            "severity": "high",
+            "location": "StashFactory contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong logic in withdrawAll",
+            "description": "Incorrect balance calculation can lead to tokens remaining in the contract.",
+            "severity": "high",
+            "location": "VoterProxy contract, withdrawAll function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Zero gauge could be added via addPool",
+            "description": "No check for _gauge variable can lead to errors in Booster logic.",
+            "severity": "high",
+            "location": "Booster contract, addPool function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent minted and deposited LP tokens amount",
+            "description": "Minted tokens amount for user can be different from deposited LP tokens amount.",
+            "severity": "info",
+            "location": "Booster contract, deposit function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "voteDelegate can perform any arbitrary calls on behalf of VoterProxy",
+            "description": "Function vote accepts calls from voteDelegate and can call any arbitrary contract on behalf of VoterProxy.",
+            "severity": "info",
+            "location": "VoterProxy contract, vote function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Insecure privileges for Owner",
+            "description": "Owner can change factories via front-running attack.",
+            "severity": "info",
+            "location": "Booster contract, setFactories function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Call earmarkRewards after shutdown",
+            "description": "Commented out require statement allows system shutdown without access to VoterProxy.",
+            "severity": "info",
+            "location": "Booster contract, earmarkRewards function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Missed safeApprove",
+            "description": "Using approve instead of safeApprove can lead to issues.",
+            "severity": "info",
+            "location": "Booster contract, various functions"
+        }
+    ]
+}

@@ -1,0 +1,383 @@
+{
+    "path": "artifacts/Pinnako_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/pinnakoex/pinnakoes_contract",
+        "commit_id": "b95ec9c57103b89ef9044c4e17ca6d529cbf739d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "pinnakoes_contract": "contracts/Pinnako_final_Secure3_Audit_Report/pinnakoes_contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Inconsistent token address used",
+            "description": "When `_FundToken has been changed to weth`, the following logic still uses input parameters `_token`.",
+            "severity": "critical",
+            "location": "LpManager.sol, functions `addLiquidity` and `removeLiquidity`"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "Potential Liquidity Exhaustion Risk",
+            "description": "When a user makes a huge profit, most of the funds in the vault will be paid to the user, causing the vault not to have sufficient funds.",
+            "severity": "critical",
+            "location": "Vault.sol, function `_decreasePoolAmount`"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "The average price must not be updated when function Vault._decreasePosition() is called",
+            "description": "Updating `ttREC.long(short)AveragePrice` when decreasing the position causes incorrect profit/loss calculations.",
+            "severity": "critical",
+            "location": "Vault.sol, function `_updateGlobalSize`"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Loss of funds for users due to premium fee implementation",
+            "description": "The premium fee can be positive or negative to indicate whether the position should pay a fee for the smaller position size or receive a fee from the larger position size.",
+            "severity": "critical",
+            "location": "Vault._collectMarginFees function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Underflow error in VaultUtils.getNextAveragePrice()",
+            "description": "No check is included to prevent underflow errors when subtracting _sizeDelta * _nextPrice from _averagePrice * _size.",
+            "severity": "critical",
+            "location": "VaultUtils getNextAveragePrice() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing _mintOut protection can lead to user fund loss",
+            "description": "The amountOut is calculated without considering the price fluctuation, which can result in users receiving less amountOut than expected.",
+            "severity": "critical",
+            "location": "RouterSign.sol#L74, L88, L135, and L149"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect daily seconds used",
+            "description": "3600 is used as daily seconds to accumulate the daily swap record, which can result in a daily swap amount that is 24 times bigger than maxSwapAmountPerDay.",
+            "severity": "medium",
+            "location": "Router.sol#L131, L154, L165, and L178"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Open position without updating price to increase winning rate",
+            "description": "Malicious users can open a position before the price update and close it after the price update in the same block.",
+            "severity": "medium",
+            "location": "Vault.sol#L189 and L259"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Tokens will be lost when function Router.directPoolDeposit() is called",
+            "description": "The function Router.directPoolDeposit() does not affect the state of the vault, resulting in wasted tokens.",
+            "severity": "medium",
+            "location": "Vault.sol#L385-L391"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "User can't guarantee to decrease his position",
+            "description": "Free trade flag can be set by owner, preventing users from decreasing their positions in time",
+            "severity": "medium",
+            "location": "RouterSign.sol#L96-L118 (decreasePosition functions)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "User's position can become liquidatable due to system parameter change",
+            "description": "No time delay for system-wide parameter changes, causing users' positions to become liquidatable unexpectedly",
+            "severity": "medium",
+            "location": "VaultUtils.sol#L99-L141 (setPremiumRate, setFundingRate, setTaxRate functions)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-330"
+                ],
+                "3": [
+                    "CWE-335"
+                ]
+            },
+            "title": "Weak sources of randomness in randomSource::_seed",
+            "description": "Using block.timestamp, now, or blockhash as a source of randomness can be influenced by miners",
+            "severity": "medium",
+            "location": "randomSource.sol#L17 (_seed function)"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "updateRate not performed after buyUSD operation",
+            "description": "Funding rate not updated after buyUSD operation, leading to incorrect fee calculations",
+            "severity": "medium",
+            "location": "Vault.sol#L153-L163 (buyUSD function)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Any msg.value exceeding _executionFee should be returned",
+            "description": "No refund logic implemented for excess native tokens sent by users",
+            "severity": "low",
+            "location": "PositionRouter.sol#L361 (createIncreasePosition function)"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Global variable psbtLogic can never be changed in PSBT contract",
+            "description": "No function to modify the psbtLogic variable",
+            "severity": "low",
+            "location": "PSBT.sol#L39 (psbtLogic variable)"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Logic error in Array contract get function",
+            "description": "No revert when index exceeds array length",
+            "severity": "low",
+            "location": "Array.sol#L11 (get function)"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Logical error: tradingTax misses a set function",
+            "description": "No function to modify the tradingTax variable",
+            "severity": "low",
+            "location": "VaultUtils.sol#L46 (tradingTax variable)"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Missing limit in RouterSign::initialization",
+            "description": "No restriction on calling the initialize function repeatedly, causing double initialization issue",
+            "severity": "low",
+            "location": "RouterSign.sol#L36-L41 (initialize function)"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Precision issue: Multiplication before division",
+            "description": "Performing division before multiplication can lead to precision loss.",
+            "severity": "low",
+            "location": "LpManager.sol, PSBT.sol (multiple lines)"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Risk of owner excessive privilege",
+            "description": "Owner role can modify sensitive parameters related to security of user funds.",
+            "severity": "low",
+            "location": "RouterSign.sol, Vault.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "addLiquidity should restrict msg.value == 0 when _token is not native",
+            "description": "User can add liquidity with native and non-native token by calling addLiquidity function.",
+            "severity": "low",
+            "location": "LpManager.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "createIncreasePosition and createDecreasePosition should have strict msg.value check",
+            "description": "User should not overpay the execution fee.",
+            "severity": "low",
+            "location": "PositionRouter.sol"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "setMaxGlobalSizes function lack array length equality check for its parameters",
+            "description": "No array length check for parameters in setMaxGlobalSizes function.",
+            "severity": "low",
+            "location": "BasePositionManager.sol"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "BasePositionManager - no params value check in setMaxGlobalSizes function",
+            "description": "Lack of checks for input parameters.",
+            "severity": "info",
+            "location": "BasePositionManager.sol"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Consider creating structs for return types on OrderBook",
+            "description": "Improve code readability by converting return types to structs.",
+            "severity": "info",
+            "location": "OrderBook.sol"
+        }
+    ]
+}

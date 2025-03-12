@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/Iosiro-TMC Token Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/TMC-Official/ERC20-Contract",
+        "commit_id": "b923cde02d2fd928760cc1e810410c2064fe1530",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ERC20-Contract": "contracts/Iosiro-TMC Token Smart Contract Audit/ERC20-Contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Insecure Blacklist State",
+            "description": "Using int type for storing whether an address was blacklisted instead of a boolean.",
+            "severity": "info",
+            "location": "ERC20_Contract.sol, Blacklist function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Insecure Transfer Function",
+            "description": "Returning false if attempting to transfer from or to a blacklisted address instead of reverting through a require statement.",
+            "severity": "info",
+            "location": "ERC20_Contract.sol, transfer(...) and transferFrom(...) functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Insecure onlyOwner Modifier",
+            "description": "Returning false instead of reverting if the function is called by a non-owner address.",
+            "severity": "info",
+            "location": "ERC20_Contract.sol, onlyOwner modifier"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unsafe Mathematical Operations",
+            "description": "Not performing mathematical operations using SafeMath.",
+            "severity": "info",
+            "location": "ERC20_Contract.sol, mathematical operations"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Missing Token Creation Transfer Event",
+            "description": "Not emitting a Transfer event when allocating the total supply to msg.sender.",
+            "severity": "info",
+            "location": "ERC20_Contract.sol#L61"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Interface Misdefinition",
+            "description": "Defining an interface as a contract instead of using the interface keyword.",
+            "severity": "info",
+            "location": "ERC20_Contract.sol#L23"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Missing Function Visibility",
+            "description": "Not explicitly setting function visibility for stop(...) and start(...) functions.",
+            "severity": "info",
+            "location": "ERC20_Contract.sol, stop(...) and start(...) functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Inexact Compiler Version",
+            "description": "Using a non-fixed pragma version that could result in using an alternative compiler with unidentified bugs.",
+            "severity": "info",
+            "location": "ERC20_Contract.sol, pragma version"
+        }
+    ]
+}

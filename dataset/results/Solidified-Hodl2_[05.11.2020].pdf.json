@@ -1,0 +1,251 @@
+{
+    "path": "artifacts/Solidified-Hodl2_[05.11.2020].pdf",
+    "project_info": {
+        "url": "https://github.com/HODLCommodity/HODLDex2",
+        "commit_id": "941ab6fb40fc8c4b4ce95f5866618f6367812249",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "HODLDex2": "contracts/Solidified-Hodl2_[05/HODLDex2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Bug in read() function returns the wrong ethUsd18 rate",
+            "description": "Function read() always returns the wrong `ethUsd18` rate due to a conversion bug.",
+            "severity": "critical",
+            "location": "HOracle.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "HodlDex’s admin can obtain HCETHUSD at close to zero cost",
+            "description": "HodlDex’s admin can temporarily provide a malicious Oracle via the adminSetOracle() function, potentially allowing them to obtain `HCETHUSD` at close to zero cost.",
+            "severity": "high",
+            "location": "HodlDex.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "HTokenReserve’s admin can issue themselves an unlimited amount of HTETHUSD",
+            "description": "HTokenReserve’s admin can grant a new DEX_ROLE role to any account, allowing them to issue themselves an unlimited amount of HTETHUSD.",
+            "severity": "high",
+            "location": "HTokenReserve.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Redeeming HTETHUSD will always fail due to calling a non-existent HTokenReserve function",
+            "description": "The hodlTRedeem() function will always fail to redeem due to it calling a non-existent function of HTokenReserve.",
+            "severity": "high",
+            "location": "HodlDex.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "Function initResetUser() does not reset back the user’s HCETHUSD balance",
+            "description": "The initResetUser() function does not set the user’s HCETHUSD balance back to zero, resulting in returning the ETH funds without reclaiming the user’s HCETHUSD tokens.",
+            "severity": "high",
+            "location": "HodlDex.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Admin has full control of storage",
+            "description": "The Hodl admin can upgrade the contract at any time, accessing all storage variables, including user balances.",
+            "severity": "high",
+            "location": "HodlDex.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "SellOrder.askUsd is never used after setting it",
+            "description": "The field askUsd of struct SellOrder declared in HodlDex.sol is never used after setting it.",
+            "severity": "low",
+            "location": "HodlDex.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Automated Surplus Allocation will only be called through modifier on block numbers that are exact multiples of 500",
+            "description": "The periodic modifier in HTokenReserve.sol calls allocateSurplus() when the current block number is a precise multiple of FREQUENCY (set to 500).",
+            "severity": "low",
+            "location": "HTokenReserve.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Ether transfers depending on gas stipend may not work if the recipient is a smart contract",
+            "description": "The transfer() function used to transfer ETH in HodlDex.sol may not work if the recipient is a smart contract.",
+            "severity": "low",
+            "location": "HodlDex.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-682"
+                ]
+            },
+            "title": "HodlDex.sol: Incorrect initialization of accrualDaysProcessed",
+            "description": "Storage variable accrualDaysProcessed is incorrectly initialized in function init().",
+            "severity": "low",
+            "location": "HodlDex.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "an account with the ORACLE_ROLE role can unnecessarily increment transaction count",
+            "description": "Function increaseTransactionCount() allows any account with the ORACLE_ROLE role to increment the transaction count.",
+            "severity": "low",
+            "location": "HodlDex.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Accrue by time function can have unprocessed days",
+            "description": "If the contract is not called for more than a day, the next time it’s called it won’t consider the skipped days in the accrual calculation.",
+            "severity": "low",
+            "location": "HodlDex.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "cancelSell() and cancelBuy() functions do not delete cancelled orders from their respective mappings",
+            "description": "Functions cancelSell() and cancelBuy() do not remove the cancelled orders from their sellOrder and buyOrder mappings, respectively.",
+            "severity": "info",
+            "location": "HodlDex.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Different version pragmas",
+            "description": "Some contracts use a lower version pragma than the rest of the code.",
+            "severity": "info",
+            "location": "libraries/Bytes32Set.sol, libraries/AddressSet.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Proportional.sol: possible overflow on add() function",
+            "description": "This function does not use SafeMath library and can potentially overflow.",
+            "severity": "info",
+            "location": "Proportional.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "HodlDex.sol: Duplicate call of balance.poke()",
+            "description": "The public function poke() calls _setEthToUsd() and then immediately calls balance.poke(), resulting in two sequential identical calls.",
+            "severity": "info",
+            "location": "HodlDex.sol"
+        }
+    ]
+}

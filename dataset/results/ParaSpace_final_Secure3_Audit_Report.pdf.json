@@ -1,0 +1,206 @@
+{
+    "path": "artifacts/ParaSpace_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/para-space/paraspace-core",
+        "commit_id": "8026a8addbd01fbd19c66eea59c506dd1ca71467",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "paraspace-core": "contracts/ParaSpace_final_Secure3_Audit_Report/paraspace-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Anycall exists in AirdropFlashClaimReceiver",
+            "description": "Unrestricted anycall allows user-input address and calldata, potentially leading to arbitrary calls.",
+            "severity": "medium",
+            "location": "AirdropFlashClaimReceiver contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Contract WalletBalanceProvider locks Ether",
+            "description": "No withdraw ETH function but has receive() function, can cause Ether locked in the contract.",
+            "severity": "info",
+            "location": "WalletBalanceProvider contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Implementation does not match documentation",
+            "description": "During ERC721 liquidation, only eth/weth is allowed to liquidate ERC721, and there is no cancellation of liquidation bonus by comparing liquidation assets and debt assets.",
+            "severity": "info",
+            "location": "PoolCore contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Lack view function specified in EIP-2535",
+            "description": "ParaProxy does not implement the required view functions for easy checking as per EIP-2535.",
+            "severity": "info",
+            "location": "ParaProxy contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "LiquidationLogic._burnDebtTokens: Interest rate update is incorrect",
+            "description": "In _burnDebtTokens, call updateInterestRates before transferring liquidationAsset.",
+            "severity": "critical",
+            "location": "DefaultReserveInterestRateStrategy contract, ReserveLogic contract, LiquidationLogic contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unsafe solidity compiler version",
+            "description": "The solidity compiler is not the latest version.",
+            "severity": "info",
+            "location": "WETHGateway contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "WETH9 Compatibility issues in PoolCore contract",
+            "description": "Same Issue as Multichain router v4 vulnerability.",
+            "severity": "low",
+            "location": "PoolCore contract, supplyPunk function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "ParaReentrancyGuard storage variable isn't initialized in PoolApeStaking and PoolMarketplace",
+            "description": "The construtor in ParaReentrancyGuard was commented out.",
+            "severity": "info",
+            "location": "ParaReentrancyGuard contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Lack of ETH sent when buying punk",
+            "description": "When calling Punk.buyPunk in WPunkGateway, no ETH is sent, allowing users to buy punks for free.",
+            "severity": "medium",
+            "location": "WPunkGateway contract, providePunk function, acceptBidWithCredit function, batchAcceptBidWithCredit function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "emergencyTokenTransfer excludes xTokenAddress token",
+            "description": "The emergencyTokenTransfer function can be used to withdraw pWETH tokens, which could lead to the protocol becoming insolvent.",
+            "severity": "medium",
+            "location": "WETHGateway contract, emergencyTokenTransfer function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "nestingOpen should be a view function",
+            "description": "The nestingOpen function in NTokenMoonBirds does not change state and should be declared as a view function.",
+            "severity": "info",
+            "location": "NTokenMoonBirds contract, nestingOpen function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "supportsInterface in MintableIncentivizedERC721 does not obey ERC721 standard",
+            "description": "The supportsInterface function in MintableIncentivizedERC721 does not correctly implement the ERC-165 standard.",
+            "severity": "info",
+            "location": "MintableIncentivizedERC721 contract, supportsInterface function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Use ERC165Checker to check whether an asset supports ERC721 interface",
+            "description": "The ParaSpaceFallbackOracle contract does not correctly check if an asset supports the ERC-721 interface using the EIP-165 standard.",
+            "severity": "low",
+            "location": "ParaSpaceFallbackOracle contract, getAssetPrice function"
+        }
+    ]
+}

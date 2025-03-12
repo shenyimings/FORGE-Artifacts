@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/SlowMist Audit Report - autofarm_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/autofarm-network/AutofarmV2_CrossChain",
+        "commit_id": "56e3bde53c532a0faf114dceb51a23b526b33f8c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "AutofarmV2_CrossChain": "contracts/SlowMist Audit Report - autofarm_en-us/AutofarmV2_CrossChain"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-674"
+                ]
+            },
+            "title": "Sandwich attacks issues",
+            "description": "The earn(), buyBack(), convertDustToEarned(), and _convertMDXToEarned functions have no limit on slippage, making them vulnerable to sandwich attacks.",
+            "severity": "high",
+            "location": "AutofarmV2_CrossChain/StratVLEV2.sol, AutofarmV2_CrossChain/StratX2_MDEX.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Excessive authority issues",
+            "description": "Owner can add mining pool arbitrarily, risking stealing mining by himself.",
+            "severity": "medium",
+            "location": "AutofarmV2_CrossChain/AutoFarmV2_CrossChain.sol, function add"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Excessive authority issues",
+            "description": "The authority of the Gov role is large, and the address of the external contract can be set arbitrarily.",
+            "severity": "medium",
+            "location": "AutofarmV2_CrossChain/StratX2.sol, functions setEntranceFeeFactor, setWithdrawFeeFactor, setControllerFee, setbuyBackRate, setGov, setOnlyGov, setUniRouterAddress, setBuyBackAddress, setRewardsAddress"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "DoS issues",
+            "description": "In the massUpdatePools function, if the length of poolInfo is too large, there is a risk of DoS.",
+            "severity": "medium",
+            "location": "AutofarmV2_CrossChain/AutoFarmV2_CrossChain.sol, function massUpdatePools"
+        }
+    ]
+}

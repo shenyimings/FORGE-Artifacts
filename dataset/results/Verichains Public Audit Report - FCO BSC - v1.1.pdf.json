@@ -1,0 +1,209 @@
+{
+    "path": "artifacts/Verichains Public Audit Report - FCO BSC - v1.1.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x9049c073b9c3f32f204e0255cec09d09e0d9b6cf",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "FCOToken": "contracts/Verichains Public Audit Report - FCO BSC - v1/FCOToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-940"
+                ]
+            },
+            "title": "Cross-chain signature replay",
+            "description": "Allows users to copy signatures and use them on other chains, even if those chains do not initially allow it.",
+            "severity": "high",
+            "location": "FCOToken.sol#processRewards(), PublicationHub.sol#mint(), PublicationHub.sol#collect()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ]
+            },
+            "title": "Use tx.origin for authentication is vulnerable to phishing",
+            "description": "Vulnerable to phishing attacks.",
+            "severity": "high",
+            "location": "EventEmitter.sol#L32"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Users will lose money if they unlock and then lock within the same epoch",
+            "description": "Users may lose money due to incorrect locking mechanism.",
+            "severity": "medium",
+            "location": "FCOToken.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "No Storage Gap for Upgradeable Contract Might Lead to Storage Slot Collision",
+            "description": "May lead to storage slot collision in upgradeable contracts.",
+            "severity": "medium",
+            "location": "AccessControl.sol, EventEmitter.sol, FCOToken.sol, and PublicationHub.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing logic to check msg.value in the mint() and collect() functions",
+            "description": "Missing checks for msg.value in mint() and collect() functions.",
+            "severity": "low",
+            "location": "PublicationHub.sol#L147 and PublicationHub.sol#L291"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Users risk losing money if they deposit an ERC20 token but unintentionally attach a native token",
+            "description": "Users may lose money due to incorrect token attachment.",
+            "severity": "low",
+            "location": "PublicationHub.sol#L147 and PublicationHub.sol#L291"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Admin may add a duplicated address in setPaymentToken() function",
+            "description": "Admin can add duplicate addresses.",
+            "severity": "low",
+            "location": "PublicationHub.sol#L124"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Consider adding the cancelCollect() function",
+            "description": "Missing cancelCollect() function.",
+            "severity": "low",
+            "location": "PublicationHub.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "epochsState.unlocked has not been updated in the _unlock() function",
+            "description": "epochsState.unlocked is not updated correctly.",
+            "severity": "info",
+            "location": "FCOToken.sol#_unlock()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Should have events for setServiceWallet() and setSignerWallet() functions",
+            "description": "Missing events for setServiceWallet() and setSignerWallet() functions.",
+            "severity": "info",
+            "location": "PublicationHub.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Excessive variables and logic",
+            "description": "Excessive variables and logic used.",
+            "severity": "info",
+            "location": "PublicationHub.sol#L65, PublicationHub.sol#L83"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Best practices to defend against reentrancy attacks",
+            "description": "Best practices not followed for defending against reentrancy attacks.",
+            "severity": "info",
+            "location": "PublicationHub.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Avoid relying on tx.origin for authentication",
+            "description": "Avoid using tx.origin for authentication.",
+            "severity": "info",
+            "location": "FCOToken.sol#L200, FCOToken.sol#L276"
+        }
+    ]
+}

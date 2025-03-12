@@ -1,0 +1,254 @@
+{
+    "path": "artifacts/alpha-homora-v-2.pdf",
+    "project_info": {
+        "url": "https://github.com/AlphaFinanceLab/homora-v2/tree/16a6f9ac884ba09d2f8eac99b0038fb8a12e4ee8",
+        "commit_id": "16a6f9ac884ba09d2f8eac99b0038fb8a12e4ee8",
+        "address": "0x33A4622B82D4c04a53e170c638B944ce27cffce3",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "homora-v2": "contracts/alpha-homora-v-2/homora-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Missing checks to the health of a position when a borrower is borrowing",
+            "description": "contracts/HomoraBank.sol: function borrow should check that collateralValue > borrowValue right after transferring the borrowed token out of the contract.",
+            "severity": "high",
+            "location": "contracts/HomoraBank.sol, function borrow"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing checks to the health of a position when a borrower is withdrawing collateral",
+            "description": "contracts/HomoraBank.sol: function takeCollateral should check require(collateralValue > borrowValue, 'position still healthy'); right after transferring the collateral out of the contract.",
+            "severity": "high",
+            "location": "contracts/HomoraBank.sol, function takeCollateral"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect share calculation in function borrow",
+            "description": "L355 in contracts/HomoraBank.sol, should be amount.mul(totalShare).div(totalDebt) instead of amount.mul(totalDebt).div(totalShare).",
+            "severity": "high",
+            "location": "contracts/HomoraBank.sol, line 355"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Oracle attack is possible by manipulating a Uniswap pool",
+            "description": "Attack scenario involving flash loans and price manipulation.",
+            "severity": "high",
+            "location": "contracts/oracle/BaseKP3ROracle.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "Function liquidate never clears up the collateral value in the liquidated position",
+            "description": "In contracts/HomoraBank.sol, the function liquidate never clears up the collateral value in the liquidated position.",
+            "severity": "medium",
+            "location": "contracts/HomoraBank.sol, function liquidate"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Truncation of fixed-point could result in sensitive collateral liquidation calculation",
+            "description": "multiplication is performed after a truncation division in a series of integer calculations.",
+            "severity": "medium",
+            "location": "contracts/oracle/ProxyOracle.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Transmit arbitrary amount of token from a position owner to a spell contract and get locked",
+            "description": "contracts/HomoraBank.sol: function transmit can be called by a position owner through the function HomoraCaster.cast.",
+            "severity": "info",
+            "location": "contracts/HomoraBank.sol, function transmit"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Missing approval in function setCToken",
+            "description": "contracts/HomoraBank.sol: function setCToken should safeApprove the newly added cToken.",
+            "severity": "info",
+            "location": "contracts/HomoraBank.sol, function setCToken"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input checks",
+            "description": "contracts/HomoraBank.sol: function initialize should check if IOracle _oracle is not 0x0.",
+            "severity": "info",
+            "location": "contracts/HomoraBank.sol, function initialize"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Integer Overflow / Underflow",
+            "description": "Integer overflow/underflow occur when an integer hits its bit-size limit.",
+            "severity": "n/a",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked cToken uniqueness",
+            "description": "Not checking for distinct cTokens can lead to catastrophic results when two banks share the same cToken.",
+            "severity": "n/a",
+            "location": "contracts/HomoraBank.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-248"
+                ]
+            },
+            "title": "Unhandled revert in repayInternal",
+            "description": "Failing to set amountCall to oldDebt when amountCall is larger than oldDebt can cause a revert.",
+            "severity": "n/a",
+            "location": "contracts/HomoraBank.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of permission checks in withdraw",
+            "description": "Not having proper access control for withdraw function can lead to unauthorized withdrawals.",
+            "severity": "medium",
+            "location": "contracts/IStakingRewards.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Unsecure safeTransfer",
+            "description": "Using transfer instead of safeTransfer can result in loss of funds.",
+            "severity": "n/a",
+            "location": "Various contracts (e.g., WERC20, IStakingRewards)"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unvalidated input for setOracles",
+            "description": "Not validating oracle input can lead to potential attacks.",
+            "severity": "medium",
+            "location": "contracts/ProxyOracle.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Insecure ERC1155 burning",
+            "description": "Burning more tokens than available can occur due to incorrect balance checks.",
+            "severity": "n/a",
+            "location": "contracts/Balancer2TokensOracle.sol"
+        }
+    ]
+}

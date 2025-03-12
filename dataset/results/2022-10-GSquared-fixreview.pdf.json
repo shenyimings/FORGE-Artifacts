@@ -1,0 +1,260 @@
+{
+    "path": "artifacts/2022-10-GSquared-fixreview.pdf",
+    "project_info": {
+        "url": "https://github.com/groLabs/GSquared/tree/b0cf03fa18b4549bd85c571c00e18ddf3218de59",
+        "commit_id": "b0cf03fa18b4549bd85c571c00e18ddf3218de59",
+        "address": "0x",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "GSquared": "contracts/2022-10-GSquared-fixreview/GSquared"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ],
+                "3": [
+                    "CWE-835"
+                ]
+            },
+            "title": "Unbounded loop can cause denial of service",
+            "description": "Under certain conditions, the withdrawal code will loop, permanently blocking users from getting their funds.",
+            "severity": "high",
+            "location": "contracts/GVault.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Lack of two-step process for contract ownership changes",
+            "description": "Transferring ownership in one function call is error-prone and could result in irrevocable mistakes.",
+            "severity": "info",
+            "location": "contracts/pnl/PnLFixedRate.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Non-zero token balances in the GRouter can be stolen",
+            "description": "A non-zero balance of 3CRV, DAI, USDC, or USDT in the router contract can be stolen by an attacker.",
+            "severity": "info",
+            "location": "GRouter.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Uninformative implementation of maxDeposit and maxMint from EIP-4626",
+            "description": "The GVault implementation of EIP-4626 is uninformative for maxDeposit and maxMint, as they return only fixed, extreme values.",
+            "severity": "info",
+            "location": "GVault.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "moveStrategy runs out of gas for large inputs",
+            "description": "Reordering strategies can trigger operations that will run out-of-gas before completion.",
+            "severity": "info",
+            "location": "GVault.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "GVault withdrawals from ConvexStrategy are vulnerable to sandwich attacks",
+            "description": "Token swaps that may be executed during vault withdrawals are vulnerable to sandwich attacks.",
+            "severity": "medium",
+            "location": "strategy/ConvexStrategy.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-430"
+                ]
+            },
+            "title": "Incorrect function call to deactivate stop loss primer",
+            "description": "The GStrategyResolver contract calls the incorrect function to check if the meta pool has become healthy again, preventing the deactivation of the stop loss primer.",
+            "severity": "medium",
+            "location": "GStrategyResolver contract, taskStopStopLossPrimer function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "getYieldTokenAmount uses convertToAssets instead of convertToShares",
+            "description": "The getYieldTokenAmount function does not properly convert a 3CRV token amount into a G3CRV token amount.",
+            "severity": "medium",
+            "location": "GTranche.sol, getYieldTokenAmount function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "convertToShares can be manipulated to block deposits",
+            "description": "An attacker can block operations by using direct token transfers to manipulate convertToShares.",
+            "severity": "medium",
+            "location": "GVault.sol, convertToShares function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Harvest operation could be blocked if eligibility check on a strategy reverts",
+            "description": "If any of the strategies in the queue revert during harvest, it would prevent the loop from reaching the end of the queue and block the entire harvest operation.",
+            "severity": "info",
+            "location": "GStrategyGuard.sol, harvest function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect rounding direction in GVault",
+            "description": "The minting and withdrawal operations in the GVault use rounding in favor of the user instead of the protocol.",
+            "severity": "medium",
+            "location": "GVault.sol, convertToShares and convertToAssets functions"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-940"
+                ],
+                "4": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Protocol migration is vulnerable to front-running and a loss of funds",
+            "description": "The migration from Gro protocol to GSquared protocol can be front-run by manipulating the share price enough that the protocol loses a large amount of funds.",
+            "severity": "high",
+            "location": "GMigration.sol, prepareMigration function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect arithmetic calculation for slippage tolerance",
+            "description": "Incorrect arithmetic calculation leads to increased rate of failed PnL reports and withdrawals.",
+            "severity": "info",
+            "location": "ConvexStrategy contract, divest function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-369"
+                ]
+            },
+            "title": "Potential division by zero in _calcTrancheValue",
+            "description": "Junior tranche withdrawals may fail due to an unexpected division by zero error.",
+            "severity": "info",
+            "location": "GTranche.sol, _calcTrancheValue function"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ],
+                "3": [
+                    "CWE-595"
+                ],
+                "4": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Token withdrawals from GTranche are sent to the incorrect address",
+            "description": "The GTranche withdrawal function sends tokens to msg.sender instead of the intended recipient.",
+            "severity": "info",
+            "location": "GTranche.sol, withdraw function"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Solidity compiler optimizations can be problematic",
+            "description": "Solidity compiler optimizations may introduce security issues due to optimization bugs.",
+            "severity": "info",
+            "location": "GSquared Protocol contracts"
+        }
+    ]
+}

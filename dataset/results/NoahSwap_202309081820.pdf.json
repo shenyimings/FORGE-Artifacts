@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/NoahSwap_202309081820.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xec1270D291c6C0448660bde2F74A674a5c303e3b",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.18+commit.87f61d96"
+        ],
+        "project_path": {
+            "Token_NOAH": "contracts/NoahSwap_202309081820/Token_NOAH"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "The newOrderNative function lacks msg.value validation",
+            "description": "Lack of validation to check whether msg.value is greater than the total amount in \"payable(order.tos[i]).transfer(order.amounts[i])\" for this specific call.",
+            "severity": "low",
+            "location": "assetsManage contract, newOrderNative function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "The centralization risks of deputy authority",
+            "description": "The deputy has the authority to prematurely close the vote using the closeVote function, which could result in fewer participants in the voting process and introduce a certain level of centralization risk to the voting outcome.",
+            "severity": "low",
+            "location": "vote contract, closeVote function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "The liquidity withdrawal of Noahswap Token is limited",
+            "description": "When the sender is the uniswapPair and the limited check is enabled, the user's balance cannot exceed the maxHoldingAmount value.",
+            "severity": "low",
+            "location": "Noah token contract, _beforeTokenTransfer function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "The ecrecover function does not check the 0 address",
+            "description": "There is no validation on the recovered address to ensure it is not a zero address in contracts using the ecrecover function.",
+            "severity": "low",
+            "location": "Multiple contracts, ecrecover function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "The token sender in the deposit_for function is not reasonable",
+            "description": "When using the deposit_for function for locking, it spends tokens from the _addr account provided as input instead of msg.sender.",
+            "severity": "low",
+            "location": "veNoah contract, deposit_for function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Modify key variables missing trigger events",
+            "description": "Lack of corresponding event triggering when modifying critical contract parameter adjustments.",
+            "severity": "info",
+            "location": "Multiple contracts (sb-token.go, NoahSwap-assetsManage-arbitrum, NoahSwap-assetsManage-bsc, etc.)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "The redundant coded",
+            "description": "Redundant code in the constructor and internal functions.",
+            "severity": "info",
+            "location": "NoahSwap-assetsManage-eth.sol #L436-438"
+        }
+    ]
+}

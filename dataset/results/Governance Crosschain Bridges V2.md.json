@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/Governance Crosschain Bridges V2.md",
+    "project_info": {
+        "url": "https://github.com/aave/governance-crosschain-bridges",
+        "commit_id": "763ef5da8befff3a129443a3ff4ef7ca4d3bb446",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "governance-crosschain-bridges": "contracts/Governance Crosschain Bridges V2/governance-crosschain-bridges"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Invalid variable check",
+            "description": "Incorrect comparison of variables in the `_executeTransaction()` function",
+            "severity": "high",
+            "location": "BridgeExecutorBase.sol, Lines 225 and 248"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Possible loss of assets",
+            "description": "Assets may remain on the contract balance due to lack of functionality to withdraw them",
+            "severity": "medium",
+            "location": "BridgeExecutorBase.sol, Line 253"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No check for zero address",
+            "description": "Lack of check for zero address in `targets` variable assignment",
+            "severity": "medium",
+            "location": "BridgeExecutorBase.sol, Line 207"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Extra field in the structure",
+            "description": "Unused and duplicated `id` field in `ActionsSet` structure",
+            "severity": "medium",
+            "location": "BridgeExecutorBase.sol, Line 206 and interfaces/IBridgeExecutor.sol, Line 9"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ]
+            },
+            "title": "It is desirable to make an access modifier",
+            "description": "Using require statements instead of access modifiers for better code readability",
+            "severity": "low",
+            "location": "ArbitrumBridgeExecutor.sol, Line 36 and PolygonBridgeExecutor.sol, Line 36"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "Redo the return value validation",
+            "description": "Incomplete check of returned variables after calling `call()` or `delegatecall()`",
+            "severity": "low",
+            "location": "BridgeExecutorBase.sol, Line 256"
+        }
+    ]
+}

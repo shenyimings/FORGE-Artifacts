@@ -1,0 +1,200 @@
+{
+    "path": "artifacts/Solidified-C-Layer_phase_1_[14.10.2019].pdf",
+    "project_info": {
+        "url": "https://github.com/c-layer/contracts/tree/audit-phase-1",
+        "commit_id": "f344c2e0986951f1ce45a5757a54c425a1e69e09",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Solidified-C-Layer_phase_1_[14/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential mismatch between what off-chain investors pay and the number of tokens they receive",
+            "description": "If the number of tokens an off-chain investor has purchased exceeds the current availableSupply() at the time the transaction is executed, addOffchainInvestment() will only distribute a fraction of the tokens purchased to them.",
+            "severity": "high",
+            "location": "ChangeTokensale.sol, function addOffchainInvestment()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "earlyBonus() will fail after bonus period is over",
+            "description": "The calculated id variable will only be less than bonuses_.length until the currentTime() is less than bonusUntil_.",
+            "severity": "high",
+            "location": "BonusTokensale.sol, function earlyBonus()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "firstBonus() will fail if totalRaised_ is greater than bonusUntil_",
+            "description": "The calculated id variable will only be less than bonuses_.length until the totalRaised_ < bonusUntil_.",
+            "severity": "high",
+            "location": "BonusTokensale.sol, function firstBonus()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Investors can potentially lose funds if withdrawAllETHFunds() is called prematurely",
+            "description": "Investors with unspentETH can potentially lose all their unspent ETH funds if withdrawAllETHFunds() is called before they had the chance to withdraw their funds.",
+            "severity": "low",
+            "location": "BaseTokensale.sol, function withdrawAllETHFunds()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential for denial of service (DoS) on transfer() and transferFrom()",
+            "description": "Both transfer() and transferFrom() call the hasClaims() function, which iterates over the tokens_[_token].claimables array. If enough claims are assigned to this array, the gas used by the function will eventually exceed the block gas limit.",
+            "severity": "low",
+            "location": "WithClaimsTokenDelegate.sol, functions transfer() and transferFrom()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Missing _role validation in assignOperators() and assignProxyOperators()",
+            "description": "The functions do not check if _role has been defined in roles before assigning it to the given operators.",
+            "severity": "n/a",
+            "location": "OperableCore.sol, functions assignOperators() and assignProxyOperators()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "canTransfer() does not check for invalid _from addresses",
+            "description": "canTransfer() returns TransferCode.OK even when _from is invalid (e.g. address(0)).",
+            "severity": "n/a",
+            "location": "BaseTokenDelegate.sol, function canTransfer()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Incorrect rateOffset_ documentation",
+            "description": "The purpose and usage of rateOffset_ need better documentation.",
+            "severity": "n/a",
+            "location": "RatesProvider.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "audit variable declared as memory instead of storage",
+            "description": "audit is referencing data residing in storage but declared as a memory variable.",
+            "severity": "n/a",
+            "location": "LimitableReceptionTokenDelegate.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading parameter name in investInternal()",
+            "description": "The parameter name _refundUnspentETH is misleading and should be renamed to _exactAmountOnly.",
+            "severity": "n/a",
+            "location": "SchedulableTokensale.sol, function investInternal()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Function auditUser() return variable names order mismatch",
+            "description": "The order of return variables in auditUser() is mismatched between TokenCore.sol and ITokenCore.sol.",
+            "severity": "n/a",
+            "location": "TokenCore.sol and ITokenCore.sol, function auditUser()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ],
+                "3": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Hard-coded ContributionLimits in UserTokensale",
+            "description": "ContributionLimits are hard-coded in UserTokensale.",
+            "severity": "n/a",
+            "location": "UserTokensale.sol"
+        }
+    ]
+}

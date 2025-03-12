@@ -1,0 +1,209 @@
+{
+    "path": "artifacts/1-bossbaby.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xd8dbe5ac60cd1c0b40c9182cb3eb2392d3df371f",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "BossBaby": "contracts/1-bossbaby/BossBaby"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ST - Stops Transactions",
+            "description": "The transactions are initially disabled for all users excluding the authorized addresses.",
+            "severity": "critical",
+            "location": "BossBaby contract, transaction functionality"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "RLF - Redundant Liquidity Functionality",
+            "description": "The liquidity fees are fixed at zero, making the liquidity functionality redundant.",
+            "severity": "critical",
+            "location": "BossBaby contract, liquidity functionality"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "PTRP - Potential Transfer Revert Propagation",
+            "description": "The contract sends funds to a `marketingWallet` which may revert from incoming payment, causing error propagation.",
+            "severity": "critical",
+            "location": "BossBaby contract, transfer flow"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PVC - Price Volatility Concern",
+            "description": "The contract accumulates tokens to swap them for ETH, potentially leading to significant price volatility.",
+            "severity": "medium",
+            "location": "BossBaby contract, swap functionality"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "FSA - Fixed Swap Address",
+            "description": "The swap address is fixed and cannot be changed, making it difficult to catch up with upgrade versions.",
+            "severity": "medium",
+            "location": "BossBaby contract, swap address assignment"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RE - Redundant Event",
+            "description": "Events `BuyFeesChanged`, `SellFeesChanged`, and `WalletToWalletTransferWithoutFeeEnabled` are not utilized in the contract's implementation.",
+            "severity": "low",
+            "location": "BossBaby contract, events"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "IDI - Immutable Declaration Improvement",
+            "description": "State variables can be declared as immutable, saving gas and improving performance.",
+            "severity": "low",
+            "location": "BossBaby contract, state variable declarations"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "L02 - State Variables could be Declared Constant",
+            "description": "State variables can be declared as constant using the `constant` keyword.",
+            "severity": "low",
+            "location": "BossBaby contract, state variable declarations"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The code does not adhere to Solidity naming conventions.",
+            "severity": "low",
+            "location": "BossBaby contract, various locations"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-561"
+                ]
+            },
+            "title": "L09 - Dead Code Elimination",
+            "description": "Dead code can make the contract more difficult to understand and maintain.",
+            "severity": "low",
+            "location": "BossBaby contract, various locations"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ]
+            },
+            "title": "L11 - Unnecessary Boolean equality",
+            "description": "Boolean equality is unnecessary when comparing two boolean values.",
+            "severity": "low",
+            "location": "BossBaby contract, boolean comparisons"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L14 - Uninitialized Variables in Local Scope",
+            "description": "Using uninitialized local variables can lead to unpredictable behavior and errors.",
+            "severity": "low",
+            "location": "BossBaby contract, local variable declarations"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L17 - Usage of Solidity Assembly",
+            "description": "Using assembly can be error-prone and difficult to read and understand.",
+            "severity": "low",
+            "location": "BossBaby contract, assembly usage"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "L20 - Succeeded Transfer Check",
+            "description": "The transfer methods should be checked if the result is successful according to the ERC20 specification.",
+            "severity": "medium",
+            "location": "BossBaby contract, transfer methods"
+        }
+    ]
+}

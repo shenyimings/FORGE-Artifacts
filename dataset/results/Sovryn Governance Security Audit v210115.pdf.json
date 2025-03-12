@@ -1,0 +1,53 @@
+{
+    "path": "artifacts/Sovryn Governance Security Audit v210115.pdf",
+    "project_info": {
+        "url": "https://github.com/DistributedCollective/Sovryn-smart-contracts",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Sovryn-smart-contracts": "contracts/Sovryn Governance Security Audit v210115/Sovryn-smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "SVN-014 - Incorrect ecrecover return value checks",
+            "description": "In the RSK blockchain implementation, ecrecover's precompiled contract returns a specific value in error scenarios, whereas Ethereum's implementation returns the 0 address for errors. This can lead to casting a vote using an invalid signature.",
+            "severity": "low",
+            "location": "Staking.sol and GovernorAlpha.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "SVN-016 - Incorrect revert error message strings in Checkpoints.sol",
+            "description": "Error strings in several functions in the Checkpoints smart contract are incorrect, indicating a stakedUntil underflow/overflow when the actual issue is with the stake amount.",
+            "severity": "info",
+            "location": "Checkpoints.sol"
+        }
+    ]
+}

@@ -1,0 +1,203 @@
+{
+    "path": "artifacts/2-xdoge.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "main",
+        "address": "0x10c925372055623fa6206e7cb496653d1ff8ca45",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "BOSSDOGE": "contracts/2-xdoge/BOSSDOGE"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "RRS - Redundant Require Statement",
+            "description": "The contract utilizes a `require` statement within the add function aiming to prevent overflow errors, which is redundant in Solidity version 0.8.0 and later.",
+            "severity": "low",
+            "location": "add function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "FAI - Function Argument Inconsistency",
+            "description": "The arguments on the `_getValue` function are called in the wrong order, which may not follow the expected business logic.",
+            "severity": "low",
+            "location": "BOSSDOGE.sol#L345,352"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "CO - Code Optimization",
+            "description": "A segment of code can be optimized to perform fewer operations.",
+            "severity": "low",
+            "location": "BOSSDOGE.sol#L299"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "DDP - Decimal Division Precision",
+            "description": "Division of decimal numbers can result in rounding errors due to the way that division is implemented in Solidity.",
+            "severity": "low",
+            "location": "BOSSDOGE.sol#L294"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "PTRP - Potential Transfer Revert Propagation",
+            "description": "The contract sends funds to a `_developmentAddress` and `_marketingAddress` which can either be a wallet address or a contract, and if the address belongs to a contract then it may revert from incoming payment.",
+            "severity": "low",
+            "location": "BOSSDOGE.sol#L295"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "FSA - Fixed Swap Address",
+            "description": "The swap address is assigned once and cannot be changed, which may not be able to catch up to the upgrade.",
+            "severity": "low",
+            "location": "BOSSDOGE.sol#L174"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RSML - Redundant SafeMath Library",
+            "description": "The usage of the SafeMath library adds complexity, overhead, and increases gas consumption unnecessarily since the contract is using a Solidity pragma version equal to or greater than 0.8.0.",
+            "severity": "low",
+            "location": "BOSSDOGE.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "IDI - Immutable Declaration Improvement",
+            "description": "The contract declares state variables that their value is initialized once in the constructor and are not modified afterwards, which can be declared as immutable to save gas.",
+            "severity": "low",
+            "location": "BOSSDOGE.sol#L171,172"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the Solidity naming convention guidelines.",
+            "severity": "low",
+            "location": "BOSSDOGE.sol#L38,136,149,150,151,303,304,309,316,402"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L05 - Unused State Variable",
+            "description": "An unused state variable is declared in the contract but is never used.",
+            "severity": "low",
+            "location": "BOSSDOGE.sol#L131"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "L16 - Validate Variable Setters",
+            "description": "The contract performs operations on variables that have been configured on user-supplied input without proper check for the case where a value is zero.",
+            "severity": "low",
+            "location": "BOSSDOGE.sol#L122,312,319"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "L19 - Stable Compiler Version",
+            "description": "The `^` symbol indicates that any version of Solidity that is compatible with the specified version can be used to compile the contract.",
+            "severity": "low",
+            "location": "BOSSDOGE.sol#L7"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "L20 - Succeeded Transfer Check",
+            "description": "The transfer methods should be checked if the result is successful according to the ERC20 specification.",
+            "severity": "low",
+            "location": "BOSSDOGE.sol#L306"
+        }
+    ]
+}

@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/sele-ct-x-storm-x-nft.pdf",
+    "project_info": {
+        "url": "https://github.com/stormxio/nft-shrug/tree/1d5d0ec1986b692d50d45e0a6d597bf97697a576",
+        "commit_id": "1d5d0ec1986b692d50d45e0a6d597bf97697a576",
+        "address": "0xb56ec59083bca56e374f25677108cb4534a474d7",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "nft-shrug": "contracts/sele-ct-x-storm-x-nft/nft-shrug"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Max supply of 500 is not enforced at the token level",
+            "description": "The max supply of 500 is enforced in the sale contract instead of at the token level.",
+            "severity": "medium",
+            "location": "./token/ShrugToken.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Minter can burn token on any address",
+            "description": "The minter address can burn any token ID that has been issued.",
+            "severity": "medium",
+            "location": "./token/ShrugToken.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Possibly stale price feeds due to deprecated Chainlink API",
+            "description": "The current conversion between ETH to USDT/STMX obtains the Chainlink price feed via IAggregator.latestAnswer, which is part of the deprecated API.",
+            "severity": "medium",
+            "location": "./curves/Exponential.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-654"
+                ]
+            },
+            "title": "There is no backup oracle nor protection from erroneous price data",
+            "description": "The system only collects price data from Chainlink and does not have any backup currently.",
+            "severity": "medium",
+            "location": "contracts/curves/Exponential.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Dangerous external calls from ShrugSale.sol to arbitrary contract that are added as recipients",
+            "description": "Function buyInETH: when sending ether to the recipients, the recipients could perform re-entrancy attack.",
+            "severity": "medium",
+            "location": "contracts/sale/ShrugSale.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Privileged roles and ownership",
+            "description": "There are some actions that could have important consequences for end-users.",
+            "severity": "info",
+            "location": "contracts/role/MinterRole.sol, contracts/curves/Exponential.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "TokenBought event does not accurately reflect the NFT transactions",
+            "description": "Buying multiple tokens would only result in one event being emitted containing only one uint256 tokenId.",
+            "severity": "info",
+            "location": "./sale/ShrugSale.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma",
+            "description": "Every Solidity file specifies an unlocked pragma, meaning that the compiler will use the specified version and above.",
+            "severity": "info",
+            "location": "All contracts"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Possible difficulty in properly managing admin privileges",
+            "description": "The ./libs/AccessControl.sol contract manages administrative privileges in a complicated manner.",
+            "severity": "info",
+            "location": "./role/MinterRole.sol, ./libs/AccessControl.sol"
+        }
+    ]
+}

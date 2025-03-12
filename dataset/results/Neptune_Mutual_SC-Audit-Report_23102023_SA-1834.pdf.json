@@ -1,0 +1,245 @@
+{
+    "path": "artifacts/Neptune_Mutual_SC-Audit-Report_23102023_SA-1834.pdf",
+    "project_info": {
+        "url": "https://github.com/neptune-mutual-blue/periphery/",
+        "commit_id": "5e44aba0427820d3f4c466d8ce1ac703d8d165be",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "periphery": "contracts/Neptune_Mutual_SC-Audit-Report_23102023_SA-1834/periphery"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Coarse-grained Access Control; Data Inconsistency",
+            "description": "The setPool function in the LiquidityGaugePool contract grants entities with the DEFAULT_ADMIN_ROLE extensive power to modify vital parameters of the _poolInfo struct.",
+            "severity": "high",
+            "location": "./src/gauge-pool/LiquidityGaugePool.sol: setPool()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Unverifiable Logic",
+            "description": "The LiquidityGaugePoolReward contract’s _updateVotingPowers function relies on out-of-scope contracts, making it challenging to identify and mitigate potential vulnerabilities.",
+            "severity": "high",
+            "location": "./src/gauge-pool/LiquidityGaugePoolReward.sol ./src/gauge-pool/LiquidityGaugePool.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Denial Of Service; Highly Permissive Owner Access",
+            "description": "The current implementation of the platform fee lacks constraints, permitting it to be set to any value, including values exceeding 100%.",
+            "severity": "high",
+            "location": "./src/gauge-pool/LiquidityGaugePool.sol: setPool() ./src/gauge-pool/LiquidityGaugePool.sol : _withdrawRewards()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Undocumented Functionality",
+            "description": "The DEFAULT_ADMIN_ROLE can alter vital parameters, leading to potential unintended consequences.",
+            "severity": "high",
+            "location": "./src/gauge-pool/LiquidityGaugePool.sol: setPool()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "Missing Storage Gaps",
+            "description": "Lack of storage gaps to allow for storage extension during upgrades.",
+            "severity": "medium",
+            "location": "Multiple contracts (LiquidityGaugePoolController.sol, LiquidityGaugePoolState.sol, etc.)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Owner Access",
+            "description": "Entities with DEFAULT_ADMIN_ROLE permissions can modify crucial variables, even after users have made deposits into the pool.",
+            "severity": "high",
+            "location": "./src/gauge-pool/LiquidityGaugePool.sol: setPool()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Mishandled Edge Case",
+            "description": "The deposit function updates the `_lastDepositHeights` for a user every time they deposit tokens, unintentionally extending the withdrawal lockup period.",
+            "severity": "high",
+            "location": "./src/gauge-pool/LiquidityGaugePool.sol: deposit(), withdraw(), exit()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Unrestricted Token Recovery",
+            "description": "The recoverToken function grants entities with the _NS_ROLES_RECOVERY_AGENT role the power to withdraw any token from the contract.",
+            "severity": "high",
+            "location": "./src/gauge-pool/LiquidityGaugePool.sol: recoverToken()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Race Condition",
+            "description": "The `_withdrawRewards` function calculates the platformFee based on the current state of the `_poolInfo.platformFee` variable, which can be changed by an admin between transaction initiation and mining.",
+            "severity": "medium",
+            "location": "./src/gauge-pool/LiquidityGaugePool.sol: withdrawRewards(), exit()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of Emergency Withdrawal Mechanism",
+            "description": "The LiquidityGaugePool contract does not feature a mechanism for emergency withdrawals, excluding rewards.",
+            "severity": "high",
+            "location": "./src/gauge-pool/LiquidityGaugePool.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "CEI Pattern Violation",
+            "description": "A CEI pattern violation has been detected in the deposit function, although it doesn't immediately present a reentrancy risk.",
+            "severity": "low",
+            "location": "./src/gauge-pool/LiquidityGaugePool.sol: deposit()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Redundant Complexity (L02)",
+            "description": "Manual specification of epoch numbers can lead to irregular epoch numbers.",
+            "severity": "low",
+            "location": "./src/gauge-pool/LiquidityGaugePool.sol: setEpoch() function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Informational - Floating Pragma (I01)",
+            "description": "Using floating pragmas may result in contracts being deployed with the wrong pragma version",
+            "severity": "low",
+            "location": "All files in the src/gauge-pool/ directory"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Informational - Solidity Style Guides Violation (I02)",
+            "description": "Inconsistent ordering and naming conventions in contracts.",
+            "severity": "low",
+            "location": "./src/gauge-pool/LiquidityGaugePool.sol contract"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Functionality (I03)",
+            "description": "Inheritance from WithPausability.sol leads to unnecessary functionality.",
+            "severity": "low",
+            "location": "./src/gauge-pool/LiquidityGaugePool.sol contract"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Accumulation of Dust Values (I04)",
+            "description": "Rounding behavior in setEpoch() function may lead to accumulation of small discrepancies in token amounts.",
+            "severity": "low",
+            "location": "./src/gauge-pool/LiquidityGaugePool.sol: setEpoch() function"
+        }
+    ]
+}

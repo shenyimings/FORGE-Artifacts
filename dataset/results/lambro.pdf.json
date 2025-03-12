@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/lambro.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x201af44d9dfa5464f20b8dd8aa96fc016d26e7c0",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "LambroToken": "contracts/lambro/LambroToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-358"
+                ]
+            },
+            "title": "MLF - Misleading Liquidity Functionality",
+            "description": "Contract's liquidity functionality does not have any effect when sending tokens to the liquidity address.",
+            "severity": "n/a",
+            "location": "LambroToken contract, liquidity functionality"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "RSW - Redundant Storage Writes",
+            "description": "The contract updates the `isExcludedFromFee` mapping even if the current state of an account is the same as the one passed as an argument, leading to redundant storage writes.",
+            "severity": "low",
+            "location": "LambroToken contract, `isExcludedFromFee` mapping"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "CR - Code Repetition",
+            "description": "The `buyCollectFee` and `SellbuyCollectFee` functions in the contract contain repetitive code segments.",
+            "severity": "low",
+            "location": "LambroToken contract, `buyCollectFee` and `SellbuyCollectFee` functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RSML - Redundant SafeMath Library",
+            "description": "The usage of the SafeMath library adds complexity, overhead, and increases gas consumption unnecessarily since Solidity versions greater than or equal to 0.8.0 have native functionality for arithmetic operations.",
+            "severity": "low",
+            "location": "LambroToken contract, SafeMath library"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L02 - State Variables could be Declared Constant",
+            "description": "Some state variables can be declared as constants using the `constant` keyword.",
+            "severity": "low",
+            "location": "LambroToken contract, state variables"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The code does not follow the Solidity style guide for naming conventions.",
+            "severity": "low",
+            "location": "LambroToken contract, variable and function names"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "L18 - Multiple Pragma Directives",
+            "description": "The contract includes multiple conflicting pragma directives.",
+            "severity": "low",
+            "location": "LambroToken contract, pragma directives"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L19 - Stable Compiler Version",
+            "description": "The version lock is not specified, allowing any version of Solidity that is compatible with the specified version to be used.",
+            "severity": "low",
+            "location": "LambroToken contract, pragma directive"
+        }
+    ]
+}

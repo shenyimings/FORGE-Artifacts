@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-PerpLimitOrders-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/perpfutui/perpetual-limit-orders/tree/0a8a7ce",
+        "commit_id": "0a8a7ce",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "perpetual-limit-orders": "contracts/PeckShield-Audit-Report-PerpLimitOrders-v1/perpetual-limit-orders"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "Proper Cleanup Upon Order Deletion",
+            "description": "The deleteOrder() function only deletes the related entry in orders, but not trailingOrders.",
+            "severity": "low",
+            "location": "LimitOrderBook, deleteOrder() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved Validation Checks in onlyValidOrder()",
+            "description": "The onlyValidOrder() modifier can be strengthened by further ensuring require(order.stillValid, 'No longer valid') to safely filter out executed orders.",
+            "severity": "low",
+            "location": "LimitOrderBook, onlyValidOrder() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improved Decimal Operation on modD()",
+            "description": "The current implementation of modD() improperly scales up the remainder by 2^18.",
+            "severity": "low",
+            "location": "Decimal, modD() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ]
+            },
+            "title": "Informational - Improved Logic Of SmartWallet::executeCall()",
+            "description": "The executeCall() routine does not support the payable modifier and can be enhanced to carry with the given ether.",
+            "severity": "info",
+            "location": "SmartWallet, executeCall() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ],
+                "3": [
+                    "CWE-440"
+                ]
+            },
+            "title": "Accommodation of approve() Idiosyncrasies",
+            "description": "The approve() function may not strictly follow the ERC-20 specification, leading to idiosyncrasies in certain token contracts (e.g., USDT).",
+            "severity": "low",
+            "location": "SmartWallet::_handleOpenPositionWithApproval(), USDT Token Contract"
+        }
+    ]
+}

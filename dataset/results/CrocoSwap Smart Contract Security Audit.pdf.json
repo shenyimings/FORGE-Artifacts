@@ -1,0 +1,48 @@
+{
+    "path": "artifacts/CrocoSwap Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x3eeb7af2f42ec2b16bb56bad91d831a69212b569, 0x219b199bb671a3ff387d9afa741ffabd13986719",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "CCTToken": "contracts/CrocoSwap Smart Contract Security Audit/CCTToken",
+            "MasterChefV2": "contracts/CrocoSwap Smart Contract Security Audit/MasterChefV2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Limited minting",
+            "description": "Due to token owner being MasterChef, limited minting will cause deposit and withdraw function fail after reaching _maxTotalSupply minting restriction.",
+            "severity": "high",
+            "location": "MasterChef contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "add(uint256 _allocPoint, …), set(uint256 _pid, …) and updateEmissionRate() could invoke massUpdatePools() function, that can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "MasterChef contract"
+        }
+    ]
+}

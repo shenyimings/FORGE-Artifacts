@@ -1,0 +1,209 @@
+{
+    "path": "artifacts/rocketpool-1-2-audit-2023-01.pdf",
+    "project_info": {
+        "url": "https://github.com/rocket-pool/rocketpool",
+        "commit_id": "77d7cca65b7c0557cfda078a4fc45f9ac0cc6cc6",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "rocketpool": "contracts/rocketpool-1-2-audit-2023-01/rocketpool"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy in distribute() function",
+            "description": "allows node owner to drain distributor funds by recursively calling the distribute() function.",
+            "severity": "critical",
+            "location": "RocketNodeDistributorDelegate, function distribute()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Node operator may reenter finalise() function",
+            "description": "to manipulate accounting settings.",
+            "severity": "high",
+            "location": "RocketMinipoolDelegateOld, function finalise()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Sandwiching of Minipool calls can have unintended side effects",
+            "description": "A minipool owner can sandwich user calls to the minipool by rolling back and upgrading the delegate implementation.",
+            "severity": "high",
+            "location": "RocketMinipoolDelegate"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ],
+                "3": [
+                    "CWE-584"
+                ]
+            },
+            "title": "Multiple checks-effects violations",
+            "description": "Violations of the checks-effects-interactions pattern where the contract state is updated after an external call.",
+            "severity": "high",
+            "location": "Throughout the system, multiple contracts (e.g. RocketMinipoolDelegate.sol)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Minipool state machine design and pseudo-states",
+            "description": "The state machine has a complicated design with pseudo-states that can impact the overall system's security.",
+            "severity": "medium",
+            "location": "RocketMinipoolDelegate"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant refund() call on forced finalization",
+            "description": "Unnecessary call to _refund() in the refund() function.",
+            "severity": "medium",
+            "location": "RocketMinipoolDelegate, function refund"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing setting delimiters",
+            "description": "In the Rocket Pool system, settings are hierarchical and namespaces are prefixed with dot delimiters.",
+            "severity": "medium",
+            "location": "RocketDAOProtocolSettingsRewards"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ]
+            },
+            "title": "Use of address instead of specific contract types",
+            "description": "The use of low-level address type and then casting to a safer contract type can lead to type safety issues.",
+            "severity": "low",
+            "location": "Various locations, including RocketStorageInterface, RocketMinipoolBase, etc."
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant double casts",
+            "description": "Redundant double casts were found in some contracts.",
+            "severity": "low",
+            "location": "Various locations, including code/contracts/contract/RocketBase.sol and code/contracts/contract/RocketVault.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing event in prepareVacancy",
+            "description": "The function prepareVacancy updates multiple contract state variables but does not emit an event.",
+            "severity": "low",
+            "location": "RocketMinipoolDelegate, function prepareVacancy"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1127"
+                ]
+            },
+            "title": "Compiler error due to missing RocketMinipoolBaseInterface",
+            "description": "The interface RocketMinipoolBaseInterface was missing from the code repository, causing a compiler error.",
+            "severity": "low",
+            "location": "RocketMinipoolDelegate"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused imports",
+            "description": "Imported but not referenced source units in various contracts.",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Inconsistent access control modifier declaration",
+            "description": "Renaming \"onlyMinipoolOwner\" to \"onlyMinipoolOwnerOrWithdrawalAddress\" for consistency.",
+            "severity": "low",
+            "location": "RocketMinipoolBase"
+        }
+    ]
+}

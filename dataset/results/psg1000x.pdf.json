@@ -1,0 +1,251 @@
+{
+    "path": "artifacts/psg1000x.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x2037d5d9e1b184b0c2d2991dfca303f404a29478",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "PresidentsSquidGame": "contracts/psg1000x/PresidentsSquidGame"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "ST - Stops Transactions",
+            "description": "The contract owner can stop sales for all users excluding themselves, potentially operating as a honeypot.",
+            "severity": "critical",
+            "location": "`SellFee` function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ELFM - Exceeds Fees Limit",
+            "description": "The contract owner can increase fees beyond the allowed limit.",
+            "severity": "critical",
+            "location": "`setBuyFee` and `setSellFee` functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "BC - Blacklists Addresses",
+            "description": "The contract owner can stop addresses from transactions.",
+            "severity": "critical",
+            "location": "`blacklistAddress` function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "PAV - Pair Address Validation",
+            "description": "The contract lacks address validation, potentially leading to security risks and loss of funds.",
+            "severity": "critical",
+            "location": "Various functions using pair addresses"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RSW - Redundant Storage Writes",
+            "description": "The contract performs redundant storage writes, resulting in unnecessary gas consumption.",
+            "severity": "medium",
+            "location": "Contract updates whitelisted status of an account"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "URC - Update Router Concern",
+            "description": "Updating the router address does not add the new pair address to the mapping, potentially leading to unexpected behavior.",
+            "severity": "medium",
+            "location": "`automatedMarketMakerPairs` mapping"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RES - Redundant Event Statement",
+            "description": "The `InvestFundAddressChanged` event statement is unused and should be removed.",
+            "severity": "low",
+            "location": "Event statement in the contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RSML - Redundant SafeMath Library",
+            "description": "The SafeMath library is unnecessary, as Solidity versions greater than or equal to 0.8.0 provide native arithmetic operations.",
+            "severity": "low",
+            "location": "Usage of SafeMath library"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "L02 - State Variables could be Declared Constant",
+            "description": "State variables can be declared as constant to ensure they cannot be changed and reduce gas consumption.",
+            "severity": "low",
+            "location": "Various state variables in the contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The contract does not conform to Solidity naming conventions, making it harder to read and maintain.",
+            "severity": "low",
+            "location": "Various function and variable names in the contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L07 - Missing Events Arithmetic",
+            "description": "Some events are missing arithmetic operations, potentially leading to issues with event triggering and logging.",
+            "severity": "medium",
+            "location": "Event declarations in the contract"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L09 - Dead Code Elimination",
+            "description": "The contract contains dead code that can increase contract size and deployment cost.",
+            "severity": "low",
+            "location": "Various unreachable or unused code segments"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "L16 - Validate Variable Setters",
+            "description": "Variables are not properly validated, potentially leading to unexpected behavior or errors.",
+            "severity": "medium",
+            "location": "Various variable setters in the contract"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L17 - Usage of Solidity Assembly",
+            "description": "Using assembly can be error-prone and difficult to read.",
+            "severity": "low",
+            "location": "Assembly code segments in the contract"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L19 - Stable Compiler Version",
+            "description": "The pragma version is not locked, potentially leading to compatibility issues.",
+            "severity": "medium",
+            "location": "Pragma version declaration"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "L22 - Potential Locked Ether",
+            "description": "Ether may be locked in the contract and inaccessible.",
+            "severity": "critical",
+            "location": "Payable methods in the contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Ownership & Admin Functions",
+            "description": "The contract owner has excessive control over critical functions, allowing them to manipulate fees, blacklist addresses, and stop transactions.",
+            "severity": "high",
+            "location": "PresidentsSquidGame contract (updateUniswapV2Router, excludeFromFees, setAutomatedMarketMakerPair, setRewardAddress, setBuyFee, setSellFee, blacklistAddress)"
+        }
+    ]
+}

@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/Huralya Smart Contract Audit Report-QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/huralya/contract",
+        "commit_id": "561a3944ee75b52aa33c45e65825163e445eb604",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contract": "contracts/Huralya Smart Contract Audit Report-QuillAudits/contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect calculation at getMintableAmount()",
+            "description": "getMintableAmount() function is incorrectly calculating currentMintableAmount.",
+            "severity": "high",
+            "location": "https://github.com/huralya/contract/blob/0a4c60e871628b3d2ee4c862ecf1f86ab4400a72/contracts/Huralya.sol, Function: getMintableAmount"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Owner can mint more than 200 million tokens after 4 years",
+            "description": "mint() function only checks if totalSupply < MAX_SUPPLY.",
+            "severity": "high",
+            "location": "https://github.com/huralya/contract/blob/087f427f279f14fd402d59b6420cf0f70aabaf6a/contracts/Huralya.sol, Function: mint"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing _amount > 0 check",
+            "description": "mint() function allows 0 amount minting.",
+            "severity": "info",
+            "location": "https://github.com/huralya/contract/blob/561a3944ee75b52aa33c45e65825163e445eb604/contracts/Huralya.sol, Function: mint"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "MINT_TIMESTAMP can be declared as immutable",
+            "description": "MINT_TIMESTAMP is only updated in the constructor.",
+            "severity": "info",
+            "location": "https://github.com/huralya/contract/blob/561a3944ee75b52aa33c45e65825163e445eb604/contracts/Huralya.sol, Function: MINT_TIMESTAMP"
+        }
+    ]
+}

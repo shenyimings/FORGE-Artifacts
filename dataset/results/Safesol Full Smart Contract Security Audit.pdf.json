@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/Safesol Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x54325550f8420e511659C15b752D8B23AA5948cE",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "safesol": "contracts/Safesol Full Smart Contract Security Audit/safesol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can cause an OUT_OF_GAS exception if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "includeInReward() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges to change tax and liquidity fees, maximum transaction amounts, exclude from fees, lock, and unlock, which can be exploited even after ownership renouncement.",
+            "severity": "low",
+            "location": "Various functions (e.g., setTaxFeePercent(), setLiquidityFeePercent(), etc.)"
+        }
+    ]
+}

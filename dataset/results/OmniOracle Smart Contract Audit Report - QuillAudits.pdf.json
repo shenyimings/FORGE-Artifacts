@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/OmniOracle Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/omni-corp-protocols/omni-oracle/tree/main/contracts",
+        "commit_id": "37e7f7bc5beacdeb4e703e9b964ca8196db82805",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "omni-oracle": "contracts/OmniOracle Smart Contract Audit Report - QuillAudits/omni-oracle"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ],
+                "3": [
+                    "CWE-15"
+                ]
+            },
+            "title": "Usage of block.timestamp",
+            "description": "The contract uses block.timestamp, which can be influenced by miners and may not always reflect the current time.",
+            "severity": "medium",
+            "location": "UniswapOracleTWAP.sol, functions fetchAnchorPrice and pokeWindowValues"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Public Function That Can Be Declared External",
+            "description": "Some public functions are never called by the contract and can be declared external to save gas.",
+            "severity": "low",
+            "location": "UniswapOracleTWAP.sol, functions getSymbolHash, updateAllPrices, _setUnderlyingForCTokens, and _setPrice"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "The contract uses a floating-point pragma version, which can lead to unintended deployment with another pragma version.",
+            "severity": "low",
+            "location": "UniswapOracleTWAP.sol, Line 3"
+        }
+    ]
+}

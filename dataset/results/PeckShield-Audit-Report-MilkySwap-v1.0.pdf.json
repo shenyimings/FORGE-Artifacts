@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-MilkySwap-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/milkyswap/milkyswap/tree/882ad9ea1dd70bf8791428a88742c811446561fe",
+        "commit_id": "882ad9ea1dd70bf8791428a88742c811446561fe",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "milkyswap": "contracts/PeckShield-Audit-Report-MilkySwap-v1/milkyswap"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy Risk in MasterMilker",
+            "description": "Violation of checks-effects-interactions principle in emergencyWithdraw() function, allowing re-entrancy attacks.",
+            "severity": "high",
+            "location": "MasterMilker contract, emergencyWithdraw() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incompatibility with Deflationary Tokens",
+            "description": "deposit() and withdraw() functions may introduce balance inconsistencies when used with deflationary tokens.",
+            "severity": "medium",
+            "location": "MilkySwap protocol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Voting Amplification With Sybil Attacks",
+            "description": "Governance functionality vulnerable to Sybil attacks due to incorrect delegation logic.",
+            "severity": "high",
+            "location": "MilkyToken contract, _delegate() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Converter Permission Bypass with MilkyMaker::convertMultiple()",
+            "description": "The permission check for converter is not applied in the convertMultiple() routine.",
+            "severity": "high",
+            "location": "MilkyMaker contract, convertMultiple() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Possible Sandwich/MEV Attacks For Reduced Returns",
+            "description": "The remove liquidity and token swap routines do not specify any restriction on possible slippage and are vulnerable to front-running attacks.",
+            "severity": "low",
+            "location": "MilkyMaker contract, _convert() and _swap() functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged owner/admin account needs to be scrutinized and potentially transferred to a community-governed DAO.",
+            "severity": "medium",
+            "location": "Multiple Contracts (MilkySwap protocol)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Improper Funding Source In CreamyToken::_deposit_for()",
+            "description": "The _deposit_for() helper routine needs to be revised to use the right funding source to transfer assets for locking.",
+            "severity": "medium",
+            "location": "CreamyToken contract, `_deposit_for()` function"
+        }
+    ]
+}

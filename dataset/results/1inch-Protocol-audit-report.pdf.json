@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/1inch-Protocol-audit-report.pdf",
+    "project_info": {
+        "url": "https://github.com/1inch/1inchProtocol",
+        "commit_id": "6d9a3e7c8b190d4f4896a56b69f61248cbf9fa55",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "1inchProtocol": "contracts/1inch-Protocol-audit-report/1inchProtocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "msg.value validation",
+            "description": "The swap method does not check msg.value for any transfers (ETH to a token, token to token).",
+            "severity": "medium",
+            "location": "OneSplitAudit.sol#L52"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Token balances validation",
+            "description": "The swap method expects fromToken and toToken balances to be zero, which negatively affects the security of the smart contract.",
+            "severity": "medium",
+            "location": "OneSplitAudit.sol#L52"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Claim stuck and spam tokens",
+            "description": "It is assumed the contract does not have any tokens before and after a swap.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "fromToken is not equal to toToken check",
+            "description": "The logic underlying the swap method checks that fromToken != toToken, but it should be in the swap method itself.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant goodSwap method",
+            "description": "The goodSwap method is a combination of the getExpectedReturn and swap methods.",
+            "severity": "low",
+            "location": "n/a"
+        }
+    ]
+}

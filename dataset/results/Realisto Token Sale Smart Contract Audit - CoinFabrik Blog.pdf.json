@@ -1,0 +1,125 @@
+{
+    "path": "artifacts/Realisto Token Sale Smart Contract Audit - CoinFabrik Blog.pdf",
+    "project_info": {
+        "url": "https://github.com/realisto/smartcontract",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smartcontract": "contracts/Realisto Token Sale Smart Contract Audit - CoinFabrik Blog/smartcontract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Disable tokens transfer",
+            "description": "Token holders can trade them in exchanges immediately after the contribution.",
+            "severity": "high",
+            "location": "RealistoToken.sol, function RealistoToken"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Disable token minting properly",
+            "description": "No guarantee that _myGenerateAddr cannot be set for a different purpose in the future.",
+            "severity": "medium",
+            "location": "finalize function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Protection against unintended token transfers",
+            "description": "Tokens get stuck within the contract if it doesn’t provide a refund mechanism.",
+            "severity": "medium",
+            "location": "MiniMeToken.sol, claimTokens function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Use SafeMath",
+            "description": "Overflow checks can be eliminated using SafeMath.",
+            "severity": "low",
+            "location": "various functions (availableNow, generate_token_for)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Add visibility to all functions",
+            "description": "Inadvertently written without the intended visibility qualifier.",
+            "severity": "low",
+            "location": "various functions (finalizeCampaign, grant_token_from_offchain)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Make function constant",
+            "description": "Function get_rate does not modify contract state.",
+            "severity": "low",
+            "location": "TokenCampaign.sol, function get_rate"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Require a newer solidity version",
+            "description": "Solidity compiler v0.4.13 has known problems (DelegateCallReturnValue and ECREcoverMalformedInput).",
+            "severity": "low",
+            "location": "n/a"
+        }
+    ]
+}

@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Mushrooms-v1.0.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xB86eace0Ce0d3f463B415e8B3463e331F1d95b6e",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "LeveragedShannonMon": "contracts/PeckShield-Audit-Report-Mushrooms-v1/LeveragedShannonMon"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved Input Validation of deposit()",
+            "description": "The user can deposit only one kind of tokens at a time, and if the user tries to deposit both of them, then only stablecoin will be transferred in. This brings unnecessary confusion to the user.",
+            "severity": "low",
+            "location": "MushMons::deposit() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-669"
+                ]
+            },
+            "title": "Mushmon Token Idiosyncrasies",
+            "description": "The transfer of share tokens between users does not actually carry any weight, as no actual value is transferred from the sender's yieldVault to the recipient's.",
+            "severity": "low",
+            "location": "MushMons::deposit() and amountOfTokenForShare() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Trust Issue Of Admin Keys",
+            "description": "The governance account has the privilege to control or govern the flow of assets managed by this protocol, which is worrisome if the privileged owner account is a plain EOA account.",
+            "severity": "medium",
+            "location": "MushMons contract, setUniRoute() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Proper Minimum Balance Enforcement",
+            "description": "The current implementation does not properly honor the minimum balance requirement in the withdraw() function.",
+            "severity": "medium",
+            "location": "MushMons contract, withdraw() function"
+        }
+    ]
+}

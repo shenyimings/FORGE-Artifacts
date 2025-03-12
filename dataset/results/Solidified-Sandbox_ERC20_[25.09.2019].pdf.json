@@ -1,0 +1,125 @@
+{
+    "path": "artifacts/Solidified-Sandbox_ERC20_[25.09.2019].pdf",
+    "project_info": {
+        "url": "https://github.com/pixowl/contracts_common",
+        "commit_id": "246b773d1045e657cad3ca661741302b07485d1d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts_common": "contracts/Solidified-Sandbox_ERC20_[25/contracts_common"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Non-compliance with ERC20 standard",
+            "description": "Contract does not allow transfers of zero value and has functionality to perform approvals without emitting the Approve event.",
+            "severity": "low",
+            "location": "Sand.sol contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Centralization weakness",
+            "description": "Super operators can transfer and burn tokens from users at will, and Execute Operators can be granted to an EOA, allowing them to execute any transaction on behalf of the token contract.",
+            "severity": "low",
+            "location": "SuperOperators.sol and ExecuteOperators.sol contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Ignoring changes to allowances in external calls",
+            "description": "Function _approveAndExecuteWithSpecificGas captures a snapshot of existing allowances, executes an external call, and restores the initial allowed amount, ignoring any changes made during the external call.",
+            "severity": "low",
+            "location": "Sand.sol contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Hardcoding decimals in ERC20BaseToken",
+            "description": "The decimals() method always returns 18, which is unnecessary if hardcoded.",
+            "severity": "info",
+            "location": "ERC20BaseToken.sol contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of malleable address check in signature verification",
+            "description": "The signature verification does not check for malleable addresses, which are still allowed by ecrecover.",
+            "severity": "info",
+            "location": "SigUtil.sol contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1288"
+                ]
+            },
+            "title": "Inconsistent parameter handling in sale contract",
+            "description": "The sale contract receives the amount in Wei for ETH, but not in decimals for DAI.",
+            "severity": "low",
+            "location": "SandSale.sol contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improper use of assert in SafeMath",
+            "description": "Using assert instead of require for input validation can lead to unnecessary gas consumption.",
+            "severity": "low",
+            "location": "SafeMath.sol contract"
+        }
+    ]
+}

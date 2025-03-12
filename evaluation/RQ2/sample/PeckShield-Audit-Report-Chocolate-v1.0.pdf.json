@@ -1,0 +1,67 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Chocolate-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/ChocolateCash/ChocolateCash-core.git",
+        "commit_id": "8ed07ca",
+        "address": "0x7A5E553888AfB3a44C3449fe2C8e1592957c678C",
+        "chain": "heco"
+    },
+    "findings": [
+        {
+            "id": 0,
+            "title": "Trust Issue of Admin Keys",
+            "description": "n/a",
+            "severity": "Medium",
+            "location": "Admin keys management"
+        },
+        {
+            "id": 1,
+            "title": "Improved Reentrancy Protection in ContractGuard::onlyOneBlock()",
+            "description": "Violation of checks-effects-interactions principle leading to potential re-entrancy attack.",
+            "severity": "Undetermined",
+            "location": "ContractGuard, onlyOneBlock() modifier"
+        },
+        {
+            "id": 2,
+            "title": "Potential Overflow Mitigation in notifyRewardAmount()",
+            "description": "Possible overflow pitfall when a new oversized reward amount is added into the pool.",
+            "severity": "Medium",
+            "location": "Boardroom contract, `rewardPerToken()` function (lines 61-67) and `notifyRewardAmount()` function."
+        },
+        {
+            "id": 3,
+            "title": "Redundant Logic Removal in LLCUSDTLPTokenSharePool",
+            "description": "Unused code or unnecessary redundancies in the `LLCUSDTLPTokenSharePool` contract.",
+            "severity": "Low",
+            "location": "`stake()` function (line 106), and other unused events in the Treasury contract."
+        },
+        {
+            "id": 4,
+            "title": "Simplified Logic in getReward()",
+            "description": "The current implementation logic of the getReward() routine can be further optimized by reusing the calculated rewards[msg.sender] instead of recalculating it.",
+            "severity": "Low",
+            "location": "LLCUSDTLPTokenSharePool.sol, functions getReward() and updateReward()"
+        },
+        {
+            "id": 5,
+            "title": "Improved Reentrancy Protection in ContractGuard::onlyOneBlock()",
+            "description": "n/a",
+            "severity": "Undetermined",
+            "location": "ContractGuard, onlyOneBlock() modifier"
+        },
+        {
+            "id": 6,
+            "title": "Improved Logic in Router::swapAndAddLiquidity()",
+            "description": "Inconsistency with ERC-20 specification in approve() routine, potentially leading to a race condition.",
+            "severity": "Low",
+            "location": "Router::swapAndAddLiquidity() function, specifically line 31."
+        },
+        {
+            "id": 7,
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged admin account in the ChocolateCash contract has unrestricted access to govern and regulate system-wide operations, which can be a security risk if the admin account is compromised.",
+            "severity": "Medium",
+            "location": "Multiple Contracts (specifically, the `executeTransaction` function in the Timelock contract)"
+        }
+    ]
+}

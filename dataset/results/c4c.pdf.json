@@ -1,0 +1,167 @@
+{
+    "path": "artifacts/c4c.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x8fd0195469b51a935dc3c48617ced6b400e38c9c",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.8.12+commit.f00d7308"
+        ],
+        "project_path": {
+            "TokenERC20": "contracts/c4c/TokenERC20"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "ST - Stop Transactions",
+            "description": "The 'admin' role has the authority to stop transactions for everyone except the 'transfer' role.",
+            "severity": "medium",
+            "location": "contract.sol#L134"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "MT - Mint Tokens",
+            "description": "The 'minter' role has the authority to mint tokens without restrictions, which can lead to token inflation.",
+            "severity": "critical",
+            "location": "contract.sol#L162,168"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "MC - Missing Check",
+            "description": "The contract is processing variables that have not properly sanitized and checked.",
+            "severity": "low",
+            "location": "contract.sol#L226"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "SPR - Sale Price Rate",
+            "description": "There is no on-chain connection between price in relation to the quantity of tokens that will be minted.",
+            "severity": "low",
+            "location": "contract.sol#L175"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "EVS - External Value Sanitization",
+            "description": "The returned values from an external source should be sanitized.",
+            "severity": "low",
+            "location": "contract.sol#L217"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "Rule exceptions in solidity naming conventions.",
+            "severity": "low",
+            "location": "contracts/lib/CurrencyTransferLib.sol, contracts/token/TokenERC20.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L07 - Missing Events Arithmetic",
+            "description": "Detected missing events for critical arithmetic parameters.",
+            "severity": "low",
+            "location": "contracts/token/TokenERC20.sol#L82"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L09 - Dead Code Elimination",
+            "description": "Functions that are not used in the contract, making the code's size bigger.",
+            "severity": "low",
+            "location": "contracts/lib/CurrencyTransferLib.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "L15 - Local Scope Variable Shadowing",
+            "description": "Variables defined in local scope containing the same name from an upper scope.",
+            "severity": "low",
+            "location": "contracts/token/TokenERC20.sol#L84,85"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Abuse of Admin and Minter Roles",
+            "description": "The contract's 'admin' and 'minter' roles could be abused, allowing unauthorized minting of tokens and stopping transactions, leading to contract inflation.",
+            "severity": "n/a",
+            "location": "Contract, admin and minter functions"
+        }
+    ]
+}

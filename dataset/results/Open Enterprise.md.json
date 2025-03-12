@@ -1,0 +1,161 @@
+{
+    "path": "artifacts/Open Enterprise.md",
+    "project_info": {
+        "url": "https://github.com/AutarkLabs/planning-suite",
+        "commit_id": "66a851551888ba7eadaab6a5f037048655bc5d88",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "planning-suite": "contracts/Open Enterprise/planning-suite"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Standby period contract functionality limitation",
+            "description": "After some standby period, all functions with the `transitionsPeriod` modifier will fail due to gas limitations.",
+            "severity": "info",
+            "location": "Allocations.sol#L463"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of limit on number of candidates for rewards",
+            "description": "Transaction may end with an error due to lack of gas if there are many candidates.",
+            "severity": "info",
+            "location": "Allocations.sol#L417"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential cycle abortion and transaction rollback",
+            "description": "Cycle will be aborted and the transaction rolled back if there are `candidateAddresses` with `supports` equal to 0.",
+            "severity": "info",
+            "location": "Allocations.sol#L527"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Error on line 528 in `runPayout` transaction",
+            "description": "Transaction will end in error if `_candidateIndex` candidate takes away full payment from some `_payoutId`.",
+            "severity": "info",
+            "location": "Allocations.sol#L528"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect `paid` variable in `runPayout` transaction",
+            "description": "`paid` should be passed externally for accurate payment reflection.",
+            "severity": "info",
+            "location": "Allocations.sol#L425"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Outdated comment update",
+            "description": "The incorrect comment was most likely copied from the function below.",
+            "severity": "n/a",
+            "location": "DotVoting.sol#L501"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Check for open vote",
+            "description": "A check proving that the vote is still open can be added. Otherwise, it makes no sense to write data to the blockchain.",
+            "severity": "n/a",
+            "location": "DotVoting.sol#L212"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Length check",
+            "description": "It's recommended to check that the length of the `_supports` array does not exceed the number of voting options.",
+            "severity": "n/a",
+            "location": "DotVoting.sol#L415"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unchecked action ID",
+            "description": "Access to a non-existent `Action` is allowed.",
+            "severity": "n/a",
+            "location": "ADynamicForwarder.sol#L75, #L91, #L107"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked option index",
+            "description": "Access to a non-existent `OptionState` is allowed.",
+            "severity": "n/a",
+            "location": "ADynamicForwarder.sol#L76"
+        }
+    ]
+}

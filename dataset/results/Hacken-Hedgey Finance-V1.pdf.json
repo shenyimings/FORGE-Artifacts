@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/Hacken-Hedgey Finance-V1.pdf",
+    "project_info": {
+        "url": "https://github.com/hedgey-finance/hedgey_audit",
+        "commit_id": "7eb9dc8de364a1ab3b53ba0ad3194f380c03e94b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "hedgey_audit": "contracts/Hacken-Hedgey Finance-V1/hedgey_audit"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ]
+            },
+            "title": "Contracts are not compilable.",
+            "description": "All provided contracts could not be compiled because the importing file should be presented as a string literal, while it’s given without quotes.",
+            "severity": "medium",
+            "location": "HedgeyAnySwap.sol, HedgeyCalls.sol, HedgeyCallsFactory.sol, HedgeyCeloAnySwap.sol, HedgeyCeloCalls.sol, HedgeyCeloPuts.sol, HedgeyPuts.sol, HegdeyPutsFactory.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Syntax error",
+            "description": "HedgeyCallsFactory contract has an excess “/” symbol before the “import” statement.",
+            "severity": "medium",
+            "location": "HedgeyCallsFactory.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Contracts that lock Ether",
+            "description": "Contract with a payable function, but without a withdrawal capacity.",
+            "severity": "medium",
+            "location": "HedgeyCeloCalls.sol (function rollExpired), HedgeyCeloPuts.sol (function rollExpired)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Possible ETH leakage.",
+            "description": "The contract sends the entire WETH balance to the “originalOwner” address, provided by the function caller.",
+            "severity": "low",
+            "location": "HedgeyAnySwap.sol (functions hedgeyCallSwap and hedgeyPutSwap)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State variables that could be declared constant",
+            "description": "Constant state variables should be declared constant to save gas.",
+            "severity": "low",
+            "location": "HedgeyCeloPuts.sol (variable uniFactory)"
+        }
+    ]
+}

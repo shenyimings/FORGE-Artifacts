@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/rhc.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x99DE5611BC1f5b8e3D8876EF567b65f94C5a2ca3",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "RightContract": "contracts/rhc/RightContract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "ULTW - Transfers Liquidity to Team Wallet",
+            "description": "The contract owner has the authority to transfer funds without limit to the team wallet.",
+            "severity": "critical",
+            "location": "contract.sol#L373,266"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-683"
+                ]
+            },
+            "title": "PTFE - Paired Token Fees Exempt",
+            "description": "The contract assumes that during the swap of the BNB/Token pair, the contract should not tax the transfer.",
+            "severity": "low",
+            "location": "contract.sol#L207"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-188"
+                ]
+            },
+            "title": "MFEA - Misleading Fees Exempt Assumption",
+            "description": "The contract is based on the fact that the external tokens WBNB and BUSD will never add fees in their transfer functionality.",
+            "severity": "low",
+            "location": "contract.sol#L207,222"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "SAD - Swapped Amount Diversion",
+            "description": "The _burn function should take into consideration the tokens that have been swapped and not the fixed number.",
+            "severity": "low",
+            "location": "contract.sol#L242"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L01 - Public Function could be Declared External",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "RightCoin.sol#L96,93,97,84,138,88,92,94"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "Solidity defines a naming convention that should be followed.",
+            "severity": "low",
+            "location": "RightCoin.sol#L378,74,54,52,379,377,73,55,380,56,53,57"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-561"
+                ]
+            },
+            "title": "L09 - Dead Code Elimination",
+            "description": "Functions that are not used in the contract, and make the code's size bigger.",
+            "severity": "low",
+            "location": "RightCoin.sol#L370"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Owner Authority",
+            "description": "The contract owner has the authority to transfer funds to the team's wallet.",
+            "severity": "low",
+            "location": "RightContract, Various admin functions (e.g., setExemptFee, setActiveTxLimit, etc.)"
+        }
+    ]
+}

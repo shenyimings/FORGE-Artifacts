@@ -1,0 +1,206 @@
+{
+    "path": "artifacts/Primitive.pdf",
+    "project_info": {
+        "url": "https://github.com/primitivefinance/rmm-core",
+        "commit_id": "5dcf4306fc32fb9a4e3c154deb86f6b9d513c344",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "rmm-core": "contracts/Primitive/rmm-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Transfer operations may silently fail due to the lack of contract existence checks",
+            "description": "Transfer operations may silently fail, and the pool may assume that failed transfers were successful, which may result in incorrect accounting.",
+            "severity": "high",
+            "location": "PrimitiveEngine contract, rmm-core/contracts/libraries/Transfers.sol, rmm-manager/contracts/libraries/TransferHelper.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Anyone could steal pool tokens’ earned interest",
+            "description": "Unexpected token interest behavior allows users to avoid paying in full.",
+            "severity": "low",
+            "location": "rmm-core/contracts/PrimitiveEngine.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-1426"
+                ]
+            },
+            "title": "Solidity compiler optimizations can be problematic",
+            "description": "Enabled optional compiler optimizations may lead to security issues due to bugs or latent issues.",
+            "severity": "info",
+            "location": "rmm-core/hardhat.config.ts, rmm-manager/hardhat-config.ts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of zero-value checks on functions",
+            "description": "Certain setter functions fail to validate incoming arguments, allowing callers to set important state variables to the zero address.",
+            "severity": "info",
+            "location": "Throughout the code"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "uint256.percentage() and int256.percentage() are not inverses of each other",
+            "description": "Rounding errors cause these functions to not be direct inverses of each other.",
+            "severity": "n/a",
+            "location": "rmm-core/contracts/libraries.Units.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-638"
+                ],
+                "5": [
+                    "CWE-424"
+                ]
+            },
+            "title": "Front-running vulnerability during BUFFER time",
+            "description": "The PrimitiveEngine.swap function allows swap transactions until 120 seconds after maturity, enabling miners to front-run swap transactions and engage in malicious behavior.",
+            "severity": "n/a",
+            "location": "PrimitiveEngine.sol#L314-L326 (swap function)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Inconsistency in allocate and remove functions",
+            "description": "The allocate and remove functions have different interfaces, allowing users to set the recipient and choose whether tokens should be credited to their margins or sent directly.",
+            "severity": "info",
+            "location": "PrimitiveEngine.sol (allocate and remove functions)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Areas of codebase inconsistent with documentation",
+            "description": "Certain areas in the implementation do not match the white paper, including the expected range for the gamma value of a pool.",
+            "severity": "info",
+            "location": "PrimitiveEngine.sol (gamma value check)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Allocate and remove are not exact inverses",
+            "description": "Due to rounding logic, users may not receive the same amount back when removing funds from a system as they allocated into it.",
+            "severity": "medium",
+            "location": "Reserve.sol (allocate and remove functions)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "scaleToX64() and scalefromX64() are not inverses",
+            "description": "The Units library's scaleToX64() and scalefromX64() helper functions are not direct inverses of each other due to rounding errors.",
+            "severity": "n/a",
+            "location": "Units.sol (scaleToX64 and scalefromX64 functions)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "getCDF always returns output in the range of (0, 1)",
+            "description": "The CumulativeNormalDistribution library's getCDF function can return 1, instead of the expected range of (0, 1].",
+            "severity": "n/a",
+            "location": "CumulativeNormalDistribution.sol (getCDF function)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of data validation on withdrawal operations",
+            "description": "There is a lack of data validation on withdrawal operations.",
+            "severity": "medium",
+            "location": "PrimitiveEngine.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Withdrawal to Engine Address",
+            "description": "Due to lack of data validation, users can specify the engine address as the recipient, causing tokens to be transferred directly to the engine.",
+            "severity": "n/a",
+            "location": "PrimitiveEngine.sol, function withdraw()"
+        }
+    ]
+}

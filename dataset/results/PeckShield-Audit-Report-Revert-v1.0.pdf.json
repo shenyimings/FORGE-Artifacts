@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Revert-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/revert-finance/v3-staker/tree/af5bd83",
+        "commit_id": "af5bd83",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "v3-staker": "contracts/PeckShield-Audit-Report-Revert-v1/v3-staker"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Proper Initialization of secondsInsideInitial in _stakeToken()",
+            "description": "The contract records the initial `secondsInside` in the new Stake only when `(liquidity >= type(uint64).max)`, otherwise, it misses to record the initial `secondsInside` in the Stake.",
+            "severity": "medium",
+            "location": "UniswapV3Staker contract, _stakeToken() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Incompatibility with Deflationary/Rebasing Tokens",
+            "description": "The contract uses `safeTransferFrom()` which may not work as expected with deflationary or rebasing tokens, leading to unexpected balance inconsistencies.",
+            "severity": "low",
+            "location": "UniswapV3Staker contract, createIncentive() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of validation for key.refundee",
+            "description": "The createIncentive() function lacks validation for the key.refundee, allowing it to be set to address(0), which would lock rewards in the contract.",
+            "severity": "low",
+            "location": "UniswapV3Staker contract, createIncentive() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-281"
+                ]
+            },
+            "title": "Insecure transferDeposit() routine",
+            "description": "The transferDeposit() function does not validate that the deposit cannot be transferred to the contract itself, which would lock LP tokens.",
+            "severity": "n/a",
+            "location": "UniswapV3Staker contract, transferDeposit() function"
+        }
+    ]
+}

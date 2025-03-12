@@ -1,0 +1,133 @@
+{
+    "path": "artifacts/d-force.pdf",
+    "project_info": {
+        "url": "https://github.com/dforce-network/USDx_1.0/tree/ed9e0cedfb301d33a1d85f66664118e74bfaf969",
+        "commit_id": "ed9e0cedfb301d33a1d85f66664118e74bfaf969",
+        "address": "0x80e1d5a1f7BDAc82dAe838416C3dc47cd2e5F77e",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "USDx_1.0": "contracts/d-force/USDx_1.0"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unchecked token supply",
+            "description": "Tokens that add rewards or take fees can cause unexpected issues due to changing supply.",
+            "severity": "medium",
+            "location": "DFCollateral.sol, DFFunds.sol, DFPool.sol, DFPoolV2.sol, DFEngineV2.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Oracle manipulation",
+            "description": "Malicious actors can manipulate Uniswap Oracle by trading X amount back and forth.",
+            "severity": "medium",
+            "location": "UniswapOracle.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Inherited fee recipient update issue",
+            "description": "The inherited fee recipient from Chargeable is not updated when updating the interest provider.",
+            "severity": "medium",
+            "location": "USR.updateInterestProvider"
+        },
+        {
+            "id": 3,
+            "category": {},
+            "title": "Token balance inequality during migration",
+            "description": "The check in lines 203-206 implemented in migrateOldPool() assumes the new contract does not hold any token balance.",
+            "severity": "medium",
+            "location": "DFPoolV2.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No non-zero checks for address arguments",
+            "description": "There are no non-zero checks for arguments of type address in various constructors and functions.",
+            "severity": "low",
+            "location": "Multiple files (DFPool.sol, DFPoolV2.sol, Collaterals_t.sol, etc.)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization of power",
+            "description": "Smart contracts have owner variables that designate special privileges.",
+            "severity": "low",
+            "location": "DFStore.sol, ERC20Pausable.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Large minimalBurnAmount value issue",
+            "description": "If the value of minimalBurnAmount is too large, it will prevent users from redeeming tokens.",
+            "severity": "low",
+            "location": "DFStore.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Malicious token DoS",
+            "description": "Malicious tokens can lead to a DoS attack.",
+            "severity": "low",
+            "location": "DFStore.sol, InterestProvider.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Allowance double-spend exploit",
+            "description": "The contract is vulnerable to the allowance double-spend exploit.",
+            "severity": "low",
+            "location": "DSToken.sol"
+        }
+    ]
+}

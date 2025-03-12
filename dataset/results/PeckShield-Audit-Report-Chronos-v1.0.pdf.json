@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Chronos-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/ChronosEx/Chronos-ContractsV2/tree/67cbe1c7b229eca6136f4406859893abbe0a6c3b",
+        "commit_id": "67cbe1c7b229eca6136f4406859893abbe0a6c3b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Chronos-ContractsV2": "contracts/PeckShield-Audit-Report-Chronos-v1/Chronos-ContractsV2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Revisited Precision in MaGaugeV2Upgradeable::rewardPerToken()",
+            "description": "The formula used to calculate the accumulated reward per token has incorrect precision.",
+            "severity": "high",
+            "location": "MaGaugeV2Upgradeable contract, rewardPerToken() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Revisited Logic of ChronosMarketplace::placeBidWithETH()",
+            "description": "The current implementation of the placeBidWithETH() function is flawed and can be exploited to undermine the protocol design.",
+            "severity": "critical",
+            "location": "ChronosMarketplace contract, placeBidWithETH() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Possible Front-Running for ChronosMarketplace::buyNow()",
+            "description": "A malicious actor can front-run the `changeSaleInfo()` function to increase the NFT price, resulting in an unexpected loss for the buyer.",
+            "severity": "high",
+            "location": "ChronosMarketplace contract, buyNow() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of Input Validation in ChronosMarketplace::makeOfferWithETH()",
+            "description": "The `makeOfferWithETH()` routine allows users to provide an arbitrary `_paymentToken` without validation, which can be exploited by a malicious actor.",
+            "severity": "high",
+            "location": "ChronosMarketplace contract, makeOfferWithETH() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Uninitialized Reward-Related State Variables in MaGaugeV2Upgradeable::split()",
+            "description": "The reward-related state variables are not timely initialized when a new maNFT is minted, resulting in users getting more rewards than expected. Additionally, the reward of the previous deposit position is not timely transferred to the user.",
+            "severity": "critical",
+            "location": "MaGaugeV2Upgradeable contract, split() function (lines 493-530)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Potential DoS risks in ChronosMarketplace::placeBidWithETH()",
+            "description": "The function is exposed to potential Denial-of-Service (DoS) risks if the last bidder is a malicious contract.",
+            "severity": "n/a",
+            "location": "ChronosMarketplace contract, placeBidWithETH() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged account not governed by a DAO-like structure, allowing an attacker to modify sensitive system parameters if compromised.",
+            "severity": "medium",
+            "location": "`MaGaugeV2Upgradeable` and `ChronosMarketplace` contracts, specifically in functions `setDistribution`, `setInternalBribe`, and `setAllowedToken`"
+        }
+    ]
+}

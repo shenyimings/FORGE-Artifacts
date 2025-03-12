@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/4-star.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x46af007b7794DCa28076D026c92B1712212Fa559",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.5+commit.a4f2e591"
+        ],
+        "project_path": {
+            "StarGateToken": "contracts/4-star/StarGateToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "ELFM - Exceed Limit Fees Manipulation",
+            "description": "The contract owner can increase fees more than a reasonable percent (25%).",
+            "severity": "medium",
+            "location": "contract.sol#L210"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "BLC - Business Logic Concern",
+            "description": "The burn fee sends the burned amount to the owner's wallet instead of burning it.",
+            "severity": "low",
+            "location": "contract.sol#L55"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "MC - Missing Check",
+            "description": "The poolFee can be zero, causing reverts and honeypot behavior.",
+            "severity": "medium",
+            "location": "contract.sol#L159"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L01 - Public Function could be Declared External",
+            "description": "Public functions should be declared external to save gas.",
+            "severity": "low",
+            "location": "contracts/Ownable.sol#L53,61 and contracts/StarGateToken.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "Non-conformant naming conventions.",
+            "severity": "low",
+            "location": "contracts/IPancakeRouterV2.sol#L7 and contracts/StarGateToken.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L07 - Missing Events Arithmetic",
+            "description": "Critical arithmetic parameters lack events for tracking off-chain changes.",
+            "severity": "low",
+            "location": "contracts/StarGateToken.sol#L282,299,304,313"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L13 - Divide before Multiply Operation",
+            "description": "Divisions performed before multiplications may cause loss of precision.",
+            "severity": "low",
+            "location": "contracts/StarGateToken.sol#L72,155"
+        }
+    ]
+}

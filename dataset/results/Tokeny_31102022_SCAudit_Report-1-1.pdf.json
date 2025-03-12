@@ -1,0 +1,338 @@
+{
+    "path": "artifacts/Tokeny_31102022_SCAudit_Report-1-1.pdf",
+    "project_info": {
+        "url": "https://github.com/TokenySolutions/T-REX/tree/trex_4",
+        "commit_id": "trex_4",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "T-REX": "contracts/Tokeny_31102022_SCAudit_Report-1-1/T-REX"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Access Control Violation / Denial of Service",
+            "description": "In AbstractModule.sol, the bindCompliance function allows anyone to call it and update the complianceBound mapping variable, making it possible for an attacker to bypass the onlyComplianceCall modifier and unbind any compliance contract from the module.",
+            "severity": "critical",
+            "location": "./contracts/compliance/modular/modules/AbstractModule.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Access Control Violation",
+            "description": "In IdentityRegistryStorage.sol, two critical functions (bindIdentityRegistry and unbindIdentityRegistry) have no restricted access, although their corresponding NatSpec defines that these functions can only be called by the IdentityRegistryStorage contract owner.",
+            "severity": "critical",
+            "location": "./contracts/registry/implementation/IdentityRegistryStorage.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Access Control Violation",
+            "description": "In Token.sol, transferFrom has no restricted access, although it is a critical function.",
+            "severity": "critical",
+            "location": "./contracts/token/Token.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Requirements Violation / Missing Validation",
+            "description": "In Token.sol, the function burn does not check if the amount to burn is smaller than the balance of the user (both free and frozen tokens) as specified in the NatSpec of that function.",
+            "severity": "high",
+            "location": "./contracts/token/Token.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Non-Finalized Code",
+            "description": "In transferred, created, and destroyed functions of ModularCompliance.sol, the calls to IModule().moduleTransferAction(), IModule().moduleMintAction(), and IModule().moduleBurnAction() respectively have no function body in most modules.",
+            "severity": "high",
+            "location": "./contracts/compliance/modular/ModularCompliance.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Unverifiable Logic",
+            "description": "The module onchain-id, integrated into several contracts, is out of the audit scope and its behavior cannot be considered safe.",
+            "severity": "high",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Standard Violation",
+            "description": "Contract AgentRoleUpgradeable does not have gaps to support upgradability.",
+            "severity": "high",
+            "location": "./contracts/token/Token.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Denial of Service (DoS)",
+            "description": "In various parts of the contracts, for loops that depend on variable array lengths are used without caps in length and can get as large as privileged roles want.",
+            "severity": "medium",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Check Effects Interaction Violation",
+            "description": "State variables are updated after external calls in Token.sol, which is against best practices.",
+            "severity": "medium",
+            "location": "./contracts/token/Token.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unscalable Functionality: Copy of Well-Known Contracts",
+            "description": "Pausable functionality and ERC20 functionality are integrated manually instead of using OpenZeppelin library in Token.sol.",
+            "severity": "medium",
+            "location": "./contracts/token/Token.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Missing Validation",
+            "description": "In CountryRestrictModule.sol, batchRestrictCountries() and batchUnrestrictCountries() should require whether the country is already restricted or not.",
+            "severity": "medium",
+            "location": "./contracts/compliance/modular/modules/CountryRestrictModule.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Using the wrong pragma version might result in contracts being deployed with an outdated pragma version, which may include bugs that affect the system negatively.",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inefficient Gas Model: SafeMath",
+            "description": "Unnecessary use of SafeMath resulting in wasted gas",
+            "severity": "n/a",
+            "location": "./contracts/token/Token.sol: _transfer(), _mint(), _burn()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Inefficient Gas Model: Unnecessary Variable Definition",
+            "description": "Defining a new variable instead of reusing the input parameter bytecode, resulting in unnecessary gas expense",
+            "severity": "n/a",
+            "location": "./contracts/factory/TREXFactory.sol: deploy()"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Inefficient Gas Model: Function Visibility",
+            "description": "Incorrect function visibility settings can result in wasted gas",
+            "severity": "n/a",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Import",
+            "description": "Unnecessary import statements",
+            "severity": "n/a",
+            "location": "./contracts/compliance/modular/modules/AbstractModule.sol, ./contracts/token/Token.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide: Order of Functions",
+            "description": "Non-compliance with official guidelines for function ordering",
+            "severity": "n/a",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide: Order of Layout",
+            "description": "Non-compliance with official guidelines for layout ordering",
+            "severity": "n/a",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide: Quotes",
+            "description": "Non-compliance with official guidelines for string quotes",
+            "severity": "n/a",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address/String Input Check",
+            "description": "Lack of checks against zero addresses or empty strings, leading to potential unwanted external calls",
+            "severity": "n/a",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "NatSpec Typo",
+            "description": "Errors or misplacements in NatSpec descriptions",
+            "severity": "n/a",
+            "location": "./contracts/token/IToken.sol, ./contracts/registry/storage/TIRStorage.sol, ./contracts/registry/implementation/IdentityRegistry.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Error Message Typo",
+            "description": "Typos in error messages leading to confusion",
+            "severity": "n/a",
+            "location": "./contracts/registry/implementation/TrustedIssuersRegistry.sol, ./contracts/registry/implementation/IdentityRegistryStorage.sol"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unindexed Events",
+            "description": "Non-indexed event parameters which may make it difficult to fetch relevant information",
+            "severity": "n/a",
+            "location": "./contracts/compliance/modular/modules/CountryRestrictModule.sol, ./contracts/compliance/modular/modules/IModule.sol, ./contracts/proxy/authority/TREXImplementationAuthority.sol"
+        }
+    ]
+}

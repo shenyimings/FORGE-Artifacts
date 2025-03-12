@@ -1,0 +1,167 @@
+{
+    "path": "artifacts/FraxQ22022.pdf",
+    "project_info": {
+        "url": "https://github.com/FraxFinance/frax-solidity/tree/19dd2637ba17b8224173fd05ff356a58706edb82",
+        "commit_id": "19dd2637ba17b8224173fd05ff356a58706edb82",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "frax-solidity": "contracts/FraxQ22022/frax-solidity"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing liquidity checks when initiating long-term swaps",
+            "description": "Long-term swaps executed in the context of insufficient liquidity could cause all operations, including those for adding liquidity, to be blocked.",
+            "severity": "n/a",
+            "location": "FraxSwap contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unsafe integer conversions in FPIControllerPool",
+            "description": "Explicit integer conversions can be used to bypass certain restrictions in the FPIControllerPool contract.",
+            "severity": "n/a",
+            "location": "FPIControllerPool contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "leveragedPosition and repayAssetWithCollateral do not update the exchangeRate",
+            "description": "Some FraxLend functions do not update the exchange rate, allowing insolvent users to call them.",
+            "severity": "n/a",
+            "location": "FraxLend contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Risk of hash collisions in FraxLendPairDeployer that could block certain deployments",
+            "description": "A hash collision could occur in the FraxLendPairDeployer contract, allowing unauthenticated users to block the deployment of certain contracts from authenticated users.",
+            "severity": "medium",
+            "location": "FraxLendPairDeployer.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Insolvent users can call certain FraxLend functions without updating the exchange rate",
+            "description": "Some FraxLend functions do not update the exchange rate, allowing insolvent users to call them.",
+            "severity": "n/a",
+            "location": "leveragedPosition and repayAssetWithCollateral operations in FraxLendCore contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "ERC20 race condition",
+            "description": "The ERC20 standard has a known race condition that must be mitigated to prevent attackers from stealing tokens.",
+            "severity": "n/a",
+            "location": "The token mitigates the known ERC20 race condition."
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "External function calls in transfer or transferFrom",
+            "description": "External calls in the transfer functions can lead to reentrancies.",
+            "severity": "n/a",
+            "location": "The token is not an ERC777 token and has no external function call in transfer or transferFrom."
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Deflationary tokens",
+            "description": "Deflationary tokens can lead to unexpected behavior.",
+            "severity": "n/a",
+            "location": "Transfer and transferFrom should not take a fee."
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Trapped interest",
+            "description": "The interest may be trapped in the contract if not taken into account.",
+            "severity": "n/a",
+            "location": "Potential interest earned from the token is taken into account."
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Token scarcity issues",
+            "description": "Tokens with a low total supply can be easily manipulated.",
+            "severity": "n/a",
+            "location": "The supply is owned by more than a few users, and the total supply is sufficient."
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Flash minting",
+            "description": "Flash minting can lead to substantial swings in the balance and the total supply.",
+            "severity": "n/a",
+            "location": "The token does not allow flash minting."
+        }
+    ]
+}

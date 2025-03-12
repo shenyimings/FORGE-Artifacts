@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/1-cs.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "639605edf6fed10f8607c342af8696bc88dbefe54a6a3c629c37eedf864c2371",
+        "address": "0xEe524d58Cf2fec1CC3F0E37001D423979f6134a3",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.12+commit.f00d7308"
+        ],
+        "project_path": {
+            "CryptoStellar": "contracts/1-cs/CryptoStellar"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can stop or pause transactions",
+            "description": "The contract owner has the authority to stop or pause transactions, which can be exploited by setting a high value to `_totalTaxIfSelling` or `coolBlock`.",
+            "severity": "critical",
+            "location": "contract.sol#L533,630"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can increase fees more than a reasonable percent (25%)",
+            "description": "The contract owner has the authority to increase fees beyond 25%, which can be exploited by calling `setSellTaxes` with a high percentage value.",
+            "severity": "critical",
+            "location": "contract.sol#L529"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Potential Abuse of Admin Functions by Owner",
+            "description": "The owner can manipulate fees and stop transactions, potentially converting the contract into a honeypot.",
+            "severity": "high",
+            "location": "CryptoStellar contract, functions setBuyTaxes, setSellTaxes, setDistributionSettings, etc."
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Potential for Owner to Lock Users Out",
+            "description": "The owner can lock users out of selling if they abuse the admin functions.",
+            "severity": "high",
+            "location": "CryptoStellar contract, functions setMarketPairStatus, setIsTxLimitExempt, etc."
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Temporary Locking or Renouncing Ownership Risk",
+            "description": "Temporarily locking the contract or renouncing ownership can eliminate all contract threats.",
+            "severity": "medium",
+            "location": "CryptoStellar contract, ownership functionality"
+        }
+    ]
+}

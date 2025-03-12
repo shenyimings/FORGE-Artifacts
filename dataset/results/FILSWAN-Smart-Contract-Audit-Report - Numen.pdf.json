@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/FILSWAN-Smart-Contract-Audit-Report - Numen.pdf",
+    "project_info": {
+        "url": "https://github.com/filswan/multi-chain-storage/tree/main/on-chain",
+        "commit_id": "32c445386a1e154dc0b99d130a922a742b78c74c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "multi-chain-storage": "contracts/FILSWAN-Smart-Contract-Audit-Report - Numen/multi-chain-storage"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "DAO_Role vote verification",
+            "description": "Users with DAO_Role permissions can call the signCarTransaction function to vote, and a single user can repeatedly vote to reach the threshold.",
+            "severity": "high",
+            "location": "FilswanOracleV2.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-233"
+                ]
+            },
+            "title": "Function parameter pass-in security",
+            "description": "An user can structure parameters to bypass the “require” judgment in the contract and execute the function, causing exceptions when voting for transactions.",
+            "severity": "high",
+            "location": "SwanPayment.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "LockFee Fee Calculation",
+            "description": "The project party will fail to withdraw the storage fee for the specified dealId while the user does not transfer enough amount or the FIL price has significant floating in a short period of time.",
+            "severity": "high",
+            "location": "SwanPayment.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Vulnerability of refund function",
+            "description": "The project party will fail to withdraw the storage fee while the user withdraws the storage fee advance, in the case that user has submitted the storage request and the Dao_Role has finished vote processing.",
+            "severity": "high",
+            "location": "SwanPayment.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Data source information acquisition",
+            "description": "The storage price during contract proceeding is related to external data sources, which might encounter data source security issues in data pragmaticality, data security, and data accuracy.",
+            "severity": "high",
+            "location": "FilinkConsumer.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "When DAO_Role calls sign to vote, if the incoming cidList is too long, it will cause insufficient gas.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

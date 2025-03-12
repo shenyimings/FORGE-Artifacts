@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/Venus_SC-Audit-Report_10052023_SA-1336.pdf",
+    "project_info": {
+        "url": "https://github.com/VenusProtocol/venus-protocol",
+        "commit_id": "7f394e087828001b0c5b5e1022701b05c0150488",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "venus-protocol": "contracts/Venus_SC-Audit-Report_10052023_SA-1336/venus-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "C01. Incorrect Mathematical Operation",
+            "description": "Assumption of token decimals may lead to incorrect results when swapping.",
+            "severity": "critical",
+            "location": "PegStability.sol, functions previewTokenUSDAmount() and getPriceInUSD()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "H01. Unverifiable Logic",
+            "description": "External function calls with implementations out of scope lead to unverifiable logic.",
+            "severity": "high",
+            "location": "AccessControlledV8.sol, function _checkAccessAllowed(); PegStability.sol, interfaces OracleProviderInterface, IVTokenUnderlying, and IPriceOracle"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "M01. Check-Effect-Interaction",
+            "description": "State variable update after external calls may lead to reentrancy.",
+            "severity": "medium",
+            "location": "PegStability.sol, functions swapVAIForStable() and swapStableForVAI()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L01. Undocumented Logic",
+            "description": "Undocumented logic in token balance calculation may lead to gas inefficiency.",
+            "severity": "low",
+            "location": "PegStability.sol, function swapStableForVAI()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Environmental Consistency",
+            "description": "Development environment not configured for contracts in scope.",
+            "severity": "info",
+            "location": "./contracts/PegStability/PegStability.sol"
+        }
+    ]
+}

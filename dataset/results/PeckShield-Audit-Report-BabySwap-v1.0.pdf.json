@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-BabySwap-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/babyswap/baby-swap-contract/tree/92fb1e0ed7c1e4b901125debc489a49d5b528176",
+        "commit_id": "92fb1e0ed7c1e4b901125debc489a49d5b528176",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "baby-swap-contract": "contracts/PeckShield-Audit-Report-BabySwap-v1/baby-swap-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ],
+                "4": [
+                    "CWE-567"
+                ]
+            },
+            "title": "Timely massUpdatePools During Pool Weight Changes",
+            "description": "Failure to timely invoke massUpdatePools() when updating pool weights can lead to unfair reward distribution and hidden pools claiming unreasonable shares of rewarded tokens.",
+            "severity": "low",
+            "location": "MasterChef contract, set() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Sandwich Attack for SwapMining Rewards",
+            "description": "The SwapMining protocol is vulnerable to sandwich attacks, allowing a bad actor to accumulate user.quantity by making flashloans of swapping token A to token B, taking rewards from the takerWithdraw() routine, and then repeating the process to make profits.",
+            "severity": "medium",
+            "location": "SwapMining contract, specifically the takerWithdraw() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Violation of Checks-Effects-Interactions Pattern (Re-Entrancy)",
+            "description": "The `withdraw()` function in the MasterChef contract violates the checks-effects-interactions principle, making it vulnerable to re-entrancy attacks.",
+            "severity": "low",
+            "location": "MasterChef contract, `withdraw()` function (specifically lines 258 and 264)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ]
+            },
+            "title": "Possible Costly LPs From Improper AutoBabyPool Initialization",
+            "description": "The share value can be manipulated by a malicious actor during the initialization of the pool, making shares extremely expensive and causing issues with precision.",
+            "severity": "low",
+            "location": "AutoBabyPool contract, deposit() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent Balance Issue with Deflationary Tokens",
+            "description": "Balance inconsistencies may occur when transferring assets from deflationary tokens, affecting portfolio management and protocol-wide operation.",
+            "severity": "low",
+            "location": "MasterChef::deposit(), MasterChef::withdraw(), and updatePool() functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Duplicate Pool Detection and Prevention",
+            "description": "In the MasterChef protocol, a new pool with a duplicate LP token can be added, which will likely cause issues in the distribution of rewards to pools and stakers.",
+            "severity": "low",
+            "location": "Multiple contracts (MasterChef, Holdstake, NFTFarm, ILO, SwapMining), add() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Improved Deletion Logic In Bottle::withdraw()",
+            "description": "The deletion of the current pool may be performed before a new pool is created, resulting in an invalid voting schedule for the new pool.",
+            "severity": "medium",
+            "location": "Bottle contract, withdraw() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Improved Logic for Same Transaction Deposit() and Withdraw() Handling",
+            "description": "A bad actor can make a profit by depositing and withdrawing in one transaction, earning BABYs as long as _earn() delivers enough rewards.",
+            "severity": "medium",
+            "location": "AutoBabyPool contract, specifically the deposit() and withdraw() functions"
+        }
+    ]
+}

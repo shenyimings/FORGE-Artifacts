@@ -1,0 +1,176 @@
+{
+    "path": "artifacts/Volt_finance_Launchpad_Smart_Contract_Audit_Report_QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/voltfinance/voltage-core-v2/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "voltage-core-v2": "contracts/Volt_finance_Launchpad_Smart_Contract_Audit_Report_QuillAudits/voltage-core-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Possible issues because lack of support for non-reverting tokens",
+            "description": "User can buy project tokens without spending sale tokens in case of non-reverting token, which won't revert on failure.",
+            "severity": "medium",
+            "location": "Launchpad contract, function buy()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Contract lacks support for Fee-on-transfer tokens",
+            "description": "The contract lacks support for fee-on-transfer tokens, resulting in incorrect calculations and potential losses.",
+            "severity": "medium",
+            "location": "Launchpad contract, functions buy() and withdrawSaleTokens()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "daysClaimed addition can be incorrect in some cases",
+            "description": "claim() function increments userInfo.daysClaimed incorrectly when elapsedDays >= vestingDay.",
+            "severity": "low",
+            "location": "Launchpad contract, function claim()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "ERC20 contracts with no optional method like decimal() can break the functionality",
+            "description": "getUserBuyAmount() function calls decimal() on saleTokens, which may revert if the token doesn't have a decimal() function.",
+            "severity": "low",
+            "location": "Launchpad contract, function getUserBuyAmount()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Unlocked pragma (pragma solidity ^0.8.0)",
+            "description": "Contracts use floating pragma, which can lead to deployment with different compiler versions and potential bugs.",
+            "severity": "info",
+            "location": "All contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading error messages",
+            "description": "Error messages in the constructor and claim() function are misleading and should be corrected.",
+            "severity": "info",
+            "location": "Launchpad contract, functions constructor and claim()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused import",
+            "description": "Ownable is unused but imported.",
+            "severity": "info",
+            "location": "All contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Fix the allowed maximum vesting period",
+            "description": "The contract only allows 89 days as the maximum vesting period, whereas it should be 90.",
+            "severity": "info",
+            "location": "Launchpad contract, constructor"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Care needs to be taken for different decimals",
+            "description": "Constructor arguments should be according to the decimals used by project tokens and sale tokens.",
+            "severity": "info",
+            "location": "Launchpad contract, constructor"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Lack of support for non-reverting tokens in LaunchpadFactory",
+            "description": "When owner creates launchpad using createLaunchpad, it uses transferFrom to transfer tokens from msg.sender to launchpad, which may not revert for non-reverting tokens.",
+            "severity": "medium",
+            "location": "LaunchpadFactory contract, function createLaunchpad()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused event in LaunchpadFactory",
+            "description": "The LaunchCreated event is declared but not used.",
+            "severity": "low",
+            "location": "LaunchpadFactory contract"
+        }
+    ]
+}

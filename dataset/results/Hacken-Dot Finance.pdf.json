@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/Hacken-Dot Finance.pdf",
+    "project_info": {
+        "url": "https://github.com/Dot-Finance/Dot",
+        "commit_id": "8FB1031EB9D874233B75EFC744279A679747D54B",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Dot": "contracts/Hacken-Dot Finance/Dot"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Compiler Version",
+            "description": "The compiler version should be updated to the latest.",
+            "severity": "high",
+            "location": "n/a"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Ability to Change Helper Version",
+            "description": "There is the ability to change the Helper version of PinkPool.sol after the contract was deployed and used by users.",
+            "severity": "high",
+            "location": "PinkPool.sol, function: setHelper"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Hardcoded Reward Token Decimals Value",
+            "description": "Reward token decimals value is hardcoded in function apy() of PinkPool.sol contract, but reward token can be changed and set by the owner.",
+            "severity": "medium",
+            "location": "PinkPool.sol, function: apy"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1087"
+                ]
+            },
+            "title": "Hardcoded 'Magic Values'",
+            "description": "There are lots of hardcoded ‘magic values’ like 1e18 in the contracts.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Uncached Calculated Values",
+            "description": "The calculated or received from helper (by calling another contract) values can be cached (saved to fields) by block time to decrease gas usage.",
+            "severity": "low",
+            "location": "PinkPool.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Lack of Proper Error Messages",
+            "description": "It is recommended to add proper values of error messages in require validation (related to all code).",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inefficient Modifier Usage",
+            "description": "Modifiers provide the way to do some validations and restrictions, due to solidity language philosophy.",
+            "severity": "info",
+            "location": "PinkPool.sol, function: updateReward"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Balance Validation",
+            "description": "It may be better to check the balance and validate the existence of the needed amount of pink token, before calling _flipToPink in the getReward function of PinkPool.sol contract.",
+            "severity": "info",
+            "location": "PinkPool.sol, function: getReward"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Event Emission",
+            "description": "Event emission should be added to all functions which change the pool configurations.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

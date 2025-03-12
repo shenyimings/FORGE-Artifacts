@@ -1,0 +1,83 @@
+{
+    "path": "artifacts/ImmuneBytes-Mozart_Finance_(PIANO)_Final_Audit_Report.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x9eEC1044C5bD15782F806C63003F4730eeDfDAE4",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "PianoToken": "contracts/ImmuneBytes-Mozart_Finance_(PIANO)_Final_Audit_Report/PianoToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Transfer function does not burn tokens",
+            "description": "The transfer() function does not include _burn() functionality, allowing users to move their tokens without burning them.",
+            "severity": "high",
+            "location": "PianoToken contract, transfer() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Delegates are not moved in transfer and transferFrom functions",
+            "description": "The transfer and transferFrom functions do not update the delegates' vote count correctly, allowing users to double-spend their voting power.",
+            "severity": "high",
+            "location": "PianoToken contract, transfer() and transferFrom() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Two public minting functions with different implementations",
+            "description": "The BEP20 contract has a mint() function that does not include _moveDelegates() implementation, which is important for tracking user votes.",
+            "severity": "medium",
+            "location": "BEP20 contract, mint() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant getOwner function in IBEP20 and BEP20 contracts",
+            "description": "The Ownable contract already has an owner() function, making the getOwner function redundant.",
+            "severity": "low",
+            "location": "IBEP20 and BEP20 contracts, getOwner() function"
+        }
+    ]
+}

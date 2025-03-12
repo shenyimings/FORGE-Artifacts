@@ -1,0 +1,419 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Skale_Token.pdf",
+    "project_info": {
+        "url": "https://github.com/skalenetwork/skale-manager/tree/50c8f4e037f6bf578d62bd752516b17237b55811",
+        "commit_id": "50c8f4e037f6bf578d62bd752516b17237b55811",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "skale-manager": "contracts/ConsenSys_Diligence-Skale_Token/skale-manager"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "uint overflow may lead to stealing funds",
+            "description": "possible to create a delegation with a huge amount which can result in critically bad malicious usages",
+            "severity": "critical",
+            "location": "DelegationRequestManager.sol, L74-L76"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Holders can burn locked funds",
+            "description": "holders can \"burn\" locked tokens resulting in unpredictable behavior",
+            "severity": "high",
+            "location": "ERC777/LockableERC777.sol, L433-L441"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Node can unlink validator",
+            "description": "nodes can remove validator's address from the _validatorAddressToId list and take over full control over validator",
+            "severity": "high",
+            "location": "ValidatorService.sol, L109-L119"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unlocking funds after slashing",
+            "description": "initially locked funds will not be unlocked at the end of the delegation period if any portion of the funds are slashed",
+            "severity": "high",
+            "location": "TokenState.sol, L258-L263"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Bounties and fees should only be locked for the first 3 months",
+            "description": "bounties are currently locked for the first 3 months after delegation instead of after the token launch",
+            "severity": "high",
+            "location": "DelegationService.sol, L315"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "getLockedCount is iterating over all history of delegations",
+            "description": "getLockedCount function may even change the state of these delegations by calling getState",
+            "severity": "high",
+            "location": "TokenState.sol, L60-L71"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Tokens are unlocked only when delegation ends",
+            "description": "tokens are only unlocked if at least 50% of tokens that were bought on the initial launch are undelegated",
+            "severity": "high",
+            "location": "TokenState.sol, L258-L264"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Tokens after delegation should not be unlocked automatically",
+            "description": "these tokens should be added to _purchased as they were in that state before their delegation",
+            "severity": "high",
+            "location": "TokenState.sol, L258-L264"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Some unlocked tokens can become locked after delegation is rejected",
+            "description": "the initial status of tokens gets stored and it’s either completely locked or unlocked",
+            "severity": "high",
+            "location": "TokenState.sol, L205-L214"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Gas limit for bounty and slashing distribution",
+            "description": "Loops over all active delegators lead to huge gas costs.",
+            "severity": "high",
+            "location": "DelegationService.sol, distributeBounty function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "ERC-777 callback issue",
+            "description": "Reentrancy opportunities in ERC-777 token transfer callbacks.",
+            "severity": "high",
+            "location": "Various contracts (e.g., SkaleToken, DelegationService)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Rename functions",
+            "description": "Functions with misleading names can lead to confusion and state changes.",
+            "severity": "medium",
+            "location": "Various contracts"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Delegations might stuck in non-active validator",
+            "description": "Delegations may get stuck for up to 12 months if a validator doesn't meet minimum requirements.",
+            "severity": "medium",
+            "location": "ValidatorService.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Disabled Validators still have delegated funds",
+            "description": "Disabled validators can still hold delegations, locking funds for up to 12 months.",
+            "severity": "medium",
+            "location": "ValidatorService.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Fees can be > 100%",
+            "description": "Validators can be created with fee rates above 100%.",
+            "severity": "medium",
+            "location": "registerValidator function"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "getState changes state implicitly",
+            "description": "getState function changes state implicitly, breaking functionality.",
+            "severity": "medium",
+            "location": "TokenState.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "_endingDelegations list is redundant",
+            "description": "The list is only used in getPurchasedAmount function and can be optimized.",
+            "severity": "medium",
+            "location": "TokenState.sol, getPurchasedAmount function"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Some functions are defined but not implemented",
+            "description": "Functions with no implementation can lead to errors and reduce readability.",
+            "severity": "medium",
+            "location": "Various contracts (e.g., DelegationService)"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "tokenState.setState redundant checks",
+            "description": "Complex if/else statements can be simplified for gas optimization and readability.",
+            "severity": "medium",
+            "location": "TokenState.sol, setState function"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Validator should be able to remove delegator",
+            "description": "Validators should be able to undelegate delegators for consistency.",
+            "severity": "medium",
+            "location": "DelegationService.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Events not emitted in some cases",
+            "description": "Events are not emitted for every state change, making it hard to track system changes.",
+            "severity": "low",
+            "location": "Various contracts"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "DelegationService redundancy",
+            "description": "The contract adds complexity and gas costs due to extra calls between contracts.",
+            "severity": "low",
+            "location": "DelegationService contract"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Rounding errors after slashing",
+            "description": "Rounding errors occur when slashing happens, causing different values to have different rounding errors, which can lead to uint underflow or smaller values.",
+            "severity": "high",
+            "location": "new_code/contracts/delegation/DelegationController.sol"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Slashes do not affect bounty distribution",
+            "description": "When slashes are processed by a holder, _effectiveDelegatedByHolderToValidator value is not reduced, affecting the bounty distribution.",
+            "severity": "high",
+            "location": "contracts/delegation/DelegationController.sol:L863-L873"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Iterations over slashes",
+            "description": "Iterating over slashes can be gas-inefficient and may cause system halt if there are a lot of slashes.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Storage operations optimization",
+            "description": "Optimizations for storage operations to avoid unnecessary writes.",
+            "severity": "medium",
+            "location": "new_code/contracts/delegation/DelegationController.sol:L711-L715, new_code/contracts/delegation/Punisher.sol:L66-L68"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate function implementation addMonths()",
+            "description": "Redundant implementation of TimeHelpers.addMonths() function.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Function overloading",
+            "description": "Overloaded functions in DelegationController, making code less readable and increasing the probability of missing bugs.",
+            "severity": "low",
+            "location": "new_code/contracts/delegation/DelegationController.sol:L722-L820"
+        }
+    ]
+}

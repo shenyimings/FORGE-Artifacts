@@ -1,0 +1,158 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Spool-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/SpoolFi/spool-core/tree/8b2e536",
+        "commit_id": "8b2e536",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "spool-core": "contracts/PeckShield-Audit-Report-Spool-v1/spool-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1335"
+                ]
+            },
+            "title": "Improved Bitwise Operations in Helper Library",
+            "description": "The bitwise library can be improved by explicitly zeroing out the ith 14 bits before assigning the given num14bit.",
+            "severity": "low",
+            "location": "Bitwise library, get14BitUintByIndex() and set14BitUintByIndex() routines."
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Proper Function Type of RiskProviderRegistry::_setRisk()",
+            "description": "The _setRisk() function is defined as public instead of internal.",
+            "severity": "low",
+            "location": "RiskProviderRegistry contract, _setRisk() function."
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20-Compliant Tokens",
+            "description": "Inconsistent behavior with non-ERC20-compliant tokens in approve() and transfer() functions",
+            "severity": "low",
+            "location": "Multiple Contracts, specifically USDT Token Contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Incorrect Strategies Hash Update in removeStrategyCalldata()",
+            "description": "Incorrect strategiesHash update when removing an existing strategy in _removeStrategyCalldata()",
+            "severity": "medium",
+            "location": "Controller contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Proper Logic Of Reward-Drip::updatePeriodFinish()",
+            "description": "No validation of timestamp argument to configure periodFinish, potentially causing reverts and lock-up of staked funds",
+            "severity": "low",
+            "location": "RewardDrip contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Proper Fast Withdrawal Logic in saveUserShares()",
+            "description": "Overwriting internal state vaultWithdraw.proportionateDeposit without considering multiple consecutive fast withdraw requests",
+            "severity": "medium",
+            "location": "FastWithdraw contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Proper Reallocation Logic in _processWithdraw()",
+            "description": "Incorrect redistribution of withdrawn assets to other strategies.",
+            "severity": "high",
+            "location": "SpoolDoHardWork::_processWithdraw()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Proper Strategy Removal Logic in notifyStrategyRemoved()",
+            "description": "Mis-calculation in updating deposit proportions when removing a strategy.",
+            "severity": "medium",
+            "location": "Vault::notifyStrategyRemoved()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Proper CompoundStrategy Initialization",
+            "description": "Incorrect validation requirement in constructor.",
+            "severity": "low",
+            "location": "CompoundStrategy::constructor()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Forced Investment Risk in Curve3poolStrategy",
+            "description": "Potential force investment risk due to implicit assumption of balanced Curve pool.",
+            "severity": "n/a",
+            "location": "Curve3poolStrategy::_lpToCoin()"
+        }
+    ]
+}

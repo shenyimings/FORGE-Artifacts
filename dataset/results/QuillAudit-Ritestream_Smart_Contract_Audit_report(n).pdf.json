@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/QuillAudit-Ritestream_Smart_Contract_Audit_report(n).pdf",
+    "project_info": {
+        "url": "https://github.com/ritestream/ritestream-contract",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ritestream-contract": "contracts/QuillAudit-Ritestream_Smart_Contract_Audit_report(n)/ritestream-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zero address check",
+            "description": "Missing zero address check for `_RITE` in constructor",
+            "severity": "low",
+            "location": "SaleVesting Contract, constructor() and TeamVesting Contract, constructor() and setVesting()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "For loop over dynamic array",
+            "description": "Potential Denial of Service condition due to for loop over dynamic array",
+            "severity": "low",
+            "location": "SaleVesting Contract, for loop and TeamVesting Contract, for loop"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No check for vesting tokens",
+            "description": "Missing check for vesting tokens during setVesting() function execution",
+            "severity": "medium",
+            "location": "SaleVesting Contract, setVesting()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Comparison with a boolean constant",
+            "description": "Redundant comparison with a boolean constant",
+            "severity": "info",
+            "location": "SaleVesting Contract, multiple locations"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Usage of block.timestamp",
+            "description": "Potential manipulation of block.timestamp by miners",
+            "severity": "medium",
+            "location": "TeamVesting Contract, multiple locations"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "User can withdraw more than deposited amount",
+            "description": "Missing mapping to track user deposits in Vault contract",
+            "severity": "high",
+            "location": "RiskModel Contract, userWithdraw()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "OnlyOwner Restriction",
+            "description": "userDeposit() is an onlyOwner function, which adds centralization risk and is less user-friendly.",
+            "severity": "low",
+            "location": "RiskModel Contract, userDeposit() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Renounce Ownership",
+            "description": "The renounceOwnership function is not properly implemented, which can be risky if the contract's ownership has not been transferred previously.",
+            "severity": "info",
+            "location": "RiskModel Contract, renounceOwnership function"
+        }
+    ]
+}

@@ -1,0 +1,419 @@
+// SPDX-License-Identifier: BUSL-1.1
+pragma solidity 0.8.21;
+
+import {AccessControlUpgradeable} from "@oz-upgradeable/access/AccessControlUpgradeable.sol";
+import {ReentrancyGuardUpgradeable} from "@oz-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
+import {SafeTransfer} from "kresko-lib/token/SafeTransfer.sol";
+import {IERC20} from "kresko-lib/token/IERC20.sol";
+import {IKrStaking} from "./interfaces/IKrStaking.sol";
+
+contract KrStaking is AccessControlUpgradeable, ReentrancyGuardUpgradeable, IKrStaking {
+    using SafeTransfer for IERC20;
+
+    // keccak256("kresko.operator.role")
+    bytes32 public constant OPERATOR_ROLE = 0x8952ae23cc3fea91b9dba0cefa16d18a26ca2bf124b54f42b5d04bce3aacecd2;
+
+    /**
+     * ==================================================
+     * =============== Storage ==========================
+     * ==================================================
+     */
+
+    // Info of each staked user.
+    mapping(uint256 => mapping(address => UserInfo)) private _userInfo;
+
+    // Reward token drip per block
+    mapping(address => uint256) public rewardPerBlockFor;
+
+    // Info of each pool.
+    PoolInfo[] private _poolInfo;
+
+    // Total allocation points.
+    uint128 public totalAllocPoint;
+
+    /**
+     * ==================================================
+     * ============== Events ============================
+     * ==================================================
+     */
+
+    event Deposit(address indexed user, uint256 indexed pid, uint256 indexed amount);
+    event Withdraw(address indexed user, uint256 indexed pid, uint256 indexed amount);
+    event EmergencyWithdraw(address indexed user, uint256 indexed pid, uint256 indexed amount);
+    event ClaimRewards(address indexed user, address indexed rewardToken, uint256 indexed amount);
+    event LogSetPool(uint256 indexed pid, uint256 indexed allocPoint);
+
+    /**
+     * ==================================================
+     * ============== Initializer =======================
+     * ==================================================
+     */
+
+    /**
+     * @notice Initialize the contract with a single pool
+     * @notice Sets initial reward token and rates
+     * @notice Sets the caller as DEFAULT_ADMIN
+     */
+    function initialize(
+        address[] calldata _rewardTokens,
+        uint256[] calldata _rewardPerBlocks,
+        IERC20 _depositToken,
+        uint128 _allocPoint,
+        uint128 _startBlock,
+        address _admin,
+        address _operator
+    ) external initializer {
+        // if (_rewardPerBlocks.length == _rewardTokens.length) {
+        //     revert("KR: arrayLengthMismatch");
+        // }
+        // __ReentrancyGuard_init();
+        // _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        // _grantRole(DEFAULT_ADMIN_ROLE, _admin);
+        // _grantRole(OPERATOR_ROLE, _operator);
+        // // Set initial reward tokens and allocations
+        // for (uint256 i; i < _rewardTokens.length; i++) {
+        //     rewardPerBlockFor[_rewardTokens[i]] = _rewardPerBlocks[i];
+        // }
+        // // Push the initial pool in.
+        // _poolInfo.push(
+        //     PoolInfo({
+        //         depositToken: _depositToken,
+        //         allocPoint: _allocPoint,
+        //         lastRewardBlock: _startBlock,
+        //         accRewardPerShares: new uint256[](_rewardTokens.length),
+        //         rewardTokens: _rewardTokens
+        //     })
+        // );
+        // totalAllocPoint += _allocPoint;
+    }
+
+    /**
+     * ==================================================
+     * =============== Modifiers ========================
+     * ==================================================
+     */
+
+    /**
+     * @notice Ensures no pool exists with this depositToken
+     * @param _depositToken to check
+     */
+    modifier ensurePoolDoesNotExist(IERC20 _depositToken) {
+        for (uint256 i; i < _poolInfo.length; i++) {
+            require(address(_poolInfo[i].depositToken) != address(_depositToken), "KR: poolExists");
+        }
+        _;
+    }
+
+    /**
+     * @notice Ensures this pool exists
+     * @param _pid to check
+     */
+    modifier ensurePoolExists(uint256 _pid) {
+        require(address(_poolInfo[_pid].depositToken) != address(0), "KR: !poolExists");
+        _;
+    }
+
+    /**
+     * ==================================================
+     * ================== Views =========================
+     * ==================================================
+     */
+
+    /// @inheritdoc IKrStaking
+    function pendingRewards(uint256 _pid, address _user) public view returns (Reward memory rewards) {
+        PoolInfo memory pool = _poolInfo[_pid];
+        UserInfo memory user = _userInfo[_pid][_user];
+        uint256 depositTokenSupply = pool.depositToken.balanceOf(address(this));
+        uint256 rewardTokensLength = pool.rewardTokens.length;
+
+        rewards = Reward({pid: _pid, tokens: pool.rewardTokens, amounts: new uint256[](rewardTokensLength)});
+
+        if (depositTokenSupply != 0 && user.amount > 0) {
+            for (uint256 rewardIndex; rewardIndex < rewardTokensLength; rewardIndex++) {
+                uint256 accRewardPerShare = pool.accRewardPerShares[rewardIndex];
+
+                uint256 rewardPerBlock = rewardPerBlockFor[pool.rewardTokens[rewardIndex]];
+                uint256 blocks = block.number - pool.lastRewardBlock;
+                uint256 reward = (rewardPerBlock * blocks * pool.allocPoint) / totalAllocPoint;
+
+                accRewardPerShare += (reward * 1e12) / depositTokenSupply;
+
+                rewards.amounts[rewardIndex] = (user.amount * accRewardPerShare) / 1e12 - user.rewardDebts[rewardIndex];
+            }
+        }
+    }
+
+    /// @inheritdoc IKrStaking
+    function allPendingRewards(address _account) external view returns (Reward[] memory allRewards) {
+        allRewards = new Reward[](_poolInfo.length);
+        for (uint256 pid; pid < _poolInfo.length; pid++) {
+            Reward memory poolReward = pendingRewards(pid, _account);
+            allRewards[pid] = poolReward;
+        }
+    }
+
+    /// @inheritdoc IKrStaking
+    function poolLength() external view returns (uint256) {
+        return _poolInfo.length;
+    }
+
+    /// @inheritdoc IKrStaking
+    function poolInfo(uint256 _pid) external view returns (PoolInfo memory) {
+        return _poolInfo[_pid];
+    }
+
+    /// @inheritdoc IKrStaking
+    function getPidFor(address _depositToken) external view returns (uint256 pid, bool found) {
+        for (pid; pid < _poolInfo.length; pid++) {
+            if (address(_poolInfo[pid].depositToken) == _depositToken) {
+                found = true;
+                break;
+            }
+        }
+    }
+
+    /// @inheritdoc IKrStaking
+    function userInfo(uint256 _pid, address _account) external view returns (UserInfo memory) {
+        return _userInfo[_pid][_account];
+    }
+
+    /**
+     * ==================================================
+     * =========== Core public functions ================
+     * ==================================================
+     */
+
+    /// @inheritdoc IKrStaking
+    function massUpdatePools() public payable {
+        for (uint256 pid; pid < _poolInfo.length; ++pid) {
+            updatePool(pid);
+        }
+    }
+
+    /// @inheritdoc IKrStaking
+    function updatePool(uint256 _pid) public payable returns (PoolInfo memory pool) {
+        pool = _poolInfo[_pid];
+        // Updates once per block
+        if (block.number > pool.lastRewardBlock) {
+            uint256 deposits = pool.depositToken.balanceOf(address(this));
+            // No rewards for 0 deposits
+            if (deposits > 0) {
+                for (uint256 rewardIndex; rewardIndex < pool.rewardTokens.length; rewardIndex++) {
+                    // Reward per block for a particular reward token
+                    uint256 rewardPerBlock = rewardPerBlockFor[pool.rewardTokens[rewardIndex]];
+                    // Blocks advanced since last update
+                    uint256 blocks = block.number - pool.lastRewardBlock;
+                    // Allocation for this particular pool
+                    uint256 reward = (rewardPerBlock * blocks * pool.allocPoint) / totalAllocPoint;
+                    // Increment accumulated rewards for new block height
+                    pool.accRewardPerShares[rewardIndex] += (reward * 1e12) / deposits;
+                }
+            }
+            // No further updates within same block height
+            pool.lastRewardBlock = uint128(block.number);
+            // storage
+            _poolInfo[_pid] = pool;
+        }
+    }
+
+    /// @inheritdoc IKrStaking
+    function deposit(address _to, uint256 _pid, uint256 _amount) external payable nonReentrant ensurePoolExists(_pid) {
+        PoolInfo memory pool = updatePool(_pid);
+        UserInfo storage user = _userInfo[_pid][_to];
+
+        // Initialize rewardDebts
+        if (user.rewardDebts.length == 0) {
+            user.rewardDebts = new uint256[](pool.rewardTokens.length);
+        }
+
+        pool.depositToken.safeTransferFrom(address(msg.sender), address(this), _amount);
+        user.amount += _amount;
+
+        for (uint256 rewardIndex; rewardIndex < pool.rewardTokens.length; rewardIndex++) {
+            user.rewardDebts[rewardIndex] += (_amount * pool.accRewardPerShares[rewardIndex]) / 1e12;
+        }
+
+        emit Deposit(_to, _pid, _amount);
+    }
+
+    /// @inheritdoc IKrStaking
+    function withdraw(uint256 _pid, uint256 _amount, address _rewardRecipient) external payable nonReentrant {
+        _withdraw(msg.sender, _pid, _amount, _rewardRecipient, true);
+    }
+
+    /// @inheritdoc IKrStaking
+    function claim(uint256 _pid, address _rewardRecipient) external payable nonReentrant {
+        _claim(msg.sender, _pid, _rewardRecipient);
+    }
+
+    /// @inheritdoc IKrStaking
+    function emergencyWithdraw(uint256 _pid) external payable nonReentrant {
+        PoolInfo memory pool = _poolInfo[_pid];
+        UserInfo storage user = _userInfo[_pid][msg.sender];
+        pool.depositToken.safeTransfer(address(msg.sender), user.amount);
+        user.amount = 0;
+        for (uint256 rewardIndex; rewardIndex < pool.rewardTokens.length; rewardIndex++) {
+            user.rewardDebts[rewardIndex] = 0;
+        }
+        emit EmergencyWithdraw(msg.sender, _pid, user.amount);
+    }
+
+    /**
+     * ==================================================
+     * ============= Admin functions ====================
+     * ==================================================
+     */
+
+    /// @inheritdoc IKrStaking
+    function setRewardPerBlockFor(address _rewardToken, uint256 _rewardPerBlock) external payable onlyRole(OPERATOR_ROLE) {
+        rewardPerBlockFor[_rewardToken] = _rewardPerBlock;
+    }
+
+    /// @inheritdoc IKrStaking
+    function addPool(
+        address[] calldata _rewardTokens,
+        IERC20 _depositToken,
+        uint128 _allocPoint,
+        uint128 _startBlock
+    ) external payable onlyRole(OPERATOR_ROLE) ensurePoolDoesNotExist(_depositToken) {
+        require(_rewardTokens.length > 0, "KR: !rewardTokens");
+
+        totalAllocPoint += _allocPoint;
+
+        _poolInfo.push(
+            PoolInfo({
+                depositToken: _depositToken,
+                allocPoint: _allocPoint,
+                lastRewardBlock: _startBlock != 0 ? _startBlock : uint128(block.number),
+                accRewardPerShares: new uint256[](_rewardTokens.length),
+                rewardTokens: _rewardTokens
+            })
+        );
+    }
+
+    /// @inheritdoc IKrStaking
+    function setPool(uint256 _pid, uint128 _newAllocPoint) external payable onlyRole(OPERATOR_ROLE) ensurePoolExists(_pid) {
+        totalAllocPoint = totalAllocPoint - _poolInfo[_pid].allocPoint + _newAllocPoint;
+        _poolInfo[_pid].allocPoint = _newAllocPoint;
+
+        emit LogSetPool(_pid, _newAllocPoint);
+    }
+
+    /**
+     * ==================================================
+     * ============ Protected functions =================
+     * ==================================================
+     */
+
+    /// @inheritdoc IKrStaking
+    function withdrawFor(
+        address _for,
+        uint256 _pid,
+        uint256 _amount,
+        address _rewardRecipient
+    ) external payable nonReentrant onlyRole(OPERATOR_ROLE) {
+        _withdraw(_for, _pid, _amount, _rewardRecipient, false);
+    }
+
+    /// @inheritdoc IKrStaking
+    function claimFor(
+        address _for,
+        uint256 _pid,
+        address _rewardRecipient
+    ) external payable nonReentrant onlyRole(OPERATOR_ROLE) {
+        _claim(_for, _pid, _rewardRecipient);
+    }
+
+    /// @inheritdoc IKrStaking
+    function rescueNative() external payable onlyRole(OPERATOR_ROLE) {
+        (bool success, ) = msg.sender.call{value: address(this).balance}("");
+        require(success, "Transfer failed.");
+    }
+
+    /// @inheritdoc IKrStaking
+    function rescueNonPoolToken(
+        IERC20 _tokenToRescue,
+        uint256 _amount
+    ) external payable onlyRole(OPERATOR_ROLE) ensurePoolDoesNotExist(_tokenToRescue) {
+        _tokenToRescue.safeTransfer(msg.sender, _amount);
+    }
+
+    /**
+     * ==================================================
+     * ============= Internal functions =================
+     * ==================================================
+     */
+
+    /**
+     * @notice Loops over pools reward tokens and sends them to the user
+     * @param pool pool to send rewards from in `_poolInfo`
+     * @param user users info in the @param pool
+     * @param recipient user to send rewards to
+     */
+    function sendRewards(PoolInfo memory pool, UserInfo memory user, address recipient) internal {
+        for (uint256 rewardIndex; rewardIndex < pool.rewardTokens.length; rewardIndex++) {
+            uint256 rewardDebt = (user.amount * pool.accRewardPerShares[rewardIndex]) / 1e12;
+            uint256 pending = rewardDebt - user.rewardDebts[rewardIndex];
+
+            if (pending > 0) {
+                IERC20(pool.rewardTokens[rewardIndex]).safeTransfer(recipient, pending);
+                emit ClaimRewards(recipient, pool.rewardTokens[rewardIndex], pending);
+            }
+        }
+    }
+
+    /**
+     * @notice Withdraw deposited tokens and rewards.
+     * @param _user user to withdraw for
+     * @param _pid id in `_poolInfo`
+     * @param _amount amount to withdraw
+     * @param _rewardRecipient address to send rewards to
+     * @param _transferToUser if true, withdraws to `_user` instead of `msg.sender`
+     */
+    function _withdraw(address _user, uint256 _pid, uint256 _amount, address _rewardRecipient, bool _transferToUser) internal {
+        require(_amount > 0, "KR: 0-withdraw");
+        require(_rewardRecipient != address(0), "KR: !rewardRecipient");
+
+        PoolInfo memory pool = updatePool(_pid);
+        UserInfo storage user = _userInfo[_pid][_user];
+
+        sendRewards(pool, user, _rewardRecipient);
+
+        // Send whole balance in case of amount exceeds deposits
+        if (_amount > user.amount) {
+            _amount = user.amount;
+            user.amount = 0;
+        } else {
+            user.amount -= _amount;
+        }
+
+        pool.depositToken.safeTransfer(_transferToUser ? _user : address(msg.sender), _amount);
+
+        for (uint256 rewardIndex; rewardIndex < pool.rewardTokens.length; rewardIndex++) {
+            user.rewardDebts[rewardIndex] = (user.amount * pool.accRewardPerShares[rewardIndex]) / 1e12;
+        }
+
+        emit Withdraw(_user, _pid, _amount);
+    }
+
+    /**
+     * @notice Claim rewards
+     * @param _user user to claim for
+     * @param _pid id in `_poolInfo`
+     * @param _rewardRecipient address to send rewards to
+     */
+    function _claim(address _user, uint256 _pid, address _rewardRecipient) internal {
+        require(_rewardRecipient != address(0), "KR: !rewardRecipient");
+
+        PoolInfo memory pool = updatePool(_pid);
+        UserInfo storage user = _userInfo[_pid][_user];
+
+        if (user.amount > 0) {
+            sendRewards(pool, user, _rewardRecipient);
+
+            for (uint256 rewardIndex; rewardIndex < pool.rewardTokens.length; rewardIndex++) {
+                user.rewardDebts[rewardIndex] = (user.amount * pool.accRewardPerShares[rewardIndex]) / 1e12;
+            }
+        }
+    }
+}

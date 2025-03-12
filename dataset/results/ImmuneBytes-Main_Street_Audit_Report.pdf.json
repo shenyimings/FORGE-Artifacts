@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/ImmuneBytes-Main_Street_Audit_Report.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x8fc1a944c149762b6b578a06c0de2abd6b7d2b89",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.6+commit.11564f7e"
+        ],
+        "project_path": {
+            "BuyMainStreetToken": "contracts/ImmuneBytes-Main_Street_Audit_Report/BuyMainStreetToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused _getTaxFee function",
+            "description": "The _getTaxFee function returns the _TAX_FEE state variable but is not called within the contract and has private visibility.",
+            "severity": "medium",
+            "location": "BuyMainStreetToken contract, Line no - 830-832"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Costly Loops",
+            "description": "The for loops in the contract use state variables like .length in their conditions, consuming extra gas.",
+            "severity": "medium",
+            "location": "BuyMainStreetToken contract, Lines no -615, 795"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Absence of Error messages in Require Statements",
+            "description": "A require statement without an error message makes it difficult to detect the reason behind a function revert.",
+            "severity": "low",
+            "location": "BuyMainStreetToken contract, Line no - 632"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Absence of Zero Address Validation",
+            "description": "No zero address validation is implemented while updating state variables like FeeAddress.",
+            "severity": "low",
+            "location": "setAsmarketingAccount function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "External Visibility should be preferred",
+            "description": "Functions that are never called within the contract should be marked as external visibility instead of public visibility for gas optimization.",
+            "severity": "low",
+            "location": "Various functions in BuyMainStreetToken contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Constant declaration should be preferred",
+            "description": "State variables that do not change throughout the contract should be declared as constant.",
+            "severity": "low",
+            "location": "BuyMainStreetToken contract, Lines no -469, 471"
+        }
+    ]
+}

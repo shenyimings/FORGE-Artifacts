@@ -1,0 +1,176 @@
+{
+    "path": "artifacts/New_Alchemy_Security_Audit-Luckchemy Smart Contract%U00A0Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Luckchemy/Luckchemy",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Luckchemy": "contracts/New_Alchemy_Security_Audit-Luckchemy Smart Contract%U00A0Audit/Luckchemy"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Token sale hard cap is not defined",
+            "description": "The Luckchemy whitepaper calls for a ‘hard cap’ of 22,000 ETH sold at which the sale ends, but this was not enforced in the contract.",
+            "severity": "medium",
+            "location": "Crowdsale contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Service Agent can buy arbitrary amounts of LUK for free",
+            "description": "The LuckchemyCrowdSale contract defines an onlyServiceAgent modifier, allowing the Service Agent to purchase arbitrary amounts of tokens from the crowd sale at no cost.",
+            "severity": "medium",
+            "location": "LuckchemyCrowdSale contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Token is not ERC223",
+            "description": "The Luckchemy whitepaper calls for an ERC223 token, but the contracts implement an ERC20 token instead.",
+            "severity": "low",
+            "location": "Token contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Crowdsale logic depends on Ethereum block timestamp",
+            "description": "The logic for determining the stage of the token sale and whether the sale has ended is made by using now, an alias for block.timestamp.",
+            "severity": "low",
+            "location": "Crowdsale contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wei refunds at the end of stage are slightly too low due to truncation",
+            "description": "The logic that carries out Wei refunds has a slight flaw, transferring an amount lower than the actual amount due to order of operations and multiple remainder truncation.",
+            "severity": "low",
+            "location": "processPrivatePurchase and processPublicPurchase functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-237"
+                ],
+                "4": [
+                    "CWE-238"
+                ]
+            },
+            "title": "Short-address attack protections",
+            "description": "Some Ethereum clients may create malformed messages if a user is persuaded to call a method on a contract with an address that is not a full 20 bytes long.",
+            "severity": "n/a",
+            "location": "Various methods (transfer, transferFrom, approve, etc.)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unrecoverable ownership transfer",
+            "description": "If the owner of a contract makes a mistake in entering the address of an intended new owner, then the contract can become irrecoverably unowned.",
+            "severity": "n/a",
+            "location": "Contracts that inherit the common Ownable contract from OpenZeppelin"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Refund vulnerability",
+            "description": "Depositors will be able to refund their deposits if the goal has been reached and forwardFunds() is not called within 7 days (now 30 days) of the sale ending.",
+            "severity": "n/a",
+            "location": "LuckchemyCrowdSale.sol, Lines 408–416"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential arithmetic errors",
+            "description": "Multiplication and division operators are not done using SafeMath, which may result in truncated remainders.",
+            "severity": "n/a",
+            "location": "LuckchemyCrowdSale.sol, Lines 52–64, 178–186"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused functions",
+            "description": "addBlacklistItem and removeBlacklistItem functions are defined but not used in the provided contracts.",
+            "severity": "n/a",
+            "location": "LuckchemyToken.sol, Lines 111–121"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Lack of two-phase ownership transfer",
+            "description": "Not provided",
+            "severity": "n/a",
+            "location": "n/a"
+        }
+    ]
+}

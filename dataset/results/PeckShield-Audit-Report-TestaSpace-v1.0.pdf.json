@@ -1,0 +1,185 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-TestaSpace-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/Testamex/testa/tree/6d501e4275cfce800e2b2e50d98893fd2a8077dd",
+        "commit_id": "6d501e4275cfce800e2b2e50d98893fd2a8077dd",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "testa": "contracts/PeckShield-Audit-Report-TestaSpace-v1/testa"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Timely Conversion Of Staking Rewards To lpTokens",
+            "description": "The Testa Finance protocol may still accumulate staking rewards entitled to the destroyed position, and not return them to the user.",
+            "severity": "low",
+            "location": "PlanetFarm contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improved PlanetFarm::payToEntry() Logic",
+            "description": "The payment requirement with the exact amount causes unnecessary friction.",
+            "severity": "low",
+            "location": "PlanetFarm contract, payToEntry() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Business Logic Design In withdraw() of PlanetFarm And SpaceFarm",
+            "description": "The rewards possibly accumulated from the staked funds are transferred to config.getCompany(), not the user.",
+            "severity": "info",
+            "location": "PlanetFarm and SpaceFarm contracts, withdraw() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reward Loss With Zero-Withdrawal In harvestAndWithdraw()",
+            "description": "Users don't get rewarded when withdrawing 0 amount.",
+            "severity": "medium",
+            "location": "PlanetFarm contract, harvestAndWithdraw() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Potential Sandwich Attacks To Maximize getTestaReward()/Minimize getTestaFee()",
+            "description": "Rewards can be manipulated by powerful miners through sandwich attacks.",
+            "severity": "medium",
+            "location": "TestaFarm and SpaceFarm contracts, activate() and firstActivate() functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved Sanity Checks For System/Function Parameters",
+            "description": "Lack of rigorous sanity checks for system-wide parameter updates.",
+            "severity": "info",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Duplicate Pool Detection and Prevention",
+            "description": "The addition of a new pool with a duplicate LP token can cause issues in the distribution of rewards to pools and stakers.",
+            "severity": "low",
+            "location": "add() function in multiple contracts (e.g., SpaceFarm)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Recommended Explicit Pool Validity Checks",
+            "description": "Lack of explicit sanity checks on pool validity can lead to issues in various functions, including set(), deposit(), withdraw(), emergencyWithdraw(), and updatePool().",
+            "severity": "info",
+            "location": "Multiple functions in multiple contracts (e.g., SpaceFarm, TestaFarm)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged account can withdraw full ETH balance, and referral reward computation is part of the critical path in the withdraw function.",
+            "severity": "medium",
+            "location": "PlanetFarm::emergencyWithdraw() and Station::withdraw()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Precision Loss due to Lack of Floating Support in Solidity",
+            "description": "The isStable() function in the UniswapOrbitConfig contract is susceptible to precision loss due to the lack of floating support in Solidity, which can lead to incorrect results.",
+            "severity": "n/a",
+            "location": "UniswapOrbitConfig contract, isStable() function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Violation of Checks-Effects-Interactions Principle",
+            "description": "EmergencyWithdraw function in TestaFarm contract violates the checks-effects-interactions principle, making it vulnerable to reentrancy attacks.",
+            "severity": "low",
+            "location": "TestaFarm::emergencyWithdraw()"
+        }
+    ]
+}

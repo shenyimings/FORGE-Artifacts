@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/stETH Price Oracle.md",
+    "project_info": {
+        "url": "https://github.com/lidofinance/curve-merkle-oracle",
+        "commit_id": "ae093b308999a564ed3f23d52c6c5dce946dbfa7",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "curve-merkle-oracle": "contracts/stETH Price Oracle/curve-merkle-oracle"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Block header incorrect input",
+            "description": "In the function for extracting data from block header, tx can fail without any information in case of incorrect input.",
+            "severity": "info",
+            "location": "StateProofVerifier.sol#L65"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible zero price for token",
+            "description": "The price for stETH = 0 until user calls the `submitState` function.",
+            "severity": "info",
+            "location": "StableSwapStateOracle.sol#L268"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Require without message",
+            "description": "In several functions, if revert occurs, then the user won't receive any information.",
+            "severity": "info",
+            "location": "StateProofVerifier.sol#L100, StableSwapStateOracle.sol#L466, StableSwapStateOracle.sol#L474"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Bad comment for hash generation",
+            "description": "The comment was unclear and made it impossible to check the constant hash.",
+            "severity": "info",
+            "location": "StableSwapStateOracle.sol#L95"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas saving in price calculation",
+            "description": "In the function for calculating price, gas can be saved when calculating variables `S_` and `c`.",
+            "severity": "info",
+            "location": "StableSwapPriceHelper.vy#L63-L72"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas saving when copying memory",
+            "description": "In the function for copy memory, gas can be saved by adding a simple check.",
+            "severity": "info",
+            "location": "RLPReader.sol#L350-L355"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Unused variable",
+            "description": "An unused variable was found in MerklePatriciaProofVerifier.sol.",
+            "severity": "info",
+            "location": "MerklePatriciaProofVerifier.sol#L37"
+        }
+    ]
+}

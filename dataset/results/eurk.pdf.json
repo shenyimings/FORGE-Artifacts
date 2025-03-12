@@ -1,0 +1,152 @@
+{
+    "path": "artifacts/eurk.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "main",
+        "address": "0x08ed36720987c86a195f404f7073cb534a20a15d",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "FiatTokenV3": "contracts/eurk/FiatTokenV3"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "ST - Stops Transactions",
+            "description": "The contract pauser has the authority to pause transactions for all users.",
+            "severity": "low",
+            "location": "contracts/v1/FiatTokenV1.sol#L244,272, contracts/v2/FiatTokenV2.sol#L99,137,190"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "MT - Mints Tokens",
+            "description": "The contract's master minter has the authority to give permission to minters to mint an allowed mint amount.",
+            "severity": "critical",
+            "location": "contracts/v1/FiatTokenV1.sol#L113"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "BC - Blacklists Addresses",
+            "description": "The contract's blacklister has the authority to stop addresses from transactions.",
+            "severity": "critical",
+            "location": "contracts/v1/Blacklistable.sol#L76"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "RSW - Redundant Storage Writes",
+            "description": "There are code segments that could be optimized to reduce redundant storage writes.",
+            "severity": "low",
+            "location": "contracts/v2/FiatTokenV3.sol#L51, contracts/v1.1/Rescuable.sol#L72, contracts/v1/Pausable.sol#L86, contracts/v1/Blacklistable.sol#L76,85,90"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "TCD - Transfers Contract's Tokens",
+            "description": "The contract rescuer has the authority to claim all the balance of the contract.",
+            "severity": "low",
+            "location": "contracts/v1.1/Rescuable.sol#L60"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "DKO - Delete Keyword Optimization",
+            "description": "The contract resets variables to the default state by setting the initial values, increasing gas cost.",
+            "severity": "low",
+            "location": "contracts/v1/FiatTokenV1.sol#L330"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "RDS - Redundant Data Structure",
+            "description": "The contract is using two data structures, one to determine if a user is a minter and the other to point to the allowed mint amount.",
+            "severity": "low",
+            "location": "contracts/v1/FiatTokenV1.sol#L313"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the Solidity naming conventions guidelines.",
+            "severity": "low",
+            "location": "Multiple files and lines (see report)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "L16 - Validate Variable Setters",
+            "description": "The contract performs operations on variables that have been configured on user-supplied input without proper zero-value checks.",
+            "severity": "low",
+            "location": "contracts/v2/FiatTokenV3.sol#L46,55"
+        }
+    ]
+}

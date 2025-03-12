@@ -1,0 +1,52 @@
+{
+    "path": "artifacts/RestaurantDeFi Standart Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x903a4645e5E4e416e3EE8FDA0A33dcC78FdF7527, 0x81BcAcAA5fCBA74212d82101160fc9369E38213d, 0x6826DdFD0fefB094F298a85c92FbbfCcaB0B3e8E",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "Timelock": "contracts/RestaurantDeFi Standart Smart Contract Security Audit/Timelock",
+            "MasterChef": "contracts/RestaurantDeFi Standart Smart Contract Security Audit/MasterChef",
+            "ResToken": "contracts/RestaurantDeFi Standart Smart Contract Security Audit/ResToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Centralized risk",
+            "description": "The function addLiquidity() sends operator addresses as a parameter, which can lead to a centralized address holding a significant portion of LP tokens.",
+            "severity": "low",
+            "location": "addLiquidity() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Function massUpdatePools() in masterChefRes contract uses a loop to update all loops from the poolInfo list, which can lead to an OUT_OF_GAS exception if the pool addresses list is too long.",
+            "severity": "low",
+            "location": "massUpdatePools() function in masterChefRes contract"
+        }
+    ]
+}

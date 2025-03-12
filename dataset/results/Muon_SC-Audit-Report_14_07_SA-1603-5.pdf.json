@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/Muon_SC-Audit-Report_14_07_SA-1603-5.pdf",
+    "project_info": {
+        "url": "https://github.com/muon-protocol/muon-tokenomics-contracts/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "muon-tokenomics-contracts": "contracts/Muon_SC-Audit-Report_14_07_SA-1603-5/muon-tokenomics-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Denial of Service; Inefficient Gas Modeling",
+            "description": "The lock() function gets a parameter list of tokens to be locked, and if one token in a list was not whitelisted, the whole transaction would be reverted.",
+            "severity": "medium",
+            "location": "./contracts/BondedToken.sol : lock()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ]
+            },
+            "title": "Coarse-Grained Authorization Model; Inefficient Gas Modeling",
+            "description": "Bonded token smart contract uses OpenZeppelin AccessControl and Ownable, leading to inefficient gas usage and possible errors.",
+            "severity": "medium",
+            "location": "./contracts/BondedToken.sol : pause(), unpause(), whitelistTokens(), setPublicTransfer(), setTreasury()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Storage Gaps",
+            "description": "No storage gaps are introduced in the contract, making it incompatible with upgradeable contracts using OpenZeppelin Upgrades.",
+            "severity": "medium",
+            "location": "./contracts/BondedToken.sol, ./contracts/Token.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "CEI Pattern Violation",
+            "description": "The Checks-Effects-Interactions pattern is violated in the lock() function, where state variables are updated after external calls.",
+            "severity": "medium",
+            "location": "./contracts/BondedToken.sol : lock()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Value Assignment",
+            "description": "Redundant value assignment to a state variable",
+            "severity": "low",
+            "location": "./contracts/BondedToken.sol : _initialize()"
+        }
+    ]
+}

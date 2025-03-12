@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-AirswapV4-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/airswap/airswap-protocols/tree/231cc79cdfa8d4dc4c6cf3152cc9a1c0802bcc86",
+        "commit_id": "231cc79cdfa8d4dc4c6cf3152cc9a1c0802bcc86",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "airswap-protocols": "contracts/PeckShield-Audit-Report-AirswapV4-v1/airswap-protocols"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Improved Order Hash Generation And Verification in Swap",
+            "description": "Inconsistent hash generation in the signature verification, protocolFee is not explicitly enforced to be equal to the order-included order.protocolFee.",
+            "severity": "low",
+            "location": "Swap::_getOrderHash()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Inconsistent Swap Protocol Fee Collection",
+            "description": "The protocol fee logic is inconsistent between Swap and SwapERC20 contracts, collecting fees from the sender in Swap and from the signer in SwapERC20.",
+            "severity": "low",
+            "location": "Swap and SwapERC20 contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged owner account has the potential to be compromised, allowing an attacker to invoke drainTo and steal funds.",
+            "severity": "medium",
+            "location": "Multiple Contracts (specifically, functions setStakingToken and drainTo in the Pool protocol)"
+        }
+    ]
+}

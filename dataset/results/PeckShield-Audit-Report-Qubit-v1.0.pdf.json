@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Qubit-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/PancakeBunny-finance/qubit-finance/tree/30aef6f",
+        "commit_id": "30aef6f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "qubit-finance": "contracts/PeckShield-Audit-Report-Qubit-v1/qubit-finance"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Reentrancy protection issue",
+            "description": "Inadequate reentrancy protection at the protocol-wide level",
+            "severity": "n/a",
+            "location": "Qubit Finance smart contract, Multiple Contracts, Business Logic"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Front-running vulnerability in repayBorrowBehalf()",
+            "description": "repayment amount of −1 can be taken advantage to launch a front-running borrow() operation, resulting in a higher borrowing balance for repayment.",
+            "severity": "low",
+            "location": "repayBorrowBehalf() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inefficient logic in removeMarket()",
+            "description": "current logic on market removal can be improved for gas efficiency.",
+            "severity": "low",
+            "location": "removeMarket() function, removeMarket() function in QoreAdmin contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant state/code issue",
+            "description": "unnecessary redundancies that can be safely removed.",
+            "severity": "info",
+            "location": "Qubit Finance smart contract, Multiple Contracts, e.g. QubitToken contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing event emission upon settings changes",
+            "description": "related events are not emitted when various important parameters are updated.",
+            "severity": "low",
+            "location": "Settings change handler function, setKeeper(), setQValidator(), and setQDistributor() functions in QoreAdmin contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Trust issue with admin keys",
+            "description": "Privileged owner account can modify sensitive system parameters, potentially undermining the MOAR design.",
+            "severity": "medium",
+            "location": "Admin key management system, Multiple Contracts (Qubit protocol)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unsound assumption in PriceCalculator on asset decimals",
+            "description": "getUnderlyingPrice() function makes an implicit assumption about the asset decimal, which may not always hold.",
+            "severity": "medium",
+            "location": "PriceCalculator contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect calculation of accruedQubit()",
+            "description": "The accruedQubit() function does not necessarily return the full rewards credited to the user.",
+            "severity": "low",
+            "location": "accruedQubit() function, QDistributor contract"
+        }
+    ]
+}

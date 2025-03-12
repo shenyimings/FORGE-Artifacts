@@ -1,0 +1,212 @@
+{
+    "path": "artifacts/1-lunainu.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "23c453771973292e8fe4542ed3fab4adbfd8fffcfb9d100eb489783685a2b161",
+        "address": "0xf05a8a840f09ac83b79875b4275cec1e60c2abdf",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.15+commit.e14f2714"
+        ],
+        "project_path": {
+            "BEP20LUNAINU": "contracts/1-lunainu/BEP20LUNAINU"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Stops Transactions",
+            "description": "The contract owner can stop transactions for all users.",
+            "severity": "low",
+            "location": "BEP20LUNAINU.sol#L356"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Transfers Contract's Tokens",
+            "description": "The contract owner can claim all the balance of the contract.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Transfers Liquidity to Team Wallet",
+            "description": "The contract owner can transfer up to 5% of the liquidity pool to their wallet every 2 minutes.",
+            "severity": "critical",
+            "location": "BEP20LUNAINU.sol#L532"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Blacklists Addresses",
+            "description": "The contract owner can stop addresses from transactions.",
+            "severity": "medium",
+            "location": "BEP20LUNAINU.sol#L431"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-369"
+                ]
+            },
+            "title": "Zero Division",
+            "description": "The contract uses variables that may be set to zero as denominators, leading to unpredictable results.",
+            "severity": "critical",
+            "location": "BEP20LUNAINU.sol#L371"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Decimal Division Precision",
+            "description": "Division of decimal numbers can result in rounding errors due to the way Solidity represents decimal numbers.",
+            "severity": "low",
+            "location": "BEP20LUNAINU.sol#L390,391,392,393"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Potential Transfer Revert Propagation",
+            "description": "The contract sends funds to a marketingFeeReceiver, teamFeeReceiver, and devFeeReceiver as part of the transfer flow, which can lead to revert propagation.",
+            "severity": "low",
+            "location": "BEP20LUNAINU.sol#L395,396,397"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Price Volatility Concern",
+            "description": "The contract accumulates tokens from taxes to swap them for ETH, which can lead to price volatility.",
+            "severity": "low",
+            "location": "BEP20LUNAINU.sol#L499"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant SafeMath Library",
+            "description": "The contract uses the SafeMath library, which is redundant in Solidity versions greater than or equal to 0.8.0.",
+            "severity": "low",
+            "location": "BEP20LUNAINU.sol#L9"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State Variables could be Declared Constant",
+            "description": "Some state variables can be declared as constant using the constant keyword.",
+            "severity": "low",
+            "location": "BEP20LUNAINU.sol#L195"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the Solidity naming conventions.",
+            "severity": "low",
+            "location": "BEP20LUNAINU.sol#L57,125,148,156,158,159,162,176,258,264,352,360,412,420,431,435,442,449,456,467,475,485,495,528,546,548,549,550,551,552,553"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing Events Arithmetic",
+            "description": "The contract is missing events arithmetic.",
+            "severity": "low",
+            "location": "BEP20LUNAINU.sol#L468,476"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Ownership Abuse",
+            "description": "The owner can drain the contract's tokens, transfer funds to the team's wallet and blacklist addresses.",
+            "severity": "high",
+            "location": "Auth, BEP20LUNA implementation contracts"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Unlimited Fees Setting",
+            "description": "There is a limit of max 15% fees, but no details on how it is enforced.",
+            "severity": "medium",
+            "location": "setFees_base1000 function in BEP20LUNA implementation contract"
+        }
+    ]
+}

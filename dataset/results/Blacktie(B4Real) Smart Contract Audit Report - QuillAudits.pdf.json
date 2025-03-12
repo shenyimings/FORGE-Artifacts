@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/Blacktie(B4Real) Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xaf294e4e2fe65c5de28bd0a3a073e6cf10d7ef6e",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.8.5+commit.a4f2e591"
+        ],
+        "project_path": {
+            "B4REAL": "contracts/Blacktie(B4Real) Smart Contract Audit Report - QuillAudits/B4REAL"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Transfer fee bypass",
+            "description": "If the \"to\" address is listed as true on the whitelist mapping and “waiveFees” is set to false, the fees payment can be bypassed by using the “approve” and “transferFrom” function.",
+            "severity": "high",
+            "location": "Contract - B4Real.sol, Function - transferFrom()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "No maximum transfer fee",
+            "description": "Admin can set transaction fees to whatever value they want (even 100%).",
+            "severity": "medium",
+            "location": "Contract - B4Real.sol, Function - setTaxFee()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma",
+            "description": "Contracts should be deployed with the same compiler version and flags that they have been tested with thoroughly.",
+            "severity": "info",
+            "location": "Contract - B4Real.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Transfer ownership should be a two-way process",
+            "description": "The transfer of ownership is crucial functionality in token contracts and it should be done by a two-step process so that the owner doesn't mistakenly transfer ownership to a false address.",
+            "severity": "info",
+            "location": "Contract - B4Real.sol, Function - transferOwnership()"
+        }
+    ]
+}

@@ -1,0 +1,185 @@
+{
+    "path": "artifacts/aptd.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x886fcb509b4ab3ccdf2f133cb89c5b4bd5c379f9",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "APTD": "contracts/aptd/APTD"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can stop transactions for all users excluding themselves",
+            "description": "The contract owner has authority to stop transactions for all users, which can be exploited to convert the contract into a honeypot.",
+            "severity": "critical",
+            "location": "contract.sol#L751, 806"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can increase fees beyond allowed limit",
+            "description": "The contract owner has authority to increase over the allowed limit of 25%, which can be exploited by calling updateBuyFees and updateSellFees functions with high percentage values.",
+            "severity": "critical",
+            "location": "contract.sol#L831, 837"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can transfer unlimited funds to team wallet",
+            "description": "The contract owner has authority to transfer funds without limit to the team wallet.",
+            "severity": "low",
+            "location": "contract.sol#L826"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Fixed swap address cannot be changed",
+            "description": "The swap address is assigned once in the constructor and it can not be changed, which may not be able to catch-up with future swap updates.",
+            "severity": "low",
+            "location": "contract.sol#L646"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Code segments can be optimized for performance",
+            "description": "Code segments can be optimized to consume less memory and execute more rapidly.",
+            "severity": "low",
+            "location": "contract.sol#L615, 619, 831, 836"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-561"
+                ]
+            },
+            "title": "Public functions that are never called by the contract should be declared external to save gas.",
+            "description": "Public functions that are never called by the contract can be declared external to save gas.",
+            "severity": "low",
+            "location": "contract.sol#L559, 567, 670, 674, 678, 682, 831, 837, 843, 853 and others"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "State variables that never change should be declared constant to save gas.",
+            "description": "State variables that never change can be declared constant to save gas.",
+            "severity": "low",
+            "location": "contract.sol#L598, 597, 599, 605"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-conformance to Solidity naming conventions",
+            "description": "Some variable names do not follow the Solidity naming convention.",
+            "severity": "low",
+            "location": "contract.sol#L25, 853, 857, 946, 950, 597, 598, 599, 601, 602 and others"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused state variables",
+            "description": "There are unused state variables that can be removed.",
+            "severity": "low",
+            "location": "contract.sol#L598, 599"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Missing events for critical arithmetic parameters",
+            "description": "There are functions that have no event emitted, so it is difficult to track off-chain changes.",
+            "severity": "low",
+            "location": "contract.sol#L831, 837, 843"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner can manipulate fees and stop transactions",
+            "description": "The owner can abuse admin functions to convert the contract into a honeypot, preventing users from selling.",
+            "severity": "n/a",
+            "location": "APTD Implementation (functions like updateBuyFees, updateSellFees, updateSwapPercentages, etc.)"
+        }
+    ]
+}

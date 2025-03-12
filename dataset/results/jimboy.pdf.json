@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/jimboy.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x0bcf961d6d1c13228d5e4c99cae48f5f8618ff6d",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.9+commit.e5eed63a"
+        ],
+        "project_path": {
+            "JIMBOY": "contracts/jimboy/JIMBOY"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "ST - Stops Transactions",
+            "description": "The contract owner has the authority to stop transactions for all users excluding the owner.",
+            "severity": "critical",
+            "location": "JIMBOY.sol#L319,323,326"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "ELFM - Exceeds Maximum Fees",
+            "description": "The owner can abuse admin functions to set excessive fees, potentially converting the contract into a honeypot.",
+            "severity": "high",
+            "location": "JIMBOY contract, various admin-only functions (e.g., `setFee`, etc.)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Admin Abuse",
+            "description": "The owner can abuse admin functions to stop transactions and manipulate fees, potentially converting the contract into a honeypot.",
+            "severity": "high",
+            "location": "JIMBOY contract, various admin-only functions (e.g., `setFee`, `toggleSwap`, etc.)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Potential Honeypot",
+            "description": "The owner can prevent users from selling tokens if they abuse the admin functions.",
+            "severity": "high",
+            "location": "JIMBOY contract, various admin-only functions (e.g., `setFee`, `toggleSwap`, etc.)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RVD - Redundant Variable Declaration",
+            "description": "The contract declares certain variables that are not used in a meaningful way by the contract.",
+            "severity": "low",
+            "location": "JIMBOY.sol#L153,171"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RED - Redundant Event Declaration",
+            "description": "The contract declares certain events that are not used by the contract.",
+            "severity": "low",
+            "location": "JIMBOY.sol#L186"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "PVC - Price Volatility Concern",
+            "description": "The contract accumulates tokens from taxes to swap them for ETH, potentially leading to price volatility.",
+            "severity": "low",
+            "location": "JIMBOY.sol#L534"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "RSW - Redundant Storage Writes",
+            "description": "The contract modifies the state of certain variables without checking if their current state is the same as the one passed as an argument.",
+            "severity": "low",
+            "location": "JIMBOY.sol#L539"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RSML - Redundant SafeMath Library",
+            "description": "The usage of the SafeMath library adds complexity, overhead and increases gas consumption unnecessarily.",
+            "severity": "low",
+            "location": "JIMBOY.sol"
+        }
+    ]
+}

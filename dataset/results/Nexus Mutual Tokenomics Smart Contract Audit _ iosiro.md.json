@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/Nexus Mutual Tokenomics Smart Contract Audit _ iosiro.md",
+    "project_info": {
+        "url": "https://github.com/NexusMutual/smart-contracts",
+        "commit_id": "d5a7d87bbc14fe6eb5f8c9f9b3e27d249833115c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smart-contracts": "contracts/Nexus Mutual Tokenomics Smart Contract Audit _ iosiro/smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Non-members allowed to swap",
+            "description": "NXM token contract's `canTransfer()` modifier is bypassed through the swapping functionality in the new `Ramm.sol` contract.",
+            "severity": "medium",
+            "location": "Ramm.sol#L191, Ramm.sol#L243"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Atomic manipulation of internal price",
+            "description": "Possible to affect the internal price of NXM by modifying the total supply of NXM or the Pool's capital without swapping, allowing for sandwiching transactions and extracting profit.",
+            "severity": "low",
+            "location": "Ramm.sol#L671"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Temporary denial of service",
+            "description": "Circuit-breaker mechanism could result in temporary denial of service if an attacker performs repeated swaps.",
+            "severity": "low",
+            "location": "Ramm.sol#L150"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Storage layout",
+            "description": "Discrepancies between the anticipated and actual storage allocation, potentially leading to state corruption during upgrades.",
+            "severity": "info",
+            "location": "Ramm.sol#L27"
+        }
+    ]
+}

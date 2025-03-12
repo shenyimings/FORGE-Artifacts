@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/2023_01_MilkyIce.pdf",
+    "project_info": {
+        "url": "https://github.com/codefunded/smartcontracts/tree/29243d5578765a6a3b70e4cbd52be80d4017ef54",
+        "commit_id": "29243d5578765a6a3b70e4cbd52be80d4017ef54",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smartcontracts": "contracts/2023_01_MilkyIce/smartcontracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Use of spot reserves in DEX pool",
+            "description": "The stake function allows to stake LP tokens for pools that contain the MIC token.",
+            "severity": "critical",
+            "location": "DEX pool (MIC_91e451_ 5.1), MultiERC20WeightedLocker contract, LiquidityValueCalculator.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unauthorized mint of staking contract tokens",
+            "description": "Functions stakeFor and collectRewardsFor are not protected and anyone can call them.",
+            "severity": "critical",
+            "location": "Staking contract (MIC_91e451_ 5.3), MintStaking, MintableToken contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Invalid value of _currentPeriodRewardsAmount variable",
+            "description": "The _notifyRewardAmount_ function sets _currentPeriodRewardsAmount_ variable to __amount_ while there is a case when rewards from the previous period remain and are taken into account when calculating the reward rate.",
+            "severity": "low",
+            "location": "Staking.sol#L198"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Invalid value returned by the _collectedRewardsInCurrentPeriod variable_",
+            "description": "The _notifyRewardAmount_ function sets _collectedRewardsInCurrentPeriod_ variable to _0_, and this variable is never increased on the rewards withdrawal.",
+            "severity": "low",
+            "location": "Staking.sol#L198"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Unused inheritance",
+            "description": "The MintStaking and DividendToken contracts inherit from Ownable contract. However, the onlyOwner modifier is not used in the contracts’ code.",
+            "severity": "info",
+            "location": "MintStaking.sol#L20 and DividentToken#L15"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating pragma",
+            "description": "The audited code uses a floating pragma, which allows compiling contracts with various versions of the compiler.",
+            "severity": "info",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ]
+            },
+            "title": "Draft version contract usage",
+            "description": "The DividendToken inherits from a draft version of ERC20Permit contract. Contract drafts may not be exhaustively tested, updated or changed.",
+            "severity": "info",
+            "location": "DividendToken.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent variable naming",
+            "description": "All but one constructor parameters in the DividentToken#L18 contract are prefixed with the underscore symbol. It is important to be consistent when naming variables.",
+            "severity": "info",
+            "location": "DividentToken.sol#L18"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Non-self-explanatory variable names",
+            "description": "The userDepositsAmount variable in _addDeposit function represents the number of deposits while its name suggests the value of deposits.",
+            "severity": "info",
+            "location": "MultiERC20WeightedLocker.sol#L465"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Favor push over pull",
+            "description": "The withdraw function calls collectRewards function. It is recommended to favor pulling tokens over pushing tokens.",
+            "severity": "info",
+            "location": "MultiERC20WeightedLocker.sol#L324"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary view function usage",
+            "description": "The lastTimeRewardApplicable function returns the current block.timestamp. This value can be obtained directly, depending on the need.",
+            "severity": "info",
+            "location": "Staking.sol"
+        }
+    ]
+}

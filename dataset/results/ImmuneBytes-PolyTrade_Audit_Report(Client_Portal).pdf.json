@@ -1,0 +1,83 @@
+{
+    "path": "artifacts/ImmuneBytes-PolyTrade_Audit_Report(Client_Portal).pdf",
+    "project_info": {
+        "url": "https://github.com/polytrade-finance/client-portal-contracts",
+        "commit_id": "8d399f242aca69dd12048e61a1f15bd44a520068",
+        "address": "0x8f256e58d0309Fcfb75506E4EE2beD32bcf997f9",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "client-portal-contracts": "contracts/ImmuneBytes-PolyTrade_Audit_Report(Client_Portal)/client-portal-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "The contract should verify the validity of Chainlink’s oracle data",
+            "description": "The getPrice() function of PriceFeeds contract does not check the validity and freshness of the chainlink oracle's price.",
+            "severity": "low",
+            "location": "PriceFeeds contract, getPrice() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Null address checks are not present at multiple places",
+            "description": "The setStableAggregator() function of PriceFeeds contract and setPricingTableAddress(), setPriceFeedAddress() function of Offer smart contract do not perform validation check for null address value.",
+            "severity": "low",
+            "location": "PriceFeeds contract, setStableAggregator() function; Offer smart contract, setPricingTableAddress(), setPriceFeedAddress() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "_checkParams() function is missing validity check for pricingId",
+            "description": "The _checkParams() function in Offer smart contract misses the validity check for the pricingId variable.",
+            "severity": "low",
+            "location": "Offer smart contract, _checkParams() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "The createOffer() function accepts any address as the stableAddress variable",
+            "description": "The createOffer() (and reserveRefund()) function of Offer smart contract can accept any ethereum address as the OfferItem.OfferParams.stableAddress variable.",
+            "severity": "low",
+            "location": "Offer smart contract, createOffer() function"
+        }
+    ]
+}

@@ -1,0 +1,242 @@
+{
+    "path": "artifacts/Morpho-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/morpho-labs/morpho-contracts",
+        "commit_id": "a861d50597ae047640727fd63afc3c3a9b0e1cbc",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "morpho-contracts": "contracts/Morpho-Spearbit-Security-Review/morpho-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong P2P exchange rate calculation",
+            "description": "Incorrect order of operations in _computeNewP2PExchangeRate function leads to wrong P2P rates throughout all markets.",
+            "severity": "critical",
+            "location": "MarketsManagerForAave.sol#L436"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "MatchingEngineForAave is using the wrong totalSupply in updateBorrowers",
+            "description": "Incorrect token address used to query scaledTotalSupply, leading to incorrect reward calculations.",
+            "severity": "critical",
+            "location": "MatchingEngineForAave.sol#L376-L385"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "RewardsManagerAave does not verify token addresses",
+            "description": "Lack of token address verification allows attackers to steal unclaimed rewards from all Morpho positions.",
+            "severity": "critical",
+            "location": "RewardsManagerForAave.sol#L145-L147"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "FullMath requires overflow behavior",
+            "description": "UniswapV3’s FullMath.sol relies on implicit overflow behavior, which reverts on overflows in version 0.8.",
+            "severity": "high",
+            "location": "FullMath.sol#L2"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Morpho’s USDT mainnet market can end up in broken state",
+            "description": "Non-standard USDT token requires resetting approval to zero before changing it, which can lead to a broken market state.",
+            "severity": "high",
+            "location": "PositionsManagerForAaveLogic.sol#L502"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong liquidation value when withdrawn amount is non-zero",
+            "description": "Using `assetData.liquidationValue` instead of `assetData.liquidationThreshold`.",
+            "severity": "low",
+            "location": "PositionsManagerForAaveLogic.sol#L438-L439"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "DDL should prevent inserting items with 0 value",
+            "description": "Inserting empty values may cause underperformance.",
+            "severity": "low",
+            "location": "DoubleLinkedList.sol#L83"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "insertSorted iterates more than max iterations parameter",
+            "description": "Iterating _maxIterations + 1 times instead of _maxIterations times.",
+            "severity": "low",
+            "location": "DoubleLinkedList.sol#L91"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "insertSorted does not behave like a FIFO for same values",
+            "description": "Not respecting the 'seniority' of users order.",
+            "severity": "low",
+            "location": "DoubleLinkedList.sol#L93"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "insertSorted inserts elements at wrong index",
+            "description": "Inserting elements after the last element instead of before.",
+            "severity": "low",
+            "location": "DoubleLinkedList.sol#L101"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Update remainingTo variable only when needed",
+            "description": "Calculate remainingTo inside if statement to avoid unnecessary calculations.",
+            "severity": "info",
+            "location": "PositionsManagerForAaveLogic.sol, _supply function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Store calculations in local variables to save gas",
+            "description": "Avoid additional SLOAD by storing currentReserveFactor, newSupplyP2PSPY, and newBorrowP2PSPY locally.",
+            "severity": "info",
+            "location": "MarketsManagerForAave.sol, _updateSPYs function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Declare variable as immutable/constant and remove unused variables",
+            "description": "Declare state variables as immutable or constant to save gas; remove unused variables for better readability.",
+            "severity": "info",
+            "location": "Various contracts (RewardsManagerForAave.sol, SwapManagerUniV2.sol, etc.)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Function does not revert if balance to transfer is zero",
+            "description": "safeTransfer() function and ReserveFeeClaimed event are called even when amountToClaim is 0; consider adding a check for this scenario.",
+            "severity": "info",
+            "location": "PositionsManagerForAave.sol, claimToTreasury() function"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rewards are ignored in the on-pool rate computation",
+            "description": "Morpho claims that the protocol is a strict improvement upon the underlying lending protocols, but high reward incentives paid out to on-pool users could yield a better rate than the P2P rate.",
+            "severity": "info",
+            "location": "Protocol level"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "User transfer AToken to Morpho or deposit on behalf of Morpho",
+            "description": "Users can deposit underlying assets to Aave on behalf of Morpho, resulting in stuck free AToken that cannot be redeemed for underlying and a better health factor for Morpho.",
+            "severity": "info",
+            "location": "LendingPool.sol (Aave), Morpho Position Manager contract"
+        }
+    ]
+}

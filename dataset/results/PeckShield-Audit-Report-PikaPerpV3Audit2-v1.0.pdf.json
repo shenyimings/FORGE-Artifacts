@@ -1,0 +1,125 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-PikaPerpV3Audit2-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/PikaProtocol/PikaPerpV2/tree/3dc49e9",
+        "commit_id": "3dc49e9",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "PikaPerpV2": "contracts/PeckShield-Audit-Report-PikaPerpV3Audit2-v1/PikaPerpV2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Incorrect Order Management Logic in OrderBook",
+            "description": "The _createOpenOrder() function may overwrite unintended orders due to incorrect order management logic.",
+            "severity": "low",
+            "location": "OrderBook contract, _createOpenOrder() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Inconsistent Order Management",
+            "description": "The createOpenOrder function does not validate the caller with require(msg.sender == _account || _validateManager(_account)), unlike the createCloseOrder function.",
+            "severity": "low",
+            "location": "OrderBook contract, createOpenOrder function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Suggested Adherence Of Checks-Effects-Interactions Pattern",
+            "description": "The liquidatePositions function violates the checks-effects-interactions principle, which can lead to reentrancy attacks.",
+            "severity": "low",
+            "location": "PikaPerpV3 contract, liquidatePositions function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Privileged Access to Critical Functions",
+            "description": "Privileged accounts have access to critical functions, such as minting tokens and toggling transfer allowances, which can be a counter-party risk to contract users.",
+            "severity": "n/a",
+            "location": "Pika contract (functions: `mint`, `setTransfersAllowed`), PositionManager contract (multiple functions)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Lack of Explicit Privileges Disclosure",
+            "description": "The list of extra privileges granted to privileged accounts is not explicit, which can lead to lack of awareness among protocol users.",
+            "severity": "info",
+            "location": "Pika protocol (general)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Lack of Event Emission",
+            "description": "The event ExecuteCloseOrder is not emitted when referralStorage is not configured.",
+            "severity": "medium",
+            "location": "OrderBook contract, executeCloseOrder function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "CWE-841: Improper Enforcement of Behavioral Workflow",
+            "description": "The `modifyMargin` function does not ensure the position after margin modification is healthy.",
+            "severity": "n/a",
+            "location": "PikaPerpV3 contract, `modifyMargin` function"
+        }
+    ]
+}

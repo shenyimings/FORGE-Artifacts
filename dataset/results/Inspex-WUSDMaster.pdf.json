@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/Inspex-WUSDMaster.pdf",
+    "project_info": {
+        "url": "https://github.com/WaultFinance/WUSD",
+        "commit_id": "91c541c2f1c0ac781ddcfb2be6a62555a5e1e8d1",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "WUSD": "contracts/Inspex-WUSDMaster/WUSD"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Share Calculation in Redeeming Process",
+            "description": "Front-running attack can gain additional $USDT from the WUSDMaster while redeeming $WUSD.",
+            "severity": "high",
+            "location": "WUSDMaster contract, redeem() function and claimUsdt() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "USDT Draining with withdrawUsdt() function",
+            "description": "$USDT stored in the WUSDMaster can be drained by the WUSDMaster contract owner.",
+            "severity": "high",
+            "location": "WUSDMaster contract, withdrawUsdt() function and setStrategistAddress() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "WUSD Arbitrary Minting with mint() function",
+            "description": "The WUSD contract owner can arbitrarily mint the $WUSD token without any limit.",
+            "severity": "high",
+            "location": "WUSD contract, mint() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ]
+            },
+            "title": "Transaction Ordering Dependence",
+            "description": "Attackers can perform a front-running attack to gain profit in the stake() and claimUsdt() functions.",
+            "severity": "medium",
+            "location": "WUSDMaster contract, stake() and claimUsdt() functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "WEX Draining by WexWithdrawer Contract",
+            "description": "The owner of the WexWithdrawer contract can drain all $WEX from the WUSDMaster contract.",
+            "severity": "medium",
+            "location": "WexWithdrawer contract, withdraw() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Improper Modification of Contract State",
+            "description": "Changing wexPermille or treasuryPermille states can cause $WUSD to be unredeemable or $USDT to be unusable.",
+            "severity": "low",
+            "location": "WUSDMaster contract, setFeePermille() and setTreasuryPermille() functions"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Improper Input Validation",
+            "description": "Setting an improper swap path can cause users' tokens to be stuck in the WUSDMaster contract.",
+            "severity": "low",
+            "location": "WUSDMaster contract, setSwapPath() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change the critical state variables to gain additional profit.",
+            "severity": "low",
+            "location": "WUSDMaster contract, functions setSwapPath(), setWexPermille(), setTreasuryPermille(), setFeePermille(), setTreasuryAddress(), setStrategistAddress(), and maxStakeAmount()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Missing Kill-Switch Mechanism in WUSDMaster",
+            "description": "There is no mechanism to prevent contracts from potential failures.",
+            "severity": "low",
+            "location": "WUSDMaster contract, functions stake(), claimWusd(), redeem(), and claimUsdt()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Inexplicit Solidity Compiler Version",
+            "description": "The Solidity compiler versions declared in the smart contracts were not explicit.",
+            "severity": "info",
+            "location": "WUSD, WUSDMaster, and WexWithdrawer contracts"
+        }
+    ]
+}

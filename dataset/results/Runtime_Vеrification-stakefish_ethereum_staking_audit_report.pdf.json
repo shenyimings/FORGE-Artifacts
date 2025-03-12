@@ -1,0 +1,242 @@
+{
+    "path": "artifacts/Runtime_Vеrification-stakefish_ethereum_staking_audit_report.pdf",
+    "project_info": {
+        "url": "https://github.com/stakefish/eth2-validation-services-contract",
+        "commit_id": "d91928f3a270f6115831fe3a21a69eb98bf57b26",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "eth2-validation-services-contract": "contracts/Runtime_Vеrification-stakefish_ethereum_staking_audit_report/eth2-validation-services-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Transaction Order Dependence",
+            "description": "Race-condition in approve and approveWithdrawal methods",
+            "severity": "medium",
+            "location": "StakefishServicesContract.sol, approve and approveWithdrawal methods"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possibility of disproportional payments after services end",
+            "description": "Depositors may not receive their fair share if they withdraw too early",
+            "severity": "high",
+            "location": "StakefishServicesContract.sol, Withdrawn phase"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "StakefishERC721Wrapper non-conformance with ERC721",
+            "description": "Method does not throw for zero-address transfer",
+            "severity": "high",
+            "location": "StakefishERC721Wrapper.sol, transfer methods"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Vulnerability in StakefishServicesContract.receive()",
+            "description": "Loss of user funds through plain Ether transfer",
+            "severity": "medium",
+            "location": "StakefishServicesContract.sol, receive function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "Initialization of the logic contract of StakefishServicesContract",
+            "description": "Uninitialized implementation contract may lead to attacks",
+            "severity": "n/a",
+            "location": "StakefishServicesContractFactory.sol, constructor"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "DoS with failed calls for endOperatorServices()",
+            "description": "Operators may become non-functioning, locking user funds",
+            "severity": "n/a",
+            "location": "StakefishServicesContract.sol, endOperatorServices function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing check for exit date during endOperatorServices",
+            "description": "Lack of proper check for exit date condition in endOperatorServices function",
+            "severity": "n/a",
+            "location": "StakefishServicesContract, endOperatorServices function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Dependency between salt and operatorDataCommitment",
+            "description": "The parameters of StakefishServicesContractFactory.deployContract are not independent",
+            "severity": "n/a",
+            "location": "StakefishServicesContractFactory, deployContract function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Exit date change after user’s verification",
+            "description": "The operator can change the exit date to an earlier date even after users have verified it",
+            "severity": "n/a",
+            "location": "StakefishServicesContract, commitment scheme"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Input validation for commission rate",
+            "description": "The validity of _commissionRate is not checked in the StakefishServicesContract.initialize() function",
+            "severity": "n/a",
+            "location": "StakefishServicesContract, initialize function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "Unused storage slots in ERC721 wrappers",
+            "description": "Unused storage slots are not deleted in StakefishERC721Wrapper.redeemTo()",
+            "severity": "n/a",
+            "location": "StakefishERC721Wrapper, redeemTo function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Input validation for StakefishERC721Wrapper.approve()",
+            "description": "No explicit check for the existence of _owners[tokenId] in StakefishERC721Wrapper.approve()",
+            "severity": "n/a",
+            "location": "StakefishERC721Wrapper, approve function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Missing setters or immutable annotations in StakefishServicesContractFactory",
+            "description": "_servicesContractImpl variable cannot be updated later after initialization and is not declared immutable",
+            "severity": "n/a",
+            "location": "StakefishServicesContractFactory, _servicesContractImpl variable"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Griefing attacks for contract creations in StakefishServicesContractFactory",
+            "description": "Salt values are revealed in the createContract() or createMultipleContracts() calls, which can be exploited for griefing attacks",
+            "severity": "n/a",
+            "location": "StakefishServicesContractFactory, createContract() and createMultipleContracts() functions"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential reentrancy vulnerability in ERC721 wrappers",
+            "description": "Potential attack surface of reentrancy in the mintTo() function of the ERC721 wrapper",
+            "severity": "n/a",
+            "location": "StakefishERC721Wrapper, mintTo function"
+        }
+    ]
+}

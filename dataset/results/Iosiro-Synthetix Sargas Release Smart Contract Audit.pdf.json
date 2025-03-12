@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/Iosiro-Synthetix Sargas Release Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix",
+        "commit_id": "fa160ff7d78cc22cd289d7c512e98195c40768f7",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix": "contracts/Iosiro-Synthetix Sargas Release Smart Contract Audit/synthetix"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "Not using safe ERC-20 transfers",
+            "description": "CollateralErc20 functions did not correctly validate the return value, which may result in erroneous behavior in the system.",
+            "severity": "low",
+            "location": "contracts/CollateralErc20.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Implement skew limit",
+            "description": "The getShortRate function used the ratio of shorts to longs for a synth, which could result in an excessive short rate.",
+            "severity": "low",
+            "location": "CollateralManager.sol#L241"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "Design comments (informational)",
+            "description": "Several informational issues regarding interest accrual approximation, unused contract removal, gas optimizations, missing service fee, and comment improvements.",
+            "severity": "info",
+            "location": "Various contracts (Collateral.sol, CollateralErc20.sol, CollateralManager.sol)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential gas issues",
+            "description": "The exceedsDebtLimit calculation needs to make external calls to each of the long and short synths, which will likely run into the gas limit on Optimism.",
+            "severity": "low",
+            "location": "CollateralManager.sol#L274"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Max decimal assumption",
+            "description": "An assumption in the ERC-20 implementation that token collaterals will have a maximum of 18 decimals, which may revert when trying to open loans.",
+            "severity": "low",
+            "location": "Contracts/CollateralErc20.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Gas optimization",
+            "description": "The closeWithCollateral function can include a check for whether collateral > 0 to avoid attempting 0 value transfers.",
+            "severity": "low",
+            "location": "CollateralShort.sol#L61"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Missing revert message",
+            "description": "The revert performed in the accrueInterest function is missing a revert message.",
+            "severity": "low",
+            "location": "CollateralManager.sol#L489"
+        }
+    ]
+}

@@ -1,0 +1,152 @@
+{
+    "path": "artifacts/Coinspect-Liquity Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/liquity/dev",
+        "commit_id": "dd7f59b980e7dab1cebc84c017db3a2c4caa522c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "dev": "contracts/Coinspect-Liquity Audit/dev"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "TCR manipulation enables sudden liquidations",
+            "description": "Missing restrictions in closeTrove enable attackers to force the system into Recovery Mode without any ETH price swing.",
+            "severity": "high",
+            "location": "closeTrove function, BorrowerOperations.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "liquidateBatch does not verify processed troves are not closed",
+            "description": "The liquidateBatch function does not check if the parameters passed to the function are active troves.",
+            "severity": "low",
+            "location": "TroveManager.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inflating fees facilitated in low LQTY pool participation scenario",
+            "description": "Attackers could inflate the system fees in order to break the LUSD hard peg mechanism.",
+            "severity": "medium",
+            "location": "TroveManager.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Liquidations incentives misaligned with system overall health (TCR)",
+            "description": "Batch liquidations affected the incentives mechanisms, enabling liquidators to target undercollateralized troves with higher ICR if their liquidation is more profitable.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "No emergency mechanism for handling bad oracles values",
+            "description": "If no good value is found in both oracles, the last known value is returned, operations do not stop or pause when both oracles are in a bad state.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Flash loan attack to manipulate fee rates",
+            "description": "Attackers can use flash loans to stake LQTY, increase fees, and then redeem LUSD for ETH, recouping the costs.",
+            "severity": "high",
+            "location": "Liquity protocol, TroveManager.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Liquidators incentivized to target high ICR troves over low ICR troves",
+            "description": "The current liquidation mechanism prioritizes troves with higher collateralization ratios, which can lead to suboptimal liquidations.",
+            "severity": "medium",
+            "location": "TroveManager.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Untested events in contracts",
+            "description": "Many events emitted by the contracts are not adequately tested, which can lead to misbehavior or errors.",
+            "severity": "low",
+            "location": "Various contracts (e.g., TroveManager.sol, BorrowerOperations.sol)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unoptimized use of SafeMath functions",
+            "description": "Some divisions by constants can be performed directly without using SafeMath, potentially reducing gas costs.",
+            "severity": "low",
+            "location": "Various contracts (e.g., LiquityMath.sol)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Miscellaneous issues",
+            "description": "Various minor issues were identified in the codebase, including typos and unfinished TODO comments.",
+            "severity": "low",
+            "location": "Various contracts and files"
+        }
+    ]
+}

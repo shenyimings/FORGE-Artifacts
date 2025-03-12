@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/BetaPulsar.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "78f9",
+        "address": "0x1398d3a7d433dce5d5AAC65Ec5017de2bDfD78f9",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "BetaPulsarToken": "contracts/BetaPulsar/BetaPulsarToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "Sending tokens to the dead address in overridden _transfer functions instead of burning them in token contract.",
+            "severity": "medium",
+            "location": "Token contract, _transfer function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "Fee burn address",
+            "description": "Fee burn address is not the zero or dead address, so deposit fee will be transferred directly to some account, but will not be burnt",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "The updateEmissionRate function can fail due to the block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "UpdateEmissionRate function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "add function issue",
+            "description": "If some LP token is added to the contract twice using function add, then the total amount of reward in function updatePool will be incorrect.",
+            "severity": "low",
+            "location": "Add function"
+        }
+    ]
+}

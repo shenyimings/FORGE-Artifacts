@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/Binamon Energy Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xd8813B5Dfa9AbEB693F217Bb905ec99B66FB017C",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "BNRG": "contracts/Binamon Energy Smart Contract Audit Report - QuillAudits/BNRG"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Denial of Service in Transactions [Restricted Mode]",
+            "description": "An attacker can exploit a modifier to prevent bots and limit transactions, blocking all transactions that a user can do.",
+            "severity": "high",
+            "location": "Modifier launchRestrict"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Approve Race",
+            "description": "A racing condition in the approve function allows a spender to get both approval amounts of two transactions.",
+            "severity": "medium",
+            "location": "Function approve"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Missing Address Validation",
+            "description": "Certain functions lack address safety checks, making tokens inaccessible or burnable in perpetuity.",
+            "severity": "low",
+            "location": "Functions setStakingContract, allowBuyingBoosters, and deliver"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of MultiSig Transactions",
+            "description": "The staking contract address can be changed by a single executor role, enabling malicious actions.",
+            "severity": "medium",
+            "location": "Function setStakingContract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Usage of Block timestamp",
+            "description": "Block.timestamp is used, but it may not reflect the current time accurately and can be influenced by miners.",
+            "severity": "low",
+            "location": "Modifier launchRestrict"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Contracts should be deployed with a specific compiler version to avoid bugs.",
+            "severity": "info",
+            "location": "pragma solidity"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ]
+            },
+            "title": "Public function that could be declared external",
+            "description": "Some public functions can be declared external to save gas.",
+            "severity": "info",
+            "location": "Various functions"
+        }
+    ]
+}

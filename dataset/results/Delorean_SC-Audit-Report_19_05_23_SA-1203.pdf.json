@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/Delorean_SC-Audit-Report_19_05_23_SA-1203.pdf",
+    "project_info": {
+        "url": "https://github.com/delorean-exchange/dlx-contracts",
+        "commit_id": "767fb3182ea8f2aa6a2606be285a776059ce8434",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "dlx-contracts": "contracts/Delorean_SC-Audit-Report_19_05_23_SA-1203/dlx-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "The owner of the YieldData.sol contract can change the writer from the YieldSlice contract to any desired address, potentially leading to unauthorized manipulation of data.",
+            "severity": "high",
+            "location": "./src/data/YieldData.sol : setWriter()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Data Consistency",
+            "description": "Using a hardcoded deadline of 1 second for a swap on Uniswap V3 leaves very little time for the transaction to be included in a block, exposing users to potential risks.",
+            "severity": "high",
+            "location": "./src/liquidity/UniswapV3LiquidityPool.sol : swap()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Data Consistency",
+            "description": "The transferOwnership function in the YieldSlice contract does not prevent transferring ownership of credit or debt slices to the YieldSlice contract itself or redundant transfers to the current owner.",
+            "severity": "high",
+            "location": "./src/core/YieldSlice.sol : transferOwnership(), debtSlice(), mintFromYield(), creditSlice(), receiveNPV()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Highly Permissive Role Access - Undocumented Behavior",
+            "description": "The Gov role in YieldSlice can set the debt fee and the credit fee to extremely high values without proper documentation.",
+            "severity": "high",
+            "location": "./src/core/YieldSlice.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Denial of Service - Loops Gas Limit",
+            "description": "Transaction execution costs in generatedDebt() and generatedCredit() functions can reach the Gas limit, potentially causing a Denial of Service.",
+            "severity": "high",
+            "location": "./src/core/YieldSlice.sol : generatedDebt(), generated Credit()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-Finalized Code",
+            "description": "The code contains unfinalized imports, which is not suitable for production.",
+            "severity": "medium",
+            "location": "Multiple files"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing Event for Critical Value Update",
+            "description": "Critical state changes do not emit events, making it difficult to track changes off-chain.",
+            "severity": "medium",
+            "location": "Multiple files"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "The project uses floating pragmas ^0.8.13, which can lead to potential issues.",
+            "severity": "low",
+            "location": "Multiple files"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Import",
+            "description": "UniswapV3LiquidityPool.sol imports IUniswapV3Factory.sol but does not use it.",
+            "severity": "low",
+            "location": "./src/liquidity/UniswapV3LiquidityPool.sol"
+        }
+    ]
+}

@@ -1,0 +1,152 @@
+{
+    "path": "artifacts/ackee-blockchain-axelar-6-report.pdf",
+    "project_info": {
+        "url": "https://github.com/axelarnetwork/axelar-cgp-solidity/tree/9f9ca0d597ba5237e5f17cadfccf75b60f2aa9f0",
+        "commit_id": "9f9ca0d597ba5237e5f17cadfccf75b60f2aa9f0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "axelar-cgp-solidity": "contracts/ackee-blockchain-axelar-6-report/axelar-cgp-solidity"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Ignored return values on LocalAsset interface",
+            "description": "The interface LocalAsset is returning a boolean value about success for each function, but it should be checked in the contract.",
+            "severity": "high",
+            "location": "XC20 Wrapper/contracts/XC20Wrap per.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Floating dependency on AxelarGateway",
+            "description": "The configuration file package.json is holding a floating dependency on AxelarGateway, which can lead to deployment with an unwished version.",
+            "severity": "medium",
+            "location": "XC20 Wrapper"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Pitfalls of upgradeability",
+            "description": "The setup function in the logic contract has no access controls, which can lead to a changed implementation address.",
+            "severity": "info",
+            "location": "XC20 Wrapper/contracts/XC20Wrap per.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ]
+            },
+            "title": "The owner can change arbitrarily operatorship and potentially cause DoS",
+            "description": "The owner can transfer operatorship to an arbitrary set of addresses, which can block operations on the protocol.",
+            "severity": "info",
+            "location": "Solidity CGP Gateway/contracts/AxelarAuthMultisig.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "XC20Wrapper owner has escalated privileges",
+            "description": "The owner can add an arbitrary token with the matching interface, which can lead to malicious behavior.",
+            "severity": "info",
+            "location": "XC20 Wrapper/contracts/XC20Wrap per.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing unit tests",
+            "description": "The project is missing unit tests, which can lead to hidden issues in the system.",
+            "severity": "info",
+            "location": "XC20 Wrapper"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ]
+            },
+            "title": "Usage of solc optimizer",
+            "description": "The project uses solc optimizer, which may lead to unexpected bugs.",
+            "severity": "info",
+            "location": "/"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Typo in the variable name",
+            "description": "The variable implementaion_ should be implementation_.",
+            "severity": "info",
+            "location": "XC20 Wrapper/contracts/Proxy.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Missing events",
+            "description": "Many places in the codebase lack logging, which can make incident analysis difficult.",
+            "severity": "info",
+            "location": "XC20 Wrapper"
+        }
+    ]
+}

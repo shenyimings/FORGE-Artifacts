@@ -1,0 +1,242 @@
+{
+    "path": "artifacts/Runtime_Vеrification-StakeWise.pdf",
+    "project_info": {
+        "url": "https://github.com/stakewise/contracts",
+        "commit_id": "19da824f44079c2b94c8cca84de77f5bdf3f0e54",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Runtime_Vеrification-StakeWise/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Flaws in StakedTokens contract implementation",
+            "description": "The rewardRates[] mapping in StakedTokens does not store the user's reward rate separately for each token.",
+            "severity": "n/a",
+            "location": "contracts/tokens/StakedTokens.sol#L212"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Error in RewardEthToken._transfer() implementation",
+            "description": "Users can increase their rwETH balance from a negative value to zero by sending a transaction of RewardEthToken.transfer(recipient, 0) for any non-zero recipient address.",
+            "severity": "n/a",
+            "location": "contracts/tokens/RewardEthToken.sol#L106"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Off-by-one error in consensus condition for balance reporting oracles",
+            "description": "The implementation of the consensus condition has an off-by-one error, allowing conflicting values to be updated on different chains.",
+            "severity": "n/a",
+            "location": "contracts/access/BalanceReporters.sol#L151"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Total supply of stETH/rwETH tokens could exceed the actual balance of the validator pool",
+            "description": "The total supply of stETH/rwETH tokens could exceed the actual balance of the validator pool in case users' balances fall below zero.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "StakedEthToken.balanceOf() could revert",
+            "description": "StakedEthToken.balanceOf() will revert for an user whose balance of stETH + rwETH tokens falls below zero.",
+            "severity": "n/a",
+            "location": "contracts/tokens/StakedEthToken.sol#L75"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Malicious balance reporter attack",
+            "description": "Attack allows malicious reporter to earn free rewards by stealing newly generated rewards",
+            "severity": "n/a",
+            "location": "BalanceReporters, RewardEthToken.updateTotalRewards(), StakedTokens.stakeTokens() and withdrawTokens()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Rounding errors in rewardPerToken computation",
+            "description": "Rounding-towards-zero division can cause inaccurate reward distributions",
+            "severity": "n/a",
+            "location": "RewardEthToken.updateTotalRewards(), RewardEthToken.rewardOf()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Precision losses in individual reward computations",
+            "description": "Precision losses can lead to distributing less amount of rewards to users",
+            "severity": "n/a",
+            "location": "RewardEthToken.updateRewardCheckpoint(), StakedTokens._withdrawRewards()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Token reward updates skipped for disabled tokens",
+            "description": "Users don't receive their share of rewards when token is disabled",
+            "severity": "n/a",
+            "location": "StakedTokens.withdrawTokens()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Ineffective permission requirement",
+            "description": "Same effect can be achieved by RewardEthToken.transfer()",
+            "severity": "n/a",
+            "location": "RewardEthToken.updateRewardCheckpoint(), RewardEthToken.transfer()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unfair service fee charging",
+            "description": "Maintainers don't refund service fees when penalties are imposed",
+            "severity": "n/a",
+            "location": "RewardEthToken, penalty distribution mechanism"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Gas optimization for transfer and rewardOf functions",
+            "description": "Optimizations can save gas costs for storage updates and reads",
+            "severity": "n/a",
+            "location": "StakedEthToken._transfer(), RewardEthToken._transfer(), rewardOf()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Arithmetic overflow in Solos",
+            "description": "Block.timestamp + cancelLockDuration could overflow",
+            "severity": "n/a",
+            "location": "Solos"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Arithmetic overflow in BalanceReporters",
+            "description": "getRoleMemberCount(REPORTER_ROLE) * 2 could overflow",
+            "severity": "n/a",
+            "location": "BalanceReporters"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing negative tests for require() assertions in claimRewards()",
+            "description": "No tests for the case of “msg.sender != stakedTokens”",
+            "severity": "n/a",
+            "location": "RewardEthToken.claimRewards()"
+        }
+    ]
+}

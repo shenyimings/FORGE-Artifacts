@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/QuillAudit-veToken_Finance_Smart_Contract_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/vetoken-finance/vetoken-contracts",
+        "commit_id": "3ed5fc8f60f16f05f5eb2139e8b02c78436ee5a6",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "vetoken-contracts": "contracts/QuillAudit-veToken_Finance_Smart_Contract_Audit_Report/vetoken-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ],
+                "3": [
+                    "CWE-835"
+                ]
+            },
+            "title": "Infinite loop possibility",
+            "description": "The array `extraRewards` is used in loops without having any limits, which might hit the block's gas limit if those addresses are too many.",
+            "severity": "low",
+            "location": "Contract - PickleBaseRewardPool.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing events at state changing functions",
+            "description": "It is recommended to emit an event whenever there is a state-changing function.",
+            "severity": "low",
+            "location": "Contract - PickleBaseRewardPool.sol, Contract - PickleBooster.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Unnecessary approval",
+            "description": "Approval to rewardContract/ _stakeAddress is set to first 0 and then the required amount.",
+            "severity": "info",
+            "location": "Contract - PickleBooster.sol, Contract - PickleDepositor.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary variable assignment",
+            "description": "The variables `feeDistro`, `feeToken`, and `treasury` have empty assignments in the constructor.",
+            "severity": "info",
+            "location": "Contract - PickleBooster.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Consider using latest solidity version",
+            "description": "It is recommended to use the latest solidity version as there are many breaking changes and security optimizations implemented.",
+            "severity": "info",
+            "location": "Contract - PickleBaseRewardPool.sol, Contract - PickleBooster.sol, Contract - PickleDepositor.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Lack of event emissions",
+            "description": "It is recommended to emit an event whenever there is a state-changing function.",
+            "severity": "low",
+            "location": "Contract - PickleDepositor.sol"
+        }
+    ]
+}

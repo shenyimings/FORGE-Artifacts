@@ -1,0 +1,359 @@
+{
+    "path": "artifacts/EnergyWebAG_03022023_SCAudit_Report_SA-816-1.pdf",
+    "project_info": {
+        "url": "https://github.com/energywebfoundation/greenproof-sdk/tree/master/packages/greenproof-contracts",
+        "commit_id": "4d9d110525e716da974f554ce8a29c003527d627",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "greenproof-sdk": "contracts/EnergyWebAG_03022023_SCAudit_Report_SA-816-1/greenproof-sdk"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "H01. Data Consistency",
+            "description": "In `_getVoters()` function may return an array with empty elements, leading to rewards being transferred to address(0).",
+            "severity": "high",
+            "location": "./contracts/libraries/LibVoting.sol : _getVoters()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "M01. Denial of Service (DoS)",
+            "description": "Nested for loop may result in DoS if the array gets too large.",
+            "severity": "medium",
+            "location": "./contracts/facets/VotingFacet.sol : cancelExpiredVotings()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "M02. Denial of Service (DoS)",
+            "description": "While loop may result in DoS if the array gets too large.",
+            "severity": "medium",
+            "location": "./contracts/libraries/LibReward.sol : payReward()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "M03. Contradiction - Documentation Mismatch",
+            "description": "Comment and documentation mismatch may lead to unexpected contract behavior.",
+            "severity": "medium",
+            "location": "./contracts/facets/VotingFacet.sol : removeWorker()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "M04. Requirements Violation",
+            "description": "Code does not follow the documented requirement for voting sessions.",
+            "severity": "medium",
+            "location": "./contracts/facets/VotingFacet.sol : vote()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "M05. Contradiction - Missing Functionality",
+            "description": "No functionality to update the Claim Revocation Registry address.",
+            "severity": "medium",
+            "location": "./contracts/Greenproof.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "M06. Inconsistent Data",
+            "description": "_getAmountHash() function may lead to a Denial of Service due to loss of precision.",
+            "severity": "medium",
+            "location": "./contracts/libraries/LibIssuer.sol : _getAmountHash()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "M07. Best Practice Violation",
+            "description": "Using transfer() and send() functions may lead to denial of service situations for specific accounts.",
+            "severity": "medium",
+            "location": "./contracts/libraries/LibReward.sol : payReward() and ./contracts/libraries/LibVoting.sol : _rewardWinners()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "M08. Contradiction - Missing Validation",
+            "description": "requestProofIssuance() function does not check if the target is an ERC1155Receiver implementer.",
+            "severity": "medium",
+            "location": "./contracts/facets/IssuerFacet.sol : requestProofIssuance()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L01. Floating Pragma",
+            "description": "Locking the pragma helps ensure that contracts are not accidentally deployed using an outdated compiler version.",
+            "severity": "low",
+            "location": "./contracts/Greenproof.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "State Variable Default Visibility",
+            "description": "Inexplicit visibility of state variables",
+            "severity": "low",
+            "location": "LibClaimManager.sol, LibIssuer.sol, LibReward.sol, LibVoting.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inefficient Gas Model",
+            "description": "Reading from storage costs more gas than reading from memory",
+            "severity": "low",
+            "location": "LibReward.sol : payReward()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation",
+            "description": "Non-compliance with Solidity style guide",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Unfinished NatSpec",
+            "description": "Incomplete NatSpec documentation",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unindexed Events",
+            "description": "Improper indexing of event parameters",
+            "severity": "low",
+            "location": "IVoting.sol : VotingSessionExpired(), LibVoting.sol : multiple events"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Imports",
+            "description": "Unnecessary imports leading to increased gas consumption",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Override Specifier",
+            "description": "Unnecessary use of override specifier",
+            "severity": "low",
+            "location": "IssuerFacet.sol, ProofManagerFacet.sol, VotingFacet.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Code Consistency",
+            "description": "Inconsistency in handling reverts and error messages",
+            "severity": "low",
+            "location": "IssuerFacet.sol, ProofManagerFacet.sol, VotingFacet.sol"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Validation",
+            "description": "Unnecessary require statements leading to increased gas consumption",
+            "severity": "low",
+            "location": "IssuerFacet.sol : safeTransferFrom(), safeBatchTransferFrom()"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Code Consistency",
+            "description": "Inconsistency in accessing data",
+            "severity": "low",
+            "location": "VotingFacet.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inefficient Gas Model",
+            "description": "Reading from storage costs more gas than reading from memory",
+            "severity": "low",
+            "location": "VotingFacet.sol : getWinningMatches()"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicated Event Declarations",
+            "description": "Duplicate event declarations",
+            "severity": "low",
+            "location": "IGreenProof.sol, IReward.sol, IVoting.sol, LibVoting.sol"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Code",
+            "description": "Unused code declarations",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Storage Variable",
+            "description": "Redundant storage variable voteToCertificates",
+            "severity": "low",
+            "location": "LibIssuer.sol"
+        }
+    ]
+}

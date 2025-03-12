@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/BlockSec-blocksec_arken_v1.0-signed.pdf",
+    "project_info": {
+        "url": "https://github.com/arken-lab/arken-swap-protocol",
+        "commit_id": "b524132b67fbc2922f4d6ccda3483e8f10ad60e7",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "arken-swap-protocol": "contracts/BlockSec-blocksec_arken_v1/arken-swap-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Painless harvest of the assets accidentally received by the contract",
+            "description": "The ArkenDexTrader.sol contract will never reserve any asset after helping users trade their tokens, allowing any user to harvest these assets by invoking the ‘trade‘ function with or without executing any swap.",
+            "severity": "low",
+            "location": "ArkenDexTrader.sol contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Trading without any cost",
+            "description": "The tradeStopLimit function in the ArkenDexV4.sol contract allows users to trade without fee payment when stopLimitFee = 0 and minimumStopLimitFee = 0 are set.",
+            "severity": "high",
+            "location": "ArkenDexV4.sol contract, tradeStopLimit function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Unvalidated msg.sender’s source token amount",
+            "description": "Lack of validation of `desc.amountIn` when source token is not `_ETH_`, potentially causing a transaction revert if `msg.sender` does not have enough source tokens.",
+            "severity": "n/a",
+            "location": "trade function in ArkenDexV4.sol contract, lines 130-162"
+        }
+    ]
+}

@@ -1,0 +1,272 @@
+{
+    "path": "artifacts/Scroll_zkEVM_-_Part_2_-_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/scroll-tech/zkevm-circuits/tree/2e422878e0d78f769e08f0b1ad1275ee039362d5",
+        "commit_id": "2e422878e0d78f769e08f0b1ad1275ee039362d5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "zkevm-circuits": "contracts/Scroll_zkEVM_-_Part_2_-_Audit_Report/zkevm-circuits"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing constraint for the first tx_id in Tx Circuit",
+            "description": "No check that the first tx_id is equal to 1 in the Tx Circuit.",
+            "severity": "high",
+            "location": "Tx Circuit"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "The CallDataRLC value in the fixed assignments is not validated against the actual calldata in Tx Circuit",
+            "description": "No check that the CallDataRLC value is equal to the RLC of the bytes in the calldata section.",
+            "severity": "critical",
+            "location": "Tx Circuit"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "The OneHot encoding gadget has incorrect constraints",
+            "description": "The previous helper function returns the enum type represented by the one-hot encoding at the previous row.",
+            "severity": "medium",
+            "location": "MPT Circuit"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "The BinaryColumn gadget is missing boolean constraint check",
+            "description": "No constraint exists to check that the binary column exposed by the gadget only contains boolean (0/1) values.",
+            "severity": "high",
+            "location": "MPT Circuit"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing range check for address values in MPT Circuit",
+            "description": "No range checks on the various values of address.",
+            "severity": "critical",
+            "location": "MPT Circuit"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Incorrect assertion for account hash traces in Proof::check",
+            "description": "Typo in the assertion in the Proof::check function.",
+            "severity": "info",
+            "location": "MPT Circuit"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Implementations of RlcLookup trait are not consistent",
+            "description": "Different order of columns in the implementation of the RlcLookup trait.",
+            "severity": "low",
+            "location": "MPT Circuit"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing constraints for new account in configure_balance",
+            "description": "No constraint to ensure that the sibling is equal to 0 when creating a new entry in the accounts trie.",
+            "severity": "high",
+            "location": "MPT Circuit"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing constraints in configure_empty_storage",
+            "description": "No check to ensure that the old_hash and new_hash are the same for an empty storage entry.",
+            "severity": "critical",
+            "location": "MPT Circuit"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Enforcing padding rows in MPT circuit",
+            "description": "No constraints to ensure that the padding rows have been assigned properly at the end of the MPT circuit.",
+            "severity": "medium",
+            "location": "MPT Circuit"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Incorrect constraints in configure_nonce",
+            "description": "Missed check on the size of the new nonce",
+            "severity": "high",
+            "location": "MPT Circuit"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Conflicting constraints in configure_code_size",
+            "description": "Constraints are contradictory and will never be executed",
+            "severity": "low",
+            "location": "MPT Circuit"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ]
+            },
+            "title": "ByteRepresentation:index is not properly constrained",
+            "description": "Index value can be controlled by values in the last row of the table",
+            "severity": "medium",
+            "location": "MPT Circuit"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Miscellaneous typos in comments and constraint descriptions",
+            "description": "Various typos in comments and constraint descriptions",
+            "severity": "info",
+            "location": "MPT Circuit"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-229"
+                ],
+                "4": [
+                    "CWE-232"
+                ]
+            },
+            "title": "ChainId is not mapped to its corresponding RLP Tag in Tx Circuit",
+            "description": "Allows forging the Chain ID value for a given transaction with an existing signature",
+            "severity": "high",
+            "location": "Tx Circuit"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Highest tx_id must be equal to cum_num_txs in Tx Circuit",
+            "description": "Allows setting cum_num_txs to be much larger than the actual set of tx_ids",
+            "severity": "high",
+            "location": "Tx Circuit"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-116"
+                ]
+            },
+            "title": "Multiple RLP encodings share the same RLC value",
+            "description": "Allows adding zero bytes to existing fields in a RLP encoded signing data for a transaction without changing the RLCed value in the circuit",
+            "severity": "critical",
+            "location": "RLP Circuit"
+        }
+    ]
+}

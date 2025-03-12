@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Tranchess-20231228-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/tranchess/contract-core/tree/d74714d",
+        "commit_id": "d74714d",
+        "address": "0x4BB3AeB5Ba75bC6A44177907B54911b19d1cF8f7",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "TimelockController": "contracts/PeckShield-Audit-Report-Tranchess-20231228-v1/TimelockController"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Lack of frozen Update in FundV5",
+            "description": "The related update logic for the frozen flag is missing.",
+            "severity": "medium",
+            "location": "FundV5 contract, settle() function."
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Timely Fee Distribution Checkpoint Upon Fee Rate Change",
+            "description": "The current implementation may be improved to timely checkpoint fee distribution upon admin fee rate change.",
+            "severity": "low",
+            "location": "FeeDistributor contract, updateAdminFeeRate() function."
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Suggested Variable Renaming in WstETHPrimaryMarketRouter And VestingEscrow",
+            "description": "n/a (informational suggestion)",
+            "severity": "info",
+            "location": "WstETHPrimaryMarketRouter and VestingEscrow contracts."
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged owner account needs to be scrutinized, and the administration key concern should be eliminated by transferring the role to a community-governed DAO.",
+            "severity": "low",
+            "location": "Multiple contracts, various functions with onlyOwner modifier."
+        }
+    ]
+}

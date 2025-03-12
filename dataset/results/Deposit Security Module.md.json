@@ -1,0 +1,326 @@
+{
+    "path": "artifacts/Deposit Security Module.md",
+    "project_info": {
+        "url": "https://github.com/lidofinance/lido-dao",
+        "commit_id": "5b449b740cddfbef5c107505677e6a576e2c2b69",
+        "address": "0xc7b5af82b05eb3b64f12241b04b2cf14469e39f7",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "lido-dao": "contracts/Deposit Security Module/lido-dao"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Possible blocking of the contract",
+            "description": "Initialize `owner` variable without checking its new value, potentially leading to function failures.",
+            "severity": "high",
+            "location": "DepositSecurityModule.sol#L123 (function setOwner())"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Fix gas cost ETH transfer",
+            "description": "ETH sending with fixed gas amount may exceed gas limit in the future, leading to potential losses.",
+            "severity": "high",
+            "location": "Lido.sol#L301 (ETH transfer)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Gas Overflow during Iteration (DoS)",
+            "description": "Each iteration of the cycle requires a gas flow.",
+            "severity": "n/a",
+            "location": "NodeOperatorsRegistry.sol, lines 214-221; Lido.sol, lines 616-624"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "Unused Keys Trimming Doesn't Remove Keys and Signatures from Storage",
+            "description": "The function leave keys data in storage.",
+            "severity": "n/a",
+            "location": "NodeOperatorsRegistry.sol, line 212"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Possible Blocking of Work with Buffered ETH",
+            "description": "Any operator can block the operation of depositBufferedEther().",
+            "severity": "n/a",
+            "location": "NodeOperatorsRegistry.sol, lines 252-262; DepositSecurityModule.sol, lines 413-414"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Superfluous Actions When the Function is Called Again",
+            "description": "Unnecessary gas consumption.",
+            "severity": "n/a",
+            "location": "DepositSecurityModule.sol, lines 336-356"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Guardian Zero Address Check",
+            "description": "It is possible to add a guardian with zero address.",
+            "severity": "n/a",
+            "location": "DepositSecurityModule.sol, line 281"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Variable Without Visibility Modifier",
+            "description": "The visibility modifier is not clear.",
+            "severity": "n/a",
+            "location": "DepositSecurityModule.sol, line 61"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Hardcoded MAX_BPS",
+            "description": "It is not safe if it may be changed.",
+            "severity": "n/a",
+            "location": "Lido.sol, lines 189, 582, 593, 599, 654, 681"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Possible uint256 Overflow",
+            "description": "There may be a uint256 overflow.",
+            "severity": "n/a",
+            "location": "NodeOperatorsRegistry.sol, lines 287, 311"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unnecessary Staking Limit Decrease",
+            "description": "It is not clear why staking limit should be decreased to index.",
+            "severity": "n/a",
+            "location": "NodeOperatorsRegistry.sol, line 627"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ],
+                "4": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Using Unchecked Address",
+            "description": "Address is not checked before using.",
+            "severity": "n/a",
+            "location": "DepositSecurityModule.sol, lines 77, 78"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Omitted Event",
+            "description": "An event is omitted at several lines in DepositSecurityModule.sol and Lido.sol.",
+            "severity": "n/a",
+            "location": "DepositSecurityModule.sol (L425), Lido.sol (L283, L406, L415, L424, L429, L434, L546, L656)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Can use the constant",
+            "description": "A constant UINT64_MAX can be used in NodeOperatorsRegistry.sol.",
+            "severity": "n/a",
+            "location": "NodeOperatorsRegistry.sol (L42, L554)"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Extra code",
+            "description": "Extra code is present in regular methods in NodeOperatorsRegistry.sol.",
+            "severity": "n/a",
+            "location": "NodeOperatorsRegistry.sol (L541, L566, L646)"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Extra initialization",
+            "description": "Extra initialization of variables is done in the constructor of DepositSecurityModule.sol.",
+            "severity": "n/a",
+            "location": "DepositSecurityModule.sol (L98-L99)"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Comment typo error",
+            "description": "A comment typo error is present in DepositSecurityModule.sol.",
+            "severity": "n/a",
+            "location": "DepositSecurityModule.sol (L390)"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ],
+                "3": [
+                    "CWE-483"
+                ]
+            },
+            "title": "Storage assigning may be in if statement",
+            "description": "Storage assigning can be placed in an if statement above in NodeOperatorsRegistry.sol.",
+            "severity": "n/a",
+            "location": "NodeOperatorsRegistry.sol (L154)"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Naming variable mistake",
+            "description": "A naming variable mistake is present in NodeOperatorsRegistry.sol.",
+            "severity": "n/a",
+            "location": "NodeOperatorsRegistry.sol (L441)"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Omitted description",
+            "description": "Omitted descriptions are present at several functions in Lido.sol.",
+            "severity": "n/a",
+            "location": "Lido.sol (L427, L432, L611)"
+        }
+    ]
+}

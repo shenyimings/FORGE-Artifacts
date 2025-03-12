@@ -1,0 +1,164 @@
+{
+    "path": "artifacts/Yearn Strategy SSB.md",
+    "project_info": {
+        "url": "https://github.com/tonkers-kuma/strategy-ssb",
+        "commit_id": "e49d07a64ea0eb4f5a199c2bf9ea4c8aee2b313f",
+        "address": "0x9cfF0533972da48Ac05a00a375CC1a65e87Da7eC",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "strategy-ssb": "contracts/Yearn Strategy SSB/strategy-ssb"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused \"payable\"",
+            "description": "Unused \"payable\" at line 133",
+            "severity": "info",
+            "location": "Strategy.sol, Line 133"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Unused \"Address\"",
+            "description": "Unused \"using Address for address\"",
+            "severity": "info",
+            "location": "Strategy.sol, Line 21"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused internal constant `weth`",
+            "description": "Internal constant `weth` is unused in the contract and inaccessible outside of the contract.",
+            "severity": "info",
+            "location": "Strategy.sol, Line 24"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "`sellRewards()` threshold values",
+            "description": "The threshold values for selling reward tokens are probably unreasonably lower than gas amount required for token swap operation.",
+            "severity": "info",
+            "location": "Strategy.sol, Lines 277 and 295"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Same value is calculated in every loop iteration",
+            "description": "Value of `decWant` is persistent during each iteration of loops at lines 276 and 293 and therefore could be calculated outside the loop to save gas.",
+            "severity": "info",
+            "location": "Strategy.sol, Lines 276 and 293"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Value of memory variable could be used instead of storage variable",
+            "description": "Value of `maxAmountsIn[tokenIndex]` was set to a value of a memory variable `amountIn`",
+            "severity": "info",
+            "location": "Strategy.sol, Line 199"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Malfunction on managed pools",
+            "description": "The strategy will not proceed further changes in tokens set of balancer pool.",
+            "severity": "info",
+            "location": "Strategy.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Unused `receive()` function",
+            "description": "The contract implements a function to receive ether, however the contract's logic does not implement any further use of ether.",
+            "severity": "info",
+            "location": "Strategy.sol, Line 422"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Strategy's outstanding debt is not accounted in `adjustPosition()`",
+            "description": "Argument `_debtOutstanding` is unused in method `adjustPosition()`.",
+            "severity": "info",
+            "location": "Strategy.sol, Line 189"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-184"
+                ]
+            },
+            "title": "`Balancer` LP token is not in `protected tokens` list",
+            "description": "Tokens used by the strategy should be protected from being swept.",
+            "severity": "info",
+            "location": "Strategy.sol, Line 262"
+        }
+    ]
+}

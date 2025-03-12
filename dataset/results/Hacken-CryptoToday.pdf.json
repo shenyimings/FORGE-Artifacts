@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/Hacken-CryptoToday.pdf",
+    "project_info": {
+        "url": "https://github.com/cryptotodaycom/contracts",
+        "commit_id": "548c1ef24d996a3adc0557638601d099a5ef745d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Hacken-CryptoToday/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading contract name and purpose",
+            "description": "The VotingEngine contract is not designed for any fair voting and is used as funds storage for the project owners.",
+            "severity": "high",
+            "location": "VotingEngine.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Transfer fail",
+            "description": "The function can fail on ethers transfer if a msg.sender is a contract with fallback function (e.g. multi-sig wallet with advanced fallback mechanisms).",
+            "severity": "high",
+            "location": "VotingEngine.sol, Function: endSale"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Constructor overwhelmed",
+            "description": "The code can fail if a list of token receivers is big enough.",
+            "severity": "medium",
+            "location": "LISTFuture.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant import",
+            "description": "\"@openzeppelin/contracts/token/ERC20/ERC20.sol\" import is redundant.",
+            "severity": "low",
+            "location": "LIST.sol"
+        }
+    ]
+}

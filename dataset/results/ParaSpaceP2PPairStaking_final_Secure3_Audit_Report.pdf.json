@@ -1,0 +1,122 @@
+{
+    "path": "artifacts/ParaSpaceP2PPairStaking_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/para-space/paraspace-core",
+        "commit_id": "cf85f96d53b66eee72cdd2f168092d1d1a1aa167",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "paraspace-core": "contracts/ParaSpaceP2PPairStaking_final_Secure3_Audit_Report/paraspace-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization risk",
+            "description": "The owner can arbitrarily take the user's income CAPEcoin.",
+            "severity": "info",
+            "location": "contracts/misc/P2PPairStaking.sol#L606-L617"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Missing Protection against Signature Replay Attacks in P2PPairStaking contract",
+            "description": "The signature (v, r, s) can be reused.",
+            "severity": "critical",
+            "location": "code/contracts/misc/P2PPairStaking.sol#L493-L520"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "NFT's owner can prevent other matchers from calling breakUpMatchedOrder",
+            "description": "The owner can prevent others from calling the breakUpMatchedOrder function.",
+            "severity": "medium",
+            "location": "code/contracts/misc/P2PPairStaking.sol#L319-L334"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unprotected call to `onERC721Received`",
+            "description": "Allows a contract owner to control whether an NFT can be received via `safeTransferFrom`, potentially preventing other matchers from calling `breakUpMatchedOrder`.",
+            "severity": "n/a",
+            "location": "P2PPairStaking.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Risk of assets being permanently locked in the contract",
+            "description": "Third-party implementation risks may cause exceptions, leading to `breakUpMatchedOrder` function failure and asset withdrawal issues.",
+            "severity": "info",
+            "location": "P2PPairStaking.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas optimization opportunity using custom errors",
+            "description": "Using custom errors instead of `require` statements can reduce gas costs.",
+            "severity": "info",
+            "location": "Multiple locations in P2PPairStaking.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas optimization opportunity for constant hashes",
+            "description": "Calculating and storing hashes as constants can save gas.",
+            "severity": "info",
+            "location": "P2PPairStaking.sol (lines 27-39)"
+        }
+    ]
+}

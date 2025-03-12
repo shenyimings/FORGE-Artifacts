@@ -1,0 +1,296 @@
+{
+    "path": "artifacts/Solidified-NFTSalon_[19.05.2021].pdf",
+    "project_info": {
+        "url": "https://github.com/kole-swapnil/CryptoArt",
+        "commit_id": "e55ed6029045f73c2759562990413e9f25876f2a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "CryptoArt": "contracts/Solidified-NFTSalon_[19/CryptoArt"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-656"
+                ]
+            },
+            "title": "Overall architecture may imply major security risks",
+            "description": "The design of the system is based on an architecture that groups a large number of functionalities into a single smart contract, increasing the attack surface.",
+            "severity": "info",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "No test coverage",
+            "description": "The codebase lacks evidence of test coverage and the number of issues found indicates that testing has been very limited.",
+            "severity": "info",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy in several places (NEW ISSUE AFTER FIXES)",
+            "description": "The fixes supplied to issues 4 and 13 introduce reentrancy vulnerabilities in the codebase.",
+            "severity": "critical",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Users cannot withdraw their funds (NEW ISSUE AFTER FIXES)",
+            "description": "The function withdrawUserBalance() has a require statement that always reverts, preventing users from withdrawing their funds.",
+            "severity": "critical",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Anyone can mint tokens from any batch at an arbitrary or zero price",
+            "description": "The mintToken() function allows anyone to mint unclaimed tokens, even if the caller is not the batch creator, and the payment for this operation is set by the caller.",
+            "severity": "critical",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Any bidder can block subsequent bids from being accepted",
+            "description": "A bidder can block subsequent bids from being accepted with a Denial Service attack, winning the auction by default.",
+            "severity": "critical",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "closeBid() does not close bidding",
+            "description": "The closeBid() function never sets the bidding flag to false, meaning that auctions remain open.",
+            "severity": "critical",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Sale and Auction at the same time can cause bidder’s funds to be locked forever",
+            "description": "A token on sale can be auctioned and vice-versa, locking in the last bidder's funds forever.",
+            "severity": "critical",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "toString(uint256 _i) function always returns \"0\" (NEW ISSUE AFTER FIXES)",
+            "description": "The return statement is misplaced, causing the function to always return 0.",
+            "severity": "high",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Sellers can be left without any payment if fees are set high",
+            "description": "There is nothing that prevents the total fees (royalties and operator fees) to be set to 100%, leaving sellers without any payment.",
+            "severity": "high",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "The contract owner can withdraw all funds at any time",
+            "description": "The contract owner can withdraw funds at any time, leaving bidders and sellers without any means of receiving their proceeds.",
+            "severity": "high",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Bids can be added even after auction end time",
+            "description": "The function addBid() does not check the auction end time and allows anyone to add a bid even after the set time.",
+            "severity": "high",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Token owner will lose funds for closing an auction with no bids",
+            "description": "In order for the owner to close a bid using the closeBid() method, it requires transferring the bidPrice to the bidder.",
+            "severity": "high",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Auction end time can be set in the past",
+            "description": "The startBid() function does not check the start timestamp when setting up an auction, allowing for any time to be used, including start times in the past.",
+            "severity": "low",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-358"
+                ]
+            },
+            "title": "Duplicate over-/underflow protection",
+            "description": "The code uses the safeMath library for protection of arithmetic operations, but also enforces Solidity version 0.8.0 or higher, which already provides overflow protection.",
+            "severity": "low",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Use call() instead of transfer()",
+            "description": "The codebase uses the transfer() for ETH payments, but since the Istanbul hard fork, the use of transfer() is discouraged.",
+            "severity": "low",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ],
+                "4": [
+                    "CWE-789"
+                ]
+            },
+            "title": "Inefficient data-structures",
+            "description": "The code uses mappings that map keys to hashes, resulting in unnecessary storage and indirections.",
+            "severity": "info",
+            "location": "NFTSalon contract"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1118"
+                ]
+            },
+            "title": "Include revert messages",
+            "description": "It is recommended to add revert messages to all possible revert conditions for better usability.",
+            "severity": "info",
+            "location": "NFTSalon contract"
+        }
+    ]
+}

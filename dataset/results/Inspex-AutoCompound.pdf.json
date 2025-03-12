@@ -1,0 +1,188 @@
+{
+    "path": "artifacts/Inspex-AutoCompound.pdf",
+    "project_info": {
+        "url": "https://github.com/killswitchofficial/auto-compound-v2",
+        "commit_id": "75a67eac40bd176b63bc0c6c939e0f63b987247f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "auto-compound-v2": "contracts/Inspex-AutoCompound/auto-compound-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Invoking of Unreliable Smart Contract",
+            "description": "The PronteraV2 contract invokes an unverifiable Juno contract, posing unknown risks to users.",
+            "severity": "high",
+            "location": "PronteraV2 contract - function `depositToken`"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change the critical state variables to gain additional profit, causing unfairness and potential monetary loss to users.",
+            "severity": "high",
+            "location": "AllocKafra.sol (L:78), Emperium.sol (L:78), FeeKafra.sol (L:78), GasPrice.sol (L:78), IzludeV2.sol (L:78)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Changing of Strategy Contract Implementation",
+            "description": "The tokens deposited into the contract by users can be drained by the owner of the IzludeV2 contract, causing monetary loss for users.",
+            "severity": "high",
+            "location": "IzludeV2.sol (L:834)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "Design Flaw in emergencyWithdraw() Function",
+            "description": "Users cannot withdraw deposited funds in the PronteraV2 contract when an emergency case occurs.",
+            "severity": "medium",
+            "location": "emergencyWithdraw() function in PronteraV2 contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation in PronteraV2",
+            "description": "The totalAllocPoint variable is not updated correctly when calling add() and set() functions without setting _withUpdate to true, leading to incorrect rewards calculation.",
+            "severity": "medium",
+            "location": "PronteraV2 contract, add() and set() functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation in Emperium",
+            "description": "The reward of the pool that has the same staking token as the reward token will be slightly lower than what it should be, resulting in monetary loss for users and loss of reputation for the platform.",
+            "severity": "medium",
+            "location": "Emperium contract, add() function (lines 684-694) and updatePool() function (lines 731-743)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Transaction Ordering Dependence",
+            "description": "Front-running attack can be performed, resulting in a bad swapping rate and a lower bounty.",
+            "severity": "low",
+            "location": "PancakeByalanLP contract, harvest() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Design Flaw in massUpdatePool() Function",
+            "description": "The massUpdatePool() function will eventually be unusable due to excessive gas usage.",
+            "severity": "low",
+            "location": "Emperium contract, massUpdatePools() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Liquidity Token Amount Miscalculation",
+            "description": "A small amount of token can be left in the contract, resulting in a lower amount of tokens used in the compounding.",
+            "severity": "low",
+            "location": "PancakeByalanLP.sol, function addLiquidity()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Function",
+            "description": "Privileged function execution cannot be monitored easily by users.",
+            "severity": "low",
+            "location": "IzludeV2, PancakeByalanLP, PronteraReserve; functions setIzlude(), setProntera(), and setEmperium()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Public function can be changed to external for gas optimization.",
+            "severity": "info",
+            "location": "Emperium; function set()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Inexplicit Solidity Compiler Version",
+            "description": "Solidity compiler versions declared in smart contracts were not explicit.",
+            "severity": "info",
+            "location": "PronteraV2, PronteraReserve, PancakeByalanLP, IzludeV2, GasPrice, FeeKafra, Emperium, AllocKafra"
+        }
+    ]
+}

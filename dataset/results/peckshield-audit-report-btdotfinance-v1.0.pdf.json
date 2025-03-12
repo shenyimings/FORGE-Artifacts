@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/peckshield-audit-report-btdotfinance-v1.0.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x03D2079c54967f463Fd6e89E76012F74EBC62615",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.5.15+commit.6a57276f"
+        ],
+        "project_path": {
+            "Controller": "contracts/peckshield-audit-report-btdotfinance-v1/Controller"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy Risks in bVault",
+            "description": "Violation of checks-effects-interactions principle, allowing re-entrancy via the deposit() function.",
+            "severity": "low",
+            "location": "bVault contract, deposit() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-684"
+                ]
+            },
+            "title": "Improved Ownership Transition in Timelock",
+            "description": "Flaw in 2-step ownership transition logic, breaking admin reset functionality.",
+            "severity": "info",
+            "location": "Timelock contract, setPendingAdmin() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Improved Precision in AutoStake",
+            "description": "Loss of precision due to multiplication and division operations in earned() function.",
+            "severity": "info",
+            "location": "AutoStake contract, earned() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Leftover Rewards Inside Strategy Contracts",
+            "description": "Dust rewards left inside the strategy contracts due to precision issues.",
+            "severity": "low",
+            "location": "Strategy Contracts, redelivery() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Fallback Mechanism in Strategy Contracts",
+            "description": "Unnecessary fallback mechanism in the withdraw() function.",
+            "severity": "info",
+            "location": "Strategy Contracts, withdraw() and _withdraw() functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Improved Authentication Mechanism in Strategy Contracts",
+            "description": "Insecure authentication implementation in withdraw() function.",
+            "severity": "info",
+            "location": "Strategy Contracts, withdraw() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ],
+                "3": [
+                    "CWE-306"
+                ]
+            },
+            "title": "Missing Authentication for Critical Functions in Strategy Contracts",
+            "description": "Lack of authentication for the withdrawUnderlying() function.",
+            "severity": "medium",
+            "location": "StrategyPickleUSDC and StrategyPickleWBTC contracts, withdrawUnderlying() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Other Suggestions",
+            "description": "Unnecessary public doApprove() function and unused interface in the Controller contract.",
+            "severity": "info",
+            "location": "Strategy Contracts, doApprove() function and Controller contract"
+        }
+    ]
+}

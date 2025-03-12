@@ -1,0 +1,374 @@
+{
+    "path": "artifacts/Solidified-ICOStart_[05.14.18].pdf",
+    "project_info": {
+        "url": "https://github.com/ICOStart/Crowdsale/tree/eb2e72f1d48e9d511acae4680fd07b90678626b1",
+        "commit_id": "eb2e72f1d48e9d511acae4680fd07b90678626b1",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Crowdsale": "contracts/Solidified-ICOStart_[05/Crowdsale"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Sale periods values are not trustless",
+            "description": "The owner can arbitrary modify sale periods.",
+            "severity": "low",
+            "location": "ICOStartSale.sol, clearPeriods() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Reservation payout is not trustless",
+            "description": "Investors need the owner's permission to claim tokens.",
+            "severity": "low",
+            "location": "ICOStartReservation.sol, pay() and whenPaid() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner can drain ether from reservations without issuing tokens",
+            "description": "The owner can kill an ICOStartReservation contract and drain Ether.",
+            "severity": "low",
+            "location": "ICOStartReservation.sol, destroy function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "ICOStartToken transfers can be paused by owner",
+            "description": "The owner can prevent users from transacting with tokens.",
+            "severity": "low",
+            "location": "ICOStartToken.sol, LockableWhiteListed contract import"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Fallback function in ICOStartReservation can result in user depositing more funds than they want",
+            "description": "Users may be unclear about how to claim tokens through the fallback function.",
+            "severity": "low",
+            "location": "ICOStartReservation.sol, fallback function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Users can send Ether to ICOStartPromo",
+            "description": "The contract should not accept Ether but defines a payable fallback function.",
+            "severity": "low",
+            "location": "ICOStartPromo.sol, fallback function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "ICO Periods are not enforced to be sequential",
+            "description": "Sale duration can be added in any order and even in the past.",
+            "severity": "low",
+            "location": "addPeriod function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-200"
+                ]
+            },
+            "title": "Information disclosure in repository configuration files",
+            "description": "Internal IP addresses and live developer account address are disclosed.",
+            "severity": "n/a",
+            "location": "truffle configuration files"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ],
+                "3": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Install zeppelin-solidity via npm",
+            "description": "Manual inclusion of OpenZeppelin's contracts may lead to missed security patches.",
+            "severity": "n/a",
+            "location": "zeppelin-solidity implementation"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "ICOStartPromo can transfer more tokens than total supply",
+            "description": "A totalSupply variable is defined but not checked when airdropping promotional tokens.",
+            "severity": "low",
+            "location": "ICOStartPromo.sol, totalSupply variable"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Whitelist implementation in ICOStartSale is inefficient",
+            "description": "Conditional checks are redundant and can be optimized.",
+            "severity": "low",
+            "location": "addAddressToWhitelist and removeAddressFromWhitelist functions"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas costly pattern in loops",
+            "description": "Loop implementation is inefficient due to array length being read on every iteration.",
+            "severity": "low",
+            "location": "loop implementations in various contracts"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Redundant assertions in airdrop and multi transfer functions",
+            "description": "Successful calls to transfer always return true, making assertions unnecessary.",
+            "severity": "low",
+            "location": "airdrop and multi transfer functions"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Include a null address check for manager",
+            "description": "No null address check is present in the ICOStartReservation constructor.",
+            "severity": "low",
+            "location": "ICOStartReservation.sol, constructor"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Replace if - revert patterns with require",
+            "description": "Consider replacing if(false statement) { … revert() } patterns to require(true statement).",
+            "severity": "low",
+            "location": "various contracts"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Consider using latest version of solidity",
+            "description": "Solidity version 0.4.19 is used, whereas the latest version is 0.4.23.",
+            "severity": "n/a",
+            "location": "solidity compiler version"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Using constructors without the constructor keyword is deprecated",
+            "description": "Constructors should be defined using the constructor keyword.",
+            "severity": "low",
+            "location": "contract constructors"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Add error strings to require statements",
+            "description": "Consider adding appropriate error messages to require statements.",
+            "severity": "low",
+            "location": "require statements"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Remove return variable from unlock function",
+            "description": "The unlock function expects a boolean return value, but none is returned.",
+            "severity": "low",
+            "location": "unlock function"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant function isWhitelisted",
+            "description": "The isWhiteListed function in LockableWhitelisted.sol is redundant.",
+            "severity": "low",
+            "location": "isWhiteListed function"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Fix code comments to match implementation",
+            "description": "Code comments do not accurately describe the implemented functions.",
+            "severity": "n/a",
+            "location": "various contracts"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove unused code",
+            "description": "Unused variables and code should be removed.",
+            "severity": "low",
+            "location": "various contracts"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove duplicate SafeMath declaration",
+            "description": "SafeMath is assigned to the type uint twice.",
+            "severity": "low",
+            "location": "SafeMath declaration"
+        }
+    ]
+}

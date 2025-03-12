@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/BlockSec-blocksec_pancake_v1.0_signed.pdf",
+    "project_info": {
+        "url": "https://github.com/chefcooper/pancake-contracts/tree/dev",
+        "commit_id": "dev",
+        "address": "0xa1f482dc58145ba2210bc21878ca34000e2e8fe4",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "Timelock": "contracts/BlockSec-blocksec_pancake_v1/Timelock"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Add a method to update the variable overdueFee",
+            "description": "The CakePool contract lacks a method to update the variable overdueFee.",
+            "severity": "n/a",
+            "location": "MasterChefV2.sol, function overdoseFee"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Add the whenNotPaused modifier to withdrawal-related functions",
+            "description": "The CakePool contract uses the whenNotPaused modifier for two functions which prevents users from depositing CAKE into the paused CakePool.",
+            "severity": "n/a",
+            "location": "MasterChefV2.sol, functions withdrawByAmount and withdraw"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Address the concern of centralization risk",
+            "description": "Authorized accounts can invoke critical functions, compromising project security if private keys are exposed.",
+            "severity": "n/a",
+            "location": "General project setup, authorized accounts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Save gas",
+            "description": "Unnecessary code execution wastes gas.",
+            "severity": "n/a",
+            "location": "MasterChefV2.sol, function set"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Add check to prevent duplicated pools",
+            "description": "The add function in MasterChefV2 does not check for duplicated LP tokens.",
+            "severity": "n/a",
+            "location": "MasterChefV2.sol, function add"
+        }
+    ]
+}

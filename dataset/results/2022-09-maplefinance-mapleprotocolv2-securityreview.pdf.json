@@ -1,0 +1,191 @@
+{
+    "path": "artifacts/2022-09-maplefinance-mapleprotocolv2-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/maple-labs/liquidations",
+        "commit_id": "56da3118036639630d41b48547f2604f9bb61ee6",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "liquidations": "contracts/2022-09-maplefinance-mapleprotocolv2-securityreview/liquidations"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Incorrect argument passed to _getPlatformOriginationFee",
+            "description": "The getOriginationFees function incorrectly uses msg.sender instead of the loan_ parameter.",
+            "severity": "low",
+            "location": "loan/contracts/MapleLoanFeeManager.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "The protocol could stop working prematurely",
+            "description": "The _uint48 function is incorrectly implemented, requiring input to be less than or equal to type(uint32).max instead of type(uint48).max.",
+            "severity": "low",
+            "location": "pool-v2/contracts/LoanManager.sol-TransitionLoanManager.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Insufficient event generation",
+            "description": "Events are not generated during contract execution, making it difficult to review correct behavior.",
+            "severity": "low",
+            "location": "globals-v2/contracts/MapleGlobals.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect GovernorshipAccepted event argument",
+            "description": "The GovernorshipAccepted event is emitted with an incorrect previous owner value.",
+            "severity": "low",
+            "location": "globals-v2/contracts/MapleGlobals.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Partially incorrect Chainlink price feed safety checks",
+            "description": "The getLatestPrice function does not correctly handle negative prices.",
+            "severity": "low",
+            "location": "globals-v2/contracts/MapleGlobals.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Incorrect implementation of EIP-4626",
+            "description": "The maxDeposit and maxMint functions do not consider all possible cases in which deposit or mint are disabled.",
+            "severity": "low",
+            "location": "pool-v2/contracts/Pool.sol, PoolManager.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "setAllowedSlippage and setMinRatio functions are unreachable",
+            "description": "The administrative functions setAllowedSlippage and setMinRatio have a requirement that they can be called only by the poolManager, but they are not called by any reachable function in the PoolManager contract.",
+            "severity": "low",
+            "location": "pool-v2/contracts/LoanManager.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate accounting of unrealizedLosses during default warning revert",
+            "description": "An accounting discrepancy fails to decrement netLateInterest from unrealizedLosses, causing unrealizedLosses to accrue an over-inflated value.",
+            "severity": "medium",
+            "location": "pool-v2/contracts/LoanManager.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Attackers can prevent the pool manager from finishing liquidation",
+            "description": "An attacker can ensure a liquidation never completes by sending the minimal amount of the collateral token to the liquidator address.",
+            "severity": "medium",
+            "location": "pool-v2/contracts/LoanManager.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-241"
+                ]
+            },
+            "title": "WithdrawalManager can have an invalid exit configuration",
+            "description": "The setExitConfig function sets an invalid configuration due to unsafe casting.",
+            "severity": "low",
+            "location": "WithdrawalManager.sol, setExitConfig function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Loan can be impaired when the protocol is paused",
+            "description": "The impairLoan function allows loan impairment when the protocol is paused due to missing whenProtocolNotPaused modifier.",
+            "severity": "n/a",
+            "location": "PoolManager.sol, impairLoan function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Fee treasury could go to the zero address",
+            "description": "The _disburseLiquidationFunds and _distributeClaimedFunds functions do not check that the mapleTreasury address was set.",
+            "severity": "low",
+            "location": "LoanManager.sol, _disburseLiquidationFunds and _distributeClaimedFunds functions"
+        }
+    ]
+}

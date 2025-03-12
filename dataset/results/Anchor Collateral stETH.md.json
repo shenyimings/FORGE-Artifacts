@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/Anchor Collateral stETH.md",
+    "project_info": {
+        "url": "https://github.com/lidofinance/anchor-collateral-steth",
+        "commit_id": "8d52ce72cb42d48dff1851222e3b624c941ddb30",
+        "address": "0xa2f987a546d4cd1c607ee8141276876c26b72bdf",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "anchor-collateral-steth": "contracts/Anchor Collateral stETH/anchor-collateral-steth"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Token Bridging doesn't work with Wormhole fees",
+            "description": "The `_transfer_asset()` function will not work due to no commission fee payment for the Wormhole system.",
+            "severity": "high",
+            "location": "BridgeConnectorWormhole.vy, line 49"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "No processing of the value returned by the function",
+            "description": "Checks are not done for the value returned by the ERC-20 standard function.",
+            "severity": "info",
+            "location": "Multiple locations in AnchorVault.vy and RewardsLiquidator.vy"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No checking value for zero",
+            "description": "There is a possible scenario where collected rewards may be sent to a zero address if `rewards_distributor` is uninitialized.",
+            "severity": "info",
+            "location": "AnchorVault.vy, line 491"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Adjusted stETH return transfer fee may be more expensive than dust amount",
+            "description": "`steth_amount - steth_amount_adj` value may be less than the transfer fee cost.",
+            "severity": "info",
+            "location": "AnchorVault.vy, lines 383 and 488"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "An unfavorable exchange may occur",
+            "description": "If the initial USDC or UST balance + exchanged tokens are bigger than the min required swap amount, an unfavorable swap may occur.",
+            "severity": "info",
+            "location": "RewardsLiquidator.vy, lines 306-308 and 329-331"
+        }
+    ]
+}

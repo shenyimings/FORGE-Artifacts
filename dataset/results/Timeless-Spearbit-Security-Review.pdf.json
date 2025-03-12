@@ -1,0 +1,221 @@
+{
+    "path": "artifacts/Timeless-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/timeless-fi/timeless",
+        "commit_id": "018b1f47de6c95d9cdfe8d4c2ca1580b3449b79a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "timeless": "contracts/Timeless-Spearbit-Security-Review/timeless"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Mint PerpetualYieldTokens for free by self-transfer",
+            "description": "The PYT.transfer and transferFrom functions operate on cached balance values, allowing an attacker to mint PYT tokens for free by self-transferring.",
+            "severity": "critical",
+            "location": "PerpetualYieldToken.sol#L53"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "xPYT auto-compound does not take pounder reward into account",
+            "description": "The assetBalance is correctly updated for the first four steps but does not decrease by the pounder reward which is transferred out in the last step.",
+            "severity": "high",
+            "location": "xPYT.sol#L179"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong yield accumulation in claimYieldAndEnter",
+            "description": "The claimYieldAndEnter function does not accrue yield to the Gate contract itself (this) in case xPYT was specified.",
+            "severity": "high",
+            "location": "Gate.sol#L590"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Swapper left-over token balances can be stolen",
+            "description": "Token balances can be stolen by anyone in several ways.",
+            "severity": "medium",
+            "location": "Swapper.sol#L133, UniswapV3Swapper.sol#L187"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "TickMath might revert in solidity version 0.8",
+            "description": "The library always reverts (instead of overflowing as in previous versions), leading to a broken xPYT contract.",
+            "severity": "medium",
+            "location": "TickMath.sol#L2"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rounding issues when exiting a vault through shares",
+            "description": "When exiting a vault through Gate.exitToVaultShares the user specifies a vaultSharesAmount, but the amount of PYT&NYT to burn is determined by a burnAmount call that rounds down, allowing an attacker to steal all vault shares.",
+            "severity": "medium",
+            "location": "Gate.sol#L383"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Possible outstanding allowances from Gate",
+            "description": "The vault parameter of Gate.enterWithUnderlying can be chosen in such a way that underlying = vault.asset() is another vault token of the Gate itself, allowing an attacker to steal from other vault shares.",
+            "severity": "low",
+            "location": "Gate.sol#L216"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Factory.sol owner can change fees unexpectedly",
+            "description": "The Factory.sol owner may be able to front run yield calculations in a gate implementation and change user fees unexpectedly.",
+            "severity": "low",
+            "location": "Factory.sol#L141"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Low uniswapV3TwapSecondsAgo may result in AMM manipulation in pound()",
+            "description": "The lower the value of uniswapV3TwapSecondsAgo is set with at construction creation time, the easier it becomes for an attacker to manipulate the results of the pound() function.",
+            "severity": "low",
+            "location": "UniswapV3xPYT.sol#L98"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "UniswapV3Swapper uses wrong allowance check",
+            "description": "The allowance check compares against an xPYT shares amount instead of the underlying token amount.",
+            "severity": "low",
+            "location": "UniswapV3Swapper.sol#L282, UniswapV3Swapper.sol#L373"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Missing check that tokenIn and tokenOut are different",
+            "description": "The doZeroExSwap() function takes in two ERC20 addresses which are tokenIn and tokenOut, but does not check if they are the same.",
+            "severity": "low",
+            "location": "Swapper.sol#L133"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Unlimitted ERC20 approval on pyt for arbitrary address",
+            "description": "A malicious contract may be passed into the claimYieldAndEnter() function as xPYT and given full control over any PYT the contract may ever hold.",
+            "severity": "low",
+            "location": "Gate.sol#L675"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Constructor function does not check for zero address",
+            "description": "The constructor function does not check if the addresses passed in are zero addresses.",
+            "severity": "low",
+            "location": "UniswapV3Juggler.sol#L81-L84"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-683"
+                ]
+            },
+            "title": "Accruing yield to msg.sender is not required when minting to xPYT contract",
+            "description": "The _exit function always accrues yield to the msg.sender before burning new tokens, but this is not necessary in case of xPYT.",
+            "severity": "low",
+            "location": "Gate.sol#L1009"
+        }
+    ]
+}

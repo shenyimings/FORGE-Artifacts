@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-KOLVault-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/KeyOfLifeFi/Kol-Vault/tree/371a866",
+        "commit_id": "371a866",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Kol-Vault": "contracts/PeckShield-Audit-Report-KOLVault-v1/Kol-Vault"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Improper assignment of owner account privileges, which could lead to a compromised owner account undermining the protocol's assumptions and operations.",
+            "severity": "medium",
+            "location": "Multiple Contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Possible Sandwich/MEV Attacks To Collect Most Rewards",
+            "description": "Flashloan-assisted deposit allows malicious actors to claim majority rewards, resulting in significantly less rewards for legitimate share holders.",
+            "severity": "medium",
+            "location": "KolStrategyThena"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Improved Reentrancy Protection in KolAutomizerVault",
+            "description": "Violation of checks-effects-interactions principle could lead to re-entrancy attacks via external contract interactions.",
+            "severity": "low",
+            "location": "KolAutomizerVault"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible Costly LPs From Improper Initialization",
+            "description": "The share value can be manipulated by a malicious actor during the first deposit, leading to an extremely expensive pool token.",
+            "severity": "low",
+            "location": "KolAutomizerVault::depositFor()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20-Compliant Tokens",
+            "description": "The approve() function may not work correctly with some non-standard ERC20 tokens, potentially leading to errors.",
+            "severity": "low",
+            "location": "KolStrategyThena::approve() and BasisStrategy::_giveAllowances/removeAllowances()"
+        }
+    ]
+}

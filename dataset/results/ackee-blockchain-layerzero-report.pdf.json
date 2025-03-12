@@ -1,0 +1,191 @@
+{
+    "path": "artifacts/ackee-blockchain-layerzero-report.pdf",
+    "project_info": {
+        "url": "https://github.com/LayerZero-Labs/LayerZero",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "LayerZero": "contracts/ackee-blockchain-layerzero-report/LayerZero"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "H1 - Oracle + Relayer conspiracy",
+            "description": "Trustless message delivery requires Oracle & Relayer independence, otherwise protocol can be manipulated.",
+            "severity": "high",
+            "location": "Oracle, Relayer (Trust model)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "W1 - Incorrect use of SafeMath library",
+            "description": "Using SafeMath with uint64, uint128 can lead to overflow.",
+            "severity": "info",
+            "location": "Relayer.sol (Type: Overflow)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "W2 - Outdated compiler",
+            "description": "Using Solidity compiler <0.8, which does not contain the latest security fixes and native overflow/underflow handling.",
+            "severity": "info",
+            "location": "<*>(Type: Compiler)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "W3 - Many different compiler versions",
+            "description": "Using many different Solidity compiler versions, even with floating pragma.",
+            "severity": "info",
+            "location": "<*>(Type: Compiler)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "W4 - Usage of third-party library",
+            "description": "Using Buffer.sol library, which had a critical issue in the init function (now fixed).",
+            "severity": "info",
+            "location": "Buffer.sol (Type: Library)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "W5 - Unintended feature - Renounce ownership",
+            "description": "The OpenZeppelin’s Ownable pattern contains renounceOwnership() which sets the owner address to address(0).",
+            "severity": "high",
+            "location": "*.sol implements Ownable (Type: Access control)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "I1 - Not a Library",
+            "description": "EVMValidator is stored in ./library/ directory but it's not a library.",
+            "severity": "info",
+            "location": "EVMValidator.sol (Type: Syntax)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "I2 - Function naming convention",
+            "description": "The contract uses incorrect function naming convention (underscores).",
+            "severity": "info",
+            "location": "ChainlinkOracleClient.sol (Type: Naming convention)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1099"
+                ]
+            },
+            "title": "I3 - Lower case constant variable",
+            "description": "Contract’s variable name bytes32 public constant PacketSignature is in lower case.",
+            "severity": "info",
+            "location": "EVMValidator.sol (Type: Naming convention)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "7.1 Protocol message double send",
+            "description": "Incorrectly stored message handling allows the Relayer to double send the message.",
+            "severity": "high",
+            "location": "Endpoint.sol (Type: Message smuggling)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "7.2 Unsigned integer 16 overflow",
+            "description": "The function newVersion() contains incrementation of uint16 latestVersion, which can cause overflow.",
+            "severity": "high",
+            "location": "Endpoint.sol (Type: Overflow)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "7.3 Inflight stuck message",
+            "description": "When send() function is called with a non-existing chainId argument, the message will remain in the inflight state forever.",
+            "severity": "medium",
+            "location": "UltraLigthNode.sol (Type: Data validation)"
+        }
+    ]
+}

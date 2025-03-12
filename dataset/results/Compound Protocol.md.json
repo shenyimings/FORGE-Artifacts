@@ -1,0 +1,440 @@
+{
+    "path": "artifacts/Compound Protocol.md",
+    "project_info": {
+        "url": "https://github.com/CreamFi/compound-protocol",
+        "commit_id": "23a4ae93adc70334553f5a83429a4e967c1eefaa",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "compound-protocol": "contracts/Compound Protocol/compound-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Incorrect first borrow for user",
+            "description": "Borrowing fails if the user wasn't registered before but has a balance of CToken > 0",
+            "severity": "info",
+            "location": "Comptroller.sol#L366"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible incorrect tokens redeeming",
+            "description": "Tx fails if the user tries to redeem an incorrect amount of tokens",
+            "severity": "n/a",
+            "location": "CCollateralCapErc20.sol#L555 (no issue, client's commentary refers to another check)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Possible flashloan attack",
+            "description": "Flashloan function allows setting exchangeRate = 0, potentially leading to asset theft",
+            "severity": "info",
+            "location": "CCollateralCapErc20.sol#L169"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Incorrect tokens transfer",
+            "description": "Tx fails if the user tries to send more tokens than they have",
+            "severity": "n/a",
+            "location": "CCollateralCapErc20.sol#L339 (no issue, client's commentary refers to another check)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Allowed zero mintFresh",
+            "description": "Zero mintFresh consumes gas and emits an \"empty\" event without changing the state",
+            "severity": "info",
+            "location": "CCollateralCapErc20.sol#L476"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Allowed zero borrowFresh and repayBorrowFresh",
+            "description": "Zero borrowFresh and repayBorrowFresh update borrower's borrowIndex, consume gas, and emit an \"empty\" event without changing the state",
+            "severity": "info",
+            "location": "CToken.sol#L437 and #L541"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Allowed zero redeemFresh",
+            "description": "Zero redeemTokensIn and redeemAmountIn may be used together",
+            "severity": "info",
+            "location": "CCollateralCapErc20.sol#L559"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Allowed zero seizeInternal",
+            "description": "Zero seizeInternal consumes gas and emits an \"empty\" event without changing the state",
+            "severity": "info",
+            "location": "CCollateralCapErc20.sol#L654"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Allowed zero flashLoan",
+            "description": "Zero flashLoan consumes gas and emits an \"empty\" event without earning fees",
+            "severity": "info",
+            "location": "CCollateralCapErc20.sol#L160"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas saving optimization",
+            "description": "Using a variable instead of invoking `address` function can save gas.",
+            "severity": "n/a",
+            "location": "Comptroller.sol#L183, function marketToExit"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused code removal",
+            "description": "Removing unused functions to save gas on deployment.",
+            "severity": "n/a",
+            "location": "Comptroller.sol#L273,#L410,#L459,#L526,#L591,#L644"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Gas saving optimization",
+            "description": "Adding a simple check to save gas.",
+            "severity": "n/a",
+            "location": "Comptroller.sol#L213"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas saving optimization",
+            "description": "Changing function to return value can save some gas.",
+            "severity": "n/a",
+            "location": "Comptroller.sol#L1303"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Function marking as pure",
+            "description": "Marking a function as pure to save gas.",
+            "severity": "n/a",
+            "location": "Comptroller.sol#L1350"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Safe calculation removal",
+            "description": "Using simple subtraction instead of safe calculations can save gas.",
+            "severity": "n/a",
+            "location": "CCollateralCapErc20.sol#L353,#L594"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Variable calculation optimization",
+            "description": "Moving a variable calculation inside an if block to save gas.",
+            "severity": "n/a",
+            "location": "CCollateralCapErc20.sol#L379"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-638"
+                ],
+                "5": [
+                    "CWE-424"
+                ]
+            },
+            "title": "Redeem hook movement",
+            "description": "Moving the security hook can save some gas for users.",
+            "severity": "n/a",
+            "location": "CCollateralCapErc20.sol#L639"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Random user token loss prevention",
+            "description": "Adding a check to prevent random users from losing tokens.",
+            "severity": "n/a",
+            "location": "CCollateralCapErc20.sol#L127"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "closeFactorMantissa initialization",
+            "description": "Initializing `closeFactorMantissa` in the constructor to prevent liquidation failure.",
+            "severity": "n/a",
+            "location": "Comptroller.sol#L869"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "collateralCap initialization",
+            "description": "Initializing `collateralCap` in the `initialize` function to prevent users from increasing their collateral.",
+            "severity": "n/a",
+            "location": "CCollateralCapErc20.sol#L135"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unreachable code removal",
+            "description": "Removing unreachable code to improve readability and maintainability.",
+            "severity": "n/a",
+            "location": "CCollateralCapErc20.sol#L408"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Incentive and close factor limits",
+            "description": "Adding min and max limits for `liquidationIncentiveMantissa` and `closeFactorMantissa`.",
+            "severity": "n/a",
+            "location": "Comptroller.sol#L78"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "New market borrow or supply cap may block borrowing or minting",
+            "description": "If market borrow balance or supply already exceeds new cap when setting it may block borrowing or minting for market",
+            "severity": "info",
+            "location": "Comptroller.sol#L1005, Comptroller.sol#L1025"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Unused values/statements in functions",
+            "description": "Unused values and statements in functions",
+            "severity": "info",
+            "location": "Comptroller.sol#L239, Comptroller.sol#L323, CCollateralCapErc20Delegate.sol#L22, CCollateralCapErc20Delegate.sol#L25"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Unused functions wrapped in commentaries",
+            "description": "Functions stated in commentaries but unused",
+            "severity": "n/a",
+            "location": "Comptroller.sol#L323, CCollateralCapErc20.sol#L398, CCollateralCapErc20.sol#L689, CCollateralCapErc20.sol#L536"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Explicit statement of uint256 values",
+            "description": "In several files, all instances of uint values are not stated as uint256 explicitly",
+            "severity": "info",
+            "location": "CCollateralCapErc20.sol, CTokenInterfaces.sol, Comptroller.sol, ComptrollerStorage.sol"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Unclear commentary",
+            "description": "Confusing comment about redeemTokensIn and redeemAmountIn values",
+            "severity": "info",
+            "location": "CCollateralCapErc20.sol#L552"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Possible value truncation issues",
+            "description": "div_ScalarByExpTruncate() may round the result down to the next nearest integer if it is calculated to be a non-integer number of cToken units",
+            "severity": "info",
+            "location": "CCollateralCapErc20.sol#L513"
+        }
+    ]
+}

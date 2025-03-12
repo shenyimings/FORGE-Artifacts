@@ -1,0 +1,197 @@
+{
+    "path": "artifacts/2022-09-incrementprotocol-fixreview.pdf",
+    "project_info": {
+        "url": "https://github.com/Increment-Finance/increment-protocol",
+        "commit_id": "9368b23ac2d2f5dc954cc849d20cdeca21d627c6",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "increment-protocol": "contracts/2022-09-incrementprotocol-fixreview/increment-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Governance role is a single point of failure",
+            "description": "The governance role has too many privileges, making it a target for attackers and incentivizing malicious behavior.",
+            "severity": "high",
+            "location": "Governance role"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent lower bounds on collateral weights",
+            "description": "Inconsistent weight calculations for collateral assets increase the likelihood of collateral seizures by liquidators.",
+            "severity": "medium",
+            "location": "contracts/Vault.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Support for multiple reserve tokens allows for arbitrage",
+            "description": "The UA token contract's support for multiple reserve tokens creates an arbitrage opportunity.",
+            "severity": "info",
+            "location": "contracts/tokens/UA.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Ownership transfers can be front-run",
+            "description": "Anyone can call the transferPerpOwner function to set their address as the owner, taking ownership of a contract's vBase or vQuote tokens.",
+            "severity": "high",
+            "location": "contracts/utils/PerpOwnable.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Funding payments are made in the wrong token",
+            "description": "Funding payments owed to users are made in vBase instead of UA tokens, resulting in incorrect PnL calculations and increased risk of liquidations.",
+            "severity": "high",
+            "location": "contracts/ClearingHouse.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Excessive dust collection may lead to premature closures of long positions",
+            "description": "Dust collection mechanism may lead to premature closure of long positions, resulting in loss of profit.",
+            "severity": "medium",
+            "location": "contracts/Perpetual.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Problematic use of primitive operations on fixed-point integers",
+            "description": "Use of primitive operations on fixed-point integers increases the risk of overflows and undefined behavior.",
+            "severity": "info",
+            "location": "Various functions in LibMath.sol, Perpetual.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Liquidations are vulnerable to sandwich attacks",
+            "description": "Hard-coded zero minimum-amount-out value makes liquidations vulnerable to sandwich attacks.",
+            "severity": "medium",
+            "location": "ClearingHouse.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Accuracy of market and oracle TWAPs is tied to the frequency of user interactions",
+            "description": "Less frequent user interactions may result in less accurate TWAPs, making them susceptible to manipulation.",
+            "severity": "info",
+            "location": "Perpetual contract's _updateTwap function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "Liquidations of short positions may fail due to insufficient dust collection",
+            "description": "Insufficient dust collection mechanism for short positions may lead to failed liquidations.",
+            "severity": "low",
+            "location": "Perpetual contract's _reducePositionOnMarket function and ClearingHouse.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Project dependencies contain vulnerabilities",
+            "description": "Project dependencies contain known vulnerabilities that need to be patched.",
+            "severity": "low",
+            "location": "increment-protocol dependencies"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Exposure of sensitive information to an unauthorized actor",
+            "description": "node-fetch is vulnerable to exposure of sensitive information to an unauthorized actor.",
+            "severity": "high",
+            "location": "node-fetch dependency"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Risks associated with oracle outages",
+            "description": "Under extreme market conditions, the Chainlink oracle may cease to work as expected, causing unexpected behavior in the Increment Protocol.",
+            "severity": "info",
+            "location": "Configuration (Chainlink oracle)"
+        }
+    ]
+}

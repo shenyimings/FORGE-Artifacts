@@ -1,0 +1,230 @@
+{
+    "path": "artifacts/dao-fi.pdf",
+    "project_info": {
+        "url": "https://github.com/DAOfi/daofi-v1-core/tree/69e5b8d76885b634638a449c2112122839a6f397",
+        "commit_id": "69e5b8d76885b634638a449c2112122839a6f397",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "daofi-v1-core": "contracts/dao-fi/daofi-v1-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Conversion",
+            "description": "In the function DAOfoV1Pair._convert(), when dividing amount by factor, if amount is lower than factor, the input amount is not converted.",
+            "severity": "high",
+            "location": "DAOfoV1Pair.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Poorly documented logic",
+            "description": "The pool logic is poorly documented in the code, which impairs external auditing.",
+            "severity": "high",
+            "location": "Codebase (no specific file mentioned)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Swap at fixed price",
+            "description": "In the function getQuoteOut() if amountBaseIn is equal to or higher than supply, the function returns the value of amountQuoteOut equal to quoteReserve.",
+            "severity": "high",
+            "location": "DAOfiV1Pair.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unintentional swaps",
+            "description": "Unintentional swaps may occur in the functions swapExactTokensForTokens() and swapExactTokensForETH () since both take sp.sender as an argument instead of msg.sender.",
+            "severity": "high",
+            "location": "DAOfiV1Router01.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Denial-of-Service (DoS)",
+            "description": "A Denial-of-Service (DoS) attack is a situation which an attacker renders some functionality unavailable.",
+            "severity": "medium",
+            "location": "DAOfiV1Factory.sol, DAOfiV1Router01.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Incorrect input validation",
+            "description": "When initializing DAOfiV1Pair using the function initialize(), following the natspec documentation, _n value should be between 1 and 3.",
+            "severity": "medium",
+            "location": "DAOfiV1Pair.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Input Validation",
+            "description": "The following functions do not check if arguments of type address are non-zero.",
+            "severity": "low",
+            "location": "Multiple files (DAOfiV1Factory.sol, DAOfiV1Router01.sol, DAOfiV1Pair.sol)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Numerical precision",
+            "description": "The function _convert() converts token amounts so that they have 8 decimals.",
+            "severity": "low",
+            "location": "DAOfiV1Pair.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Privileged Roles and Ownership",
+            "description": "Smart contracts will often have owner variables to designate the person with special privileges to make modifications to the smart contract.",
+            "severity": "low",
+            "location": "DAOfiV1Pair.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Race Conditions / Front-Running",
+            "description": "A block is an ordered collection of transactions from all around the network.",
+            "severity": "low",
+            "location": "DAOfiV1Pair.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Anyone Can Provide Liquidity",
+            "description": "Since the pool is designed to allow only one liquidity provider, only the owner should be able to add and remove liquidity via addLiquidity() and removeLiquidity().",
+            "severity": "low",
+            "location": "DAOfiV1Router01.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas Usage / for Loop Concerns",
+            "description": "Gas usage is a main concern for smart contract developers and users, since high gas costs may prevent users from wanting to use the smart contract.",
+            "severity": "info",
+            "location": "DAOfiV1Pair.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rebasing tokens",
+            "description": "DAOfi pair contract computations are incompatible with rebasing tokens.",
+            "severity": "info",
+            "location": "DAOfiV1Pair.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Code hash computation",
+            "description": "The L25 contains hardcoded code hash.",
+            "severity": "info",
+            "location": "DAOfiV1Library.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Add and remove liquidity design",
+            "description": "The functions deposit() and withdraw() can be called only once by the router contract, meaning that users won't be able to provide liquidity after the initial deposit call.",
+            "severity": "info",
+            "location": "DAOfiV1Pair.sol"
+        }
+    ]
+}

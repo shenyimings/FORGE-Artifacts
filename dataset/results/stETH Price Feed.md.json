@@ -1,0 +1,161 @@
+{
+    "path": "artifacts/stETH Price Feed.md",
+    "project_info": {
+        "url": "https://github.com/lidofinance/steth-price-feed",
+        "commit_id": "459495f07c97d04f6e3839e7a3b32acfcade22ad",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "steth-price-feed": "contracts/stETH Price Feed/steth-price-feed"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Possible assets loss",
+            "description": "User can lose money if accidentally sends tx to proxy with `msg.value>0`",
+            "severity": "info",
+            "location": "PriceFeedProxy.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Possible admin control loss",
+            "description": "Admin can set address of a new admin to zero, which means that nobody can call admin functions after that",
+            "severity": "n/a",
+            "location": "PriceFeedProxy.sol and StEthPriceFeed.vy"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-369"
+                ]
+            },
+            "title": "Incorrect input parameters",
+            "description": "Relative difference `old` argument can be zero in function for calculating price",
+            "severity": "n/a",
+            "location": "StEthPriceFeed.vy"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Bad range for price change",
+            "description": "It is possible to set 100% (for assets with the same price it is very big range) allowed range for price change",
+            "severity": "info",
+            "location": "StEthPriceFeed.vy"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Unnecessary payable modificator",
+            "description": "Proxy constructor can receive assets, but does not use it anywhere",
+            "severity": "n/a",
+            "location": "PriceFeedProxy.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary check in constructor",
+            "description": "Proxy constructor contains unnecessary check",
+            "severity": "n/a",
+            "location": "PriceFeedProxy.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Possible incorrect initialization",
+            "description": "`initialize` function can be invoked only once and it can be done by anybody",
+            "severity": "n/a",
+            "location": "StEthPriceFeed.vy"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "Events not emitting",
+            "description": "After change of some storage variables events not emitting",
+            "severity": "info",
+            "location": "StEthPriceFeed.vy"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "No checks timestamp in `_update_safe_price`",
+            "description": "Intruder may manipulate with `safe_price_value` in one transaction",
+            "severity": "n/a",
+            "location": "StEthPriceFeed.vy"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-188"
+                ]
+            },
+            "title": "Storage collisions between implementation versions",
+            "description": "May be broken if a developer changes order or types of variables in a new logic contract",
+            "severity": "info",
+            "location": "StEthPriceFeed.vy"
+        }
+    ]
+}

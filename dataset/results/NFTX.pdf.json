@@ -1,0 +1,239 @@
+{
+    "path": "artifacts/NFTX.pdf",
+    "project_info": {
+        "url": "https://github.com/NFTX-project/nftx-protocol-v2/tree/c8ddc72b4400ad1e12ed03f4369b765371564a00",
+        "commit_id": "c8ddc72b4400ad1e12ed03f4369b765371564a00",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "nftx-protocol-v2": "contracts/NFTX/nftx-protocol-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing validation of proxy admin indices",
+            "description": "Unvalidated index input, leading to potential out-of-bounds errors.",
+            "severity": "info",
+            "location": "ProxyController.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Random token withdrawals can be gamed",
+            "description": "The algorithm used to randomly select a token for withdrawal is deterministic and predictable.",
+            "severity": "info",
+            "location": "NFTXVaultUpgradeable.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Duplicate receivers allowed by addReceiver()",
+            "description": "The addReceiver() function does not check for duplicate receivers, leading to potential fee distribution errors.",
+            "severity": "medium",
+            "location": "NFTXSimpleFeeDistributor.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "OpenZeppelin vulnerability can break initialization",
+            "description": "A bug in OpenZeppelin v3.4.1 affects initializer functions invoked separately during contract creation.",
+            "severity": "info",
+            "location": "package.json (OpenZeppelin dependency)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potentially excessive gas fees imposed on users for protocol fee distribution",
+            "description": "Users may pay a substantial amount in gas for the distribution of insignificant protocol fees.",
+            "severity": "high",
+            "location": "NFTXSimpleFeeDistributor contract (TOB-NFTX-6)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Risk of denial of service due to unbounded loop",
+            "description": "An unbound loop is used in the fee distribution code, which could hit the block gas limit and cause a denial of service.",
+            "severity": "high",
+            "location": "NFTXSimpleFeeDistributor contract (TOB-NFTX-7)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "A malicious fee receiver can cause a denial of service",
+            "description": "A malicious fee receiver contract can consume all the gas forwarded to it when the fee distribution process is executed, leading to a denial of service.",
+            "severity": "high",
+            "location": "NFTXSimpleFeeDistributor contract (TOB-NFTX-8)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Vault managers can grief users",
+            "description": "Vault managers can change the vault fees and disable certain vault features, allowing them to grief users.",
+            "severity": "medium",
+            "location": "NFTXVaultFactoryUpgradeable contract (TOB-NFTX-9)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of zero address check in functions",
+            "description": "Certain setter functions fail to validate incoming arguments, allowing callers to accidentally set important state variables to the zero address.",
+            "severity": "info",
+            "location": "Several contracts (NFTXInventoryStaking.sol, NFTXSimpleFeeDistributor.sol, RewardDistributionToken)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Unbounded loops in fee distribution contract",
+            "description": "Using unbounded loops can be risky due to gas limitations, leading to potential griefing attacks.",
+            "severity": "medium",
+            "location": "Fee distribution contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Execution of arbitrary bytecode",
+            "description": "Executing arbitrary code when a receiver is a contract, which may lead to unpredictable behavior and denial-of-service attacks.",
+            "severity": "medium",
+            "location": "Fee distribution contract"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Lack of incentives for users",
+            "description": "Users may be disincentivized to use the protocol due to the cost of executing the fee distribution process.",
+            "severity": "info",
+            "location": "Fee distribution mechanism"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ERC20 race condition",
+            "description": "Failure to mitigate the known ERC20 race condition, which can allow attackers to steal tokens.",
+            "severity": "medium",
+            "location": "Token contracts"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "External function calls in transfer or transferFrom",
+            "description": "Presence of external function calls in transfer or transferFrom functions can lead to reentrancies.",
+            "severity": "medium",
+            "location": "ERC777 token contracts"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Deflationary tokens",
+            "description": "Tokens with deflationary mechanisms can lead to unexpected behavior.",
+            "severity": "info",
+            "location": "Token contracts"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Flash minting",
+            "description": "Allowing flash minting can lead to substantial swings in the balance and total supply, necessitating strict overflow checks.",
+            "severity": "medium",
+            "location": "Token contracts"
+        }
+    ]
+}

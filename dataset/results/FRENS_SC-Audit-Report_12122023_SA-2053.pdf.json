@@ -1,0 +1,221 @@
+{
+    "path": "artifacts/FRENS_SC-Audit-Report_12122023_SA-2053.pdf",
+    "project_info": {
+        "url": "https://github.com/frens-pool/frens-contracts-v2",
+        "commit_id": "6b73ad4",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "frens-contracts-v2": "contracts/FRENS_SC-Audit-Report_12122023_SA-2053/frens-contracts-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Insecure Setting of DepositContractAddress in Staking Function",
+            "description": "Dynamic retrieval of depositContractAddress from frensStorage during staking operation poses potential security risks.",
+            "severity": "medium",
+            "location": "StakingPool contract, _stake function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Possible Manipulation and Limit Exceedance of Fee Percentage in Reward Calculations",
+            "description": "Dynamic retrieval of fee percentage from storage (frensStorage) introduces risks related to manipulation and limit exceedance.",
+            "severity": "medium",
+            "location": "StakingPool contract, claim and getDistributableShare functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Potential DoS Risk in claim() Due to Fee Recipient Handling",
+            "description": "Fee recipient handling can lead to a Denial of Service (DoS) situation.",
+            "severity": "low",
+            "location": "claim function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1127"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Contract employs a floating pragma statement, which allows for compilation with any version between 0.8.0 and 0.9.0.",
+            "severity": "info",
+            "location": "./contracts/"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Missing Explicit Visibility Declarations in StakingPool.sol and FrensPoolShare.sol Contract State Variables",
+            "description": "Certain state variables lack explicit visibility declarations.",
+            "severity": "info",
+            "location": "StakingPool.sol and FrensPoolShare.sol contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Constructors of FrensPoolShare and StakingPool Contracts Lack Null Address Validation",
+            "description": "Input addresses are not validated against being zero in constructors.",
+            "severity": "info",
+            "location": "FrensPoolShare and StakingPool contracts constructors"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Absence of Events in Key Functions of StakingPool Contract",
+            "description": "Key functions do not emit events.",
+            "severity": "info",
+            "location": "StakingPool contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Unconventional Encoding Method in _toWithdrawalCred() Function",
+            "description": "The _toWithdrawalCred() function uses an unconventional encoding method.",
+            "severity": "info",
+            "location": "_toWithdrawalCred function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Ownable Functionality in Smart Contract",
+            "description": "FrensPoolShare contract imports Ownable but does not utilize its functionality.",
+            "severity": "info",
+            "location": "Smart contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Presence of Debugging Code in Production Contract",
+            "description": "Commented-out import statement for hardhat/console.sol is present in production contract.",
+            "severity": "info",
+            "location": "Production contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Inefficient Function Visibility in FrensPoolShare.sol and StakingPool.sol Contracts",
+            "description": "Functions meant to be invoked from external sources should have external visibility instead of public.",
+            "severity": "info",
+            "location": "FrensPoolShare.sol and StakingPool.sol contracts"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Misconfiguration or Malfeasance in Setting Validator Parameters",
+            "description": "Participants must place significant trust in the pool owner's expertise and integrity.",
+            "severity": "low",
+            "location": "Pool owner's settings"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Dynamic Fee Percentage Manipulation",
+            "description": "Excessively high fees can undermine the integrity of the reward distribution mechanism.",
+            "severity": "n/a",
+            "location": "StakingPool.sol, claim(), getDistributableShare()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misalignment Between Documentation and Contract Implementation",
+            "description": "exitPool function is documented but not implemented in the contract; instead, logic is embedded within claim function.",
+            "severity": "n/a",
+            "location": "StakingPool.sol"
+        }
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/KingDogeToken Full Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xa60dad644be617d4380ef2a03f3075ebbc9d0770",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "KingDogeToken": "contracts/KingDogeToken Full Smart Contract Audit/KingDogeToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can lead to an OUT_OF_GAS exception if the excluded addresses list is long. Similarly, `_getCurrentSupply` also uses a loop for evaluating total supply, which can also be aborted with OUT_OF_GAS exception.",
+            "severity": "low",
+            "location": "_includeInReward() and _getCurrentSupply functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges, including changing tax fee, liquidity fee, maximum transaction amount, and excluding from fees.",
+            "severity": "n/a",
+            "location": "Various functions with onlyOwner modifiers"
+        }
+    ]
+}

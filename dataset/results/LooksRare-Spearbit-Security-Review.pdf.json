@@ -1,0 +1,350 @@
+{
+    "path": "artifacts/LooksRare-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/LooksRare/contracts-exchange-v2",
+        "commit_id": "ad675924da61ae70e05883edbbf1bc08eb8b0106",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts-exchange-v2": "contracts/LooksRare-Spearbit-Security-Review/contracts-exchange-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "The Protocol owner can drain users' currency tokens",
+            "description": "The Protocol owner can drain users' currency tokens that have been approved to the protocol.",
+            "severity": "critical",
+            "location": "LooksRareProtocol.sol#L138, LooksRareProtocol.sol#L391-L398, ITransferSelectorNFT.sol#L14-L17, TransferSelectorNFT.sol#L41, TransferSelectorNFT.sol#L89-L98"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "StrategyFloorFromChainlink will often revert due to stale prices",
+            "description": "The FloorFromChainlink strategy inherits from BaseStrategyChainlinkPriceLatency and may revert with the PriceNotRecentEnough error.",
+            "severity": "medium",
+            "location": "StrategyFloorFromChainlink.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "TransferManager does not check ERC721 token amounts",
+            "description": "TransferManager would perform transfers even if an operator sends a 0 amount for an itemId in the context of transferring ERC721 tokens.",
+            "severity": "low",
+            "location": "TransferManager.sol, functions transferItemsERC721 and transferBatchItemsAcrossCollections"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Maker cannot enforce number of fulfillments for custom strategies",
+            "description": "The maker cannot directly enforce an upper bound for the maximum number of fulfills for an order to avoid unexpected behavior.",
+            "severity": "low",
+            "location": "ExecutionManager.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Discount equals 10_000 not allowed",
+            "description": "Reverts if discount == 10_000, but does not revert if discount == 99_99 which almost has the same effect.",
+            "severity": "info",
+            "location": "StrategyFloorFromChainlink.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Unused variable `recipients[0]`",
+            "description": "`recipients[0]` is set to `protocolFeeRecipient`, but its value is never used afterward.",
+            "severity": "info",
+            "location": "ExecutionManager.sol, LooksRareProtocol.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Currency validation can be optimized/refactored",
+            "description": "The if statement can be simplified and refactored into a utility function.",
+            "severity": "info",
+            "location": "StrategyUSDDynamicAsk.sol, StrategyFloorFromChainlink.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Validating amount can be simplified and possibly refactored",
+            "description": "The validation logic can be simplified and possibly refactored into a utility function.",
+            "severity": "info",
+            "location": "InheritedStrategy.sol, StrategyCollectionOffer.sol, StrategyDutchAuction.sol, StrategyItemIdsRange.sol, StrategyUSDDynamicAsk.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "_verifyMatchingItemIdsAndAmountsAndPrice can be further optimized",
+            "description": "The validation logic uses more opcodes than necessary and can be turned into an assembly block to further optimize the function.",
+            "severity": "info",
+            "location": "InheritedStrategy.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Shared login in different StrategyFloorFromChainlink strategies can be refactored",
+            "description": "Duplicate logic across multiple endpoints.",
+            "severity": "info",
+            "location": "StrategyFloorFromChainlink.sol, various functions"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Define named constants",
+            "description": "Replace used literals with named constants",
+            "severity": "info",
+            "location": "Multiple locations (see document fragment)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Price validation relaxation",
+            "description": "The strategies pick the execution price to be the maximum price bid by the maker, which can be relaxed.",
+            "severity": "info",
+            "location": "StrategyCollectionOffer.sol#L32, StrategyCollectionOffer.sol#L73, StrategyItemIdsRange.sol#L88-L90"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Inaccurate terminology",
+            "description": "The use of 'whitelist' and 'blacklist' can be offensive and is not accurate in conveying the function.",
+            "severity": "info",
+            "location": "CurrencyManager.sol, OrderValidatorV2A.sol, ValidationCodeConstants.sol#L8, ICurrencyManager.sol, ITransferManager.sol, LooksRareProtocol.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Insufficient documentation",
+            "description": "The assumptions about the decimals value of priceFeeds are not documented.",
+            "severity": "info",
+            "location": "StrategyUSDDynamicAsk.sol#L107, StrategyFloorFromChainlink.sol#L370"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code duplication",
+            "description": "Duplicated code for Chainlink staleness check and asset type validation.",
+            "severity": "info",
+            "location": "Multiple locations in the contract"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-188"
+                ]
+            },
+            "title": "Low-level call usage",
+            "description": "Low-level calls lack type safety and won't revert for calls to Externally Owned Accounts.",
+            "severity": "info",
+            "location": "ExecutionManager.sol#L124, ExecutionManager.sol#L210, TransferSelectorNFT.sol#L89"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Insufficient input validation",
+            "description": "Lack of consistency in validating parameters, especially on the Taker's side.",
+            "severity": "info",
+            "location": "Multiple locations in the contract"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Unimplemented strategyIds exploitation",
+            "description": "The protocol owner can add a malicious strategy afterward and take all offers.",
+            "severity": "info",
+            "location": "StrategyManager.sol#L55, ExecutionManager.sol#L210-L212, ExecutionManager.sol#L124-L126"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Faulty price feed reliance",
+            "description": "If price feeds do not return correct prices, strategies may have unexpected consequences.",
+            "severity": "info",
+            "location": "StrategyUSDDynamicAsk.sol#L92, StrategyFloorFromChainlink.sol#L370"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect royalty info pricing",
+            "description": "The input price parameters provided to royaltyInfo endpoint do not match the EIP-2981 specification.",
+            "severity": "info",
+            "location": "CreatorFeeManagerWithRebates.sol#L52, CreatorFeeManagerWithRoyalties.sol#L57"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent Royalty Fee Calculation",
+            "description": "The price provided in viewCreatorFeeInfo functions is for the whole batch of itemIds and not individual tokens.",
+            "severity": "n/a",
+            "location": "royaltyInfo endpoint, CreatorFeeManagerWithRebates.sol, CreatorFeeManagerWithRoyalties.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1287"
+                ]
+            },
+            "title": "abi.encodeWithSelector Lacks Type Safety",
+            "description": "abi.encodeWithSelector does not guarantee type safety for input parameters.",
+            "severity": "info",
+            "location": "Multiple locations in OrderValidatorV2A.sol and lowLevelCallers."
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Hardcoded EIP-712 Type Hashes",
+            "description": "Hardcoded byte32 EIP-712 type hashes are defined in the OrderStructs library.",
+            "severity": "info",
+            "location": "OrderStructs.sol"
+        }
+    ]
+}

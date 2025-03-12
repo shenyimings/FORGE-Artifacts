@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/Solidified-Origin_Governance.pdf",
+    "project_info": {
+        "url": "https://github.com/OriginProtocol/origin-dollar",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "origin-dollar": "contracts/Solidified-Origin_Governance/origin-dollar"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Excess ETH for minting is not refunded",
+            "description": "The function mint() accepts payment in ETH for the minting of an NFT, but no refund/change is given if the user overpays.",
+            "severity": "low",
+            "location": "NFTLaunchpad, OriginERC721a_v1.sol, mint() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Swap and harvest might fail if the number of strategies and reward addresses grow very large",
+            "description": "The functions harvest() and swap() cause nested iterations over dynamic data structures, which might grow too large and hit the block gas limit.",
+            "severity": "low",
+            "location": "Harvester, Harvester.sol, harvest() and swap() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Minter signatures can be replayed several times by user",
+            "description": "The function mint() requires a signature by a minter admin to be submitted, but there is no nonce to make messages unique, allowing users to re-submit signatures.",
+            "severity": "low",
+            "location": "NFTLaunchpad, OriginERC721a_v1.sol, mint() function"
+        }
+    ]
+}

@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/origin.pdf",
+    "project_info": {
+        "url": "https://github.com/OriginProtocol/origin",
+        "commit_id": "edf58336b16a3200141afdb4b6b8b7cd8a52bf92",
+        "address": "0x698ff47b84837d3971118a369c570172ee7e54c2",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "origin": "contracts/origin/origin"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Marketplace OGN balance is drainable through withdrawListing",
+            "description": "The Marketplace contract allows repeated withdrawals by a deposit manager, draining the contract's OGN account balance.",
+            "severity": "high",
+            "location": "origin-contracts/contracts/marketplace/v00/Marketplace.sol, function withdrawListing"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Disputes are front-runnable by a buyer",
+            "description": "A buyer can trick a seller into accepting an offer and then finalize it before the seller's dispute transaction is processed.",
+            "severity": "medium",
+            "location": "origin-contracts/contracts/marketplace/v00/Marketplace.sol, function dispute"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Marketplace cannot be paused",
+            "description": "In the event of malicious activity or required upgrade, there is currently no way to pause the Marketplace contract.",
+            "severity": "info",
+            "location": "origin-contracts/contracts/marketplace/v00/Marketplace.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-657"
+                ]
+            },
+            "title": "Tokens with external code execution can lead to theft of tokens through reentrancy",
+            "description": "Marketplace does not follow the Checks-Effects-Interactions pattern for its interaction with the currency and tokenAddr tokens.",
+            "severity": "high",
+            "location": "V01_Marketplace.sol"
+        }
+    ]
+}

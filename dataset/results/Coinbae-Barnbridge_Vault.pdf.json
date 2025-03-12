@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/Coinbae-Barnbridge_Vault.pdf",
+    "project_info": {
+        "url": "https://github.com/BarnBridge/BarnBridge-Whitepaper",
+        "commit_id": "n/a",
+        "address": "0xa3c299eee1998f45c20010276684921ebe6423d9",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "CommunityVault": "contracts/Coinbae-Barnbridge_Vault/CommunityVault"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "EmptyByteArrayCopy",
+            "description": "Copying an empty byte array (or string) from memory or calldata to storage can result in data corruption if the target array's length is increased subsequently without storing new data.",
+            "severity": "medium",
+            "location": "Audited contracts using solidity versions 0.6.0 --> 0.8.0"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ],
+                "4": [
+                    "CWE-226"
+                ]
+            },
+            "title": "DynamicArrayCleanup",
+            "description": "When assigning a dynamically-sized array with types of size at most 16 bytes in storage causing the assigned array to shrink, some parts of deleted slots were not zeroed out.",
+            "severity": "medium",
+            "location": "Audited contracts using solidity versions 0.6.0 --> 0.8.0"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Function could be marked as external (SWC-000)",
+            "description": "Public function can be optimized to use external instead, reducing gas usage.",
+            "severity": "medium",
+            "location": "Line 16 of the setAllowance function"
+        }
+    ]
+}

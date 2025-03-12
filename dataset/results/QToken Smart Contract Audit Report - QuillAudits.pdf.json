@@ -1,0 +1,176 @@
+{
+    "path": "artifacts/QToken Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/qoneqt/Qtoken",
+        "commit_id": "8efd2209fedc09a5530d6e46a9df6a681c815031",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Qtoken": "contracts/QToken Smart Contract Audit Report - QuillAudits/Qtoken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "uniRouter variable has been initialized to zero address",
+            "description": "The variable uniRouter is initialized with the value of PANCAKESWAP_ROUTER_ADDRESS, at the time of construction. At that point of time PANCAKESWAP_ROUTER_ADDRESS is also zero address.",
+            "severity": "high",
+            "location": "QTokenBuy.sol, Line 181"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "ERC20 transfers might revert for some tokens",
+            "description": "There are some ERC20 tokens that do not return anything on transfer or transferFrom. If this contract is ever used to interact with such tokens then, withdrawAllFromToken will revert.",
+            "severity": "medium",
+            "location": "QTokenBuy.sol, Line 201-203"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State variables that could be declared immutable",
+            "description": "The state variable should be declared immutable to save gas.",
+            "severity": "info",
+            "location": "QTokenBuy.sol, Line 166"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Public function that could be declared external",
+            "description": "The following public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "info",
+            "location": "QTokenBuy.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Centralization Risks",
+            "description": "The role owner has the authority to manage the list containing addresses excluded from reward and fee, withdraw ether from the contract at any point of time, and change the fee rate.",
+            "severity": "medium",
+            "location": "Qoneqttokengenerator.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Range Check for Input Variable",
+            "description": "The owner can set the following state variables arbitrary large or small causing potential risks in fee deduction logic.",
+            "severity": "low",
+            "location": "Qoneqttokengenerator.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing zero address validation",
+            "description": "There are missing zero checks in constructor and transferXS function and they could lead to unintended transfer of funds or in some cases loss of ownership.",
+            "severity": "low",
+            "location": "Qoneqttokengenerator.sol, Line 449, 941"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "If ownable is set to false in constructor, then owner can never renounce ownership",
+            "description": "If ownable is set to false in the constructor, then renounceOwnershipToBurnAddress function will always revert due to the require check on the line #495.",
+            "severity": "low",
+            "location": "Qoneqttokengenerator.sol, Line 494-497"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing Events for Significant Transactions",
+            "description": "The missing event makes it difficult to track off-chain decimal changes.",
+            "severity": "info",
+            "location": "Qoneqttokengenerator.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Incorrect error message",
+            "description": "The above error messages do not describe the error correctly.",
+            "severity": "info",
+            "location": "Qoneqttokengenerator.sol, Line 602"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused state variables",
+            "description": "The above state variable should be removed to improve code readability and save deployment gas.",
+            "severity": "info",
+            "location": "Qoneqttokengenerator.sol, Line 389"
+        }
+    ]
+}

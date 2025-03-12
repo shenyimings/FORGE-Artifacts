@@ -1,0 +1,416 @@
+{
+    "path": "artifacts/2023-02-03_Keep3r_Sidechain_oracles.pdf",
+    "project_info": {
+        "url": "https://github.com/defi-wonderland/sidechain-oracles/tree/da7cf7d15fca848828f3a2c6e0e8c55e0dd76841",
+        "commit_id": "da7cf7d15fca848828f3a2c6e0e8c55e0dd76841",
+        "address": "0x5b9315CE1304DF3B2A83B2074cbF849D160642Ab",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.8.15+commit.e14f2714"
+        ],
+        "project_path": {
+            "DataReceiver": "contracts/2023-02-03_Keep3r_Sidechain_oracles/DataReceiver"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "External access in strategicFetchObservation function",
+            "description": "The strategicFetchObservation function is granted with external access, allowing anyone to call it without restrictions, which can lead to incorrect price calculations.",
+            "severity": "high",
+            "location": "DataFeedStrategy.sol, function strategicFetchObservation"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Bridged nonces are not tracked properly",
+            "description": "The bridged nonces are not tracked correctly, which can lead to reverting transactions in the sidechain.",
+            "severity": "medium",
+            "location": "StrategyJob.sol, function _workable"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Self static call from the inherited contract",
+            "description": "DataFeed is inheriting from PipelineManagement contract, which makes a STATICCALL to itself.",
+            "severity": "info",
+            "location": "DataFeed contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Explicit bytes return value",
+            "description": "The function xReceive returns 64 bytes of zero, which is unnecessary and costly.",
+            "severity": "info",
+            "location": "ConnextReceiverAdapter function xReceive"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "Observation overwriting",
+            "description": "Number of observations may exceed pool cardinality, causing some observations to be overwritten.",
+            "severity": "info",
+            "location": "DataFeed contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Cardinality check",
+            "description": "setInitialCardinality() function does not restrict setting initialCardinality variable to zero.",
+            "severity": "info",
+            "location": "DataFeed contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ],
+                "3": [
+                    "CWE-478"
+                ]
+            },
+            "title": "Revert transaction",
+            "description": "The transaction will simply return nothing if a comparison is not passed, which can lead to errors.",
+            "severity": "info",
+            "location": "DataFeed contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Period duration can be set to 0",
+            "description": "There is no check if _periodDuration is bigger than 0 in the contract DataFeedStrategy.sol.",
+            "severity": "info",
+            "location": "DataFeedStrategy contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Pending old observations sending DoS",
+            "description": "Sending observation with highest nonce when there are more unsent observations with lower nonce can lead to a denial-of-service attack.",
+            "severity": "info",
+            "location": "OracleSidechain contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused variable ORACLE_INIT_CODE_HASH",
+            "description": "The variable ORACLE_INIT_CODE_HASH is not used throughout the contract DataReceiver.sol.",
+            "severity": "info",
+            "location": "DataReceiver contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Superfluous functions",
+            "description": "Some functions are redundant and can be deleted to optimize code.",
+            "severity": "info",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing event in forceFetchObservations",
+            "description": "There is no event emitted when governor fetches observations.",
+            "severity": "info",
+            "location": "DataFeed contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Add zero address checks in constructors and setters",
+            "description": "Zero address checks are missing in some constructors and setters.",
+            "severity": "info",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Payable send to bridge",
+            "description": "The function bridgeObservations is set payable, though the only possible executor DataFeed cannot send ether.",
+            "severity": "info",
+            "location": "ConnextSenderAdapter contract"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Uninitialized Local Variable",
+            "description": "_i is a local variable never initialized",
+            "severity": "medium",
+            "location": "DataReceiver.whitelistAdapters(IBridgeReceiverAdapter[],bool[])"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Uninitialized Local Variable",
+            "description": "_i is a local variable never initialized",
+            "severity": "medium",
+            "location": "PipelineManagement.whitelistAdapters(IBridgeSenderAdapter[],bool[])"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-457"
+                ]
+            },
+            "title": "Uninitialized Local Variable",
+            "description": "_i is a local variable never initialized",
+            "severity": "medium",
+            "location": "DataFeedStrategy.calculateSecondsAgo(uint32)"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Uninitialized Local Variable",
+            "description": "_i is a local variable never initialized",
+            "severity": "medium",
+            "location": "PipelineManagement.whitelistPipelines(uint32[],bytes32[])"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Uninitialized Local Variable",
+            "description": "_i is a local variable never initialized",
+            "severity": "medium",
+            "location": "DataFeed.fetchObservations(bytes32,uint32[])"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Uninitialized Local Variable",
+            "description": "_lastPoolStateObserved is a local variable never initialized",
+            "severity": "medium",
+            "location": "DataFeedStrategy.strategicFetchObservations(bytes32,IDataFeedStrategy.TriggerReason)"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Uninitialized Local Variable",
+            "description": "_i is a local variable never initialized",
+            "severity": "medium",
+            "location": "PipelineManagement.setDestinationDomainIds(IBridgeSenderAdapter[],uint32[],uint32[])"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Uninitialized Local Variable",
+            "description": "_i is a local variable never initialized",
+            "severity": "medium",
+            "location": "OracleSidechain.write(IOracleSidechain.ObservationData[],uint24)"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Unused Return Value",
+            "description": "ignores return value by connext.xcall(_destinationDomainId,_to,address(0),address(0),0,0,_callData)",
+            "severity": "medium",
+            "location": "ConnextSenderAdapter.bridgeObservations(address,uint32,IOracleSidechain.ObservationData[],bytes32,uint24)"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Unused Return Value",
+            "description": "ignores return value by _whitelistedPools.add(_poolSalt)",
+            "severity": "medium",
+            "location": "PipelineManagement._whitelistPipeline(uint32,bytes32)"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "External Function",
+            "description": "should be declared external",
+            "severity": "high",
+            "location": "StrategyJob.workable(bytes32,IDataFeedStrategy.TriggerReason)"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "External Function",
+            "description": "should be declared external",
+            "severity": "high",
+            "location": "Keep3rJob.setKeep3r(IKeep3r)"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "External Function",
+            "description": "should be declared external",
+            "severity": "high",
+            "location": "StrategyJob.workable(uint32,bytes32,uint24)"
+        }
+    ]
+}

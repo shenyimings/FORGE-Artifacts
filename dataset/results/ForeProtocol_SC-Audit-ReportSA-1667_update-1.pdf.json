@@ -1,0 +1,500 @@
+{
+    "path": "artifacts/ForeProtocol_SC-Audit-ReportSA-1667_update-1.pdf",
+    "project_info": {
+        "url": "https://github.com/FOREProtocol/contracts",
+        "commit_id": "4672889a61a9cd4455aac1d9680fe2cb3eaa3fea",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/ForeProtocol_SC-Audit-ReportSA-1667_update-1/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ]
+            },
+            "title": "C01. Mishandled Edge Case; Data Consistency",
+            "description": "Prediction market's verification system is easily manipulated, leading to loss of trust and economic misalignment.",
+            "severity": "high",
+            "location": "./contracts/protocol/markets/basic/library/MarketLib.sol : _isVerified()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "C02. Denial of Service Vulnerability",
+            "description": "withdrawVerificationReward function may lead to denial-of-service attacks.",
+            "severity": "high",
+            "location": "./contracts/protocol/markets/basic/BasicMarket.sol: withdrawVerificationReward()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "C03. Unauthorized Access To Critical Functions",
+            "description": "Lack of access controls in withdrawVerificationReward function enables malicious actors to control power distribution among verifier NFTs.",
+            "severity": "high",
+            "location": "./contracts/protocol/markets/basic/BasicMarket.sol: withdrawVerificationReward()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "C04. Denial of Service Vulnerability",
+            "description": "foreVerifiers contract lacks allowance-granting ability, leading to denial-of-service vulnerabilities.",
+            "severity": "high",
+            "location": "./contracts/protocol/markets/basic/BasicMarket.sol: withdrawVerificationReward()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "C05. Data Consistency",
+            "description": "upgradeTier function enables users to upgrade their NFT tier without checking if the tier exists, leading to data inconsistencies.",
+            "severity": "high",
+            "location": "./contracts/protocol/ForeProtocol.sol: upgradeTier()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "C06. Denial of Service Vulnerability; Invalid Calculations",
+            "description": "Incorrect calculation of amounts in withdrawVerificationReward and calculateVerificationReward functions may lead to denial-of-service attacks.",
+            "severity": "high",
+            "location": "./contracts/protocol/markets/basic/BasicMarket.sol: withdrawVerificationReward(), calculateVerificationReward"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "H01. Mishandled Edge Case; Data Consistency",
+            "description": "fore operator's override control on verification NFTs creates a centralized point of vulnerability.",
+            "severity": "high",
+            "location": "./contracts/verifiers/ForeVerifiers.sol : isApprovedForAll(), _transfer()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "H02. Requirements Violation; Data Consistency",
+            "description": "ProtocolConfig contract allows setting market validation and dispute time periods that don't align with documentation constraints.",
+            "severity": "high",
+            "location": "./contracts/protocol/config/ProtocolConfig.sol: constructor(), _setConfig()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "H03. Coarse-Grained Access Control",
+            "description": "Exclusive reliance on a single highGuard address poses significant security risks.",
+            "severity": "high",
+            "location": "n/a"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ],
+                "4": [
+                    "CWE-789"
+                ]
+            },
+            "title": "M01. Redundant Memory Allocation",
+            "description": "The line MarketLib.Market memory m = market; creates an in-memory copy of the storage variable market, leading to a significant Gas overhead.",
+            "severity": "low",
+            "location": "./contracts/protocol/markets/basic/library/MarketLib.sol: _predict()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "M02. Best Practices Violation",
+            "description": "Events are declared in the MarketLib.sol library, which is unconventional and can lead to missed logs or additional tracking efforts.",
+            "severity": "low",
+            "location": "./contracts/protocol/markets/basic/library/MarketLib.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "M03. Absence of ReentrancyGuard for ERC721 Functions",
+            "description": "The project's contracts do not utilize the ReentrancyGuard for functions that interact with ERC721 tokens, exposing them to potential reentrancy attacks.",
+            "severity": "high",
+            "location": "./contracts/protocol/markets/basic/BasicMarket.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "M04. Requirements Violation; Data Consistency",
+            "description": "The project's NFT marketplace documentation specifies that it should exclusively use the native project ERC20 token for transactions, but an inherited method allows for purchases using chain native currency.",
+            "severity": "high",
+            "location": "./contracts/external/pancake-nft-markets/ERC721NFTMarketV1.sol: buyTokenUsingBNB()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "M05. Mishandled Edge Case",
+            "description": "The functions withdrawPredictionReward, withdrawVerificationReward, and marketCreatorFeeWithdraw may fail due to rounding discrepancies in mathematical operations.",
+            "severity": "high",
+            "location": "./contracts/protocol/markets/basic/BasicMarket.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "M06. Accumulation of Dust Values",
+            "description": "Due to integer division when splitting the toVerifiers fee, there is a possibility of truncating small residual balances.",
+            "severity": "low",
+            "location": "./contracts/protocol/markets/basic/library/MarketLib.sol: closeMarket()"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "L01. Missing Events on Critical State Updates",
+            "description": "Critical state changes should emit events for tracking things off-chain.",
+            "severity": "low",
+            "location": "./contracts/protocol/ForeProtocol.sol: editBaseUri()"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "L02. Race Condition",
+            "description": "The functions for market creation and minting verifier NFTs retrieve fees from the ProtocolConfig.sol contract, but the owner can change these fees, leading to unpredictability for users.",
+            "severity": "medium",
+            "location": "./contracts/protocol/markets/basic/BasicFactory.sol: createMarket()"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "L03. Unsafe Minting of ERC721 Tokens",
+            "description": "The createMarket function uses the _mint method to create and assign ERC721 tokens, which might not be safe when the receiver is a contract without ERC721 support.",
+            "severity": "medium",
+            "location": "./contracts/protocol/ForeProtocol.sol: createMarket()"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-755"
+                ]
+            },
+            "title": "L04. Unchecked Transfer",
+            "description": "The project's contracts do not utilize the SafeERC20 library for managing ERC20 token transfers, which can introduce risks.",
+            "severity": "medium",
+            "location": "./contracts/protocol/ForeProtocol.sol: mintVerifier(), buyPower()"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "L05. Redundant Code",
+            "description": "The current implementation of the market closure function executes several unnecessary operations when the market result is ResultType.INVALID.",
+            "severity": "low",
+            "location": "./contracts/protocol/markets/basic/BasicMarket.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "HighGuard Address Manipulation",
+            "description": "An attacker with control over the highGuard address could manipulate market outcomes and compromise the integrity of the system.",
+            "severity": "n/a",
+            "location": "./contracts/protocol/markets/basic/BasicMarket.sol: resolveDispute()"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Requirements Violation (HighGuard)",
+            "description": "The high guard address allows the system owner to specify any entity, without the requirement for it to be a multi-sig wallet configuration or limited solely to NFT holders.",
+            "severity": "medium",
+            "location": "./contracts/protocol/config/ProtocolConfig.sol"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Requirement Violation; Data Consistency (Edit Tier)",
+            "description": "The editTier function lacks comprehensive checks to maintain the ordered and hierarchical structure of minVerifications and multipliers across tiers.",
+            "severity": "high",
+            "location": "./contracts/protocol/config/ProtocolConfig.sol: editTier()"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Unnecessary Calculations",
+            "description": "Unnecessary calculations and returns immediately when handling an INVALID result.",
+            "severity": "n/a",
+            "location": "MarketLib.sol, closeMarket(); BasicMarket.sol, closeMarket()"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation",
+            "description": "Not following the official Solidity guidelines for code organization and naming conventions.",
+            "severity": "info",
+            "location": "./contracts/"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Typo in require Statement",
+            "description": "Typos in error messages and NatSpec annotations.",
+            "severity": "n/a",
+            "location": "ProtocolConfig.sol, editTier(); MarketLib.sol, calculatePredictionReward()"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "Not checking for zero addresses, which can lead to unwanted external calls.",
+            "severity": "n/a",
+            "location": "ProtocolConfig.sol, constructor(), setFactoryStatus(), setFoundationWallet(), setHighGuard(), setMarketplace()"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State Variables Can Be Declared Immutable",
+            "description": "Not declaring state variables as immutable, which can increase gas costs.",
+            "severity": "n/a",
+            "location": "BasicFactory.sol; BasicMarket.sol"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Using floating pragmas, which can lead to accidental deployment with outdated compiler versions.",
+            "severity": "n/a",
+            "location": "./contracts/"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Import",
+            "description": "Unused imports that decrease readability.",
+            "severity": "n/a",
+            "location": "ForeVerifiers.sol; ForeProtocol.sol"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Block",
+            "description": "Redundant code block that creates a discrepancy.",
+            "severity": "n/a",
+            "location": "ForeVerifiers.sol, decreasePower()"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Encoder Use",
+            "description": "Using an outdated abicoder version.",
+            "severity": "n/a",
+            "location": "ERC721NFTMarketV1.sol"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-1071"
+                ]
+            },
+            "title": "Empty Code Block",
+            "description": "An empty code block that can lead to confusion and reduced readability.",
+            "severity": "n/a",
+            "location": "ForeNftMarketplace.sol"
+        }
+    ]
+}

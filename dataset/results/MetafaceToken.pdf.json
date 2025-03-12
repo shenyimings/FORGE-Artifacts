@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/MetafaceToken.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x93116DAC9d16434d02e57846DA4a62a1D4c40a12",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "MetafaceToken": "contracts/MetafaceToken/MetafaceToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which may lead to an OUT_OF_GAS exception if the excluded addresses list is too long. Similarly, the `_getCurrentSupply` function also uses a loop for evaluating total supply, which could be aborted with an OUT_OF_GAS exception.",
+            "severity": "low",
+            "location": "includeInReward() and _getCurrentSupply functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges, including enabling/disabling modes, excluding from fees, changing addresses, modifying fees, locking/unlocking, etc.",
+            "severity": "low",
+            "location": "Various functions related to owner privileges"
+        }
+    ]
+}

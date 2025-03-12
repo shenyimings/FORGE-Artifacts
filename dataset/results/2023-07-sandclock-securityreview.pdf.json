@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/2023-07-sandclock-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/lindy-labs/sandclock-contracts",
+        "commit_id": "a100f21a30dd332b69351d1e05d98dbc748c6ddc",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "sandclock-contracts": "contracts/2023-07-sandclock-securityreview/sandclock-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "receiveFlashLoan does not account for fees",
+            "description": "Fees not accounted for in flash loans, potentially breaking core functionality. The receiveFlashLoan functions of scWETHv2 and scUSDCv2 vaults ignore Balancer flash loan fees and repay exactly the amount that was loaned.",
+            "severity": "high",
+            "location": "Sandclock vaults (TOB-SANDCLOCK-1), src/steth/scWETHv2.sol, src/steth/scUSDCv2.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reward token distribution rate can diverge from reward token balance",
+            "description": "The _reward parameter provided to the notifyRewardAmount method can be larger than the number of reward tokens transferred.",
+            "severity": "low",
+            "location": "RewardTracker contract, src/staking/RewardTracker.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Miscalculation in beforeWithdraw can leave the vault with less than minimum float",
+            "description": "Minor arithmetic issue delaying user withdrawals in edge cases. The calculation of the missing parameter does not guarantee that the float value remaining after the withdrawal is at least the value of the minimumFloatAmount parameter.",
+            "severity": "info",
+            "location": "beforeWithdraw function (TOB-SANDCLOCK-3), src/steth/scWETHv2.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Last user in scWETHv2 vault will not be able to withdraw their funds",
+            "description": "If there is only one user remaining in the vault and they want to withdraw, this enforcement will not allow them to do so.",
+            "severity": "low",
+            "location": "scWETHv2 vault, _withdrawToVault method"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Lido stake rate limit could lead to unexpected reverts",
+            "description": "Integration issue with Lido stake rate limits.",
+            "severity": "info",
+            "location": "Lido integration, PriceConverter contract, Swapper library"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Chainlink oracles could return stale price data",
+            "description": "Acceptance of potentially stale price data from Chainlink oracles. Chainlink oracles may return outdated prices due to ignoring updatedAt values.",
+            "severity": "info",
+            "location": "Chainlink oracles (TOB-SANDCLOCK-6), usdcToEthPriceFeed and stEThToEthPriceFeed oracles"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Ignoring Rate Limit in Swapper Library",
+            "description": "The lidoSwapWethToWstEth method ignores rate limit checks.",
+            "severity": "info",
+            "location": "Swapper library, lidoSwapWethToWstEth function"
+        }
+    ]
+}

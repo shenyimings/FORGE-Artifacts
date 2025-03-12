@@ -1,0 +1,197 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-The_LAO.pdf",
+    "project_info": {
+        "url": "https://github.com/MolochVentures/moloch",
+        "commit_id": "72de55374ea583c7b314107e6e17b745f745e875",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "moloch": "contracts/ConsenSys_Diligence-The_LAO/moloch"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "safeRagequit makes you lose funds",
+            "description": "safeRagequit function withdraws only some subset of tokens, defined by the user, in case the user or GuildBank is blacklisted in some of the tokens and the transfer reverts.",
+            "severity": "critical",
+            "location": "safeRagequit function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Creating proposal is not trustless",
+            "description": "If a proposal is not processed before the emergency processing, tribute tokens will not be transferred back to the proposer.",
+            "severity": "critical",
+            "location": "Proposal creation process"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Emergency processing can be blocked",
+            "description": "The emergency processing mechanism can be blocked due to token transfers being blocked.",
+            "severity": "critical",
+            "location": "Emergency processing mechanism"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Token Overflow might result in system halt or loss of funds",
+            "description": "If a token overflows, some functionality such as processProposal, cancelProposal will break due to safeMath reverts.",
+            "severity": "high",
+            "location": "Functions using internalTransfer()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "Whitelisted tokens limit",
+            "description": "The number of whitelisted tokens is limited, which can lead to system halt or loss of funds if exceeded.",
+            "severity": "high",
+            "location": "Whitelist token management"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Summoner can steal funds using bailout",
+            "description": "The summoner can steal funds by exploiting the bailout function.",
+            "severity": "high",
+            "location": "Bailout function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Sponsorship front-running",
+            "description": "A member can front-run the sponsorProposal function to block a proposal.",
+            "severity": "high",
+            "location": "SponsorProposal function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Delegate assignment front-running",
+            "description": "Any member can front-run another member’s delegateKey assignment, potentially blocking some addresses from being delegates forever.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Shareholders can vote for upcoming proposals and Rage Quit",
+            "description": "Shareholders can vote for the upcoming proposals 2 weeks before they can be executed, and their votes are still considered valid even after rage quitting or getting kicked out.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Dilution bound should be a fixed-point number",
+            "description": "The dilution bound is an integer value and it’s impossible to configure it to a specific percentage.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Whitelist proposal duplicate",
+            "description": "Even though you can’t sponsor a duplicate proposal, you can still submit a new proposal with the same token.",
+            "severity": "low",
+            "location": "code/contracts/Moloch.sol:L277-L281"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Flags as bool array can be changed to a dedicated structure",
+            "description": "The use of bool[6] flags makes it complicated to reason about the correctness of the code, and it is recommended to create a dedicated structure with named elements for each flag.",
+            "severity": "low",
+            "location": "code/contracts/Moloch.sol:L88"
+        }
+    ]
+}

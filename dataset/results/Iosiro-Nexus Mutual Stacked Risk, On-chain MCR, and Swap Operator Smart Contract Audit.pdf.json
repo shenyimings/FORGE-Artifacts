@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/Iosiro-Nexus Mutual Stacked Risk, On-chain MCR, and Swap Operator Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/NexusMutual/smart-contracts",
+        "commit_id": "60efdf64f2198050f7e6fcec57548d40e4f8598f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smart-contracts": "contracts/Iosiro-Nexus Mutual Stacked Risk, On-chain MCR, and Swap Operator Smart Contract Audit/smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Use of transfer function",
+            "description": "Using `transfer()` function to send ether which relies on the receiving contract having a fallback function below 2300 gas limit.",
+            "severity": "info",
+            "location": "Quotation.sol#L355"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Fallback implementations could revert",
+            "description": "The `freeUpHeldCovers()` function looping through covers and checking for refunds can be reverted if a user address is a smart contract that reverts when called.",
+            "severity": "info",
+            "location": "Quotation.sol#L386"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Design comment - Defense in depth",
+            "description": "The `Incidents.redeemPayout()` function can be used to redeem payouts against other cover products without on-chain protection.",
+            "severity": "info",
+            "location": "Incidents contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Refactoring suggestion",
+            "description": "The `swapETHForStETH` function name should reflect its implementation, suggesting a suitable name like `stakeETHforStETH`.",
+            "severity": "info",
+            "location": "SwapOperator.sol#L267"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Incorrect modifier for addIncident",
+            "description": "The `addIncident` function used the wrong modifier, allowing any member of the Advisory Board to add a product and perform a payout.",
+            "severity": "medium",
+            "location": "Incidents.sol#L119"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted initializer",
+            "description": "The `initialize` function was callable by any address, allowing an attacker to front-run the contract's initialization.",
+            "severity": "medium",
+            "location": "Incidents.sol#L82"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No explicit check to ensure asset is valid",
+            "description": "The `SwapOperator` contract did not validate that assets were pool assets, assuming the asset address was valid and proceeding with default values.",
+            "severity": "low",
+            "location": "SwapOperator.sol#L80, SwapOperator.sol#L111"
+        }
+    ]
+}

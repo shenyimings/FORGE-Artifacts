@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/GaussGANG.pdf",
+    "project_info": {
+        "url": "https://github.com/Gauss-Gang/GaussGANG-Token",
+        "commit_id": "9524a85de34c06521c2c2ef26f5ff66ffd3a1bdb",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "GaussGANG-Token": "contracts/GaussGANG/GaussGANG-Token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Functions getReceipts(), updateBalances(), releaseTokens(), withdrawTokens() use loops to iterate through the balances list, and may be aborted with OUT_OF_GAS exception if the lists are too long.",
+            "severity": "low",
+            "location": "Multiple functions (getReceipts(), updateBalances(), releaseTokens(), withdrawTokens())"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Various owner-only functions can be called, including vestTokens(), scheduledVesting(), locking the vault, releasing tokens, taking snapshots, changing transaction fees, finalizing and closing crowdsales, allowing withdrawals, changing users' balances, and releasing tokens.",
+            "severity": "low",
+            "location": "Multiple owner-only functions"
+        }
+    ]
+}

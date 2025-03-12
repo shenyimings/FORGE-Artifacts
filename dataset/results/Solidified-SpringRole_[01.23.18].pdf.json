@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/Solidified-SpringRole_[01.23.18].pdf",
+    "project_info": {
+        "url": "https://github.com/SpringRole/smart-contracts/tree/6d0e68e342ba7bedbe35eb85d5485357561e12d9",
+        "commit_id": "6d0e68e342ba7bedbe35eb85d5485357561e12d9",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smart-contracts": "contracts/Solidified-SpringRole_[01/smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Max Supply can overflow",
+            "description": "The maxSupply variable in the SRTToken.sol constructor can overflow since SafeMath is not used.",
+            "severity": "n/a",
+            "location": "SRTToken.sol, constructor"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Token is susceptible to multiple withdrawal attack",
+            "description": "ERC20 token allows an approved spender to transfer more than allowed by another user.",
+            "severity": "n/a",
+            "location": "n/a (ERC20)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Tokens are not assigned to owner in constructor",
+            "description": "The owner's balance is not altered in the function body, despite a comment suggesting otherwise.",
+            "severity": "n/a",
+            "location": "SRTToken.sol, constructor"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Total token supply can never reach maxSupply",
+            "description": "The maximum reachable supply is maxSupply - 1 unit due to the mint function limitations.",
+            "severity": "n/a",
+            "location": "SRTToken.sol, mint function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Excessive power given to whitelisted addresses",
+            "description": "Whitelisted addresses can remove tokens from anyone and transfer them to someone else without authorization.",
+            "severity": "n/a",
+            "location": "doTransfer() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Improper use of uint in WhiteListedContracts",
+            "description": "Using 1 and 0 to indicate whether a contract is whitelisted instead of a bool mapping.",
+            "severity": "n/a",
+            "location": "WhitelistedContracts.sol, line 134"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Payable fallback function can receive unwanted ether transactions",
+            "description": "The payable fallback function can receive unexpected ether transactions if the contract is not expected to do so.",
+            "severity": "n/a",
+            "location": "Fallback function"
+        }
+    ]
+}

@@ -1,0 +1,197 @@
+{
+    "path": "artifacts/Inspex_AUDIT2022031_BaryonNetwork_BaryonFarm_FullReport_v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/coin98/baryon-farm",
+        "commit_id": "75f13934af5208e43922f5339833b62d015955ef",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "baryon-farm": "contracts/Inspex_AUDIT2022031_BaryonNetwork_BaryonFarm_FullReport_v1/baryon-farm"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change critical state variables to gain additional profit, which is unfair to other users.",
+            "severity": "high",
+            "location": "SmartBaryFactory contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reward Miscalculation in updatePool() Function",
+            "description": "The rewards in the SmartBaryFactoryRewarder contract can be claimed largely when the pool starts or renews (active the pool again after it expires) due to incorrect accumulation of rewards.",
+            "severity": "medium",
+            "location": "SmartBaryFactory, updatePool() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Access Control",
+            "description": "Critical state variables can be updated at any time by the controlling authorities without notifying the users.",
+            "severity": "high",
+            "location": "SmartBaryFactory contract, functions with onlyOwner modifier (setPool(), withdrawMultiplePool(), withdrawPoolTokens(), setRewardConfig(), withdrawMultiple())"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected create2 instruction",
+            "description": "Unprotected `create2` instruction can lead to arbitrary code execution.",
+            "severity": "high",
+            "location": "`assembly` block in the `add()` function (lines 524-527)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input validation",
+            "description": "Lack of input validation for `_pid` parameter in the `set()` function.",
+            "severity": "low",
+            "location": "`set()` function (line 582)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inflated Reward Calculation",
+            "description": "The `pool.accRewardPerShare` is inflated since it was accumulated when the pool was being added, leading to reward amounts greater than expected.",
+            "severity": "n/a",
+            "location": "SmartBaryFactory.sol, lines 676-687"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Design Flaw in Reward Distribution Mechanism",
+            "description": "The platform users will not be able to claim the reward when the balance in the pool reward is insufficient.",
+            "severity": "low",
+            "location": "SmartBaryFactory and SmartBaryFactoryRewarder contracts, specifically in the add() and set() functions."
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions' executions cannot be monitored easily by the users.",
+            "severity": "low",
+            "location": "SmartBaryFactory contract, functions: withdrawMultiplePool(), withdrawPoolTokens(), setRewardConfig(), and withdrawMultiple()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unnecessary Public Visibility",
+            "description": "Public functions not called internally should have external visibility for better contract readability.",
+            "severity": "info",
+            "location": "SmartBaryFactory contract, setRewardConfig function (L:818)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unsupported Design for Deflationary Tokens",
+            "description": "Failure to recognize the token amount could lead to scenarios such as unable to withdraw staking tokens",
+            "severity": "info",
+            "location": "SmartBaryFactory.sol, function deposit(uint256 pid, uint256 amount)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Insufficient Balance Withdrawal",
+            "description": "The contract reverts when a user tries to withdraw more tokens than the available balance in the contract.",
+            "severity": "n/a",
+            "location": "SmartBaryFactory.sol, line 770"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reward Calculation Exploit",
+            "description": "An attacker can amplify the pool.accRewardPerShare by repeatedly executing a scenario where they cannot withdraw staking tokens, gaining a large amount of reward.",
+            "severity": "n/a",
+            "location": "SmartBaryFactory.sol, line 673"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unvalidated LP Token Amount",
+            "description": "The `deposit()` function uses the value of the `amount` parameter directly, which can be manipulated by users.",
+            "severity": "n/a",
+            "location": "SmartBaryFactory.sol, deposit() function, lines 699-702 and 717"
+        }
+    ]
+}

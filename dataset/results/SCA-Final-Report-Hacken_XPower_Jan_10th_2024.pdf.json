@@ -1,0 +1,212 @@
+{
+    "path": "artifacts/SCA-Final-Report-Hacken_XPower_Jan_10th_2024.pdf",
+    "project_info": {
+        "url": "https://github.com/blackhan-software/xpower-hh",
+        "commit_id": "bd660e12ee394e736d1a65f4d2282ed16df21756",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "xpower-hh": "contracts/SCA-Final-Report-Hacken_XPower_Jan_10th_2024/xpower-hh"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Extended Validity of Block Hashes in XPower Contract Leads to Inflation Vulnerability",
+            "description": "Incorrect implementation of `_recent` function in XPower contract leads to extended validity of block hashes, causing hidden inflation.",
+            "severity": "critical",
+            "location": "XPower.sol, `_recent` function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Inadequate Handling of NFT Transfers and Restaking in XPowerPpt.sol Impacts Reward Accumulation",
+            "description": "Flaw in handling NFT transfers and restaking in XPowerPpt contract affects reward accumulation.",
+            "severity": "high",
+            "location": "XPowerPpt.sol, `_pushBurn` function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Reward Accumulation Issue in MoeTreasury Contract Affecting Restaking and Transfers of XPowerPpt NFTs",
+            "description": "Flaw in interaction between XPowerPpt and MoeTreasury contracts affects reward accumulation post-transfer or unstake.",
+            "severity": "high",
+            "location": "XPowerPpt.sol, MoeTreasury.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Using floating pragmas (^0.8.20) which may result in deploying contracts with the wrong pragma version",
+            "severity": "info",
+            "location": "Various contracts including NftTreasury.sol, MoeTreasury.sol, XPowerPpt.sol, etc."
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Potential Forced Unstaking in unstake() and unstakeBatch() Functions During Migration",
+            "description": "Conditional check allows for forced unstaking of NFTs during migration period",
+            "severity": "low",
+            "location": "unstake() and unstakeBatch() functions in NftTreasury.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Forced Migration in Token Contracts",
+            "description": "Lack of restrictions on who can initiate migration process",
+            "severity": "low",
+            "location": "migrateFrom and migrateFromBatch functions in NftMigratable.sol, Migratable.sol, and SovMigratable.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inefficient NFT ID Migration Logic",
+            "description": "Complex method for calculating tryId in _burnFrom function leads to unnecessary gas usage",
+            "severity": "info",
+            "location": "_burnFrom function in NftMigratable.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Inefficient Handling of Zero Amount",
+            "description": "Lack of zero amount check leads to redundant operations and gas consumption",
+            "severity": "info",
+            "location": "_pushBurn function in XPowerPpt.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of Zero Amount Check",
+            "description": "Absence of zero amount checks leads to unnecessary execution and gas expenditure",
+            "severity": "info",
+            "location": "stake and stakeBatch functions in NftTreasury.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Optimization and Enhancement",
+            "description": "Inefficient claimBatch function leads to unnecessary gas expenditure",
+            "severity": "info",
+            "location": "claimBatch function in MoeTreasury.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inefficient Gas Usage in burnBatch() Function",
+            "description": "The burnBatch function has two main inefficiencies: redundant redeemability checks and multiple transfer calls.",
+            "severity": "n/a",
+            "location": "XPowerNft.sol, burnBatch() function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ],
+                "3": [
+                    "CWE-1090"
+                ]
+            },
+            "title": "Variable Shadowing in Inherited Contracts",
+            "description": "The APower contract inherits from SovMigratable and both contracts declare a private variable named _moe with different types.",
+            "severity": "n/a",
+            "location": "APower contract, SovMigratable contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Assert Statements in init() Function",
+            "description": "The init function has three assert statements that are inherently true and contribute to unnecessary gas consumption.",
+            "severity": "n/a",
+            "location": "XPower contract, init() function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Lack of Events in Key Functions",
+            "description": "Several key functions across multiple contracts lack events to track changes and provide transparency.",
+            "severity": "n/a",
+            "location": "Multiple contracts, including MoeTreasury, Migratable, NftMigratable, NftRoyalty, XPowerPpt."
+        }
+    ]
+}

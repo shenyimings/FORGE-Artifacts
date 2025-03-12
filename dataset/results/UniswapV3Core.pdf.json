@@ -1,0 +1,221 @@
+{
+    "path": "artifacts/UniswapV3Core.pdf",
+    "project_info": {
+        "url": "https://github.com/Uniswap/v3-core/tree/99223f3",
+        "commit_id": "99223f3",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "v3-core": "contracts/UniswapV3Core/v3-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing validation of _owner argument",
+            "description": "Lack of input validation of the _owner argument in constructor and setOwner functions could permanently lock the owner role.",
+            "severity": "medium",
+            "location": "UniswapV3Factory.sol, constructor and setOwner functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Incorrect event emission",
+            "description": "Passing address(0) to constructor or setOwner function can lead to incorrect event emission.",
+            "severity": "n/a",
+            "location": "UniswapV3Factory.sol, constructor and setOwner functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Stealing pool tokens' earned interest",
+            "description": "Anyone could steal pool tokens' earned interest.",
+            "severity": "high",
+            "location": "Pool contracts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Whitepaper contains incorrect equation",
+            "description": "Formula error in whitepaper can lead to user misunderstanding.",
+            "severity": "info",
+            "location": "Whitepaper"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Incorrect comparison enables swapping and token draining at no cost",
+            "description": "Incorrect comparison allows for swapping and token draining at no cost.",
+            "severity": "high",
+            "location": "Swap function, pool contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Unbound loop enables denial of service",
+            "description": "Loop inside the swap function can cause a denial of service due to a large amount of very small ticks.",
+            "severity": "medium",
+            "location": "Swap function, pool contracts"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Front-running pool's initialization can lead to draining of liquidity provider's initial deposits",
+            "description": "Front-running an initialize call could be used by an attacker to execute (and profit off of) a swap at an unfair price.",
+            "severity": "medium",
+            "location": "Initialize function, pool contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Swapping on zero liquidity allows for control of the pool's price",
+            "description": "An attacker can set an arbitrary price at the pool’s initialization or if the liquidity providers withdraw all of the liquidity for a short time.",
+            "severity": "medium",
+            "location": "UniswapV3Pool.sol, libraries/SwapMath.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Failed transfer may be overlooked due to lack of contract existence check",
+            "description": "The pool fails to check that a contract exists and assumes failed transactions involving destructed tokens are successful.",
+            "severity": "high",
+            "location": "libraries/TransferHelper.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "getNextSqrtPriceFromInput|Output can return a value outside of MIN_SQRT_RATIO, MAX_SQRT_RATIO",
+            "description": "The function does not confirm that the square ratio price is within MIN_SQRT_RATIO/MAX_SQRT_RATIO.",
+            "severity": "info",
+            "location": "libraries/SqrtPriceMath.sol, libraries/TickMath.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect argument order",
+            "description": "The arguments of getAmount0Delta and getAmount1Delta functions are passed in reverse order in several places in SwapMath and UniswapV3Pair.",
+            "severity": "n/a",
+            "location": "SwapMath and UniswapV3Pair contracts"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading function name",
+            "description": "The getNextPrice functions return the root of the price, not the price itself, and should be renamed to getNextSqrtPriceX.",
+            "severity": "n/a",
+            "location": "Next getPrice functions"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect isMulSafe function behavior",
+            "description": "The isMulSafe function throws when the first parameter is 0, even though premultiplication by 0 is safe for all unsigned integers.",
+            "severity": "n/a",
+            "location": "BitMath.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect comment in mostSignificantBit function",
+            "description": "The comment for the mostSignificantBit function does not accurately reflect its behavior.",
+            "severity": "n/a",
+            "location": "BitMath.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Front-running initialize tests, Potential Overflow of amountIn + feeAmount",
+            "description": "An attacker could abuse TOB-UNI-007 to swap tokens at an unfair price; manual analysis of a potential overflow in UniswapV3Pool.swap.",
+            "severity": "n/a",
+            "location": "UniswapV3Pool contract, initialize function and UniswapV3Pool.swap, computeSwapStep function"
+        }
+    ]
+}

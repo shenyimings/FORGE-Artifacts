@@ -1,0 +1,57 @@
+{
+    "path": "artifacts/Hacken-Pocket Arena.pdf",
+    "project_info": {
+        "url": "https://github.com/pocket-arena/POC_ERC20-BEP20",
+        "commit_id": "68c9a327e50c1ae3dad45f95cd104dfd98c78240",
+        "address": [
+            {
+                "chain": "Ethereum",
+                "address": "0x095cf7f3e82a1dcadbf0fbc59023f419883ea296"
+            },
+            {
+                "chain": "Binance Smart Chain",
+                "address": "0x1b6609830c695f1c0692123bd2fd6d01f6794b98"
+            }
+        ],
+        "chain": "n/a",
+        "compiler_version": "n/a",
+        "project_path": "n/a"
+    },
+    "findings": [
+        {
+            "id": 0,
+            "title": "Contracts are vulnerable to permanent blocking by any token holder",
+            "description": "Arrays ERC20POC.arr_pegin_submit and BEP20POC.pegout_submit could be filled by a malicious token holder, causing gas costs to increase up to the block's gas limit.",
+            "severity": "High",
+            "location": "POC_ERC20.sol, POC_BEP20.sol (functions: pegin_submit, pegout_submit)"
+        },
+        {
+            "id": 1,
+            "title": "Missing event for changing _fee_rate",
+            "description": "Changing critical values should be followed by an event emission for better tracking off-chain.",
+            "severity": "Low",
+            "location": "POC_ERC20.sol, POC_BEP20.sol (function: _fee_rate_set)"
+        },
+        {
+            "id": 2,
+            "title": "A public function that could be declared external",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "Low",
+            "location": "POC_ERC20.sol, POC_BEP20.sol (multiple functions listed)"
+        },
+        {
+            "id": 3,
+            "title": "Boolean equality",
+            "description": "Boolean constants can be used directly and do not need to be compared to true or false.",
+            "severity": "Low",
+            "location": "POC_ERC20.sol, POC_BEP20.sol (functions: transfer, transferFrom, staff_add, staff_quota_add, pegin_reserve, pegout_reserve)"
+        },
+        {
+            "id": 4,
+            "title": "Code and documentation inconsistency",
+            "description": "Maximum fee in contracts is 1000%, but documentation states it as 100%.",
+            "severity": "Low",
+            "location": "POC_ERC20.sol, POC_BEP20.sol (function: _fee_rate_set)"
+        }
+    ]
+}

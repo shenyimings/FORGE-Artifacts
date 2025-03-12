@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/Baby Ethereum-Audit-by-BlockSAFU.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x7C8EeB2cFc4F555c3c22998D90AA554E9C951772",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "RewardToken": "contracts/Baby Ethereum-Audit-by-BlockSAFU/RewardToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked return value of external transfer/transferFrom",
+            "description": "The return value of an external transfer/transferFrom is not checked.",
+            "severity": "low",
+            "location": "function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Unsafe math operations",
+            "description": "Not using SafeMath after solc version 0.8.0.",
+            "severity": "low",
+            "location": "Library SafeMathInt"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "High owner fees",
+            "description": "The owner can set fees up to 100%.",
+            "severity": "high",
+            "location": "functions setTokenRewardsFee, setLiquiditFee, setMarketingFee"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Blacklist functionality",
+            "description": "The owner can set blacklist.",
+            "severity": "high",
+            "location": "function blacklistAddress(address account, bool value)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Owner Can Set Fees Over 100%",
+            "description": "The owner can set fees that exceed 100% of the total supply, potentially leading to unexpected behavior or losses.",
+            "severity": "medium",
+            "location": "`RewardToken` contract, fee-related functions (e.g., `setTokenRewardsFee`, etc.)"
+        }
+    ]
+}

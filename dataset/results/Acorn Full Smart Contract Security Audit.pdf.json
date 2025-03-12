@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/Acorn Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xD48D300f19Ac77F0C8a329aa926D0D21FCab3C0A",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "Masterchef": "contracts/Acorn Full Smart Contract Security Audit/Masterchef"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "Sending tokens to the dead address in overridden _transfer functions instead of burning them in token contract.",
+            "severity": "medium",
+            "location": "Token contract, _transfer function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "The updateEmissionRate function can fail due to the block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "MasterChef contract, updateEmissionRate function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "add function issue",
+            "description": "If some LP token is added to the contract twice using function add, then the total amount of reward AcornReward in function updatePool will be incorrect.",
+            "severity": "low",
+            "location": "MasterChef contract, add function"
+        }
+    ]
+}

@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/QuillAudit-StackOS_NFT_Smart_Contract_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/stackosofficial/node-nft-contract",
+        "commit_id": "7b4999ef00c337b707699e23d5d2d48cad2cb5b8",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "node-nft-contract": "contracts/QuillAudit-StackOS_NFT_Smart_Contract_Audit_Report/node-nft-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing Events for Significant Transactions",
+            "description": "The missing event makes it difficult to track off-chain decimal changes.",
+            "severity": "info",
+            "location": "Contract - DarkMatter"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Token transfers might not return a boolean value",
+            "description": "Some ERC20 tokens do not return a boolean value on transfers or only revert on failed transfers.",
+            "severity": "low",
+            "location": "Contract - StackOsNFTBasic, Line 325-331"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Allowed NFTs can be more than maxSupply",
+            "description": "There can be a scenario where allowed NFTs for partners + 20 (lottery nfts) + auctionNfts > maxSupply.",
+            "severity": "medium",
+            "location": "Contract - StackOsNFT"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Txn fees will be more than pending rewards",
+            "description": "There will be a time when the pending royalty rewards will be less than the gas fee for that txn.",
+            "severity": "low",
+            "location": "Contract - Royalty"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Users can create fake listing in the marketplace",
+            "description": "The NFT holders can create a listing in the marketplace, giving the NFT approval to the market contract and then lock that NFT in the Dark Matter contract for minting.",
+            "severity": "low",
+            "location": "Contract - Market"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Centralization Risks",
+            "description": "The role owner has the authority to update critical settings, but these settings can be changed by the administrator.",
+            "severity": "medium",
+            "location": "Contract - Subscription"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Typos",
+            "description": "Various typos were found in the code.",
+            "severity": "info",
+            "location": "Contract - Subscription"
+        }
+    ]
+}

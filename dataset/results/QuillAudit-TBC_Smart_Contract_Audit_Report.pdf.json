@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/QuillAudit-TBC_Smart_Contract_Audit_Report.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x03042ae6fcfd53e3a0baa1fab5ce70e0cb74e6fb",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.5.16+commit.9c3226ce"
+        ],
+        "project_path": {
+            "SlashToken": "contracts/QuillAudit-TBC_Smart_Contract_Audit_Report/SlashToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Race conditions due to ERC20 Approve function",
+            "description": "Standard ERC20 implementation contains a widely-known race condition in its approve function.",
+            "severity": "medium",
+            "location": "approve function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma (pragma solidity ^0.5.16)",
+            "description": "Contracts should be deployed with the same compiler version and flags that they have been tested with thoroughly.",
+            "severity": "info",
+            "location": "Contract's pragma"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "Ten Best Coins is a fixed supply token and mints 100% of the total tokens liquidity to the deployer of the contract, prone to centralization risk.",
+            "severity": "info",
+            "location": "Token deployment"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zero address validation at multiple instances",
+            "description": "Multiple functions lack zero address validation, which is necessary because funds or tokens transferred to a zero address cannot be retrieved back.",
+            "severity": "info",
+            "location": "Functions (approve, transfer, transferFrom)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "TotalSupply function can be manipulated to display false information",
+            "description": "The totalSupply() function returns (25 million - Tokens held by zero address), which can be manipulated by an attacker.",
+            "severity": "info",
+            "location": "totalSupply function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improper implementation of checks",
+            "description": "Various functions lack require statements to check if certain conditions are met before changing the state.",
+            "severity": "info",
+            "location": "Functions (transfer, etc.)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inappropriate name of the contract",
+            "description": "The deployed contract's name on etherscan is SlashToken, which does not align with Ten Best Coins.",
+            "severity": "info",
+            "location": "Contract name"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Public functions that could be declared external to save gas",
+            "description": "Some public functions can be declared as external to save gas.",
+            "severity": "info",
+            "location": "Functions (balanceOf, totalSupply, allowance, approve, Transfer, TransferFrom)"
+        }
+    ]
+}

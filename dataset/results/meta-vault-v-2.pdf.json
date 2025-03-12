@@ -1,0 +1,272 @@
+{
+    "path": "artifacts/meta-vault-v-2.pdf",
+    "project_info": {
+        "url": "https://github.com/yaxis-project/metavault/tree/3538b8a8c1ea4ec2b68a635c48b938aa1acfbc26",
+        "commit_id": "3538b8a8c1ea4ec2b68a635c48b938aa1acfbc26",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "metavault": "contracts/meta-vault-v-2/metavault"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-405"
+                ]
+            },
+            "title": "Curve 3pool Imbalance Attack",
+            "description": "Large variation of the Curve 3pool imbalance attack due to depositing DAI, USDC, USDT into the Curve 3pool in any proportion.",
+            "severity": "high",
+            "location": "StableSwap3PoolConverter.sol, yAxisMetaVault.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Integer Overflow / Underflow",
+            "description": "Integer overflow/underflow occur when an integer hits its bit-size limit.",
+            "severity": "medium",
+            "location": "StrategyControllerV2.sol, yAxisMetaVault.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Strategy caps are not always enforced",
+            "description": "The StrategyControllerV2.getBestStrategyEarn function does not revert if there is no strategy found which would satisfy the cap requirement.",
+            "severity": "medium",
+            "location": "StrategyControllerV2.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "High slippage possible",
+            "description": "The StableSwap3PoolConverter.convert function uses the magic number 1 to specify the minimum amount of tokens expected back.",
+            "severity": "low",
+            "location": "StableSwap3PoolConverter.sol, BaseStrategy.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Epochs can overlap affecting getMultiplier",
+            "description": "The yAxisMetaVault.setEpochEndBlock function doesn't check if the _epochEndBlock for the given _index is higher than the epoch end block for the following index.",
+            "severity": "low",
+            "location": "yAxisMetaVault.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Wrong address could be used instead of stable-coin",
+            "description": "The StrategyPickle3Crv.setStableForLiquidity function does not check if the provided input parameter is the address of a stable-coin.",
+            "severity": "low",
+            "location": "StrategyPickle3Crv.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Adding and removing strategies is error prone",
+            "description": "If a strategy can be harvested, it should be added to the yAxisMetaVaultHarvester contract as well as the StrategyControllerV2.",
+            "severity": "low",
+            "location": "StrategyControllerV2.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Gas Usage / for Loop Concerns",
+            "description": "The StrategyControllerV2 contract has no hard cap on the maximum number of strategies allowed, which could lead to high gas costs.",
+            "severity": "low",
+            "location": "StrategyControllerV2.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input validation",
+            "description": "Several functions are missing input parameter validations.",
+            "severity": "low",
+            "location": "yAxisMetaVault.sol, StrategyControllerV2.sol, BaseStrategy.sol, StrategyCurve3Crv.sol, StrategyDforce.sol, StrategyPickle3Crv.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Sensitive functions do not emit any events",
+            "description": "Sensitive functions do not emit events, potentially leading to issues for end-users.",
+            "severity": "low",
+            "location": "StrategyControllerV2 contract, yAxisMetaVault contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Block timestamp manipulation",
+            "description": "Relying on block timestamps can be manipulated by miners, potentially affecting smart contracts.",
+            "severity": "info",
+            "location": "yAxisMetaVaultHarvester.sol, StrategyStabilize.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Implicit assumptions",
+            "description": "Various implicit assumptions are made in the code, including block time, epoch duration, and ordering of roles.",
+            "severity": "info",
+            "location": "All contracts"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Privileged Roles and Ownership",
+            "description": "Privileged roles have significant capabilities, but are not clearly documented.",
+            "severity": "info",
+            "location": "yAxisMetaVault.sol, BaseStrategy.sol, StrategyControllerV2.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked Return Value",
+            "description": "Some functions ignore return values, potentially leading to issues.",
+            "severity": "info",
+            "location": "All contracts"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked Pragma",
+            "description": "Using unlocked pragmas can lead to unexpected behavior in the future.",
+            "severity": "info",
+            "location": "interfaces/*.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Defense in depth to avoid reentrancy",
+            "description": "The high amount of external dependencies and interactions increases the risk of complex re-entrancy attacks.",
+            "severity": "n/a",
+            "location": "All contracts"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Low Branch Coverage",
+            "description": "The branch coverage is very low, which may not detect bugs introduced by code changes.",
+            "severity": "n/a",
+            "location": "metavault/, metavault/controllers/, metavault/strategies/"
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/Tripin-Audit-by-BlockSAFU.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xe27B49606c61C6eD7Fc7d90f41b9FeBe9868d84e",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "AntiBotLiquidityGeneratorToken": "contracts/Tripin-Audit-by-BlockSAFU/AntiBotLiquidityGeneratorToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked return value of an external transfer/transferFrom",
+            "description": "The return value of an external transfer/transferFrom is not checked.",
+            "severity": "low",
+            "location": "Function `transferFrom` in the smart contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unrestricted use of `transfer` function",
+            "description": "In the `_tokenTransfer` function, if `takeFee` is set to `false`, it seems that fees are not deducted from the transfer amount.",
+            "severity": "n/a",
+            "location": "_tokenTransfer function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential reentrancy risks",
+            "description": "The contract uses several external calls (e.g., `uniswapV2Router.swapExactTokensForETHSupportingFeeOnTransferTokens`) that could potentially lead to reentrancy attacks if not properly protected.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of input validation",
+            "description": "Some functions, such as `_transferStandard`, do not appear to validate user inputs thoroughly, which may lead to potential security issues.",
+            "severity": "n/a",
+            "location": "_transferStandard function"
+        }
+    ]
+}

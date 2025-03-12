@@ -1,0 +1,71 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-LuckyChipStaking-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/luckychip-io/core/tree/37a34d524dc14b12eb1e9dae59cec020735a880e",
+        "commit_id": "37a34d524dc14b12eb1e9dae59cec020735a880e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "core": "contracts/PeckShield-Audit-Report-LuckyChipStaking-v1/core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Timely massUpdatePools During Pool Multiplier Changes",
+            "description": "The multiplier of supported pools can be dynamically adjusted via updateMultiplier(), but if massUpdatePools() is not immediately invoked before updating the pool multiplier, certain situations may be crafted to create an unfair reward distribution.",
+            "severity": "low",
+            "location": "BetMining contract, updateMultiplier() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ],
+                "4": [
+                    "CWE-551"
+                ]
+            },
+            "title": "Sandwiched updatePower() For Higher Quantity",
+            "description": "A bad actor could stake large amount tokens into the MasterChef before calling updateBonus() and get a higher amounts[i] when calculating the reward from LuckyPower(), then unstake the large amount of tokens from MasterChef afterwards.",
+            "severity": "low",
+            "location": "LuckyPower contract, updatePower() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged owner account has the privilege to control or govern the flow of assets managed by this protocol, which could result in different amounts of rewards received by each pool.",
+            "severity": "medium",
+            "location": "Multiple Contracts"
+        }
+    ]
+}

@@ -1,0 +1,182 @@
+{
+    "path": "artifacts/2022-10-GSquared-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/groLabs/GSquared",
+        "commit_id": "b0cf03fa18b4549bd85c571c00e18ddf3218de59",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "GSquared": "contracts/2022-10-GSquared-securityreview/GSquared"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ],
+                "3": [
+                    "CWE-835"
+                ]
+            },
+            "title": "Unbounded loop can cause denial of service",
+            "description": "Under certain conditions, the withdrawal code will loop, permanently blocking users from getting their funds.",
+            "severity": "high",
+            "location": "GVault contract (beforeWithdraw function)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-357"
+                ]
+            },
+            "title": "Lack of two-step process for contract ownership changes",
+            "description": "The setOwner() function is used to change the owner of the PnLFixedRate contract, which can result in irrevocable mistakes.",
+            "severity": "info",
+            "location": "contracts/pnl/PnLFixedRate.sol (setOwner function)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Non-zero token balances in the GRouter can be stolen",
+            "description": "A non-zero balance of 3CRV, DAI, USDC, or USDT in the router contract can be stolen by an attacker.",
+            "severity": "info",
+            "location": "GRouter.sol (withdrawFromTrancheForCaller function)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Uninformative implementation of maxDeposit and maxMint from EIP-4626",
+            "description": "The GVault implementation of EIP-4626 is uninformative for maxDeposit and maxMint, as they return only fixed, extreme values.",
+            "severity": "info",
+            "location": "GVault.sol (maxDeposit and maxMint functions)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "moveStrategy runs out of gas for large inputs",
+            "description": "Reordering strategies can trigger operations that will run out-of-gas before completion.",
+            "severity": "high",
+            "location": "GVault.sol (moveStrategy function)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "GVault withdrawals from ConvexStrategy are vulnerable to sandwich attacks",
+            "description": "Token swaps that may be executed during vault withdrawals are vulnerable to sandwich attacks.",
+            "severity": "medium",
+            "location": "strategy/ConvexStrategy.sol (withdrawal function)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Front-running vulnerability in protocol migration",
+            "description": "Attacker can manipulate share price and drain liquidity",
+            "severity": "high",
+            "location": "GMigration.sol, prepareMigration function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect slippage calculation",
+            "description": "Incorrect arithmetic calculation for slippage tolerance",
+            "severity": "medium",
+            "location": "ConvexStrategy.sol, divest function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-369"
+                ]
+            },
+            "title": "Potential division by zero in _calcTrancheValue",
+            "description": "Junior tranche withdrawals may fail due to unexpected division by zero error",
+            "severity": "info",
+            "location": "GTranche.sol, _calcTrancheValue function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Token withdrawals sent to incorrect address",
+            "description": "Withdrawals are sent to msg.sender instead of intended recipient",
+            "severity": "info",
+            "location": "GTranche.sol, withdraw function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1038"
+                ],
+                "4": [
+                    "CWE-733"
+                ]
+            },
+            "title": "Undefined Behavior due to Solidity compiler optimizations",
+            "description": "The GSquared Protocol contracts have enabled optional compiler optimizations in Solidity, which may introduce latent bugs related to optimization and cause security vulnerabilities.",
+            "severity": "info",
+            "location": "GSquared Protocol contracts"
+        }
+    ]
+}

@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/Aave stETH.md",
+    "project_info": {
+        "url": "https://github.com/lidofinance/aave-protocol-v2/",
+        "commit_id": "2a42cb58d49c350d72c87614f0cf86819b29daa3",
+        "address": "0xbd233D4ffdAA9B7d1d3E6b18CCcb8D091142893a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "aave-protocol-v2": "contracts/Aave stETH/aave-protocol-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Possible incorrect `scaledTotalSupply` calculation",
+            "description": "Overflow in scaled total supply calculation if shares are below zero.",
+            "severity": "high",
+            "location": "AStETH.sol, line 595"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No validation of the address parameter value in contract constructor",
+            "description": "The variable is assigned to the value of the constructor input parameter without being checked.",
+            "severity": "n/a",
+            "location": "AStETH.sol, IncentivizedERC20.sol, DebtTokenBase.sol, AaveAStETHIncentivesController.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unlimited rights for the owner of the contract",
+            "description": "The owner can always withdraw all tokens and block the work of the notifyRewardAmount() function.",
+            "severity": "n/a",
+            "location": "AaveAStETHIncentivesController.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Extra condition",
+            "description": "An unnecessary check is performed, which can prevent the transaction from being executed under certain conditions.",
+            "severity": "n/a",
+            "location": "SignedSafeMath.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "claimReward() may be external",
+            "description": "The function may be external with no internal usage.",
+            "severity": "n/a",
+            "location": "AaveAStETHIncentivesController.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "initialize() should be private",
+            "description": "The function should be private because it is executed in the constructor once.",
+            "severity": "n/a",
+            "location": "AaveAStETHIncentivesController.sol"
+        }
+    ]
+}

@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/Parallel Universe Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x11ed1d93bdd3ee180ca724ac82f911663f0dafb2",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.2+commit.661d1103"
+        ],
+        "project_path": {
+            "CoinToken": "contracts/Parallel Universe Full Smart Contract Security Audit/CoinToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong burn and mint",
+            "description": "In burn and mint functions, wrong values are added because of not converting `_value`.",
+            "severity": "high",
+            "location": "Burn and mint functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas (includeAccount function)",
+            "description": "The `includeAccount()` function uses a loop to find and remove addresses from the `_excluded` list, which may lead to an OUT_OF_GAS exception if there are many excluded addresses.",
+            "severity": "low",
+            "location": "IncludeAccount function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas (_getCurrentSupply function)",
+            "description": "The `_getCurrentSupply` function uses a loop to evaluate the total supply, which may lead to an OUT_OF_GAS exception if there are many excluded addresses.",
+            "severity": "low",
+            "location": "_GetCurrentSupply function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges, including excluding from fees, changing charity address, minting, and changing fees.",
+            "severity": "n/a",
+            "location": "Various functions"
+        }
+    ]
+}

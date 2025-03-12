@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/VegasONE Exchange Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/taisys-technologies/audit-exchange/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "audit-exchange": "contracts/VegasONE Exchange Smart Contract Audit Report - QuillAudits/audit-exchange"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Negligence for Users With Tokens Less Than Exchange Minimum Value",
+            "description": "The contract fails to handle users interacting with little amount, resulting in funds being received without correspondingly sending VegasONE token to the users.",
+            "severity": "medium",
+            "location": "Contract - EXCHANGE, Function - ethToVegasONE & erc20ToVegasONE"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Power of the Admin",
+            "description": "The contract allows the admin to withdraw all tokens and ethers sent into the contract.",
+            "severity": "high",
+            "location": "Contract - EXCHANGE, Admin role, token and ether withdrawal function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Check for Address Zero",
+            "description": "The ethWithdraw function fails to check for when address zero is passed as a parameter.",
+            "severity": "low",
+            "location": "Line 192, ethWithdraw function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Check for Token Existence",
+            "description": "The setERC20TokenExchangeRate function fails to check the existence of a token id before setting the exchange rate.",
+            "severity": "low",
+            "location": "Line 211, setERC20TokenExchangeRate function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Use of SafeERC20 library to Avoid Function Call Failure",
+            "description": "The contract may fail when calling the erc20ToVegasONE function due to token decimal discrepancies.",
+            "severity": "low",
+            "location": "erc20ToVegasONE function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Public Function Visibility",
+            "description": "The isEnableExchange function should be declared as external for gas optimization.",
+            "severity": "info",
+            "location": "Line 234, isEnableExchange function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Absence of Proper Code Comment",
+            "description": "The code lacks proper comments, making it difficult to understand and maintain.",
+            "severity": "info",
+            "location": "Throughout the contract"
+        }
+    ]
+}

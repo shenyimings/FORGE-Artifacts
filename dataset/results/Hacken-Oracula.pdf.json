@@ -1,0 +1,56 @@
+{
+    "path": "artifacts/Hacken-Oracula.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x85f3ec4EC49aB6a5901278176235957ef521970d",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.11+commit.d7f03943"
+        ],
+        "project_path": {
+            "Oracula": "contracts/Hacken-Oracula/Oracula"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Transfer Receives Fees",
+            "description": "In the _transfer() function fees are deducted from the amount, causing the receiver to get less than desired every time.",
+            "severity": "high",
+            "location": "Oracula.sol, _transfer(address _from, address _to, uint256 _amount) function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Variable Shadowing",
+            "description": "The owner variable used in the allowance function shadows the Ownable contract’s owner function.",
+            "severity": "low",
+            "location": "Oracula.sol, owner(), approve(address owner, address spender, uint256 amount), allowance(address owner, address spender) functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Boolean Equality",
+            "description": "Boolean constants can be used directly and do not need to be compared to true or false",
+            "severity": "low",
+            "location": "Oracula.sol, _setExcanhePairs(address pair, bool value) function"
+        }
+    ]
+}

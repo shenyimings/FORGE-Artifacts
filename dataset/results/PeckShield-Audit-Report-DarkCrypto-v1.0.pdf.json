@@ -1,0 +1,125 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-DarkCrypto-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/darkcryptofinance/darkcrypto-contracts/tree/50197b101942a5c088e387d5d660410910df38b2",
+        "commit_id": "50197b101942a5c088e387d5d660410910df38b2",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "darkcrypto-contracts": "contracts/PeckShield-Audit-Report-DarkCrypto-v1/darkcrypto-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Tax-Evasion By Calling Transfer() Directly",
+            "description": "The tax-collection helper routine _transferWithTax() is only applied in the transferFrom() routine, allowing users to bypass tax collection by directly calling the transfer() function.",
+            "severity": "high",
+            "location": "DarkCrypto::transfer()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Potential Underflow For tierId",
+            "description": "The _updateTaxRate() function may cause underflow and lead to an infinite loop, causing a revert transaction in every single transferFrom() operation.",
+            "severity": "medium",
+            "location": "DarkCrypto::_updateTaxRate()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incompatibility with Deflationary Tokens",
+            "description": "The SkyRewardPool contract may introduce unexpected balance inconsistencies when dealing with deflationary tokens, affecting accurate and precise portfolio management.",
+            "severity": "low",
+            "location": "SkyRewardPool::deposit() and withdraw()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-657"
+                ]
+            },
+            "title": "Potential Reentrancy in withdraw()",
+            "description": "The withdraw() function violates the checks-effects-interactions principle, allowing for potential reentrancy attacks.",
+            "severity": "medium",
+            "location": "SkyRewardPool::withdraw()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent Dark Amount Calculation in getBurnableDarkLeft() and redeemBonds()",
+            "description": "Inconsistent dark amount calculations between `getBurnableDarkLeft()` and `redeemBonds()` functions may introduce unexpected results.",
+            "severity": "medium",
+            "location": "Treasury contract, `getBurnableDarkLeft()` and `redeemBonds()` functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged admin account is a plain EOA account, which may introduce trust issues.",
+            "severity": "medium",
+            "location": "Multiple contracts, administrative account (Operator)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Incompatible ERC-20 transfer function",
+            "description": "The transfer() function in USDT token contract does not return a value, which may cause reverts when called by other contracts expecting a boolean return value.",
+            "severity": "low",
+            "location": "USDT Token Contract, function transfer()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incomplete refund of excess ETH",
+            "description": "The addLiquidityETHTaxFree() function in TaxOffice contract does not properly refund the excess ETH to the caller.",
+            "severity": "medium",
+            "location": "TaxOffice Contract, function addLiquidityETHTaxFree()"
+        }
+    ]
+}

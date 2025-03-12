@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/Audit Report - Animoca Publisher NFT Season 2 Contracts [18.10.2023].pdf",
+    "project_info": {
+        "url": "https://github.com/animoca/opencampus-ethereum-contracts/",
+        "commit_id": "9e8e6d371f38d04298ca05b94e556276faef511c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "opencampus-ethereum-contracts": "contracts/Audit Report - Animoca Publisher NFT Season 2 Contracts [18/opencampus-ethereum-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "currentMintPrice() returns zero",
+            "description": "Function currentMintPrice() returns zero for certain combinations of price and discount values",
+            "severity": "high",
+            "location": "PublisherNFTSale.sol, function currentMintPrice()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ]
+            },
+            "title": "withdraw() can potentially fail when transferring ETH to a smart contract",
+            "description": "Function withdraw() calls transfer() which only forwards 2300 gas",
+            "severity": "low",
+            "location": "PublisherNFTSale.sol, function withdraw()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing constructor validation",
+            "description": "Missing validations from the PublisherNFTSale constructor",
+            "severity": "low",
+            "location": "PublisherNFTSale.sol, constructor"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Discount percentages are not validated",
+            "description": "DISCOUNT_PERCENTAGE_x can have values greater than 100",
+            "severity": "low",
+            "location": "PublisherNFTSale.sol, constructor"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Discount percentages have low precision",
+            "description": "Discount percentages can only be incremented in 100 BPS",
+            "severity": "n/a",
+            "location": "PublisherNFTSale.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Function mint() hardcodes gas calculation values",
+            "description": "Hardcoded gas calculation values can result in potential issues in case a future EVM fork changes gas prices",
+            "severity": "n/a",
+            "location": "PublisherNFTSale.sol, function mint()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Potential value mismatch between PublisherNFTMinter.MINT_SUPPLY_LIMIT and PublisherNFTSale.MINT_SUPPLY_LIMIT",
+            "description": "Mismatch between the values of PublisherNFTMinter.MINT_SUPPLY_LIMIT and PublisherNFTSale.MINT_SUPPLY_LIMIT",
+            "severity": "n/a",
+            "location": "PublisherNFTMinter.sol and PublisherNFTSale.sol"
+        }
+    ]
+}

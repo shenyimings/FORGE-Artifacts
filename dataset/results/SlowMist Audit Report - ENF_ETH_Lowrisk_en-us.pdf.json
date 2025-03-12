@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/SlowMist Audit Report - ENF_ETH_Lowrisk_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/Shata-Capital/ENF_ETH_Lowrisk",
+        "commit_id": "f050de5cc4096502e588d6befa2aeedd3d1115b8",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ENF_ETH_Lowrisk": "contracts/SlowMist Audit Report - ENF_ETH_Lowrisk_en-us/ENF_ETH_Lowrisk"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Defects in the defaultDepositSS check",
+            "description": "The harvest function of the Controller contract has a defect in checking whether the default SS exists, which may cause the protocol to fail to re-deposit.",
+            "severity": "medium",
+            "location": "contracts/core/Controller.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "ownerDeposit remaining deposit issue",
+            "description": "The ownerDeposit function of the StETH contract does not implement the refund of excess ETH, which may result in funds being locked.",
+            "severity": "info",
+            "location": "contracts/subStrtegies/convex/StETH.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant variable",
+            "description": "There is a redundant weth global variable in the CEth contract that is not used.",
+            "severity": "info",
+            "location": "contracts/subStrtegies/notional/CEth.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Risk of excessive authority",
+            "description": "The owner role has many permissions, which increases the single point of risk.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Compound interest slippage check issue",
+            "description": "No slippage check is performed during the swap operation, which may result in a risk of being attacked by sandwiches.",
+            "severity": "low",
+            "location": "contracts/exchanges/*.sol"
+        }
+    ]
+}

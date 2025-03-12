@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/$solar.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xD169fAF8119Ca3B339a323D0911c14947a603f08",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.6+commit.7338295f"
+        ],
+        "project_path": {
+            "SOLIUMRISE": "contracts/$solar/SOLIUMRISE"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can stop transactions",
+            "description": "The contract owner has the authority to stop sales and set a high value to the sellMultiplier.",
+            "severity": "critical",
+            "location": "contract.sol#L521,L466"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Contract Owner can increase fees more than 25%",
+            "description": "The owner may take advantage of it by calling the setFees or the set_sell_multiplier function with a high percentage value.",
+            "severity": "critical",
+            "location": "contract.sol#L564,L663"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Contract Owner can blacklist wallets from selling",
+            "description": "The owner may take advantage of it by calling the manage_blacklist function.",
+            "severity": "critical",
+            "location": "contract.sol#L644"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Detected missing events for critical arithmetic parameters",
+            "description": "There are functions that have no event emitted, so it is difficult to track off-chain changes.",
+            "severity": "low",
+            "location": "contract.sol#L688,L683,L663 and 4 more"
+        }
+    ]
+}

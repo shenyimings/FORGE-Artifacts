@@ -1,0 +1,136 @@
+{
+    "path": "artifacts/API3.pdf",
+    "project_info": {
+        "url": "https://github.com/api3dao/airnode/tree/v1-protocol",
+        "commit_id": "v1-protocol",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "airnode": "contracts/API3/airnode"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-182"
+                ]
+            },
+            "title": "Publish-subscribe protocol users are vulnerable to a denial of service",
+            "description": "Publish-subscribe protocol users vulnerable to DoS due to collision in `abi.encodePacked` hash value.",
+            "severity": "high",
+            "location": "airnode-protocol-v1/contracts/protocol/StorageUtils.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Decisions to opt out of a monetization scheme are irreversible",
+            "description": "Airnodes cannot opt back into a monetization scheme after opting out.",
+            "severity": "medium",
+            "location": "airnode-protocol-v1/contracts/monetization/RequesterAuthorizerWhitelisterWithToken.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Depositors can front-run request-blocking transactions",
+            "description": "Depositors can withdraw tokens before a requester is blocked.",
+            "severity": "medium",
+            "location": "airnode-protocol-v1/contracts/monetization/RequesterAuthorizerWhitelisterWithTokenDeposit.sol, RequesterAuthorizerWhitelisterWithTokenPayment.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Incompatibility with non-standard ERC20 tokens",
+            "description": "Contracts do not correctly handle ERC20 tokens that do not return a boolean value.",
+            "severity": "low",
+            "location": "airnode-protocol-v1/contracts/monetization/RequesterAuthorizerWhitelisterWithTokenDeposit.sol, RequesterAuthorizerWhitelisterWithTokenPayment.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Compromise of a single oracle enables limited control of the dAPI value",
+            "description": "An attacker can set the median price of a dAPI within a certain range by compromising one oracle.",
+            "severity": "high",
+            "location": "airnode-protocol-v1/contracts/dapis/DapiServer.sol"
+        },
+        {
+            "id": 5,
+            "category": {},
+            "title": "Project dependencies contain vulnerabilities",
+            "description": "Project dependencies have known vulnerabilities that could be exploited.",
+            "severity": "n/a",
+            "location": "packages/"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "DapiServer beacon data is accessible to all users",
+            "description": "Anyone can call the `conditionPspDapiUpdate` function to access private data on-chain.",
+            "severity": "low",
+            "location": "airnode-protocol-v1/contracts/dapis/DapiServer.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Insecure Direct Object Reference (IDOR)",
+            "description": "An attacker can infer the value of `dataPoint` directly on-chain.",
+            "severity": "n/a",
+            "location": "airnode-protocol-v1/contracts/dapis/DapiServer.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading function name",
+            "description": "The `conditionPspDapiUpdate` function always updates the `dataPoints` storage variable even if the function returns false.",
+            "severity": "info",
+            "location": "airnode-protocol-v1/contracts/dapis/DapiServer.sol"
+        }
+    ]
+}

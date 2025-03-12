@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/PathFund Staking  Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x3C0b6FCB2F62990f477d9AF611e4Da3fF1F08222",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.0+commit.c7dfd78e"
+        ],
+        "project_path": {
+            "PathFundV2": "contracts/PathFund Staking  Smart Contract Audit Report - QuillAudits/PathFundV2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "kkAirDrop function for loop upper bond check missing",
+            "description": "The function for loop should be checked for the upper threshold of address that can be incorporated in one single transaction and the for loop should run for that",
+            "severity": "medium",
+            "location": "PathFund contract, kkAirDrop function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing check for address and amount array",
+            "description": "The check for input length of address and amount should be equal in kkAirDrop.",
+            "severity": "medium",
+            "location": "PathFund contract, kkAirDrop function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Zero check's missing",
+            "description": "zero check lacks in setairDropAddress, updateUniswapV2Router, setFeesAddress arguments",
+            "severity": "low",
+            "location": "PathFund contract, multiple functions (setairDropAddress, updateUniswapV2Router, setFeesAddress)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Insufficient Function Visibility",
+            "description": "Public functions should be set to external to save gas.",
+            "severity": "n/a",
+            "location": "Multiple functions (setFeesAddress, setairDropAddress, retunList_excludedFee, retunList_premarket, retunList_blacklist)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent Integer Type",
+            "description": "Use uint256 instead of uint for better readability and to identify the byte length.",
+            "severity": "n/a",
+            "location": "Multiple variables using 'uint' type"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ]
+            },
+            "title": "Lack of Event Emission",
+            "description": "Emit events for state changes in functions (switchBlockMultiBuys, setFee, setSwapAndLiquify, set_maxLimits).",
+            "severity": "n/a",
+            "location": "Multiple functions (switchBlockMultiBuys, setFee, setSwapAndLiquify, set_maxLimits)"
+        }
+    ]
+}

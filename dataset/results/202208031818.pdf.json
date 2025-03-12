@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/202208031818.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x0af000dbd339147EC7800b8e582c02c529f20a15",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.15+commit.e14f2714"
+        ],
+        "project_path": {
+            "StakingEarn": "contracts/202208031818/StakingEarn"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unreasonable Reward Calculation",
+            "description": "Reward calculation based on 'balance - totalStaking' can be exploited to take away principals staked by other users.",
+            "severity": "high",
+            "location": "StakeReward.sol#L207-211"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Improperly Designed _updatePool Function",
+            "description": "The function will throw an exception when calculating accTokenPerShare, making the contract unavailable.",
+            "severity": "medium",
+            "location": "StakeReward.sol#L196-210"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "The burn function can be used by miners to lock user's stake tokens in the contract.",
+            "severity": "medium",
+            "location": "FONos.sol#L32-35"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improperly Designed pendingReward Function",
+            "description": "The reward queried by users may be inaccurate due to outdated accTokenPerShare.",
+            "severity": "low",
+            "location": "StakeReward.sol#L182-187"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Codes",
+            "description": "Unused functions and variables should be deleted.",
+            "severity": "info",
+            "location": "StakeReward.sol#20,26,213-216"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Lack of Event Triggering",
+            "description": "Events should be triggered for enterStaking and leaveStaking functions.",
+            "severity": "info",
+            "location": "StakingEarn.sol#40-66"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rewards Not Updated When Withdrawing",
+            "description": "Users may receive reduced rewards due to outdated reward updates.",
+            "severity": "info",
+            "location": "StakingEarn.sol"
+        }
+    ]
+}

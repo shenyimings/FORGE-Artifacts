@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/Hacken-WOWSwap-V2.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x4da996c5fe84755c80e108cf96fe705174c5e36a",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.5+commit.eb77ed08"
+        ],
+        "project_path": {
+            "WOWToken": "contracts/Hacken-WOWSwap-V2/WOWToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Approve function can't be used to change approved amount that is not 0",
+            "description": "The approve function doesn't allow changing the approved amount from a non-zero value to another non-zero value.",
+            "severity": "high",
+            "location": "WOWToken, approve function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Absence of increaseAllowance and decreaseAllowance functions",
+            "description": "The WOWToken contract doesn't implement these functions, which are necessary to protect from approve front running attacks.",
+            "severity": "high",
+            "location": "WOWToken"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Inaccurate token rate calculation",
+            "description": "The actual token rate for token sale will be different due to integer division removing remainder of the division.",
+            "severity": "high",
+            "location": "WOWSale, buyTokens function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ],
+                "3": [
+                    "CWE-912"
+                ]
+            },
+            "title": "SafeMath used as contract not as library",
+            "description": "This usage causes additional gas usage for smart contract function calls.",
+            "severity": "medium",
+            "location": "WOWToken and WOWSale contracts"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Token sale and token contracts should be separate",
+            "description": "It's recommended to split tokensale and token contracts into two separate contracts to reduce potential risks.",
+            "severity": "medium",
+            "location": "Architecture of WOWToken and WOWSale contracts"
+        }
+    ]
+}

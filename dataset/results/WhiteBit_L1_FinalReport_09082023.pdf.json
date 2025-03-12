@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/WhiteBit_L1_FinalReport_09082023.pdf",
+    "project_info": {
+        "url": "https://github.com/whitebit-exchange/wbt/tree/f8d2d285df13dfc3c933266ff36905a5b0a8975e",
+        "commit_id": "f8d2d285df13dfc3c933266ff36905a5b0a8975e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "wbt": "contracts/WhiteBit_L1_FinalReport_09082023/wbt"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Missing backports for vulnerable dependencies and DoS mitigations",
+            "description": "Important changes and bug fixes were not backported from later Geth versions (after 1.10.26)",
+            "severity": "medium",
+            "location": "WB Network node implementation (fork of Geth v1.10.26)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-821"
+                ]
+            },
+            "title": "Changes to Block Sealing Logic Ineffective in Mitigating Block Reorgs",
+            "description": "The changes intended to mitigate block reorgs are ineffective and disrupt concurrency, causing block reorgs to persist even when a new block sealing task arrives and cancels an unfinished previous task.",
+            "severity": "low",
+            "location": "consensus/clique/clique.go#L595"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Architectural Concerns in Mint Instructions Implementation",
+            "description": "Multiple concerns listed, including transaction data size inconsistency, code comment inconsistencies, missing verification of burn transactions, error handling discrepancy, and inconsistent minting implementation",
+            "severity": "low",
+            "location": "core/mint/instruction.go"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistencies Detected in MintState Contract Bytecode",
+            "description": "The bytecode of the MintState contract is not up to date with MintState.sol, and there are typos in string literals.",
+            "severity": "low",
+            "location": "core/mint/contract.go"
+        }
+    ]
+}

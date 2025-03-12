@@ -1,0 +1,383 @@
+{
+    "path": "artifacts/Nouns-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/nounsDAO/nouns-monorepo",
+        "commit_id": "9a6f066d458031cedac4afe3f6f947f7d7eda79c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "nouns-monorepo": "contracts/Nouns-Spearbit-Security-Review/nouns-monorepo"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Duplicate ERC20 tokens will send a greater than prorata token share leading to loss of DAO funds",
+            "description": "No sanity checks for duplicate ERC20 tokens in the erc20tokens parameter",
+            "severity": "medium",
+            "location": "NounsDAOV3Admin.sol#L497-L507, NounsDAOV3Fork.sol#L224-L230, NounsDAOLogicV1Fork.sol#L717-L721"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "A malicious proposer can create arbitrary number of maliciously updatable proposals to significantly grief the protocol",
+            "description": "Malicious proposers can create arbitrary proposals by transferring/delegating their Nouns and update them to be malicious",
+            "severity": "medium",
+            "location": "NounsDAOV3Proposals.sol#L783-L798, NounsDAOV3Proposals.sol#L171, NounsDAOV3Proposals.sol#L818-L823"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Malicious proposer can update proposal past inattentive voters to sneak in otherwise unacceptable details",
+            "description": "A malicious proposer updates a proposal with unacceptable transactions/description to get support of inattentive voters.",
+            "severity": "medium",
+            "location": "NounsDAOV3Proposals.sol#L269-L423, NounsDAOV3Admin.sol#L118, NounsDAOV3Votes.sol#L70-"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "51% Attack Vector",
+            "description": "Renouncing veto power or removing/blocking rage quit function can lead to 51% attacks.",
+            "severity": "low",
+            "location": "NounsDAOLogicV2.sol#L900-L915, NounsDAOV3Admin.sol#L318-L333, NounsDAOLogicV1Fork.sol#L195-"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Potential re-minting of previously burnt NounsTokenFork",
+            "description": "Allows for a previously burned NounsTokenFork to be re-minted.",
+            "severity": "low",
+            "location": "NounsTokenFork.sol, NounsDAOForkEscrow.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "A single invalid/expired/cancelled signature will prevent the creation and updation of proposals",
+            "description": "Verification of proposal signatures may fail due to a single invalid signature.",
+            "severity": "low",
+            "location": "NounsDAOV3Proposals.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing require checks in NounsDAOV3Proposals.execute() and executeOnTimelockV1() functions",
+            "description": "Lack of require checks can lead to Denial of Service or incorrect execution paths.",
+            "severity": "low",
+            "location": "NounsDAOV3Proposals.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Due to misaligned DAO and Executors logic any proposal will be blocked from execution at 'eta + GRACE_PERIOD' timestamp",
+            "description": "Inconsistency in treatment of eta + GRACE_PERIOD moment can block proposal execution.",
+            "severity": "low",
+            "location": "NounsDAOLogicV2.sol, NounsDAOV3Proposals.sol, NounsDAOLogicV1Fork.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "A malicious DAO can increase the odds of proposal defeat by setting a very high value of lastMinuteWindowInBlocks",
+            "description": "Malicious majority can abuse objection-only period by setting a high value of lastMinuteWindowInBlocks.",
+            "severity": "low",
+            "location": "NounsDAOV3Admin.sol, NounsDAOV3Votes.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use custom errors instead of revert strings",
+            "description": "Using custom errors saves gas and is more convenient.",
+            "severity": "info",
+            "location": "NounsDAOProxy.sol#L79, NounsDAOExecutorV2.sol#L108"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "escrowedTokensByForkId can be used to get owner of escrowed tokens",
+            "description": "Removing redundant function ownerOfEscrowedToken() can reduce code and deployment cost.",
+            "severity": "info",
+            "location": "NounsDAOForkEscrow.sol#L58"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Emit events using locally assigned variables instead of reading from storage to save on SLOAD",
+            "description": "Saving gas by emitting local variables over storage variables.",
+            "severity": "info",
+            "location": "NounsDAOV3Admin.sol#L284, NounsDAOLogicV1Fork.sol#L619"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "joinFork() violates Checks-Effects-Interactions best practice for reentrancy mitigation",
+            "description": "Implementing the Checks-Effects-Interactions best practice can enhance security.",
+            "severity": "info",
+            "location": "NounsDAOV3Fork.sol#L139-L158"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Rename MAX_VOTING_PERIOD and MAX_VOTING_DELAY to enhance readability",
+            "description": "Enhancing readability by renaming variables.",
+            "severity": "info",
+            "location": "NounsDAOV3Admin.sol#L115, NounsDAOV3Admin.sol#L121"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "External function is used instead of internal equivalent across NounsDAOV3Proposals logic",
+            "description": "Using internal functions for better performance.",
+            "severity": "info",
+            "location": "NounsDAOV3Proposals.sol#L389"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Proposals created through proposeBySigs() can not be executed on TimelockV1",
+            "description": "Allowing proposals to be executed on TimelockV1 for more flexibility.",
+            "severity": "info",
+            "location": "NounsDAOV3Proposals.sol#L204"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-941"
+                ]
+            },
+            "title": "escrowToFork() can be frontrun to prevent users from joining the fork during the escrow period",
+            "description": "Preventing frontrunning attacks on escrowToFork().",
+            "severity": "info",
+            "location": "NounsDAOV3Fork.sol#L72-L86, NounsDAOV3Fork.sol#L109-L130"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Known issues from previous versions/audit",
+            "description": "Multiple known issues (delegateBySigs allows delegating to address zero, Voting gas refund can be abused, Nouns transfers will stop working when block number hits uint32 max value, AuctionHouse has an open gas griefing vector)",
+            "severity": "info",
+            "location": "Various contracts (NounsToken, AuctionHouse)"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "When a minority forks, the majority can follow",
+            "description": "Majority can attack minority fork DAO by joining and then quitting to drain treasury",
+            "severity": "info",
+            "location": "Fork mechanism"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "The original DAO can temporarily brick a fork DAO’s token minting",
+            "description": "Original DAO can update descriptor to revert fork token mint function",
+            "severity": "info",
+            "location": "Descriptor contract, Token mint function"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unused events, missing events and unindexed event parameters in contracts",
+            "description": "Multiple issues with events in various contracts (INounsTokenFork.sol, NounsDAOV3Admin.sol, NounsDAOEventsFork.sol)",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Prefer using __Ownable_init instead of _transferOwnership to initialize upgradable contracts",
+            "description": "Deviation from standard approach for initializing upgradable contracts",
+            "severity": "info",
+            "location": "NounsAuctionHouseFork.sol, NounsTokenFork.sol"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-397"
+                ]
+            },
+            "title": "Consider emitting the address of the timelock in the ProposalQueued event",
+            "description": "Missing timelock address information in ProposalQueued event",
+            "severity": "info",
+            "location": "NounsDAOV3Proposals.sol"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Typos, comments and descriptions need to be updated",
+            "description": "Various typographical errors and misaligned comments/descriptions.",
+            "severity": "info",
+            "location": "Multiple files (listed in the document)"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "No need to use an assembly block to get the chain ID",
+            "description": "Unnecessary assembly block usage",
+            "severity": "info",
+            "location": "ERC721CheckpointableUpgradeable.sol#L294-L300"
+        }
+    ]
+}

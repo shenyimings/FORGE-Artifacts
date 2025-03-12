@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-KratosDAO-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/Kratos-Dao/contracts/tree/9dba105",
+        "commit_id": "9dba105",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/PeckShield-Audit-Report-KratosDAO-v1/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Incorrect Reserve/Liquidity Management in Treasury::toggle()",
+            "description": "Blindly appending queues of members without proper validation.",
+            "severity": "medium",
+            "location": "Treasury contract, toggle() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improved Reward Calculation in StakingDistributor::nextRewardFor()",
+            "description": "Not taking into account same recipient being rewarded twice for distributions.",
+            "severity": "low",
+            "location": "StakingDistributor contract, nextRewardFor() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20-Compliant Tokens",
+            "description": "Not handling idiosyncrasies from non-standard ERC20 token contracts.",
+            "severity": "medium",
+            "location": "KratosTreasury"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential Arithmetic Underflows of Bonding Calculation",
+            "description": "The decimals computation in the getKValue() function may be reverted if the sum of two constituent tokens' decimals is not greater than the pair's 18 decimal.",
+            "severity": "low",
+            "location": "KratosBondingCalculator contract, getKValue() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged account needs to be scrutinized, and a compromised owner account could change current settings to steal funds.",
+            "severity": "medium",
+            "location": "Multiple contracts (e.g., Staking, KratosERC20Token)"
+        }
+    ]
+}

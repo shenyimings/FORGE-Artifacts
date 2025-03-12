@@ -1,0 +1,203 @@
+{
+    "path": "artifacts/Coinspect - Smart Contract Audit - Exactly Protocol 3rd Audit V221028.pdf",
+    "project_info": {
+        "url": "https://github.com/exactly-protocol/protocol",
+        "commit_id": "af5b4907ec63fe034fb8dde62bae99222d8407bc",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol": "contracts/Coinspect - Smart Contract Audit - Exactly Protocol 3rd Audit V221028/protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "EXA-23 Users can bypass critical liquidity checks",
+            "description": "Liquidity checks in functions `Market.borrowAtMaturity` and `Market.withdrawAtMaturity` are made using outdated values, allowing borrows of non-trivial amounts when the protocol is illiquid.",
+            "severity": "high",
+            "location": "Market.sol:249,337"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "EXA-24 Depositors unfairly harmed by spreadBadDebt sandwich",
+            "description": "Attackers can profit by sandwiching calls that result in bad debt being distributed among depositors, such as liquidate and handleBadDebt.",
+            "severity": "high",
+            "location": "Market.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Protocol bad debt distribution can be prevented indeterminately",
+            "description": "Bad debt distribution process can be prevented by transferring a few shares to the account with bad debt after it was liquidated.",
+            "severity": "high",
+            "location": "Auditor.sol, handleBadDebt function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Users may waste funds on deposits",
+            "description": "Deposits over a certain amount will be unnecessarily locked from the user perspective, as the maximum yield is limited.",
+            "severity": "medium",
+            "location": "Market.sol, depositAtMaturity function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Lack of precision in the approximation of the Interest Rate Curve",
+            "description": "The rate calculation at `InterestRateModel.fixedRate` and `InterestRateModel.floatingRate` uses an incorrect equation for rate calculation at small variations.",
+            "severity": "medium",
+            "location": "InterestRateModel.sol, lines 86, 107"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "EXA-28 Incorrect calculation of floatingDebt due to upgrade timing issue",
+            "description": "New Interest Rate Model or damping speed update not effective until lastFloatingDebtUpdate",
+            "severity": "medium",
+            "location": "setInterestRateModel function, Market.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Upgradeability pattern not fully respected",
+            "description": "Non-respect of OpenZeppelin's recommended best practices for upgradeable contracts",
+            "severity": "low",
+            "location": "Market.sol, MarketETHRouter.sol, Auditor.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unbounded setters could allow Admin role to steal from users",
+            "description": "Several protocol parameters can be modified without limits by the Administrative role",
+            "severity": "low",
+            "location": "Market.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Loss of precision due to division before multiplication",
+            "description": "Incorrect order of operations in adjustFactor calculation",
+            "severity": "low",
+            "location": "Auditor.sol:221"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing Natspec documentation",
+            "description": "Incomplete or missing NatSpec documentation for contracts, functions, and variables",
+            "severity": "info",
+            "location": "Various files"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Hardcoded constants",
+            "description": "Difficulty in understanding hardcoded constant values without context",
+            "severity": "info",
+            "location": "Various files"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Maximum maturities per market can increase liquidation costs",
+            "description": "Gas consumption increases with more allowed maturities",
+            "severity": "info",
+            "location": "Market.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Lack of emitted event on spreadBadDebt",
+            "description": "Difficulty in tracking debt distribution due to lack of specific event",
+            "severity": "info",
+            "location": "Market.sol"
+        }
+    ]
+}

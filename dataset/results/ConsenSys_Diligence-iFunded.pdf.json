@@ -1,0 +1,251 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-iFunded.pdf",
+    "project_info": {
+        "url": "https://github.com/ledgerwatch/eth_state",
+        "commit_id": "n/a",
+        "address": "0xec5bee2dbb67da8757091ad3d9526ba3ed2e2137",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "eth_state": "contracts/ConsenSys_Diligence-iFunded/eth_state"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "InterestDistribution - validateInterestPayment functions do not provide additional security",
+            "description": "The `validateInterestPaymentinEthers` and `validateInterestPaymentinTokens` functions do not provide additional security, as they only check that the contract has sufficient balance to make the transfer.",
+            "severity": "medium",
+            "location": "InterestDistribution.sol (L214-L234)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "ERC1410 - methods should be public instead of external",
+            "description": "The methods `isOperator` and `isOperatorForPartition` can be public instead of external because they are also called internally.",
+            "severity": "medium",
+            "location": "ERC1410.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "TokenVoting - consider using a custom struct type to manage votes",
+            "description": "The use of multiple nested mappings in `TokenVoting` leads to repetitive code and inefficiencies.",
+            "severity": "medium",
+            "location": "TokenVoting contract, various functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Redefined events in implementation",
+            "description": "Defining events again in the implementation can lead to mistakes or confusion.",
+            "severity": "medium",
+            "location": "ERC1410 implementation, event definitions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused function implementation",
+            "description": "The `FungibleWhitelist` contract implements the interface `IFungibleWhitelist`, but defines `isWhitelistOperator` which is already defined in the interface.",
+            "severity": "medium",
+            "location": "code/contracts/whitelists/FungibleWhitelist.sol:L115-L122"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant input validation",
+            "description": "The functions `addToRole` and `removeFromRole` have redundant input validation checks.",
+            "severity": "medium",
+            "location": "code/contracts/access/RoleBasedAccessControl.sol:L93-L97, code/contracts/access/RoleBasedAccessControl.sol:L107-L111"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "getAllDocuments() Can Cause Gas or Memory Issues",
+            "description": "The function `getAllDocuments()` can be blocked if too many documents are added, causing gas, memory, or execution problems.",
+            "severity": "medium",
+            "location": "ERC1643 contract, `getAllDocuments()` function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "TokenVoting - does not emit event when voting is closed",
+            "description": "The contract does not emit an event when the voting is closed.",
+            "severity": "low",
+            "location": "closeVoteManually function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "TokenVoting - does not have a clear permissions schema",
+            "description": "Anyone can create a vote by providing a contract that returns true for `isControllable` and `isController`, leading to potential state rent problems and event monitoring issues.",
+            "severity": "low",
+            "location": "createVote function, controllableTokenOnly modifier"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Outdated Solidity version",
+            "description": "The contract uses a floating Solidity version, which can lead to newer, possibly untested versions.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused variable",
+            "description": "The `operator` variable is used only once and is not cheaper than using `msg.sender`.",
+            "severity": "low",
+            "location": "code/contracts/ERC/ERC1410/ERC1410.sol:L295-L301, code/contracts/ERC/ERC1410/ERC1410.sol:L324-L330"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Function visibility can be external",
+            "description": "Functions in PlatformProviderRbac can be restricted to function visibility `external`.",
+            "severity": "low",
+            "location": "PlatformProviderRbac, functions getAppIdentifier, addToLevel1, addToLevel2, removeFromLevel1, removeFromLevel2"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Should emit events for critical operations and log",
+            "description": "RoleBasedAccessControl should emit events for critical operations to support detection of potentially malicious behavior and forensic analysis.",
+            "severity": "low",
+            "location": "RoleBasedAccessControl, functions addOperator and removeOperator"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input validation for asset",
+            "description": "Functions addOperator and removeOperator are missing input validation for the caller provided value `asset`.",
+            "severity": "low",
+            "location": "RoleBasedAccessControl, functions addOperator and removeOperator"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Should emit an event when setting the owner",
+            "description": "Contracts inheriting from OwnableNonTransferable are setting an owner in the constructor without emitting an event.",
+            "severity": "low",
+            "location": "OwnableNonTransferable, constructor"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant onlyContractOwner modifier",
+            "description": "The `onlyContractOwner` modifier is redundant and non-standard, identical to the `onlyOwner` modifier.",
+            "severity": "low",
+            "location": "OwnableNonTransferable.sol, L27-L33; RoleBasedAccessControl.sol, L54 and L67"
+        }
+    ]
+}

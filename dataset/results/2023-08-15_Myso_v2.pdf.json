@@ -1,0 +1,422 @@
+{
+    "path": "artifacts/2023-08-15_Myso_v2.pdf",
+    "project_info": {
+        "url": "https://github.com/mysofinance/v2/tree/c0536c1ad650805bdf5d68390de0434eb570e694",
+        "commit_id": "c0536c1ad650805bdf5d68390de0434eb570e694",
+        "address": "0x3EAf1BA2C14B2d353fd63c3881bbcc7583E665f9",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "LenderVaultImpl": "contracts/2023-08-15_Myso_v2/LenderVaultImpl"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Inability to Disable Whitelist for Borrowers When Granted Using Signatures",
+            "description": "Borrowers can exploit the system by backrunning whitelist authority's call and preserving their existing whitelist status.",
+            "severity": "high",
+            "location": "AddressRegistry contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Impossible to swap when protocolFee is set",
+            "description": "upfrontFee calculation prevents swaps with non-zero protocol fees or transfer fees.",
+            "severity": "high",
+            "location": "LenderVaultImpl.sol, BorrowerGateway.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Collateral can be locked forever if the loan amount is zero",
+            "description": "Zero loan amounts cause collateral to be locked indefinitely.",
+            "severity": "high",
+            "location": "LenderVaultImpl processQuote function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "UniswapV2 LP-Token price oracle can be manipulated",
+            "description": "An attacker can increase the amount of tokens in one of the reserves by directly transferring the tokens to the UniswapV2 Pair contract and then executing sync() function.",
+            "severity": "medium",
+            "location": "UniswapV2 Pair contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Rounding error in repayAmount calculation",
+            "description": "A rounding error occurs in the _getLoanAndRepayAmount method of LenderVaultImpl contract.",
+            "severity": "medium",
+            "location": "LenderVaultImpl contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible lose of money by lenders",
+            "description": "Lenders will lose part of their money due to new loanTokenDue calculations.",
+            "severity": "medium",
+            "location": "LoanProposalImpl contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy in borrowing process",
+            "description": "A reentrancy vulnerability allows an owner to spend a borrower's locked funds by using Compartment implementation.",
+            "severity": "medium",
+            "location": "LenderVaultImpl contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Potential DOS of repay due to open repayCallback",
+            "description": "The function repayCallback is open and can be called by anyone, leading to a Denial-of-Service (DOS) vulnerability.",
+            "severity": "medium",
+            "location": "BalancerV2Looping and UniV3Looping contracts"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Harmful condition in acceptLoanTerms",
+            "description": "A condition isn't required and is harmful because many lenders may not subscribe to a proposal until it is accepted.",
+            "severity": "medium",
+            "location": "LoanProposalImpl contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Borrower can avoid repayment",
+            "description": "The borrower can avoid repayment by creating a proposal with incorrect loanTokenDue, totalSubscription.",
+            "severity": "medium",
+            "location": "LoanProposalImpl contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Griefing wrapping tokens",
+            "description": "Griever can create wrapped token with own params, causing reissue of the wrapped token.",
+            "severity": "medium",
+            "location": "AddressRegistry createWrappedTokenForERC721s, createWrappedTokenForERC20s functions"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Last repayment can be blocked",
+            "description": "Borrower cannot repay the last amount due to reclaimCollAmount calculation.",
+            "severity": "medium",
+            "location": "LenderVaultImpl validateRepayInfo function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Users can lose tokens when minting a wrapped token",
+            "description": "Attacker can front-run victim's transaction, causing user to lose tokens.",
+            "severity": "medium",
+            "location": "WrappedERC20Impl::mint() function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Compartment access after a loan default",
+            "description": "Borrower has full access to compartment's token functionality even after loan expires.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Singleton state violation",
+            "description": "Not checking for existing addresses with singleton states, breaking protocol rules.",
+            "severity": "medium",
+            "location": "_updateSingletonState() function"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Meaningless condition in the rollback function",
+            "description": "Condition block.timestamp < lenderInOrOutCutoffTime is unnecessary and causes delays.",
+            "severity": "medium",
+            "location": "LoanProposalImpl contract, rollback function"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Infinite unsubscribe period",
+            "description": "No upper bounds for `_unsubscribeGracePeriod` in `LoanProposalImpl.initialize()`",
+            "severity": "info",
+            "location": "LoanProposalImpl, initialize()"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Positive and Negative MysoTokenManager hooks",
+            "description": "No \"negative\" hooks for withdraw or unsubscribe functions in `MysoTokenManager`",
+            "severity": "info",
+            "location": "MysoTokenManager"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No protection from malicious proposal",
+            "description": "No check for `finalLoanAmount` and `arrangerFee` in `FundingPoolImpl.executeLoanProposal()`",
+            "severity": "info",
+            "location": "FundingPoolImpl, executeLoanProposal()"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of zero check",
+            "description": "No check for `_arranger` being not equal to address(0) in `createLoanProposal()`",
+            "severity": "info",
+            "location": "createLoanProposal()"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Blacklisted tokens will revert the whole transaction",
+            "description": "No handling for blacklisted tokens in `WrappedERC20Impl.redeem()`",
+            "severity": "info",
+            "location": "WrappedERC20Impl, redeem()"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "arbitrary-send-erc20",
+            "description": "Arbitrary send ERC20 in `BorrowerGateway._processTransfers()` and `_processRepayTransfers()`",
+            "severity": "high",
+            "location": "BorrowerGateway, _processTransfers() and _processRepayTransfers()"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "naming-convention",
+            "description": "Inconsistent naming convention in various contracts",
+            "severity": "info",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "shadowing-local",
+            "description": "Shadowing local variables with same names as functions in multiple interfaces",
+            "severity": "low",
+            "location": "Multiple interfaces"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "calls-loop",
+            "description": "External calls inside loops in `ChainlinkBasic.constructor()`, `LenderVaultImpl.getTokenBalancesAndLockedAmounts()` and `LenderVaultImpl.unlockCollateral()`",
+            "severity": "low",
+            "location": "ChainlinkBasic, LenderVaultImpl"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "missing-zero-check",
+            "description": "Missing zero checks in `ChainlinkBasic.constructor()` and `Ownable.proposeNewOwner()`",
+            "severity": "low",
+            "location": "ChainlinkBasic, Ownable"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "reentrancy-benign",
+            "description": "Benign reentrancy in `AddressRegistry.createWrappedTokenForERC20s()` and `FundingPoolImpl.subscribe()`",
+            "severity": "low",
+            "location": "AddressRegistry, FundingPoolImpl"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "LoanProposalImpl.claimDefaultProceeds() uses timestamp for comparisons",
+            "description": "Dangerous comparisons",
+            "severity": "low",
+            "location": "LoanProposalImpl, claimDefaultProceeds function"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy in LenderVaultImpl.unlockCollateral",
+            "description": "External calls and state variable writes",
+            "severity": "medium",
+            "location": "LenderVaultImpl, unlockCollateral function"
+        }
+    ]
+}

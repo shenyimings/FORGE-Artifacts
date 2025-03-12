@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Fei_Labs_Flywheel_v2_xTRIBE_xERC4626.pdf",
+    "project_info": {
+        "url": "https://github.com/fei-protocol/ERC4626/tree/0515d6e985d8add01dd720261ad55076af64af07",
+        "commit_id": "0515d6e985d8add01dd720261ad55076af64af07",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ERC4626": "contracts/ConsenSys_Diligence-Fei_Labs_Flywheel_v2_xTRIBE_xERC4626/ERC4626"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of input validation in delegateBySig",
+            "description": "No zero address check in delegateBySig function, potentially allowing a random address to be delegated.",
+            "severity": "low",
+            "location": "ERC20MultiVotes.sol, function delegateBySig"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Decreasing maxGauges does not account for users' previous gauge list size",
+            "description": "Decreasing maxGauges can lead to unexpected behavior if there are already users with gauges allocated.",
+            "severity": "low",
+            "location": "ERC20Gauges.sol, function setMaxGauges"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Decrementing a gauge by 0 that is not in the user gauge list will fail an assert",
+            "description": "Passing a weight of 0 with a gauge that doesn't belong to the user can lead to an assertion failure.",
+            "severity": "low",
+            "location": "ERC20Gauges.sol, function _decrementGaugeWeight"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Undelegating 0 votes from an address who is not a delegate of a user will fail an assert",
+            "description": "Passing an amount of 0 with a delegatee that doesn't belong to the user can lead to an assertion failure.",
+            "severity": "low",
+            "location": "ERC20MultiVotes.sol, function _undelegate"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Reactivated gauges can't queue up rewards",
+            "description": "Reactivated gauges may be locked out of queuing up for rewards",
+            "severity": "high",
+            "location": "FlywheelGaugeRewards._queueRewards() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reactivated gauges have incorrect accounting for the last cycle's rewards",
+            "description": "Incorrect accounting logic for completed rewards",
+            "severity": "medium",
+            "location": "FlywheelGaugeRewards contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ],
+                "3": [
+                    "CWE-306"
+                ]
+            },
+            "title": "xTRIBE.emitVotingBalances event can be emitted by anyone",
+            "description": "The emitVotingBalances function lacks authentication, allowing anyone to emit the DelegateVotesChanged event.",
+            "severity": "medium",
+            "location": "xTRIBE.sol, function emitVotingBalances"
+        }
+    ]
+}

@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/LinkDao-Audit-by-BlockSAFU.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xaF027427DC6d31A3e7e162A710a5Fe27e63E275F",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "LINKDAO_Token": "contracts/LinkDao-Audit-by-BlockSAFU/LINKDAO_Token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unchecked transfer/transferFrom return value",
+            "description": "The return value of an external transfer/transferFrom is not checked.",
+            "severity": "low",
+            "location": "function transferFrom(address sender, address recipient, uint256 amount) external returns (bool)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unsecured mint function",
+            "description": "The mint function allows the owner to mint unlimited tokens without any checks or balances.",
+            "severity": "high",
+            "location": "function mint(uint256 amount) public onlyOwner returns (bool)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Mint Function",
+            "description": "The mint function allows the owner to mint tokens without a burning mechanism, potentially leading to infinite supply.",
+            "severity": "n/a",
+            "location": "mint function in the WRITE CONTRACT section"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Ownership Renounce Ability",
+            "description": "The owner can renounce ownership, leaving the contract without an owner and potentially causing issues.",
+            "severity": "n/a",
+            "location": "renounceOwnership function in the WRITE CONTRACT section"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ]
+            },
+            "title": "Unverified Team (KYC)",
+            "description": "The team hasn't done KYC yet, which may raise trust concerns.",
+            "severity": "n/a",
+            "location": "RUG-PULL REVIEW section"
+        }
+    ]
+}

@@ -1,0 +1,182 @@
+{
+    "path": "artifacts/Solidified-Polymath_Core_2.0.0_[08.18.2018].pdf",
+    "project_info": {
+        "url": "https://github.com/PolymathNetwork/polymath-core/tree/1.5.0",
+        "commit_id": "1.5.0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "polymath-core": "contracts/Solidified-Polymath_Core_2/polymath-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Duplicates in excluded array",
+            "description": "Having duplicates in the excluded array can lead to a artificial decrease in the calculated total supply, making possible for some investors to overdraw checkpoints rewards.",
+            "severity": "n/a",
+            "location": "DividenCheckpoint.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-358"
+                ]
+            },
+            "title": "Percentage constraint can be broken",
+            "description": "The percentage constraint can be bypassed by burning tokens, which this module does not check for.",
+            "severity": "n/a",
+            "location": "PercentageTransferManager.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Approve attack still possible",
+            "description": "The function acts as a wrapper around increaseApproval and decreaseApproval, which makes possible again for frontrunning approve attacks.",
+            "severity": "n/a",
+            "location": "SecurityToken.sol line 358"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Allowed transaction might be rejected by transfers modules",
+            "description": "If all transfer managers return NA, the transaction won't be allowed.",
+            "severity": "n/a",
+            "location": "SecurityToken.sol line 534"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Possible Sybil attack on tokens with CountTransferManager",
+            "description": "Trading can be blocked on tokens subject to CountTransferManager by a holder performing a sybil attack by redistributing his own tokens into multiple addresses.",
+            "severity": "n/a",
+            "location": "CountTransferManager.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Signed messages can be replayed",
+            "description": "Signed transactions can be replayed and as a consequence revert a change made by a WHITELIST manager.",
+            "severity": "n/a",
+            "location": "GenrealTransferManager.sol line 231"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Issues with SingleTradeVolumeRestrictionManager.sol",
+            "description": "This module can be bypassed by wrapping the tokens in another erc20 compliant contract that uses batched transfer.",
+            "severity": "n/a",
+            "location": "SingleTradeVolumeRestrictionManager.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Issues with VolumeRestrictionTransferManager.sol",
+            "description": "The implementation of the module can lead to unexpected results, like locking user tokens in the contract if the amount is less than the unlocked amount at a given time.",
+            "severity": "n/a",
+            "location": "VolumeRestrictionTransferManager.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Buyers should be able to set the maximum price they want to buy",
+            "description": "Given the structure of the tiered STO, buyers can end up making purchases at a greater value than they initially desired.",
+            "severity": "n/a",
+            "location": "USDTieredSTO.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Archiving Permission Manager has no effect",
+            "description": "If a user decides to archive the Permission Manager it won't have any practical difference because the modifier withPerm does not check weather the module is active.",
+            "severity": "n/a",
+            "location": "SecurityToken.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Variable hashes should probably be precompiled into constants",
+            "description": "Computing the hash of storage keys at execution time is costly gas wise.",
+            "severity": "n/a",
+            "location": "SecurityTokenRegistry.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Prunable investors can be missed",
+            "description": "Some prunable investor can be missed, if they are switched to an index previoulsy occupied by a pruned investor.",
+            "severity": "n/a",
+            "location": "SecurityToken.sol line 406"
+        }
+    ]
+}

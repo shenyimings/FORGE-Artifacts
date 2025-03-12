@@ -1,0 +1,82 @@
+{
+    "path": "artifacts/RematicV3_AuditReport_InterFi.pdf",
+    "project_info": {
+        "url": "https://github.com/interfinetwork/audited-codes/blob/main/RematicV3.sol",
+        "commit_id": "473d91d003307e2da23ced245c4b2f5b3d9fca3d",
+        "address": "0x8826429f705d043501e1b3659a4d96d2540285ed",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "Rematic": "contracts/RematicV3_AuditReport_InterFi/Rematic"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Privileged access control",
+            "description": "Smart contract owner can authorize to be contract admin. Authorized wallet to modify “write contract” parameters.",
+            "severity": "n/a",
+            "location": "Rematic contract, setAdminContractAdddress function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant code for transferOwnership",
+            "description": "Ideal transfer ownership code should look different from the current implementation.",
+            "severity": "n/a",
+            "location": "Rematic contract, transferOwnership function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Lack of arbitrary limit on transaction fees",
+            "description": "Smart contract owner can change transaction fees without any limits.",
+            "severity": "n/a",
+            "location": "Rematic contract, setTxFeeRate, setBurnFeeRate, and setStakingFeeRate functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of arbitrary limit on max transfer amount",
+            "description": "Smart contract owner can change the max transfer limit without any limits.",
+            "severity": "n/a",
+            "location": "Rematic contract, setMaxTransfertAmountRate function"
+        },
+        {
+            "id": 4,
+            "category": {},
+            "title": "Utilization of block.timestamp",
+            "description": "The smart contract uses block.timestamp which may or may not create a functional vulnerability.",
+            "severity": "low",
+            "location": "Rematic contract, changeTimeSells and changeTimeBuys functions"
+        }
+    ]
+}

@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/Iosiro-Synthetix Altair Release Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix",
+        "commit_id": "7bcd24db1fdbde57e62e0f07ad5666439034c358",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix": "contracts/Iosiro-Synthetix Altair Release Smart Contract Audit/synthetix"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Deadline Unenforced",
+            "description": "Liquidations on an account could only be performed after a set period of time had elapsed since the account was flagged for liquidation.",
+            "severity": "high",
+            "location": "SIP-15, Liquidations.sol#L117"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Partial Liquidation Risk",
+            "description": "A partial liquidation could lead to a case where the account was liquidated under the liquidation ratio, but above the issuance ratio.",
+            "severity": "high",
+            "location": "SIP-15, Liquidations.sol#L115"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Burn Does Not Reset Liquidation Flag",
+            "description": "The burnSynthsToTarget() function correctly reset the liquidation flag when being called; however, if synths were burned through the burnSynths(...) or burnSynthsOnBehalf(...) the flag would only be reset if the total debt was cleared.",
+            "severity": "info",
+            "location": "SIP-15, Issuer.sol#L281"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Design Comments - Fix Spelling and Grammatical Errors",
+            "description": "Language mistakes were identified in the comments and revert messages in the codebase.",
+            "severity": "info",
+            "location": "SIP-15, Liquidations.sol#L243"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Refactoring Suggestions",
+            "description": "Certain portions of the code should be refactored to improve readability and consistency.",
+            "severity": "info",
+            "location": "Various files"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Constant",
+            "description": "The `sUSD constant variable was defined, but was unused.",
+            "severity": "info",
+            "location": "SIP-15, Liquidations.sol#L29"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Implement MIN_LIQUIDATION_RATIO",
+            "description": "A `MIN_LIQUIDATION_RATIO should be implemented to specify the maximum amount of collateral that could be required to avoid liquidation.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

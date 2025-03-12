@@ -1,0 +1,193 @@
+{
+    "path": "artifacts/Hacken-Pera Finance.pdf",
+    "project_info": {
+        "url": "https://github.com/perafinance/peraplatform/tree/2e02b430c7641121e8053cf6718087115a5cf9d5",
+        "commit_id": "2e02b430c7641121e8053cf6718087115a5cf9d5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "peraplatform": "contracts/Hacken-Pera Finance/peraplatform"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Undocumented owner functionality",
+            "description": "The owner can withdraw all tokens from the contract without documentation.",
+            "severity": "high",
+            "location": "PeraStaking.sol, Function: withdrawTokens()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Potential DoS Risk",
+            "description": "Iteration over activeRewards array can consume much Gas, leading to potential Denial of Service.",
+            "severity": "high",
+            "location": "PeraStaking.sol, Function: updateReward()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential Reward Token Balance Shortage",
+            "description": "Rewards in all available tokens are transferred during one call, potentially causing failure if there is an insufficient token balance.",
+            "severity": "high",
+            "location": "PeraStaking.sol, Function: claimAllRewards()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing Reward Balance Update",
+            "description": "claimAllRewards function does not decrease totalRewardBalance after reward transfer to a user.",
+            "severity": "high",
+            "location": "TradeFarming.sol, Function: claimAllRewards()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Reward and Staking Token Balances Should be Separate",
+            "description": "The contract should separate reward and staking token balances.",
+            "severity": "high",
+            "location": "PeraStaking.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Allowance Check",
+            "description": "safeTransferFrom function is called without checking allowance prior to calling it.",
+            "severity": "medium",
+            "location": "PeraStaking.sol, TradeFarming.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Revert due to transfer Function Gas Limitation",
+            "description": "The swapETHForExactTokens function cannot be called from another contract with a fallback function.",
+            "severity": "medium",
+            "location": "TradeFarming.sol, Function: swapETHForExactTokens()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unused Return",
+            "description": "Calls to EnumerableSet.UintSet’s functions have ignored return values.",
+            "severity": "medium",
+            "location": "TradeFarming.sol"
+        },
+        {
+            "id": 8,
+            "category": {},
+            "title": "Missing Zero Address Validation",
+            "description": "Constructor and depositRewardTokens do not check for zero addresses.",
+            "severity": "low",
+            "location": "TradeFarming.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused State Variable",
+            "description": "Field `MAX_UINT` is never used.",
+            "severity": "low",
+            "location": "TradeFarming.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1177"
+                ]
+            },
+            "title": "Use of Hardcoded Values",
+            "description": "The constructor and mulDiv functions use hardcoded values in their computations.",
+            "severity": "low",
+            "location": "TradeFarming.sol, PeraStaking.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Functions That Can be Declared as external",
+            "description": "Public functions that are never called in the contract should be declared as external to save Gas.",
+            "severity": "low",
+            "location": "PeraStaking.sol, Function: calcWeight()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "The contracts use floating pragma ^0.8.11.",
+            "severity": "low",
+            "location": "PeraStaking.sol, TradeFarming.sol"
+        }
+    ]
+}

@@ -1,0 +1,185 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-DSG-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/Dinosaur-eggs/core/tree/6b046e634308d09dd3e3b625cb930d61364065ca",
+        "commit_id": "6b046e634308d09dd3e3b625cb930d61364065ca",
+        "address": "0x8e8c01e78f15912c815407117893cf0226ca4f88",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "core": "contracts/PeckShield-Audit-Report-DSG-v1/core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Timely massUpdatePools During Pool Weight Changes",
+            "description": "Invoking massUpdatePools() before updating pool weights to prevent unfair reward distribution.",
+            "severity": "low",
+            "location": "DSG contract, massUpdatePools function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Incompatibility with Deflationary Tokens",
+            "description": "DepositPool and withdraw operations may introduce balance inconsistencies with deflationary tokens.",
+            "severity": "low",
+            "location": "DSG contract, token functionality"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Duplicate Pool Detection and Prevention In Erc20EarnNftPool",
+            "description": "The addPool() function in the Erc20EarnNftPool contract does not perform necessary sanity checks to prevent adding a new pool with a duplicate token.",
+            "severity": "low",
+            "location": "Erc20EarnNftPool contract, pool detection logic"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Fees Bypass With Direct ERC721 transferFrom()",
+            "description": "Buyers and sellers can directly negotiate prices without paying fees, bypassing the protocol's fee collection mechanism.",
+            "severity": "low",
+            "location": "ERC721 contract, transferFrom() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged administrative accounts have high levels of control and assets management, which can be a counter-party risk to users.",
+            "severity": "medium",
+            "location": "DSG contract, admin key management"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Possible Overflow in vDSGToken::_mint()",
+            "description": "The calculation of StakingPower may overflow when a large amount of DSG tokens are transferred into the contract at once.",
+            "severity": "low",
+            "location": "vDSGToken contract, _mint() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Possible Sandwich/MEV Attacks For Reduced Returns In Treasury",
+            "description": "Vulnerable to front-running attacks due to lack of slippage restrictions.",
+            "severity": "low",
+            "location": "Treasury contract, MEV attack prevention"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ],
+                "3": [
+                    "CWE-940"
+                ]
+            },
+            "title": "Potential Fund Lockup For Contract Users",
+            "description": "Inconsistent use of msg.sender and tx.origin descriptors may lead to fund lockup for contract users.",
+            "severity": "high",
+            "location": "DSG contract, user fund management"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Improved Logic of LiquidityPoolOther::emergencyWithdraw()",
+            "description": "The emergencyWithdraw() function in the LiquidityPoolOther contract only clears the user.amount and user.rewardDebt, leaving user.additionalAmount intact.",
+            "severity": "low",
+            "location": "LiquidityPoolOther contract, emergencyWithdraw() function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "Incomplete Withdrawal of User Funds",
+            "description": "The emergencyWithdraw() function in the LiquidityPoolOther contract only clears the user.amount and user.rewardDebt, leaving user.additionalAmount intact.",
+            "severity": "low",
+            "location": "LiquidityPoolOther contract, emergencyWithdraw() function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Violation of Checks-Effects-Interactions Pattern",
+            "description": "The emergencyWithdraw() function in the SinglePool contract violates the checks-effects-interactions principle, making it vulnerable to reentrancy attacks.",
+            "severity": "medium",
+            "location": "SinglePool contract, emergencyWithdraw() function"
+        }
+    ]
+}

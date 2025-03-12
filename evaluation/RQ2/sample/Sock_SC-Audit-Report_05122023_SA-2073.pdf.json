@@ -1,0 +1,48 @@
+{
+    "path": "artifacts/Sock_SC-Audit-Report_05122023_SA-2073.pdf",
+    "project_info": {
+        "url": "https://github.com/SockFinance/sock-account",
+        "commit_id": "0e95242dceab8815a44767f6ef2b20a693765e56",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": "n/a",
+        "project_path": "n/a"
+    },
+    "findings": [
+        {
+            "id": 0,
+            "title": "H01. Missing Constructor And Assignment Of Admins In SockOwnable",
+            "description": "The SockOwnable contract lacks a constructor() and assignment of administrative roles, which can lead to default values of 0x0 being assigned.",
+            "severity": "High",
+            "location": "SockOwnable contract"
+        },
+        {
+            "id": 1,
+            "title": "L01. Missing Zero Address Validation",
+            "description": "Address parameters are being used without checking against the possibility of 0x0.",
+            "severity": "Low",
+            "location": "_transferSockFunctionRegistry() in SockRegistryAccessManager.sol, _transferSockOwnership() and _transferOwnership() in SockOwnable.sol"
+        },
+        {
+            "id": 2,
+            "title": "I01. Floating Pragma",
+            "description": "The project uses floating pragmas ^0.8.17, which may result in contracts being deployed using the wrong pragma version.",
+            "severity": "Informational",
+            "location": "Various contracts including SockFunctionRegistry.sol, SockUserPermissions.sol, SockRegistryAccessManager.sol, and others."
+        },
+        {
+            "id": 3,
+            "title": "Higher Deployment Cost Due To Complex Implementation Of _getFunctionSig()",
+            "description": "Complex implementation of `_getFunctionSig()` contributes to higher deployment costs.",
+            "severity": "n/a",
+            "location": "contracts/registry/SockFunctionRegistry.sol, _getFunctionSig() function"
+        },
+        {
+            "id": 4,
+            "title": "Gas Inefficient Counter",
+            "description": "Arithmetic operations automatically include checks for underflows and overflows, consuming additional gas.",
+            "severity": "n/a",
+            "location": "contracts/sock-account/SockUserPermissions.sol, initializeUserPermissions() function"
+        }
+    ]
+}

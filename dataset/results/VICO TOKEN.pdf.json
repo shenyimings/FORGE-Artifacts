@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/VICO TOKEN.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x7d03c01918b8235f0118ed35ea31312f5310a096",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "VICO": "contracts/VICO TOKEN/VICO"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function setIncludeInReward() uses a loop to find and remove addresses from the _excluded list, which can be aborted with OUT_OF_GAS exception if there is a long excluded addresses list. Similarly, the function getCurrentSupply() also uses a loop for evaluating total supply and can be aborted with OUT_OF_GAS exception.",
+            "severity": "low",
+            "location": "setIncludeInReward() and getCurrentSupply() functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges, including withdrawing ERC20 tokens, changing fees, and excluding addresses from autoliquidity and rewards.",
+            "severity": "n/a",
+            "location": "Various functions with owner-only permissions"
+        }
+    ]
+}

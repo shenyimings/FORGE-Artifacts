@@ -1,0 +1,143 @@
+{
+    "path": "artifacts/Cristomonedas-Audit-by-BlockSAFU.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xe748d5C3A572f14D07D4a16E0ef38A96ff891156",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.16+commit.07a7930e"
+        ],
+        "project_path": {
+            "Contract": "contracts/Cristomonedas-Audit-by-BlockSAFU/Contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unchecked return value of external transfer/transferFrom",
+            "description": "The return value of an external transfer/transferFrom is not checked.",
+            "severity": "low",
+            "location": "function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owner can set calm down trading without no limit time",
+            "description": "The owner can set the calm down trading without any limit on time.",
+            "severity": "medium",
+            "location": "function Launch_Settings_02__Set_Launch_Limits(uint256 Launch_Buy_Delay_Seconds, uint256 Launch_Transaction_Limit_TOKENS, uint256 Launch_Phase_Length_Minutes) external onlyOwner;"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Math error in holder calculation",
+            "description": "The total written supply is 7,000,000 while the sum of the total holders is 6,999,999.94 due to a math error.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner can set blacklist address",
+            "description": "The owner can blacklist any address, preventing them from selling their assets.",
+            "severity": "high",
+            "location": "function Launch_Settings_01__Blacklist_Bots(address Wallet, bool true_or_false) external onlyOwner;"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Owner can sell before starting trading",
+            "description": "The owner can sell all developer unlock tokens before the transaction starts.",
+            "severity": "high",
+            "location": "function Launch_Settings_03__OpenTrade() external onlyOwner;"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Owner can set Max tx Amount without no limit",
+            "description": "The owner can set the maximum transaction amount to 0, causing a honeypot.",
+            "severity": "high",
+            "location": "function Contract_SetUp_03__Wallet_Limits(uint256 Max_Tokens_Per_Transaction, uint256 Max_Total_Tokens_Per_Wallet) external onlyOwner;"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out-of-Gas DoS",
+            "description": "Loops in excluded wallets can break the contract if it runs out of gas before completion.",
+            "severity": "high",
+            "location": "Reflection Rewards functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ]
+            },
+            "title": "Lack of KYC verification",
+            "description": "The team is not KYC verified by Blocksafu",
+            "severity": "medium",
+            "location": "RUG-PULL REVIEW section"
+        }
+    ]
+}

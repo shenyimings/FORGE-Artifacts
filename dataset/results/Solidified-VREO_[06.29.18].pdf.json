@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/Solidified-VREO_[06.29.18].pdf",
+    "project_info": {
+        "url": "http://github.com/Vreo/vreo-contracts",
+        "commit_id": "5e0b8c260c0a005bd3ed94ee8cf7c0951188e831",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "vreo-contracts": "contracts/Solidified-VREO_[06/vreo-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Assert used for user input validation",
+            "description": "Using assert for user input validation instead of require, which refunds remaining gas to users.",
+            "severity": "low",
+            "location": "VreoTokenSale.sol (lines 116, 158, and 195)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-451"
+                ]
+            },
+            "title": "User can't easily ensure that their buy transaction will be only included in the desired period",
+            "description": "Users cannot specify the period with the associated bonus rate in their transactions.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Iconiq holders can transfer tokens to others during the sale, enabling users to buy more tokens than the defined amount set in the specs",
+            "description": "Iconiq token holders can circumvent the investment limit by transferring their balance to other addresses.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Checking that block time is after sale start and before sale end not strictly necessary in iconiqSaleOngoing & vreoSaleOngoing",
+            "description": "Redundant checks in ICONIQ_SALE_OPENING_TIME and VREO_SALE_CLOSING_TIME.",
+            "severity": "n/a",
+            "location": "VreoTokenSale.sol (lines 141 and 147)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Arbitrary switching between `msg.sender` and `_beneficiary` in the span of one function",
+            "description": "Inconsistent use of msg.sender and _beneficiary variables.",
+            "severity": "low",
+            "location": "PostKYCCrowdsale.sol (line 92)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ],
+                "3": [
+                    "CWE-440"
+                ]
+            },
+            "title": "Note on manual Deployment",
+            "description": "Manual deployment may introduce human error, recommended to use automated deployment tools like Truffle.",
+            "severity": "n/a",
+            "location": "n/a"
+        }
+    ]
+}

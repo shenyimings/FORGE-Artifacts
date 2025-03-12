@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Idle_Finance.pdf",
+    "project_info": {
+        "url": "https://github.com/Idle-Labs/idle-tranches/tree/f389c0a0d1ce0f245a8b82ac36767bfc0771a149",
+        "commit_id": "f389c0a0d1ce0f245a8b82ac36767bfc0771a149",
+        "address": "0xd133552be9724b501e1ee9c257e34e07317b5db6",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "idle-tranches": "contracts/ConsenSys_Diligence-Idle_Finance/idle-tranches"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "IdleCDO._deposit() allows re-entrancy from hookable tokens",
+            "description": "The function IdleCDO._deposit() updates the system's internal accounting and mints shares to the caller, then transfers the deposited funds from the user.",
+            "severity": "medium",
+            "location": "code/contracts/IdleCDO.sol:L230-L245"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "IdleCDO.virtualPrice() and _updatePrices() yield different prices in a number of cases",
+            "description": "The functions IdleCDO.virtualPrice() and _updatePrices() use different calculations for the current price of a tranche.",
+            "severity": "medium",
+            "location": "code/contracts/IdleCDO.sol:L331-L341, L237-L245"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ]
+            },
+            "title": "IdleCDO.harvest() allows price manipulation in certain circumstances",
+            "description": "The function IdleCDO.harvest() can be manipulated by an attacker to perform a sandwiching attack.",
+            "severity": "medium",
+            "location": "code/contracts/IdleCDO.sol:L564-L565, L590-L599"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Sanity checks",
+            "description": "The implementation of initialize() functions are missing some sanity checks.",
+            "severity": "low",
+            "location": "code/contracts/IdleCDO.sol:L54-L57, L84-L84, L672-L673, and IdleCDOTrancheRewards.sol:L50-L53"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Overly complicated virtualPrice() and _updatePrices() functions",
+            "description": "The methods are too complex to verify their correctness, relying heavily on external interactions with contracts whose expected semantics are poorly defined.",
+            "severity": "low",
+            "location": "IdleCDO.virtualPrice() & _updatePrices() functions"
+        }
+    ]
+}

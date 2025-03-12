@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/Aira-Robonomic-audit-report.pdf",
+    "project_info": {
+        "url": "https://github.com/airalab/robonomics_contracts/tree/cc35a91de187072214d215262d8371f0159c2498",
+        "commit_id": "cc35a91de187072214d215262d8371f0159c2498",
+        "address": "0x97282A7a15f9bEaDC854E8793AAe43B089F14b4e",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "robonomics_contracts": "contracts/Aira-Robonomic-audit-report/robonomics_contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Possible re-entrancy at withdraw",
+            "description": "Token stealing if the actual token meets certain circumstances",
+            "severity": "low",
+            "location": "LighthouseLib.sol#L24"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Token stealing",
+            "description": "The to function can be used to make arbitrary calls on behalf of the Lighthouse contract",
+            "severity": "critical",
+            "location": "LighthouseLib.sol#L83"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ]
+            },
+            "title": "The use of tx.origin",
+            "description": "Considered to be dangerous and not recommended",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Possible keccak256 collisions",
+            "description": "Keccak256 is vulnerable to collisions",
+            "severity": "high",
+            "location": "RobotLiabilityLib.sol#L73"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Possible integer overflow",
+            "description": "LiabilityFactory mints a huge amount of tokens due to integer overflow",
+            "severity": "low",
+            "location": "LiabilityFactory.sol#L222"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Dangerous function",
+            "description": "The receiveApproval function is dangerous because there is no guarantee Token address is the address of a real Token",
+            "severity": "medium",
+            "location": "Congress.sol#L133"
+        }
+    ]
+}

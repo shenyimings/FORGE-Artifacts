@@ -1,0 +1,404 @@
+{
+    "path": "artifacts/Dexalot_19012023_SCAudit_Report_4.pdf",
+    "project_info": {
+        "url": "https://github.com/Dexalot/contracts",
+        "commit_id": "91b2b26ffe8cdc9b5411836621465db6d4299ed0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Dexalot_19012023_SCAudit_Report_4/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Integer Overflow and Underflow",
+            "description": "If unchecked math is used, all math operations should be safe from overflows and underflows.",
+            "severity": "medium",
+            "location": "Math operations"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "SELFDESTRUCT Instruction",
+            "description": "The contract should not be self-destructible while it has funds belonging to users.",
+            "severity": "high",
+            "location": "Contract deployment"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-330"
+                ]
+            },
+            "title": "Weak Sources of Randomness",
+            "description": "Using predictable random values can be exploited for profit.",
+            "severity": "critical",
+            "location": "ExchangeMain contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Flashloan Attack",
+            "description": "When working with exchange rates, they should be received from a trusted source and not be vulnerable to short-term rate changes that can be achieved by using flash loans. Oracles should be used.",
+            "severity": "n/a",
+            "location": "(contract, function, etc.)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Token Supply manipulation",
+            "description": "Tokens can be minted only according to rules specified in a whitepaper or any other documentation provided by the customer.",
+            "severity": "n/a",
+            "location": "(contract, function, etc.)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unfinalized Code",
+            "description": "Hardcoded version number with no effect on implementation.",
+            "severity": "high",
+            "location": "bridgeApps/LzApp.sol: lzEstimateFees()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Denial of Service Vulnerability",
+            "description": "withdrawFees function can fail due to excessive Gas usage.",
+            "severity": "high",
+            "location": "PortfolioSub.sol: withdrawFees"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "Owners have access to user funds without bridge proof.",
+            "severity": "high",
+            "location": "PortfolioBridge.sol: refundTokens, refundNative"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "Admin can cancel pending auction orders without user permission.",
+            "severity": "high",
+            "location": "TradePairs.sol: unsolicitedCancel()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ]
+            },
+            "title": "EIP Standard Violation",
+            "description": "Hashing structured data is non-trivial, leading to security property loss.",
+            "severity": "high",
+            "location": "token/IncentiveDistributor.sol: _checkClaim()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Data inconsistency",
+            "description": "Auction mode update inconsistencies between ExchangeSub and TradePairs contracts.",
+            "severity": "n/a",
+            "location": "ExchangeSub.sol: setAuctionMode(), TradePairs.sol: setAuctionMode()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "Unfinalized Code",
+            "description": "Implementation contains test oracle address, making it look unfinished.",
+            "severity": "medium",
+            "location": "contracts/ExchangeMain.sol : function()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Missing Check Validation",
+            "description": "Base display decimal not checked against base decimal when adding a new pair.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Decimal Check Reversion",
+            "description": "addTradePair and addLimitOrder functions do not check display decimals against base/quote decimals, causing reversion.",
+            "severity": "n/a",
+            "location": "./contracts/TradePairs.sol: addTradePair(), addLimitOrder()"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Data Inconsistency",
+            "description": "Token details with the same symbol are recorded twice in different contracts; Portfolio and PortfolioBridge.",
+            "severity": "n/a",
+            "location": "./contracts/PortfolioBridge.sol: addToken()"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Unused Enum Variable",
+            "description": "The BridgeProvider type CELER is not validated anywhere in the project, and there is no implementation for it.",
+            "severity": "n/a",
+            "location": "./contracts/PortfolioBridge.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code Duplication",
+            "description": "Two different functions are detected for the same operation, setting the LZ trusted remote address.",
+            "severity": "n/a",
+            "location": "./contracts/bridgeApps/LzApp.sol: setLZTrustedRemote, setLZTrustedRemoteAddress"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Function Implementation",
+            "description": "The applied abstraction strategy for inheritance in the Portfolio contracts includes unnecessary interface components.",
+            "severity": "n/a",
+            "location": "./contracts/PortfolioSub.sol : addIERC20, getToken, depositToken, depositTokenFromContract"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Best Practice Violation",
+            "description": "The implementation of the OrderBooks mechanism is unusual and introduces unnecessary complexity into the order fulfilment process.",
+            "severity": "low",
+            "location": "./contracts/TradePairs.sol: addTradePair()"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Typos in the Code",
+            "description": "Misspelt quoteSymbol parameter on line 55.",
+            "severity": "low",
+            "location": "./contracts/interfaces/ITradePairs.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Require Statement",
+            "description": "Trusted contracts are already checked in the depositToken function, making line 164 redundant.",
+            "severity": "n/a",
+            "location": "./contracts/PortfolioMain.sol: depositTokenFromContract()"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Redundant Comparison",
+            "description": "Using require(1 == 0) instead of revert() to revert the function in an unintended scenario.",
+            "severity": "n/a",
+            "location": "./contracts/PortfolioBridge.sol: sendXChainMessageInternal"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Solidity Version",
+            "description": "Using an outdated compiler version can cause security vulnerabilities and incompatibility.",
+            "severity": "n/a",
+            "location": "./contracts/ (global)"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ]
+            },
+            "title": "Redundant comparison",
+            "description": "On line 384, checking the _from.balance twice is redundant.",
+            "severity": "n/a",
+            "location": "./contracts/PortfolioSub.sol: depositNative()"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked Return Value",
+            "description": "The software does not check the return value of a method or function, which can prevent it from detecting unexpected states and conditions.",
+            "severity": "n/a",
+            "location": "./contracts/OrderBooks.sol : lines 467 and 440, /contracts/Portfolio.sol : lines 416 and 434, /contracts/PortfolioBridge.sol : lines 237 and 278, /contracts/TradePairs.sol : lines 360, 372 and 128"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "Address parameters are being used without checking against the possibility of 0x0.",
+            "severity": "n/a",
+            "location": "./contracts/GasStation.sol : requestGas(), /contracts/IncentiveDistributor.sol : initialize(), /contracts/PortfolioMain.sol : processXFerPayload()"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant code",
+            "description": "There is redundant code in Portfolio contract.",
+            "severity": "n/a",
+            "location": "./contracts/Portfolio.sol"
+        }
+    ]
+}

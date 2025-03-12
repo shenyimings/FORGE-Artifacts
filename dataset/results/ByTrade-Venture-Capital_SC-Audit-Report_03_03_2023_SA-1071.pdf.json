@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/ByTrade-Venture-Capital_SC-Audit-Report_03_03_2023_SA-1071.pdf",
+    "project_info": {
+        "url": "https://github.com/bytradeio/Bytrade-Staking",
+        "commit_id": "a686c324db38d378b45fe758a3a7ad83e8341473",
+        "address": "0x87a39f76d45378bf995aa89048ae015ffeff477f",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "Bytrade_Staking": "contracts/ByTrade-Venture-Capital_SC-Audit-Report_03_03_2023_SA-1071/Bytrade_Staking"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Funds Lock",
+            "description": "The contract can accept native coins to its account, but does not have any withdrawal mechanisms",
+            "severity": "high",
+            "location": "Bytrade_Staking.sol, stake(uint,uint) function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Insufficient Balance",
+            "description": "Users' balances can be used for paying rewards that can lead to the inability to withdraw funds from the contract",
+            "severity": "high",
+            "location": "Bytrade_Staking.sol, stake(uint,uint) function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas Limit and Loops",
+            "description": "Transaction execution costs depend dramatically on the amount of data stored on the contract",
+            "severity": "medium",
+            "location": "Bytrade_Staking.sol, getUserDeposits(address) function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "The smart contract uses floating pragma ^0.8.4",
+            "severity": "low",
+            "location": "Bytrade_Staking.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Boolean Equality",
+            "description": "Boolean constants can be used directly and do not need to be compared to true or false",
+            "severity": "low",
+            "location": "Bytrade_Staking.sol, stake(uint,uint) and unstake(uint,uint) functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use of Hard-Coded Values",
+            "description": "Hardcoded values can be replaced with const variables",
+            "severity": "low",
+            "location": "Bytrade_Staking.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Variables that Should Be Declared External",
+            "description": "State variable that does not change its month value should be declared constant to save Gas",
+            "severity": "low",
+            "location": "Bytrade_Staking.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "The view function returns a dynamic array of unlimited size",
+            "description": "Gas cost of executing this function will exceed the Gas limit set in the node",
+            "severity": "medium",
+            "location": "Bytrade_Staking contract, view function"
+        }
+    ]
+}

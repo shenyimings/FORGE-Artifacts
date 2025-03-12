@@ -1,0 +1,368 @@
+{
+    "path": "artifacts/Overlay-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/overlay-market/v1-core",
+        "commit_id": "5208a322c976dabe5e9f1d7ce6476c54267d0c1f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "v1-core": "contracts/Overlay-Spearbit-Security-Review/v1-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Use unchecked in TickMath.sol and FullMath.sol",
+            "description": "Uniswap math libraries rely on wrapping behaviour for conducting arithmetic operations.",
+            "severity": "high",
+            "location": "TickMath.sol, FullMath.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Liquidation might fail",
+            "description": "The liquidate() function checks if a position can be liquidated and via liquidatable(), uses maintenanceMarginFraction as a factor to determine if enough value is left.",
+            "severity": "high",
+            "location": "OverlayV1Market.sol#L345-L376, Position.sol#L221-L247"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Rounding down of snapAccumulator might influence calculations",
+            "description": "Rounding down of snapAccumulator can lead to calculations diverging from formulas written in the whitepaper.",
+            "severity": "medium",
+            "location": "Roller.sol#L23-L78 (transform() function)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Verify pool legitimacy",
+            "description": "The constructor in OverlayV1UniswapV3Factory.sol and OverlayV1UniswapV3Feed.sol only does a partial check to see if the pool corresponds to the supplied tokens.",
+            "severity": "medium",
+            "location": "OverlayV1UniswapV3Factory.sol#L19-L40, OverlayV1UniswapV3Feed.sol#L30-L78 (constructor)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Liquidatable positions can be unwound by the owner of the position",
+            "description": "The liquidation function can be front-runned since it does not require any deposits.",
+            "severity": "low",
+            "location": "OverlayV1Market.sol#L240, OverlayV1Market.sol#L345 (liquidation function)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Adding constructor params causes creation code to change",
+            "description": "Using constructor parameters in create2 makes the construction code different for every case.",
+            "severity": "low",
+            "location": "OverlayV1Deployer.sol#L30-L35 (constructor)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-128"
+                ]
+            },
+            "title": "Potential wrap of timestamp",
+            "description": "In the transform() function, a revert could occur right after timestamp32 has wrapped.",
+            "severity": "low",
+            "location": "Roller.sol#L23-L34 (transform() function)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Verify the validity of _microWindow and _macroWindow",
+            "description": "The constructor of OverlayV1Feed doesn’t verify the validity of _microWindow and _macroWindow, potentially causing the price oracle to produce bad results if misconfigured.",
+            "severity": "low",
+            "location": "OverlayV1Feed.sol#L13-L16 (constructor)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Simplify _midFromFeed()",
+            "description": "The calculation in _midFromFeed() is more complicated than necessary and can overflow and revert if bid + ask >= 2**256.",
+            "severity": "low",
+            "location": "OverlayV1Market.sol#L653-L657 (_midFromFeed() function)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Flatten code of OverlayV1UniswapV3Feed",
+            "description": "Functions do a lot of interactions with small arrays and loops over them, increasing overhead and reading difficulty.",
+            "severity": "info",
+            "location": "OverlayV1UniswapV3Feed.sol (L84-L282)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Replace memory with calldata",
+            "description": "External calls to functions with memory parameters can be made more gas efficient by replacing memory with calldata.",
+            "severity": "info",
+            "location": "OverlayV1Deployer.sol (L21-L25), OverlayV1Market.sol (L102-L107)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "No need to cache immutable values",
+            "description": "Variables microWindow and macroWindow are immutable, so it is not necessary to cache them because the compiler inlines their value.",
+            "severity": "info",
+            "location": "OverlayV1UniswapV3Feed.sol (L84-L87), OverlayV1Feed.sol (L13-L16)"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Simplify circuitBreaker",
+            "description": "The function circuitBreaker() does a divDown() which can be circumvented to save gas and improving readability.",
+            "severity": "info",
+            "location": "OverlayV1Market.sol (L558-L574)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Optimizations if data.macroWindow is constant",
+            "description": "Several checks are done in contract OverlayV1Market which involve data.macroWindow in combination with a linear calculation.",
+            "severity": "info",
+            "location": "OverlayV1Market.sol (L578-L606, L465-L484)"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove unused / redundant functions and variables",
+            "description": "Functions nextPositionId() and mid() in OverlayV1Market.sol are not used internally and don’t appear to be useful.",
+            "severity": "info",
+            "location": "OverlayV1Market.sol (L536-L539, L642-L649), Position.sol (L79-L90, L251-L292), OverlayV1UniswapV3Feed.sol (L30-L78)"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Optimize power functions",
+            "description": "In contract OverlayV1Market.sol, several power calculations are done with EULER / INVERSE_EULER as a base which can be optimized to save gas.",
+            "severity": "info",
+            "location": "OverlayV1Market.sol (L465-L469, L504-L506, L621-L640)"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Redundant Math.min()",
+            "description": "Unnecessary Math.min() call in capNotionalAdjustedForCircuitBreaker() function",
+            "severity": "info",
+            "location": "OverlayV1Market.sol#L543-L574"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Replace square with multiplication",
+            "description": "Inefficient computation of squares in oiAfterFunding() function",
+            "severity": "info",
+            "location": "OverlayV1Market.sol#L515-L518"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-274"
+                ]
+            },
+            "title": "Retrieve roles via constants in import",
+            "description": "Roles retrieved via external function calls can be optimized by importing as constants",
+            "severity": "info",
+            "location": "OverlayV1Factory.sol, IOverlayV1Token.sol, OverlayV1Token.sol"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Double check action when snapAccumulator == 0 in transform()",
+            "description": "Unclear behavior when accumulatorNow == 0 in transform() function",
+            "severity": "info",
+            "location": "Roller.sol#L23-L78"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Add unchecked in natural log (ln) function or remove the functions",
+            "description": "Missing unchecked keyword in ln() function",
+            "severity": "info",
+            "location": "LogExpMath.sol#L297-L334"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Specialized functions for the long and short side",
+            "description": "Large code duplication between long and short side logic",
+            "severity": "info",
+            "location": "OverlayV1Market.sol#L145-L427"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Beware of chain dependencies",
+            "description": "Hardcoded AVERAGE_BLOCK_TIME and WETH addresses limit deployment to specific chains",
+            "severity": "info",
+            "location": "OverlayV1Market.sol, OverlayV1UniswapV3Feed.sol"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Move _registerMint() closer to mint() and burn()",
+            "description": "Unclear relation between _registerMint(), mint(), and burn() calls",
+            "severity": "info",
+            "location": "OverlayV1Market.sol#L240-L427"
+        }
+    ]
+}

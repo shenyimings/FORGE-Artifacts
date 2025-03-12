@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/FairLife Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x8a646ec31EE33B12FF47E6C7DAaF4BC4df9ae54a",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "FairLife": "contracts/FairLife Full Smart Contract Security Audit/FairLife"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "TakeFee always true",
+            "description": "The function _transfer(address from, …) checks for excluded from fee addresses and should disable fees if there are some. But takeFee parameter never turns to false value.",
+            "severity": "medium",
+            "location": "_transfer function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The functions includeInReward() and _getCurrentSupply use loops that can be aborted with OUT_OF_GAS exceptions if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "includeInReward() and _getCurrentSupply functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner Privileges",
+            "description": "Several owner privilege issues were identified, including the ability to change fees, transaction amounts, charity and marketing addresses, enable/disabled presale modes, lock/unlock, and more.",
+            "severity": "n/a",
+            "location": "n/a"
+        }
+    ]
+}

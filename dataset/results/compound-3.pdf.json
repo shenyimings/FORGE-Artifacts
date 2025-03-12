@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/compound-3.pdf",
+    "project_info": {
+        "url": "https://github.com/zeppelinos/zos/tree/master",
+        "commit_id": "master",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "zos": "contracts/compound-3/zos"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Large error codes will invalidate error messages",
+            "description": "Error codes greater than or equal to 2080 will cause an overflow, leading to incorrect error messages.",
+            "severity": "low",
+            "location": "contracts/CEther.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Failure information changes could cause on- and off-chain repercussions",
+            "description": "Keeping alphabetical order of FailureInfo codes can lead to misinterpretation by third-party systems.",
+            "severity": "medium",
+            "location": "ErrorReporter.sol, various contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of newOracle validation when setting a price oracle",
+            "description": "No test coverage for negative test case (contract doesn't implement isPriceOracle) in Comptroller.sol.",
+            "severity": "high",
+            "location": "Comptroller.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Invalid documentation regarding upper-bounds error checks",
+            "description": "Documentation uses -1, but implementation uses uint(-1), leading to misinterpretation.",
+            "severity": "low",
+            "location": "Across the codebase"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Missing tests and functionality for checking senders when setting allowSeize",
+            "description": "Lack of tests and validation of callers in BoolComptroller.sol.",
+            "severity": "n/a",
+            "location": "liquidateTest.js, BoolComptroller.sol"
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "path": "artifacts/Unity Protocol.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x3182d2983fA1b6928A581CF30a5fca094736200f",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.0+commit.c7dfd78e"
+        ],
+        "project_path": {
+            "UnityProtocol": "contracts/Unity Protocol/UnityProtocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Function includeInReward() uses a loop to find and remove addresses from the _excluded list, which may cause an OUT_OF_GAS exception if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "includeInReward() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "Burn amount is sent by _transferStandard function, which operates with only reflection balance, potentially causing issues if burn or sending addresses are excluded from the reward.",
+            "severity": "low",
+            "location": "_transferStandard function"
+        }
+    ]
+}

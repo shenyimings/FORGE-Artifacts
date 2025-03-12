@@ -1,0 +1,236 @@
+{
+    "path": "artifacts/Divergence Protocol.md",
+    "project_info": {
+        "url": "https://github.com/DivergenceProtocol/diver-contracts",
+        "commit_id": "e5286f94a7ccb9d6279fae51ea66a8833672628a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "diver-contracts": "contracts/Divergence Protocol/diver-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "startSqrtPriceX96 manipulation",
+            "description": "An attacker can specify an unfair price to grief other users or make profits from unfair trade conditions.",
+            "severity": "high",
+            "location": "Battle contract, `startSqrtPriceX96` function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Empty trades",
+            "description": "An attacker can perform empty exchanges in empty areas of liquidity, creating the possibility of price manipulation.",
+            "severity": "high",
+            "location": "Battle contract, `trade` function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Price manipulation by calling `updatePhase` with different symbols",
+            "description": "An attacker can manipulate the `endRoundId` values, violating the correctness of the price calculation algorithm.",
+            "severity": "high",
+            "location": "Oracle contract, `updatePhase` function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Price manipulation by calling `updatePhase` prematurely",
+            "description": "An attacker can record an incorrect `endRoundId` value, compromising the price calculation algorithm.",
+            "severity": "high",
+            "location": "Oracle contract, `updatePhase` function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "The owner can manipulate oracles",
+            "description": "The owner can set a fake external oracle address before the battle end, leading to incorrect battle settlement.",
+            "severity": "medium",
+            "location": "Oracle contract, `setExternalOracle` function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Reserve oracle",
+            "description": "Price history gaps may cause the `settle` function call to revert.",
+            "severity": "medium",
+            "location": "Oracle contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Public functions for withdrawn assets in the `PeripheryPayments` contract",
+            "description": "Anyone can withdraw funds from the `Manager` contract, allowing an attacker to steal mistakenly transferred funds.",
+            "severity": "medium",
+            "location": "PeripheryPayments contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-654"
+                ]
+            },
+            "title": "Lack of incentivization of the battle settlement process",
+            "description": "There is no incentive for users to settle battles, leading to centralization and an open attack vector for griefing attacks.",
+            "severity": "medium",
+            "location": "Battle contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "The `redeemObligation` will always be reverted",
+            "description": "The `redeemObligation` function is designed to be called when the state is `Outcome.ONGOING`, but it will always be reverted.",
+            "severity": "low",
+            "location": "Manager contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Spelling mistakes",
+            "description": "A spelling mistake in a comments section.",
+            "severity": "low",
+            "location": "Battle contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Only manager modifier",
+            "description": "Code duplication makes the code base less clear and more voluminous.",
+            "severity": "low",
+            "location": "Various contracts"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-667"
+                ],
+                "4": [
+                    "CWE-412"
+                ]
+            },
+            "title": "Using a lock modifier",
+            "description": "The `lock` modifier is not used consistently, leading to potential reentrancy attacks.",
+            "severity": "low",
+            "location": "Battle contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "The use of immutable variables",
+            "description": "Immutable variables are not used, increasing gas consumption.",
+            "severity": "low",
+            "location": "Arena contract"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1106"
+                ]
+            },
+            "title": "Magic numbers",
+            "description": "Unnamed constants make the codebase less understandable.",
+            "severity": "low",
+            "location": "Arena contract"
+        }
+    ]
+}

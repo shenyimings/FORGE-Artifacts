@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Buffer-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/Buffer-Finance/Buffer-Protocol/tree/9e1b339",
+        "commit_id": "9e1b339",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Buffer-Protocol": "contracts/PeckShield-Audit-Report-Buffer-v1/Buffer-Protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved Handling Of Corner Cases In BufferBNBPool::provide()",
+            "description": "The provide function in BufferBNBPool contract does not handle the case where the referrer address is the contract itself.",
+            "severity": "medium",
+            "location": "BufferBNBPool::provide()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential Reentrancy Risks In BufferBNBOptions::create()",
+            "description": "The create function in BufferBNBOptions contract has a potential reentrancy risk due to the callback function in _safeMint.",
+            "severity": "n/a",
+            "location": "BufferBNBOptions::create()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged account _owner can set protocol parameters to unreasonably values, causing user asset losses.",
+            "severity": "medium",
+            "location": "Multiple contracts (BufferBNBOptions)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ]
+            },
+            "title": "Possible Costly LPs From Improper Pool Initialization",
+            "description": "Malicious actor can manipulate pool initialization to make rBFR-BNB tokens extremely expensive.",
+            "severity": "low",
+            "location": "BufferBNBPool::provide()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Lack Of OPTION_ISSUER_ROLE Initialization In BufferBNBPool",
+            "description": "OPTION_ISSUER_ROLE is not properly initialized in BufferBNBPool contract.",
+            "severity": "low",
+            "location": "BufferBNBPool::constructor()"
+        }
+    ]
+}

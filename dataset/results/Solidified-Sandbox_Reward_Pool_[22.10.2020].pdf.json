@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/Solidified-Sandbox_Reward_Pool_[22.10.2020].pdf",
+    "project_info": {
+        "url": "https://github.com/thesandboxgame/sandbox-private-contracts",
+        "commit_id": "1768142603a948bd7492cc87a66e19160489043f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "sandbox-private-contracts": "contracts/Solidified-Sandbox_Reward_Pool_[22/sandbox-private-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Total contribution is not reduced when stakes are withdrawn",
+            "description": "The withdraw() function reduces the contribution of msg.sender, but fails to update the _totalContributions variable.",
+            "severity": "high",
+            "location": "LandWeightedSANDRewardPool.sol, withdraw() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Land owned may not be accurate during reward calculation",
+            "description": "Contributions are calculated using the number of land NFT at the time of staking, which can lead to incorrect pool shares and reward distributions.",
+            "severity": "high",
+            "location": "LandWeighterSANDRewardPool.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Potential reentrancy from token contract",
+            "description": "The stake() and withdraw() functions call their equivalents in the LPTokenWrapper contract, which may lead to a potentially exploitable reentrancy.",
+            "severity": "high",
+            "location": "LandWeighterSANDRewardPool.sol, stake() and withdraw() functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No check for amount received in notifyRewardAmount",
+            "description": "It is possible for this function to be called with a different amount than what was sent to the contract.",
+            "severity": "low",
+            "location": "notifyRewardAmount() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reward calculation performed twice",
+            "description": "The getReward() function calls the earned() function twice, introducing unnecessary logic to be executed.",
+            "severity": "info",
+            "location": "getReward() function"
+        }
+    ]
+}

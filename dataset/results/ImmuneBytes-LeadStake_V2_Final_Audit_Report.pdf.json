@@ -1,0 +1,173 @@
+{
+    "path": "artifacts/ImmuneBytes-LeadStake_V2_Final_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/leadwallet/Lead-Stake-V2",
+        "commit_id": "8cd5075099a47c72ed569b12730f6264312342a8",
+        "address": "0xd4dd6c929855fd06beafa42e285ec7dfb1399370",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Lead-Stake-V2": "contracts/ImmuneBytes-LeadStake_V2_Final_Audit_Report/Lead-Stake-V2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Admin/Owner Privileges can be misused",
+            "description": "Admin/owner has various privileges over the smart contract that can be misused intentionally or unintentionally.",
+            "severity": "high",
+            "location": "LeadStakeV2 contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "The LeadStakeV2 contract won’t work with USDT",
+            "description": "The contract contains statements that deal with the transfer of USDT tokens, which will likely fail/revert because USDT does not completely follow the ERC20 token standard.",
+            "severity": "high",
+            "location": "LeadStakeV2 contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "_migrationContract can be changed multiple times by the owner",
+            "description": "The activateMigration() function can be used to update the migrationContract address variable multiple times.",
+            "severity": "low",
+            "location": "LeadStakeV2 contract, activateMigration() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Return value of Standard ERC20 functions should be handled explicitly",
+            "description": "Returned values of ERC20 functions are ignored at Line 684 and 940 of the LeadStakeV2 contract.",
+            "severity": "low",
+            "location": "LeadStakeV2 contract, Lines 684 and 940"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "setFeeTaker() function should check the validity of input address variable",
+            "description": "The setFeeTaker() function does not check the validity of input address and allows zero address to be set as feeTaker.",
+            "severity": "low",
+            "location": "LeadStakeV2 contract, setFeeTaker() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Address of the Lead Stake V1 contract should be taken as a parameter in _constructor()",
+            "description": "The address of Lead Stake V1 contract is hardcoded to the ropsten contract address, increasing room for human error at deployment.",
+            "severity": "low",
+            "location": "LeadStakeV2 contract, constructor()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "No getter function present for feeTaker variable",
+            "description": "There is no getter function implemented for the private state variable feeTaker.",
+            "severity": "low",
+            "location": "LeadStakeV2 contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Events should be emitted when crucial contract parameters are changed",
+            "description": "Functions that update crucial parameters do not emit events to log state changes.",
+            "severity": "low",
+            "location": "LeadStakeV2 contract, functions setTaxRate(), setFeeTaker(), changeROI()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary input variable in migrate() function",
+            "description": "The migrate() function takes an unnecessary address variable as input.",
+            "severity": "low",
+            "location": "LeadStakeV2 contract, migrate() function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent use of now and block.timestamp",
+            "description": "Both 'now' and 'block.timestamp' are used in the contract, which may lead to inconsistency.",
+            "severity": "low",
+            "location": "LeadStakeV2 contract"
+        }
+    ]
+}

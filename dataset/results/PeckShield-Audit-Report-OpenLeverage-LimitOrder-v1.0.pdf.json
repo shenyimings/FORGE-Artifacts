@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-OpenLeverage-LimitOrder-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/OpenLeverageDev/open-order-contracts/tree/173a1ac",
+        "commit_id": "173a1ac",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "open-order-contracts": "contracts/PeckShield-Audit-Report-OpenLeverage-LimitOrder-v1/open-order-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Accommodation of Possible Non-ERC20-Compliant Tokens",
+            "description": "The transferFrom() routine may not have a return value defined and implemented, which can cause a revert.",
+            "severity": "low",
+            "location": "OPLimitOrder contract, function transferF rom()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Possible Signature Malleability in OpenZeppelin ECDSA",
+            "description": "The imported @openzeppelin/contracts has a signature malleability issue on its signature verification logic due to accepting EIP-2098 compact signatures.",
+            "severity": "high",
+            "location": "OPLimitOrder contract, function fillOpenOrder()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged admin account needs to be scrutinized and consideration should be given to transferring the role to a community-governed DAO.",
+            "severity": "medium",
+            "location": "OPLimitOrder contract, function initialize()"
+        }
+    ]
+}

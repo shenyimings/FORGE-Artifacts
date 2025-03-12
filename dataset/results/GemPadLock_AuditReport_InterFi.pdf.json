@@ -1,0 +1,140 @@
+{
+    "path": "artifacts/GemPadLock_AuditReport_InterFi.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x21A7dC46958fc6939E1E53d386e26dbef4Cb8a92",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.13+commit.abaa5c0e"
+        ],
+        "project_path": {
+            "Lock": "contracts/GemPadLock_AuditReport_InterFi/Lock"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Lack of centralized privileges and role-based access controls",
+            "description": "Smart contract lacks clear ownership mechanism or access control to set administrative values.",
+            "severity": "high",
+            "location": "add function, unlockLiquidity function, unlockToken function, extendLock function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Use of proxy and upgradeable contracts",
+            "description": "Contract upgradeability allows privileged roles to change current contract implementation.",
+            "severity": "critical",
+            "location": "Lock contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-300"
+                ]
+            },
+            "title": "Potential front-running",
+            "description": "Front-running risk exists because an attacker can observe the pending transactions in the mempool and submit a transaction with a higher gas price.",
+            "severity": "low",
+            "location": "add function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-638"
+                ],
+                "5": [
+                    "CWE-424"
+                ]
+            },
+            "title": "Logical oversight",
+            "description": "User can add to an existing lock with the same _endDateTime.",
+            "severity": "low",
+            "location": "add function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Timestamp manipulation via block.timestamp",
+            "description": "Miner can manipulate the timestamp of the block to seed a number.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of emergency stop mechanism",
+            "description": "Add functions like pause() and emergencyWithdraw() to halt certain functions or allow users to withdraw their tokens in certain scenarios.",
+            "severity": "n/a",
+            "location": "Lock contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Direct and indirect dependencies",
+            "description": "Smart contracts are interacting with third-party protocols, which can be compromised or exploited.",
+            "severity": "n/a",
+            "location": "Lock contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Potential resource exhaustion errors",
+            "description": "Functions may throw out-of-gas errors if arrays grow too large.",
+            "severity": "low",
+            "location": "liquidityList and tokenList arrays"
+        }
+    ]
+}

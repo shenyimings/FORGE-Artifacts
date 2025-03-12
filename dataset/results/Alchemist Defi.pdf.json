@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/Alchemist Defi.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x6f8fe12cc34398d15b7d5a5ba933e550da1d099f, 0x5aa13aa7dcb8cb6d23e1eb3424160bdd1323bbce, 0x43404359bb38f5135ab8e25c62902015a49a0074, 0x21780Bb8BaF30598Dc70c48d7b74Ffad1268BdE3, 0x49207BAA3a7332F0716788aa57B088D499bcc104, 0x193765551a49eAD3aA8C693F19C4501710cD874d",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "MistToken": "contracts/Alchemist Defi/MistToken",
+            "Timelock": "contracts/Alchemist Defi/Timelock",
+            "MasterChef": "contracts/Alchemist Defi/MasterChef",
+            "AurumToken": "contracts/Alchemist Defi/AurumToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "Sending funds to the dead address instead of burning in overridden function _transfer.",
+            "severity": "medium",
+            "location": "MistToken contract and AurumToken contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "The updateEmissionRate function can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "Mist MasterChef contract and Aurum MasterChef contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "add function issue",
+            "description": "Incorrect total amount of reward mistReward/aurumReward in function updatePool.",
+            "severity": "low",
+            "location": "Mist MasterChef contract and Aurum MasterChef contract"
+        }
+    ]
+}

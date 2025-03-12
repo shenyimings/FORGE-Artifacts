@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/VIP TOKEN Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x6759565574De509b7725ABb4680020704B3F404e",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.9+commit.e5eed63a"
+        ],
+        "project_path": {
+            "VIPTOKEN": "contracts/VIP TOKEN Full Smart Contract Security Audit/VIPTOKEN"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which may lead to an OUT_OF_GAS exception if there are too many excluded addresses.",
+            "severity": "low",
+            "location": "Contract: VIPTOKEN, Function: includeInReward()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Wrong transfer",
+            "description": "The function `_tokenTransfer()` uses `_transferStandard` to send burn and marketing amounts without checking if the addresses are excluded from reward, which may cause issues.",
+            "severity": "low",
+            "location": "Contract: VIPTOKEN, Function: _tokenTransfer()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges, including locking and unlocking, including/excluding from fees and rewards, disabling/enabling fees, changing marketing wallet addresses, etc.",
+            "severity": "low",
+            "location": "Contract: VIPTOKEN, Various functions"
+        }
+    ]
+}

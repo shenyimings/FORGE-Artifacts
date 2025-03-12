@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/Iosiro-Synthetix Kochab Release Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix",
+        "commit_id": "d45b36d4c171674a7a0d87554339beeea0d5912a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix": "contracts/Iosiro-Synthetix Kochab Release Smart Contract Audit/synthetix"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect calculation of expectedAmount in _repayWithCollateral",
+            "description": "The exchange fee should be added to the amount, which would result in the collateral being reduced by a larger amount.",
+            "severity": "high",
+            "location": "Collateral.sol#L544"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Exchange fee not paid to stakers",
+            "description": "The initial implementation removed `_payFees(fee, sUSD);` after calculating the amount of collateral to burn.",
+            "severity": "medium",
+            "location": "Collateral.sol#L548"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Collapse service fee not charged with repayment",
+            "description": "The existing implementation did not proportionally apply the collapse service fee when repaying a loan with collateral.",
+            "severity": "medium",
+            "location": "Collateral.sol#L385"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Collapse service fee denominated in the wrong currency",
+            "description": "The existing implementation remitted the collapse fee using the incorrect currency.",
+            "severity": "medium",
+            "location": "Collateral.sol#L386"
+        }
+    ]
+}

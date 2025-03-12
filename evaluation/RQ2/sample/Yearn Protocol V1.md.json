@@ -1,0 +1,76 @@
+{
+    "path": "artifacts/Yearn Protocol V1.md",
+    "project_info": {
+        "url": "https://github.com/iearn-finance/yearn-protocol/tree/9ff0dc0ea73642c529383d0675930a41bf033295/contracts",
+        "commit_id": "9ff0dc0ea73642c529383d0675930a41bf033295",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": "n/a",
+        "project_path": "n/a"
+    },
+    "findings": [
+        {
+            "id": 0,
+            "title": "Unsafe implementation of arithmetic operations",
+            "description": "Integer underflow vulnerability due to lack of SafeMath library usage",
+            "severity": "Warning",
+            "location": "yinsure.sol, function (around line 912)"
+        },
+        {
+            "id": 1,
+            "title": "Usage of increment without Counters safe library",
+            "description": "Incrementing token ID without using Counters library, potentially leading to under/overflow vulnerabilities",
+            "severity": "Warning",
+            "location": "yinsure.sol, function (around line 911)"
+        },
+        {
+            "id": 2,
+            "title": "Function calculation result not processed",
+            "description": "Not processing results of method calls, potentially leading to issues in certain circumstances",
+            "severity": "Info",
+            "location": "Controller.setStrategy, Controller.withdrawAll, Controller.yearn"
+        },
+        {
+            "id": 3,
+            "title": "Unprocessed Calculation Results",
+            "description": "Lack of processing of calculation results in various functions.",
+            "severity": "n/a",
+            "location": "OneSplitAudit.sol, yDelegatedVault.repay(), StrategyMKRVaultDAIDelegate._approveAll()"
+        },
+        {
+            "id": 4,
+            "title": "Unprocessed Approval Results",
+            "description": "The approve method returns true if successful, and may return false otherwise, but results are not processed.",
+            "severity": "n/a",
+            "location": "StrategyMKRVaultDAIDelegate._approveAll()"
+        },
+        {
+            "id": 5,
+            "title": "No Boundary Check for Various Fee Values",
+            "description": "No boundary checks for withdrawalFee, performanceFee, strategistReward, keepCRV values in setter methods.",
+            "severity": "n/a",
+            "location": "Multiple strategies (StrategyDForceUSDC.sol, StrategyCreamYFI.sol, etc.)"
+        },
+        {
+            "id": 6,
+            "title": "No Boundary Check for `min` Value",
+            "description": "No boundary check for `min` value in yVault and yWETH.",
+            "severity": "n/a",
+            "location": "yVault.sol, yWETH.sol"
+        },
+        {
+            "id": 7,
+            "title": "Insecure arithmetic operations",
+            "description": "Be careful with arithmetical operation.",
+            "severity": "Warning",
+            "location": "yinsure.sol"
+        },
+        {
+            "id": 8,
+            "title": "Unchecked `_fee`/`_keepCRV` values",
+            "description": "_fee/_keepCRV potentially can have zero value, so we recommend checking that case to save gas.",
+            "severity": "n/a",
+            "location": "StrategyDForceUSDC.sol#L147"
+        }
+    ]
+}

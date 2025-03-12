@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Dandelion_Organizations.pdf",
+    "project_info": {
+        "url": "https://github.com/1Hive/delay-app",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "delay-app": "contracts/ConsenSys_Diligence-Dandelion_Organizations/delay-app"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "TimeLock spam prevention can be bypassed",
+            "description": "The TimeLock app allows arbitrary calls to be executed, which opens vectors for bypassing spam prevention.",
+            "severity": "critical",
+            "location": "TimeLock app, Dandelion orgs"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Passing duplicate tokens to Redemptions and TokenRequest may have unintended consequences",
+            "description": "The contracts do not make a uniqueness check on input tokens during initialization.",
+            "severity": "medium",
+            "location": "Redemptions, TokenRequest contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Delay.execute can re-enter and re-execute the same script twice",
+            "description": "The script being run executes arbitrary external calls, allowing a script to be created that re-enters Delay and executes itself multiple times.",
+            "severity": "low",
+            "location": "Delay contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Delay.cancelExecution should revert on a non-existent script id",
+            "description": "cancelExecution makes no existence check on the passed-in script ID.",
+            "severity": "low",
+            "location": "Delay contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "ID validation check missing for installDandelionApps",
+            "description": "The _id parameter is not validated in installDandelionApps.",
+            "severity": "low",
+            "location": "Dandelion orgs"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "The Delay app allows scripts to be paused even after execution time has elapsed",
+            "description": "The pauseExecution function still allows the script to be paused, halting execution.",
+            "severity": "medium",
+            "location": "Delay.sol, function pauseExecution"
+        }
+    ]
+}

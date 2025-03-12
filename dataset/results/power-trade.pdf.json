@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/power-trade.pdf",
+    "project_info": {
+        "url": "https://github.com/Power-Trade/fuel-dao/tree/200947a7b3c283e87caae2dc02587883f46049ee",
+        "commit_id": "200947a7b3c283e87caae2dc02587883f46049ee",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "fuel-dao": "contracts/power-trade/fuel-dao"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "QSP-1",
+            "description": "In FuelToken.sol, the use of uint32 for BlockNumber and numCheckpoints could conceivably result in the token's lockdown in the future as these numbers approach their max limits.",
+            "severity": "low",
+            "location": "FuelToken.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "QSP-2",
+            "description": "The clone-and-own approach involves copying and adjusting open source code at one's own discretion, which may not follow best practices or contain security vulnerabilities.",
+            "severity": "low",
+            "location": "CloneFactory.sol, IERC20.sol, ReentrancyGuard.sol, SafeMath.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "QSP-3",
+            "description": "In VestingContract.sol, the rate of vesting tokens that the beneficiary receives when calling _drawDown() is calculated based on the amount parameter in the beneficiary's schedule.",
+            "severity": "low",
+            "location": "VestingContract.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "QSP-4",
+            "description": "The contract Timelock.sol has been modified to handle delay and gracePeriod as uint seconds while the original Compound contract explicitly enforces limits to these parameters in time units of days.",
+            "severity": "low",
+            "location": "Timelock.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "QSP-5",
+            "description": "The contracts Timelock.sol and Governor.sol have been modified to allow updates to pendingAdmin without being subjected to the timelock by the admin.",
+            "severity": "low",
+            "location": "Timelock.sol, Governor.sol"
+        }
+    ]
+}

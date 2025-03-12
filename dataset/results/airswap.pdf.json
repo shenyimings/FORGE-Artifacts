@@ -1,0 +1,158 @@
+{
+    "path": "artifacts/airswap.pdf",
+    "project_info": {
+        "url": "https://github.com/airswap/airswap-protocols",
+        "commit_id": "b87d292",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "airswap-protocols": "contracts/airswap/airswap-protocols"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization of Power",
+            "description": "Owner variables have special privileges to make modifications, including self-destructing the contract and locking funds forever.",
+            "severity": "medium",
+            "location": "Indexer.sol, Index.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Integer arithmetic causing incorrect pricing logic",
+            "description": "Integer truncation issues in Delegate.sol can cause incorrect pricing logic due to the way equations are written.",
+            "severity": "medium",
+            "location": "Delegate.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Insufficient balance checking",
+            "description": "The `transferFrom()` function does not correctly check the balance, which can lead to issues with ERC20 tokens.",
+            "severity": "low",
+            "location": "Swap.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Insufficient validation checks",
+            "description": "The `isValid()` function does not correctly validate the swap contract, which can lead to replay attacks.",
+            "severity": "low",
+            "location": "Swap.sol, Types.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unchecked return values",
+            "description": "Several functions do not check the return value of external calls, which can cause issues with ether transfers.",
+            "severity": "low",
+            "location": "Wrapper.sol, Swap.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Gas usage concerns",
+            "description": "The `cancel()` function in Swap.sol and the `_getEntryLowerThan()` function may lead to gas-related denial-of-service attacks.",
+            "severity": "low",
+            "location": "Swap.sol, Index.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Insufficient return value checking",
+            "description": "The `transferFrom()` function in Swap.sol does not check the return value for success.",
+            "severity": "info",
+            "location": "Swap.sol, INRERC20.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked constructor argument",
+            "description": "The `swapRegistry` parameter in Swap.sol is not checked to be non-zero, which can lead to incorrect deployments.",
+            "severity": "info",
+            "location": "Swap.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Experimental features enabled",
+            "description": "Using experimental features on live deployments",
+            "severity": "medium",
+            "location": "Various contracts (e.g., @airswap/types/contracts/Types.sol, @airswap/delegate/contracts/interfaces/IDelegate.sol, etc.)"
+        }
+    ]
+}

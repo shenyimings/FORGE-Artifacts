@@ -1,0 +1,239 @@
+{
+    "path": "artifacts/txp.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x91829779e4a3c23f96f006e5e47a995985adab05",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "TheXProtocol": "contracts/txp/TheXProtocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Authorization issue in transaction control",
+            "description": "Transactions can be enabled for all users by invoking `_finishPresale` function, but cannot be disabled again.",
+            "severity": "critical",
+            "location": "TheXProtocol.sol#L155,208,479,764"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted token minting",
+            "description": "Mint Owner role can mint tokens without restriction, potentially inflating contract tokens.",
+            "severity": "critical",
+            "location": "TheXProtocol.sol#L640"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted token burning",
+            "description": "Burn Owner role can burn tokens from a specific address without restriction, potentially resulting in token loss.",
+            "severity": "critical",
+            "location": "TheXProtocol.sol#L663"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ]
+            },
+            "title": "Authorization issue in address blacklisting",
+            "description": "Contract owner can blacklist addresses without restriction, potentially blocking transactions.",
+            "severity": "critical",
+            "location": "TheXProtocol.sol#L334"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused modifier",
+            "description": "`onlyDistribution` modifier is not used in the contract and can be optimized or removed.",
+            "severity": "low",
+            "location": "TheXProtocol.sol#L201"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-compliance with Solidity naming conventions",
+            "description": "Contract does not follow Solidity naming convention guidelines, affecting readability and maintainability.",
+            "severity": "low",
+            "location": "TheXProtocol.sol#L170,243,334,339,344,640,663,764"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Lack of event logging",
+            "description": "Certain functions do not emit events, making it difficult to track off-chain changes.",
+            "severity": "low",
+            "location": "TheXProtocol.sol#L296,305,314"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant boolean comparison",
+            "description": "Unnecessary boolean equalities can be removed for clearer and more concise code.",
+            "severity": "low",
+            "location": "TheXProtocol.sol#L209"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Variable shadowing",
+            "description": "Local variables with the same name as outer variables can cause confusion and unintended consequences.",
+            "severity": "low",
+            "location": "TheXProtocol.sol#L408,790,791"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of input validation",
+            "description": "Variables are set without proper checks, potentially leading to issues when values are zero.",
+            "severity": "low",
+            "location": "TheXProtocol.sol#L296,305,314"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Unstable compiler version",
+            "description": "`pragma solidity ^0.8.4` allows for compatible versions, but should be locked to ensure stability.",
+            "severity": "low",
+            "location": "TheXProtocol.sol#L2,87,113,352"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Potential Ether lock",
+            "description": "Payable constructor function may lead to locked Ether.",
+            "severity": "low",
+            "location": "TheXProtocol.sol#L789"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Abuse of mint functionality",
+            "description": "The contract owner can abuse the mint functionality, leading to highly inflated contracts.",
+            "severity": "n/a",
+            "location": "ERC20 contract, _mint function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Abuse of burn functionality",
+            "description": "The contract owner can abuse the burn functionality, causing users to lose their tokens.",
+            "severity": "n/a",
+            "location": "ERC20 contract, _burn function"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Mass blacklisting of addresses",
+            "description": "The contract owner can massively blacklist addresses.",
+            "severity": "n/a",
+            "location": "Blacklist contract, addAddressToBlacklist and removeFromBlacklist functions"
+        }
+    ]
+}

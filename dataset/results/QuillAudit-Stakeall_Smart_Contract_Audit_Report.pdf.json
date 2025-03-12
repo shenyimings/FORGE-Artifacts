@@ -1,0 +1,164 @@
+{
+    "path": "artifacts/QuillAudit-Stakeall_Smart_Contract_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/stakeall/contracts/tree/c266b2e40ee100635175b935676ac64a96695622",
+        "commit_id": "c266b2e40ee100635175b935676ac64a96695622",
+        "address": "0x692f78A81A1BFb2A2FEa6c403Fd8776036fD874D",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.7.6+commit.7338295f"
+        ],
+        "project_path": {
+            "GraphProtocolStaking": "contracts/QuillAudit-Stakeall_Smart_Contract_Audit_Report/GraphProtocolStaking"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zero check",
+            "description": "Missing zero address check for indexers, _indexers parameters that may lead to the delegation of amount to a zero address.",
+            "severity": "medium",
+            "location": "GraphProtocol Staking Contract, delegateMultiple, undelegateMultiple, withdrawMultipleDelegate functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Race Condition",
+            "description": "ERC20 approve race condition in function delegate() and delegateMultiple()",
+            "severity": "low",
+            "location": "GraphProtocol Staking Contract, delegate, delegateMultiplener functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Out of Gas issue",
+            "description": "No check in place to limit the number of indexers and portions allowed to delegate, may lead to out of gas issues during loop execution",
+            "severity": "low",
+            "location": "GraphProtocol Staking Contract, delegateMultiple, withdrawMultipleDelegate functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Race Condition",
+            "description": "ERC20 approve race condition in function delegate() and delegateMultiple()",
+            "severity": "low",
+            "location": "MaticProtocol Staking Contract, delegate, delegateMultiple functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of Gas issue",
+            "description": "No check in place to limit the number of indexers and portions allowed to delegate, may lead to out of gas issues during loop execution",
+            "severity": "low",
+            "location": "MaticProtocol Staking Contract, delegateMultiple, withdrawRewardsMultiple, sellVoucherMultiple functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing array length check",
+            "description": "Missing array length check in validatorContractAddresses, validatorAddresses, minShares, and unbondNonces parameters",
+            "severity": "low",
+            "location": "MaticProtocol Staking Contract, delegateMultiple, withdrawRewardsMultiple, sellVoucherMultiple, unstakeClaimedTokensMultiple functions"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Parameters (Dead Code)",
+            "description": "Unused parameter _eventParam in depositByAllowance() function",
+            "severity": "info",
+            "location": "Basic/main.sol Contract, depositByAllowance function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked return value of external calls",
+            "description": "Unchecked return value of external call to prepare() function",
+            "severity": "low",
+            "location": "Connext/main.sol Contract, crosschainTransfer function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma",
+            "description": "Contracts should be deployed with the same compiler version and flags that they have been tested with thoroughly",
+            "severity": "info",
+            "location": "Multiple contracts (Basic/main.sol, GraphProtocol/main.sol, MaticProtocol/main.sol, connext/main.sol)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "State variables that could be declared constant",
+            "description": "State variable \"name\" is not updated and must be declared constant",
+            "severity": "info",
+            "location": "Multiple contracts (Basic/main.sol, GraphProtocol/main.sol, Connext/main.sol)"
+        }
+    ]
+}

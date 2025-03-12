@@ -1,0 +1,50 @@
+{
+    "path": "artifacts/NFTinder_1.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xf4d41517ccfb66404082e561bede0ba79363760a",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.6+commit.7338295f"
+        ],
+        "project_path": {
+            "AntiBotLiquidityGeneratorToken": "contracts/NFTinder_1/AntiBotLiquidityGeneratorToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which may cause an OUT_OF_GAS exception if the excluded addresses list is too long. Similarly, the function `_getCurrentSupply()` also uses a loop for evaluating total supply, leading to a potential OUT_OF_GAS exception.",
+            "severity": "low",
+            "location": "includeInReward() and _getCurrentSupply() functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges, including enabling/disabling antibot, modifying fees, transaction limits, and more.",
+            "severity": "low",
+            "location": "Various owner-only functions"
+        }
+    ]
+}

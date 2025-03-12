@@ -1,0 +1,191 @@
+{
+    "path": "artifacts/Inspex_AUDIT2023012_Alpaca Finance_Alpaca Finance 2.0 Automated Vaults V3_FullReport_v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/alpaca-finance/alpaca-v2-automated-vault",
+        "commit_id": "44c9da92226effb4368ce45832909890e538dab5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "alpaca-v2-automated-vault": "contracts/Inspex_AUDIT2023012_Alpaca Finance_Alpaca Finance 2/alpaca-v2-automated-vault"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unrestricted Critical State Variables Update",
+            "description": "Controlling authorities can modify critical state variables without notifying users, potentially gaining unfair profit.",
+            "severity": "high",
+            "location": "AutomatedVaultManager contract, functions openVault and setVaultTokenImplementation with onlyOwner modifier."
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Improper Check or Handling of Exceptional Conditions",
+            "description": "Revert in the decreased liquidity process, preventing users from withdrawing their funds.",
+            "severity": "high",
+            "location": "PCSV3Executor01 and PCSV3StableExecutor contracts, `onWithdraw()` function."
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Decreased Liquidity Position to Zero",
+            "description": "The user may decrease the liquidity position by 0 when there is very low liquidity or a very small portion of the user's shares.",
+            "severity": "n/a",
+            "location": "PancakeSwapV3Worker contract, lines 433 and 444."
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Insufficient validation of liquidity amount",
+            "description": "PancakeSwapV3Worker attempts to decrease the liquidity with a 0 amount, causing the withdrawal transaction to revert.",
+            "severity": "medium",
+            "location": "NonfungiblePositionManager.sol, line 266"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Force Decrease Liquidity on Withdrawal",
+            "description": "The liquidity provided to PancakeSwap V3 can be forcefully decreased, resulting in platform users receiving less reward.",
+            "severity": "medium",
+            "location": "PCSV3Executor01 contract (line 135) and PCSV3StableExecutor contract (line 146), specifically in the onWithdraw() function."
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Decrease of Liquidity",
+            "description": "An attacker can deposit and then withdraw immediately to forcibly decrease the liquidity, resulting in lower rewards received.",
+            "severity": "medium",
+            "location": "`onWithdraw` function in `PCSV3StableExecutor.sol` contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy Vulnerability",
+            "description": "The `_harvest()` function in the PancakeV3MasterChef contract is vulnerable to reentrancy attacks due to the use of `exactInput` from the `IPancakeV3Router` contract, which can lead to unintended behavior and potential token losses.",
+            "severity": "n/a",
+            "location": "PancakeV3MasterChef contract, `_harvest()` function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of Slippage Protection",
+            "description": "The `_harvest()` function does not implement proper slippage protection, allowing for potential front-running attacks and significant losses.",
+            "severity": "n/a",
+            "location": "PancakeV3MasterChef contract, `_harvest()` function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PancakeSwap V3 Pair Price Manipulation",
+            "description": "Manipulated returns from the PancakeV3Pool.slot0() function can result in unexpected behavior on the platform.",
+            "severity": "low",
+            "location": "PancakeV3MasterChef contract, _harvest() function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Slippage Tolerance Exceed Price Range (IDX-006)",
+            "description": "The increasePosition() function call may be reverted due to a large volume shifting the price across the position range, resulting in an invalid amount to add liquidity.",
+            "severity": "low",
+            "location": "`PancakeV3Worker` contract, specifically the `increasePosition()` function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Improper Check or Handling of Exceptional Conditions (CWE-703)",
+            "description": "The increasePosition() function call may be reverted due to an invalid amount to add liquidity, leading to unexpected results.",
+            "severity": "n/a",
+            "location": "`PancakeV3Worker` contract, `_prepareOptimalTokensForIncreaseOutOfRange()` function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent Range for Liquidity Position",
+            "description": "The price limit calculation in `_prepareOptimalTokensForIncreaseOutOfRange()` can lead to unexpected results when the tick range is narrow, causing the swapping process to drive the price down below the defined range of the position.",
+            "severity": "n/a",
+            "location": "`PancakeV3Worker` contract, `_prepareOptimalTokensForIncreaseOutOfRange()` function, lines 235 and 247"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Insufficient Range for Liquidity Position",
+            "description": "The tick lower and tick upper do not have a sufficient range to calculate according to the formula.",
+            "severity": "n/a",
+            "location": "PCSV3Executor01.sol, function openPosition, lines 254-262"
+        }
+    ]
+}

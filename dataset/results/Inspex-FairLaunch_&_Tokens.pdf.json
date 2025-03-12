@@ -1,0 +1,233 @@
+{
+    "path": "artifacts/Inspex-FairLaunch_&_Tokens.pdf",
+    "project_info": {
+        "url": "https://github.com/seeder-finance/seeder-core-contract",
+        "commit_id": "6ef6a79b066c79138860682f96da71f0979c8cd9",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "seeder-core-contract": "contracts/Inspex-FairLaunch_&_Tokens/seeder-core-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Upgradable Proxy Contract Without Timelock",
+            "description": "The contract owner can deploy new logic to the proxy without notifying users.",
+            "severity": "critical",
+            "location": "BigFarm.sol, GranaryV2.sol, GreenHouse.sol, BankV1_5.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Token Draining via Adding Duplicated ibToken Address",
+            "description": "Tokens deposited to the contract can be drained by the owner of the contract.",
+            "severity": "critical",
+            "location": "BankV1_5.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Token Manual Minting by Contract Owner",
+            "description": "The contract owner can arbitrarily mint the affected tokens.",
+            "severity": "critical",
+            "location": "Leaf.sol, Tree.sol, sdToken.sol (mint() function)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change the critical state variables to gain additional profit, which is unfair to other users.",
+            "severity": "high",
+            "location": "BigFarm.sol, GranaryV2.sol, GreenHouse.sol, BankV1_5.sol (Multiple functions with `onlyOwner` modifier)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Share Calculation",
+            "description": "The attacker can drain the tokens from the target contract by manipulating the share calculation.",
+            "severity": "high",
+            "location": "BankV1_5.sol (deposit and withdraw functions)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Token Distribution",
+            "description": "The actual implementation of token distribution in BigFarm contract does not match with the document, resulting in 15% instead of 12%. ",
+            "severity": "medium",
+            "location": "BigFarm.sol (line 226)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation",
+            "description": "The reward miscalculation can lead to unfair $LEAF token distribution, which may cause loss of reputation.",
+            "severity": "medium",
+            "location": "BigFarm.sol, _calculateReward function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unsafe Token Transfer",
+            "description": "ibToken can be minted without using any token.",
+            "severity": "medium",
+            "location": "BankV1_5.sol, deposit function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Inconsistent Token Transfer Fee",
+            "description": "Users can use the transferFrom() function to avoid the transfer fee.",
+            "severity": "medium",
+            "location": "Tree.sol, transfer() and transferFrom() functions"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Design Flaw in updateAllFarms() Function",
+            "description": "The updateAllFarms() function will eventually be unusable due to excessive gas usage.",
+            "severity": "low",
+            "location": "BigFarm.sol, updateAllFarms() function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation (2)",
+            "description": "The reward of the pool that has the same staking token as the reward token will be slightly lower than what it should be.",
+            "severity": "low",
+            "location": "BigFarm.sol, _calculateReward() function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ]
+            },
+            "title": "Improper Release of Locked Tokens",
+            "description": "The keepPeriodInSecond variable is used to determine the release times in the keep() function, but if it's updated to a lower value, the release times of newer entries can be lower than the entries in the lower indexes.",
+            "severity": "low",
+            "location": "GranaryV2.sol (functions setKeepPeriod(), keep(), and release())"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Inexplicit Solidity Compiler Version",
+            "description": "The Solidity compiler versions declared in the smart contracts were not explicit, which may result in compatibility issues.",
+            "severity": "info",
+            "location": "BigFarm.sol, GranaryV2.sol, GreenHouse.sol, BankV1_5.sol, Leaf.sol, Tree.sol, sdToken.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "The getKeepInformations() function in GranaryV2 has public visibility and is never called by any internal function.",
+            "severity": "info",
+            "location": "GranaryV2.sol (function getKeepInformations())"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Design Flaw in the Loanable Library",
+            "description": "Duplicated loan issuers can be added due to lack of checking on the value of `loanIssuerAddress` parameter.",
+            "severity": "info",
+            "location": "Loanable.sol, _addLoanIssuer() function"
+        }
+    ]
+}

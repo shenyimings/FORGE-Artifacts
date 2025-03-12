@@ -1,0 +1,563 @@
+{
+    "path": "artifacts/LiquidCollective-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/River-Protocol/river-contracts",
+        "commit_id": "778d71c5c2b0bb7d430b60df72b4d65173ebee6a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "river-contracts": "contracts/LiquidCollective-Spearbit-Security-Review/river-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "An attacker can freeze all incoming deposits and brick the oracle members' reporting system with only 1 wei",
+            "description": "An attacker can brick/lock all deposited user funds and also prevent oracle members to come to a quorum when there is an earning to be distributed as rewards.",
+            "severity": "critical",
+            "location": "SharesManager.1.sol#L195-L206"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Operators._hasFundableKeys returns true for operators that do not have fundable keys",
+            "description": "Because _hasFundableKeys uses operator.stopped in the check, an operator without fundable keys be validated and return true.",
+            "severity": "critical",
+            "location": "Operators.sol#L149-L154"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "OperatorsRegistry._getNextValidatorsFromActiveOperators can DOS Alluvial staking if there is an operator with funded==stopped and funded == min(limit, keys)",
+            "description": "This issue is also related to OperatorsRegistry._getNextValidatorsFromActiveOperators should not consider stopped when picking a validator.",
+            "severity": "critical",
+            "location": "OperatorsRegistry.1.sol#L403-L454"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Oracle.removeMember allows multiple votes and prevents others from voting",
+            "description": "removeMember function in Oracle contract introduces an exploit allowing oracle members to vote again and preventing others from voting.",
+            "severity": "high",
+            "location": "Oracle.1.sol#L213-L222"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Order of calls to removeValidators affects the resulting validator keys set",
+            "description": "The order of transactions in removeValidators function can lead to different results, allowing for DOS attacks.",
+            "severity": "high",
+            "location": "OperatorsRegistry.1.sol#L310"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "_hasFundableKeys marks operators with no fundable validators as fundable",
+            "description": "An active operator with stopped validators is marked as fundable, even if they have no available slots.",
+            "severity": "high",
+            "location": "Operators.sol#L151-L152"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ],
+                "3": [
+                    "CWE-839"
+                ]
+            },
+            "title": "Non-zero operator.limit should always be greater than or equal to operator.funded",
+            "description": "The subtraction operation can underflow and revert without enforcing the assumption that operator.limit >= operator.funded.",
+            "severity": "high",
+            "location": "OperatorsRegistry.1.sol#L241, OperatorsRegistry.1.sol#L428-L430"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Decrementing quorum in Oracle can open up a frontrunning/backrunning opportunity",
+            "description": "An oracle member can backrun the admin transaction to decide which report variant gets pushed to River.",
+            "severity": "medium",
+            "location": "Oracle.1.sol#L338-L370, Oracle.1.sol#L260, Oracle.1.sol#L156"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "_getNextValidatorsFromActiveOperators can be tweaked to find an operator with a better validator pool",
+            "description": "The current algorithm finds the first index in the cached operators array with the minimum value for A and tries to gather as many publicKeys and signatures from this operator's validators.",
+            "severity": "medium",
+            "location": "OperatorsRegistry.1.sol#L417-L420"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Dust might be trapped in WlsETH when burning one's balance",
+            "description": "It is not possible to burn the exact amount of minted/deposited lsETH back because of the _value provided to burn is in ETH.",
+            "severity": "medium",
+            "location": "WLSETH.1.sol#L140"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-172"
+                ]
+            },
+            "title": "BytesLib.concat can potentially return results with dirty byte paddings",
+            "description": "concat does not clean the potential dirty bytes that might have been copied from _postBytes (nor does it clean the padding).",
+            "severity": "medium",
+            "location": "BytesLib.sol#L23"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "The reportBeacon is prone to front-running attacks by oracle members",
+            "description": "There could be a situation where the oracle members are segmented into 2 groups A and B, and members of the group A have voted for the report variant Va and the group B for Vb.",
+            "severity": "medium",
+            "location": "Oracle.1.sol#L289"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Shares distributed to operators suffer from rounding error",
+            "description": "Potential attackers can spot a call to UserDepositManagerV1._deposit and front-run it, causing the victim to receive fewer shares.",
+            "severity": "medium",
+            "location": "SharesManager.1.sol#L202"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "OracleV1.getMemberReportStatus returns true for non existing oracles",
+            "description": "MemberIndex will be equal to -1 for non-existing oracles, causing the function to return true.",
+            "severity": "medium",
+            "location": "Oracle.1.sol#L115-L118"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Operators might add the same validator more than once",
+            "description": "Depositors' funds will be directed to duplicated addresses, damaging capital efficiency.",
+            "severity": "medium",
+            "location": "OperatorsRegistry.1.sol#L270"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "OracleManager.setBeaconData possible front running attacks",
+            "description": "Investors might time their deposit/withdrawal just before profits are being distributed, harvesting others' profits.",
+            "severity": "medium",
+            "location": "River.1.sol#L27"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "SharesManager._mintShares - Depositors may receive zero shares due to front-running",
+            "description": "Potential attackers can spot a call to UserDepositManagerV1._deposit and front-run it, causing the victim to receive fewer shares.",
+            "severity": "medium",
+            "location": "SharesManager.1.sol#L202"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Orphaned (index, values) in SlotOperator storage slots in operatorsRegistry",
+            "description": "Leaving orphaned (index, values) if !opExists corresponds to an operator which has OperatorResolution.active set to false.",
+            "severity": "low",
+            "location": "Operators.sol#L261-L263"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "A malicious operator can purposefully mismanage its validators to benefit from lsETH market price movements",
+            "description": "An operator might find it beneficial to let its validators get slashed or turned off, moving the market for those coins.",
+            "severity": "low",
+            "location": "operatorsRegistry/Operators.sol#L11"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Warn the admin and the operator that setOperatorName has other side-effects",
+            "description": "setOperatorName sets OperatorResolution.active to true as a side-effect, which should be warned.",
+            "severity": "low",
+            "location": "OperatorsRegistry.1.sol#L196"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "OperatorsRegistry.setOperatorName Possible front running attacks",
+            "description": "setOperatorName reverts for an already used name, allowing front-running attacks.",
+            "severity": "low",
+            "location": "OperatorsRegistry.1.sol#L196-L204"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Prevent users from burning token via lsETH/wlsETH transfer or transferFrom functions",
+            "description": "Users can bypass the burn function logic by sending tokens to address(0).",
+            "severity": "low",
+            "location": "SharesManager.1.sol#L158-L165, WLSETH.1.sol#L157-L165"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Cache memberIndex and ReportsPositions checks at the beginning of the OracleV1.reportBeacon function",
+            "description": "The checks for memberIndex == -1 and ReportsPositions.get(uint256(memberIndex)) happen in the middle of reportBeacon after quite a few calculations are done.",
+            "severity": "info",
+            "location": "Oracle.1.sol#L289, Oracle.1.sol#L307-L313"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Prevent institutional investors and operators from doing business directly outside of River protocol",
+            "description": "Since the list of operators and also depositors can be looked up from the information on-chain, what would prevent Institutional investors (users) and the operators to do business outside of River?",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Documenting incentivizing operators to run validators when globalFee is zero",
+            "description": "If GlobalFee could be 0, then neither the treasury nor the operators earn rewards. What factor would motivate the operators to keep their validators running?",
+            "severity": "info",
+            "location": "River.1.sol#L270"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Current operator reward distribution does not favor more performant operators",
+            "description": "Reward shares are distributed based on the fraction of the active funded non-stopped validators owned by an operator. This distribution of shares does not promote the honest operation of validators to the fullest extent.",
+            "severity": "info",
+            "location": "River.1.sol#L238"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing, confusing or wrong natspec comments",
+            "description": "Not all the constructors, functions, events, custom errors, variables, or struct are covered by natspec comments.",
+            "severity": "info",
+            "location": "Multiple contracts and libraries"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Both wlsETH and lsETH transferFrom implementation allow the owner of the token to use transferFrom like if it was a 'normal' transfer",
+            "description": "The current implementation of transferFrom allows the msg.sender to use the function like if it was a 'normal' transfer.",
+            "severity": "info",
+            "location": "WLSETH.1.sol#L103-L109, SharesManager.1.sol#L129-L135"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Both wlsETH and lsETH tokens are reducing the allowance when the allowed amount is type(uint256).max",
+            "description": "The current implementation of the function transferFrom in both SharesManager.1.sol and WLSETH.1.sol is not taking into consideration the scenario where a user has approved a spender the maximum possible allowance type(uint256).max.",
+            "severity": "info",
+            "location": "WLSETH.1.sol#L103-L109, SharesManager.1.sol#L129-L135"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Discrepancy between architecture and code",
+            "description": "The architecture diagram states that admin triggers deposits on the Consensus Layer Deposit Manager, but the depositToConsensusLayer() function allows anyone to trigger such deposits.",
+            "severity": "info",
+            "location": "ConsensusLayerDepositManager.1.sol#L50"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Consider replacing the remaining require with custom errors",
+            "description": "In the vast majority of the project contracts have defined and already use Custom Errors that provide a better UX, DX, and gas saving compared to require statements.",
+            "severity": "info",
+            "location": "ConsensusLayerDepositManager.1.sol#L129, BytesLib.sol#L94, BytesLib.sol#L95"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing event emission in critical functions",
+            "description": "Some critical functions are missing event emissions.",
+            "severity": "info",
+            "location": "Multiple contracts (listed under 6.6.39)"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Unused imports in codebase",
+            "description": "The codebase has unused imports across the code base.",
+            "severity": "info",
+            "location": "ELFeeRecipient.1.sol#L6, Oracle.1.sol#L9"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Oracle.removeMember allows members to vote multiple times",
+            "description": "The removeMember function can be exploited to allow members to vote multiple times in the same epoch.",
+            "severity": "n/a",
+            "location": "Oracle contract, removeMember function"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Operators._hasFundableKeys returns true for operators that do not have fundable keys",
+            "description": "The _hasFundableKeys function incorrectly returns true for operators without fundable keys.",
+            "severity": "n/a",
+            "location": "Operators contract, _hasFundableKeys function"
+        },
+        {
+            "id": 35,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "OperatorsRegistry._getNextValidatorsFromActiveOperators can DOS Alluvial staking",
+            "description": "The _getNextValidatorsFromActiveOperators function can be exploited to cause a denial-of-service (DOS) attack on Alluvial staking if an operator has funded == stopped and funded == min(limit, keys).",
+            "severity": "n/a",
+            "location": "OperatorsRegistry contract, _getNextValidatorsFromActiveOperators function"
+        },
+        {
+            "id": 36,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Insecure Implementation of pickNextValidators Function",
+            "description": "The pickNextValidators function prioritizes stopped operators over active ones, leading to unintended behavior.",
+            "severity": "medium",
+            "location": "OperatorsRegistry contract, pickNextValidators function"
+        },
+        {
+            "id": 37,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Unchecked Oracle Member Count",
+            "description": "The Oracle contract does not prevent adding more than 256 members, leading to potential issues with ReportsPosition.sol.",
+            "severity": "medium",
+            "location": "Oracle contract, addMember function"
+        }
+    ]
+}

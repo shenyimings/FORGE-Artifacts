@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/Solidified-Animoca_[12.10.2021].pdf",
+    "project_info": {
+        "url": "https://github.com/animoca/ethereum-contracts-assets",
+        "commit_id": "c999ebac8bf5a2e7df3273363cf13f74ab9e2dba",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ethereum-contracts-assets": "contracts/Solidified-Animoca_[12/ethereum-contracts-assets"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Anyone can trigger token Receive events",
+            "description": "Anyone can call functions onERC1155Received(), onERC1155BatchReceived() and onERC721Received() and trigger token received events without actually transferring tokens.",
+            "severity": "low",
+            "location": "ERC1155TokenReceiverMock.sol and ERC721ReceiverMock.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Minting is allowed while the contract is paused",
+            "description": "Multiple contracts allow minting tokens while the contract is in a paused state.",
+            "severity": "info",
+            "location": "REVVMotorsportInventory.sol, TokenLaunchpadVouchers.sol, ERC1155InventoryPausableMock.sol, ERC1155721InventoryPausableMock.sol and ERC721PausableMock.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Allows setting the approval bit without an actual approval",
+            "description": "The function approve() allows setting approval for a zero address, resulting in setting the approval bit without changing the value in the approval mapping.",
+            "severity": "info",
+            "location": "ERC721.sol & ERC1155721Inventory.sol"
+        }
+    ]
+}

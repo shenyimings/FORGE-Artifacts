@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-SSAP-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/killswitchofficial/ssap/tree/6134d158e5d2d6a4958d9e836fe814ff18630d38",
+        "commit_id": "6134d158e5d2d6a4958d9e836fe814ff18630d38",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ssap": "contracts/PeckShield-Audit-Report-SSAP-v1/ssap"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Incompatibility With Deflationary/Rebasing Tokens",
+            "description": "LendingPool contract may introduce unexpected balance inconsistencies when interacting with deflationary/rebasing tokens.",
+            "severity": "medium",
+            "location": "SSAP contract, LendingPool::deposit()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "approveDelegation() / borrow() Race Condition",
+            "description": "A user can race to borrow up to previously approved amount and then additionally borrow the new approved amount.",
+            "severity": "medium",
+            "location": "SSAP contract, LendingPool/DebtTokenBase, approveDelegation and borrow functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Fork-Compliant Domain Separator In AToken",
+            "description": "The pre-computed DOMAIN_SEPARATOR can be replayed on other chains in case of a chain-level hard-fork.",
+            "severity": "low",
+            "location": "AToken contract, AToken::initialize() and AToken::permit()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Flashloan-assisted Lowered Stable Borrow Rate For Mode-Switching Users",
+            "description": "A flashloan-assisted sandwiching attack can be used to set the new stable borrow rate to the lowest possible value when switching from variable to stable rate.",
+            "severity": "medium",
+            "location": "SSAP contract, LendingPool, function swapBorrowRateMode(), mode-switching functionality"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue Of Admin Keys",
+            "description": "The privileged account is not governed by a DAO-like structure, which could lead to security issues if the account is compromised.",
+            "severity": "medium",
+            "location": "SSAP contract, admin key management, Multiple Contracts"
+        }
+    ]
+}

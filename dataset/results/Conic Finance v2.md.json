@@ -1,0 +1,490 @@
+{
+    "path": "artifacts/Conic Finance v2.md",
+    "project_info": {
+        "url": "https://github.com/ConicFinance/protocol",
+        "commit_id": "7a66d26ef84f93059a811a189655e17c11d95f5c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol": "contracts/Conic Finance v2/protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Transferring tokens without tainting",
+            "description": "An attacker can do deposit/withdraw in small amounts, exploiting `_minimumTaintedTransferAmount`.",
+            "severity": "medium",
+            "location": "LpToken.sol#L74 and LpToken.sol#L81"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "`CurveLPOracle` is not working",
+            "description": "`CurveLPOracle` will never be used due to the existing `crvUSD` oracle on mainnet.",
+            "severity": "medium",
+            "location": "oracles/GenericOracle.sol#L34"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "An incorrect interface version definition",
+            "description": "Incorrect pool versioning process, leading to wrong method calls.",
+            "severity": "low",
+            "location": "CurveHandler.sol#L183"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Unsafe `safeApprove` and `safeIncreaseAllowance`",
+            "description": "Possible allowance issues with USDT approve method.",
+            "severity": "medium",
+            "location": "CurveHandler.sol#L246 and CurveHandler.sol#L266"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "GenericOracle public frontrun for `initialize()`",
+            "description": "Anyone can frontrun the official initialize() call, setting malicious oracles.",
+            "severity": "high",
+            "location": "oracles/GenericOracle.sol#L20-L24"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "ChainlinkOracle fails to return WBTC price, pools with WBTC are not supported",
+            "description": "`ChainlinkOracle` does not support Curve pools with WBTC.",
+            "severity": "low",
+            "location": "ChainlinkOracle contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy in `GovernanceProxy._executeChange()`",
+            "description": "Check-Effect-Interaction pattern violation, leading to unforeseen consequences.",
+            "severity": "high",
+            "location": "GovernanceProxy.sol#L168-L172"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "GovernanceProxy DOS via `updateDelay()`",
+            "description": "Admin mistakenly calling `updateDelay(someImportantFunction, SUPER_BIG_NUMBER)`.",
+            "severity": "medium",
+            "location": "GovernanceProxy.sol#L196-L210"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "GovernanceProxy pending change cannot expire",
+            "description": "Pending changes accumulate without expiration.",
+            "severity": "low",
+            "location": "GovernanceProxy contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "LpToken taint griefing",
+            "description": "A malicious actor can block a user's deposit/withdraw operations by sending them a minimum number of tokens.",
+            "severity": "medium",
+            "location": "LpToken.sol#L81"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "ChainlinkOracle integration problems",
+            "description": "Several shortcomings in the interaction with Chainlink, including not considering abandoned feeds, using deprecated `answeredInRound`, and not checking for stale prices.",
+            "severity": "n/a",
+            "location": "ChainlinkOracle.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "`ChainlinkOracle.getUSDPrice()` price check issue",
+            "description": "The check for `price_ != 0` should be `price_ > 0`.",
+            "severity": "n/a",
+            "location": "ChainlinkOracle.sol, `_getPrice()` function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "`Controller.updateWeights()` weight sum issue",
+            "description": "The function can set a total weight differing from one due to not verifying the final weights.",
+            "severity": "low",
+            "location": "BaseConicPool.sol, `updateWeights()` function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "`BaseConicPool.handleInvalidConvexPid()` rebalancing reward issue",
+            "description": "The function doesn't set `rebalancingRewardActive` when invoking `_setWeightToZero()`.",
+            "severity": "n/a",
+            "location": "BaseConicPool.sol, `handleInvalidConvexPid()` function"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect depeg check in `_isDepegged()`",
+            "description": "The function checks the percentage change from the last `updateWeights()` call instead of a benchmark value.",
+            "severity": "n/a",
+            "location": "ConicEthPool and ConicPool, `_isDepegged()` function"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "`BaseConicPool`'s `cachedTotalUnderlying()` and `usdExchangeRate()` inaccuracies",
+            "description": "The functions might work incorrectly due to `_cachedTotalUnderlying` being updated in the `withdraw()` function.",
+            "severity": "n/a",
+            "location": "BaseConicPool.sol, `cachedTotalUnderlying()` and `usdExchangeRate()` functions"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "`BaseConicPool`'s `usdExchangeRate()` outdated `_cachedTotalUnderlying`",
+            "description": "The function uses an arbitrarily outdated `_cachedTotalUnderlying` for its calculation.",
+            "severity": "n/a",
+            "location": "BaseConicPool.sol, `usdExchangeRate()` function"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect rebalancing for curve pools weighted above `100%-maxDeviation`",
+            "description": "In situations where the weight of the curve pool + maxDeviation exceeds 100%, all deposits go to that curve pool, while the balance of other curve pools remains unchanged.",
+            "severity": "low",
+            "location": "_getDepositPool function in BaseConicPool.sol"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Potential rewards loss due to LpTokenStaker switch in RewardManager",
+            "description": "Changing the LpTokenStaker via `Controller.switchLpTokenStaker()` results in all users losing a portion of their rewards in RewardManager.",
+            "severity": "medium",
+            "location": "_updateAccountRewardsMeta function in RewardManager.sol"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Potential delays in `updatePoolWeights()` leading to unfair reward distribution in conic pools",
+            "description": "The system lacks guarantees for the timely invocation of `updatePoolWeights()`, which can lead to an unfair distribution of rewards.",
+            "severity": "low",
+            "location": "InflationManager.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "`exchangeRate` can be manipulated",
+            "description": "An attacker can manipulate the `exchangeRate` by sending tokens to ConicPool, making the use of omnipool unprofitable.",
+            "severity": "low",
+            "location": "BaseConicPool.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Inaccuracy in rounding",
+            "description": "Loss of accuracy in rounding when `decimals` is small.",
+            "severity": "low",
+            "location": "CurveAdapter.sol, computePoolValueInUnderlying function, line 103."
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy can be in base pool",
+            "description": "Possibility of reentrancy in `CurveHandler` when using `basePool`.",
+            "severity": "low",
+            "location": "CurveHandler.sol, line 74."
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "RewardManager's extra reward token might have excessive slippage",
+            "description": "High slippage for unsupported tokens in `RewardManager`.",
+            "severity": "low",
+            "location": "RewardManager.sol, lines 504-506."
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "No max length for pools indicated",
+            "description": "Ethereum gas limit can be exceeded if too many pools are added.",
+            "severity": "low",
+            "location": "Conic Pool operation."
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Chainlink `min&max` price is not checked",
+            "description": "No checks for `min` and `max` prices in Chainlink Oracle.",
+            "severity": "low",
+            "location": "ChainlinkOracle.sol, line 68."
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "CNCLockerV2 griefing",
+            "description": "Possibility of breaking functions by creating many locks with 0 wei.",
+            "severity": "low",
+            "location": "CNCLockerV2, multiple functions."
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Multiple CNCMintingRebalancingRewardsHandler can break the targeted CNC TotalSupply distribution",
+            "description": "Possibility of exceeding total supply cap with multiple `CNCMintingRebalancingRewardsHandler` contracts.",
+            "severity": "n/a",
+            "location": "CNCMintingRebalancingRewardsHandler.sol"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Insufficient `airdropBoost` checking",
+            "description": "`claimAirdropBoost()` in `CNCLocker` does not check that `amount` is above 1e18.",
+            "severity": "n/a",
+            "location": "CNCLocker, claimAirdropBoost()"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Redundant shutdown check in donation",
+            "description": "Shutdown check in `donate()` function does not prevent direct CNC transfers to `CNCDistributor`.",
+            "severity": "n/a",
+            "location": "CNCDistributor, donate()"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "`previousRewardsHandler` may be null",
+            "description": "`previousRewardsHandler` is used without checking for null.",
+            "severity": "n/a",
+            "location": "CNCMintingRebalancingRewardsHandler"
+        },
+        {
+            "id": 31,
+            "category": {},
+            "title": "`LpTokenStaker.getTimeToFullBoost()` allows reaching full boost faster",
+            "description": "The function only accounts for time boost and does not consider stake boost.",
+            "severity": "n/a",
+            "location": "LpTokenStaker, getTimeToFullBoost()"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "`BaseConicPool._setWeightToZero()` leads to excessive minting of rewards",
+            "description": "The function does not update `Controller.lastWeightUpdate` leading to large rewards.",
+            "severity": "n/a",
+            "location": "BaseConicPool, _setWeightToZero()"
+        }
+    ]
+}

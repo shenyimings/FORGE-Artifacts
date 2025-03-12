@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/SmartContract_Audit_Solidproof_JaguarToken.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x55b0e127fe6e30a99658726b7e7ddfc094962e50",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "Timelock": "contracts/SmartContract_Audit_Solidproof_JaguarToken/Timelock"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Contract doesn’t import npm packages from source",
+            "description": "We recommend to import all packages from npm directly without flatten the contract. Functions could be modified or can be susceptible to vulnerabilities.",
+            "severity": "low",
+            "location": "Main"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "A control flow decision is made based on The block.timestamp environment variable",
+            "description": "The block.timestamp environment variable is used to determine a control flow decision. Note that the values of variables like coinbase, gaslimit, block number and timestamp are predictable and can be manipulated by a malicious miner.",
+            "severity": "low",
+            "location": "JaguarToken, Line 992"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Low level calls (low-level-calls)",
+            "description": "Avoid low-level calls. Check the call success. If the call is meant for a contract, check for code existence.",
+            "severity": "low",
+            "location": "Timelock, Line 288"
+        }
+    ]
+}

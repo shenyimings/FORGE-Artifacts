@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/SportemonGo Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xe5d46cc0fd592804b36f9dc6d2ed7d4d149ebd6f",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "SportemonGo": "contracts/SportemonGo Full Smart Contract Security Audit/SportemonGo"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "TakeFee always true",
+            "description": "The function `_transfer(address from, …)` checks for excluded from fee addresses and should disable fees if there are some, but takeFee parameter never turns to false value.",
+            "severity": "medium",
+            "location": "_transfer function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The functions `includeInReward()` and `_getCurrentSupply` use loops that could be aborted with OUT_OF_GAS exception if there is a long excluded addresses list.",
+            "severity": "low",
+            "location": "includeInReward() and _getCurrentSupply functions"
+        }
+    ]
+}

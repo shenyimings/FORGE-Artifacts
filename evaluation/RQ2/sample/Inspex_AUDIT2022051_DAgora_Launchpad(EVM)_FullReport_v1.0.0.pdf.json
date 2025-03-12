@@ -1,0 +1,196 @@
+{
+    "path": "artifacts/Inspex_AUDIT2022051_DAgora_Launchpad(EVM)_FullReport_v1.0.0.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": [
+            "0x444f313053c893c305c4a5f333f3b033d548405c830016c4b623e787aa045145",
+            "0x1bc7992855b26a5ae511e9b448c90941ef8f1b835f4936d94c8cfd9202da9384"
+        ],
+        "chain": "n/a"
+    },
+    "findings": [
+        {
+            "id": 0,
+            "title": "Insufficient Authorization for withdrawNft() Function",
+            "description": "Anyone can withdraw any NFTs stored in the contract at any time.",
+            "severity": "Critical",
+            "location": "withdrawNft() function"
+        },
+        {
+            "id": 1,
+            "title": "Reentrancy Attack in redeem() Function",
+            "description": "Not provided",
+            "severity": "High",
+            "location": "redeem() function"
+        },
+        {
+            "id": 2,
+            "title": "Centralized Control of State Variable",
+            "description": "Not provided",
+            "severity": "Medium",
+            "location": "Not specified"
+        },
+        {
+            "id": 3,
+            "title": "Missing Registered User Validation",
+            "description": "Not provided",
+            "severity": "n/a",
+            "location": "Not specified"
+        },
+        {
+            "id": 4,
+            "title": "Improper Access Control in TransferableLaunchpad",
+            "description": "Not provided",
+            "severity": "n/a",
+            "location": "TransferableLaunchpad contract"
+        },
+        {
+            "id": 5,
+            "title": "Unprotected Function in TimeLock Contract",
+            "description": "Not provided",
+            "severity": "n/a",
+            "location": "TimeLock contract"
+        },
+        {
+            "id": 6,
+            "title": "IDX-001 - Improper Access Control",
+            "description": "Anyone can withdraw any NFTs stored in the contract, including valuable ones, due to the lack of access control on the `withdrawNft()` function.",
+            "severity": "Critical",
+            "location": "`withdrawNft()` functions in both MintableLaunchpad and TransferableLaunchpad contracts."
+        },
+        {
+            "id": 7,
+            "title": "Lack of Authorization in withdrawNft() Function",
+            "description": "The `withdrawNft()` function does not have adequate authorization controls.",
+            "severity": "Medium",
+            "location": "`MintableLaunchpad.sol` and `TransferableLaunchpad.sol`, `withdrawNft()` function"
+        },
+        {
+            "id": 8,
+            "title": "Reentrancy Attack in redeem() Function",
+            "description": "A Launchpad registered user can perform a reentrancy attack through the `redeem()` function to redeem more NFTs than the limit per user.",
+            "severity": "High",
+            "location": "`Launchpad` contract, `redeem()` function"
+        },
+        {
+            "id": 9,
+            "title": "Reentrancy Attack through redeem() function",
+            "description": "A registered user can exploit the redeem() function to transfer more NFTs than the limit per user due to non-applying \"Checks Effects Interactions\" principles, leading to a reentrancy attack.",
+            "severity": "High",
+            "location": "`Launchpad` contract, `redeem()` function"
+        },
+        {
+            "id": 10,
+            "title": "Reentrancy Vulnerability",
+            "description": "The redeem() function in the Launchpad contract is susceptible to reentrancy attacks due to lack of \"Checks Effects Interactions\" or a nonReentrant modifier.",
+            "severity": "High",
+            "location": "The redeem() function in Launchpad.sol."
+        },
+        {
+            "id": 11,
+            "title": "Centralized Control of State Variable",
+            "description": "Critical state variables can be updated at any time by controlling authorities without notifying users, potentially leading to unfair profit.",
+            "severity": "Medium",
+            "location": "The setLaunchpadStatus() function in Launchpad.sol and the setImplement() function in LaunchpadFactory.sol."
+        },
+        {
+            "id": 12,
+            "title": "Missing Registered User Validation",
+            "description": "The launchpad will miscount the actual number of registered users if the user registers with the same index and proofs more than once, leading to a potential attack by repeatedly registering until the maximum registered number is reached.",
+            "severity": "Medium",
+            "location": "Launchpad contract, `register()` function (lines 129-143)"
+        },
+        {
+            "id": 13,
+            "title": "Improper Access Control in setFee() function",
+            "description": "The launchpad's owner can change the fee values to zero to avoid paying the protocol fee to the platform.",
+            "severity": "Medium",
+            "location": "Launchpad.sol, function setFee()"
+        },
+        {
+            "id": 14,
+            "title": "Arbitrary Pre-Selection Index of Manual Minting",
+            "description": "The launchpad's owner can manually mint an NFT with a selected index, affecting the total supply and breaking business logic.",
+            "severity": "Medium",
+            "location": "MintableLaunchpad.sol, lines 49-53 (function mint(address owner, uint256 tokenId) external onlyOwner)"
+        },
+        {
+            "id": 15,
+            "title": "Withdrawable Converted NFT during Convert Time",
+            "description": "The launchpad's owner can withdraw valuable NFTs and take fees from users.",
+            "severity": "Low",
+            "location": "MintableLaunchpad and TransferableLaunchpad contracts, _convertTime and _convertEndTime states"
+        },
+        {
+            "id": 16,
+            "title": "Business Logic Error in MintableLaunchpad",
+            "description": "The launchpad's owner can deposit valuable NFTs as prizes, convince users to pay a fee for the lucky draw, and then withdraw the valuable NFTs.",
+            "severity": "Low",
+            "location": "pushToken() function (lines 68-76) and convertToken() function (lines 81-96)"
+        },
+        {
+            "id": 17,
+            "title": "Owner Can Change _convertTokenAddress During Convert Phase",
+            "description": "The owner can change the _convertTokenAddress state variable during the convert phase, resulting in users being unaware of the token address change.",
+            "severity": "n/a",
+            "location": "convertToken() function"
+        },
+        {
+            "id": 18,
+            "title": "Insecure Randomness on Redeeming NFTs",
+            "description": "Whitelisted users can control the random result to select a specific NFT when redeeming, giving them an unfair advantage.",
+            "severity": "Low",
+            "location": "MintableLaunchpad.sol: Line 89 (randomIndex() function), TransferableLaunchpad.sol: Line 17 (randomIndex() function), Randomness.sol: randomIndex() function"
+        },
+        {
+            "id": 19,
+            "title": "Improper Fee Enforcement",
+            "description": "The launchpad's owner may lose all profits or have to pay an additional fee to the platform due to improper fee enforcement in the redemption phase.",
+            "severity": "Low",
+            "location": "Launchpad.sol, _claimFee() function and setFee() function"
+        },
+        {
+            "id": 20,
+            "title": "IDX-010: Insufficient Parameter Validation in withdrawNft() Function",
+            "description": "Insufficient parameter validation leads to transaction reversion or mismatched index selection.",
+            "severity": "Low",
+            "location": "withdrawNft() function (exact location not specified)"
+        },
+        {
+            "id": 21,
+            "title": "Improper Input Validation in withdrawNft() function",
+            "description": "When the withdrawNft() function is executed with an index that includes a value equal to at least _tokenIds.length - indexes.length and the order is not in descending order, the transaction will be reverted.",
+            "severity": "Low",
+            "location": "Lines 98-106 (MintableLaunchpad.sol) and lines 40-54 (TransferableLaunchpad.sol)"
+        },
+        {
+            "id": 22,
+            "title": "Insufficient logging for privileged functions",
+            "description": "Certain privileged functions lack proper event logging, making it difficult for users to monitor executions.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 23,
+            "title": "Unchecked return value ERC20 transfer",
+            "description": "The contracts use an improper `transfer()` function, which may result in unexpected behavior if the transfer fails.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 24,
+            "title": "IDX-014: Improper Adherence to Coding Standard",
+            "description": "The return value of the transfer() function is not checked, so the transfer transactions of tokens that return false on failure will not be reverted.",
+            "severity": "Info",
+            "location": "withdrawFungibleToken() function in Launchpad and LaunchpadFactory contracts"
+        },
+        {
+            "id": 25,
+            "title": "IDX-015: Insufficient Parameter Validation in redeem() Function",
+            "description": "Lack of input validation for the amount parameter in the redeem() function.",
+            "severity": "Info",
+            "location": "redeem() function in TransferableLaunchpad contract"
+        }
+    ]
+}

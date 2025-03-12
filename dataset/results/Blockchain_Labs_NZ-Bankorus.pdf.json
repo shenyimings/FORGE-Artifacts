@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/Blockchain_Labs_NZ-Bankorus.pdf",
+    "project_info": {
+        "url": "https://github.com/BlockchainLabsNZ/bankorus_contracts_audit",
+        "commit_id": "master",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bankorus_contracts_audit": "contracts/Blockchain_Labs_NZ-Bankorus/bankorus_contracts_audit"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "LogAllow event missing parameter",
+            "description": "The LowAllog event is currently not logging anything.",
+            "severity": "low",
+            "location": "Bankorus.sol, #L56"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Uint256 can be used in replacement of uint8 to save gas",
+            "description": "Using uint256 instead of uint8 on line #L47 will cost less gas.",
+            "severity": "low",
+            "location": "Bankorus.sol, #L47"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant if statement",
+            "description": "The if statement is redundant due to the onlyOwner declaration in the transferToAddresses() function.",
+            "severity": "low",
+            "location": "Bankorus.sol (transferToAddresses() function)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Repeated if statement can be replaced by modifier",
+            "description": "Same if statement appears three times in different functions, suggesting to use a modifier to replace repeated codes.",
+            "severity": "low",
+            "location": "Bankorus.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "No fixed supply of tokens",
+            "description": "Initially tokens can be minted causing the totalSupply to increase, but once the function finishMinting() has been called, tokens cannot be minted again.",
+            "severity": "high",
+            "location": "MintableToken.sol (finishMinting() function)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Not using PausableToken library from OpenZeppelin Framework",
+            "description": "It is best practice to use the PausableToken library from OpenZeppelin Framework.",
+            "severity": "n/a",
+            "location": "Bankorus.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incompatibility issues with token distribution script",
+            "description": "The Python script companycoin.py needs adapting to be compatible with distributing tokens to multiple addresses and supporting multiple token values being sent as well.",
+            "severity": "low",
+            "location": "Token Distribution Script (companycoin.py)"
+        }
+    ]
+}

@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/Nugen Operational Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/nugenuniverse/nugencoin/tree/main",
+        "commit_id": "main",
+        "address": "0x17DBaB3D0c053120598Da6F12B4Cc50ce05EED7E",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.11+commit.d7f03943"
+        ],
+        "project_path": {
+            "Operational": "contracts/Nugen Operational Smart Contract Audit Report - QuillAudits/Operational"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Check for Zero Address",
+            "description": "Function receives an array of addresses as one of the parameters to add and set an address qualified to claim Nugen tokens. In conditions where the addresses are numerous and the owner is unaware of the address zero being in the list, the contract will assign tokens to this address.",
+            "severity": "low",
+            "location": "Contract - Nugen Operational, function - addDistributionWallet"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Missing Events Emission",
+            "description": "Event emissions are relevant to help track smart contract state changes. When important actions are carried out, whether for the owner to add or revoke addresses, events must be emitted and indexed.",
+            "severity": "n/a",
+            "location": "Contract - Nugen Operational"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-439"
+                ]
+            },
+            "title": "Use a Constructor in place of Initializable Contract",
+            "description": "The contract uses the initializable contract from Openzeppelin to help initialize variables. While this is an old contract with a floating solidity version, “>= 0.4.24 < 0.7.0”, it is unfit to be integrated with a contract with version 0.8.11 because this could pose security lapses present in the old version.",
+            "severity": "n/a",
+            "location": "Contract - Nugen Operational"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Lengthy and Unclear Error Message",
+            "description": "Some error messages have symbols that do not explain clearly why a function call fails when it does not meet some requirement. Some errors are lengthy and facilitate higher gas consumption.",
+            "severity": "info",
+            "location": "Contract - Nugen Operational, functions - revokeDistributionWallet(), claim()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Absence of Code Comments",
+            "description": "Contract lacks appropriate code commenting that explains the motive behind the contract creation.",
+            "severity": "info",
+            "location": "Contract - Nugen Operational"
+        }
+    ]
+}

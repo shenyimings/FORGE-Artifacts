@@ -1,0 +1,233 @@
+{
+    "path": "artifacts/Bird Money(MasterChef) - Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/bird-money/bird-farm-contracts/tree/master/contracts",
+        "commit_id": "dfd2502b73c8f54c9081682c3eb070fcd3c00629",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bird-farm-contracts": "contracts/Bird Money(MasterChef) - Audit Report/bird-farm-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Similar LP Token Address can be added more than once",
+            "description": "Allows storing similar LP token address multiple times, breaking core functionalities.",
+            "severity": "high",
+            "location": "MasterChef contract, add() function, Line 147"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "safeRewardTokenTransfer function does not execute adequately if Reward Token Balance is less",
+            "description": "Fails to store remaining reward tokens if balance is insufficient, leading to unexpected scenarios.",
+            "severity": "high",
+            "location": "MasterChef contract, safeRewardTokenTransfer() function, Line 319"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Contract State Variables are being updated after External Calls",
+            "description": "Potential reentrancy scenario due to updating state variables after external calls.",
+            "severity": "high",
+            "location": "MasterChef contract, deposit() and emergencyWithdraw() functions, Lines 278-282, 313-316"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unstake Time increases 72 Hours with every new Deposit",
+            "description": "Unstake time keeps increasing with each new deposit, potentially leading to confusion.",
+            "severity": "high",
+            "location": "MasterChef contract, deposit() function, Line 278"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "User is capable of depositing ZERO amount of LP Tokens",
+            "description": "Allowing zero deposits can lead to unpredictable behavior and issues with reward calculations.",
+            "severity": "high",
+            "location": "MasterChef contract, deposit() function, Lines 261-284"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Violation of Check_Effects_Interaction Pattern in the Withdraw function",
+            "description": "External calls and state variable modifications are not following the recommended pattern.",
+            "severity": "medium",
+            "location": "MasterChef contract, withdraw() function, Lines 292-305"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "updatePool and massUpdatePools functions have been assigned a Public visibility",
+            "description": "Public visibility can lead to unnecessary gas expenditure and potential security issues.",
+            "severity": "medium",
+            "location": "MasterChef contract, updatePool() and massUpdatePools() functions, Lines 229-234, 237-258"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Multiplication is being performed on the result of Division",
+            "description": "Possible loss of precision due to division before multiplication operations.",
+            "severity": "medium",
+            "location": "MasterChef contract, pendingRewardToken() and updatePool() functions, Lines 214-219, 248-256"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "safeRewardTokenTransfer function should include require statement instead of IF-Else Statement",
+            "description": "Using if-else statements instead of require statements for input validation.",
+            "severity": "low",
+            "location": "MasterChef contract, safeRewardTokenTransfer() function, Lines 320-322"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "External Visibility should be preferred",
+            "description": "Functions are marked as public instead of external, leading to potential gas optimization issues.",
+            "severity": "low",
+            "location": "Various functions throughout the MasterChef contract."
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "withdraw function should include require statement instead of IF-Else Statement",
+            "description": "Using if-else statements instead of require statements for input validation.",
+            "severity": "low",
+            "location": "MasterChef contract, withdraw() function, Line 292"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Return Value of an External Call is never used Effectively",
+            "description": "Ignoring return values from external calls can lead to potential security issues.",
+            "severity": "low",
+            "location": "Various functions throughout the MasterChef contract."
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "No Events emitted after imperative State Variable modification",
+            "description": "Lack of events emission makes it difficult to track crucial state variable changes off-chain.",
+            "severity": "low",
+            "location": "Various functions throughout the MasterChef contract, Lines 118, 122, 129, 133, 137"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Inadequate NatSpec Annotations",
+            "description": "Smart contract does not include the NatSpec annotations adequately.",
+            "severity": "n/a",
+            "location": "All Contract methods."
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Commented Code",
+            "description": "Commented codes regarding a devAddress state variable affect the readability of the code.",
+            "severity": "n/a",
+            "location": "Masterchef contract, Lines 51 and 85"
+        }
+    ]
+}

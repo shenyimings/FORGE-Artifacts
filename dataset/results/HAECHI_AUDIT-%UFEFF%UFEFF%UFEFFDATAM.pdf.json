@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/HAECHI_AUDIT-%UFEFF%UFEFF%UFEFFDATAM.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x2eed6e51c2a40c8a348861dd17bcfd7a320782e4",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.4.21+commit.dfe3193c"
+        ],
+        "project_path": {
+            "DATAM": "contracts/HAECHI_AUDIT-%UFEFF%UFEFF%UFEFFDATAM/DATAM"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Owner can burn other accounts' tokens",
+            "description": "The owner can call the BurnableToken#burnAddress() function to burn other accounts' tokens.",
+            "severity": "critical",
+            "location": "BurnableToken contract, burnAddress() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Frozen addresses can still transfer tokens using FreezingToken#transferFrom()",
+            "description": "Despite being frozen, addresses can still transfer tokens using the FreezingToken#transferFrom() function.",
+            "severity": "critical",
+            "location": "FreezingToken contract, transferFrom() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owner can restrict other accounts' token transfers",
+            "description": "The owner can call the FreezingToken#setFrozen() function to restrict other accounts' token transfers.",
+            "severity": "high",
+            "location": "FreezingToken contract, setFrozen() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Event in transferFrom() function",
+            "description": "The transferFrom() function is missing an Approval event.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

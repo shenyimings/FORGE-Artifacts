@@ -1,0 +1,776 @@
+{
+    "path": "artifacts/Connext-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/connext/nxtp",
+        "commit_id": "16ee2f8b441e80c82cf53358e9534c6cd4080bec",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "nxtp": "contracts/Connext-Spearbit-Security-Review/nxtp"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Lack of transferId Verification Allows an Attacker to Front-Run Bridge Transfers",
+            "description": "The onReceive() function does not verify the integrity of transferId against all other parameters, allowing a front-running attack.",
+            "severity": "critical",
+            "location": "n/a"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Use of spot dex price when repay portal debt leads to sandwich attacks",
+            "description": "When the NomadFacet repays the portal debt, it uses a spot DEX price, which can be manipulated by attackers to launch a sandwich attack.",
+            "severity": "critical",
+            "location": "SponsorVault"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "swapOut allows overwrite of token balance",
+            "description": "The StableSwapFacet has a function swapExactOut() where a user could supply the same address as assetOut, allowing for arbitrary lowering of token balances.",
+            "severity": "critical",
+            "location": "Executor contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Use of spot price in SponsorVault leads to sandwich attack.",
+            "description": "The SponsorVault uses the spot AMM price when doing a swap, which can be manipulated by attackers to drain native tokens in the sponsor vault.",
+            "severity": "critical",
+            "location": "SponsorVault"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Deriving price with balanceOf is dangerous",
+            "description": "Deriving the price by querying the balance of AMM’s pools can be gamed.",
+            "severity": "high",
+            "location": "ConnextPriceOracle.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Routers can sybil attack the sponsor vault to drain funds",
+            "description": "A router can perform several large value transfers in an effort to drain the sponsor vault of its funds.",
+            "severity": "high",
+            "location": "BridgeFacet.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ]
+            },
+            "title": "Routers are exposed to extreme slippage if they attempt to repay debt before being reconciled",
+            "description": "Routers may receive less than the amount of liquidity they initially provided, leading to router insolvency.",
+            "severity": "high",
+            "location": "NomadFacet.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Malicious call data can DOS execute",
+            "description": "An attacker can DOS the executor contract by giving infinite allowance to normal users.",
+            "severity": "high",
+            "location": "Executor.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "DOS attack on the Nomad Home.sol Contract",
+            "description": "Anyone can dispatch a message and insert a new root into the queue, impacting the availability of the protocol.",
+            "severity": "high",
+            "location": "Home.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "Upon failing to back unbacked debt _reconcileProcessPortal() will leave the converted asset in the contract",
+            "description": "The function _reconcileProcessPortal() will not convert the adopted asset back to the local asset in case of failure.",
+            "severity": "high",
+            "location": "NomadFacet.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "_handleExecuteTransaction() doesn’t handle native assets correctly",
+            "description": "The function _handleExecuteTransaction() sends any native tokens to the executor contract first, causing issues.",
+            "severity": "high",
+            "location": "BridgeFacet.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Add checks to xcall()",
+            "description": "Function xcall() lacks sanity checks, potentially leading to issues later on in the use of the protocol.",
+            "severity": "high",
+            "location": "BridgeFacet.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Executor and AssetLogic deals with the native tokens inconsistently that breaks execute()",
+            "description": "Inconsistencies in dealing with native tokens break the execute() function.",
+            "severity": "high",
+            "location": "Executor.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Executor reverts on receiving native tokens from BridgeFacet",
+            "description": "The Executor contract does not have a fallback/receive function to handle native token transfers",
+            "severity": "high",
+            "location": "Executor contract"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "SponsorVault sponsors full transfer amount in reimburseLiquidityFees()",
+            "description": "The BridgeFacet passes the full transfer amount instead of the liquidity fee when calling reimburseLiquidityFees",
+            "severity": "high",
+            "location": "BridgeFacet.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Tokens can get stuck in Executor contract if the destination doesn’t claim them all",
+            "description": "The execute() function increases allowance and then calls the recipient, but if the recipient does not use all tokens, they may remain stuck inside the Executor contract",
+            "severity": "high",
+            "location": "Executor contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "reimburseLiquidityFees sends tokens twice",
+            "description": "The function reimburseLiquidityFees() is called from the BridgeFacet, making msg.sender the BridgeFacet, and then tokens are sent to msg.sender again via safeTransfer()",
+            "severity": "high",
+            "location": "BridgeFacet.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Anyone can repay the portalDebt with different tokens",
+            "description": "The PortalFacet does not check whether _adopted is the correct token in debt when repaying AAVE loans",
+            "severity": "high",
+            "location": "PortalFacet contract"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Malicious call data can steal unclaimed tokens in the Executor contract",
+            "description": "Users can provide arbitrary data when doing a cross-chain transfer, allowing exploiters to steal tokens from the Executor contract by granting an allowance",
+            "severity": "high",
+            "location": "Executor contract"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Fee-On-Transfer tokens are not explicitly denied in swap()",
+            "description": "The swap() function does not check that the amount transferred is equal to dx, allowing fee-on-transfer tokens to work as intended.",
+            "severity": "medium",
+            "location": "SwapUtils.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "xcall() may erroneously overwrite prior calls to bumpTransfer()",
+            "description": "The bumpTransfer() function allows users to increment the relayer fee on any given transferId without checking if the unique transfer identifier exists, leading to lost funds.",
+            "severity": "medium",
+            "location": "BridgeFacet.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "_handleExecuteLiquidity doesn’t consistently check for receiveLocalOverrides",
+            "description": "The function _handleExecuteLiquidity() initially checks for receiveLocal but does not check for receiveLocalOverrides, potentially leading to an unwarranted reception of funds denominated in the adopted asset.",
+            "severity": "medium",
+            "location": "BridgeFacet.sol"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Router signatures can be replayed when executing messages on the destination domain",
+            "description": "Connext bridge supports near-instant transfers by allowing users to pay a small fee to routers for providing them with liquidity, but Gelato relayers can reuse the same signature multiple times, leading to unintended provision of more liquidity.",
+            "severity": "medium",
+            "location": "BridgeFacet.sol"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "diamondCut() allows re-execution of old updates",
+            "description": "The function diamondCut() of LibDiamond verifies the signed version of the update parameters, but it doesn’t prevent multiple executions and the signed version stays valid forever, allowing old updates to be executed again.",
+            "severity": "medium",
+            "location": "LibDiamond.sol"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Not always safeApprove(..., 0)",
+            "description": "Some functions do safeApprove(..., 0) first, but others don’t, which could result in problems with tokens like USDT.",
+            "severity": "medium",
+            "location": "NomadFacet.sol"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "_slippageTol does not adjust for decimal differences",
+            "description": "The assetLogic calculates minReceived without adjusting for the decimal differences between assetIn and assetOut, making users vulnerable to sandwich attacks or stuck cross-chain transfers.",
+            "severity": "medium",
+            "location": "AssetLogic.sol"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant fee on transfer logic",
+            "description": "The function repayAavePortalFor() has unnecessary code for handling fee-on-transfer tokens.",
+            "severity": "info",
+            "location": "PortalFacet.sol#L124-L167, AssetLogic.sol#L66-L90, AssetLogic.sol#L108-L118"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Some gas can be saved in reimburseLiquidityFees",
+            "description": "Assigning tokenExchange before the if statement can save some gas.",
+            "severity": "info",
+            "location": "SponsorVault.sol#L197-L226"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "LIQUIDITY_FEE_DENOMINATOR could be a constant",
+            "description": "The value of LIQUIDITY_FEE_DENOMINATOR seems to be constant, but it's stored in a variable and requires an SLOAD operation.",
+            "severity": "info",
+            "location": "BridgeFacet.sol, PortalFacet.sol, AssetLogic.sol"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Access elements from storage array instead of loading them in memory",
+            "description": "The function removeLiquidityOneToken() reads the entire array in memory, which costs extra gas.",
+            "severity": "info",
+            "location": "SwapUtils.sol#L1016-L1034"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Send information through calldata instead of having callee query Executor",
+            "description": "The contract called by Executor.sol should check originSender, origin, and amount, which costs extra gas due to external calls.",
+            "severity": "info",
+            "location": "Executor.sol#L35-L60, Executor.sol#L201-L211"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-663"
+                ]
+            },
+            "title": "Several external functions are not nonReentrant",
+            "description": "The following functions don’t have nonReentrant, while most other external functions do have such modifier.",
+            "severity": "info",
+            "location": "BridgeFacet.sol, PortalFacet.sol, RelayerFacet.sol"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential issue with aggregators and nonReentrant",
+            "description": "There is a chance that future updates might open up an issue to exploit.",
+            "severity": "n/a",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused argument canonicalDomain in NomadFacet.reconcile()",
+            "description": "NomadFacet.reconcile() has an unused argument canonicalDomain.",
+            "severity": "info",
+            "location": "NomadFacet.sol#L122"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "SwapUtils._calculateSwap() returns two values with different precision",
+            "description": "dy is the amount of tokens a user will get from a swap and dyFee is the associated fee.",
+            "severity": "info",
+            "location": "SwapUtils.sol#L537-L538"
+        },
+        {
+            "id": 35,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Multicall.sol not compatible with Natspec",
+            "description": "Multicall.sol Natspec comment specifies but it uses a low level call() method which can call write functions as well.",
+            "severity": "info",
+            "location": "Multicall.sol#L5-L17"
+        },
+        {
+            "id": 36,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "reimburseRelayerFees only what is necessary",
+            "description": "The function reimburseRelayerFees() gives a maximum of relayerFeeCap to a receiver...",
+            "severity": "info",
+            "location": "SponsorVault.sol#L235-L271"
+        },
+        {
+            "id": 37,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ],
+                "3": [
+                    "CWE-670"
+                ]
+            },
+            "title": "safeIncreaseAllowance and safeDecreaseAllowance can be replaced with safeApprove in _reconcileProcessPortal",
+            "description": "The NomadFacet uses safeIncreaseAllowance after clearing the allowance...",
+            "severity": "info",
+            "location": "NomadFacet.sol#L236-L237"
+        },
+        {
+            "id": 38,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Event not emitted when ERC20 and native asset is transferred together to SponsorVault",
+            "description": "If the native asset and an ERC20 token are transferred in the same call only a single event corresponding to the ERC20 transfer is emitted...",
+            "severity": "info",
+            "location": "SponsorVault.sol#L279-L285"
+        },
+        {
+            "id": 39,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "payable keyword can be removed",
+            "description": "Two payable functions swapExact() and swapExactOut, which only swap ERC20 tokens...",
+            "severity": "info",
+            "location": "StableSwapFacet.sol#L249, StableSwapFacet.sol#L273"
+        },
+        {
+            "id": 40,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Improve variable naming",
+            "description": "Variable names like _routerOwnershipRenounced and _assetOwnershipRenounced do not correctly reflect their meaning...",
+            "severity": "info",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 41,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "onlyRemoteRouter can be circumvented",
+            "description": "The modifier onlyRemoteRouter() can be misled if the sender parameter has the value 0.",
+            "severity": "info",
+            "location": "Router.sol#L56-L58, BridgeRouter.sol#L112-L117, Replica.sol#L179-L204"
+        },
+        {
+            "id": 42,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Some dust not accounted for in reconcile()",
+            "description": "Tiny amounts of tokens (dust) are not accounted for in `reconcile()`.",
+            "severity": "info",
+            "location": "BridgeFacet.sol#L571-L628, NomadFacet.sol#L118-L165"
+        },
+        {
+            "id": 43,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Careful with the decimals of BridgeTokens",
+            "description": "The BridgeRouter sends token details including the decimals() over the nomad bridge to configure a new deployed token.",
+            "severity": "info",
+            "location": "BridgeRouter.sol#L226-L334, BridgeToken.sol#L93-L119, initializeSwap.ts#L109-L110, SwapAdminFacet.sol#L107-L175"
+        },
+        {
+            "id": 44,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect comment about ERC20 approval to zero-address",
+            "description": "The linked code notes in a comment that approving to the zero-address will fail, but it's not always true.",
+            "severity": "info",
+            "location": "AssetLogic.sol#L289-L290"
+        },
+        {
+            "id": 45,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Native asset is delivered even if the wrapped asset is transferred",
+            "description": "Connext delivers the native asset on the destination chain even if the wrapped asset was transferred.",
+            "severity": "info",
+            "location": "BridgeFacet.sol#L292-L293, AssetLogic.sol#L75-L80, AssetLogic.sol#L140-L145"
+        },
+        {
+            "id": 46,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Entire transfer amount is borrowed from AAVE Portal when a router has insufficient balance",
+            "description": "If the router picked by the Sequencer doesn’t have enough balance to transfer the required amount, it can borrow the entire amount from Aave Portal.",
+            "severity": "info",
+            "location": "BridgeFacet.sol#L601-L608"
+        },
+        {
+            "id": 47,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Unused variable",
+            "description": "The variable `message` is not used after declaration.",
+            "severity": "info",
+            "location": "BridgeFacet.sol#L265"
+        },
+        {
+            "id": 48,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect Natspec for adopted and canonical asset mappings",
+            "description": "The descriptions of the variables `adoptedToCanonical` and `canonicalToAdopted` are incorrect.",
+            "severity": "info",
+            "location": "BridgeFacet.sol"
+        },
+        {
+            "id": 49,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use of a loop to iterate over an array in removeLiquidityOneToken()",
+            "description": "The function removeLiquidityOneToken() uses a loop to iterate over an array, which can be optimized.",
+            "severity": "info",
+            "location": "SwapUtils.sol#L1016-L1034"
+        }
+    ]
+}

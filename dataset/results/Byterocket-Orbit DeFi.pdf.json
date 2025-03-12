@@ -1,0 +1,518 @@
+{
+    "path": "artifacts/Byterocket-Orbit DeFi.pdf",
+    "project_info": {
+        "url": "https://github.com/FiveElementsLabs/orbit-defi",
+        "commit_id": "3c6ed8c356be28b2e059a2a7f0171ba31f216bb7",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "orbit-defi": "contracts/Byterocket-Orbit DeFi/orbit-defi"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Prevent contract to be initialized multiple times",
+            "description": "The PositionManager can be re-initialized numerous times, allowing ownership to be claimed.",
+            "severity": "high",
+            "location": "PositionManager.sol - Line 105-116"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ]
+            },
+            "title": "SwapToPositionRatio function can be called by anyone",
+            "description": "The swapToPositionRatio() function has no authorization checks, allowing it to be called by anyone.",
+            "severity": "high",
+            "location": "actions/SwapToPositionRatio.sol - Line 34-75"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "LendingPoolAddress can be set by anyone",
+            "description": "The setLendingPoolAddress() function has no authorization checks, allowing it to be called by anyone.",
+            "severity": "high",
+            "location": "modules/AaveModule.sol - Line 103-128"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Logic to find best pool does not find best one",
+            "description": "The function returns the pool with the most liquidity at the given slot instead of finding the best pool.",
+            "severity": "medium",
+            "location": "actions/ZapOut.sol - Line 111-120, modules/AaveModule.sol - Lines 214-222"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing liquidity in Aave deposit",
+            "description": "The amountToAave calculation only accounts for the collected fees, not for the liquidity received by closing the position.",
+            "severity": "medium",
+            "location": "modules/AaveModule.sol - Line 103-128"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Relying on external security promises for ticks",
+            "description": "The result of the call to the NonfungiblePositionManager returns the lower and upper ticks, which are not checked and can lead to the calculation in line 111 to over- or underflow.",
+            "severity": "medium",
+            "location": "modules/IdleLiquidityModule.sol - Line 114-118"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Unsafe cast to int24",
+            "description": "The cast of a uint24 to int24 is dangerous and should be properly executed and verified.",
+            "severity": "medium",
+            "location": "modules/IdleLiquidityModule.sol - Line 129"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Severe over-/underflow risk without SafeMath",
+            "description": "As SafeMath is not used, there are several risks of under- and/or overflows due to the nature of the calculation.",
+            "severity": "medium",
+            "location": "modules/IdleLiquidityModule.sol - Line 131"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Empty data doesn’t always revert",
+            "description": "With the modules and actions generally reverting in case of the data being non-existent, this is mostly fine.",
+            "severity": "medium",
+            "location": "modules/IdleLiquidityModule.sol - Line 40"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Wrong comparison operator",
+            "description": "During the check on whether the balance is greater than the required amount, a less_than (<) is used instead of making use of a less_than_equal (<=).",
+            "severity": "low",
+            "location": "helpers/ERC20Helper.sol - Line 54"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading or wrong documentation",
+            "description": "Certain parts of the documentation are misleading or wrong.",
+            "severity": "low",
+            "location": "Multiple occurrences throughout the project"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Not making use of SafeMath where appropriate",
+            "description": "In certain locations, calculations are facilitated without SafeMath in a Solidity version that is lower than 0.8.",
+            "severity": "low",
+            "location": "Multiple occurrences throughout the project"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Unsecured approval and wrong maximum value",
+            "description": "Using the wrong address for approval, using the wrong amount, and not following best practice for uint256 maximum value.",
+            "severity": "n/a",
+            "location": "ERC20Helper.sol (approveToken and withdrawTokens functions)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "NC.6 - Use underscores for large numerals",
+            "description": "Not using underscores for large numerals, reducing readability.",
+            "severity": "low",
+            "location": "utils/WithdrawRecipes.sol - Line 31, 49, 50"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "NC.7 - Not using the getStorage function",
+            "description": "Retrieving storage manually instead of using the provided getStorage() function.",
+            "severity": "low",
+            "location": "PositionManager.sol - Line 294"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "NC.8 - Unnecessary double function exposed",
+            "description": "Exposing an unnecessary function that increases contract size without any benefit.",
+            "severity": "low",
+            "location": "PositionManagerFactory.sol - Line 86-88 and Registry.sol (getModuleKeys() function)"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "NC.9 - Insufficient state-modifying function",
+            "description": "Not validating input and possibly emitting events without state change.",
+            "severity": "low",
+            "location": "PositionManagerFactory.sol - Line 46-49 and Registry.sol (changeGovernance() function)"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "NC.10 - Unnecessary deadline extension",
+            "description": "Extending deadlines unnecessarily when executed by a contract.",
+            "severity": "low",
+            "location": "actions/ClosePosition.sol - Line 46 and other multiple locations"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "NC.11 - Wrong type used for Uniswap V3",
+            "description": "Implicit conversion due to using uint256 instead of uint128",
+            "severity": "low",
+            "location": "actions/ClosePosition.sol - Line 50-52"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "NC.12 - Not using the default method for maximum values",
+            "description": "Manual calculation instead of using type(uint128).max",
+            "severity": "low",
+            "location": "actions/ClosePosition.sol - Line 57-58, and other locations"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "NC.13 - Making use of undocumented side effects ",
+            "description": "Certain function is making use of undocumented side effects.",
+            "severity": "low",
+            "location": "actions/ClosePosition.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "NC.16 - Use of transferFrom instead of safeTransferFrom",
+            "description": "The code of the distance check is a near duplicate of the code in the _getTokens() function of the UniswapNFTHelper contract.",
+            "severity": "low",
+            "location": "modules/AaveModule.sol - Line 173"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-1283"
+                ]
+            },
+            "title": "NC.17 - Unchangeable global variables should be immutable",
+            "description": "Certain occurrences of global variables that should never change, hence should be immutable to ensure that this is the case.",
+            "severity": "low",
+            "location": "Throughout the project (multiple locations)"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "NC.18 - Missing visibility keyword",
+            "description": "Certain occurrences of global variables are missing a visibility keyword, leading to them being private, which is often not the desired behaviour.",
+            "severity": "low",
+            "location": "Throughout the project (multiple locations)"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "NC.19 - Function can be exported to library",
+            "description": "The code of the distance check is a near duplicate of the code in the _getTokens() function of the UniswapNFTHelper contract.",
+            "severity": "low",
+            "location": "modules/AaveModule.sol - Line 173"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "NC.6 - Use transferFrom instead of safeTransferFrom",
+            "description": "The code in ERC20Helper.sol uses transferFrom, which is not recommended because it allows the receiver to re-enter the sender.",
+            "severity": "low",
+            "location": "helpers/ERC20Helper.sol - Line 77"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas Optimization - Cache array length",
+            "description": "Caching the array length outside a loop saves reading it on each iteration, as long as the array's length is not changed during the loop.",
+            "severity": "n/a",
+            "location": "PositionManager.sol (Lines 128, 271, 284), utils/DepositRecipes.sol (Line 36), utils/Storage.sol (Lines 81, 106, 177, 192)"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Gas Optimization - Optimize loops",
+            "description": "Optimizing for-loops to be more efficient in terms of gas usage.",
+            "severity": "n/a",
+            "location": "Throughout the project"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas Optimization - Don’t initialize variables with default value",
+            "description": "Initializing variables with their default values uses more gas than necessary.",
+            "severity": "n/a",
+            "location": "actions/ZapOut.sol (Line 108), helpers/ERC20Helper.sol (Line 51), modules/AaveModule.sol (Lines 113, 222)"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ]
+            },
+            "title": "Gas Optimization - Use !=0 instead of >0 for uint comparisons",
+            "description": "Checking for != 0 instead of > 0 in require statements saves gas.",
+            "severity": "n/a",
+            "location": "PositionManager.sol (Line 237), helpers/SwapHelper.sol (Line 46), utils/Storage.sol (Lines 98, 169, 188, 203), utils/WithdrawRecipes.sol (Line 34)"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Gas Optimization - Cache certain variables to save gas",
+            "description": "Caching variables that are read often saves gas.",
+            "severity": "n/a",
+            "location": "PositionManager.sol (Line 237), actions/AaveDeposit.sol (Line 33), actions/DecreaseLiquidity.sol (Line 44), actions/IncreaseLiquidity.sol (Line 37), actions/Mint.sol (Line 37), actions/ZapIn.sol (Line 123), actions/ZapOut.sol (Line 86), modules/AaveModule.sol (Lines 71, 95), modules/AutoCompoundModule.sol (Line 59), modules/IdleLiquidityModule.sol (Line 126), utils/DepositRecipes.sol (Lines 41-47)"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Storage Slot Usage",
+            "description": "The pool variable is being obtained in two steps, with the outcome of the first step never being used again.",
+            "severity": "n/a",
+            "location": "actions/SwapToPositionRatio.sol - Lines 41-47"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Multiple Approvals",
+            "description": "The approveToken() function is called twice with the same inputs, wasting gas.",
+            "severity": "n/a",
+            "location": "actions/ZapIn.sol - Line 56"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Possible Caching Opportunity",
+            "description": "The result of the call to the NonfungiblePositionManager could be cached to prevent a double calling.",
+            "severity": "n/a",
+            "location": "modules/IdleLiquidityModule.sol - Lines 36-72"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inefficient Array Access",
+            "description": "The access to the whitelistedKeepers array gets more expensive as the array size increases, with the cost of the access being O(n).",
+            "severity": "n/a",
+            "location": "Registry.sol - Line 11"
+        }
+    ]
+}

@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/Predator Token Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xe59046e1a4a83c11ccc578e26da4eeec8484ed8d",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "PredatorToken": "contracts/Predator Token Full Smart Contract Security Audit/PredatorToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Public Function Access",
+            "description": "The function distributeDividends(uint256 amount) has public access, allowing anyone to call the function with any amount and potentially put part of the contract logic at risk.",
+            "severity": "low",
+            "location": "distributeDividends function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent Dividend Distribution",
+            "description": "The function distributeDividends() increases magnifiedDividendPerShare not in dividendToken proportion when dividendToken is not equal to BNB.",
+            "severity": "low",
+            "location": "distributeDividends function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Public Access to setDividendTokenAddress()",
+            "description": "The setDividendTokenAddress() function has public access, allowing anyone to call the function and change the token address.",
+            "severity": "low",
+            "location": "setDividendTokenAddress function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out-of-Gas Exception in excludeMultipleAccountsFromFees()",
+            "description": "The function excludeMultipleAccountsFromFees() may abort with an OUT_OF_GAS exception if the addresses list is too long.",
+            "severity": "low",
+            "location": "excludeMultipleAccountsFromFees function"
+        }
+    ]
+}

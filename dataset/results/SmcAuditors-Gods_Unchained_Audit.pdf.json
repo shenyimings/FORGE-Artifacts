@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/SmcAuditors-Gods_Unchained_Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x0e3a2a1f2146d86a604adc220b4967a898d7fe07",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.5.11+commit.c082d0b4"
+        ],
+        "project_path": {
+            "BatchWrapper": "contracts/SmcAuditors-Gods_Unchained_Audit/BatchWrapper"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-241"
+                ]
+            },
+            "title": "Out-of-bounds Enum Inputs Trigger Invalid Opcode",
+            "description": "Assert-style exception burns all gas in transactions when out-of-range enum value is used as an argument in certain functions.",
+            "severity": "medium",
+            "location": "BatchWrapper.sol, _validateProtos and copyNextBatch functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "State Access after Untrusted External Call",
+            "description": "State access occurs after external transfer call to arbitrary address in mintCards() function.",
+            "severity": "medium",
+            "location": "BatchWrapper.sol, mintCards() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Duplicate Values Possible in Series Array",
+            "description": "updateProtos() function accepts duplicate values for Series[] array.",
+            "severity": "low",
+            "location": "BatchWrapper.sol, updateProtos() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No Null Address Check in updateProtos()",
+            "description": "sysAdmin can set address to zero when calling updateProtos().",
+            "severity": "low",
+            "location": "BatchWrapper.sol, updateProtos() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Public Functions",
+            "description": "burnAll() and isTradable() functions are not used internally and can be changed from public to external.",
+            "severity": "low",
+            "location": "BatchWrapper.sol, burnAll() and isTradable() functions"
+        }
+    ]
+}

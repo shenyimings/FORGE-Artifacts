@@ -1,0 +1,50 @@
+{
+    "path": "artifacts/IQEQ TOKEN Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x4c1761059d48aa7b4ab241046425e20c3697fee7",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "CoinToken": "contracts/IQEQ TOKEN Full Smart Contract Security Audit/CoinToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can cause an OUT_OF_GAS exception if the excluded addresses list is too long. Similarly, the function `_getCurrentSupply` also uses a loop for evaluating total supply, which can also be aborted with an OUT_OF_GAS exception.",
+            "severity": "low",
+            "location": "Functions `includeInReward()` and `_getCurrentSupply`"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges, including changing tax, dev, and liquidity fees, maximum transaction amount, excluding from fee, changing dev address, router address, and minimum number of tokens to add to liquidity.",
+            "severity": "n/a",
+            "location": "Various functions with `onlyOwner` modifiers"
+        }
+    ]
+}

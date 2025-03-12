@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/DreamTeam Smart Contracts Audit for Players' Compensation - CoinFabrik Blog.pdf",
+    "project_info": {
+        "url": "https://github.com/dreamteam-gg/smart-contracts",
+        "commit_id": "c1efcabf8a56a4d0a1fa5185a095052c110bdd87",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smart-contracts": "contracts/DreamTeam Smart Contracts Audit for Players' Compensation - CoinFabrik Blog/smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Ambiguous return value",
+            "description": "The storageGetTeamMemberIndexByAddress function does not distinguish between returning 0 because nothing was found and returning the member with index 0.",
+            "severity": "medium",
+            "location": "storageGetTeamMemberIndexByAddress function in TeamStorageController contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Vesting mechanism does not emit Transfer events",
+            "description": "The TDTT contract does not emit Transfer events when balances are assigned to token holders as a consequence of its vesting mechanism.",
+            "severity": "low",
+            "location": "subFromBalance function in TDTT contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Addresses can be declared as contracts",
+            "description": "Lines like ERC20TokenInterface(erc20TokenAddress).transfer(newDeployedTeamContracts, ERC20TokenInterface(erc20TokenAddress).balanceOf(this)); can be simplified by making the variable erc20TokenAddress an ERC20TokenInterface instead of an untyped address.",
+            "severity": "low",
+            "location": "TeamStorageController contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Add token transfer failsafe mechanisms",
+            "description": "We recommend adding failsafe mechanisms to ensure tokens don’t get stuck indefinitely in any of the contracts involved.",
+            "severity": "low",
+            "location": "DreamTeamStorage and TeamContracts contracts"
+        }
+    ]
+}

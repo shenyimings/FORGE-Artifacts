@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/Coinbae-Deus_Finance_DEAStaking.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x1D17d697cAAffE53bf3bFdE761c90D61F6ebdc41",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "Staking": "contracts/Coinbae-Deus_Finance_DEAStaking/Staking"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "EmptyByteArrayCopy",
+            "description": "Copying an empty byte array (or string) from memory or calldata to storage can result in data corruption if the target array's length is increased subsequently without storing new data.",
+            "severity": "medium",
+            "location": "Audited contracts using Solidity version 0.6.11"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ],
+                "4": [
+                    "CWE-226"
+                ]
+            },
+            "title": "DynamicArrayCleanup",
+            "description": "When assigning a dynamically-sized array with types of size at most 16 bytes in storage causing the assigned array to shrink, some parts of deleted slots were not zeroed out.",
+            "severity": "medium",
+            "location": "Audited contracts using Solidity version 0.6.11"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "High severity issue: Overpowered user",
+            "description": "Functions on DEAStaking.sol (setShares, setRewardPerBlock, setWallets) are callable only from one address if the private key of this address becomes compromised rewards can be changed and this may lead to undesirable consequences.",
+            "severity": "high",
+            "location": "DEAStaking.sol (functions: setWallets, setShares, setRewardPerBlock)"
+        }
+    ]
+}

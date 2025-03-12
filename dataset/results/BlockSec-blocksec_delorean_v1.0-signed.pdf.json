@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/BlockSec-blocksec_delorean_v1.0-signed.pdf",
+    "project_info": {
+        "url": "https://github.com/delorean-exchange/siv-contracts/tree/initial",
+        "commit_id": "initial",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "siv-contracts": "contracts/BlockSec-blocksec_delorean_v1/siv-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of validation for duplicated reward tokens",
+            "description": "The function addRewardToken does not verify the existence of the input rewardToken, allowing duplicated reward tokens in the list.",
+            "severity": "medium",
+            "location": "SelfInsuredVault.sol, function addRewardToken"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of validation for duplicated insurance providers",
+            "description": "The function addInsuranceProvicer does not verify the existence of the input provider in the list providers.",
+            "severity": "medium",
+            "location": "SelfInsuredVault.sol, function addInsuranceProvider"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect payout assignment",
+            "description": "The function claimVaultPayouts collects all payouts from unclaimed epochs for different insurance providers and assigns all claimed payouts in the last epoch of providerEpoch.",
+            "severity": "high",
+            "location": "SelfInsuredVault.sol, function claimVaultPayouts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper update of ‘totalShares’",
+            "description": "The function _updateProviderEpochs updates the providerEpochs if it is unsynchronized with vault.epochs().",
+            "severity": "high",
+            "location": "SelfInsuredVault.sol, function _updateProviderEpochs"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove unused code from the function ‘_purchaseForNextEpoch’",
+            "description": "The variable assigned at line 601 of listing 2.7 is unused.",
+            "severity": "info",
+            "location": "SelfInsuredVault.sol, function _purchaseForNextEpoch"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Remove redundant check for the function ‘claimRewards’",
+            "description": "The first require check in the function claimRewards is redundant.",
+            "severity": "info",
+            "location": "SelfInsuredVault.sol, function claimRewards"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove unused code regarding the function ‘_projectEpochYield’",
+            "description": "The function _projectEpochYield is not used in the contract anymore.",
+            "severity": "info",
+            "location": "SelfInsuredVault.sol, function purchaseInsuranceForNextEpoch"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove unused variable ‘nextEpochId’ from the function ‘_computeAccumulatePayouts’",
+            "description": "The variable nextEpochId at line 354 of listing 2.11 is not used.",
+            "severity": "info",
+            "location": "SelfInsuredVault.sol, function _computeAccumulatePayouts"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Improper update for ‘claimedEpochIndex’",
+            "description": "The function claimPayouts possibly invokes _claimPayoutForEpoch in multiple times, updating claimedEpochIndex repeatedly.",
+            "severity": "info",
+            "location": "Y2KEarthquakeV1InsuranceProvider.sol, functions claimPayouts and _claimPayoutForEpoch"
+        }
+    ]
+}

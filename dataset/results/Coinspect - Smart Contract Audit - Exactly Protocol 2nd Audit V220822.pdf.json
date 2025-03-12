@@ -1,0 +1,224 @@
+{
+    "path": "artifacts/Coinspect - Smart Contract Audit - Exactly Protocol 2nd Audit V220822.pdf",
+    "project_info": {
+        "url": "https://github.com/exactly-finance/protocol/releases/tag/0.0.3",
+        "commit_id": "0685d9ecead2dfad32299d60c73165ef7c02ed87",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol": "contracts/Coinspect - Smart Contract Audit - Exactly Protocol 2nd Audit V220822/protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Protocol can accumulate debt because of unprofitable liquidations",
+            "description": "Attackers can create many small positions to create debt in the system, and the protocol lacks a minimum position size.",
+            "severity": "high",
+            "location": "Auditor.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Liquidity check bypass allows attackers to drain protocol funds",
+            "description": "The beforeWithdraw function implementation is flawed and can be bypassed when the msg.sender and the funds owner are different, enabling attackers to drain funds from the protocol.",
+            "severity": "high",
+            "location": "FixedLender.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Some users will not be able to redeem funds when protocol has debt",
+            "description": "When liquidations are not able to recover funds fast enough, the protocol is left with outstanding debt that is not redistributed between depositors.",
+            "severity": "high",
+            "location": "FixedLender.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Interest rate model approximation error",
+            "description": "The interest rate model utilizes Simpson's rule to numerically integrate the borrow rate function, which has an unbounded error close to the asymptote, causing excessive penalty fees at early withdrawal.",
+            "severity": "medium",
+            "location": "InterestRateModel.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Rounding to zero allows bypassing allowance and liquidity checks",
+            "description": "Losing precision during calculations allows attackers to bypass critical checks and steal funds.",
+            "severity": "medium",
+            "location": "FixedLender.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Allowance reset could result in user funds lost",
+            "description": "Allowing allowance reset can result in lost user funds in certain scenarios.",
+            "severity": "medium",
+            "location": "FixedLender.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Liquidations revert when the liquidator has shortfall",
+            "description": "The redeem function reverts liquidation if the liquidator has a shortfall.",
+            "severity": "medium",
+            "location": "FixedLender.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Chainlink pair rates are assumed to always have 8 decimals",
+            "description": "Incorrect precision scaling can result in lost funds.",
+            "severity": "low",
+            "location": "ExactlyOracle.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unnecessary addition in PoolAccounting",
+            "description": "Gas expense due to unnecessary addition",
+            "severity": "info",
+            "location": "PoolAccounting.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing pool state validation in liquidate function",
+            "description": "validateRequiredPoolState function is not called in the liquidate function, allowing an invalid maturity date to be passed down to internal functions",
+            "severity": "info",
+            "location": "FixedLender.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing sanity checks in critical protocol parameters setters",
+            "description": "Critical parameters that affect the security of the protocol funds are not always validated",
+            "severity": "info",
+            "location": "Auditor.sol, InterestRateModel.sol, FixedLender.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Infinite Rate Calculation",
+            "description": "The rate calculation can result in infinite values when utilizationRate approaches uMax.",
+            "severity": "medium",
+            "location": "Trapezoid integrator"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted seize function",
+            "description": "The FixedLender external seize function and the Auditor seizeAllowed function allow any listed market to seize all funds from other FixedLenders without further checks.",
+            "severity": "n/a",
+            "location": "FixedLender.sol, Auditor contract"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Trusting external contracts",
+            "description": "External contracts are assumed to always transfer the expected amount, but some tokens may transfer less than the specified amount.",
+            "severity": "info",
+            "location": "FixedLender.sol, ERC4626.sol"
+        }
+    ]
+}

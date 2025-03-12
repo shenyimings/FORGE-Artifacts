@@ -1,0 +1,269 @@
+{
+    "path": "artifacts/DeXe-Network_SC-Audit-Report_22052023SA-962.pdf",
+    "project_info": {
+        "url": "https://github.com/dexe-network/investment-contracts/tree/audit",
+        "commit_id": "f29a0e26ae59ffdf34f62e69ae1c32c606d10fd3",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "investment-contracts": "contracts/DeXe-Network_SC-Audit-Report_22052023SA-962/investment-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-668"
+                ],
+                "3": [
+                    "CWE-200"
+                ]
+            },
+            "title": "Unauthorized access to user funds",
+            "description": "In case of owner keys leak, unauthorized users may receive access to user funds.",
+            "severity": "critical",
+            "location": "Multiple upgradable contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ]
+            },
+            "title": "No guarantees for fund return",
+            "description": "TraderPoolInvestProposal allows traders to withdraw invested funds to traders’ wallets with no guarantees that investors would take their funds back.",
+            "severity": "medium",
+            "location": "TraderPoolInvestProposal contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Potential fraud through custom tokens",
+            "description": "TraderPoolRiskyProposal enables trading of custom tokens, which may result in user investment loss during trading in risky pools due to potential fraud.",
+            "severity": "high",
+            "location": "TraderPoolRiskyProposal contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "No insurance claims",
+            "description": "Users may receive no insurance claims as decisions on paying insurance are done off-chain or with out-of-scope contracts.",
+            "severity": "medium",
+            "location": "Insurance contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Incorrect Compiler Version",
+            "description": "Contracts should be deployed with the same compiler version and flags that they have been tested thoroughly.",
+            "severity": "n/a",
+            "location": "Global (compiler version)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Unverified interaction with untrusted tokens",
+            "description": "Trading with untrusted tokens can lead to unexpected contract behavior.",
+            "severity": "critical",
+            "location": "TraderPoolRiskyProposal.sol, invest() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Manipulation of exchange rates using flash loans",
+            "description": "Using Uniswap's functions to determine exchange rates can lead to manipulation by flash loans.",
+            "severity": "critical",
+            "location": "UniswapV2PathFinder.sol, getUniV2PathWithPriceOut() and getUniV2PathWithPriceIn() functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Allowing traders to trade any token in risky pools",
+            "description": "Trading with tokens created by traders can lead to profit manipulation.",
+            "severity": "high",
+            "location": "TraderPoolRiskyProposal.sol, create() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Owner's ability to change commissions at any time",
+            "description": "No upper bound limit for commission setup can lead to fee manipulation.",
+            "severity": "high",
+            "location": "CoreProperties.sol, setDEXECommissionPercentages() and setTraderCommissionPercentages() functions"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing proposeClaim() function in Insurance contract",
+            "description": "No implementation for proposing claims in insurance cases.",
+            "severity": "high",
+            "location": "Insurance.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-356"
+                ]
+            },
+            "title": "Withdrawal of all user investments from TraderPoolInvestProposal",
+            "description": "No guarantee for users to receive their funds back.",
+            "severity": "high",
+            "location": "TraderPoolInvestProposal.sol, withdraw() function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Owner's ability to burn any user funds",
+            "description": "No proper allowances for burning user funds.",
+            "severity": "high",
+            "location": "ERC20Sale.sol, burn() function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Voting duration issue in GovValidators contract",
+            "description": "Insufficient voting duration can lead to not reaching a quorum.",
+            "severity": "high",
+            "location": "GovValidators.sol, duration variable"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner's ability to change validators at any moment",
+            "description": "Owner has too much control over the voting process.",
+            "severity": "high",
+            "location": "GovValidators.sol, changeBalances() function"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Downcasting issue in GovUserKeeper contract",
+            "description": "Unexpected nftsTotalSupply value assignment due to downcasting.",
+            "severity": "high",
+            "location": "GovUserKeeper.sol, _setERC721Address() function"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Injector's ability to change DeXe token address on Insurance contract",
+            "description": "Unauthorised access to critical state variables.",
+            "severity": "high",
+            "location": "Insurance.sol, setDependencies() function"
+        }
+    ]
+}

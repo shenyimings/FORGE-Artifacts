@@ -1,0 +1,173 @@
+{
+    "path": "artifacts/BlockSec-blocksec_alpaca_v1.0_signed.pdf",
+    "project_info": {
+        "url": "https://github.com/alpaca-finance/bsc-alpaca-contract/tree/feat/delta-neutral-vault/contracts/8.10",
+        "commit_id": "e7c3899416e86a045011febec7a5cc986176e406",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bsc-alpaca-contract": "contracts/BlockSec-blocksec_alpaca_v1/bsc-alpaca-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Potential Precision Loss",
+            "description": "Multiplying after division may cause precision losses.",
+            "severity": "medium",
+            "location": "DeltaNeutralVault contract, withdraw() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ],
+                "3": [
+                    "CWE-480"
+                ],
+                "4": [
+                    "CWE-482"
+                ]
+            },
+            "title": "Unreturned Values",
+            "description": "Return value of claim() function not properly assigned.",
+            "severity": "low",
+            "location": "DeltaNeutralVault.sol, claim() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked Initialization Parameters",
+            "description": "No checks on parameters of initialize() function.",
+            "severity": "low",
+            "location": "DeltaNeutralVault contract, initialize() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unlimited Withdraw Value",
+            "description": "No check between user shares burnt and actual value withdrawn by invoking _execute().",
+            "severity": "high",
+            "location": "withdraw() function in DeltaNeutralVault contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Potential Locking of Native Tokens",
+            "description": "If msg.value is larger than _amount, native tokens may be locked in the contract.",
+            "severity": "low",
+            "location": "deposit() function in DeltaNeutralVault contract, specifically in _transferTokenToVault()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked Price",
+            "description": "The obtained price from Chainlink may be outdated and hence invalid.",
+            "severity": "medium",
+            "location": "PriceHelper contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Potential Locked Tokens",
+            "description": "Executed operations may use less token than actual amount deposited, leaving extra tokens locked in the contract.",
+            "severity": "low",
+            "location": "DeltaNeutralVault contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Avoiding Duplicated Calculations",
+            "description": "Multiple calls to _positionDebtValue() function with same parameters may lead to unnecessary gas consumption.",
+            "severity": "n/a",
+            "location": "positionInfo() function in DeltaNeutralVault contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Avoiding Inconsistency Checks in the Worker Contracts",
+            "description": "No corresponding check for treasuryAccount and treasuryBountyBps in DeltaNeutralMdexWorker02 contract.",
+            "severity": "n/a",
+            "location": "work() function in DeltaNeutralPancakeWorker02 and DeltaNeutralMdexWorker02 contracts"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Considering the Impact of Transaction Ordering Dependency",
+            "description": "Transactions may fail due to transaction ordering dependency, affecting position management.",
+            "severity": "n/a",
+            "location": "deposit() and withdraw() functions in DeltaNeutralVault contract"
+        }
+    ]
+}

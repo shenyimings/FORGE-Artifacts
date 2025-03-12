@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/DeeDee Standart Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x71eee06829cf9b168ca2e4a5294f49ecc949f16c",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "DeeDee": "contracts/DeeDee Standart Smart Contract Security Audit/DeeDee"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Calculation error",
+            "description": "The function payOrLockupPendingDEEDEE calculates halfRewards by getting 50% percent from totalRewards, but the variable poolBoostFeeAmount is changeable.",
+            "severity": "medium",
+            "location": "DeeDee contract, payOrLockupPendingDEEDEE function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Functions massUpdatePools() uses a loop to update all loops from the poolInfo list, which may cause an OUT_OF_GAS exception.",
+            "severity": "low",
+            "location": "MasterChef contract, massUpdatePools function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Token type",
+            "description": "The function deposit() updates user.amount by adding transferred amount of tokens, but lpToken may get some tax on transfer.",
+            "severity": "info",
+            "location": "DeeDee contract, deposit function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges in the contracts.",
+            "severity": "n/a",
+            "location": "DeeDee and MasterChef contracts"
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/Hacken-Hyksos.pdf",
+    "project_info": {
+        "url": "https://github.com/hyksos-fi/hyksos-contracts/tree/audit",
+        "commit_id": "fc4360879923da3f54378604a7ab003ab6bda702",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "hyksos-contracts": "contracts/Hacken-Hyksos/hyksos-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked call return value",
+            "description": "The return value of a message call is not checked, which can lead to funds losses.",
+            "severity": "medium",
+            "location": "HyksosCyberkongz.sol, Functions: payErc20, withdrawErc20, depositErc20"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ],
+                "3": [
+                    "CWE-1060"
+                ]
+            },
+            "title": "Costly operations inside a loop",
+            "description": "Loops are not optimized, leading to high Gas losses.",
+            "severity": "medium",
+            "location": "HyksosBase.sol, Functions: distributeRewards, withdrawNftAndShareRewardEqually, withdrawNftAndRewardClaimant, withdrawNftAndRewardOwner, selectShareholders"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Contracts files use floating pragma ^0.8.0, which can lead to accidental deployment using an outdated compiler version.",
+            "severity": "low",
+            "location": "AutoCompound, DepositQueue, HyksosBase, HyksosCyberkongz, HyksosEtherOrcs, IHyksos"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "State Variable Default Visibility",
+            "description": "The explicit visibility makes it easier to catch incorrect assumptions about who can access the variable.",
+            "severity": "low",
+            "location": "AutoCompound, DepositQueue, HyksosBase, HyksosCyberkongz, HyksosEtherOrcs"
+        }
+    ]
+}

@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/SpaceFi Farm Smart Contract Final Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/SpaceFinance/space-contract/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "space-contract": "contracts/SpaceFi Farm Smart Contract Final Audit Report - QuillAudits/space-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risk in SpaceFarm Contract",
+            "description": "Owner account has the authority over several functions, potentially allowing hackers to take advantage.",
+            "severity": "medium",
+            "location": "SpaceFarm contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possibility of adding same token",
+            "description": "Adding the same LP token more than once can incorrectly calculate total reward in function updatePool().",
+            "severity": "medium",
+            "location": "add() function, Line 152"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Missing Check-Interaction-Effect pattern",
+            "description": "In emergencyWithdraw(), the order of external call/transfer function CIE pattern is not followed, potentially leading to a re-entrancy bug.",
+            "severity": "low",
+            "location": "emergencyWithdraw() function, Lines 649-664"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Increase in length of pool can cause out of gas error",
+            "description": "In massUpdatePools(), the function may run out of gas due to unused pools not being deleted.",
+            "severity": "low",
+            "location": "massUpdatePools() function, Lines 386-392"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Large supply of tokens in pool result in less reward",
+            "description": "Adding tokens with huge supplies can cause pool.accStarPerShare to become close to zero, resulting in almost no shares in the reward.",
+            "severity": "low",
+            "location": "updatePerBlock() function, Line 283"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Incompatibility with deflationary tokens",
+            "description": "Transferring standard ERC20 deflationary tokens may cause the contract to lose tokens due to transaction fees.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing comments in the code",
+            "description": "The SpaceFarm contract is missing proper code commenting, making it harder to understand and read.",
+            "severity": "info",
+            "location": "SpaceFarm contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma (pragma solidity ^0.8.0)",
+            "description": "Contracts should be deployed with the same compiler version and flags to avoid introducing bugs.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

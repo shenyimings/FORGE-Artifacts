@@ -1,0 +1,191 @@
+{
+    "path": "artifacts/2cimple_SC-Audit-Report_201023_SA-1808.pdf",
+    "project_info": {
+        "url": "https://github.com/experiencenano/DeedzCoin",
+        "commit_id": "9f57d71",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "DeedzCoin": "contracts/2cimple_SC-Audit-Report_201023_SA-1808/DeedzCoin"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Invalid Calculations",
+            "description": "Unintended balance assignment order in `_transferSupplierRole()` function leading to loss of funds.",
+            "severity": "critical",
+            "location": "contracts/DeedzCoin.sol: _transferSupplierRole()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Redundant balances Mapping Overlook",
+            "description": "Redundant `balances` mapping in DeedzCoin contract leading to inconsistencies in token balance data.",
+            "severity": "high",
+            "location": "contracts/DeedzCoin.sol: balances() and transferSupplyRole()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "Lack of validation for zero address (0x0) when handling address parameters.",
+            "severity": "low",
+            "location": "contracts/DeedzCoin.sol: setSupplier()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Inconsistent Implementation and Documentation",
+            "description": "Functions extendLock, increaseLockAmount, unlock, and lock lack the onlySupplier modifier.",
+            "severity": "n/a",
+            "location": "contracts/DeedzCoin.sol: extendLock(), increaseLockAmount(), unlock(), lock()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use Custom Errors",
+            "description": "Revert strings are expensive and should be replaced with custom errors.",
+            "severity": "low",
+            "location": "contracts/DeedzCoin.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Redundant Check",
+            "description": "Double checks on the number of already locked tokens in functions transferWithLock() and transferWithLockActualTime().",
+            "severity": "medium",
+            "location": "contracts/DeedzCoin.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Variable",
+            "description": "The mapping named allowed is not used anywhere.",
+            "severity": "low",
+            "location": "contracts/DeedzCoin.sol: allowed()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Virtual Keyword",
+            "description": "Virtual keywords are unnecessary in functions _transferSuppliedRole(), transferSupplierRole(), lock(), transferWithLock(), tokensLocked(), tokensLockedAtTime(), totalBalanceOf(), extendLock(), increaseLockAmount(), tokensUnlockable(), unlock(), getUnlockableToken();",
+            "severity": "low",
+            "location": "contracts/DeedzCoin.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant SafeMath Usage In Solidity",
+            "description": "SafeMath is redundant in solidity versions 0.8.0 and above.",
+            "severity": "low",
+            "location": "contracts/DeedzCoin.sol: contract SafeMath {}"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inefficient Event Emitting",
+            "description": "The event `SupplierRoleTransferred` should use the original function parameter `newSupplier`.",
+            "severity": "low",
+            "location": "contracts/DeedzCoin.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code Duplication",
+            "description": "Functions transferWithLock and transferWithLockActualTime have duplicate logic.",
+            "severity": "medium",
+            "location": "contracts/DeedzCoin.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Boolean Return",
+            "description": "The boolean return type is redundant in functions increaseLockAmount, transferWithLockActualTime, transferWithLock, and extendLock.",
+            "severity": "low",
+            "location": "contracts/DeedzCoin.sol"
+        }
+    ]
+}

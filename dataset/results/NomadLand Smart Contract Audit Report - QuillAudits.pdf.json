@@ -1,0 +1,206 @@
+{
+    "path": "artifacts/NomadLand Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x59Cde41a855682349edaEA221169d9b686687748",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.4.24+commit.e67f0147"
+        ],
+        "project_path": {
+            "MainToken": "contracts/NomadLand Smart Contract Audit Report - QuillAudits/MainToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Not comply with BEP20 standard completely",
+            "description": "The token contract doesn’t implement/define the getOwner function as required by BEP20 interface documentation.",
+            "severity": "low",
+            "location": "NomadLand Token Contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Old Solidity Compiler",
+            "description": "The contract uses an old solidity compiler (0.4.23) which contains well-known bugs.",
+            "severity": "medium",
+            "location": "NomadLand Token Contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Missing two-step process to change privileged role Owner",
+            "description": "The contract uses a one-step process to transfer/renounce ownership, which may lead to accidental proposals or loss of control over the operational logic.",
+            "severity": "medium",
+            "location": "NomadLand Token Contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Unsafe Arithmetic Calculation",
+            "description": "Some instances of unsafe arithmetic calculations were found, which are prone to integer overflows.",
+            "severity": "low",
+            "location": "NomadLand Token Contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of Proper Documentation",
+            "description": "The operational logic for many functions was not well documented, making it difficult to evaluate the system implementation against the specification.",
+            "severity": "low",
+            "location": "NomadLand Token Contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Overuse of Public Visibility",
+            "description": "Some constants are defined with public visibility, which increases the bytecode and makes it expensive to deploy.",
+            "severity": "low",
+            "location": "NomadLand Token Contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unexpected Functional Behaviour/Outcome",
+            "description": "The releaseAll function may produce unexpected results or behaviour for users if there are no frozen tokens available or the freeze time has not elapsed.",
+            "severity": "low",
+            "location": "NomadLand Token Contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "block.timestamp dependance",
+            "description": "The contract uses block.timestamp to calculate freeze time, which may be manipulated by miners.",
+            "severity": "info",
+            "location": "NomadLand Token Contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Public functions never should be declared external",
+            "description": "Public functions not used internally should be declared external to save gas.",
+            "severity": "info",
+            "location": "NomadLand Token Contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary modifier",
+            "description": "The hasMintPermission modifier is unnecessary and can be removed, using onlyOwner instead.",
+            "severity": "info",
+            "location": "NomadLand Token Contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary checks",
+            "description": "Some checks can be replaced with the whenNotPaused modifier to improve code readability.",
+            "severity": "info",
+            "location": "NomadLand Token Contract"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Centralization Risks",
+            "description": "The contract mints complete token liquidity and transfers ownership to a hardcoded address, posing centralization risks.",
+            "severity": "medium",
+            "location": "NomadLand Token Contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "BEP20 approve race condition",
+            "description": "The standard ERC20 implementation contains a racing condition in its approve function, which can be exploited by a spender to move the current approved amount from the owner’s balance to the spender.",
+            "severity": "medium",
+            "location": "NomadLand Token Contract"
+        }
+    ]
+}

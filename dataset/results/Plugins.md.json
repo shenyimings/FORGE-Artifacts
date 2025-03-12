@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/Plugins.md",
+    "project_info": {
+        "url": "https://github.com/cryptoalgebra/Algebra",
+        "commit_id": "6f57b3e218630106a4d41aedefd38f9e83b41e2b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Algebra": "contracts/Plugins/Algebra"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Farming can be deactivated by accident",
+            "description": "The current check for farming deactivation can be triggered by accident if `tick` hasn't changed during the swap and `zeroToOne` is false.",
+            "severity": "high",
+            "location": "EternalVirtualPool.sol (L131-L134)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ]
+            },
+            "title": "Overflow will entirely block the plugin",
+            "description": "Overflow will occur on the second time of the list initialization, blocking plugin updates that will affect the pool and further recovery can be executed by admin only.",
+            "severity": "high",
+            "location": "VolatilityOracle.sol (L72-L74)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Manipulation of volatility through zero-amount swaps",
+            "description": "Swaps executed with a zero amount are currently factored into the volatility oracle, allowing an attacker to artificially manipulate the volatility index.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing flags validation in new `pluginConfig`",
+            "description": "There is no validation of flags in new `pluginConfig` set with `AlgebraPool.setPluginConfig()`.",
+            "severity": "medium",
+            "location": "AlgebraBasePluginV1.sol (n/a)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ],
+                "3": [
+                    "CWE-15"
+                ]
+            },
+            "title": "Plugin timestamps data can be overwritten by a call to the `prepayTimepointsStorageSlot` function",
+            "description": "Plugin timestamps data can be overwritten by a call to the `prepayTimepointsStorageSlots` function.",
+            "severity": "medium",
+            "location": "AlgebraBasePluginV1.sol (L67)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect comment",
+            "description": "An incorrect comment in the code",
+            "severity": "low",
+            "location": "AdaptiveFee.sol, Line 36"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No check in `AlgebraEternalFarming._isIncentiveActive()` that the plugin is still connected to the pool",
+            "description": "_isIncentiveActive() doesn't check if the incentive's pluginAddress is a current pool's plugin",
+            "severity": "n/a",
+            "location": "AlgebraEternalFarming.sol, Line 349"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "`AlgebraBasePluginV1.isIncentiveActive()` returns true for deactivated incentives",
+            "description": "isIncentiveActive() doesn't check whether the current state of incentive and `EternalVirtualPool` is active or not",
+            "severity": "n/a",
+            "location": "AlgebraBasePluginV1 contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "TODO comments should be resolved",
+            "description": "Multiple TODO comments in the code",
+            "severity": "low",
+            "location": "Various contracts (AlgebraEternalFarming.sol, FarmingCenter.sol)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Risk of storage overflow in volatility oracle",
+            "description": "Volatility oracle's storage is constrained by a `UINT16_MODULO` capacity",
+            "severity": "low",
+            "location": "VolatilityOracle.sol, Lines 14-15"
+        }
+    ]
+}

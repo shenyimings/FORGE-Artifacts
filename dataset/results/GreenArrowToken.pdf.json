@@ -1,0 +1,50 @@
+{
+    "path": "artifacts/GreenArrowToken.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xC7a8C40AfBeE37761740ea78C122f1DD31b2Ea5B",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "GreenArrowToken": "contracts/GreenArrowToken/GreenArrowToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Owner can grant access to transfer before trading is enabled, change trading enabled timestamp, dividend tracker address, Pancake router address, exclude and include addresses in automatedMarketMakerPairs array, exclude from the fees, change liquidity wallet address, gas for processing, and update claimWait value.",
+            "severity": "low",
+            "location": "GreenArrowToken contract, various functions (setBalance, etc.)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Unaudited logic changes",
+            "description": "Dividend tracker may be changed, so the logic of setBalance and other functions could be different and not audited.",
+            "severity": "n/a",
+            "location": "GreenArrowToken contract, setBalance function, etc."
+        }
+    ]
+}

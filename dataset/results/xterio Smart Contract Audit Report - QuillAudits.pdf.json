@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/xterio Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/PlayVRS/SmartContracts",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "SmartContracts": "contracts/xterio Smart Contract Audit Report - QuillAudits/SmartContracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risks",
+            "description": "The role Governance has the authority to update critical settings.",
+            "severity": "medium",
+            "location": "PresaleContract.sol, withdrawToken(), withdraw(), addStableCoins()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Insufficient check for setTokenDecimal()",
+            "description": "setTokenDecimal() does not check if the stable coin exists, which might get the default value set by the contract.",
+            "severity": "medium",
+            "location": "PresaleContract.sol, setTokenDecimal()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Lack of event emissions",
+            "description": "Missing event to track off-chain liquidity fee changes.",
+            "severity": "low",
+            "location": "PresaleContract.sol, addStableCoins(), removeStableCoin(), setTokenDecimal(), setWhitelists()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Tautology or Contradiction Issue",
+            "description": "A tautology that will waste gas during execution.",
+            "severity": "low",
+            "location": "PresaleContract.sol, Line 192"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of Zero address validation in constructor()",
+            "description": "No check for zero address in the constructor and some functions.",
+            "severity": "low",
+            "location": "PresaleContract.sol, constructor(), setWhitelist() and setWhitelists() function; VestingContract.sol, constructor(), transferManagement() function, addBeneficiary() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Public function that could be declared external",
+            "description": "Some public functions should be declared external to save gas.",
+            "severity": "info",
+            "location": "PresaleContract.sol, buyPresale(), withdrawToken(), withdraw(); VestingContract.sol, transferManagement(), addBeneficiary(), withdraw(), release()"
+        }
+    ]
+}

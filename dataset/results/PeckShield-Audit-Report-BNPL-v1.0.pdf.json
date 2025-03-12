@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-BNPL-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/BNPLPayTech/BNPL/tree/1f791a6c1d292d3c600b9d8420d841ec577116b2",
+        "commit_id": "1f791a6c1d292d3c600b9d8420d841ec577116b2",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "BNPL": "contracts/PeckShield-Audit-Report-BNPL-v1/BNPL"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy Risk in BankingNode",
+            "description": "The interaction with an external contract starts before effecting the update on the internal state, hence violating the checks-effects-interactions principle.",
+            "severity": "medium",
+            "location": "BankingNode contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Possible Costly LPs From Improper BankingNode Initialization",
+            "description": "The share value directly takes the value of _amount when the contract is being initialized, which can lead to precision issues.",
+            "severity": "medium",
+            "location": "BankingNode, function deposit()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improved Logic of Calculation For principalLost Amount",
+            "description": "The calculation of principalLost is using (1e12 * principalLost)/ getTotalAssetValue(), which makes an implicit assumption that principalLost is the total loss while this value should equal to principalLost - baseTokenOut.",
+            "severity": "medium",
+            "location": "BankingNode, function slashLoan()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Proper Handling Of totalUnbondingShares Calculation",
+            "description": "The balance calculation of totalUnbondingShares does not count the amount withdrawn by Stakers into it.",
+            "severity": "low",
+            "location": "BankingNode, function unstake()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Accommodation of approve() Idiosyncrasies",
+            "description": "The approve() routine has a requirement that reduces the allowance to 0 first before setting the proper allowance.",
+            "severity": "low",
+            "location": "BankingNode::_depositToLendingPool()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Incompatibility with Deflationary Tokens",
+            "description": "The use of safeTransferFrom() may introduce balance inconsistencies when dealing with deflationary tokens.",
+            "severity": "low",
+            "location": "BNPLRewardsController::deposit() and withdraw()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Possible Sandwich/MEV Attacks For Reduced Returns",
+            "description": "The collectFees() routine is vulnerable to possible front-running attacks, resulting in smaller returns for users.",
+            "severity": "low",
+            "location": "BankingNode::collectFees()"
+        }
+    ]
+}

@@ -1,0 +1,140 @@
+{
+    "path": "artifacts/mmgt.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x44C4eDDef663fC65E93987A153c31314cC4C9eb1",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.5.10+commit.5a6ea5b1"
+        ],
+        "project_path": {
+            "MultiMoney": "contracts/mmgt/MultiMoney"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unauthorized token transfer",
+            "description": "Any user can claim all contract balance by continuously calling the getAirdrop function when blocks are open.",
+            "severity": "medium",
+            "location": "contract.sol#L139"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent total supply calculation",
+            "description": "The totalSupply function returns the circulating supply, not the total supply, due to incorrect calculation.",
+            "severity": "medium",
+            "location": "contract.sol#L84"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-369"
+                ]
+            },
+            "title": "Potential zero division error",
+            "description": "Variables may be set to zero as denominators, causing transactions to revert.",
+            "severity": "low",
+            "location": "contract.sol#L160,164"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Redundant division operation",
+            "description": "Division by 1 is redundant and can be optimized.",
+            "severity": "low",
+            "location": "contract.sol#L144,145,146"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code repetition",
+            "description": "Similar code segments are repeated in the contract, increasing code size and reducing readability.",
+            "severity": "low",
+            "location": "contract.sol#L144-146,148-150,168-170,172-174"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Non-optimal function declaration",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "contract.sol#L111,35"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-conformant naming conventions",
+            "description": "The contract does not follow Solidity's naming conventions.",
+            "severity": "low",
+            "location": "contract.sol#L70,192,185,53,154,139"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Missing event emissions for critical arithmetic parameters",
+            "description": "There are functions with no event emitted, making it difficult to track off-chain changes.",
+            "severity": "low",
+            "location": "contract.sol#L185,192"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential loss of precision due to division before multiplication",
+            "description": "Performing divisions before multiplications may cause prediction issues.",
+            "severity": "low",
+            "location": "contract.sol#L154"
+        }
+    ]
+}

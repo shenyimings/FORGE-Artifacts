@@ -1,0 +1,140 @@
+{
+    "path": "artifacts/2023-08-31_Arrakis_V2_manager_templates.pdf",
+    "project_info": {
+        "url": "https://github.com/ArrakisFinance/v2-manager-templates/tree/1d507a2beaa9c0e785bac7dd943c77964fedaef3",
+        "commit_id": "1d507a2beaa9c0e785bac7dd943c77964fedaef3",
+        "address": "0x89dc63264dAB74a4350D7F44bD62eec3b22c9ca0",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.10+commit.fc410830"
+        ],
+        "project_path": {
+            "ProxyAdmin": "contracts/2023-08-31_Arrakis_V2_manager_templates/ProxyAdmin"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Improper Chainlink oracle handling",
+            "description": "Issues in ChainLinkOracle contract due to improper handling of latestRoundData() function.",
+            "severity": "medium",
+            "location": "ChainLinkOracle.sol, getPrice0 and getPrice1 functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Rounding error in ChainLinkOracle",
+            "description": "Rounding error in price calculation in getPrice0 method of ChainLinkOracle contract.",
+            "severity": "medium",
+            "location": "ChainLinkOracle.sol, getPrice0 method"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No checks if vault is in vaults",
+            "description": "Lack of checks in SimpleManager.rebalance() and withdrawAndCollectFees() functions to ensure initManagement() was called.",
+            "severity": "info",
+            "location": "SimpleManager.sol, rebalance() and withdrawAndCollectFees() functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused function in SimpleManager",
+            "description": "Unused _includesAddress method in SimpleManager contract.",
+            "severity": "info",
+            "location": "SimpleManager.sol, _includesAddress method"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Useless import",
+            "description": "Unnecessary ERC20 import and Range import in SimpleManager.sol contract.",
+            "severity": "info",
+            "location": "SimpleManager.sol, imports section"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "No way to remove vaults and modify vault info",
+            "description": "Lack of functionality to remove or modify vault information after initManagement().",
+            "severity": "info",
+            "location": "SimpleManager.sol, initManagement() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Max deviation is not bounded",
+            "description": "Unbounded maxDeviation parameter in SimpleManager.initManagement() function.",
+            "severity": "info",
+            "location": "SimpleManager.sol, initManagement() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code duplicating",
+            "description": "Duplicate calls to oracle for getting the price of token0 in rebalance() function.",
+            "severity": "info",
+            "location": "SimpleManager.sol, rebalance() function"
+        }
+    ]
+}

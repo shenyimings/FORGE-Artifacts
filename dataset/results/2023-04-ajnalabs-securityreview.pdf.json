@@ -1,0 +1,188 @@
+{
+    "path": "artifacts/2023-04-ajnalabs-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/ajna-finance/contracts/tree/2f00a000bc9d087d777a59de1517a48a5635f4ff",
+        "commit_id": "2f00a000bc9d087d777a59de1517a48a5635f4ff",
+        "address": "0x1f00000000000000000000000000000000000000",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/2023-04-ajnalabs-securityreview/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missing access controls on accounts voting on extraordinary proposals",
+            "description": "A lack of access controls on the voteExtraordinary function allows an attacker to steal AJNA tokens from the treasury.",
+            "severity": "high",
+            "location": "ExtraordinaryFunding contract, voteExtraordinary function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-405"
+                ]
+            },
+            "title": "Extreme interest rates can cause denial-of-service attacks",
+            "description": "The continual increase of interest rates caused by a highly collateralized loan can make a pool essentially unusable, causing a denial of service.",
+            "severity": "medium",
+            "location": "PoolCommons library, interest rate calculations"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Drain Grant Fund",
+            "description": "An attacker can drain AJNA tokens from the treasury by creating a proposal and gathering enough votes to make it pass.",
+            "severity": "n/a",
+            "location": "DrillGrantFund contract, constructor function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "findMechanismOfProposal shadowing an extraordinary proposal",
+            "description": "The findMechanismOfProposal function will shadow an existing extraordinary proposal if a standard proposal with the same proposal ID exists.",
+            "severity": "low",
+            "location": "GrantFund.sol, findMechanismOfProposal function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing checks of array lengths in LP allowance update functions",
+            "description": "There is no check to ensure that the array arguments are equal in length, which can lead to silent ignoring of extra values.",
+            "severity": "low",
+            "location": "Pool.sol, increaseLPAllowance and decreaseLPAllowance functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unprotected Owner Privileges",
+            "description": "Malicious or compromised owners can abuse minting capabilities, trap contracts relying on pausable tokens, and blacklist the contract.",
+            "severity": "high",
+            "location": "Token contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "ERC20 Non-Compliance",
+            "description": "Transfer and transferFrom functions may not return a boolean, decimals function returns a uint256 instead of uint8, and lack of mitigation for ERC20 race condition.",
+            "severity": "medium",
+            "location": "ERC20 token contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy Risk",
+            "description": "External calls in transfer functions can lead to reentrancies.",
+            "severity": "high",
+            "location": "ERC777 and ERC721 token contracts"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Deflationary Token Risks",
+            "description": "Tokens with fees on transfer can lead to unexpected behavior.",
+            "severity": "medium",
+            "location": "Deflationary token contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "Token Scarcity Issues",
+            "description": "Insufficient total supply and limited exchange listings can make the token vulnerable to manipulation.",
+            "severity": "low",
+            "location": "Token economics"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Flash Loan Risks",
+            "description": "Large amounts of funds or flash loans can be used to manipulate the token balance.",
+            "severity": "medium",
+            "location": "Token contract"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Rounding Errors",
+            "description": "Fixed-point arithmetic can lead to rounding errors, breaking invariants and affecting the protocol's behavior.",
+            "severity": "low",
+            "location": "Maths library"
+        }
+    ]
+}

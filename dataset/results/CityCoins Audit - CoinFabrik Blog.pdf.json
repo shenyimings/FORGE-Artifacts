@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/CityCoins Audit - CoinFabrik Blog.pdf",
+    "project_info": {
+        "url": "https://github.com/ripio/rcn-network/tree/v2",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "rcn-network": "contracts/CityCoins Audit - CoinFabrik Blog/rcn-network"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "CR-01 Lost Miners Funds after Shut Down",
+            "description": "Miners may lose committed tokens when the core contract is upgraded.",
+            "severity": "critical",
+            "location": "CityCoin Core Contract, Shutdown function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "ME-01 Insecure Authentication through tx-sender",
+            "description": "Using tx-sender for authentication can lead to phishing attacks.",
+            "severity": "medium",
+            "location": "auth.clar contract, tx-sender variable"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "MI-01 Rounding Issue when Calculating Stacking Rewards",
+            "description": "Inaccurate calculation of stacking rewards due to data type imprecision.",
+            "severity": "low",
+            "location": "CityCoin Core Contract, get-entitled-stacking-reward function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "MI-02 Inactive Core Contract Can Activate Itself",
+            "description": "Inactive core contracts can activate themselves through the auth contract.",
+            "severity": "low",
+            "location": "auth.clar contract, activate-core-contract function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "MI-03 Malicious Inactive Core Contract Can Mint and Burn Tokens",
+            "description": "Malicious inactive core contracts can mint new tokens and burn others' tokens.",
+            "severity": "low",
+            "location": "token.clar contract, mint and burn functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "MI-04 Denial of Service in the Upgrade of a Malicious Core",
+            "description": "Malicious core contracts can prevent upgrades by reverting shutdown-contract calls.",
+            "severity": "low",
+            "location": "auth.clar contract, upgrade-core-contract function"
+        }
+    ]
+}

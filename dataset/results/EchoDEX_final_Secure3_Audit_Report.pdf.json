@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/EchoDEX_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/echodex-io/echodex-contracts/tree/main/contracts",
+        "commit_id": "0c6fe46ce91528467d60057f4f32c65a99054ace",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "echodex-contracts": "contracts/EchoDEX_final_Secure3_Audit_Report/echodex-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential reward over-distribution issue",
+            "description": "In contract EchodexFarm, there is a possibility of over-distribution of rewards due to incorrect lastRewardTimestamp updating.",
+            "severity": "critical",
+            "location": "EchodexFarm.sol, lines 227-239"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential reentrancy risk in EchodexFarm::harvest",
+            "description": "Reentrancy attack possible when contract creates a function that makes an external call to another contract before resolving any effects.",
+            "severity": "medium",
+            "location": "EchodexFarm contract, harvest function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Failure to perform zero-address checks may result in the failure of function execution.",
+            "description": "In _payFee function, when the tokenFee address is obtained from the factory, the tokenFee address set by the factory is not checked for zero address.",
+            "severity": "info",
+            "location": "EchodexPair.sol#L106-L115"
+        }
+    ]
+}

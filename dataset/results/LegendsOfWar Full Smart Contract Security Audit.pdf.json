@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/LegendsOfWar Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x0A754Bdfba1B5779d0c960447cB920B1fAD781c2",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "LegendToken": "contracts/LegendsOfWar Full Smart Contract Security Audit/LegendToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function includeInReward() uses a loop to find and remove addresses from the _excluded list, which may cause an OUT_OF_GAS exception if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "LegendToken contract, includeInReward function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has various privileges to change fees, maximum transaction amount, exclude from fee, change dev address, router address, and minimum tokens to add to liquidity.",
+            "severity": "low",
+            "location": "LegendToken contract, various functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Owner lock and unlock",
+            "description": "The owner can lock and unlock, potentially retaking privileges even after ownership is renounced.",
+            "severity": "low",
+            "location": "LegendToken contract, lock and unlock functions"
+        }
+    ]
+}

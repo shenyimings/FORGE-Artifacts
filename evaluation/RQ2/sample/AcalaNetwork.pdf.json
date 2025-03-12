@@ -1,0 +1,130 @@
+{
+    "path": "artifacts/AcalaNetwork.pdf",
+    "project_info": {
+        "url": "https://github.com/paritytech/substrate/tree/6b600cdeb4043e512bc5f342eb02a5a17d26797a/",
+        "commit_id": "6b600cdeb4043e512bc5f342eb02a5a17d26797a",
+        "address": "n/a",
+        "chain": "Polkadot"
+    },
+    "findings": [
+        {
+            "id": 0,
+            "title": "Insecure configuration for running Acala node in a Docker container",
+            "description": "The Acala documentation describes how to launch an Acala node in a Docker container, but the documented way does not prevent users from gaining more privileges.",
+            "severity": "Low",
+            "location": "Documentation for running node in a Docker container"
+        },
+        {
+            "id": 1,
+            "title": "Sudo is enabled on the Acala chain",
+            "description": "The Acala chain spec uses the sudo module, which should not exist in a production network and may decrease users' trust in the Acala Network.",
+            "severity": "Informational",
+            "location": "Acala/bin/acala/service/src/chain_spec/acala.rs#L164"
+        },
+        {
+            "id": 2,
+            "title": "CSRF in Acala/apps settings which allows changing the RPC endpoint URL",
+            "description": "An attacker can send a malicious link to its victim that will change the RPC endpoint URL.",
+            "severity": "n/a",
+            "location": "Acala/apps (reported in polkadot.js/apps#4465)"
+        },
+        {
+            "id": 3,
+            "title": "Transferring \"max\" ACA tokens through Acala-dapp fails and only burns the fees",
+            "description": "Acala-dapp UI's \"MAX\" button for transferring all tokens to a given account always fails with a \"balances.InsufficientBalance\" result, causing the sender to lose transfer fees.",
+            "severity": "Low",
+            "location": "Acala / Acala-dapp"
+        },
+        {
+            "id": 4,
+            "title": "Outdated dependencies in Substrate's \"chaostests\"",
+            "description": "The outdated dependencies are Node-fetch version 1.7.3, with a DoS vulnerability (CVE-2020-15168), and Node-forge version 0.8.5, with a prototype pollution vulnerability (CVE-2020-7720).",
+            "severity": "Informational",
+            "location": "Acala's dependency substrate/.maintain/chaostests dependencies"
+        },
+        {
+            "id": 5,
+            "title": "Lack of proper development guidance on using Acala-dapp with Acala",
+            "description": "The Acala Development Guide lacks proper documentation on how to use a local build of Acala-dapp and Acala node to test or develop the Acala blockchain.",
+            "severity": "Informational",
+            "location": "Acala development documentation"
+        },
+        {
+            "id": 6,
+            "title": "CSRF in Acala/apps settings",
+            "description": "Allows an attacker to send a malicious link to the victim, which will change the victim's RPC endpoint URL.",
+            "severity": "Informational",
+            "location": "Acala/apps settings"
+        },
+        {
+            "id": 7,
+            "title": "Missing security measures in Acala-dapp",
+            "description": "Missing security measures (e.g., input validation, access control) in Acala-dapp.",
+            "severity": "Medium",
+            "location": "Acala-dapp"
+        },
+        {
+            "id": 8,
+            "title": "Privileged Flag Security Bypass",
+            "description": "Using the --privileged flag allows hijacking the machine.",
+            "severity": "Critical",
+            "location": "Docker run command"
+        },
+        {
+            "id": 9,
+            "title": "Root User Container Access",
+            "description": "Running containers as a root user allows access to host resources.",
+            "severity": "High",
+            "location": "Docker container runtime"
+        },
+        {
+            "id": 10,
+            "title": "Privileged Flag Security Bypass",
+            "description": "Using the --privileged flag allows hijacking the machine.",
+            "severity": "Critical",
+            "location": "Docker run command"
+        },
+        {
+            "id": 11,
+            "title": "Docker Daemon Socket Access",
+            "description": "Mounting the Docker daemon socket into a container allows access to host resources.",
+            "severity": "High",
+            "location": "Docker daemon socket configuration"
+        },
+        {
+            "id": 12,
+            "title": "Volume Mount Security Bypass",
+            "description": "Mounting volumes from special filesystems into a container may allow gaining information about the host or escalating privileges.",
+            "severity": "Medium",
+            "location": "Docker volume mounting"
+        },
+        {
+            "id": 13,
+            "title": "Capabilities Misuse",
+            "description": "Adding capabilities may allow the process to escalate its privileges and \"escape\" the container.",
+            "severity": "Medium",
+            "location": "Docker run command with --cap-add flag"
+        },
+        {
+            "id": 14,
+            "title": "DoS Scenario",
+            "description": "Not limiting resources given for the contained process may lead to potential DoS scenarios.",
+            "severity": "Low",
+            "location": "Resource allocation configuration"
+        },
+        {
+            "id": 15,
+            "title": "Root User in Container",
+            "description": "Using root (uid=0 or gid=0) in the container if not needed.",
+            "severity": "Medium",
+            "location": "Dockerfile or docker run command"
+        },
+        {
+            "id": 16,
+            "title": "AppArmor and Seccomp Misconfiguration",
+            "description": "Disabling AppArmor and Seccomp profiles allows access to restricted resources.",
+            "severity": "High",
+            "location": "Security profile configuration"
+        }
+    ]
+}

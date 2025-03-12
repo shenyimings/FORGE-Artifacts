@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/Supremacy-Audit-Report-AladdinDAO_aCVX-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/AladdinDAO/aladdin-v3-contracts/tree/main/contracts",
+        "commit_id": "2ebd6bfbabd5d9ddd2e3ddc9d1bb6fba4316f10e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "aladdin-v3-contracts": "contracts/Supremacy-Audit-Report-AladdinDAO_aCVX-v1/aladdin-v3-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Centralization risk",
+            "description": "The privileged owner account is a plain EOA, posing counter-party risk to protocol users.",
+            "severity": "medium",
+            "location": "migrateStrategy() function in ConcentratorCompounderBase.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "The potential freezing of funds",
+            "description": "_sweepToken() will always fail if native tokens are transferred into the contract, creating a denial-of-service.",
+            "severity": "medium",
+            "location": "_sweepToken() function in ConcentratorStrategyBase.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-573"
+                ],
+                "3": [
+                    "CWE-358"
+                ]
+            },
+            "title": "Non-compliance with EIP-4626 specification",
+            "description": "Contracts may wrongly assume that functions are EIP-4626 specification, causing integration problems and potential loss of funds.",
+            "severity": "low",
+            "location": "ConcentratorStrategyBase.sol (functions maxDeposit, maxMint, maxWithdraw, maxRedeem)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Potential denial-of-service",
+            "description": "Renouncing ownership can leave the contract without an owner, removing functionality available only to the owner.",
+            "severity": "low",
+            "location": "Ownable2Step.sol (function renounceOwnership), ConcentratorStrategyBase.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of address validation",
+            "description": "Initialize function lacks zero address checking for external contract addresses.",
+            "severity": "info",
+            "location": "CvxCompounder.sol (function initialize), LinearRewardDistributor.sol, ConcentratorCompounderBase.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1111"
+                ]
+            },
+            "title": "Lack of event records",
+            "description": "Many smart contracts lack event records, making it difficult for off-chain monitoring tools to index state changes.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of comments",
+            "description": "Many functions are missing or lacking documentation, hindering reviewers' understanding of the code's intention.",
+            "severity": "info",
+            "location": "Throughout the codebase"
+        }
+    ]
+}

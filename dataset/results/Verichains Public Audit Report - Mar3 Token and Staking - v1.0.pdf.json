@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/Verichains Public Audit Report - Mar3 Token and Staking - v1.0.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x9D44C04ef10Cbd4ba321E51A54F1354d0799fEEF",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.9+commit.e5eed63a"
+        ],
+        "project_path": {
+            "Mar3": "contracts/Verichains Public Audit Report - Mar3 Token and Staking - v1/Mar3"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "The constant ONE_DAY_IN_SECONDS is set to the wrong value",
+            "description": "The constant ONE_DAY_IN_SECONDS is set to a value of 10 for testing purposes, causing the waiting time for user unstaking to be very low.",
+            "severity": "low",
+            "location": "Mar3Staking#L55"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missing check expiredAt variable",
+            "description": "The variable `expiredAt is used to limit the time of use for the signature, but if the value of this variable is large, the signature may be reused after users unstakeLp().",
+            "severity": "low",
+            "location": "Mar3Staking#stakeLp()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Should check the signer variable",
+            "description": "The variable `signer should be declared immutable, and the constructor function should check whether the parameter `signer_ passed in is different from the address(0).",
+            "severity": "info",
+            "location": "Mar3Staking#L58 and Mar3Staking#L119"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundancy in comment",
+            "description": "The comment is used for redundant code, so it should be removed.",
+            "severity": "info",
+            "location": "Mar3Staking#L129"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing necessary events",
+            "description": "Events are important in Solidity because they provide an efficient way to notify external applications of changes that occur on the blockchain.",
+            "severity": "info",
+            "location": "Mar3Staking#createPool(), Mar3Staking#updatePool(), Mar3Staking#pausePool(), Mar3Staking#unpausePool(), Mar3Staking#setAdmins(), Mar3Staking#emergencyTokenWithdraw()"
+        }
+    ]
+}

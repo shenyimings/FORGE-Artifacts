@@ -1,0 +1,185 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Zer0_zBanc.pdf",
+    "project_info": {
+        "url": "https://github.com/zer0-os/ZNS",
+        "commit_id": "b05e503ea1ee87dbe62b1d58426aaa518068e395",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ZNS": "contracts/ConsenSys_Diligence-Zer0_zBanc/ZNS"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Potential gas optimizations in DynamicLiquidTokenConverter",
+            "description": "Redundant casting of reserveBalance and potential gas optimization opportunities",
+            "severity": "low",
+            "location": "zBanc/solidity/contracts/converter/types/liquid-token/DynamicLiquidTokenConverter.sol:L130-L150"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent contract type usage",
+            "description": "Using address instead of specific contract types in function arguments and declarations",
+            "severity": "medium",
+            "location": "Multiple locations (e.g., zAuction/contracts/zAuction.sol:L22-L26, L52-L54, etc.)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Ineffective reentrancy protection in DynamicLiquidTokenConverter",
+            "description": "Insufficient protection against reentrant calls due to incorrect use of _protected() modifier",
+            "severity": "high",
+            "location": "zBanc/solidity/contracts/converter/types/liquid-token/DynamicLiquidTokenConverter.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Input validation issue in DynamicLiquidTokenConverter",
+            "description": "Lack of input validation for PPM values, potentially leading to misconfiguration and incorrect behavior",
+            "severity": "medium",
+            "location": "zBanc/solidity/contracts/converter/types/liquid-token/DynamicLiquidTokenConverter.sol:L75-L84, L92-L101"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-439"
+                ]
+            },
+            "title": "Breaking Changes to Underlying BancorProtocol",
+            "description": "Introducing diverging behavior and custom interfaces that may break the system's functionality.",
+            "severity": "medium",
+            "location": "DynamicLiquidTokenConverterFactory.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "isActive Should Only be Returned if Converter is Fully Configured",
+            "description": "isActive should return true only when the converter is fully configured; otherwise, it may lead to unexpected outcomes.",
+            "severity": "medium",
+            "location": "DynamicLiquidTokenConverter.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Front-Runner can Grief Owner when Calling Reduce Weight",
+            "description": "A malicious actor may sandwich calls to reduceWeight, manipulating the market cap and causing the owner's call to fail.",
+            "severity": "medium",
+            "location": "DynamicLiquidTokenConverter.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-656"
+                ]
+            },
+            "title": "Outdated Fork",
+            "description": "The system is forked from an outdated version of Bancor, which may miss security fixes and updates.",
+            "severity": "medium",
+            "location": "n/a (system-wide)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Inconsistent DynamicContractRegistry",
+            "description": "The registry owner can change the underlying registry contract, add new settings, or override existing ones, potentially leading to malicious activities.",
+            "severity": "medium",
+            "location": "DynamicContractRegistry.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Hardcoded Integer Literals",
+            "description": "Hardcoded integer literals should be replaced with constants for better code readability and maintainability.",
+            "severity": "low",
+            "location": "DynamicLiquidTokenConverter.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Potential converter type overlap with bancor",
+            "description": "The system is forked from bancorprotocol/contracts-solidity and there is a chance that bancor introduces new types that overlap with the DynamicLiquidTokenConverter converter type.",
+            "severity": "low",
+            "location": "DynamicLiquidTokenConverter.sol, function converterType()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary contract duplication",
+            "description": "DynamicContractRegistryClient is an exact copy of ContractRegistryClient, which leads to unnecessary code duplication.",
+            "severity": "low",
+            "location": "DynamicContractRegistryClient contract"
+        }
+    ]
+}

@@ -1,0 +1,56 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-OpenLeverage-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/OpenLeverageDev/openleverage-contracts/tree/115f6d0",
+        "commit_id": "115f6d0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "openleverage-contracts": "contracts/PeckShield-Audit-Report-OpenLeverage-v1/openleverage-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Revisited Logic in payoffTrade()",
+            "description": "The current implementation of payoffTrade() can be improved by avoiding repeated calculation of interest accrual and minimizing friction or cost for tokens with tax.",
+            "severity": "low",
+            "location": "OpenLevV1, function payoffTrade()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged admin account having critical control over system-wide operations and asset flow, posing counter-party risk to exchange users.",
+            "severity": "medium",
+            "location": "Multiple contracts (OpenLeverage protocol), specifically functions with `onlyAdmin` access modifiers"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Revisited Interest Rate Calculation in LTimePool",
+            "description": "The totalBorrowsCurrent() function makes an implicit assumption that the block time is equal to 1 second, which may not be the case in the deployed blockchain.",
+            "severity": "info",
+            "location": "LTimePool contract, totalBorrowsCurrent() function"
+        }
+    ]
+}

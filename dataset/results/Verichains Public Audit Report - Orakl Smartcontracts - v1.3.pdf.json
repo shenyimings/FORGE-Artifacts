@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/Verichains Public Audit Report - Orakl Smartcontracts - v1.3.pdf",
+    "project_info": {
+        "url": "https://github.com/Bisonai/orakl",
+        "commit_id": "3049a7a81d905fb74ecd7658f21f973bdc0f2098",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "orakl": "contracts/Verichains Public Audit Report - Orakl Smartcontracts - v1/orakl"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Temporary account fund can be locked if oracles fail the response to request",
+            "description": "If a user makes an error in the response configuration, the oracles are unable to fulfill the request, and the prepayment funds become permanently trapped within the prepayment contract.",
+            "severity": "high",
+            "location": "Prepayment.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unverify jobid when oracle submits fulfillDataRequestData",
+            "description": "The jobid in the requestData is utilized to specify the callback function in the user's contract, but it does not validate the jobid.",
+            "severity": "high",
+            "location": "RequestResponseCoordinator.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unverify isDirectPayment value when oracle submits fulfillDataRequestData",
+            "description": "The isDirectPayment variable is not checked when an oracle submits fulfillDataRequest, leading to loss of operatorFee for oracles in the rewardList.",
+            "severity": "n/a",
+            "location": "RequestResponseCoordinator.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy in fulfillDataRequestUint128",
+            "description": "The nonReentrant modifier does not modify the flag value during the payment step, allowing oracles to re-enter the function and execute the payment step multiple times.",
+            "severity": "high",
+            "location": "RequestResponseCoordinator.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrectly initialize a function selector that maps to a job id",
+            "description": "A bool-type job id's initialization is incorrect, causing the job id to always return a selector of function fulfillDataRequestInt256.",
+            "severity": "n/a",
+            "location": "RequestResponseConsumerBase.sol"
+        }
+    ]
+}

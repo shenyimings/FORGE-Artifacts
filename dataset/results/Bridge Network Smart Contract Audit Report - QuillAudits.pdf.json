@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/Bridge Network Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/bridgeNetwork1/bridgeToken/tree/master",
+        "commit_id": "master",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bridgeToken": "contracts/Bridge Network Smart Contract Audit Report - QuillAudits/bridgeToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing events for significant actions",
+            "description": "Not emitting events when performing significant privileged actions (addAdmin, removeAdmin, blacklistAddress, removeBlacklistedAddress)",
+            "severity": "low",
+            "location": "BridgeToken.sol, functions addAdmin(), removeAdmin(), blacklistAddress(), removeBlacklistedAddress() (lines 313, 317, 321, 325)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Multiple Solidity Pragma",
+            "description": "Not locking the pragma version and using different solidity compiler versions across contracts",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Ownership Transfer must be a two-step process",
+            "description": "The transferOwnership() function allows the current admin to transfer privileges without proper validation and verification.",
+            "severity": "n/a",
+            "location": "Contract, Function - transferOwnership()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Code",
+            "description": "The _burn() function is not called anywhere inside the contract and should be removed.",
+            "severity": "low",
+            "location": "Line 485, Function - _burn()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Public functions that could be declared external to save gas",
+            "description": "Some public functions can be declared as external instead of public to save gas.",
+            "severity": "low",
+            "location": "Various Functions (renounceOwnership, transferOwnership, name, symbol, decimals, totalSupply, balanceOf, transfer, addAdmin, removeAdmin, blacklistAddress, removeBlacklistedAddress, approve, transferFrom, increaseAllowance, decreaseAllowance)"
+        }
+    ]
+}

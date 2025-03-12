@@ -1,0 +1,140 @@
+{
+    "path": "artifacts/Solidified-Props__Protocol__[26.03.2021].pdf",
+    "project_info": {
+        "url": "https://github.com/propsproject/props-protocol",
+        "commit_id": "ce4b8e872fd1975a664128e71c106c2c6a5d59ac",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "props-protocol": "contracts/Solidified-Props__Protocol__[26/props-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Permissioned roles concentrate a lot of privileges",
+            "description": "Key privileges assigned to certain roles introduce centralization and potential security risks in case of key compromise.",
+            "severity": "high",
+            "location": "Props protocol implementation (controller, admin, and guardian roles)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Divisions before multiplication lead to decreased precision",
+            "description": "In Staking.sol, integer divisions performed before multiplications reduce precision.",
+            "severity": "low",
+            "location": "Staking.sol (lines 54 and 334)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "stakeAsDelegate() will always fail for unstaking",
+            "description": "The function reverts in _stake() when unstaking as a delegate, despite comments suggesting otherwise.",
+            "severity": "low",
+            "location": "PropsProtocol.sol (stakeAsDelegate())"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "transferGuardianship() and transferControl() lack zero checks",
+            "description": "Functions allow address(0) as parameters, which could break the protocol if used to renounce roles.",
+            "severity": "low",
+            "location": "PropsProtocol.sol (transferGuardianship() and transferControl())"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Timelock.sol: Pausing of contract cannot be undone",
+            "description": "The TimeLock contract can only be paused, with no unpause function to re-enable it.",
+            "severity": "low",
+            "location": "Timelock.sol (pause function)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Not all parameter changes are covered by events",
+            "description": "Some parameter changes in Staking.sol do not emit events for off-chain monitoring.",
+            "severity": "n/a",
+            "location": "Staking.sol (changeDailyRewardEmission() and changeRewardsDistribution())"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Domain separator could be precalculated to save gas",
+            "description": "Pre-calculating the domainSeparator in SPropsToken.sol could reduce gas costs.",
+            "severity": "n/a",
+            "location": "SPropsToken.sol (initializer)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "approve() should revert if transfers are not allowed",
+            "description": "The approve() function is inconsistent with expected behavior when transfers are not allowed in SPropsToken.sol.",
+            "severity": "n/a",
+            "location": "SPropsToken.sol (approve())"
+        }
+    ]
+}

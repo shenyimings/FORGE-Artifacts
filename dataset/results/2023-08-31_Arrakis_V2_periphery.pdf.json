@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/2023-08-31_Arrakis_V2_periphery.pdf",
+    "project_info": {
+        "url": "https://github.com/ArrakisFinance/v2-periphery/tree/cab630396506aad825d838f98d60d287ed49c0b9",
+        "commit_id": "cab630396506aad825d838f98d60d287ed49c0b9",
+        "address": "0x6aC8Bab8B775a03b8B72B2940251432442f61B94",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.10+commit.fc410830"
+        ],
+        "project_path": {
+            "TransparentUpgradeableProxy": "contracts/2023-08-31_Arrakis_V2_periphery/TransparentUpgradeableProxy"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unsafe call for unknown dummy Gauge",
+            "description": "The factory should interact with only known gauges.",
+            "severity": "info",
+            "location": "ArrakisV2GaugeFactory, setGaugeRewardDistributor and addGaugeReward functions."
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Low-level call doesn't forward the revert reason",
+            "description": "The low-level call doesn't forward the revert reason.",
+            "severity": "info",
+            "location": "RouterSwapExecutor.sol, line 55."
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ArrakisV2RouterStorage allows direct ETH transfers",
+            "description": "The contract allows direct ETH transfers.",
+            "severity": "info",
+            "location": "ArrakisV2RouterStorage, receive() function."
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Attacker can steal tokens and allowance from RouterSwapExecutor",
+            "description": "An attacker can choose swapRouter as any token and transfer from RouterSwapExecutor balance or allowance.",
+            "severity": "info",
+            "location": "RouterSwapExecutor, swap() function."
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "RouterSwapExecutor transfers all balance after swapping",
+            "description": "The contract transfers all balance after swapping.",
+            "severity": "info",
+            "location": "RouterSwapExecutor, swap() function."
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of nonreentrant modifier in RouterSwapExecutor",
+            "description": "The contract lacks a non-reentrant modifier.",
+            "severity": "info",
+            "location": "RouterSwapExecutor, swap() function."
+        }
+    ]
+}

@@ -1,0 +1,131 @@
+{
+    "path": "artifacts/Avalaunch Audit Allocation Staking and Sales - CoinFabrik Blog.pdf",
+    "project_info": {
+        "url": "https://github.com/avalaunch-app/xava-protocol/",
+        "commit_id": "fd252f8b9b0283d245d9d561130fe789ff08dfe9",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "xava-protocol": "contracts/Avalaunch Audit Allocation Staking and Sales - CoinFabrik Blog/xava-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Double Withdrawals Allowed in withdrawTokens()",
+            "description": "Any user can withdraw the same portion more than once.",
+            "severity": "critical",
+            "location": "withdrawTokens() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Earlier-than-expected Withdraw in withdrawTokens()",
+            "description": "Tokens can be vested at the start, allowing earlier-than-expected withdrawals.",
+            "severity": "critical",
+            "location": "withdrawTokens() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Denial of Service in depositTokens()",
+            "description": "A malicious user could transfer a minimal amount of tokens to prevent deposits.",
+            "severity": "medium",
+            "location": "depositTokens() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Excessive DepositFees Through Settings Manipulation",
+            "description": "Deposit fee percentage can be set to any value, allowing excessive fees.",
+            "severity": "medium",
+            "location": "AllocationStaking contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Vesting Settings Allowing Excessive or Insufficient Token Withdrawal",
+            "description": "No checks are made on the sum of vesting percentages, allowing excessive or insufficient withdrawals.",
+            "severity": "medium",
+            "location": "setVestingParams() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Denial of Service in postponeSale()",
+            "description": "Large values for timeToShift can shift round startTime to be bigger than saleEnd, rendering the sale useless.",
+            "severity": "low",
+            "location": "postponeSale() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Requirements Best Practices",
+            "description": "Use of require(condition == true, msg) and require(condition == false, msg) is not preferred.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Denial Of Service by Removing All the Administrators",
+            "description": "The function removeAdmin() can be used to remove every administrator.",
+            "severity": "low",
+            "location": "removeAdmin() function"
+        }
+    ]
+}

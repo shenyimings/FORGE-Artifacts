@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Thena-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/ThenafiBNB/THENA-Contracts/tree/07106e7",
+        "commit_id": "07106e7",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "THENA-Contracts": "contracts/PeckShield-Audit-Report-Thena-v1/THENA-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Delegate/Voting Balance Accounting in VotingEscrow",
+            "description": "Flawed delegation feature in VotingEscrow contract",
+            "severity": "low",
+            "location": "VotingEscrow::_moveAllDelegates()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Revisited Proposal State For Cancellation in Governor",
+            "description": "Incorrect protocol state in Governor contract",
+            "severity": "low",
+            "location": "L2Governor::_cancel() and execute()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20-Compliant Tokens",
+            "description": "The contract does not properly handle non-ERC20-compliant tokens, which can lead to issues with token approval and transfer.",
+            "severity": "low",
+            "location": "Multiple Contracts (USDT Token Contract, AirdropClaim contract)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improved Airdrop Logic in AirdropClaim::setUserInfo()",
+            "description": "The current logic to compute initAmount, vestedAmount, and lockedAmount can be improved.",
+            "severity": "medium",
+            "location": "AirdropClaim contract (setUserInfo() function)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Killed Gauges Still Eligible For Rewards",
+            "description": "The `killGaugeTotally` function in `VoterV2_1` contract does not properly remove a killed gauge, making it still eligible for rewards.",
+            "severity": "medium",
+            "location": "VoterV2_1 contract, specifically the `killGaugeTotally` function."
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged owner account has too much power and control over the system-wide operations, posing a trust issue.",
+            "severity": "medium",
+            "location": "Multiple contracts, specifically the `setDistribution`, `setGaugeRewarder`, and `setRewarderPid` functions."
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Violation of Checks-Effects-Interactions Principle",
+            "description": "The `withdrawStakingFees` function in `PairFees` contract violates the checks-effects-interactions principle, making it vulnerable to reentrancy attacks.",
+            "severity": "low",
+            "location": "MerkleTree/MerkleTreeTHENFT contracts, specifically the `withdrawStakingFees` function."
+        }
+    ]
+}

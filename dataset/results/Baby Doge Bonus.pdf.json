@@ -1,0 +1,50 @@
+{
+    "path": "artifacts/Baby Doge Bonus.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x23ad338f21228f93fa20e688a0ccc09f5e61b784",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "CoinToken": "contracts/Baby Doge Bonus/CoinToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can lead to an OUT_OF_GAS exception if the excluded addresses list is long. Similarly, the function `_getCurrentSupply` also uses a loop for evaluating total supply, which can result in an OUT_OF_GAS exception.",
+            "severity": "low",
+            "location": "`includeInReward()` and `_getCurrentSupply` functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges, including locking/unlocking, including/excluding from reward/fee, changing tax/liquidity fee, numTokensSellToAddToLiquidity, maximum transaction amount, enabling/disabling swap and liquify, and withdrawing contract BNBs.",
+            "severity": "low",
+            "location": "Multiple functions and variables across the contract"
+        }
+    ]
+}

@@ -1,0 +1,152 @@
+{
+    "path": "artifacts/MetaGameStarter Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/metagamehub/Tokenomics-Contracts/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Tokenomics-Contracts": "contracts/MetaGameStarter Smart Contract Audit Report - QuillAudits/Tokenomics-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Insufficient require checks on the createPool parameters",
+            "description": "The parameters tokenPerShareMultiplier, cycleDuration, startOfDeposit, and tokenPerShare in the constructor and createPool() function do not have any required checks on their range of values allowed and thus can be exploited by the owner.",
+            "severity": "high",
+            "location": "Constructor and createPool() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "For loop over dynamic array leads to out of gas",
+            "description": "There is a for loop used over dynamic array _initialPools in the constructor, which can lead to out of gas issues.",
+            "severity": "medium",
+            "location": "Constructor"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Staking Token is assumed to be non-malicious",
+            "description": "The staking token is assumed to be non-malicious without any proofs provided.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Insufficient require checks on cycletoken in updatePool()",
+            "description": "cycleDuration in the updatePool() function has no checks, which can lead to unwanted or undiscovered outcomes.",
+            "severity": "medium",
+            "location": "updatePool() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "Insufficient liquidity in the Staking Pool",
+            "description": "If a user deposits tokens and the owner updates the tokenPerShareMultiplier, but enough staking tokens are not available in the contract, it can lead to undesired outcomes.",
+            "severity": "medium",
+            "location": "Staking Pool"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing error messages",
+            "description": "There is a missing error message in the require statement on lines 51 and 62.",
+            "severity": "low",
+            "location": "Lines 51 and 62"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zero address check",
+            "description": "There is a missing zero address check for _sender parameter in the receiveApproval() function.",
+            "severity": "low",
+            "location": "receiveApproval() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Insufficient documentation provided",
+            "description": "There is insufficient documentation provided as to the business logic of the project and the expected implementation of the staking pools.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused function parameter _stakeToken in receiveApproval() function",
+            "description": "It is advised to make clear as to why this parameter is unused and to remove it if not required.",
+            "severity": "info",
+            "location": "receiveApproval() function"
+        }
+    ]
+}

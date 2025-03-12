@@ -1,0 +1,275 @@
+{
+    "path": "artifacts/Solidified-Gnosis_DX_[03.29.18].pdf",
+    "project_info": {
+        "url": "https://github.com/gnosis/dutch-exchange/tree/8388808de1459363182a63eb27c0bcadebd4537d",
+        "commit_id": "8388808de1459363182a63eb27c0bcadebd4537d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "dutch-exchange": "contracts/Solidified-Gnosis_DX_[03/dutch-exchange"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Potential abuse of auctioneer's powers",
+            "description": "Auctioneer can update masterCopy variable, allowing them to withdraw all funds and mint arbitrary Magnolia tokens.",
+            "severity": "high",
+            "location": "DutchExchange contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Minting of arbitrary amount of Magnolia tokens",
+            "description": "Auctioneer can mint arbitrary Magnolia tokens by creating a pair of token contracts controlled by them.",
+            "severity": "high",
+            "location": "DutchExchange contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Changing the TokenMGN minter to prevent claiming of auction winnings",
+            "description": "Owner of Magnolia contract can set a minter, allowing them to steal tokens.",
+            "severity": "high",
+            "location": "Magnolia Token contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Griefing opportunities enabled by addTokenPair",
+            "description": "List of known issues mentions that the starting price provided doesn't have to reflect rational market price.",
+            "severity": "low",
+            "location": "DutchExchange contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ]
+            },
+            "title": "Due to change of ETH/USD price, auctions that were under the starting threshold can passively surpass it",
+            "description": "Auction's sell-side funding surpasses necessary auction start threshold due to a change in ETH/USD price.",
+            "severity": "low",
+            "location": "DutchExchange contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Each approved token contract is a potential Magnolia minting attack vector",
+            "description": "Approved token contract can be used for minting Magnolia tokens.",
+            "severity": "n/a",
+            "location": "DutchExchange contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Sellers are disproportionately affected by network congestion",
+            "description": "Buyers include gas costs in the calculation of effective price, but sellers do not.",
+            "severity": "low",
+            "location": "DutchExchange contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Consider adding pre-approval of max fee and max price",
+            "description": "Allow users to pre-approve values of attributes that depend on time and order.",
+            "severity": "n/a",
+            "location": "DutchExchange contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant arguments",
+            "description": "claimAndWithdraw function throws if user != msg.sender, so the user argument is redundant; settleFee function always called with user = msg.sender, making the user argument redundant.",
+            "severity": "low",
+            "location": "DutchExchange contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-179"
+                ]
+            },
+            "title": "Consider indexing event arguments",
+            "description": "Events should have indexed arguments for searchable logs.",
+            "severity": "n/a",
+            "location": "DutchExchange contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Consider validating input arrays are same length in function claimTokensFromSeveralAuctions",
+            "description": "Input arrays auctionSellTokens, auctionBuyTokens, and auctionIndices should be validated to be the same length.",
+            "severity": "low",
+            "location": "DutchExchange contract"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Last Buy-Order does not pay fees",
+            "description": "The buy order that closes an auction is not charged fees.",
+            "severity": "n/a",
+            "location": "Auction closing function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Misused variable",
+            "description": "Variable `auctionStart` set on line 431 can be used instead of `getAuctionStart(sellToken, buyToken)`",
+            "severity": "n/a",
+            "location": "DutchExchange.sol, line 437"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Invariant Expression",
+            "description": "Expression in condition is always true because of line 446",
+            "severity": "n/a",
+            "location": "DutchExchange.sol, line 775"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unnecessary visibility",
+            "description": "Functions with \"public\" visibility instead of \"external\"",
+            "severity": "n/a",
+            "location": "Various functions in the contract"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Funds locked due to rounding",
+            "description": "Accumulation of irretrievable token balances due to division rounding",
+            "severity": "n/a",
+            "location": "Various places in the contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Miner front-running ability",
+            "description": "Miner has limited control over which transactions they accept and execute, allowing for front-running",
+            "severity": "n/a",
+            "location": "Auction closing function"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Overflow not handled",
+            "description": "No protection against overflows in `totalTokens` and `lockedTokenBalances`",
+            "severity": "n/a",
+            "location": "MNG contract, `mintTokens()` function"
+        }
+    ]
+}

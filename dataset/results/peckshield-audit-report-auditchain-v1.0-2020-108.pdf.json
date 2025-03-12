@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/peckshield-audit-report-auditchain-v1.0-2020-108.pdf",
+    "project_info": {
+        "url": "https://github.com/DAOCapsule/AUDT-Capsule-Lift-Off/tree/c69e52f33fe53a92a004bd5c36c26f2e81f64b60",
+        "commit_id": "c69e52f33fe53a92a004bd5c36c26f2e81f64b60",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "AUDT-Capsule-Lift-Off": "contracts/peckshield-audit-report-auditchain-v1/AUDT-Capsule-Lift-Off"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Oversized totalReward May Lock User Stakes",
+            "description": "If totalReward is initially configured unreasonably large, it may cause an overflow in the returnEarningRatio() function, leading to every redemption attempt being reverted after the staking period ends.",
+            "severity": "low",
+            "location": "DAOCapsule contract, _deliverRewards() and returnEarningsPerAmount() functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Burnability of Locked Accounts",
+            "description": "The locked account may still be able to burn their tokens.",
+            "severity": "medium",
+            "location": "ERC20Burnable contract, burn() and burnFrom() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Suggested Uses of SafeMath",
+            "description": "Possibility of overflow in arithmetic operations without using SafeMath.",
+            "severity": "low",
+            "location": "Staking contract, returnEarningsPerAmount() and stake() functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of Rigorous Sanity Checks on System Parameters",
+            "description": "The update logic on system-wide parameters can be improved by applying more rigorous sanity checks to prevent undesirable consequences.",
+            "severity": "low",
+            "location": "AlphaPerp contract, function updateStakingPeriods()"
+        }
+    ]
+}

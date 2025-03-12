@@ -1,0 +1,83 @@
+{
+    "path": "artifacts/ExperiPie.md",
+    "project_info": {
+        "url": "https://github.com/pie-dao/ExperiPie",
+        "commit_id": "facf3c246d9c43f5b1e0bad7dc2b0a9a2a2393c5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ExperiPie": "contracts/ExperiPie/ExperiPie"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Invalid setter function",
+            "description": "The setDefaultController() and setFeeBeneficiary() functions do not update the pool owner and fee beneficiary correctly.",
+            "severity": "high",
+            "location": "PieFactoryContract.sol, BasketFacet.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect logic when burning and minting tokens",
+            "description": "The mint() and burn() functions do not update the totalSupply variable correctly.",
+            "severity": "n/a",
+            "location": "ERC20Facet.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Approve / TransferFrom multiple withdrawal attack",
+            "description": "The approve() function allows an attacker to transfer more tokens than allowed.",
+            "severity": "high",
+            "location": "ERC20Facet.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Gas overflow during iteration (DoS)",
+            "description": "Loops in the code can cause gas overflows and denial-of-service attacks.",
+            "severity": "high",
+            "location": "PieFactoryContract.sol, CallFacet.sol, BasketFacet.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Global Protection of malicious backward calls in raw methods execution",
+            "description": "The LendingManager and RSIManager contracts allow for malicious reentrancy attacks.",
+            "severity": "high",
+            "location": "LendingManager.sol, RSIManager.sol"
+        }
+    ]
+}

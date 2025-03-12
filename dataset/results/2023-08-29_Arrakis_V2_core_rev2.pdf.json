@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/2023-08-29_Arrakis_V2_core_rev2.pdf",
+    "project_info": {
+        "url": "https://github.com/ArrakisFinance/v2-core/tree/a9759d1a45bc3a9dc9a378cbff3588e76a5083f5",
+        "commit_id": "a9759d1a45bc3a9dc9a378cbff3588e76a5083f5",
+        "address": "0x7f346f1eb7a65ff83f51b3fd76dcc70979e6df38",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.13+commit.abaa5c0e"
+        ],
+        "project_path": {
+            "ArrakisV2": "contracts/2023-08-29_Arrakis_V2_core_rev2/ArrakisV2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No checks if liquidity to mint is zero",
+            "description": "In ArrakisV2.mint(), if mintAmount_ is small, liquidity can round down to 0, causing the transaction to revert in pool.mint().",
+            "severity": "medium",
+            "location": "ArrakisV2.sol#L136"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "First minter can skew the initial ratio",
+            "description": "In ArrakisV2.mint(), the first minter can skew the initial ratio by setting mintAmount_ to a small value.",
+            "severity": "medium",
+            "location": "ArrakisV2.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "getAmountsForDelta reverts for liquidity < 0",
+            "description": "The Underlying library's getAmountsForDelta function reverts when liquidity is less than 0.",
+            "severity": "info",
+            "location": "Underlying.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistent function name",
+            "description": "The Underlying library's computeMintAmounts function returns only one parameter - mintAmount, and its name is inconsistent.",
+            "severity": "info",
+            "location": "Underlying.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Zero address check",
+            "description": "The ArrakisV2Storage contracts' _whitelistRouters function allows adding a zero address as a router.",
+            "severity": "info",
+            "location": "ArrakisV2Storage.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Magic number",
+            "description": "The ArrakisV2Storage contracts' setManagerFeeBPS function has a check for a managerFeeBPS_ input variable, which is a magic number.",
+            "severity": "info",
+            "location": "ArrakisV2Storage.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Zero address _arrakisV2Beacon for ArrakisV2FactoryStorage",
+            "description": "ArrakisV2FactoryStorage allows creating a factory with a zero address for _arrakisV2Beacon.",
+            "severity": "info",
+            "location": "ArrakisV2FactoryStorage.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Zero address factory_ for ArrakisV2Resolver",
+            "description": "ArrakisV2Resolver allows creating a factory with a zero address for _factory.",
+            "severity": "info",
+            "location": "ArrakisV2Resolver.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Inconsistent event name",
+            "description": "All ArrakisV2Storage contract's events have a 'Log' prefix except one - LPBurned.",
+            "severity": "info",
+            "location": "ArrakisV2Storage.sol"
+        }
+    ]
+}

@@ -1,0 +1,377 @@
+{
+    "path": "artifacts/cryptex-finance.pdf",
+    "project_info": {
+        "url": "https://github.com/cryptexglobal/contracts",
+        "commit_id": "9bd0481…755d32e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/cryptex-finance/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong token being transferred on claimVest()",
+            "description": "The claimVest() function transfers the staking token instead of the reward token.",
+            "severity": "high",
+            "location": "LiquidityReward.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Staking token can be withdrawn from the rewards contract",
+            "description": "The recoverERC20() function does not prevent withdrawing the staking token.",
+            "severity": "medium",
+            "location": "LiquidityReward.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "TCAP Token can be withdrawn from the vault",
+            "description": "The recoverERC20() function allows the owner to recover both TCAP Token and any ERC20 collateral.",
+            "severity": "medium",
+            "location": "IVaultHandler.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Oracle price could be stale",
+            "description": "The getLatestAnswer() function returns a potentially stale price from Chainlink.",
+            "severity": "low",
+            "location": "ChainlinkOracle.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Loss of rewards due to truncation",
+            "description": "The getReward() function loses precision due to integer division.",
+            "severity": "low",
+            "location": "LiquidityReward.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Ratio can be set to any value",
+            "description": "The setRatio() function does not constrain the input parameter ratio.",
+            "severity": "low",
+            "location": "IVaultHandler.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Burn fee can be set to any value",
+            "description": "The setBurnFee() function does not constrain the input parameter burnFee.",
+            "severity": "low",
+            "location": "IVaultHandler.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Treasury can be set to any address",
+            "description": "The setTreasury() function does not validate the input parameter treasury.",
+            "severity": "low",
+            "location": "IVaultHandler.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Burn fee not paid to the treasury",
+            "description": "The burn fee is not paid to the treasury in the liquidateVault() function.",
+            "severity": "low",
+            "location": "IVaultHandler.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Median is more robust than average for aggregated oracles",
+            "description": "Using a median price aggregation is more robust than an average price.",
+            "severity": "low",
+            "location": "ChainlinkOracle.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1077"
+                ]
+            },
+            "title": "Dangerous use of strict equality",
+            "description": "The liquidateVault() function and withBurnFee() modifier use strict equality checks.",
+            "severity": "low",
+            "location": "IVaultHandler.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Allowance Double-Spend Exploit",
+            "description": "The approve() function is vulnerable to the allowance double-spend exploit.",
+            "severity": "info",
+            "location": "Ctx.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Misleading error message",
+            "description": "The recoverERC20() function has a misleading error message.",
+            "severity": "info",
+            "location": "IVaultHandler.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-654"
+                ]
+            },
+            "title": "Single point of failure for price feeds",
+            "description": "The price feeds rely on a single oracle, Chainlink Aggregator V3.",
+            "severity": "info",
+            "location": "IVaultHandler.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Clone-and-Own",
+            "description": "The clone-and-own approach involves copying and adjusting open-source code.",
+            "severity": "info",
+            "location": "SafeMath.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Receipts with value zero for invalid proposals",
+            "description": "The getReceipt() function can return receipts with value zero for invalid proposals.",
+            "severity": "info",
+            "location": "GovernorAlpha.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Loss of precision due to multiplication after division",
+            "description": "Division in Solidity leads to truncation and loss of precision.",
+            "severity": "info",
+            "location": "IVaultHandler.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unchecked Return Value",
+            "description": "The claimVest() function ignores the return value of transfer().",
+            "severity": "info",
+            "location": "LiquidityReward.sol"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input address validation",
+            "description": "Input parameters of type address should always be checked to be different from address(0).",
+            "severity": "info",
+            "location": "Orchestrator.sol, RewardHandler.sol"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Incorrect amount may be withdrawn from the reward handler",
+            "description": "Withdrawal of _requiredTCAP may be larger than vault debt, causing an integer underflow.",
+            "severity": "n/a",
+            "location": "IVaultHandler.sol, function liquidateVault()"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Unread vestingBegin state variable",
+            "description": "The vestingBegin state variable is never read in the LiquidityReward contract.",
+            "severity": "n/a",
+            "location": "LiquidityReward.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Unclear vesting period interpretation",
+            "description": "The implementation of vesting period is unclear, leading to potential misinterpretation.",
+            "severity": "n/a",
+            "location": "LiquidityReward.sol"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Arbitrary setting of vestingRatio",
+            "description": "The vestingRatio can be arbitrarily set in the LiquidityReward constructor, leading to potential inconsistencies.",
+            "severity": "n/a",
+            "location": "LiquidityReward.sol"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Unindexed event parameters",
+            "description": "Event parameters of type address are not indexed.",
+            "severity": "n/a",
+            "location": "Various contracts (NewRewardHandler, NewTreasury, Recovered events)"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "TODOs in production code",
+            "description": "TODOs should not be present in production code.",
+            "severity": "n/a",
+            "location": "Various contracts (IVaultHandler.sol, TCAP.sol)"
+        }
+    ]
+}

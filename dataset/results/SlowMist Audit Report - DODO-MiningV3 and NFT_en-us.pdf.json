@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/SlowMist Audit Report - DODO-MiningV3 and NFT_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/DODOEX/contractV2/",
+        "commit_id": "453e323",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contractV2": "contracts/SlowMist Audit Report - DODO-MiningV3 and NFT_en-us/contractV2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-330"
+                ],
+                "3": [
+                    "CWE-340"
+                ]
+            },
+            "title": "Random can be predicted issue",
+            "description": "The random number can be predicted due to the lack of separate operations for redeeming tickets and determining the random number.",
+            "severity": "critical",
+            "location": "DODODropsV2.sol (L114, L229, L154-L159)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-358"
+                ]
+            },
+            "title": "isContract can be bypassed",
+            "description": "The implementation of the isContract check has flaws and can be bypassed.",
+            "severity": "medium",
+            "location": "DODODropsV2.sol (L135)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Excessive authority issue",
+            "description": "The owner has excessive authority to control the source of the random number seed.",
+            "severity": "medium",
+            "location": "DODODropsV2.sol (L227, L259)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "The DoS risk",
+            "description": "A for loop can cause an out-of-gas error if the number of loops is large.",
+            "severity": "info",
+            "location": "BaseMine.sol (L258)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Event log missing",
+            "description": "There is no event record for setting an external contract address as a template contract.",
+            "severity": "info",
+            "location": "DODOMineV3Proxy.sol (L128)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Check enhancement of isLpToken",
+            "description": "Admin can add non-LPtoken assets with isLpToken set to True, or LPtoken assets with isLpToken set to False.",
+            "severity": "info",
+            "location": "DODOMineV3Registry.sol (L44)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Security reminder on architecture design",
+            "description": "createStdERC20 and createMintableERC20 are open-ended calls, which may pose security risks.",
+            "severity": "info",
+            "location": "ERC20V2Factory.sol (L72-L123)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Untrusted data from getTokenByUser",
+            "description": "The data obtained by getTokenByUser is not credible and should not be used as a dependency for other services.",
+            "severity": "medium",
+            "location": "getTokenByUser function"
+        }
+    ]
+}

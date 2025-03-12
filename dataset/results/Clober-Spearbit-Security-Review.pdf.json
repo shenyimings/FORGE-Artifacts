@@ -1,0 +1,350 @@
+{
+    "path": "artifacts/Clober-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/clober-dex/core",
+        "commit_id": "28062f477f571b38fe4f8455170bd11094a71862",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "core": "contracts/Clober-Spearbit-Security-Review/core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "OrderBook Denial of Service leveraging blacklistable tokens like USDC",
+            "description": "An attacker can block the main functionality of the OrderBook by creating a broken order, leading to a denial-of-service attack.",
+            "severity": "critical",
+            "location": "OrderBook.sol#L649-L666"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Overflow in SegmentedSegmentTree464",
+            "description": "The nodes in a group can overflow without triggering an overflow & revert, breaking the order book depth and claim functionalities.",
+            "severity": "critical",
+            "location": "SegmentedSegmentTree464.sol#L173"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "OrderNFT theft due to controlling future and past tokens of same order index",
+            "description": "An attacker can steal an NFT by setting approvals for future token IDs, allowing them to cancel the NFT and claim their tokens.",
+            "severity": "critical",
+            "location": "OrderBook.sol#L410, OrderNFT.sol#L285"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-172"
+                ]
+            },
+            "title": "OrderNFT theft due to ambiguous tokenId encoding/decoding scheme",
+            "description": "The encodeId() function can be ambiguously decoded, allowing an attacker to steal an NFT.",
+            "severity": "critical",
+            "location": "OrderNFT.sol#L249-L274"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-283"
+                ]
+            },
+            "title": "Missing owner check on from when transferring tokens",
+            "description": "An attacker can decrease other users' NFT balances, making them unable to cancel or claim their NFTs and locking users' funds.",
+            "severity": "high",
+            "location": "OrderNFT.sol#L207"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong minimum net fee check",
+            "description": "Market creators can avoid collecting protocol fees this way.",
+            "severity": "high",
+            "location": "MarketFactory.sol#L79, MarketFactory.sol#L111"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rounding up of taker fees of constituent orders may exceed collected fee",
+            "description": "More fees are accounted for than actually taken.",
+            "severity": "high",
+            "location": "OrderBook.sol#L463, OrderBook.sol#L478-L482, OrderBook.sol#L604"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Drain tokens condition due to reentrancy in collectFees",
+            "description": "A malicious host can drain trading pools.",
+            "severity": "high",
+            "location": "OrderBook.sol#L800-L810"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Group claim clashing condition",
+            "description": "Transactions claiming multiple orders at once can easily clash with others and be reverted completely, effectively claiming nothing - just wasting gas.",
+            "severity": "medium",
+            "location": "OrderBook.sol#L685"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ],
+                "4": [
+                    "CWE-226"
+                ]
+            },
+            "title": "Order owner isn't zeroed after burning",
+            "description": "This allows for unexpected behavior, like being able to call approve() and safeTransferFrom() functions on non-existent tokens.",
+            "severity": "medium",
+            "location": "OrderBook.sol#L821-L823, OrderNFT.sol#L78-L82, OrderNFT.sol#L189"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Lack of two-step role transfer",
+            "description": "The lack of two-step role transfer can lead to errors in MarketFactory ownership and market's host.",
+            "severity": "medium",
+            "location": "MarketFactory.sol#L146-L152, MarketFactory.sol#L137-L140"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Atomic fees delivery susceptible to funds lockout",
+            "description": "Fees delivery can be blocked due to a single address being blacklisted or malicious token configuration.",
+            "severity": "medium",
+            "location": "OrderBook.sol#L791-L798, OrderBook.sol#L804-L805"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "DAO fees potentially unavailable due to overly strict access control",
+            "description": "The collectFees function is too restrictive, leading to potential fund lockout.",
+            "severity": "medium",
+            "location": "OrderBook.sol#L790"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "OrderNFT ownership and market host transfers are done separately",
+            "description": "The market host is entitled to 80% of the fees collected, and is able to set the URI of the corresponding orderToken NFT.",
+            "severity": "low",
+            "location": ""
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "DOS if quoteUnit and index to price functions are set to unreasonable values",
+            "description": "Denial-of-service attacks for some markets that are created with bad quoteUnit and pricing functions.",
+            "severity": "info",
+            "location": "OrderBook.sol#L565"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Unsupported tokens: tokens with more than 18 decimals",
+            "description": "The orderbook does currently not support tokens with more than 18 decimals.",
+            "severity": "info",
+            "location": "OrderBook.sol#L102"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "childRawIndex in OctopusHeap.pop is not a raw index",
+            "description": "The variable is not a raw index, it's actually raw index + 1 (1-based).",
+            "severity": "info",
+            "location": "OctopusHeap.sol#L231"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of orderIndex validation",
+            "description": "Missing proper validation for the orderIndex parameter.",
+            "severity": "info",
+            "location": "OrderNFT.sol#L271"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Unsafe _getParentHeapIndex, _getLeftChildHeapIndex",
+            "description": "When heapIndex = 1 or 45, these functions may return invalid heap indices.",
+            "severity": "info",
+            "location": "OctopusHeap.sol#L135 and #L156"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "_priceToIndex function implemented but unused",
+            "description": "The function is implemented but not used.",
+            "severity": "info",
+            "location": "ArithmeticPriceBook.sol#L23, GeometricPriceBook.sol#L74"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect _MAX_NODES and _MAX_NODES_P descriptions",
+            "description": "Derivation of the values _MAX_NODES and MAX_NODES_P in the comments are incorrect.",
+            "severity": "info",
+            "location": "SegmentedSegmentTree464.sol#L41-L42"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "marketOrder() with expendOutput reverts with SlippageError with max tolerance",
+            "description": "The function reverts with a SlippageError when using the maximum tolerance.",
+            "severity": "high",
+            "location": "https://github.com/clober-dex/core/issues/332"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong OrderIndex could be emitted at Claim() event",
+            "description": "The wrong order index could be emitted during the claim event.",
+            "severity": "low",
+            "location": "https://github.com/clober-dex/core/issues/354"
+        }
+    ]
+}

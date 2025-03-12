@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Merlin-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/merlinprotocol/HashNFT/tree/612b423",
+        "commit_id": "612b423",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "HashNFT": "contracts/PeckShield-Audit-Report-Merlin-v1/HashNFT"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged accounts (e.g., owner/ADMIN_ROLE/TRACK_ROLE) have critical roles in governing and regulating system-wide operations, which can be a counter-party risk to protocol users if not properly managed.",
+            "severity": "medium",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Inconsistent day index meaning",
+            "description": "The day index in BitcoinEarningsOracle and RiskControl contracts have different meanings, leading to unexpected daily earnings.",
+            "severity": "n/a",
+            "location": "BitcoinEarningsOracle contract (trackDailyEarnings function) and RiskControl contract (deliver function)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Inconsistent getRound behavior",
+            "description": "The getRound function in BitcoinEarningsOracle contract may return 0 if daily earnings are not set, but it is handled as an impossible case in the RiskControl contract.",
+            "severity": "n/a",
+            "location": "BitcoinEarningsOracle contract (getRound function) and RiskControl contract (deliver function)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Violation of checks-effects-interactions pattern",
+            "description": "The claimTax function in the RiskControl contract violates the checks-effects-interactions principle, making it vulnerable to re-entrancy attacks.",
+            "severity": "low",
+            "location": "RiskControl contract (claimTax function) and other similar functions in Multiple Contracts"
+        }
+    ]
+}

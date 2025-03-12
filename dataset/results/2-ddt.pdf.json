@@ -1,0 +1,176 @@
+{
+    "path": "artifacts/2-ddt.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x4c287a968189dB50170f7E2b1F0284786F3448A7",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.9+commit.e5eed63a"
+        ],
+        "project_path": {
+            "DiamondDexToken": "contracts/2-ddt/DiamondDexToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "ST - Stops Transactions",
+            "description": "The contract owner has the authority to stop transactions for all users excluding the owner.",
+            "severity": "medium",
+            "location": "DiamondDexToken.sol#L1350"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "ELFM - Exceeds Fees Limit",
+            "description": "The contract owner can increase fees over the allowed limit of 25%.",
+            "severity": "critical",
+            "location": "DiamondDexToken.sol#L1168,1172,1180"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PVC - Price Volatility Concern",
+            "description": "numTokensSellToAddToLiquidity could produce dramatically price volatility.",
+            "severity": "low",
+            "location": "DiamondDexToken.sol#L1195"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RSML - Redundant SafeMath Library",
+            "description": "The usage of the SafeMath library produces unnecessary additional gas in Solidity versions 0.8.0 or higher.",
+            "severity": "low",
+            "location": "DiamondDexToken.sol#L103"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L02 - State Variables could be Declared Constant",
+            "description": "Constant state variables should be declared constant to save gas.",
+            "severity": "low",
+            "location": "DiamondDexToken.sol#L918,919,917,913"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "Not following the Solidity naming convention.",
+            "severity": "low",
+            "location": "Multiple locations in DiamondDexToken.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "L07 - Missing Events Arithmetic",
+            "description": "Functions have no event emitted, making it difficult to track off-chain changes.",
+            "severity": "low",
+            "location": "DiamondDexToken.sol#L1168,1172,1176,1180,1195"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L09 - Dead Code Elimination",
+            "description": "Unused functions make the code's size bigger.",
+            "severity": "low",
+            "location": "DiamondDexToken.sol#L320,384,404,417,290,365,352"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "L10 - State Variables in Loop",
+            "description": "Costly operations inside a loop might waste gas.",
+            "severity": "low",
+            "location": "DiamondDexToken.sol#L1125"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Abuse by owner",
+            "description": "Some functions can be abused by the owner, such as stopping transactions and manipulating fees.",
+            "severity": "n/a",
+            "location": "Various contract functions"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Centralized ownership risk",
+            "description": "Renouncing ownership or temporarily locking the contract can eliminate contract threats.",
+            "severity": "n/a",
+            "location": "Contract ownership"
+        }
+    ]
+}

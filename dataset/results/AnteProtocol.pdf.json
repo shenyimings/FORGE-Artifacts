@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/AnteProtocol.pdf",
+    "project_info": {
+        "url": "https://github.com/antefinance/ante-v0-core",
+        "commit_id": "fdd0d8d68a5697415cde511aa5dc98c469871bb7",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ante-v0-core": "contracts/AnteProtocol/ante-v0-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Insufficient gas can cause AnteTests to produce false positives",
+            "description": "An attacker could manipulate the result of an AnteTest by providing a limited amount of gas",
+            "severity": "high",
+            "location": "contracts/AntePool.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Looping over an array of unbounded size can cause a denial-of-service",
+            "description": "The _calculateChallengerEligibility function will consume a large quantity of gas when the number of challengers is large",
+            "severity": "medium",
+            "location": "contracts/AntePool.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Re-entrancy into AntePool.checkTest scales challenger eligible amount",
+            "description": "A malicious AnteTest or underlying contract being tested can trigger multiple failed checkTest calls by reentering the AntePool.checkTest function",
+            "severity": "high",
+            "location": "contracts/AntePool.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "AntePool Reentrancy (Moderate/Weak)",
+            "description": "Proof-of-concept unit test demonstrates reentrancy vulnerability in AntePool's checkTest method",
+            "severity": "medium",
+            "location": "contracts/AntePool.sol (checkTest method)"
+        }
+    ]
+}

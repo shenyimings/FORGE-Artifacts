@@ -1,0 +1,545 @@
+{
+    "path": "artifacts/Solidified-Nexus_Mutual_[22.04.2019].pdf",
+    "project_info": {
+        "url": "https://github.com/somish/NexusMutual/tree/341679e5b43774e7db3bdb9ecd8fcea5b2fc9bcf",
+        "commit_id": "341679e5b43774e7db3bdb9ecd8fcea5b2fc9bcf",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "NexusMutual": "contracts/Solidified-Nexus_Mutual_[22/NexusMutual"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Non-member can empty quotation contract",
+            "description": "A user can repeatedly refund joining fee and cover value by exploiting the initiation membership process.",
+            "severity": "critical",
+            "location": "QuotationData contract, initiateMembershipAndCover() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "NXMasterToken.sol: transferFrom() does not check whether tokens have been locked for voting",
+            "description": "Members can move locked tokens using transferFrom() implementation.",
+            "severity": "critical",
+            "location": "NXMasterToken.sol, transferFrom() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Quotation.sol: Signature verification is liable to signature replay attacks",
+            "description": "VerifySign function is vulnerable to signature replay attacks due to lack of uniqueness in signed messages.",
+            "severity": "critical",
+            "location": "Quotation.sol, verifySign function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Followers get no protection if leader votes against their interest",
+            "description": "Followers have no protection mechanism if the leader votes against their interests.",
+            "severity": "high",
+            "location": "Governance contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Users can deny a follower choosing a leader by delegating to them first",
+            "description": "Users can prevent followers from choosing leaders by delegating to them beforehand.",
+            "severity": "high",
+            "location": "Governance contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "It's possible to add new categories with _memberRoleToVote values different than the one present in MemberRoles enum",
+            "description": "New categories can be added with conflicting _memberRoleToVote values.",
+            "severity": "high",
+            "location": "Governance contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Delegation only works if it's been made more than 7 days ago",
+            "description": "Delegation is restricted by a 7-day delay, which can lead to issues with voting mechanisms.",
+            "severity": "high",
+            "location": "Governance contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "follower is an unbounded array, so it can grow too large to be able to cast a vote",
+            "description": "Unbounded follower array can cause gas limitations and prevent votes from being cast.",
+            "severity": "high",
+            "location": "Governance contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "Voters are incremented even if member.checkRole returns false",
+            "description": "Voter count is increased regardless of checkRole's result, affecting voting mechanisms.",
+            "severity": "high",
+            "location": "Governance contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Adding solution functionality is not present",
+            "description": "Lack of multi-option proposal functionality in governance structure.",
+            "severity": "high",
+            "location": "Governance contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Proposals can never get categorized?",
+            "description": "Proposal categorization mechanism is flawed or non-existent.",
+            "severity": "high",
+            "location": "Governance contract"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "UpdateProposal does not update categories",
+            "description": "UpdateProposal function fails to update proposal categories, requiring separate calls.",
+            "severity": "high",
+            "location": "Governance contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Replaced contracts are still active",
+            "description": "Replaced contracts remain operational and can receive deposits due to loose upgradability scheme.",
+            "severity": "n/a",
+            "location": "Upgradability mechanism"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Governance can upgrade each contract masters individually",
+            "description": "Governance can individually upgrade master contracts, which may lead to inconsistencies.",
+            "severity": "n/a",
+            "location": "Upgradability mechanism"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "There's no assurance that even though the address for upgrading is correct that the initialization will be as well",
+            "description": "Uncertainty in proper initialization of upgraded contracts due to flawed upgradability scheme.",
+            "severity": "n/a",
+            "location": "Upgradability mechanism"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Quotation.sol: Cover can be initiated with a very large amount",
+            "description": "Lack of SafeMath usage allows for massive ETH amounts in cover initiation, leading to overflow.",
+            "severity": "low",
+            "location": "Quotation.sol, initiateMembershipAndCover() function"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "On NXMaster.sol and MemberRoles.sol there's no check to guarantee that the contracts are initialized before functions are callable",
+            "description": "Uninitialized contracts can be called, leading to potential issues.",
+            "severity": "low",
+            "location": "NXMaster.sol and MemberRoles.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "On NXMaster(sol there's no enforcing that the addNewVersion function will receive an array with all the contracts",
+            "description": "Lack of enforcement for receiving a complete array of contracts in addNewVersion function.",
+            "severity": "low",
+            "location": "NXMaster.sol, addNewVersion() function"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Unbounded arrays can reach block gas limit on iteration",
+            "description": "Unbounded arrays can cause gas limitations when iterated, preventing execution.",
+            "severity": "low",
+            "location": "Various contracts with unbounded arrays"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "ERC-20 transfers should be wrapped in require statements",
+            "description": "Lack of wrapping ERC-20 transfer calls in require statements may lead to unexpected behavior.",
+            "severity": "low",
+            "location": "ERC-20 token implementation"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "EventCaller functions can be called by anyone",
+            "description": "The functions in the Event Caller contract are callable by anyone in the network, which could confuse off-chain operators that rely on events being called.",
+            "severity": "n/a",
+            "location": "EventCaller contract"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "NXMaster delegateCallBack can be resubmitted",
+            "description": "Anyone can resubmit a callback by copying the ID and sending to NXMaster again.",
+            "severity": "n/a",
+            "location": "NXMaster contract, delegateCallBack function"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inefficient use of Ints",
+            "description": "Using Ints is highly inefficient.",
+            "severity": "n/a",
+            "location": "General (multiple contracts)"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ],
+                "3": [
+                    "CWE-1060"
+                ]
+            },
+            "title": "Unoptimized gas usage in CheckVoteClosing()",
+            "description": "Inverting else if statements order should save gas due to short circuiting.",
+            "severity": "n/a",
+            "location": "Claims.sol, CheckVoteClosing() function"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1048"
+                ]
+            },
+            "title": "Unoptimized gas usage in SubmitCAVote()",
+            "description": "Making 6 consecutive calls to ClaimsData is significantly more expensive than calling one function in CD that handles all sub-operations.",
+            "severity": "n/a",
+            "location": "SubmitCAVote() function"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unoptimized gas usage in getTokenPrice()",
+            "description": "Forwarding a call to another contract is significantly cheaper than calling it directly.",
+            "severity": "n/a",
+            "location": "TokenFuntions.sol, getTokenPrice() function"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unoptimized gas usage in getTotalStakedTokensOnSmartContract()",
+            "description": "Calling tokenData on every iteration of for loop unnecessarily increases gas usage.",
+            "severity": "n/a",
+            "location": "TokenFuntions.sol, getTotalStakedTokensOnSmartContract() function"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Duplicate reference to MemberRole in ClaimsRewards",
+            "description": "Duplicate reference to MemberRole in ClaimsRewards.",
+            "severity": "n/a",
+            "location": "ClaimsRewrds.sol"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Redundant versionDate mapping",
+            "description": "Contracts only have a singular versionDate that gets overridden, so there's no need to keep an additional mapping.",
+            "severity": "n/a",
+            "location": "NXMaster.sol"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Tests contain no assertions",
+            "description": "In the test files for burnStakerStake most test cases do not contain the usage of any assertions, only using logging in its place.",
+            "severity": "n/a",
+            "location": "Test files for burnStakerStake"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Outdated Solidity version",
+            "description": "The contracts should be updated and their compiler version fixed to a version > 0.5.7.",
+            "severity": "n/a",
+            "location": "General (multiple contracts)"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate token code",
+            "description": "Open Zeppelin's ERC20 implementation is included in the code base, but NXMToken does not inherit from it; instead, large amounts of the code are copied into the implementation.",
+            "severity": "n/a",
+            "location": "NXMToken contract"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Hardcoded constants and types",
+            "description": "Integer identifies are hardcoded into the code.",
+            "severity": "n/a",
+            "location": "General (multiple contracts)"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Multiplication after division",
+            "description": "Rounding errors can increase dramatically due to multiplication after division.",
+            "severity": "n/a",
+            "location": "MCR.sol, Pool2.sol"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Usage of Assert over Revert",
+            "description": "Using assert(x) when require(x) should be used instead.",
+            "severity": "n/a",
+            "location": "Iupgradable.sol"
+        },
+        {
+            "id": 35,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Mixing of named and unnamed return values",
+            "description": "Mixing of named and unnamed return values can cause confusion.",
+            "severity": "n/a",
+            "location": "General (multiple contracts)"
+        }
+    ]
+}

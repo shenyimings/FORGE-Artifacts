@@ -1,0 +1,224 @@
+{
+    "path": "artifacts/ackee-blockchain-ovn-core-report.pdf",
+    "project_info": {
+        "url": "https://github.com/ovnstable/ovnstable-core/tree/291d5be70802da0314cd3f6978a96c68fe0c9569",
+        "commit_id": "291d5be70802da0314cd3f6978a96c68fe0c9569",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ovnstable-core": "contracts/ackee-blockchain-ovn-core-report/ovnstable-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked return values for token transfers",
+            "description": "Transfers are not checking the return value, which can cause problems when tokens don't match expected behavior.",
+            "severity": "medium",
+            "location": "Exchange.sol, PortfolioManager.sol, Strategy.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Division by zero if parameters are not set",
+            "description": "If oracleLossDenominator or compensateLossDenominator are not set, the payout function is unable to proceed on negative rebase and the transaction is reverted.",
+            "severity": "medium",
+            "location": "Exchange.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ]
+            },
+            "title": "Usage of solc optimizer",
+            "description": "The project uses solc optimizer, which may lead to unexpected bugs.",
+            "severity": "info",
+            "location": "**/*"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Wide Solidity pragma usage",
+            "description": "The contracts are using a wide range of Solidity versions, which can cause unexpected behavior if the version of the compiler used to compile the contracts is different from the one that was properly tested.",
+            "severity": "info",
+            "location": "**/*"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "For cycle in the payout function can revert",
+            "description": "Calling the payout function can run out of gas if there will be a lot of iterations or at least be pricy on gas.",
+            "severity": "info",
+            "location": "**/*"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent usage of msg.sender over _msgSender",
+            "description": "The protocol is using OpenZeppelin Context that defines _msgSender and _msgData functions, but uses of msg.data and msg.sender should be replaced by internal calls to _msgData and _msgSender.",
+            "severity": "info",
+            "location": "USDPlusToken.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "The lockfile can be overwritten",
+            "description": "According to the documentation, the packages are installed via the yarn command, which can overwrite the lockfile and thus lead to unexpected behavior due to different package versions.",
+            "severity": "info",
+            "location": "**/*"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Usage of hardcoded value instead of constant",
+            "description": "The approve function uses a hardcoded value instead of a constant in a calculation, which causes worse readability and maintainability.",
+            "severity": "info",
+            "location": "UsdPlusToken.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused function parameter",
+            "description": "The deposit function in the PortfolioManager contract has an unused parameter _amount, which does not affect the function.",
+            "severity": "info",
+            "location": "PortfolioManager"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "The payout function could be external",
+            "description": "The payout is public and could be external since it is going to be called only by an external service.",
+            "severity": "info",
+            "location": "Exchange.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-358"
+                ]
+            },
+            "title": "Contract id based validation",
+            "description": "The project uses zero-address checks for addresses data validation, but validation can be more stringent if contract ids are used.",
+            "severity": "info",
+            "location": "**/*"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use pre-incrementation in for cycles",
+            "description": "The project contains for cycles with post-incrementation, which is less gas efficient than pre-incrementation.",
+            "severity": "info",
+            "location": "**/*"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Upgrader role is used inconsistently",
+            "description": "The project mostly uses the Upgrader role for upgrades but not consistently.",
+            "severity": "medium",
+            "location": "Exchanger and Strategy contracts"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "The initSlippages and setSlippages functions could be merged",
+            "description": "Both functions have the same content but different access controls, which can lead to code duplicity.",
+            "severity": "info",
+            "location": "Strategy contract (functions initSlippages and setSlippages)"
+        }
+    ]
+}

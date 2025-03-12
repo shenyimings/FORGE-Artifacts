@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/asuna.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "fff6c1ed7ea253c1bce91a9fac9865dbe1bc502aea8eefc8269427ba7c41e7db",
+        "address": "0x106543a9d0407E06b5369Ac15AFbd6E999158640",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "AsunaHentai": "contracts/asuna/AsunaHentai"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "ST - Stop Transactions",
+            "description": "The contract owner has the authority to stop transactions for all users excluding themselves, allowing them to manipulate fees and whitelist specific addresses.",
+            "severity": "critical",
+            "location": "contract.sol#L839,853,883"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "ELFM - Exceed Limit Fees Manipulation",
+            "description": "The contract owner has the authority to increase fees beyond the allowed limit of 25%.",
+            "severity": "critical",
+            "location": "contract.sol#L692"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Public Function could be Declared External",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "Contract.sol#L429,438,444,449,457,551,555,559,563,567,571,576,581,585,590,596,601,606,610,616,667,672,678,808,820,824,828,832"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "State Variables could be Declared Constant",
+            "description": "Constant state variables should be declared constant to save gas.",
+            "severity": "low",
+            "location": "Contract.sol#L502,500,501,496"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Conformance to Solidity Naming Conventions",
+            "description": "Solidity defines a naming convention that should be followed.",
+            "severity": "low",
+            "location": "Contract.sol#L477,770,776,782,828,504,505,509,510,522,527"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing Events Arithmetic",
+            "description": "Detected missing events for critical arithmetic parameters.",
+            "severity": "low",
+            "location": "Contract.sol#L682,688,692,697"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Dead Code Elimination",
+            "description": "Functions that are not used in the contract, and make the code's size bigger.",
+            "severity": "low",
+            "location": "Contract.sol#L355,315,325,340,350,262,289"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Potential honeypot conversion",
+            "description": "The contract can be converted into a honeypot and prevent users from selling if the owner abuses the admin functions.",
+            "severity": "n/a",
+            "location": "AsunaHentai contract, various admin functions (e.g., setTaxFeePercent, setBurnFee, setAdvestisementFeePercent)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Transaction manipulation",
+            "description": "The owner can abuse certain functions to manipulate fees and stop transactions.",
+            "severity": "n/a",
+            "location": "AsunaHentai contract, various admin functions (e.g., excludeFromReward, includeInReward, setMaxTxPercent)"
+        }
+    ]
+}

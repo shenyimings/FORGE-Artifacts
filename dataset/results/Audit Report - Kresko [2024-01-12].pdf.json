@@ -1,0 +1,371 @@
+{
+    "path": "artifacts/Audit Report - Kresko [2024-01-12].pdf",
+    "project_info": {
+        "url": "https://github.com/kreskohq/kresko-protocol",
+        "commit_id": "cbbc4c365e544a765a74554b9857a3ec0cf58252",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "kresko-protocol": "contracts/Audit Report - Kresko [2024-01-12]/kresko-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Inability to fully repay and liquidate debt due to incorrect comparison of rebased and normalized token amounts",
+            "description": "Incorrect comparison in repaySCDP and liquidateSCDP functions leads to unable to fully repay debt, causing accumulation of bad protocol debt.",
+            "severity": "critical",
+            "location": "SCDPFacet contract, repaySCDP and liquidateSCDP functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrapping and unwrapping Kresko asset tokens results in insufficient backing",
+            "description": "Insufficient backing due to minting Kresko asset tokens before anchor tokens, leading to fewer anchor tokens minted.",
+            "severity": "critical",
+            "location": "KreskoAsset contract, wrap function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Liquidations can leave SCDP below the minimum debt value",
+            "description": "LiquidateSCDP function never checks if position will be left below minimum debt value after repayment, causing bad protocol debt.",
+            "severity": "high",
+            "location": "SCDPFacet contract, liquidateSCDP function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Inability to swap assets with the SCDPSwapFacet.swapSCDP function in case of insufficient liquidity of the fee token",
+            "description": "Insufficient liquidity of fee token causes transaction reverting and denial of service.",
+            "severity": "high",
+            "location": "SCDPSwapFacet contract, swapSCDP function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Users are double charged fees in the Vault redeem function when there is insufficient balance in the contract",
+            "description": "Double charging of fees due to incorrect computation of sharesIn value.",
+            "severity": "high",
+            "location": "Vault contract, redeem function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unable to withdraw fair share of remaining collateral",
+            "description": "Depositors unable to withdraw their share of remaining collateral if liquidity is fully seized during liquidation.",
+            "severity": "n/a",
+            "location": "SCDP, handleSeizeSCDP function in SDeposits library"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unable to accumulate fees",
+            "description": "Depositers of non-fee collateral tokens unable to withdraw their share of accumulated fees.",
+            "severity": "n/a",
+            "location": "SCDPState.feeAsset"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "KreskoAssetAnchor shares can be increased",
+            "description": "Supplying kresko assets increases anchor token supply, breaking the invariant between anchor contract and KreskoAsset.",
+            "severity": "n/a",
+            "location": "KreskoAssetAnchor contract, mint function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Vault shares can be manipulated",
+            "description": "Vault shares can be manipulated after emptying underlying assets due to incorrect reset logic.",
+            "severity": "n/a",
+            "location": "Vault.sol, previewDeposit, previewMint, previewRedeem, and previewWithdraw functions"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "KISS token value can be manipulated",
+            "description": "KISS token value can be manipulated shortly after deployment by transferring collateral tokens to the Vault contract.",
+            "severity": "n/a",
+            "location": "Vault contract, deployemnt and deposit functionality"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "KreskoAsset implementation contract can be initialized",
+            "description": "KreskoAsset implementation contract can be initialized directly, granting the caller admin role.",
+            "severity": "n/a",
+            "location": "KreskoAsset contract, initialize function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Incorrect totalCover value calculation",
+            "description": "Total cover amount is calculated incorrectly in SDebtIndex library due to decimal precision issue.",
+            "severity": "low",
+            "location": "SDebtIndex library, valueToSDI function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Gate modifier incorrect balance check",
+            "description": "Gate modifier in Modifiers.sol incorrectly checks for phase 2 NFT ownership.",
+            "severity": "n/a",
+            "location": "Modifiers.sol, gate modifier"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Unbounded loops over arrays",
+            "description": "Unbounded loops over collateral and Kresko asset arrays can cause denial of service due to gas limits.",
+            "severity": "n/a",
+            "location": "Multiple instances in codebase, e.g., SGlobal.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Prices.rawPrice always returns primary oracle's price",
+            "description": "rawPrice function returns primary oracle's price even if it is stale and secondary oracle's price is not.",
+            "severity": "n/a",
+            "location": "Prices.sol, rawPrice function"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "handleSequencerDown returns incorrect prices",
+            "description": "handleSequencerDown function returns secondary oracle price even if L2 sequencer is down.",
+            "severity": "n/a",
+            "location": "Prices.sol, handleSequencerDown function"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Vault's maxRedeem, maxWithdraw, and maxDeposit functions do not include fees",
+            "description": "Functions inconsistent in including vault fees.",
+            "severity": "n/a",
+            "location": "Vault.sol, maxRedeem, maxWithdraw, and maxDeposit functions"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missing access control for Kresko.setAnchorToken",
+            "description": "setAnchorToken function does not implement access control.",
+            "severity": "n/a",
+            "location": "Kresko.sol, setAnchorToken function"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unintended return value for collateralization ratio",
+            "description": "SCDPStateFacet contract returns 0 for the collateralization ratio if the user has no debt.",
+            "severity": "n/a",
+            "location": "SCDPStateFacet contract"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Possible zero address of state variables",
+            "description": "There is no check to ensure that addresses are not zero before configuring the vKiss, asset, and kresko variables.",
+            "severity": "n/a",
+            "location": "Kiss.sol, ERC4626Upgradeable.sol, KreskoAsset.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Validation issue",
+            "description": "Validations.validateCollateralArgs reverts with underflow if there are no deposited collateral assets.",
+            "severity": "n/a",
+            "location": "Validations.sol, validateCollateralArgs function"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential unsafe casting of toWad",
+            "description": "Math.sol's toWad function casts a signed 256-bit integer to an unsigned 256-bit integer without any input validation.",
+            "severity": "n/a",
+            "location": "Math.sol, toWad function"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Vault.setGovernance does not implement a 2-step process",
+            "description": "Vault.sol's setGovernance function does not implement a 2-step process for setting the new governance.",
+            "severity": "n/a",
+            "location": "Vault.sol"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Errors.id and Errors.symbol perform external calls to possibly untrusted addresses",
+            "description": "Errors.sol's id and symbol helper functions perform external calls to the symbol function from the _addr input.",
+            "severity": "n/a",
+            "location": "Errors.sol"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistencies in Vault adaptation of ERC-4626",
+            "description": "The Vault contract has inconsistencies in its adaptation of the ERC-4626 standard.",
+            "severity": "n/a",
+            "location": "Vault contract, maxMint and previewWithdraw functions"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Inconsistent check for minimum collateral ratio and liquidation threshold",
+            "description": "The validateMinCollateralRatio and validateLiquidationThreshold functions have inconsistent checks.",
+            "severity": "n/a",
+            "location": "Validations.sol, lines 54 and 60"
+        }
+    ]
+}

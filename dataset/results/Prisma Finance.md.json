@@ -1,0 +1,359 @@
+{
+    "path": "artifacts/Prisma Finance.md",
+    "project_info": {
+        "url": "https://github.com/prisma-fi/prisma-contracts",
+        "commit_id": "52b26b8a2f1904b048754d5443e08d2144610b92",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "prisma-contracts": "contracts/Prisma Finance/prisma-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect `defaultedDebt` interest accrual",
+            "description": "Allows hackers to close their trove without paying accrued `defaultedDebt` interest, leading to instant losses for all troves.",
+            "severity": "critical",
+            "location": "TroveManager.sol, _applyPendingRewards function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Mint awards can be manipulated",
+            "description": "Allows hackers to claim Prisma tokens without a commission.",
+            "severity": "critical",
+            "location": "TroveManager.sol, mint awards functionality"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "An attacker can steal the StabilityPool depositors' profit",
+            "description": "Allows hackers to use a flash loan to bypass providing liquidity and steal `StabilityPool` providers' profits.",
+            "severity": "high",
+            "location": "LiquidationManager.sol, liquidateTroves function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Whale governance attack on the protocol",
+            "description": "Allows a whale to drain the Treasury by bypassing `passingPct` with a well-timed attack.",
+            "severity": "high",
+            "location": "AdminVoting.sol, createNewProposal and executeProposal functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Small amounts can be withdrawn without penalties from TokenLocker",
+            "description": "Allows hackers to withdraw small amounts of tokens without penalties due to a rounding error.",
+            "severity": "high",
+            "location": "TokenLocker.sol, penalty calculation and withdrawWithPenalty function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ]
+            },
+            "title": "Mutable Contract Implementation in Factory",
+            "description": "troveManagerImpl can be changed, affecting getTroveManager method results.",
+            "severity": "medium",
+            "location": "Factory contract, cloneDeterministic function."
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inequitable Weight Calculation for Token Locks",
+            "description": "Users with short lock durations receive the same weight as users with longer locks.",
+            "severity": "medium",
+            "location": "TokenLocker contract, accountWeeklyWeights[currentWeek] function."
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Guardian Unable to Cancel Malicious Proposals in AdminVoting",
+            "description": "A guardian cannot cancel a proposal with malicious actions due to payload length restriction.",
+            "severity": "n/a",
+            "location": "AdminVoting contract, createNewProposal and cancelProposal functions."
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Insufficient Time to Cancel Malicious Proposals in AdminVoting",
+            "description": "A malicious user can execute a proposal before the guardian can cancel it due to timing issues.",
+            "severity": "n/a",
+            "location": "AdminVoting contract, MIN_TIME_TO_EXECUTION and VOTING_PERIOD variables."
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential Loss of PRISMA Tokens in AllocationVesting",
+            "description": "Rounding errors can cause the loss of up to `1e18-1` wei PRISMA tokens in lockFutureClaimsWithReceiver function.",
+            "severity": "n/a",
+            "location": "AllocationVesting contract, lockFutureClaimsWithReceiver function."
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Inadequate RESPONSE_TIMEOUT Constant for Oracles",
+            "description": "Using a generic RESPONSE_TIMEOUT constant can lead to stale data from oracles with faster update rates.",
+            "severity": "n/a",
+            "location": "PriceFeed contract, RESPONSE_TIMEOUT constant."
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Flashmint max amount check is easily bypassed",
+            "description": "Users can take two or more flashloans and bypass the requirement of the `maxFlashLoan()` size.",
+            "severity": "low",
+            "location": "DebtToken.sol, lines 155-157"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "The callerOrDelegated specification is not followed for CloseTrove",
+            "description": "For all key functions in `BorrowerOperations`, users can choose their privileged address to delegate an operation.",
+            "severity": "low",
+            "location": "BorrowerOperations.sol, lines 393-398"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "During the global pause, users can increase and decrease TCR",
+            "description": "The \"pause\" does not serve as a true global pause and does not stop all operations.",
+            "severity": "low",
+            "location": "BorrowerOperations.sol and StabilityPool.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "TroveManager bytecodes are not recommended to be different",
+            "description": "`Factory` allows selecting any implementation addresses for `TroveManager` and `SortedTroves`.",
+            "severity": "low",
+            "location": "Factory.sol, lines 83-84"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-487"
+                ]
+            },
+            "title": "MCR and CCR management",
+            "description": "`MCR` and `CCR` are constants.",
+            "severity": "low",
+            "location": "PrismaBase.sol, lines 13-17"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "Use `SafeTransfer`",
+            "description": "When transfer tokens, there are checks for returned value.",
+            "severity": "low",
+            "location": "TroveManager.sol and StabilityPool.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "A note about exotic tokens",
+            "description": "The project's current implementation does not account for the unique behaviors associated with rebaseable tokens, fee-on-transfer tokens, ERC-777 (callback) tokens, or non-18 decimal tokens.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Unused approval from Treasury to TokenLock",
+            "description": "In the constructor of Treasury we have an unused approval.",
+            "severity": "low",
+            "location": "Treasury.sol, line 111"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "`CurveProxy` contract needs to be approved by Curve DAO",
+            "description": "In order to make `CurveProxy` work, you need to get an approval from the Curve DAO.",
+            "severity": "low",
+            "location": "CurveProxy.sol, line 307"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Events missing",
+            "description": "The function should emit an event for better UX in possible integrations.",
+            "severity": "low",
+            "location": "Treasury.sol, line 173"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Old votes can be called",
+            "description": "Old approved proposals may be called after a long time.",
+            "severity": "low",
+            "location": "AdminVoting.sol, line 207"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-183"
+                ]
+            },
+            "title": "`AllocationVesting.setAllocations()` allows setting a zero `numberOfWeeks`",
+            "description": "`setAllocations()` allows an admin to create an allocation with zero `numberOfWeeks`.",
+            "severity": "low",
+            "location": "AllocationVesting.sol, line 94"
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/Verichains Public Audit Report - Astra Protocol - v1.2.pdf",
+    "project_info": {
+        "url": "https://github.com/AstraProtocol/astra",
+        "commit_id": "d26568e5a8c999f1e6910fb85341ed92c6f06b53",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "astra": "contracts/Verichains Public Audit Report - Astra Protocol - v1/astra"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possibility of wrong calculation for skippedEpochs",
+            "description": "Wrong calculation of skippedEpochs if inflation is disabled and epochIdentifier is not \"day\"",
+            "severity": "n/a",
+            "location": "x/inflation/keeper/hooks.go"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Poor documentation of periodProvision formula",
+            "description": "The current formula for periodProvision is not well-documented.",
+            "severity": "info",
+            "location": "x/inflation/types/inflation_calculation.go, function CalculateEpochMintProvision"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unchecked epochIdentifier",
+            "description": "The value of epochIdentifier should always be checked with the expEpochID variable.",
+            "severity": "n/a",
+            "location": "x/inflation/keeper/hooks.go, function AfterEpochEnd"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused BondedRatio function",
+            "description": "The BondedRatio function is not needed anymore since the bondingIncentive factor has been removed from the periodProvision formula.",
+            "severity": "n/a",
+            "location": "x/inflation/keeper/inflation.go, function BondedRatio"
+        }
+    ]
+}

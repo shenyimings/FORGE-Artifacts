@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/SlowMist Audit Report - Earning.Farm_Phase6_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/Shata-Capital/ENF_V3",
+        "commit_id": "e78cbadf996d8da7e7401d527300b80360d074ae",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ENF_V3": "contracts/SlowMist Audit Report - Earning/ENF_V3"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Index conflict issue",
+            "description": "The getPID function returns 0 if no match is found, which can cause confusion with a valid LP token in the 0 index pool.",
+            "severity": "low",
+            "location": "ENF_V3/contracts/subStrategies/convex/Mim.sol, function getPID(address _lpToken)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Visibility issue with getPID function",
+            "description": "The getPID function has public visibility but is not called by other functions in the contract, which can lead to unnecessary gas consumption.",
+            "severity": "info",
+            "location": "ENF_V3/contracts/subStrategies/convex/Mim.sol, function getPID(address _lpToken)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Read-only reentrancy checks subject to rounding errors",
+            "description": "The remove_liquidity_one_coin operation is used during deposit and withdraw operations, which can be affected by rounding errors in the calculation of _get_y_D.",
+            "severity": "info",
+            "location": "ENF_ETH_Lowrisk/contracts/subStrategies/convex/StETH.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-358"
+                ]
+            },
+            "title": "Slippage check issue when Vault gets totalAssets",
+            "description": "The totalAssets function in the Vault contract ignores slippage checks when fetch is set to true.",
+            "severity": "low",
+            "location": "ENF_ETH_Lowrisk/contracts/core/Vault.sol, function totalAssets()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Logic optimization",
+            "description": "Some functions in the FrxETH contract can be optimized by using interfaces provided by the sFrx contract.",
+            "severity": "info",
+            "location": "ENF_ETH_Lowrisk/contracts/subStrategies/frx/FrxETH.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Swap optimization from ETH to FrxETH",
+            "description": "The _deposit function in the FrxETH contract can be optimized by modifying the curveExpect check.",
+            "severity": "info",
+            "location": "ENF_ETH_Lowrisk/contracts/subStrategies/frx/FrxETH.sol, function _deposit(uint256 _amount)"
+        }
+    ]
+}

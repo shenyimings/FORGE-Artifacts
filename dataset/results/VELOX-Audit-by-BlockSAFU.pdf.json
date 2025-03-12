@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/VELOX-Audit-by-BlockSAFU.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x11be9d518f03a4d309a1340fddab944ccc5b3b15",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "CoinToken": "contracts/VELOX-Audit-by-BlockSAFU/CoinToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-330"
+                ]
+            },
+            "title": "Weak PRNG",
+            "description": "Do not use block.timestamp as a source of randomness, as it can be manipulated by miners.",
+            "severity": "low",
+            "location": "function unlock() public virtual"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked return value",
+            "description": "Use SafeERC20 or ensure that the transfer/transfers from return value are checked.",
+            "severity": "low",
+            "location": "function transferFrom(address sender, address recipient, uint256 amount) public override"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "High fee setting",
+            "description": "The owner contract can be modified to set taxes, dev fees, liquidity fees, or max tx percent with maximum amounts.",
+            "severity": "high",
+            "location": "functions setTaxFeePercent, setDevFeePercent, setLiquidityFeePercent, and setMaxTxPercent"
+        }
+    ]
+}

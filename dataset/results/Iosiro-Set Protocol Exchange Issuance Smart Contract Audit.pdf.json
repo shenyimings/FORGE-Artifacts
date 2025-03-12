@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/Iosiro-Set Protocol Exchange Issuance Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/SetProtocol/index-coop-contracts",
+        "commit_id": "a2904cf34be59a1ebde7ef186bd8535db80093b0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "index-coop-contracts": "contracts/Iosiro-Set Protocol Exchange Issuance Smart Contract Audit/index-coop-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Sets with illiquid components revert when issuing",
+            "description": "Sets with illiquid components will revert due to SafeMath subtraction overflow.",
+            "severity": "medium",
+            "location": "ExchangeIssuance.sol#L731"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Sets with an ETH or WETH component cannot be issued or redeemed",
+            "description": "Sets with ETH or WETH component cannot be issued or redeemed due to addition overflows in subsequent functions.",
+            "severity": "medium",
+            "location": "ExchangeIssuance.sol#L731"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect parameters passed to _getMaxTokenForExactToken",
+            "description": "Incorrect calculation of max amount of WETH for the given input token.",
+            "severity": "medium",
+            "location": "ExchangeIssuance.sol#L380"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Incorrect else if statement",
+            "description": "Incorrect else if statement in getEstimatedIssueSetAmount function prevents it from working correctly for SushiSwap exchange.",
+            "severity": "medium",
+            "location": "ExchangeIssuance.sol#L465"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "Insufficient test quality and coverage",
+            "description": "Insufficient unit test quality and coverage may impact the maintainability of the code and increase the likelihood of functional or security issues.",
+            "severity": "low",
+            "location": "Multiple functions in ExchangeIssuance.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Use of transfer function",
+            "description": "The use of transfer() function to send ether may lead to compatibility issues with receiving contracts having fallback functions above the 2300 gas limit.",
+            "severity": "low",
+            "location": "Multiple functions in ExchangeIssuance.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted fallback function",
+            "description": "The unrestricted fallback function allows anyone to send ETH directly to the contract, putting users at risk of having their funds used by other users.",
+            "severity": "info",
+            "location": "ExchangeIssuance.sol#L355"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "approveSetToken() missing the isSetToken() modifier",
+            "description": "The approveSetToken function does not validate the address passed in as a Set token, allowing any ERC-20 token to be approved.",
+            "severity": "info",
+            "location": "ExchangeIssuance.sol#L152"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Typos, Spelling, and Grammatical Errors",
+            "description": "Spelling mistakes in the codebase can improve end-user experience and maintainability",
+            "severity": "info",
+            "location": "ExchangeIssuance.sol#L85"
+        }
+    ]
+}

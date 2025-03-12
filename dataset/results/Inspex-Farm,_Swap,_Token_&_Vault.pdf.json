@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/Inspex-Farm,_Swap,_Token_&_Vault.pdf",
+    "project_info": {
+        "url": "https://github.com/latteswap-official/latteswap-contract",
+        "commit_id": "9fac06bea550fef4b2a9f5d0e0154964ff477410",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "latteswap-contract": "contracts/Inspex-Farm,_Swap,_Token_&_Vault/latteswap-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unclaimable Locked Rewards",
+            "description": "A portion of the total $LATTE reward will be locked and unclaimable, causing users to gain less $LATTE than expected.",
+            "severity": "high",
+            "location": "LatteVault.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Lock Amount Calculation",
+            "description": "The developer's portion of the $LATTE reward is calculated as 15% but only 10% is used for locking, causing a lower locked amount than intended.",
+            "severity": "high",
+            "location": "MasterBarista.sol, function updatePool()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation",
+            "description": "The reward of the pool that has the same staking token as the reward token will be slightly lower than what it should be.",
+            "severity": "high",
+            "location": "MasterBarista.sol, function addPool()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked bonusLockUpBps Parameter Value",
+            "description": "An improper setting of the bonusLockUpBps variable can cause the smart contract to be unusable for the users.",
+            "severity": "medium",
+            "location": "MasterBarista.sol, function setBonus()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Distribution",
+            "description": "A part of the $LATTE reward could be claimed by a user without any prior token deposited, causing the other investors to gain less $LATTE reward.",
+            "severity": "medium",
+            "location": "LatteVault.sol (deposit function)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Design Flaw in massUpdatePools() Function",
+            "description": "The massUpdatePools() function may eventually become unusable due to excessive gas usage.",
+            "severity": "low",
+            "location": "MasterBarista.sol, massUpdatePools() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Reduced Unlockable Amount for transferAll() Recipient",
+            "description": "An attacker can gain an early advantage of $LATTE unlock amount over the victim by reducing their unlockable amount.",
+            "severity": "low",
+            "location": "LATTE.sol, transferAll() and canUnlockAmount() functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Potential Centralized Control of State Variable",
+            "description": "Controlling authorities can change critical state variables to gain additional profit without notifying users.",
+            "severity": "low",
+            "location": "MasterBarista.sol and LatteVault.sol, various functions with onlyOwner or onlyAdmin modifiers"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Update of State Variable",
+            "description": "Miscalculation of `user.latteAtLastUserAction` leading to reputation damage when used in the public website.",
+            "severity": "low",
+            "location": "LatteVault.sol, withdraw() function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Public functions copying calldata to memory instead of reading directly from calldata.",
+            "severity": "info",
+            "location": "LATTE.sol (setCap()), MasterBarista.sol, LatteSwapRouter.sol (multiple functions)"
+        }
+    ]
+}

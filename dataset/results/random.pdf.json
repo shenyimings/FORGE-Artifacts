@@ -1,0 +1,188 @@
+{
+    "path": "artifacts/random.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.6+commit.6c089d02"
+        ],
+        "project_path": {
+            "UniswapV2Router02": "contracts/random/UniswapV2Router02"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Unauthorized access to disable transactions",
+            "description": "Owner can enable transactions for all users, but cannot disable them again.",
+            "severity": "critical",
+            "location": "openTrading() function in RANDOM.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner can blacklisting addresses",
+            "description": "Owner has the authority to stop addresses from transactions.",
+            "severity": "critical",
+            "location": "addBots() function in RANDOM.sol#L297"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Inability to handle existing pair scenarios",
+            "description": "openTrading() function does not handle the scenario where a pair already exists.",
+            "severity": "n/a",
+            "location": "openTrading() function in RANDOM.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Redundant fee mechanism",
+            "description": "Fee mechanism is not being used by the transaction flow.",
+            "severity": "low",
+            "location": "RANDOM.sol#L130,225,245"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent arithmetic operations",
+            "description": "Combination of SafeMath library and native arithmetic operations.",
+            "severity": "low",
+            "location": "RANDOM.sol#L240,259"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Immutable swap address",
+            "description": "Swap address is assigned once and cannot be changed.",
+            "severity": "low",
+            "location": "RANDOM.sol#L314"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unlimited transfer authority",
+            "description": "Owner has the authority to transfer funds without limit to the _taxWallet wallet.",
+            "severity": "low",
+            "location": "manualSwap() function in RANDOM.sol#L334"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary SafeMath library usage",
+            "description": "Native Solidity arithmetic operations replace SafeMath library.",
+            "severity": "low",
+            "location": "RANDOM.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Improper immutable declaration",
+            "description": "State variables are not declared as immutable.",
+            "severity": "low",
+            "location": "RANDOM.sol#L162"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-constant state variables",
+            "description": "State variables can be declared as constant using the constant keyword.",
+            "severity": "low",
+            "location": "RANDOM.sol#L130,131,134,135,136,145,146"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-conforming naming conventions",
+            "description": "Code does not adhere to the Solidity style guide.",
+            "severity": "low",
+            "location": "RANDOM.sol#L109,139,140,141,142,143,144,145,146,325"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Ineffective Fee Mechanism",
+            "description": "The fee mechanism in the contract is ineffective as the tax variables are statically set to zero, resulting in zero fees.",
+            "severity": "n/a",
+            "location": "RANDOM contract, fee mechanism"
+        }
+    ]
+}

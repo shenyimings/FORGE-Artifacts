@@ -1,0 +1,248 @@
+{
+    "path": "artifacts/QuillAudit-WorthPad_Smart_Contract_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/worthpad/worth",
+        "commit_id": "f18eb432f476ab7b37bf7e1d45bdc33f10427215",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "worth": "contracts/QuillAudit-WorthPad_Smart_Contract_Audit_Report/worth"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risks",
+            "description": "The role owner has the authority to update critical settings, update the worthDVCFundWallet address, and update the _worthDVCFundFee value.",
+            "severity": "medium",
+            "location": "WorthToken.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Missing Check for Reentrancy Attack",
+            "description": "Trigger function kens and these two functions have state updates and event emits after external calls.",
+            "severity": "medium",
+            "location": "WorthToken.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Missing Range Check for Input Variable",
+            "description": "Causing potential risks in fees and anti-whale.",
+            "severity": "medium",
+            "location": "WorthToken.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing zero address validation",
+            "description": "The setWorthDVCFundWallet does not check whether the newWallet address is similar to the current worthDVCFundWallet.",
+            "severity": "low",
+            "location": "WorthToken.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing Events for Significant Transactions",
+            "description": "In the following functions: excludeFromFee(), includeInFee(), setWorthDVCFundWallet(), etc.",
+            "severity": "medium",
+            "location": "WorthToken.sol, WorthTokenSale.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "claimDate can be changed after the sale",
+            "description": "Changed during as well as after the Tokensale.",
+            "severity": "high",
+            "location": "WorthTokenSale.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Divisions performed before multiplication",
+            "description": "Perform multiplications before divisions to avoid loss of precision.",
+            "severity": "low",
+            "location": "WorthTokenSale.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked transfer",
+            "description": "L135:",
+            "severity": "medium",
+            "location": "WorthTokenSale.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "No error messages in require() functions",
+            "description": "Lack of error messages greatly damage the overall user experience, thus lowering the system’s quality.",
+            "severity": "low",
+            "location": "WorthTokenSale.sol, WorthTokenTimeLock.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Conformance to Solidity naming conventions",
+            "description": "VerifyOwner, addMember, changeOwner.",
+            "severity": "info",
+            "location": "WorthTokenSale.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Not explicitly defining maximum allowance",
+            "description": "In the entire codebase. For example: L110:",
+            "severity": "low",
+            "location": "WorthTokenSale.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Irrelevant return value",
+            "description": "Return the whitelist status instead.",
+            "severity": "info",
+            "location": "WorthTokenSale.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Ambiguous code comments",
+            "description": "In line 110, _amount is the amount of USDT that an investor pays to buy the token.",
+            "severity": "info",
+            "location": "WorthTokenSale.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "block.timestamp may not be reliable",
+            "description": "Time checks for the users to withdraw their tokens.",
+            "severity": "high",
+            "location": "WorthTokenTimeLock.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "DoS With Block Gas Limit",
+            "description": "The lockTokens() and createMultipleLocks() are public functions without any modifiers.",
+            "severity": "medium",
+            "location": "WorthTokenTimeLock.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Insufficient Input Validation",
+            "description": "Check for greater than the old unlockTime.",
+            "severity": "low",
+            "location": "WorthTokenTimeLock.sol"
+        }
+    ]
+}

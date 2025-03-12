@@ -1,0 +1,182 @@
+{
+    "path": "artifacts/maker-dao-liquidations-2-0.pdf",
+    "project_info": {
+        "url": "https://github.com/makerdao/dss/tree/8aae83e0b46c009f4d4dd9306cd0f865ca7e2dc7",
+        "commit_id": "8aae83e0b46c009f4d4dd9306cd0f865ca7e2dc7",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "dss": "contracts/maker-dao-liquidations-2-0/dss"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Dog and Clipper could potentially have mismatched components",
+            "description": "Dog and Clipper contracts may diverge due to lack of validation, leading to aberrant behavior.",
+            "severity": "medium",
+            "location": "dog.sol, clip.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Misaligned incentives may encourage aberrant behavior",
+            "description": "Tip incentives may lead to creation of unsafe vaults and liquidation for profit.",
+            "severity": "medium",
+            "location": "clip.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-369"
+                ]
+            },
+            "title": "Division by zero",
+            "description": "Primitive division operation without zero check in bark function.",
+            "severity": "low",
+            "location": "dog.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Auction may halt if peek is zero",
+            "description": "No check for zero value returned by pip.peek() in kick and redo functions.",
+            "severity": "low",
+            "location": "clip.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input validation",
+            "description": "Lack of input validation in authorized functions, leading to potential unexpected values.",
+            "severity": "low",
+            "location": "dog.sol, clip.sol, abaci.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Auction parameters may change mid-flight",
+            "description": "Parameter changes during auction may abruptly stop the auction.",
+            "severity": "low",
+            "location": "clip.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked Pragma",
+            "description": "Unlocked pragma in Solidity files, allowing for potential unexpected behavior.",
+            "severity": "info",
+            "location": "All contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Privileged Roles and Ownership",
+            "description": "Centralization of power without clear documentation may impact users.",
+            "severity": "info",
+            "location": "dog.sol, clip.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Contracts may have no authorized ward",
+            "description": "Authorized user can lock themselves out by calling deny() on themselves.",
+            "severity": "info",
+            "location": "All contracts"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Tips may not be enough to cover gas fees when network is congested",
+            "description": "Flat fee for tips may not be sufficient during network congestion.",
+            "severity": "info",
+            "location": "clip.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Oracle delay may lead to redo-ing and bad debt",
+            "description": "Delay in OSM price updates may cause incomplete auctions, leading to bad debt.",
+            "severity": "info",
+            "location": "clip.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ]
+            },
+            "title": "Incorrect initialization behavior",
+            "description": "Initialization issues in Clipper and StairstepExponentialDecrease constructors.",
+            "severity": "n/a",
+            "location": "clip.sol, abaci.sol"
+        }
+    ]
+}

@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/1inch Limit Order Settlements Smart Contract Audit _ iosiro.md",
+    "project_info": {
+        "url": "https://github.com/1inch/erc20-pods",
+        "commit_id": "50b192a7e63d4eb4eaa8c8af431feb6113e620fd",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "erc20-pods": "contracts/1inch Limit Order Settlements Smart Contract Audit _ iosiro/erc20-pods"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unauthorized increase in voting power",
+            "description": "Users can receive more staking tokens than they are entitled to, allowing them to arbitrarily increase their voting power.",
+            "severity": "high",
+            "location": "BasicDelegationPodWithVotingPower contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Bypassing internal accounting",
+            "description": "Users can bypass the staking contract's internal accounting.",
+            "severity": "high",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "St1inch reentrancy",
+            "description": "The `_deposit()` function in `St1inch.sol` contract is not reentrant safe.",
+            "severity": "high",
+            "location": "St1inch.sol, _deposit() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "ERC20Pods Insecure try-catch pattern",
+            "description": "The `ERC20Pods._updateBalances()` function ignores whether the call succeeds, enabling users to bypass internal accounting.",
+            "severity": "high",
+            "location": "ERC20Pods.sol, _updateBalances() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ],
+                "4": [
+                    "CWE-567"
+                ]
+            },
+            "title": "Lack of resynchronization of Pod balances",
+            "description": "The tracked balances might drift due to internal calls reverting or balances changing during an update.",
+            "severity": "low",
+            "location": "ERC20Pods.sol, _updateBalances() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Arbitary calls",
+            "description": "The `Settlement` contract allows resolvers to execute arbitrary calls, posing a risk to other resolvers.",
+            "severity": "low",
+            "location": "Settlement.sol, settleOrdersEOA function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing events",
+            "description": "Several sensitive actions and state changes did not emit events, reducing visibility and transparency.",
+            "severity": "low",
+            "location": "Multiple contracts (WhitelistRegistry.sol and Settlement.sol)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ]
+            },
+            "title": "Lack of events emission for transparency and traceability",
+            "description": "Several functions should emit events to improve the transparency and traceability of the protocol.",
+            "severity": "info",
+            "location": "Multiple contracts (not specified)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "increaseAllowance() and decreaseAllowance() not overridden",
+            "description": "Allowing users to modify their allowances",
+            "severity": "info",
+            "location": "St1inch.sol and DelegatedShare.sol contracts"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant check when entering _deposit()",
+            "description": "Redundant check in _deposit() function in St1inch.sol",
+            "severity": "info",
+            "location": "St1inch.sol#150"
+        }
+    ]
+}

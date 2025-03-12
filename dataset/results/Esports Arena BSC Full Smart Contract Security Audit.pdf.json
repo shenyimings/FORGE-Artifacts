@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/Esports Arena BSC Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xD67A2C4003Bc21c29fB2607DC58cBDe6dAa8be42",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "EsportsArenaBSC": "contracts/Esports Arena BSC Full Smart Contract Security Audit/EsportsArenaBSC"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Access modifier",
+            "description": "The function setMaxWalletPercent() is public and has no access restriction, so anybody can change _maxWalletToken amount.",
+            "severity": "high",
+            "location": "setMaxWalletPercent() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function includeInReward() uses a loop to find and remove addresses from the _excluded list, which can be aborted with OUT_OF_GAS exception if there is a long excluded addresses list.",
+            "severity": "low",
+            "location": "includeInReward() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Wrong transfer",
+            "description": "The function _tokenTransfer() uses _transferStandard to send burn and marketing amounts without checking addresses to be excluded from reward.",
+            "severity": "low",
+            "location": "_tokenTransfer() function"
+        }
+    ]
+}

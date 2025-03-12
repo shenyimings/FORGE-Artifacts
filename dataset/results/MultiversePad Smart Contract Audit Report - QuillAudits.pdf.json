@@ -1,0 +1,212 @@
+{
+    "path": "artifacts/MultiversePad Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x64d2906391a82721bb24925fc16a3eff20c8756e",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.0+commit.26b70077"
+        ],
+        "project_path": {
+            "MultiversePad": "contracts/MultiversePad Smart Contract Audit Report - QuillAudits/MultiversePad"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Mathematical Error in fees calculation",
+            "description": "Incorrect distribution of fees (0.45% instead of 0.4%, and 0.05% instead of 0.1%)",
+            "severity": "medium",
+            "location": "Fees calculation"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "NonWhiteListed addresses can make a transfer without paying 0.5% deflation fees",
+            "description": "Public function transferWithoutDeflationary allows any user to bypass deflation fees",
+            "severity": "medium",
+            "location": "transferWithoutDeflationary function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Race conditions due to BEP20 Approve function",
+            "description": "Potential race condition in approve function allows attackers to spend approval amount twice",
+            "severity": "low",
+            "location": "approve function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Not complying with BEP20 standard completely",
+            "description": "Missing getOwner function implementation",
+            "severity": "low",
+            "location": "Token contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "rewardPool[] Length problem",
+            "description": "Large rewardPool array length can cause extreme gas costs and failed transactions",
+            "severity": "low",
+            "location": "countActiveRewardPool function and _transfer function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Unlocked Pragma (>=0.6.0)",
+            "description": "Unlocking pragma version can lead to outdated compiler versions",
+            "severity": "info",
+            "location": "Contract code"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Inactive users are not popped out of rewardPool",
+            "description": "Inactive users remain in rewardPool, potentially causing gas consumption issues",
+            "severity": "info",
+            "location": "removeRewardPool function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Public functions that could be declared external",
+            "description": "Public functions can be optimized by declaring them as external for gas savings",
+            "severity": "info",
+            "location": "Various public functions"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "Deployer's private key loss can lead to centralization risks",
+            "severity": "info",
+            "location": "Contract deployment"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Using Block values as a proxy for time",
+            "description": "Predictable block values can be manipulated by malicious miners",
+            "severity": "info",
+            "location": "_transfer function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Stuck tokens in the contract get transferred to the owner of the contract",
+            "description": "Public withdrawErc20 function allows anyone to transfer stuck tokens to the owner",
+            "severity": "info",
+            "location": "withdrawErc20 function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Missing Explicit Visibility",
+            "description": "Default visibility is used instead of explicit visibility",
+            "severity": "info",
+            "location": "Mapping and array definitions"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Usage of unsafeMath",
+            "description": "Older Solidity version (<0.8.0) poses integer underflow/overflow risks",
+            "severity": "info",
+            "location": "Arithmetic computations (e.g., #L-351,353,354,281)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Gas optimization: For loop optimization",
+            "description": "Optimization opportunity in for loops to reduce gas consumption",
+            "severity": "info",
+            "location": "countActiveRewardPool and _transfer functions"
+        }
+    ]
+}

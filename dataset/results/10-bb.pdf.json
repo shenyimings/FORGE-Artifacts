@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/10-bb.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x8eed289c760a521615644fb51519ecb8056c0c9e",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.9+commit.e5eed63a"
+        ],
+        "project_path": {
+            "BetBitcoinAi": "contracts/10-bb/BetBitcoinAi"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Stops Transactions",
+            "description": "The transactions can be enabled for all users, but once enabled, they cannot be disabled again.",
+            "severity": "critical",
+            "location": "BetBitcoinAi.sol#L610,703,749"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Exceeds Fees Limit",
+            "description": "The contract owner can increase fees beyond the allowed limit of 25%.",
+            "severity": "critical",
+            "location": "swapTrading function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unvalidated Variable Setters",
+            "description": "Variables are set based on user-supplied input without proper checks for zero values, leading to potential problems during contract execution.",
+            "severity": "low",
+            "location": "BetBitcoinAi.sol#L673,674"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Succeeded Transfer Check",
+            "description": "The transfer methods do not check if the result is successful, which may lead to incorrect assumptions about the transfer status.",
+            "severity": "low",
+            "location": "BetBitcoinAi.sol#L669"
+        }
+    ]
+}

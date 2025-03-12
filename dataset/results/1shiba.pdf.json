@@ -1,0 +1,83 @@
+{
+    "path": "artifacts/1shiba.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xcc21ec2C6867AC6EFD9cE158996fF47AB5743B2d",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "ONE1SHIBA": "contracts/1shiba/ONE1SHIBA"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Exceed Limit Fees Manipulation",
+            "description": "The contract owner can increase fees without limit, potentially taking advantage of users.",
+            "severity": "high",
+            "location": "setTaxFeePercent function (https://bscscan.com/address/0xcc21ec2c6867ac6efd9ce158996ff47ab5743b2d#code#L887,L821)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Liquidity to Team Wallet",
+            "description": "The contract transfers a large amount of funds to the team wallet, potentially draining liquidity.",
+            "severity": "high",
+            "location": "https://bscscan.com/address/0xcc21ec2c6867ac6efd9ce158996ff47ab5743b2d#code#L1048"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Stop Transactions",
+            "description": "The contract owner can stop transactions for all users, except the owner.",
+            "severity": "high",
+            "location": "https://bscscan.com/address/0xcc21ec2c6867ac6efd9ce158996ff47ab5743b2d#code#L1008"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Liquidity moved to dev wallet",
+            "description": "The contract contains a critical issue regarding the liquidity moved to the dev wallet, which cannot be configured with a percentage and is always half of the contract liquidity.",
+            "severity": "critical",
+            "location": "Contract functionality related to liquidity"
+        }
+    ]
+}

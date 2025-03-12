@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/geode-staking-v2-audit-2023-05.pdf",
+    "project_info": {
+        "url": "https://github.com/Geodefi/Portal-Eth",
+        "commit_id": "4a4d0b5cd402ceb12fcca03d15a4c948e6bf0830",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Portal-Eth": "contracts/geode-staking-v2-audit-2023-05/Portal-Eth"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Node Operators Can Stake Validators That Were Not Proposed by Them.",
+            "description": "Node operators can stake validators proposed by other node operators, potentially leading to fund theft.",
+            "severity": "high",
+            "location": "contracts/Portal/modules/StakeModule/libs/StakeModuleLib.sol:L1478-L1558"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Cannot Blame Operator for Proposed Validator",
+            "description": "Malicious operators can lock up funds in the pool indefinitely by not staking approved validators.",
+            "severity": "medium",
+            "location": "contracts/Portal/modules/StakeModule/libs/StakeModuleLib.sol:L931-L946"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Validators Array Length Has to Be Updated When the Validator Is Alienated",
+            "description": "The array length is not updated when a validator is alienated, which can cause incorrect calculation of monopoly threshold and fallback operator participation time.",
+            "severity": "medium",
+            "location": "contracts/Portal/modules/StakeModule/libs/OracleExtensionLib.sol: L111-L136"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "A Potential Controller Update Issue",
+            "description": "An issue with updating controller address in GeodeModuleLib that can allow an attacker to change the implementation contract.",
+            "severity": "low",
+            "location": "contracts/Portal/modules/GeodeModule/libs/GeodeModuleLib.sol: L299-L309"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "The Price Change Limit Could Prevent the Setting of the Correct Price",
+            "description": "Maximum share price change limit can prevent updating prices, leading to incorrect pool operation.",
+            "severity": "low",
+            "location": "OracleExtensionLib sanityCheck function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-74"
+                ]
+            },
+            "title": "Potential for a Cross-Site Scripting When Creating a Pool",
+            "description": "Malicious script injection in pool name can lead to XSS attacks on the UI.",
+            "severity": "low",
+            "location": "contracts/Portal/modules/StakeModule/libs/StakeModuleLib.sol: L358"
+        }
+    ]
+}

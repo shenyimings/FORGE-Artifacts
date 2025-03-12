@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/froggo.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "main",
+        "address": "0x37cE6D9660aA14EF27aFeFe060f4044565397EA3",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "MutantFroggo": "contracts/froggo/MutantFroggo"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "BA - Blacklists Addresses",
+            "description": "The contract owner has the authority to massively stop addresses from transactions, which can be exploited by calling the setBlacklistEnabledMultiple function.",
+            "severity": "critical",
+            "location": "contract.sol#L355"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "STC - Succeeded Transfer Check",
+            "description": "According to the ERC20 specification, the transfer methods should be checked if the result is successful. Otherwise, the contract may wrongly assume that the transfer has been established.",
+            "severity": "low",
+            "location": "contract.sol#L533"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L01 - Public Function could be Declared External",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "contract.sol#L252,341,357,552"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "Solidity defines a naming convention that should be followed but is not in this contract.",
+            "severity": "low",
+            "location": "contract.sol#L33,365,115,116,117,118,119,127,133,134,135,136,155"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "L07 - Missing Events Arithmetic",
+            "description": "Detected missing events for critical arithmetic parameters. There are functions that have no event emitted, so it is difficult to track off-chain changes.",
+            "severity": "low",
+            "location": "contract.sol#L389,394,411,420"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "L12 - Using Variables before Declaration",
+            "description": "The contract is using a variable before the declaration. This is usually happening either if it has not been declared yet or the variable has been declared in a different scope.",
+            "severity": "low",
+            "location": "contract.sol#L581"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L14 - Uninitialized Variables in Local Scope",
+            "description": "There are variables that are defined in the local scope and are not initialized.",
+            "severity": "low",
+            "location": "contract.sol#L580,581"
+        }
+    ]
+}

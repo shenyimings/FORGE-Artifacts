@@ -1,0 +1,185 @@
+{
+    "path": "artifacts/Solidified-ICHI_oneToken_[24.05.2021]-FINAL.pdf",
+    "project_info": {
+        "url": "https://github.com/ichifarm/ichi-oneToken/",
+        "commit_id": "5bc41b3d6995cd0fe29f1c771f7e92928701e61d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ichi-oneToken": "contracts/Solidified-ICHI_oneToken_[24/ichi-oneToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect implementation for oracle function amountRequired()",
+            "description": "Function amountRequired() incorrectly returns a value that is 1:1 pegged to the given amountUsd.",
+            "severity": "high",
+            "location": "ICHICompositeOracle.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "closeAllPositions() will always fail after a large enough number of assets have been added",
+            "description": "Function closeAllPositions() iterates over all OneTokenV1Base assets, which will exceed the block gas limit after a large enough number of assets have been added.",
+            "severity": "low",
+            "location": "StrategyCommon.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "executeTransaction() does not refund extra ETH sent",
+            "description": "Function executeTransaction() does not refund any extra ETH sent that exceeds the value parameter.",
+            "severity": "low",
+            "location": "Arbitrary.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Oracle does not enforce that indexToken is a USD stablecoin",
+            "description": "The contract's constructor implementation does not enforce that the given indexToken address is in the whitelist of ICHI supported USD tokens.",
+            "severity": "low",
+            "location": "UniswapOracleSimple.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "removeStrategy() does not close the strategy",
+            "description": "The function removeStrategy() does not close the strategy as stated in its documentation.",
+            "severity": "low",
+            "location": "OneTokenV1Base.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Zero value logic mismatch for stepSize",
+            "description": "The value of stepSize can be assigned to zero in setParams(), but is not allowed to be so in setStepSize().",
+            "severity": "low",
+            "location": "Incremental.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "redeem() does not check if the liabilities of the collateral token exceed the contract's balance",
+            "description": "Function redeem() does not check if the liabilities of the collateral tokens exceed the contract's balance.",
+            "severity": "low",
+            "location": "OneTokenV1.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Two-step withdrawal process is redundant",
+            "description": "The two-step withdrawal process is unnecessary and can be improved for better user experience.",
+            "severity": "n/a",
+            "location": "OneTokenV1.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant call to _transferOwnership() in init()",
+            "description": "Function init() calls both initOwnable() and _transferOwnership(), which is redundant.",
+            "severity": "n/a",
+            "location": "OneTokenV1Base.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "redeem() assumes one to one ratio between collateral token and oneToken",
+            "description": "Arbitrage opportunities might exist when oneToken is not on an exact 1:1 peg with its collateral.",
+            "severity": "n/a",
+            "location": "OneTokenV1.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Collateral tokens which charge transfer fee are not compatible with the accounting of collateral balances",
+            "description": "The actual collateral balances in contract will be lower than accounted for in case a collateral token charges a transfer fee.",
+            "severity": "n/a",
+            "location": "OneTokenV1.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "setStrategyAllowance() amount parameter documentation is incorrect",
+            "description": "The amount parameter is incorrectly documented.",
+            "severity": "low",
+            "location": "OneTokenV1Base.sol"
+        }
+    ]
+}

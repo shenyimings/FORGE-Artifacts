@@ -1,0 +1,50 @@
+{
+    "path": "artifacts/Solidified-Snowbridge_[10.09.2021]-final.pdf",
+    "project_info": {
+        "url": "https://github.com/Snowfork/snowbridge",
+        "commit_id": "b706a56cd9687f0e66115b32fdc89b50f40ef764",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "snowbridge": "contracts/Solidified-Snowbridge_[10/snowbridge"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "ETHApp.sol: Functions reward() and unlock() can potentially fail when transferring ETH to a smart contract",
+            "description": "Functions reward() and unlock() call transfer() which only forwards 2300 gas, potentially causing failures when sending ETH to smart contracts whose fallback function consumes more than 2300 gas.",
+            "severity": "low",
+            "location": "ETHApp.sol, functions reward() and unlock()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "ERC20App.sol: It is possible that some ERC-20 tokens might get locked forever within the contract",
+            "description": "Some ERC-20 tokens implementations of transfer()/transferFrom() do not return a bool result, potentially preventing tokens from being deposited or getting stuck within the ERC20App contract.",
+            "severity": "low",
+            "location": "ERC20App.sol"
+        }
+    ]
+}

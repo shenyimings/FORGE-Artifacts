@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/ERTHToken Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x3B8674F9CD879E0f557B3df9700D9B639a2eeA17",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "ErthToken": "contracts/ERTHToken Full Smart Contract Security Audit/ErthToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Function includeInReward() uses a loop to find and remove addresses from the _excluded list, which can lead to an OUT_OF_GAS exception if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "Functions includeInReward() and _getCurrentSupply"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges, including changing dev wallet address, maximum transaction amount, excluding from fee, and more.",
+            "severity": "low",
+            "location": "Various functions (e.g., includeInReward(), setDevWalletFee(), etc.)"
+        }
+    ]
+}

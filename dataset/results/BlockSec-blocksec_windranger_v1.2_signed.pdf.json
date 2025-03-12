@@ -1,0 +1,143 @@
+{
+    "path": "artifacts/BlockSec-blocksec_windranger_v1.2_signed.pdf",
+    "project_info": {
+        "url": "https://github.com/windranger-io/auction-contracts",
+        "commit_id": "b6ff3a26644e9e6a148033d5bb900f456a6d27a1",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "auction-contracts": "contracts/BlockSec-blocksec_windranger_v1/auction-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Incorrect Check of Parameters for the selectWinner() Function",
+            "description": "The selectWinner() function in both Auction and AuctionWithTime contracts accept a series of signatures in three arrays which specify the raw data (i.e., R, S, V). However, there is a duplicate check for the length of sigsV and sigsR, while leaving sigS unchecked.",
+            "severity": "medium",
+            "location": "selectWinner() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Incorrect Initialization Pattern",
+            "description": "In the AuctionWithTime contract, the initialization procedure is done in the constructor() function with the initializer modifier, which is not the recommended way of implementing the initialization logic in the upgradeable context.",
+            "severity": "high",
+            "location": "constructor() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Unsafe Signatures",
+            "description": "The signatures used in the selectWinners() function only sign on the bid amount of each bidder in the auction. These signatures are subject to replay attacks.",
+            "severity": "high",
+            "location": "selectWinners() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Potential Denial-of-Service Attack",
+            "description": "In the selectWinners() function of the AuctionWithTime contract, for each bidder, the auction procedure is implemented as follows: verifying the signatures provided by the bidder, transferring WETH from the bidder to the beneficiary address, and minting NFT to the bidder. However, the logic implemented for the AuctionWithTime contract is not fail-safe.",
+            "severity": "low",
+            "location": "selectWinners() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Inconsistent Auction Design",
+            "description": "The auction procedure consists of two steps. Firstly, the bidders submit their signatures to the project. Secondly, the project invokes the selectWinners() function of the Auction contract with corresponding bids.",
+            "severity": "low",
+            "location": "Auction design"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove Unused State Variable",
+            "description": "The startTime state variable in the AuctionWithTime contract is not used.",
+            "severity": "n/a",
+            "location": "AuctionWithTime contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove Unused receive() Function",
+            "description": "The receive() function of the Auction and AuctionWithTime contracts are unused, and there is no actual logic implemented.",
+            "severity": "n/a",
+            "location": "Auction and AuctionWithTime contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove Unused Inherited Contract",
+            "description": "Both Auction and AuctionWithTime contracts inherit from the PausableUpgradeable contract of OpenZeppelin. However, the PausableUpgradeable contract has no public interface to pause and unpause the contract.",
+            "severity": "n/a",
+            "location": "Auction and AuctionWithTime contracts"
+        }
+    ]
+}

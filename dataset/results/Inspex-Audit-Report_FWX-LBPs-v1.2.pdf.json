@@ -1,0 +1,302 @@
+{
+    "path": "artifacts/Inspex-Audit-Report_FWX-LBPs-v1.2.pdf",
+    "project_info": {
+        "url": "https://github.com/InspexCo/SCSTG",
+        "commit_id": "n/a",
+        "address": "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.26+commit.8a97fa7a"
+        ],
+        "project_path": {
+            "Recovery": "contracts/Inspex-Audit-Report_FWX-LBPs-v1/Recovery"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Design Flaw in repay() Function",
+            "description": "The users will not be able to repay the loan position, causing monetary loss for the users, disruption of service, and loss of reputation to the platform.",
+            "severity": "critical",
+            "location": "CoreBorrowing contract, repay() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ],
+                "4": [
+                    "CWE-567"
+                ]
+            },
+            "title": "Denial of Service on Native Token Transfer to APHPool Contract",
+            "description": "The position with wrapped native token as a borrowed asset will not be able to be liquidated.",
+            "severity": "critical",
+            "location": "APHPool contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Price Manipulation in _rollover() Function",
+            "description": "The asset price on the platform can be arbitrarily manipulated by the flashloan attack.",
+            "severity": "high",
+            "location": "CoreBorrowing contract, _rollover() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change critical state variables to gain additional profit.",
+            "severity": "high",
+            "location": "Multiple contracts (CoreBaseFunc, CoreSetting, StakePool, Vault, Membership, PoolSetting, InterestVault, PriceFeeds_BSC)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Use of Upgradable Contract Design",
+            "description": "Upgradable contract design allows proxy owner to perform malicious actions.",
+            "severity": "high",
+            "location": "APHCore.sol, APHPool.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Design Flaw in Kill Switch Mechanism",
+            "description": "Platform users cannot withdraw principal even in emergency cases due to pausing of withdrawal functionality.",
+            "severity": "high",
+            "location": "PoolLending.sol (withdraw() function), CoreBorrowing.sol (repay(), rollover() functions)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Denial of Service in PoolLending",
+            "description": "The users cannot execute core functions of the PoolLending contract, causing disruption of service and loss of reputation to the platform.",
+            "severity": "medium",
+            "location": "PoolLending contract, specifically the `withdraw()` function and `settleForwInterest` modifier."
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Denial of Service in Allowance Mechanism of InterestVault",
+            "description": "The ownerApprove() function will always be reverted.",
+            "severity": "medium",
+            "location": "InterestVault.sol, ownerApprove() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Position Liquidation Avoidance",
+            "description": "The loan position's owner with the native token as collateral can decide to make the position liquidatable or not.",
+            "severity": "medium",
+            "location": "CoreBorrowing contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Avoidable Liquidation",
+            "description": "The loan position's owner with native tokens as collateral can avoid liquidation, resulting in bad debt for the platform.",
+            "severity": "medium",
+            "location": "CoreBorrowing.sol, function liquidate()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Design Flaw in Liquidation Mechanism",
+            "description": "The loan position cannot be closed in the liquidation process if the collateral value is insufficient for closing the loan.",
+            "severity": "medium",
+            "location": "CoreBorrowing.sol, function liquidate()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Transaction Ordering Dependence (Race Condition)",
+            "description": "The front running attack can be performed, resulting in a bad swapping rate and might cause bad debt to the platform.",
+            "severity": "medium",
+            "location": "CoreBorrowing contract, _liquidationSwap() function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Rate Validation",
+            "description": "Unnecessary rate validation in _queryRateUSD() function",
+            "severity": "low",
+            "location": "PriceFeeds_BSC contract, _queryRateUSD function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions' executions cannot be monitored easily by the users.",
+            "severity": "low",
+            "location": "Membership.sol (setNewPool, setBaseURI), StakePool.sol (setNextPool, setSettleInterval, setSettlePeriod, setRankInfo), Vault.sol (ownerApprove, approveInterestVault)"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Compiler Version",
+            "description": "The Solidity compiler versions specified in the smart contracts were outdated.",
+            "severity": "low",
+            "location": "All contracts"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Functions in InterestVault",
+            "description": "The pause() and unPause() functions are not used in the InterestVault contract.",
+            "severity": "info",
+            "location": "InterestVault.sol, pause and unPause functions"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Logging for setForwAddress() Function",
+            "description": "The parameters passed to the SetForwAddress event are not the new forwAddress state.",
+            "severity": "info",
+            "location": "InterestVault.sol, setForwAddress function"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Public functions that are never called internally by the contract itself should have external visibility.",
+            "severity": "info",
+            "location": "Membership.sol, pause and unpause functions"
+        }
+    ]
+}

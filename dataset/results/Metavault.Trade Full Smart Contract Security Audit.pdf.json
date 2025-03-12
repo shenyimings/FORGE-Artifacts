@@ -1,0 +1,69 @@
+{
+    "path": "artifacts/Metavault.Trade Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x2760e46d9bb43dafcbecaad1f64b93207f9f0ed7, 0x39bdDc22D9B75727244CcC8F39b67d5A546937eC, 0x32848e2d3aecfa7364595609fb050a301050a6b4, 0xca9c89410025f2bc3befb07ce57529f26ad69093, 0x25f3434ce5873d169f3E73Ffc422C200dE22Be09",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "MVX": "contracts/Metavault/MVX",
+            "MvxTimelock": "contracts/Metavault/MvxTimelock",
+            "Vault": "contracts/Metavault/Vault",
+            "Router": "contracts/Metavault/Router",
+            "Timelock": "contracts/Metavault/Timelock"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Functions `recoverClaim()`, `claim()`, and `_updateRewards()` may abort with OUT_OF_GAS exception if the addresses list is too long.",
+            "severity": "low",
+            "location": "Metavault Trade, function `batchSetBonusRewards()` in Timelock"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Clearing token issue",
+            "description": "`clearTokenConfig()` function doesn't clear `allWhitelistedTokens`.",
+            "severity": "low",
+            "location": "Vault, function `clearTokenConfig()`"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Rounding error",
+            "description": "Division in `updateCumulativeFundingRate()` may cause rounding errors.",
+            "severity": "low",
+            "location": "Vault, function `updateCumulativeFundingRate()`"
+        }
+    ]
+}

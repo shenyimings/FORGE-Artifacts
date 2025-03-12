@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/Euler Staking Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/eulertools/contracts",
+        "commit_id": "c3fa6a76387024916cdb8f645f686c841aea6464",
+        "address": "0xb18fab4c6f054e734ea169561787cc87928f54ee",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "EulerStaking": "contracts/Euler Staking Smart Contract Audit Report - QuillAudits/EulerStaking"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "EulerPerBlock Miscalculation",
+            "description": "eulerPerBlock will be incorrect",
+            "severity": "medium",
+            "location": "Line 266-269, eulerPerBlock = _eulerPerBlock;"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risks",
+            "description": "Owner has the authority to change lockdown period, Euler per block reward rate, etc.",
+            "severity": "medium",
+            "location": "Token Contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "poolInfo[] stores only one element",
+            "description": "Can be simplified into a single struct variable",
+            "severity": "low",
+            "location": "Line 43, PoolInfo[] public poolInfo;"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Euler Token Address Check",
+            "description": "Tokens sent to zero address may be burnt",
+            "severity": "low",
+            "location": "setEulerToken function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Code",
+            "description": "Will only waste gas",
+            "severity": "info",
+            "location": "Line 45, 99-100"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Incorrect Solidity Version",
+            "description": "Avoiding complex pragma statements",
+            "severity": "low",
+            "location": "pragma solidity >=0.8.0 <=0.9.0"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing Event",
+            "description": "Difficult to track off-chain liquidity fee changes",
+            "severity": "info",
+            "location": "setLockupDuration and startStaking functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "State variables that could be declared constant",
+            "description": "Can save gas",
+            "severity": "low",
+            "location": "maxFee, totalAllocPoint"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Change memory to storage",
+            "description": "No new storage is allocated",
+            "severity": "low",
+            "location": "PoolInfo memory pool = poolInfo[pid];"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Public function that could be declared external",
+            "description": "Should be declared external to save gas",
+            "severity": "low",
+            "location": "claim function"
+        }
+    ]
+}

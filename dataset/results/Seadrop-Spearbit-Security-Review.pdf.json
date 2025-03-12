@@ -1,0 +1,167 @@
+{
+    "path": "artifacts/Seadrop-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/ProjectOpenSea/primary-drops-evm",
+        "commit_id": "284e80750bdadf0249a58ba5e4d6253819628adb",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "primary-drops-evm": "contracts/Seadrop-Spearbit-Security-Review/primary-drops-evm"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "An allowed signer can sign mints with malicious parameters",
+            "description": "An allowed signer can sign mints that have either mintParams.feeBps equal to 0 or a custom feeRecipient with mintParams.restrictFeeRecipients equal to false.",
+            "severity": "high",
+            "location": "SeaDrop.sol#L259-L266, SeaDrop.sol#L318-L319"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "ERC721SeaDrop's modifier onlyOwnerOrAdministrator would allow either the owner or the admin to override the other person's config parameters",
+            "description": "The onlyOwnerOrAdministrator modifier allows either one to override the other person's work, posing possible vectors of attack if there is no off-chain trust established between these 2 entities.",
+            "severity": "high",
+            "location": "ERC721SeaDrop.sol#L106, ERC721SeaDrop.sol#L212, ERC721SeaDrop.sol#L289, ERC721SeaDrop.sol#L345"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy of fee payment can be used to circumvent max mints per wallet check",
+            "description": "Re-entrancy in the fee dispersal mechanism can be used to circumvent the maxMintsPerWallet check.",
+            "severity": "high",
+            "location": "SeaDrop.sol#L586"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Cross SeaDrop reentrancy",
+            "description": "The contract implementing IERC721SeaDrop can work with multiple Seadrop implementations, allowing a malicious fee receiver to circumvent the maxMintsPerWallet check using cross-contract reentrancy.",
+            "severity": "medium",
+            "location": "SeaDrop.sol#L586"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of replay protection for mintAllowList and mintSigned",
+            "description": "No checks prevent reusing the same signature or Merkle proof multiple times, allowing replays to happen if a wallet does not claim all of maxMintsPerWallet in one transaction.",
+            "severity": "medium",
+            "location": "SeaDrop.sol#L227, SeaDrop.sol#L318"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "The digest in SeaDrop.mintSigned is not calculated correctly according to EIP-712",
+            "description": "mintParams in the calculation of the digest in mintSigned is of struct type, so we would need to calculate and use its hashStruct, not the actual variable on its own.",
+            "severity": "medium",
+            "location": "SeaDrop.sol#L308"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Token gated drops with a self-allowed ERC721SeaDrop or a variant of that can lead to the drop getting drained by one person",
+            "description": "Scenarios where an actor with only 1 token from an allowed NFT can drain Token Gated Drops that are happening simultaneously or back to back.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "ERC721SeaDrop inherits unnecessary interfaces",
+            "description": "ERC721SeaDrop inherits from ERC721, but some functions are not necessary for its functionality.",
+            "severity": "info",
+            "location": "ERC721SeaDrop.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Update drop stage function does not check if the new timestamp is less than or equal to the old one",
+            "description": "The update drop stage function should check if the new timestamp is greater than the old one.",
+            "severity": "info",
+            "location": "SeaDrop.sol#L871-L886"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent naming conventions in public variables",
+            "description": "Consider renaming certain state variables for consistency and readability.",
+            "severity": "info",
+            "location": "SeaDrop.sol#L43"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Misleading variable name",
+            "description": "Rename enumeratedDropsLength to enumerationLength.",
+            "severity": "info",
+            "location": "SeaDrop.sol#L1002-L1008"
+        }
+    ]
+}

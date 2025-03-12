@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/SlowMist Audit Report - Fortube Bank 2.0_en-us.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "14c501812d7a53ef5b7ded2e9540d7bc07967a1ef6c9e9cadfb266f1d99b062e",
+        "address": "0x322401fff76dda9cea5595aaa90d062798907bde",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.4+commit.1dca32f3"
+        ],
+        "project_path": {
+            "FToken": "contracts/SlowMist Audit Report - Fortube Bank 2/FToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Authentication check bypassing",
+            "description": "transferToUser function on BankController is public, allowing msg.sender to be a contract and forging underlying to return a list of valid tokens, bypassing permission checks.",
+            "severity": "critical",
+            "location": "BankController.sol Line: 218"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Not set gas limit to external call",
+            "description": "The transferIn function of the BankController contract did not limit the gas to 2300 when returning user assets.",
+            "severity": "medium",
+            "location": "BankController.sol, Line 211"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing check",
+            "description": "The calculation of the borrowRate limit by the peekInterest function and accrueInterest function in the Ftoken contract is checked before updating the new loan amount.",
+            "severity": "medium",
+            "location": "Ftoken.sol, Lines 769 and 704"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Precision issue",
+            "description": "The withdrawCheck on BankController contract does not perform precision processing on Ftoken, which causes calculation problems when precision of ftoken and underlying are inconsistent.",
+            "severity": "medium",
+            "location": "BankController.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "System unavailability risk",
+            "description": "The accrueInterest function has a problem in processing borrowRate, which may cause system unavailability.",
+            "severity": "medium",
+            "location": "Ftoken.sol, Line 515"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing check",
+            "description": "Bank contract does not check if Ftoken is in the market in the deposit function and cashIn function.",
+            "severity": "low",
+            "location": "Bank.sol, Lines 112 and 214"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing check",
+            "description": "In Ftoken, accrueinterest() is not used to correct the interest during transferTokens, resulting in incorrect calculations.",
+            "severity": "low",
+            "location": "Ftoken.sol, Line 206"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing check",
+            "description": "The Bank contract did not check whether liquidateBorrow and liquidateCollateral are address(0) or whether the corresponding address already exists during liquidation.",
+            "severity": "low",
+            "location": "Bank.sol, Line 182"
+        }
+    ]
+}

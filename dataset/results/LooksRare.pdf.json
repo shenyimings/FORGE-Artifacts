@@ -1,0 +1,356 @@
+{
+    "path": "artifacts/LooksRare.pdf",
+    "project_info": {
+        "url": "https://github.com/LooksRare/looksrare-contracts",
+        "commit_id": "n/a",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.4.18+commit.9cf6e910"
+        ],
+        "project_path": {
+            "TetherToken": "contracts/LooksRare/TetherToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Risk of reuse of signatures across forks due to lack of chainID validation",
+            "description": "The system may be vulnerable to signature replay attacks on forked chains.",
+            "severity": "high",
+            "location": "Contract constructor, DOMAIN_SEPARATOR generation"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Lack of two-step process for contract ownership changes",
+            "description": "Contract ownership is transferred in a single step, which is risky.",
+            "severity": "high",
+            "location": "OpenZeppelin contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ]
+            },
+            "title": "Project dependencies contain vulnerabilities",
+            "description": "Dependency with a known vulnerability (CVE-2021-23358) in underscore",
+            "severity": "medium",
+            "location": "LooksRare protocol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Excessive privileges of RoyaltyFeeSetter and RoyaltyFeeRegistry owners",
+            "description": "Violation of the principle of least privilege",
+            "severity": "low",
+            "location": "contracts/royaltyFeeHelpers/RoyaltyFeeSetter.sol, contracts/royaltyFeeHelpers/RoyaltyFeeRegistry.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-311"
+                ],
+                "3": [
+                    "CWE-312"
+                ],
+                "4": [
+                    "CWE-526"
+                ]
+            },
+            "title": "Insufficient protection of sensitive information",
+            "description": "Sensitive information (API keys) stored in process environments",
+            "severity": "low",
+            "location": "contracts/hardhat.config.ts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unemitted event in protocol fee transfer",
+            "description": "No event is emitted when a protocol fee is levied.",
+            "severity": "n/a",
+            "location": "StrategyDutchAuction.sol (contracts/executionStrategies)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-116"
+                ]
+            },
+            "title": "Taker orders are not EIP-712 signatures",
+            "description": "Takers presented with an obscure blob of data, creating UX asymmetry.",
+            "severity": "info",
+            "location": "OrderTypes.sol (contracts/libraries)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Solidity compiler optimizations can be problematic",
+            "description": "Enabled optional compiler optimizations may introduce security bugs.",
+            "severity": "info",
+            "location": "LooksRare protocol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "isContract may behave unexpectedly",
+            "description": "isContract function may return unexpected results in some edge cases.",
+            "severity": "info",
+            "location": "SignatureChecker.sol (contracts/libraries)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "tokenId and amount fully controlled by the order strategy when matching two orders",
+            "description": "Strategy can control tokenId and amount, potentially causing loss of funds.",
+            "severity": "info",
+            "location": "LooksRareExchange.sol (contracts)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Risk of phishing due to data stored in maker order params field",
+            "description": "Arbitary data storage increases phishing risk.",
+            "severity": "info",
+            "location": "OrderTypes.sol (contracts/libraries)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-327"
+                ]
+            },
+            "title": "Use of legacy openssl version in solidity-coverage plugin",
+            "description": "Outdated security protocols may be risky or prone to errors.",
+            "severity": "info",
+            "location": "LooksRare protocol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1127"
+                ]
+            },
+            "title": "TypeScript compiler errors during deployment",
+            "description": "Errors prevent proper compilation during deployment.",
+            "severity": "info",
+            "location": "scripts/helpers/deploy-exchange.ts (LooksRare protocol)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Ambiguous data parameter in MakerOrder struct",
+            "description": "The data parameter in the MakerOrder struct may lead to undefined behavior if users sign data that is not properly validated.",
+            "severity": "medium",
+            "location": "MakerOrder struct"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Phishing risk with EIP-712 signatures",
+            "description": "Although EIP-712 signatures are more resilient to phishing attacks, user funds can still be stolen through a phishing campaign that asks for signatures outside the context of the LooksRare application.",
+            "severity": "medium",
+            "location": "EIP-712 signature usage"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ]
+            },
+            "title": "Risk of domain or subdomain takeovers",
+            "description": "The system is vulnerable to domain or subdomain takeovers by malicious parties.",
+            "severity": "medium",
+            "location": "LooksRare exchange infrastructure"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1288"
+                ]
+            },
+            "title": "Privacy breach through web requests",
+            "description": "Careless inclusion of information in web requests to third-party servers may lead to privacy breaches, allowing IP address locations to be matched to wallet addresses.",
+            "severity": "low",
+            "location": "Web request handling"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unauthorized token burning",
+            "description": "Tokens transferred to the 0x0 address are considered burned instead of reverting.",
+            "severity": "n/a",
+            "location": "ERC721 contract, transfer function"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Loss of assets due to missing safeTransferFrom implementation",
+            "description": "Transfers of NFTs to contracts without safeTransferFrom implementation can result in loss of assets.",
+            "severity": "n/a",
+            "location": "ERC721 token contracts, safeTransferFrom function"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy vulnerability due to onERC721Received callback",
+            "description": "External calls in transfer functions can lead to reentrancies if the onERC721Received callback is not properly handled.",
+            "severity": "n/a",
+            "location": "ERC721 contract, transfer function"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Loss of assets due to unsafe minting",
+            "description": "Minting functions should behave similarly to safeTransferFrom and handle minting of new tokens to a smart contract.",
+            "severity": "n/a",
+            "location": "ERC721 contract, minting function"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Uncleared approvals after burning",
+            "description": "Burning functions should clear previous token approvals.",
+            "severity": "n/a",
+            "location": "ERC721 contract, burning function"
+        }
+    ]
+}

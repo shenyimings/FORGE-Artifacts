@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/BlockSec-blocksec_firnprotocol_v1.0-signed.pdf",
+    "project_info": {
+        "url": "https://github.com/firnprotocol/contracts",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/BlockSec-blocksec_firnprotocol_v1/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Potential DoS in repeated registrations",
+            "description": "The Firn contract's pending mechanism can lead to a potential DoS vulnerability if a user registers a new account, then calls register again for the same account.",
+            "severity": "low",
+            "location": "Firn contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unfair Fee Distribution",
+            "description": "Conditional skipping of holders during fee distribution can lead to unfair allocation, depending on the position of skipped holders in the BalanceTree.",
+            "severity": "n/a",
+            "location": "Treasury contract, traverse function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Double Payment",
+            "description": "An attacker could transfer their own FIRN balance within their 'receive' function to get paid twice for the same FIRN.",
+            "severity": "n/a",
+            "location": "Treasury contract, traverse function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Repeated Registrations",
+            "description": "The register function allows users to register the same account multiple times, reducing privacy and potentially allowing front-running attacks.",
+            "severity": "n/a",
+            "location": "Firn contract, register function"
+        }
+    ]
+}

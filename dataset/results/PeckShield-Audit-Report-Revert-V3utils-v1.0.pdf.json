@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Revert-V3utils-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/revert-finance/v3utils/tree/9176c99b63c3c8fada6fe33bb40f39c3c3d5b970",
+        "commit_id": "9176c99b63c3c8fada6fe33bb40f39c3c3d5b970",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "v3utils": "contracts/PeckShield-Audit-Report-Revert-V3utils-v1/v3utils"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Lack of Slippage Control in onERC721Received()",
+            "description": "No slippage control in the internal _swapAndIncrease/_swapAndMint() routines, which opens up the possibility for front-running and potentially results in a smaller LP amount.",
+            "severity": "low",
+            "location": "V3Utils contract, onERC721Received() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Incorrect swapSourceToken Using in onERC721Received()",
+            "description": "The input argument SwapAndMintParams.swapSourceToken should be IERC20(address(0)) if no swap operation is required, instead of current IERC20(token0).",
+            "severity": "info",
+            "location": "V3Utils contract, onERC721Received() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Accommodation Of Non-ERC20-Compliant Tokens",
+            "description": "The approve() function does not have a return value for certain non-compliant ERC20 tokens (e.g., USDT), which may cause issues when calling approve().",
+            "severity": "low",
+            "location": "V3Utils contract, _swapAndPrepareAmounts() function"
+        }
+    ]
+}

@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/[KALOS] StableComp Audit Report v1.1 (ENG).pdf",
+    "project_info": {
+        "url": "https://github.com/stablecomp/stablecomp-contracts",
+        "commit_id": "f5bb17e595a1320f3f107b039653f6d384c5ed45",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "stablecomp-contracts": "contracts/[KALOS] StableComp Audit Report v1/stablecomp-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Minimum output parameter does not exist in UniswapV2's swapExactTokensForTokens function",
+            "description": "Lack of minimum output parameter makes the contract vulnerable to sandwich trading attacks, potentially losing more than 90% of tokens being swapped.",
+            "severity": "high",
+            "location": "contracts/utility/UniswapSwapper.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "First Depositor Front-Running",
+            "description": "The first depositor of the SCompVault contract may lose most of the assets they deposit due to malicious MEV attackers.",
+            "severity": "critical",
+            "location": "contracts/SCompVault.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "veScomp Contract Can Freeze Any Arbitrary User's Scomp Tokens",
+            "description": "The veScomp contract can impose a lock-up for up to two years on the user without their consent.",
+            "severity": "high",
+            "location": "contracts/farmBooster/veScomp.vy"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential Calculation Issue with Rewards in MasterchefScomp Contract after endBlock",
+            "description": "Users may receive additional rewards beyond the predetermined rewards, which may result in losses for the project team.",
+            "severity": "medium",
+            "location": "contracts/farmBooster/MasterchefScomp.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential Issue with Reward Token Management in MasterchefScomp Contract",
+            "description": "Users may receive less or no rewards in specific situations.",
+            "severity": "low",
+            "location": "contracts/farmBooster/MasterchefScomp.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Minimum output parameter does not exist in Curve _add_liquidity_single_coin function",
+            "description": "During the process of reinvesting profits received, some profits may be lost.",
+            "severity": "high",
+            "location": "contracts/utility/CurveSwapper.sol"
+        }
+    ]
+}

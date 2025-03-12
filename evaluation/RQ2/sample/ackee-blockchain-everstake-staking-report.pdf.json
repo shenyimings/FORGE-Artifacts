@@ -1,0 +1,165 @@
+{
+    "path": "artifacts/ackee-blockchain-everstake-staking-report.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a"
+    },
+    "findings": [
+        {
+            "id": 0,
+            "title": "_simulateAutocompound can revert",
+            "description": "The `_simulateAutocompound` function can revert in certain protocol states. Pending amounts may lead to reverts due to underflows.",
+            "severity": "High",
+            "location": "Accounting.sol, _simulateAutocompound function"
+        },
+        {
+            "id": 1,
+            "title": "DoS due to 0 pending deposits",
+            "description": "The withdrawPending function does not remove users from the pending set when they withdraw their full pending balance. This results in a DoS as the loop may run indefinitely due to unbounded set length.",
+            "severity": "High",
+            "location": "Pool.sol, Accounting.sol"
+        },
+        {
+            "id": 2,
+            "title": "Partial DoS due to interchange",
+            "description": "When users withdraw, a large number of interchanges among pending stakers with low balances can lead to high gas fees, causing partial DoS.",
+            "severity": "High",
+            "location": "Pool.sol, Accounting.sol"
+        },
+        {
+            "id": 3,
+            "title": "DoS due to underflow",
+            "description": "The `_withdrawFromAutocompound` function can revert due to an underflow caused by integer rounding errors during conversions.",
+            "severity": "High",
+            "location": "AutocompoundAccounting.sol"
+        },
+        {
+            "id": 4,
+            "title": "Withdrawal of autocompoundBalanceOf amount reverts",
+            "description": "Withdrawal from `autocompoundBalanceOf` function reverts due to insufficient balance in the user's account leading to failure.",
+            "severity": "High",
+            "location": "autocompoundBalanceOf function"
+        },
+        {
+            "id": 5,
+            "title": "Missing whenWithdrawActive modifier",
+            "description": "The unstake function does not enforce the withdrawal restriction due to the missing `whenWithdrawActive` modifier.",
+            "severity": "Medium",
+            "location": "Pool.sol, unstake function"
+        },
+        {
+            "id": 6,
+            "title": "Call to depositedBalanceOf reverts",
+            "description": "The function `depositedBalanceOf` can revert due to an underflow caused by the default return value in `Accounting` contract.",
+            "severity": "Medium",
+            "location": "Accounting.sol, AutocompoundAccounting.sol"
+        },
+        {
+            "id": 7,
+            "title": "simulateAutocompound checks only balance diff",
+            "description": "simulateAutocompound does not consider edge cases for other state variables and only relies on balance difference check.",
+            "severity": "Medium",
+            "location": "simulateAutocompound function"
+        },
+        {
+            "id": 8,
+            "title": "Withdraw request array monotonically grows",
+            "description": "The withdraw request array grows indefinitely under certain conditions, increasing gas consumption.",
+            "severity": "Low",
+            "location": "WithdrawRequests.sol"
+        },
+        {
+            "id": 9,
+            "title": "Lack of 2-phase role transfers",
+            "description": "The contract uses a 1-step transfer process for role transfers which may result in incorrect addresses being assigned.",
+            "severity": "Low",
+            "location": "OwnableWithSuperAdmin.sol, Governor.sol, TreasuryBase.sol"
+        },
+        {
+            "id": 10,
+            "title": "Exiting validators can revert",
+            "description": "The `markValidatorsAsExited` function can revert if there's a mix of pending and deposited validators.",
+            "severity": "Low",
+            "location": "Pool.sol, markValidatorsAsExited function"
+        },
+        {
+            "id": 11,
+            "title": "Replacing validators lacks validation",
+            "description": "The `replacePendingValidator` function lacks proper data validation for incoming validators.",
+            "severity": "Low",
+            "location": "Pool.sol, replacePendingValidator function"
+        },
+        {
+            "id": 12,
+            "title": "Validation of owner in treasuries",
+            "description": "Constructor lacks validation for owner addresses in `WithdrawTreasury` and `RewardsTreasury`.",
+            "severity": "Low",
+            "location": "WithdrawTreasury.sol, RewardsTreasury.sol"
+        },
+        {
+            "id": 13,
+            "title": "Data validation in initialize functions",
+            "description": "initialize functions lack proper validation for important variables.",
+            "severity": "Low",
+            "location": "Pool.sol, Accounting.sol"
+        },
+        {
+            "id": 14,
+            "title": "Incorrect return value of _simulateAutocompound",
+            "description": "The function `_simulateAutocompound` returns an incorrect value for `unclaimedReward` under certain conditions.",
+            "severity": "Low",
+            "location": "Accounting.sol, _simulateAutocompound function"
+        },
+        {
+            "id": 15,
+            "title": "Upgradeable contract constructor without initializer",
+            "description": "The contracts don't follow conventional patterns for disabling initialization leading to potential risks.",
+            "severity": "Low",
+            "location": "Pool.sol, Accounting.sol"
+        },
+        {
+            "id": 16,
+            "title": "unstakePending and activateBalance can revert due to bad timing",
+            "description": "Functions `unstakePending` and `activateBalance` can revert in certain timing scenarios.",
+            "severity": "Warning",
+            "location": "unstakePending, activateBalance functions"
+        },
+        {
+            "id": 17,
+            "title": "Dead code in _autoCompoundUserBalance",
+            "description": "Redundant if statement checking the same condition twice.",
+            "severity": "Warning",
+            "location": "AutocompoundAccounting.sol"
+        },
+        {
+            "id": 18,
+            "title": "Pending deposited can't be withdrawn",
+            "description": "Users cannot initiate withdrawal processes for stakes in the pending deposited state due to insufficient shares, causing transaction reverts until activation.",
+            "severity": "Low",
+            "location": "Pool.sol, Accounting.sol, AutocompoundAccounting.sol"
+        },
+        {
+            "id": 19,
+            "title": "Lack of call to disableInitializers()",
+            "description": "The lack of explicit constructor calls to disableInitializers() in logic contracts makes them vulnerable to front-running the initialize transaction.",
+            "severity": "Low",
+            "location": "Pool.sol, Accounting.sol, RewardsTreasury.sol, WithdrawTreasury.sol"
+        },
+        {
+            "id": 20,
+            "title": "Lack of 0 shares check in simulateAutocompound",
+            "description": "The `_simulateAutocompound` function lacks an if-statement check for zero balance, leading to incorrect simulations.",
+            "severity": "Low",
+            "location": "simulateAutocompound function"
+        },
+        {
+            "id": 21,
+            "title": "Lack of 0 shares check in feeBalance",
+            "description": "The `feeBalance` function does not consider zero shares, leading to incorrect balance reporting.",
+            "severity": "Low",
+            "location": "Accounting.sol, feeBalance function"
+        }
+    ]
+}

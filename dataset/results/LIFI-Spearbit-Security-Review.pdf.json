@@ -1,0 +1,466 @@
+{
+    "path": "artifacts/LIFI-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/lifinance/contracts",
+        "commit_id": "f024ee5d64a24882010642bf81d87529712edc7c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/LIFI-Spearbit-Security-Review/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ],
+                "3": [
+                    "CWE-302"
+                ]
+            },
+            "title": "Hardcode bridge addresses via immutable",
+            "description": "Most bridge facets call bridge contracts where the bridge address has been supplied as a parameter, which is inherently unsafe.",
+            "severity": "high",
+            "location": "OmniBridgeFacet.sol#L34-L106, AxelarFacet.sol#L18-L23"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Tokens are left in the protocol when the swap at the destination chain fails",
+            "description": "LiFi protocol finds the best bridge route for users, but if the swap fails, tokens may be left in the protocol.",
+            "severity": "high",
+            "location": "AmarokFacet.sol#L55-L94, StargateFacet.sol#L149-L187, NXTPFacet.sol#L86-L117"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Tokens transferred with Axelar can get lost if the destination transaction can’t be executed",
+            "description": "If _executeWithToken() reverts, tokens may be lost if the call cannot be made to work.",
+            "severity": "high",
+            "location": "Executor.sol#L293-L316"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Use the getStorage() / NAMESPACE pattern instead of global variables",
+            "description": "The facet DexManagerFacet and the inherited contracts Swapper.sol / SwapperV2.sol define a global variable appStorage on the first storage slot.",
+            "severity": "high",
+            "location": "Swapper.sol#L17, SwapperV2.sol#L17, DexManagerFacet.sol#L21"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Decrease allowance when it is already set a non-zero value",
+            "description": "Non-standard tokens like USDT will revert the transaction when a contract or a user tries to approve an allowance when the spender allowance is already set to a non zero value.",
+            "severity": "high",
+            "location": "AxelarFacet.sol#L71, LibAsset.sol#L52, FusePoolZap.sol#L64, Executor.sol#L312"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Too generic calls in GenericBridgeFacet allow stealing of tokens",
+            "description": "With the contract GenericBridgeFacet, the functions swapAndStartBridgeTokensGeneric() (via LibSwap.swap()) and _startBridge() allow arbitrary functions calls.",
+            "severity": "high",
+            "location": "GenericBridgeFacet.sol#L69-L120, LibSwap.sol#L30-L68"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "LiFi protocol isn’t hardened",
+            "description": "The usage of the LiFi protocol depends largely on off-chain APIs and doesn't verify them.",
+            "severity": "high",
+            "location": "Lifi src"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Bridge with Axelar can be stolen with malicious external call",
+            "description": "Executor contract allows users to build an arbitrary payload external call to any address except erc20Proxy, allowing exploiters to steal users' funds.",
+            "severity": "high",
+            "location": "Executor.sol#L272-L288"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "LibSwap may pull tokens that are different from the specified asset",
+            "description": "LibSwap.swap is responsible for doing swaps, but users can build a calldata to swap a different asset as specified.",
+            "severity": "medium",
+            "location": "LibSwap.sol#L30-L55"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Check slippage of swaps",
+            "description": "Several bridges check that the output of swaps isn’t 0, but still lower than expected due to slippage / sandwiching / MEV.",
+            "severity": "medium",
+            "location": "OmniBridgeFacet.sol#L63-L65"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Replace createRetryableTicketNoRefundAliasRewrite() with depositEth()",
+            "description": "The function _startBridge() of the ArbitrumBridgeFacet uses createRetryableTicketNoRefundAliasRewrite(), which skips some address rewrite magic that depositEth() does.",
+            "severity": "medium",
+            "location": "ArbitrumBridgeFacet.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "WormholeFacet doesn’t send native token",
+            "description": "The functions of WormholeFacet allow sending the native token, but they don’t actually send it across the bridge.",
+            "severity": "medium",
+            "location": "WormholeFacet(sol#L36-L103"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "ArbitrumBridgeFacet does not check if msg.value is enough to cover the cost",
+            "description": "The ArbitrumBridgeFacet does not check whether the user’s provided ether (msg.value) is enough to cover _amount + cost.",
+            "severity": "medium",
+            "location": "ArbitrumBridgeFacet.sol#L97-L121"
+        },
+        {
+            "id": 13,
+            "category": {},
+            "title": "Underpaying Optimism l2gas may lead to loss of funds",
+            "description": "If the l2Gas is underpaid, finalizeDeposit will fail and user funds will be lost.",
+            "severity": "medium",
+            "location": "OptimismBridgeFacet.sol#L97-L113"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Funds can be locked during the recovery stage",
+            "description": "The recovery is an address that should receive funds if the execution fails on destination chain, but it is hardcoded as msg.sender.",
+            "severity": "low",
+            "location": "AmarokFacet.sol#L133"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "What if the receiver of Axelar _executeWithToken() doesn’t claim all tokens",
+            "description": "The function _executeWithToken() approves tokens and then calls callTo, but if that contract doesn't retrieve the tokens then the tokens stay within the Executor and are lost.",
+            "severity": "medium",
+            "location": "Executor.sol#L293-L316"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Remaining tokens can be swept from the LiFi Diamond or the Executor",
+            "description": "Remaining native tokens can be swept by swap functions, potentially leading to loss of funds.",
+            "severity": "medium",
+            "location": "Executor.sol (Lines 143-149, 191-199, 242-249, 338-345)"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Wormhole bridge chain IDs are different than EVM chain IDs",
+            "description": "Direct interaction with the contract can lead to loss of funds due to incorrect chain ID checks.",
+            "severity": "medium",
+            "location": "WormholeFacet.sol (Line 93)"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ]
+            },
+            "title": "Facets approve arbitrary addresses for ERC20 tokens",
+            "description": "Users can approve and transfer tokens out of LiFiDiamond contract, potentially leading to unauthorized token transfers.",
+            "severity": "medium",
+            "location": "AcrossFacet.sol (Line 103), AmarokFacet.sol (Line 145), AnyswapFacet.sol (Line 127), ..."
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "FeeCollector not well integrated",
+            "description": "Fees may not be paid when using the bridge directly, and the current implementation is complicated and non-transparent.",
+            "severity": "medium",
+            "location": "FeeCollector.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "_executeSwaps of Executor.sol doesn’t have a whitelist",
+            "description": "Calling arbitrary addresses is dangerous, potentially leading to unauthorized token transfers or other attacks.",
+            "severity": "medium",
+            "location": "Executor.sol (Lines 323-333), SwapperV2.sol (Lines 67-81)"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Processing of end balances",
+            "description": "The contract logic ignores start balances in certain cases, defeating its purpose and potentially leading to unintended behavior.",
+            "severity": "medium",
+            "location": "SwapperV2.sol (Lines 22-60), Executor.sol (Lines 41-57), Swapper.sol (Lines 22-38)"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Improve dexAllowlist",
+            "description": "Independent checks for approveTo, callTo, and signature (callData) in _executeSwaps() allow any signature to be valid for any dex combined with any approveTo address.",
+            "severity": "medium",
+            "location": "SwapperV2.sol, Swapper.sol, LibAccess.sol, DexManagerFacet.sol"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Pulling tokens by LibSwap.swap() is counterintuitive",
+            "description": "LibSwap.swap() pulls in tokens via transferFromERC20() from msg.sender when needed, leading to risks.",
+            "severity": "medium",
+            "location": "LibSwap.sol"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1254"
+                ]
+            },
+            "title": "Too many bytes are checked to verify the function selector",
+            "description": "Checking 8 bytes instead of 4 bytes to verify function selectors in _executeSwaps() is unnecessary and potentially unwanted.",
+            "severity": "medium",
+            "location": "SwapperV2.sol, Swapper.sol, LibStorage.sol, DexManagerFacet.sol"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use same layout for facets",
+            "description": "The different bridge facets use different layouts for the source code.",
+            "severity": "info",
+            "location": "LiFi Facets"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Inconsistent inheritance order",
+            "description": "Inheritance order is not always the same.",
+            "severity": "info",
+            "location": "Various facets (e.g., AmarokFacet, AnyswapFacet, etc.)"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Revert in swapAndStartBridgeTokensViaStargate() function",
+            "description": "nativeFee -= _swapData[i].fromAmount; can revert.",
+            "severity": "info",
+            "location": "StargateFacet.sol#L95-L114"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Check processing of native tokens in AnyswapFacet",
+            "description": "The variable isNative seems to mean a wrapped native token is used, but the logic for native tokens may be incorrect.",
+            "severity": "info",
+            "location": "AnyswapFacet.sol#L32-L144"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Diamond pattern complexity",
+            "description": "The diamond pattern is relatively complex and has overhead for delegatecall.",
+            "severity": "info",
+            "location": "ERC20Proxy.sol"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Diamond standard reference",
+            "description": "LiFiDiamond.sol contract doesn’t contain a reference to the Diamond contract.",
+            "severity": "info",
+            "location": "LiFiDiamond.sol"
+        }
+    ]
+}

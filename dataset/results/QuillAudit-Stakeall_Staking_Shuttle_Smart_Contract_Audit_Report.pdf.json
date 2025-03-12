@@ -1,0 +1,179 @@
+{
+    "path": "artifacts/QuillAudit-Stakeall_Staking_Shuttle_Smart_Contract_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/stakeall/cross-chain-staking-shuttle",
+        "commit_id": "2524a365a71beca88db604058f42dd1feb224e16",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "cross-chain-staking-shuttle": "contracts/QuillAudit-Stakeall_Staking_Shuttle_Smart_Contract_Audit_Report/cross-chain-staking-shuttle"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Parameter and msg.value mismatch",
+            "description": "When passing amount to deposit function, it often mismatches with the matic amount sent due to the gas price we pay.",
+            "severity": "medium",
+            "location": "ChildPool.sol, Line #93"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Missing setters",
+            "description": "The contract initializes values for fundCollector and feeBeneficiary, which might need updating in the future.",
+            "severity": "low",
+            "location": "ChildPool.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary initialization",
+            "description": "In solidity variables which are not initialized are set to zero by default if they are of the type uint256, but in initialization of ChildPool, we are setting this variables to zero explicitly.",
+            "severity": "low",
+            "location": "ChildPool.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unnecessary check",
+            "description": "There is an unnecessary required check in deposit",
+            "severity": "low",
+            "location": "ChildPool.sol, Line #95"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Method can be made external",
+            "description": "Change the visibility to external to reduce gas costs of operation.",
+            "severity": "low",
+            "location": "FxStateChildTunnel.sol, FxStateRootTunnel.sol, Lines #36 and 27"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Repeated code lines",
+            "description": "The methods crossChainStake and cancelShuttle share a lot of common logic.",
+            "severity": "low",
+            "location": "RootPool.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect parameter description",
+            "description": "The netspec comments added for parameter description are incorrect",
+            "severity": "low",
+            "location": "RootPool.sol, Line #24"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused variable",
+            "description": "The address is set for erc20PredicateProxy but never used.",
+            "severity": "low",
+            "location": "RootPool(sol)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Internal method naming convention",
+            "description": "Internal method names should be preceded by ‘_’ to differentiate them visibly from external and public methods according to solidity naming convention.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing License Identifier",
+            "description": "Add SPDX-License-Identifier for all the contracts",
+            "severity": "low",
+            "location": "RootPool.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing netspec comments",
+            "description": "We recommend adding netspec comments for each method and variables for better readability and understanding of code.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

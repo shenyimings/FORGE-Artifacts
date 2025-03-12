@@ -1,0 +1,305 @@
+{
+    "path": "artifacts/Solidified-2Key_[14.10.2019].pdf",
+    "project_info": {
+        "url": "https://github.com/2key/contracts",
+        "commit_id": "de171eb80e9ce1c6566a5d782f0a0549ab0151ad",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Solidified-2Key_[14/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Transactions may hit block gas limit when referral chain becomes too long",
+            "description": "Unbounded loops can cause transactions to fail due to hitting the block gas limit.",
+            "severity": "critical",
+            "location": "TwoKeyAcquisitionCampaignERC20.sol, updateOnConversionExecutedEvent()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Error in vote counting",
+            "description": "The voting system implementation in ​TwoKeyCongress.sol is incorrect. In the current implementation, votes are added when in favor of proposal and subtracted when voting against. However, the proposal executing code checks for > 50 % majority compared to the total voting power. Total voting power: 10, votes in favor 7, votes against 3, result = 7 – 3 = 4. In this case the proposal would fail despite majority.",
+            "severity": "critical",
+            "location": "TwoKeyCongress.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Discrepant values between converted amount and msg.value",
+            "description": "Sanity checks are performed on msg.value, but conversion is created using a different value.",
+            "severity": "high",
+            "location": "TwoKeyAcquisitionCampaingERC20.sol, ConvertFiat function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Functionality to Remove Member is unusable",
+            "description": "Logic of the RemoveMember function in TwoKeyCongress.sol checks for an out-of-bounds position in the allMembers array.",
+            "severity": "high",
+            "location": "TwoKeyCongress.sol, RemoveMember function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Congress does not allow for adding members after deployment",
+            "description": "No logic to allow for new members to be voted in after deployment.",
+            "severity": "high",
+            "location": "TwoKeyCongress.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Restriction on methods called by congress is ineffective",
+            "description": "State variable allowedMethodSignatures is never set, and verification before external calls is missing.",
+            "severity": "high",
+            "location": "TwoKeyCongress.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Maintainers can bypass congress upgrades",
+            "description": "Function createProxy allows maintainers to redeploy proxy contracts and substitute the existing version.",
+            "severity": "high",
+            "location": "TwoKeyAdmin.sol, createProxy function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missing Enforcement of Invocation Restriction in TwoKeyBaseReputationRegistry.sol",
+            "description": "Methods updateOnConversionExecutedEvent() and updateOnConversionRejectedEvent() can be called from anywhere.",
+            "severity": "low",
+            "location": "TwoKeyBaseReputationRegistry.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "The initial token distribution does not match the events created.",
+            "description": "Token distribution implemented in TwoKeyEconomy.sol does not match the event created during token deployment.",
+            "severity": "low",
+            "location": "TwoKeyEconomy.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Signature Verification does not Check for Malleable Addresses",
+            "description": "Signature verification does not check for malleable addresses allowed by ecrecover.",
+            "severity": "low",
+            "location": "Various contracts using signature verification"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "replaceMember function can lead to inconsistent state",
+            "description": "Passing an existing address will throw the allMembers array in inconsistent state.",
+            "severity": "low",
+            "location": "TwoKeyCongress.sol, replaceMember function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Error in function signature report2KEYWithdrawnFromNetworkInternal",
+            "description": "Function visibility modifier is incorrect, allowing anyone to call it.",
+            "severity": "low",
+            "location": "TwoKeyFactory.sol, report2KEYWithdrawnFromNetworkInternal function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of input validation on campaign creation",
+            "description": "No validation performed on parameters given for campaign creation.",
+            "severity": "low",
+            "location": "TwoKeyFactory.sol and campaigns contracts"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Unbounded loops can block execution",
+            "description": "Loops can grow larger than the block gas limit, blocking execution.",
+            "severity": "low",
+            "location": "Various contracts (TwoKeyUpgradableExchange.sol, TwoKeyMantainersRegistry.sol, TwoKeyConversionHandler.sol)"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Contracts can be upgraded to non-existing versions",
+            "description": "UpgradeContract function does not check if the version passed returns an actual address.",
+            "severity": "low",
+            "location": "Various contracts"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Possible clash of addresses in twoKeyEconomy",
+            "description": "_twoKeyAdmin is passed as a parameter, but the state variable is set with the twoKeyAdmin from singletons registry.",
+            "severity": "low",
+            "location": "TwoKeyEconomy.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-638"
+                ],
+                "5": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Exchanges rates are a point of centralization",
+            "description": "Exchange rate can heavily influence live campaigns and being set by maintainers can be seen as a point of centralization.",
+            "severity": "low",
+            "location": "TwoKeyEconomy.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "ArcERC20 and InvoiceTokenERC20 are not compliant to the ERC20 Standard",
+            "description": "ArcERC20 does not implement required functions, and InvoiceToken reverts on approve and transferFrom functions.",
+            "severity": "low",
+            "location": "ArcERC20.sol and InvoiceTokenERC20.sol"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Influencers can set their own cut (percentage of the bounty to be received)",
+            "description": "Influencers can override system cuts by setting their own percentage.",
+            "severity": "low",
+            "location": "TwoKeyAcquisitionCampaignERC20.sol"
+        }
+    ]
+}

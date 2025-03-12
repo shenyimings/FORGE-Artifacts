@@ -1,0 +1,365 @@
+{
+    "path": "artifacts/0x-protocol.pdf",
+    "project_info": {
+        "url": "https://github.com/0xProject/0x-monorepo/tree/abd479dc68fa75719647db261130418725fd40d5",
+        "commit_id": "abd479dc68fa75719647db261130418725fd40d5",
+        "address": "0xdd974d5c2e2928dea5f71b9825b8b646686bd200",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "0x-monorepo": "contracts/0x-protocol/0x-monorepo"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Fee refunds incentivize transaction centralization through market makers",
+            "description": "The protocol fee payment process can be exploited by market makers to receive a portion of the protocol fee and then offer it back to users, effectively allowing them to reduce the protocol interaction cost for users.",
+            "severity": "low",
+            "location": "Exchange Contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Market makers have a reduced cost for performing front-running attacks",
+            "description": "Market makers can specify a higher gas price for a reduced overall transaction rate, using the refund they will receive upon disbursement of protocol fee pools to front-run transactions.",
+            "severity": "medium",
+            "location": "Exchange Contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "cancelOrdersUpTo can be used to permanently block future orders",
+            "description": "The cancelOrdersUpTo function can cancel an arbitrary number of future orders in a single, fixed-size transaction, and this operation is not reversible.",
+            "severity": "high",
+            "location": "exchange/contracts/src/MixinExchangeCore.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "setSignatureValidatorApproval race condition may be exploitable",
+            "description": "A race condition in the signature validator approval logic becomes exploitable if a validator is compromised, allowing an attacker to validate malicious transactions.",
+            "severity": "medium",
+            "location": "exchange/contracts/src/MixinSignatureValidator.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "WETH9 transferFrom often does not follow spec",
+            "description": "The transferFrom function in WETH9's ERC20 token does not require approval if the sender is the source of the account, breaking invariants expected of transferFrom.",
+            "severity": "info",
+            "location": "erc20/contracts/src/WETH9.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Batch processing of transaction execution and order matching may lead to exchange griefing",
+            "description": "Batch processing of transaction execution and order matching can be exploited by an attacker submitting a valid order that gets bundled into a batch, then front-running its processing by reducing the allowance below the required value.",
+            "severity": "medium",
+            "location": "exchange/contracts/src/{MixinTransactions, MixinMatchOrders}.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Zero fee orders are possible if a user performs transactions with a zero gas price",
+            "description": "Users can submit valid orders and avoid paying fees if they use a zero gas price.",
+            "severity": "medium",
+            "location": "exchange-libs/contracts/src/LibFillResults.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ]
+            },
+            "title": "Lack of events for critical operations",
+            "description": "Several critical operations do not trigger events, making it difficult to review the correct behavior of the contracts once deployed.",
+            "severity": "info",
+            "location": "Exchange contracts"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of validation in makerAssetData and takerAssetData",
+            "description": "The lack of validation in two order fields may cause unexpected results in certain corner cases, which could confuse users or allow an attacker to bring the contract into an invalid state.",
+            "severity": "info",
+            "location": "exchange/contracts/src/MixinAssetProxyDispatcher.sol and asset-proxy/contracts/src/ERC20Proxy.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Transfers with Zero Fee Amounts Can Log Arbitrary Data in Their feeAssetData",
+            "description": "A user can insert arbitrary data into the makerFeeAssetData or takerFeeAssetData fields when the makerFee or takerFee is equal to 0.",
+            "severity": "info",
+            "location": "exchange/contracts/src/{MixinExchangeCore, MixinAssetProxyDispatcher}.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "MultiSigWallet Does Not Check Contract Existence before Call",
+            "description": "The _externalCall function in the MultiSigWallet contract does not check if the destination address is a contract, which can lead to unexpected behavior.",
+            "severity": "medium",
+            "location": "multisig/contracts/src/MultiSigWallet.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Potential Overflow in transactionId Allowing Arbitrary Execution of Transactions by a Malicious Owner",
+            "description": "The MultiSigWallet contract does not use SafeMath, resulting in the potential for overflow and underflow of numeric values.",
+            "severity": "info",
+            "location": "multisig/contracts/src/MultiSigWallet.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Transaction ID Overflow",
+            "description": "Eve can submit a transaction with UINT256_MAX + 2 invocations, overwriting Alice's transactionId.",
+            "severity": "high",
+            "location": "confirmTransaction function, MultiSigWallet contract"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Specification-Code Mismatch for AssetProxyOwner Timelock Period",
+            "description": "Timelock period implementation does not enforce the two-week period described in the specification.",
+            "severity": "high",
+            "location": "AssetProxyOwner.sol and MultiSigWalletWithTimeLock.sol contracts"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Potential Overflow in MultiSigWalletWithTimelock",
+            "description": "An overflow is possible when calculating the amount of time that must pass for a given lock to be unlocked.",
+            "severity": "low",
+            "location": "pastTimeLock modifier, MultiSigWalletWithTimeLock.sol contract"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Rounding Division Errors Can Accumulate Over Partial Fills",
+            "description": "Accumulation of rounding errors can produce unexpected results over partial fills.",
+            "severity": "info",
+            "location": "calculateFillResults function, LibFillResults.sol contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "The Cobb-Douglas Function is Not Properly Documented and Reverts with Valid Parameters",
+            "description": "The Cobb-Douglas function reverts for inputs within bounds as described in the documentation.",
+            "severity": "medium",
+            "location": "cobbDouglas function, LibCobbDouglas.sol contract"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Unclear documentation on how order filling can fail",
+            "description": "The 0x documentation is unclear about how to determine whether orders are fillable or not.",
+            "severity": "high",
+            "location": "0x Protocol 3.0 specification, exchange/contracts/src/MixinExchangeCore.sol"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Potential single point of failure for 'read-only-mode' and 'catastrophic-failure-mode'",
+            "description": "Owners of StakingProxy.sol and ZrxVault.sol can trigger read-only-mode and catastrophic-failure-mode.",
+            "severity": "info",
+            "location": "staking/contracts/src/{StakingProxy, ZrxVault}.sol"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "ERC20 reverts during certain self-transfer",
+            "description": "Self-transfers may revert if the amount is larger than 2**128.",
+            "severity": "info",
+            "location": "erc20/contracts/src/ERC20.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "_assertStakingPoolExists never returns true",
+            "description": "The function does not use a return statement and therefore, it will always return false or revert.",
+            "severity": "info",
+            "location": "staking/contracts/src/staking_pools/MixinStakingPool.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Calls to setParams may set invalid values",
+            "description": "Certain parameters can be configured to invalid values, causing unexpected behavior in the staking contracts.",
+            "severity": "medium",
+            "location": "staking/contracts/src/sys/MixinParams.sol"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Malicious non-operator maker can decrease staking pool operator share",
+            "description": "The function that permits the operator share to be reduced, decreaseStakingPoolOperatorShare, can currently be called by any of the makers linked to that pool.",
+            "severity": "info",
+            "location": "staking/contracts/src/staking_pools/MixinStakingPool.sol"
+        }
+    ]
+}

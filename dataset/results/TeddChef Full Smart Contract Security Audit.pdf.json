@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/TeddChef Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x1fa53f85b8010d3603eb8a392b5538cdc802827e",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "TeddChef": "contracts/TeddChef Full Smart Contract Security Audit/TeddChef"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "`add(uint256 _allocPoint, …)`, `set(uint256 _pid, …)` and `updateEmissionRate()` could invoke `massUpdatePools()` function, that can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "TeddChef contract (`add`, `set`, `updateEmissionRate` functions)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Owner can change start block value, dev, vault and fee addresses, referral address, minter address, and referral commission rate.",
+            "severity": "low",
+            "location": "TeddChef contract (owner-only functions)"
+        }
+    ]
+}

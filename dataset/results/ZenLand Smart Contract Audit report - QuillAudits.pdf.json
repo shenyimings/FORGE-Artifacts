@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/ZenLand Smart Contract Audit report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/zenland-dao/contracts/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/ZenLand Smart Contract Audit report - QuillAudits/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "sendMoney() controlled by malicious agent causing issues in payments",
+            "description": "In function sendMoney(), if a buyer opens a dispute, the status changes to DISPUTED. However, an agent can call sendMoney() with different percentage values, potentially causing issues in payments.",
+            "severity": "medium",
+            "location": "Contract - Zenland Escrow, Function - sendMoney()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ],
+                "4": [
+                    "CWE-551"
+                ]
+            },
+            "title": "Possibility to frontrunning the buyer",
+            "description": "A seller can call release() with high gas and front-run the buyer's function call in release(), potentially causing issues in payments.",
+            "severity": "low",
+            "location": "Contract - Zenland Escrow, Function - release()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma (pragma solidity ^0.8.14)",
+            "description": "Contracts should be deployed with the same compiler version and flags that they have been tested with thoroughly to avoid potential bugs.",
+            "severity": "info",
+            "location": "Contract - Escrow_V100, Pragma statement"
+        }
+    ]
+}

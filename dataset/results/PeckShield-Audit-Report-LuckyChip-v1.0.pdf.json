@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-LuckyChip-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/luckychip-io/dice/tree/de3090cc70205079f8c13c0c79e98dd1ab6c5792",
+        "commit_id": "de3090cc70205079f8c13c0c79e98dd1ab6c5792",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "dice": "contracts/PeckShield-Audit-Report-LuckyChip-v1/dice"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Predictable Results For Dice Rolling",
+            "description": "Admin can predict dice rolling results, making the game unfair.",
+            "severity": "high",
+            "location": "Dice.sol (contract), sendSecret() and _safeSendSecret() functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Logic Error For MaxExposure Limit Check",
+            "description": "Missing multiplication of 5 for betAmount in maxExposureRatio check.",
+            "severity": "medium",
+            "location": "Dice contract, betNumber() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved Validation Of manualStartRound()",
+            "description": "Lack of validation of Player's time not ended in manualStartRound().",
+            "severity": "low",
+            "location": "Dice contract, manualStartRound() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged Admin account is not governed by a DAO-like structure.",
+            "severity": "medium",
+            "location": "Dice contract, setRatios() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Possible Sandwich/MEV Attacks For Reduced Return",
+            "description": "Vulnerable to front-running attacks resulting in a smaller gain for this round of yielding.",
+            "severity": "low",
+            "location": "Dice contract, _calculateRewards() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ],
+                "3": [
+                    "CWE-837"
+                ]
+            },
+            "title": "Timely massUpdatePools During Pool Weight Changes",
+            "description": "Need to timely invoke `massUpdatePools()` when any pool’s weight has been updated.",
+            "severity": "low",
+            "location": "MasterChef contract, set() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Duplicate Pool/Bonus Detection and Prevention",
+            "description": "Lack of necessary sanity checks in preventing a new pool but with a duplicate token from being added.",
+            "severity": "low",
+            "location": "MasterChef contract, add() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Incompatibility with Deflationary Tokens",
+            "description": "The MasterChef contract's asset-transferring routines may introduce unexpected balance inconsistencies when interacting with deflationary ERC20 tokens, affecting the pool's reward calculation.",
+            "severity": "low",
+            "location": "MasterChef contract, deposit() and withdraw() functions"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Suggested Event Generation For setAdmin()",
+            "description": "Lack of emitting an event to reflect adminAddress changes and playerTimeBlocks changes.",
+            "severity": "info",
+            "location": "Dice contract, `setAdmin()` function"
+        }
+    ]
+}

@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/Solidified-Sandbox_StarterPack_[02.10.2020].pdf",
+    "project_info": {
+        "url": "https://github.com/thesandboxgame/sandbox-private-contracts",
+        "commit_id": "fcb5ea804fddf8e94683405f39630ad61a16f120",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "sandbox-private-contracts": "contracts/Solidified-Sandbox_StarterPack_[02/sandbox-private-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-330"
+                ]
+            },
+            "title": "Unsecure source of randomness",
+            "description": "Computation of pseudo-random numbers in CatalystDataBase.sol depends on user-supplied values.",
+            "severity": "high",
+            "location": "CatalystDataBase.sol, getValues() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "StarterPackV1.sol: Maker can update priceFeed",
+            "description": "The medianizer address used in StarterPackV1.sol could be upgraded by Maker, affecting sale prices.",
+            "severity": "high",
+            "location": "StarterPackV1.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "SatrterPackV1.sol: Change can be sent to relayer",
+            "description": "When an exceeding amount is sent to the contract, the outstanding amount is returned to msg.sender which could be a meta transaction relayer.",
+            "severity": "low",
+            "location": "StarterPackV1.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Potential Integer Overflow in StartPackV1.sol",
+            "description": "Possible integer overflow if quantities and prices are large enough in _calculateTotalPriceInSand() function.",
+            "severity": "low",
+            "location": "StarterPackV1.sol, _calculateTotalPriceInSand() function"
+        }
+    ]
+}

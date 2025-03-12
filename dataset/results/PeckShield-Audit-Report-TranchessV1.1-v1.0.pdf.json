@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-TranchessV1.1-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/tranchess/contract-core/tree/9cf2a5d",
+        "commit_id": "9cf2a5d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contract-core": "contracts/PeckShield-Audit-Report-TranchessV1/contract-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Proper dailyProtocolFeeRate Validation in Fund Constructor",
+            "description": "The constructor() function evaluates the current dailyProtocolFeeRate against MAX_DAILY_PROTOCOL_FEE_RATE before it is initialized.",
+            "severity": "low",
+            "location": "Fund contract, constructor()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Generation Of Meaningful Events in Fund",
+            "description": "Lack of emitting important events that reflect important state changes when tranche tokens are being minted or burned.",
+            "severity": "low",
+            "location": "Fund contract, _mint() and _burn() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Violation of Checks-Effects-Interactions Principle",
+            "description": "The deposit() function in StakingV2 contract violates the checks-effects-interactions principle, making it vulnerable to reentrancy attacks.",
+            "severity": "low",
+            "location": "StakingV2 contract, deposit() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of Caller Validation",
+            "description": "The initializeV2() function in VotingEscrowV2 contract allows anyone to invoke, introducing a vulnerable time window for internal state manipulation.",
+            "severity": "info",
+            "location": "VotingEscrowV2 contract, initializeV2() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Non-Lockable User Withdrawals",
+            "description": "The withdraw() function in VotingEscrowV2 contract can be paused with the whenNotPaused modifier, preventing users from withdrawing unlocked funds.",
+            "severity": "medium",
+            "location": "VotingEscrowV2 contract, withdraw() function"
+        }
+    ]
+}

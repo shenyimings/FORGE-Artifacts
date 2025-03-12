@@ -1,0 +1,131 @@
+{
+    "path": "artifacts/Runtime_Vеrification-Tracer_Perpetual_Pools_V2.pdf",
+    "project_info": {
+        "url": "https://github.com/tracer-protocol/perpetual-pools-contracts",
+        "commit_id": "846bbf62652d7c83aee1cf3766275c4d08b00c8a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "perpetual-pools-contracts": "contracts/Runtime_Vеrification-Tracer_Perpetual_Pools_V2/perpetual-pools-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Unsafe transfer of ERC20 tokens",
+            "description": "The vesting and pool contracts can interact with arbitrary ERC20 tokens, but not all ERC20 implementations conform to the standard specification.",
+            "severity": "high",
+            "location": "Vesting and pool contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "PoolCommitter.claim() Potential reentrancy vulnerability",
+            "description": "An external call to transfer the token from the contract to the end-user can potentially call back into the PoolCommitter.claim() function.",
+            "severity": "high",
+            "location": "PoolCommitter contract, claim() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "PoolCommitter.claim() griefing vulnerability",
+            "description": "Bob can withdraw on Alice's behalf to hinder her from minting if she intends to lock in the collateral from her balance.",
+            "severity": "low",
+            "location": "PoolCommitter contract, claim() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "PoolCommitter.executeCommitments() - Potential DoS due to unbounded loop",
+            "description": "The executeGivenCommitments() function contains an unbounded loop that can lead to a condition where the loop can no longer be executed because its gas consumption exceeds the block gas limit.",
+            "severity": "high",
+            "location": "PoolCommitter contract, executeGivenCommitments() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "PoolCommitter - Bypass front-running interval",
+            "description": "It is possible to bypass the front-running interval by exploiting the update interval and pool keeper's failure to execute pending commitments timely.",
+            "severity": "high",
+            "location": "PoolCommitter contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PoolCommitter - incorrect calculation of shadow balances",
+            "description": "Shadow balance is calculated incorrectly if front-running interval is higher than update interval, leading to incorrect execution of pending commits.",
+            "severity": "high",
+            "location": "PoolCommitter contract, executeCommitments() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "SMAOracle.getPrice() returns the wrong price when not enough prices are observed",
+            "description": "getPrice() returns incorrect value if less than 24 price observations are made.",
+            "severity": "high",
+            "location": "SMAOracle contract, getPrice() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Front-running of rug()",
+            "description": "Users can observe mempool to see if they'll be rugged and claim vested tokens before being rugged.",
+            "severity": "low",
+            "location": "Vesting contract, rug() function"
+        }
+    ]
+}

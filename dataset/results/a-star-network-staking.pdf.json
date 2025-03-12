@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/a-star-network-staking.pdf",
+    "project_info": {
+        "url": "https://github.com/PlasmNetwork/Astar/tree/6d8c38a0c3a9f7d24e0f11cab2fff65c0e5558ec",
+        "commit_id": "6d8c38a0c3a9f7d24e0f11cab2fff65c0e5558ec",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Astar": "contracts/a-star-network-staking/Astar"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Potential segfault in localtime_r invocations",
+            "description": "Data race between localtime_r and setenv",
+            "severity": "medium",
+            "location": "Cargo.lock (chrono package with version 0.4.19)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Mathematical Operations That Lead To Overflow",
+            "description": "Incrementing next_era variable can cause an overflow",
+            "severity": "medium",
+            "location": "/dapps-staking/src/pallet/mod.rs (on_initialize function, lines 244, 393, 408, 413, 549, 552, 683)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1284"
+                ]
+            },
+            "title": "Missing Validation In Some Variables",
+            "description": "No limit on the length of stakers variable and insufficient verification of value_to_stake",
+            "severity": "low",
+            "location": "dapps/src/pallet/mod.rs (lines 327, 578, 390)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "Order of Validation in Maximum Number of Stakers",
+            "description": "Verification of number of stakers should be done before updating the ledger value",
+            "severity": "info",
+            "location": "bond_and_stake function (line 400)"
+        }
+    ]
+}

@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Orchid_Network_Protocol.pdf",
+    "project_info": {
+        "url": "https://github.com/OrchidTechnologies/orchid/tree/audit",
+        "commit_id": "audit",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "orchid": "contracts/ConsenSys_Diligence-Orchid_Network_Protocol/orchid"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Staking node can be inappropriately removed from the tree",
+            "description": "The condition `name(stake.left_) == key` can never hold, which reduces the stake of that node, leading to improper random selection or failing altogether.",
+            "severity": "critical",
+            "location": "OrchidDirectory.pull()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Verifiers need to be pure",
+            "description": "It's difficult to validate pureness; a verifier contract could be created with the CREATE2 opcode, destroyed via SELFDESTRUCT, and replaced with different code.",
+            "severity": "medium",
+            "location": "OrchidLottery"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Simplify the logic in OrchidDirectory.pull()",
+            "description": "The logic for removing an interior node can be simplified by combining the two cases (direct child and not) into a two-step operation.",
+            "severity": "medium",
+            "location": "OrchidDirectory.pull()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove unnecessary address payable",
+            "description": "The address payable type is only needed for transferring ether to an address, but the contracts work with tokens, not ether.",
+            "severity": "low",
+            "location": "Various places in the code"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unneeded named return parameter",
+            "description": "Unused named return parameter in heft() function.",
+            "severity": "low",
+            "location": "heft() function in OrchidDirectory contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improve function visibility",
+            "description": "Functions can have their visibility restricted to external rather than public.",
+            "severity": "low",
+            "location": "Various functions in OrchidDirectory, OrchidLocation, OrchidLottery, and OrchidCurator contracts"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Inconsistent Ordering of Parameters in OrchidDirectory.lift()",
+            "description": "Inconsistent ordering of staker and stakee parameters in OrchidDirectory.lift() function.",
+            "severity": "low",
+            "location": "OrchidDirectory, lift() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Unsigned Integers Used to Represent Negative Numbers",
+            "description": "Using uint128 to represent negative numbers, which can lead to overflows.",
+            "severity": "low",
+            "location": "Various structs in OrchidDirectory contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Math Assumes Maximum Number of Tokens",
+            "description": "Mathematical operations assume a maximum number of tokens, capped at less than 2**128.",
+            "severity": "low",
+            "location": "step() function in OrchidDirectory contract"
+        }
+    ]
+}

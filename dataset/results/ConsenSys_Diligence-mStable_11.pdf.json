@@ -1,0 +1,227 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-mStable_11.pdf",
+    "project_info": {
+        "url": "https://github.com/mstable/mStable-contracts",
+        "commit_id": "6faf3a2387439271e8bbab4ebb74942e0645974c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "mStable-contracts": "contracts/ConsenSys_Diligence-mStable_11/mStable-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Swap fees can be bypassed using redeemMasset",
+            "description": "Traders can perform fee-less swaps by providing liquidity in one bAsset, followed by calling redeemMasset() to convert the resulting mAssets back into a proportional amount of bAssets.",
+            "severity": "high",
+            "location": "Masset.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Users can collect interest from SavingsContract by only staking mTokens momentarily",
+            "description": "A user who deposits shortly before the end of the timeframe will receive credits at the stale interest rate and can immediately trigger an update of the rate and withdraw at the updated (more favorable) rate after the 30 minutes window.",
+            "severity": "high",
+            "location": "SavingsManager.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Internal accounting of vault balance may diverge from actual token balance in lending pool",
+            "description": "Vault balance may be greater than available balance in lending pool due to incorrect assumptions about token transfers.",
+            "severity": "medium",
+            "location": "CompoundIntegration.sol (L45-L58)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing validation in Masset._redeemTo",
+            "description": "_redeemTo function does not check collateralisation ratio, potentially allowing disproportionate asset redemption.",
+            "severity": "medium",
+            "location": "Masset.sol (L558-L561)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Removing a bAsset might leave some tokens stuck in the vault",
+            "description": "Tokens may remain in vault due to outdated vault balance, leading to potential losses.",
+            "severity": "low",
+            "location": "BasketManager.sol (L464)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused parameter in BasketManager._addBasset",
+            "description": "_measurementMultiple parameter is always set to 1e8, making range validation code unnecessary.",
+            "severity": "low",
+            "location": "BasketManager.sol (L310)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused event BasketStatusChanged",
+            "description": "The event BasketManager.BasketStatusChanged is declared but not used.",
+            "severity": "low",
+            "location": "BasketManager.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Assumptions are made about interest distribution",
+            "description": "Interest collection mechanism assumes frequent and continuous payouts, which may not always be the case.",
+            "severity": "low",
+            "location": "SavingsManager.sol (L174)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Assumptions are made about Aave and Compound integrations",
+            "description": "The code makes various assumptions about the behavior of integrated lending pools, which may not always be true.",
+            "severity": "low",
+            "location": "BasketManager.sol (L317) and other locations"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Assumptions are made about bAssets",
+            "description": "The code makes several assumptions about the behavior of bAssets, which may not always be true.",
+            "severity": "low",
+            "location": "BasketManager.sol (L319) and other locations"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused field in ForgePropsMulti struct",
+            "description": "The isValid field in the ForgePropsMulti struct is always true, making it unnecessary.",
+            "severity": "low",
+            "location": "MassetStructs.sol (L78-L84)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "BassetStatus enum defines multiple unused states",
+            "description": "The BassetStatus enum has several unused values, which may indicate dead code.",
+            "severity": "low",
+            "location": "MassetStructs.sol (L59-L69)"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Potential gas savings by terminating early",
+            "description": "Functions could be optimized to revert earlier and save gas in certain scenarios.",
+            "severity": "low",
+            "location": "ForgeValidator.sol (L264)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Discrepancy between code and comments",
+            "description": "The comment does not match the code at BasketManager.sol (L417).",
+            "severity": "low",
+            "location": "BasketManager.sol (L409)"
+        }
+    ]
+}

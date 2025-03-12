@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/HAECHI_AUDIT-Universe_Polymorph.pdf",
+    "project_info": {
+        "url": "https://github.com/UniverseXYZ/Polymorph-Contracts/tree/polymorph-v2",
+        "commit_id": "d719ea7911f8d3519f991ac4978a68aefd890f12",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Polymorph-Contracts": "contracts/HAECHI_AUDIT-Universe_Polymorph/Polymorph-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Gene information is sometimes not set while minting polymorph.",
+            "description": "PolymorphChild#mintPolymorphWithInfo() mints a token without updating gene information.",
+            "severity": "low",
+            "location": "PolymorphChild.sol, function mintPolymorphWithInfo()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "Polymorph's gene is not initialized during the transfer of Polymorph via contract.",
+            "description": "PolymorphRoot#burnAndMintNewPolymorph() does not initialize gene information when burning and minting a new token.",
+            "severity": "low",
+            "location": "PolymorphRoot.sol, function burnAndMintNewPolymorph()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Polymorph information is set incorrectly during the Gene Randomize process.",
+            "description": "PolymorphWithGeneChanger#randomizeGenome() sets isNotVirgin to true after randomizing gene.",
+            "severity": "low",
+            "location": "PolymorphWithGeneChanger.sol, function randomizeGenome()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Some parts are not implemented.",
+            "description": "FxBaseRootTunnel#_processMessageFromChild() and FxBaseChildTunnel#_processMessageFromRoot() functions are not implemented.",
+            "severity": "low",
+            "location": "FxBaseRootTunnel.sol, function _processMessageFromChild(), FxBaseChildTunnel.sol, function _processMessageFromRoot()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "An unnecessary implementation exists.",
+            "description": "PolymorphWithGeneChanger#replaceGene() has an unnecessary if statement.",
+            "severity": "low",
+            "location": "PolymorphWithGeneChanger.sol, function replaceGene()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Some implementations differ from the documentation.",
+            "description": "The actual implementation of Polymorph traits differs from the documentation.",
+            "severity": "low",
+            "location": "Documentation and code mismatch"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Dao can change contract variables even after deploy.",
+            "description": "Dao has arbitrary access to key variables in contracts.",
+            "severity": "n/a",
+            "location": "n/a (contract architecture issue)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-940"
+                ]
+            },
+            "title": "Key functions of the project are performed off-chain in some cases.",
+            "description": "The process of polygon and mainnet syncing Polymorph is performed off-chain.",
+            "severity": "n/a",
+            "location": "n/a (off-chain implementation issue)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "There are parts excluded from the scope of the audit.",
+            "description": "Parts of FxBaseRootTunnel#_validateAndExtractMessage() contain information about block and receipt, which were excluded from the audit scope.",
+            "severity": "n/a",
+            "location": "n/a (audit scope limitation)"
+        }
+    ]
+}

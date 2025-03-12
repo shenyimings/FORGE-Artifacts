@@ -1,0 +1,56 @@
+{
+    "path": "artifacts/ElonsPets.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x40b50a516e081945b95d30fcbbb31476a63ffb4a",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "ElonsPets": "contracts/ElonsPets/ElonsPets"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Burn issue",
+            "description": "The function collectFee() takes burn fee from reflection and token balances in row with sending already removed burn fee to DEAD address.",
+            "severity": "high",
+            "location": "collectFee() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function includeInReward() uses the loop to find and remove addresses from the _excluded list, which may cause an OUT_OF_GAS exception if there will be a long excluded addresses list.",
+            "severity": "low",
+            "location": "includeInReward() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong reflection from token calculations",
+            "description": "Missing parentheses when calculating target value in tokenAmount.sub(tokenAmount.mul(_taxFee).div(10**(_feeDecimal + 2))).mul(_getReflectionRate()).",
+            "severity": "low",
+            "location": "tokenAmount calculation"
+        }
+    ]
+}

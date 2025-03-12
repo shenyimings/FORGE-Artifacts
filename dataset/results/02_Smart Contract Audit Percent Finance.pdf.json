@@ -1,0 +1,389 @@
+{
+    "path": "artifacts/02_Smart Contract Audit Percent Finance.pdf",
+    "project_info": {
+        "url": "https://github.com/percent-finance/compound-protocol",
+        "commit_id": "8dec3c293b3a9087bd67d0f6b7082df421978d61",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "compound-protocol": "contracts/02_Smart Contract Audit Percent Finance/compound-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "A floating pragma is set",
+            "description": "The current pragma Solidity directive is ^0.5.16;",
+            "severity": "low",
+            "location": "ChainlinkPriceOracleProxy.sol / percentfinance.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Interest-Free Loans",
+            "description": "Due to truncation error in borrow balance calculation, users can take out small, short-term, interest-free loans.",
+            "severity": "high",
+            "location": "CToken contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Counterproductive Incentives",
+            "description": "The liquidation mechanism can push borrowers towards insolvency.",
+            "severity": "medium",
+            "location": "Compound system's liquidation incentive and close factor"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Simple Interest Calculation",
+            "description": "The interest calculation underestimates the amount of interest that would be calculated if it were compounded every block.",
+            "severity": "medium",
+            "location": "CToken.accrueInterest()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Error Propagation Pattern",
+            "description": "The error propagation pattern violates the “Fail Early and Loudly” principle, increases code complexity and gas costs.",
+            "severity": "medium",
+            "location": "Codebase's error propagation mechanism"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unknown Repayment Amount",
+            "description": "Specified repayment amount does not consider accrued interest, leading to potential underpayment.",
+            "severity": "n/a",
+            "location": "repayBorrow or repayBorrowBehalf functions"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unsafe Assumptions About Average Time Between Blocks",
+            "description": "The implementation is sensitive to changes in the average time between Ethereum blocks.",
+            "severity": "n/a",
+            "location": "WhitePaperInterestRateModel.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading NatSpec Comments",
+            "description": "Inaccurate comments may confuse users and lead to incorrect expectations.",
+            "severity": "low",
+            "location": "Various contracts (getBorrowRate, CToken, Unitroller, ComptrollerStorage, Exponential)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Excessive Indirection",
+            "description": "Unnecessary indirection in the Exponential contract introduces overhead and complexity.",
+            "severity": "n/a",
+            "location": "Exponential contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Markets Can Become Insolvent",
+            "description": "The value of all collateral becomes less than the value of all borrowed assets due to various reasons.",
+            "severity": "high",
+            "location": "Compound protocol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Missing ReservesIncreased Event",
+            "description": "AccrueInterest function does not include reserves increased amount in its event.",
+            "severity": "n/a",
+            "location": "CToken contract, accrueInterest function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Multiple Contracts Per File",
+            "description": "ErrorReporter file contains three independent contracts.",
+            "severity": "n/a",
+            "location": "ErrorReporter.sol file"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent NatSpec Usage",
+            "description": "Docstrings partially follow Ethereum Natural Specification Format (NatSpec).",
+            "severity": "n/a",
+            "location": "Various contracts and functions"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect Code Comments",
+            "description": "Several comments in the code are incorrect or outdated.",
+            "severity": "n/a",
+            "location": "Comptroller.sol, CToken.sol files"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Require Statement Without Error Message",
+            "description": "A require statement on CEther.sol has no failure message.",
+            "severity": "n/a",
+            "location": "CEther.sol file, line 111"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Non-traditional Use of ReentrancyGuard",
+            "description": "Functions with nonReentrant modifier are not external.",
+            "severity": "n/a",
+            "location": "CToken.sol file"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unvetted Token Warning",
+            "description": "Malicious or poorly-designed tokens can be added to Compound, allowing fund theft.",
+            "severity": "high",
+            "location": "Compound protocol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Transparent Proxy Pattern",
+            "description": "Unitroller contract's proxy pattern has limitations.",
+            "severity": "n/a",
+            "location": "Unitroller contract"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Return Value",
+            "description": "getUtilizationAndAnnualBorrowRate function returns unnecessary value.",
+            "severity": "n/a",
+            "location": "WhitePaperInterestRateModel contract"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "collateralFactorMantissa Needs to be Set",
+            "description": "collateralFactorMantissa initialization is implicit, needing a separate transaction.",
+            "severity": "n/a",
+            "location": "Comptroller.sol file"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Accrue Zero Interest Event",
+            "description": "AccrueInterest event is emitted even when there's no interest.",
+            "severity": "n/a",
+            "location": "CToken contract, accrueInterest function"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unexpected ERC20’s",
+            "description": "No way to check for unexpected ERC20 sends to cToken contracts.",
+            "severity": "n/a",
+            "location": "cToken ERC20 contracts"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Avoid Overloaded Functions",
+            "description": "Two definitions of mulExp() function in Exponential.sol.",
+            "severity": "n/a",
+            "location": "Exponential.sol file"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use ABI Encoder",
+            "description": "Manual string concatenation instead of using abi.encodePacked.",
+            "severity": "n/a",
+            "location": "CEther contract, requireNoError function"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Missing require",
+            "description": "Sanity check in Comptroller _supportMarket function does not confirm isCToken method return value.",
+            "severity": "n/a",
+            "location": "Comptroller.sol file, _supportMarket function"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Default Visibility",
+            "description": "Some state variables and constants have default visibility.",
+            "severity": "n/a",
+            "location": "Various contracts (Comptroller, CToken, Exponential)"
+        }
+    ]
+}

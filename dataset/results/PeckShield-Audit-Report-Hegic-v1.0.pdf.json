@@ -1,0 +1,167 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Hegic-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/hegic/contracts/tree/83499168bbbf622cae53527e49576e340d06be8c",
+        "commit_id": "83499168bbbf622cae53527e49576e340d06be8c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/PeckShield-Audit-Report-Hegic-v1/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Non-Functional Lockup Periods in HegicStaking",
+            "description": "The staking function does not record the lastBoughtTimestamp of the buyer, allowing immediate selling without being locked.",
+            "severity": "medium",
+            "location": "HegicStakingETH and HegicStakingWBTC contracts, buy() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Possible Front-Running Against Pool Withdrawals And Staking",
+            "description": "Possible front-running attack that may block an ongoing withdrawal attempt.",
+            "severity": "low",
+            "location": "HegicETHPool/HegicERCPool, Business Logics"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Bypass of Daily Reward Limit in HegicRewards",
+            "description": "The daily rewarded amount is not updated, allowing individual option rewards to bypass the daily limit.",
+            "severity": "medium",
+            "location": "HegicRewards, Business Logics"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Denial-of-Service in getReward()",
+            "description": "The logic does not validate the given optionID, allowing a malicious actor to submit a getReward() request with an optionID that has not been created yet.",
+            "severity": "medium",
+            "location": "HegicRewards contract, getReward() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Option Pool Draining With Invalid optionType",
+            "description": "The create() routine of the HegicETHOptions contract does not validate the last parameter optionType, which can be used to drain all available funds in the pool.",
+            "severity": "critical",
+            "location": "HegicETHOptions/HegicWBTCOptions contracts, create() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong Reward Rate in HegicWBTCRewards",
+            "description": "Decimal mismatch in reward rate can lead to immediate depletion of available rewards for distribution.",
+            "severity": "medium",
+            "location": "HegicWBTCRewards contract, constructor function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Improved Precision With Division Avoidance",
+            "description": "Use of division may introduce precision loss in threshold enforcement of locked amount in the pool.",
+            "severity": "info",
+            "location": "HegicETHPool/HegicERCPool, Coding Practices"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Less Friction For Option Creation",
+            "description": "Overly restrictive requirement on ETH amount can cause unnecessary reverts.",
+            "severity": "info",
+            "location": "Coding Practices"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Enhanced Business Logic of lock() in HegicETHPool",
+            "description": "Inaccurate threshold calculation in lock() function can lead to errors.",
+            "severity": "low",
+            "location": "HegicETHPool contract, lock() function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Precision loss in calculation",
+            "description": "Floor division can cause precision loss, leading to preferential treatment of liquidity providers.",
+            "severity": "info",
+            "location": "HegicETHPool/HegicERCPool, function withdraw()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unnecessary friction in option creation",
+            "description": "Overly restrictive requirement on ETH amount can cause unnecessary reverts.",
+            "severity": "info",
+            "location": "HegicETHOptions, function create()"
+        }
+    ]
+}

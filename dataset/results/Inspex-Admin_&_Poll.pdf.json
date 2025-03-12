@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/Inspex-Admin_&_Poll.pdf",
+    "project_info": {
+        "url": "https://github.com/inspex-archive/iAM-Admin-Poll-Token",
+        "commit_id": "0f8bb7a04c439286a5dffa223c3b30265acb4b5c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "iAM-Admin-Poll-Token": "contracts/Inspex-Admin_&_Poll/iAM-Admin-Poll-Token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Missing Approval Validation",
+            "description": "One of the admins in the BigOwner contract can remove other admins and add new admins without any approval from other admins.",
+            "severity": "low",
+            "location": "BigOwner contract, acceptAdmin() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions that are executable by the controlling parties are not logged properly by emitting events.",
+            "severity": "low",
+            "location": "adminManage.sol, functions addAdmin(), addSuperAdmin(), removeAdmin(), removeSuperAdmin(); BigOwner.sol, function setDeadline()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Solidity Compiler Version",
+            "description": "The solidity compiler versions declared in the smart contracts were outdated.",
+            "severity": "low",
+            "location": "Multiple contracts (AdminManage, BigOwner, Poll, PollFactory, MultipleTransferProxy, TokenFactory)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Assert Statement",
+            "description": "The condition values of the assert statement in the PollFactory contract is always true.",
+            "severity": "info",
+            "location": "PollFactory.sol, function createPoll()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "AdminManage, BigOwner, Poll contracts (multiple functions)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Logging Parameter for Privileged Functions",
+            "description": "The NewAdmin event with newAdmin and removeAdmin parameters is emitted in the acceptAdmin() function with incorrect parameter values.",
+            "severity": "info",
+            "location": "BigOwner contract (acceptAdmin() function)"
+        }
+    ]
+}

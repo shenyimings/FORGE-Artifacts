@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-PoolTogether.pdf",
+    "project_info": {
+        "url": "https://github.com/pooltogether/pooltogether-pool-contracts/tree/master",
+        "commit_id": "master",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "pooltogether-pool-contracts": "contracts/ConsenSys_Diligence-PoolTogether/pooltogether-pool-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "TokenFaucet refill can have an unexpected outcome",
+            "description": "The TokenFaucet contract can stop dripping tokens when running out of balance, and the owner may not be aware of it.",
+            "severity": "medium",
+            "location": "TokenFaucet contract (code/pool-contracts/contracts/token-faucet/TokenFaucet.sol:L119-L138)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas Optimization on transfers",
+            "description": "The _captureNewTokensForUser function is called twice, resulting in extra storage writes.",
+            "severity": "low",
+            "location": "TokenFaucet contract (code/pool-contracts/contracts/token-faucet/TokenFaucet.sol)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Handle transfer tokens where from == to",
+            "description": "The contract does not handle the case where the 'from' and 'to' addresses are the same.",
+            "severity": "low",
+            "location": "TokenFaucet contract (code/pool-contracts/contracts/token-faucet/TokenFaucet.sol)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant/Duplicate checks",
+            "description": "There are redundant checks in the TokenFaucet contract that can be removed.",
+            "severity": "low",
+            "location": "TokenFaucet contract (code/pool-contracts/contracts/token-faucet/TokenFaucet.sol)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Unnecessary use of upgradability",
+            "description": "Libraries like SafeMath and SafeCast should not be upgradable.",
+            "severity": "n/a",
+            "location": "TokenFaucet contract"
+        }
+    ]
+}

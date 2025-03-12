@@ -1,0 +1,197 @@
+{
+    "path": "artifacts/Hacken-Fidometa-V2_1.pdf",
+    "project_info": {
+        "url": "https://github.com/fidometa/Smart_Contract",
+        "commit_id": "ad56b0ce678f77d162752dbb5d987d2f4a29fddf",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Smart_Contract": "contracts/Hacken-Fidometa-V2_231543/Smart_Contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Missing functionality",
+            "description": "Functions emit Transfer event but do not change any balances.",
+            "severity": "critical",
+            "location": "FidoMeta.sol, functions: _burn, _mint, constructor"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Excluding from receiving rewards logic is corrupted",
+            "description": "Excluded user's reflection balance updates along with prime balance.",
+            "severity": "critical",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Operation between different time units",
+            "description": "block.timestamp may be bigger than startTime plus initialLock in seconds.",
+            "severity": "critical",
+            "location": "FidoMeta.sol, function: unlock"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ],
+                "4": [
+                    "CWE-567"
+                ]
+            },
+            "title": "Significant impact on market price",
+            "description": "Functions change balances of all users at one moment.",
+            "severity": "critical",
+            "location": "FidoMeta.sol, functions: burn, mint"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Unnecessary Reassignment Operations",
+            "description": "Changing and reverting values for special calls.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol, _tokenTransfer function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Overwhelmed Code",
+            "description": "Unneeded reassignment is provided.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol, _transfer function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Repeated Code",
+            "description": "The functions include the same operation (updating r-space balance of the sender).",
+            "severity": "n/a",
+            "location": "FidoMeta.sol, _transferFromExcluded, _transferToExcluded, _transferStandard, _transferBothExcluded functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Code",
+            "description": "Any unnecessary code should be removed in order to save Gas.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol, _tokenTransfer function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Functions that can be declared as external",
+            "description": "Public functions that are never called in the contract should be declared as external.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol, totalSupply function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unnecessary checks",
+            "description": "Checks for each fee separately are not needed because the check for the sum is stronger.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol, setCharges function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Modification of well-known contract",
+            "description": "Imported or copy-pasted contracts should not be modified to keep the code clear.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol, Ownable contract"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Hardcoded values",
+            "description": "Hardcoded values make development harder and the code less readable.",
+            "severity": "n/a",
+            "location": "FidoMeta.sol, _getTValues function"
+        }
+    ]
+}

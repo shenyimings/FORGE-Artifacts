@@ -1,0 +1,152 @@
+{
+    "path": "artifacts/Inspex-Farm.pdf",
+    "project_info": {
+        "url": "https://github.com/LuckyLionIO/Lucky-farm/tree/db27680512",
+        "commit_id": "db27680512",
+        "address": "0x4b6c8959a41475347226d51f37ec9a1e09f39a92",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "Timelock": "contracts/Inspex-Farm/Timelock"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Token Draining Using migrate() Function",
+            "description": "The owner of the MasterChef contract can steal all lpToken from the contract by setting the migrator address to a malicious address and using the transferFrom() function.",
+            "severity": "high",
+            "location": "MasterChef contract, setMigrator() function, migrate() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation (Duplicated LP Token)",
+            "description": "The $LUCKY reward miscalculation can lead to an unfair $LUCKY token distribution to the users.",
+            "severity": "medium",
+            "location": "MasterChef contract, add() and migrate() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation (_withUpdate)",
+            "description": "The $LUCKY reward miscalculation can lead to an unfair $LUCKY token distribution to the users.",
+            "severity": "medium",
+            "location": "MasterChef contract, add() and set() functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change the critical state variables to gain additional profit.",
+            "severity": "medium",
+            "location": "MasterChef contract, various functions with onlyOwner modifier"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Design Flaw in massUpdatePools() Function",
+            "description": "The massUpdatePools() function will eventually be unusable due to excessive gas usage.",
+            "severity": "low",
+            "location": "MasterChef contract, massUpdatePools() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions' executions cannot be monitored easily by the users.",
+            "severity": "low",
+            "location": "MasterChef contract, various privileged functions without sufficient logging"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Unsupported Design for Deflationary Token",
+            "description": "The deposit function in MasterChef contract does not account for deflationary tokens, leading to scenarios where users cannot withdraw staking tokens or exploit reward calculations.",
+            "severity": "info",
+            "location": "MasterChef contract, deposit() and withdraw() functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Public functions that are not called from any internal function can be changed to external functions for gas efficiency.",
+            "severity": "info",
+            "location": "Multiple functions in MasterChef and SyrupBar contracts"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Inflated Rewards",
+            "description": "An attacker can drain the contract by repeatedly executing withdraw() and deposit() functions, causing accLuckyPerShare state to be overly inflated.",
+            "severity": "n/a",
+            "location": "MasterChef contract, deposit() function"
+        }
+    ]
+}

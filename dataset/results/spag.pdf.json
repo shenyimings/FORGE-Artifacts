@@ -1,0 +1,191 @@
+{
+    "path": "artifacts/spag.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x8fa4da191a1cf21d9d8daac7b5051b52d53fe2cb",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "SpotPlayArena": "contracts/spag/SpotPlayArena"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ST - Stops Transactions",
+            "description": "The transactions are initially disabled for all users excluding the authorized addresses.",
+            "severity": "critical",
+            "location": "SpotPlayArena.sol#L712"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "DDP - Decimal Division Precision",
+            "description": "Division of decimal (fixed point) numbers can result in rounding errors due to the way that division is implemented in Solidity.",
+            "severity": "low",
+            "location": "SpotPlayArena.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RES - Redundant Event Statement",
+            "description": "The `Burn` event statement is not used in the contract's implementation.",
+            "severity": "low",
+            "location": "SpotPlayArena.sol#L830"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PVC - Price Volatility Concern",
+            "description": "The swap condition also checks whether the sum of `_totalFeesOnBuy` and `_totalFeesOnSell` is greater than zero.",
+            "severity": "low",
+            "location": "SpotPlayArena.sol#L727, L773"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "PTRP - Potential Transfer Revert Propagation",
+            "description": "The contract sends funds to a `marketingWallet` as part of the transfer flow.",
+            "severity": "low",
+            "location": "SpotPlayArena.sol#L827"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RSD - Redundant Swap Duplication",
+            "description": "The contract contains multiple swap methods that individually perform token swaps and transfer promotional amounts to specific addresses and features.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "IDI - Immutable Declaration Improvement",
+            "description": "The contract declares state variables that their value is initialized once in the constructor and are not modified afterwards.",
+            "severity": "low",
+            "location": "SpotPlayArena.sol#L602,603,607,615"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the solidity naming convention guidelines.",
+            "severity": "low",
+            "location": "SpotPlayArena.sol#L37,38,55,75,663,674,686,693,768,831"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L09 - Dead Code Elimination",
+            "description": "The contract has dead code that is written but never executed or reached during normal contract execution.",
+            "severity": "low",
+            "location": "SpotPlayArena.sol#L231,242,246,254,262,273,277,286,290,299,317,329"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L14 - Uninitialized Variables in Local Scope",
+            "description": "Using an uninitialized local variable can lead to unpredictable behavior and potentially cause errors in the contract.",
+            "severity": "low",
+            "location": "SpotPlayArena.sol#L587"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1177"
+                ],
+                "3": [
+                    "CWE-676"
+                ]
+            },
+            "title": "L17 - Usage of Solidity Assembly",
+            "description": "Using assembly can be useful for optimizing code, but it can also be error-prone.",
+            "severity": "low",
+            "location": "SpotPlayArena.sol#L334"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "L20 - Succeeded Transfer Check",
+            "description": "The transfer methods should be checked if the result is successful.",
+            "severity": "low",
+            "location": "SpotPlayArena.sol#L648"
+        }
+    ]
+}

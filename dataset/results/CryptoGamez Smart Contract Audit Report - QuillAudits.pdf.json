@@ -1,0 +1,56 @@
+{
+    "path": "artifacts/CryptoGamez Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "02",
+        "address": "0xf4c375fd1c53f08ad597cf1db60b7c23153db3bc",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.6+commit.11564f7e"
+        ],
+        "project_path": {
+            "CryptoGamez": "contracts/CryptoGamez Smart Contract Audit Report - QuillAudits/CryptoGamez"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zero address validation",
+            "description": "When setting the new owner address, it should be checked for zero. Otherwise, they may lose the ability to use the privileged functions.",
+            "severity": "low",
+            "location": "function changeOwnership(address payable _newOwner) public onlyOwner"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Public function that could be declared external",
+            "description": "Some public functions should be declared external to save gas.",
+            "severity": "medium",
+            "location": "functions changeOwnership, setChangeStatus, setPercent, setAddressToChange, setAddressToSend, and setTransferLimitAndLimitStatus"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating pragma",
+            "description": "The pragma solidity version should be locked to ensure that contracts are not unintentionally deployed using another pragma.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

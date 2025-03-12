@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/ParaSpaceV1.4P2_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/para-space/paraspace-core",
+        "commit_id": "6ba3c430a24b9781fee5f0c0745862748655b36e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "paraspace-core": "contracts/ParaSpaceV1/paraspace-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-638"
+                ],
+                "5": [
+                    "CWE-424"
+                ]
+            },
+            "title": "Missing repeatability check",
+            "description": "A malicious user can pass in an array with the same elements, allowing them to transfer NFTs back and forth.",
+            "severity": "low",
+            "location": "PoolApeStaking contract, claimBAKC & withdrawBAKC & claimPairedApeAndCompound function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "New BAKC owners can lock staked APECoin",
+            "description": "The staked APECoin will be sent to the BAYC/MAYC owner and the reward APECoin will be sent to the BAKC owner.",
+            "severity": "medium",
+            "location": "PoolApeStaking contract, _validateBAKCOwnerAndTransfer function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "PairedApe stakers can prevent others from claiming compoundFee",
+            "description": "If the PairedApe staker sends BAKC to another address or cancels approval of the Pool, other users will not be able to call claimPairedApeAndCompound.",
+            "severity": "low",
+            "location": "PoolApeStaking contract, claimPairedApeAndCompound function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential Reentrancy risk",
+            "description": "Missing reentrancy guard in repayAndSupply function",
+            "severity": "low",
+            "location": "PoolApeStaking contract, repayAndSupply function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas optimization issue",
+            "description": "Potential gas optimization opportunity by avoiding transfer to self",
+            "severity": "info",
+            "location": "PoolApeStaking contract, _validateBAKCOwnerAndTransfer function"
+        }
+    ]
+}

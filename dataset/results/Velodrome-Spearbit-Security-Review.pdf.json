@@ -1,0 +1,383 @@
+{
+    "path": "artifacts/Velodrome-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/velodrome-finance/contracts",
+        "commit_id": "ac4a7a419efa40a23b005e09cf9327d215a4f13b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Velodrome-Spearbit-Security-Review/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Lack of vetoer can lead to 51% attack",
+            "description": "The veto power is important functionality in a governance system to protect from malicious proposals.",
+            "severity": "medium",
+            "location": "VeloGovernor.sol, EpochGovernor.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Compromised or malicious owner can siphon rewards from the Voter contract",
+            "description": "The createGauge() function takes a _gaugeFactory parameter which is checked to be approved by the FactoryRegistry contract.",
+            "severity": "low",
+            "location": "FactoryRegistry.sol#L35-L69, Voter.sol#L272-L279"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Missing nonReentrant modifier on a state-changing checkpoint function",
+            "description": "The checkpoint() function will call the internal _checkpoint() function which ultimately fills the point history and potentially updates the epoch state variable.",
+            "severity": "low",
+            "location": "VotingEscrow.sol#L802-L804"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Close to half of the trading fees may be paid one epoch late",
+            "description": "Due to how left() is implemented in Reward, _claimFees() will not queue rewards until the new fees are greater than the current ones for the epoch.",
+            "severity": "low",
+            "location": "Gauge.sol#L71"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ]
+            },
+            "title": "Not synced with Epochs",
+            "description": "If there's enough delay in calling the notifyRewardAmount() function, a full desync can happen.",
+            "severity": "low",
+            "location": "Gauge.sol#L209"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Dust losses in notifyRewardAmount",
+            "description": "This should cause dust losses which are marginal but are never queued back.",
+            "severity": "low",
+            "location": "Gauge.sol#L196"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "All rewards are lost until Gauge or Bribe deposits are non-zero",
+            "description": "Because the rewards are emitted over DURATION, if no deposit has happened and notifyRewardAmount() is called with a non-zero value, all rewards will be forfeited until totalSupply is non-zero.",
+            "severity": "low",
+            "location": "Gauge.sol#L123-L128"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Difference in getPastTotalSupply and propose",
+            "description": "The getPastTotalSupply() function currently uses block.number, but OpenZeppelin's propose() function will use votes from block.timestamp - 1.",
+            "severity": "low",
+            "location": "VeloGovernor.sol#L45-L48"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Delaying update_period may award more emissions",
+            "description": "First nudge can be performed on the first tail period, delaying update_period() may award more emissions.",
+            "severity": "low",
+            "location": "Minter.sol#L87"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect math for future factories and pools",
+            "description": "The quoteLiquidity() function assumes an x * y = k formula, which may be incorrect when using a custom factory that uses a different curve.",
+            "severity": "low",
+            "location": "Router.sol#L673-L700"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Add function to remove whitelisted token and NFT",
+            "description": "The Voter contract is missing the functionality to remove whitelisted tokens and NFTs.",
+            "severity": "low",
+            "location": "Voter.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Unnecessary approve in Router",
+            "description": "The newly added Zap feature uses max approvals, which are granted to pairs, but the Pair contract does not pull tokens from the router, making the approve() call unnecessary.",
+            "severity": "low",
+            "location": "Router.sol#L656-L657"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "The current value of a Pair is not always returning a 30-minute TWAP and can be manipulated",
+            "description": "The TWAP interval may be shorter than 30 minutes, making it cheaper for an attacker to manipulate the price.",
+            "severity": "low",
+            "location": "Pair.sol#L276-L288"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Calculation error of getAmountOut leads to revert of Router",
+            "description": "The function getAmountOut in Pair calculates the correct swap amount and token price, but may cause the router to revert unexpectedly due to rounding errors.",
+            "severity": "low",
+            "location": "Pair.sol#L450-L476"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Use of block number as a timing reference",
+            "description": "Using block.number as a timing reference in GovernorSimpleVotes contract may cause issues if Optimism's block production changes.",
+            "severity": "info",
+            "location": "GovernorSimpleVotes.sol#L22, VeloGovernor.sol#L31"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Event is missing indexed fields",
+            "description": "Not indexing event fields may make them less accessible to off-chain tools.",
+            "severity": "info",
+            "location": "Multiple locations (see Context)"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing checks for address(0)",
+            "description": "Lack of zero-address validation on address parameters may lead to transaction reverts, waste gas, and require resubmission of transactions.",
+            "severity": "info",
+            "location": "Multiple locations (see Context)"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Incorrect comment",
+            "description": "There are mistakes in comments that need correction.",
+            "severity": "info",
+            "location": "Router.sol#L148, Router.sol#L179"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Discrepancies between specification and implementation",
+            "description": "Zapping is not supported for fee-on-transfer tokens, contrary to the specification.",
+            "severity": "info",
+            "location": "Router.sol#L579, Router.sol#L718"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "DOS attack at future facilitator contract and stop SinkManager.convertVe",
+            "description": "DOS attack by sending NFT tokens to a future facilitator.",
+            "severity": "high",
+            "location": "SinkManager.sol#L123"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "RewardDistributor caching totalSupply leading to incorrect reward calculation",
+            "description": "Incorrect reward calculation due to cached totalSupply.",
+            "severity": "high",
+            "location": "RewardsDistributor.sol#L136-L159"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "AutoCompounder can be created without admin",
+            "description": "Creating an AutoCompounder contract without an _admin by passing address(0) through AutoCompounderFactory is possible, breaking certain functionalities in the AutoCompounder.",
+            "severity": "low",
+            "location": "AutoCompounderFactory.sol#L40"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "claim and claimMany functions will revert when called in end lock time",
+            "description": "If _timestamp == _locked.end, then depositFor() will be called but this will revert as block.timestamp >= oldLocked.end.",
+            "severity": "low",
+            "location": "RewardsDistributor.sol#L136, RewardsDistributor.sol#L161"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Malicious Pool Factory can be used to prevent new pools from being voted on as well as brick voting locks",
+            "description": "A malicious factory can be introduced, reverting on command as a way to prevent normal protocol functionality.",
+            "severity": "low",
+            "location": "Voter.sol#L322-L381"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Pool will stop working if a pausable / blockable token is blocked",
+            "description": "If a pausable or blockable token (e.g., USDC) is part of a Pool and the Pool is blocked, the Pool will stop working.",
+            "severity": "low",
+            "location": "Pool.sol"
+        }
+    ]
+}

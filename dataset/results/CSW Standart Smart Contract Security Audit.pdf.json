@@ -1,0 +1,58 @@
+{
+    "path": "artifacts/CSW Standart Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/crswap/CSW/tree/master/contracts",
+        "commit_id": "b09582582fc851a94fc2a50b4adfb870686aba3c",
+        "address": "0xa5B06407F7421Ed481f47324B8bF299ef611A846, 0xe100A4bfE7A55404b330C13E0CBA31a6E3442a63, 0x20bd8b30AE9B03fCd4064488fAa23D09f3F2f4B2",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.8.0+commit.c7dfd78e"
+        ],
+        "project_path": {
+            "MasterChef": "contracts/CSW Standart Smart Contract Security Audit/MasterChef",
+            "Shares": "contracts/CSW Standart Smart Contract Security Audit/Shares",
+            "CSWToken": "contracts/CSW Standart Smart Contract Security Audit/CSWToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Extra token fee",
+            "description": "The function deposit() in MasterChef contract increases pool and user amount not considering token’s transfer fee.",
+            "severity": "medium",
+            "location": "MasterChef contract, function deposit()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Functions massUpdatePools() uses the loop to update all loops from the poolInfo list and may be aborted with OUT_OF_GAS exception if there will be a pool addresses list.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Various owner privileges in CSWoken, Shares, and MasterChef contracts that could be exploited.",
+            "severity": "n/a",
+            "location": "CSWoken, Shares, and MasterChef contracts"
+        }
+    ]
+}

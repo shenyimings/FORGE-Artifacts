@@ -1,0 +1,56 @@
+{
+    "path": "artifacts/Periphery.md",
+    "project_info": {
+        "url": "https://github.com/cryptoalgebra/Algebra",
+        "commit_id": "bddd6487c86e0d6afef39638159dc403a91ba433",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Algebra": "contracts/Periphery/Algebra"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Incorrect usage of the parameter",
+            "description": "Not enough checks on the amount of liquidity that can be removed from the limit order in the `decreaseLimitOrder` function.",
+            "severity": "medium",
+            "location": "LimitOrderManager.sol, decreaseLimitOrder function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "The operator address is not reset after the position token transfer",
+            "description": "A NFT position owner can set token `operator` to use permit functionality, but the operator address is used without being reset.",
+            "severity": "medium",
+            "location": "LimitOrderManager.sol, getApproved function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "An inverted price is used for overflow validation during the creation of new limit orders",
+            "description": "Inverted price is used to evaluate whether the parameter `amountToBuy` is prone to overflow.",
+            "severity": "medium",
+            "location": "LimitOrderManagement.sol, addOrRemoveLimitOrder function"
+        }
+    ]
+}

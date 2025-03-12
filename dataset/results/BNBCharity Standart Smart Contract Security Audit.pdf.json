@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/BNBCharity Standart Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x4551f4c96fb23745a4a52af6d95070667c1e12d8",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "BNBCharity": "contracts/BNBCharity Standart Smart Contract Security Audit/BNBCharity"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate marketing fee",
+            "description": "The function swapTokens() transfers 3/8 of swapped BNBs, not 3%.",
+            "severity": "medium",
+            "location": "swapTokens() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential out-of-gas exception in includeInReward()",
+            "description": "The function uses a loop to find and remove addresses from the _excluded list, which could cause an OUT_OF_GAS exception if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "includeInReward() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential out-of-gas exception in _getCurrentSupply",
+            "description": "The function uses a loop to evaluate total supply, which could cause an OUT_OF_GAS exception if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "_getCurrentSupply function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inefficient calculation in _transfer()",
+            "description": "The function divides balance by 100 and passes it to buyBackTokens() function, which could be optimized.",
+            "severity": "low",
+            "location": "_transfer() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Centralized ownership of LP tokens",
+            "description": "The owner address acquires generated LP tokens, accumulating a significant portion, which is insecure.",
+            "severity": "low",
+            "location": "addLiquidity() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Owner can lock and unlock even after ownership renouncement",
+            "description": "The owner can use specific functions to retain control even after ownership renouncement.",
+            "severity": "n/a",
+            "location": "Various functions (lock, unlock, etc.)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner has excessive privileges",
+            "description": "The owner can change various parameters and settings, which could lead to security issues.",
+            "severity": "n/a",
+            "location": "Various functions (change included in reward members, excluded from fee members, etc.)"
+        }
+    ]
+}

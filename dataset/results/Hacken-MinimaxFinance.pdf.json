@@ -1,0 +1,167 @@
+{
+    "path": "artifacts/Hacken-MinimaxFinance.pdf",
+    "project_info": {
+        "url": "https://github.com/minimaxdefi/contracts",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Hacken-MinimaxFinance/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unlimited Minting",
+            "description": "The mint function of the BEP20 contract allows owners to mint tokens without restrictions.",
+            "severity": "critical",
+            "location": "BEP20.sol, Function: mint"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Loss of Tokens",
+            "description": "If userFeeAmount is 0, then the amountToStake will be 0 and the user will lose all tokens that were transferred during the transaction.",
+            "severity": "critical",
+            "location": "MinimaxMain.sol, Function: stake Cake"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Broken Vote Distribution",
+            "description": "The number of votes should be equal to the balance of tokens, but this dependency is broken and the distribution of votes does not work correctly.",
+            "severity": "high",
+            "location": "MinimaxToken.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unvalidated Reward Token Address",
+            "description": "Reward token address is not validated, allowing any address and any token to be passed.",
+            "severity": "high",
+            "location": "MinimaxMain.sol, Functions: stakeCake"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Zero Deposit Allowed",
+            "description": "Zero deposit allowed, leading to the loss of user funds for gas.",
+            "severity": "medium",
+            "location": "MinimaxStaking.sol, Function: deposit"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Gas Limit Issue (addNewCallers)",
+            "description": "May run out of gas if the amount parameter is too big.",
+            "severity": "medium",
+            "location": "MinimaxMain.sol, Function: addNewCallers"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Gas Limit Issue (liquidateManyByIndex)",
+            "description": "Might run out of gas if positionIndexes array length is too big.",
+            "severity": "medium",
+            "location": "MinimaxMain.sol, Function: liquidateManyByIndex"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-405"
+                ],
+                "4": [
+                    "CWE-1176"
+                ]
+            },
+            "title": "Redundant Gas Transfer",
+            "description": "Cake tokens are transferred to the MinimaxMain contract in the withdrawViaCaller function and transferred to a user in the withdrawImpl function, paying for 2 transfers.",
+            "severity": "medium",
+            "location": "MinimaxMain.sol, Function: withdrawImpl"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked _maxAmount",
+            "description": "_maxAmount is not checked before setting and can be larger than allowed for minting according to MAX_SUPPLY.",
+            "severity": "low",
+            "location": "MinimaxToken.sol, Function: setMinter"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Check",
+            "description": "The updatePool function has a redundant check because the previous checks in this function ensure that this check will always pass.",
+            "severity": "low",
+            "location": "MinimaxStaking.sol, Function: updatePool"
+        }
+    ]
+}

@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/ExoniumDEX Standart Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xF1afb5674Bf946458BD1163163F62dE683B07D65",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "TEXOToken": "contracts/ExoniumDEX Standart Smart Contract Security Audit/TEXOToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Functions massUpdatePools() uses a loop to update all loops from the poolInfo list, which may cause an OUT_OF_GAS exception if there are too many pool addresses.",
+            "severity": "low",
+            "location": "massUpdatePools() function in TEXOOrchestrator contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Reset data",
+            "description": "The function emergencyWithdraw() in TEXOOrchestrator contract does not nullify rewardLockedUp property.",
+            "severity": "low",
+            "location": "emergencyWithdraw() function in TEXOOrchestrator contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Execution order",
+            "description": "The function setEmissionRate() in TEXOOrchestrator contract updates all pools only after initializing tEXOPerBlock variable with a new value.",
+            "severity": "low",
+            "location": "setEmissionRate() function in TEXOOrchestrator contract"
+        }
+    ]
+}

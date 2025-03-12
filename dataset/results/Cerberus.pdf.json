@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/Cerberus.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xb3566deF601b2dE77d309db03DBDd0080fa8554A, 0x8B3268a23131DAFBd77165690767F285C1AAC6C5, 0xaAC5636DbDF8e64dD75d44066990B23085dDC39b, 0x6E5b0758Fb7Ecb1D37c49F605811B209eea8F4A0",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "CerberusReferral": "contracts/Cerberus/CerberusReferral",
+            "CerberusToken": "contracts/Cerberus/CerberusToken",
+            "MasterChef": "contracts/Cerberus/MasterChef",
+            "Timelock": "contracts/Cerberus/Timelock"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "Sending tokens to the dead address in overridden _transfer functions instead of burning them in the token contract.",
+            "severity": "medium",
+            "location": "CerberusToken contract, _transfer function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "The updateEmissionRate function can fail due to the block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "MasterChef contract, updateEmissionRate function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "add function issue",
+            "description": "If some LP token is added to the contract twice using function add, then the total amount of reward in function updatePool will be incorrect.",
+            "severity": "low",
+            "location": "MasterChef contract, add function"
+        }
+    ]
+}

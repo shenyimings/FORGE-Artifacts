@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/Vault V2 (Solidity part).md",
+    "project_info": {
+        "url": "https://github.com/iearn-finance/yearn-vaults",
+        "commit_id": "54db126821c4d7aaaf5839be935cecb9b1bf088b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "yearn-vaults": "contracts/Vault V2 (Solidity part)/yearn-vaults"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No validation of address parameter value in contract constructor",
+            "description": "Missing input validation for the `vault` variable in the contract constructor.",
+            "severity": "info",
+            "location": "BaseStrategy.sol, L162 (constructor)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No validation of address parameter value in function before using this parameter in access modifiers",
+            "description": "Lack of input validation for the `_strategist` parameter in the `setStrategist` function.",
+            "severity": "info",
+            "location": "BaseStrategy.sol, L171 (setStrategist function)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Ability to change the value of a private variable from another contract",
+            "description": "Private variable `reserve` can be modified by another contract, potentially breaking smart contract logic.",
+            "severity": "info",
+            "location": "BaseStrategy.sol, L156 (setReserve internal function)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Function calculation result is not processed",
+            "description": "The `approve` method's return value is not handled properly.",
+            "severity": "info",
+            "location": "BaseStrategy.sol, L164"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Safe math is not used",
+            "description": "Arithmetic operations may cause overflows without using safe math libraries.",
+            "severity": "info",
+            "location": "BaseStrategy.sol, L338 (harvestTrigger function)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Function description differs from implementation",
+            "description": "The `harvestTrigger` function does not enforce the required invariant as described in its documentation.",
+            "severity": "info",
+            "location": "BaseStrategy.sol, L311 (harvestTrigger function)"
+        }
+    ]
+}

@@ -1,0 +1,233 @@
+{
+    "path": "artifacts/ackee-blockchain-axelar-squid-report.pdf",
+    "project_info": {
+        "url": "https://github.com/axelarnetwork/axelar-utils-solidity/tree/726020fd893059f9a469ca049f3cf5dd4b3d11c6",
+        "commit_id": "726020fd893059f9a469ca049f3cf5dd4b3d11c6",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "axelar-utils-solidity": "contracts/ackee-blockchain-axelar-squid-report/axelar-utils-solidity"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "fundAndRunMulticall is not pausable",
+            "description": "The fundAndRunMulticall function is not pausable.",
+            "severity": "high",
+            "location": "SquidRouter, function fundAndRunMulticall"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Call.callType validation",
+            "description": "The run function does not handle the case where call.callType is not one of the expected values.",
+            "severity": "medium",
+            "location": "Squid Router, function Call"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing isContract check in SquidMulticall",
+            "description": "The success variable will be set to true even if call.target is not a contract.",
+            "severity": "medium",
+            "location": "SquidMulticall"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Memory address overflow in _setCallDataParameter",
+            "description": "The _setCallDataParameter function allows overwriting the callData variable at a given position with a 256-bit value.",
+            "severity": "medium",
+            "location": "function _setCallDataParameter"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Multicall implementation being too generic",
+            "description": "The SquidMulticall contract implementation is too generic and does not perform any checks to ensure that the user cannot lose funds.",
+            "severity": "medium",
+            "location": "Squid Router, multicall implementation"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Re-entrancy in SquidRouter",
+            "description": "The fundAndRunMulticall function can be re-entered.",
+            "severity": "medium",
+            "location": "SquidRouter"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Missing refundRecipient validation",
+            "description": "Lack of validation may lead to loss of funds.",
+            "severity": "medium",
+            "location": "function refundRecipient"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing destinationChain validation",
+            "description": "Invalid destinationChain parameter may lead to loss of funds.",
+            "severity": "medium",
+            "location": "function destinationChain"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Address helper functions not respecting EIP-55",
+            "description": "Functions do not respect EIP-55 standard.",
+            "severity": "info",
+            "location": "Address helper functions"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "SquidRouter pausable can be bypassed",
+            "description": "Pause ability can be bypassed using upgradeable proxies.",
+            "severity": "info",
+            "location": "SquidRouter, function pausable"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Bytes length accessed in a for loop condition",
+            "description": "Accessing data.length in every iteration of the loop is unnecessary.",
+            "severity": "info",
+            "location": "bytes length handling"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent for loop incrementation",
+            "description": "Inconsistent loop incrementation style.",
+            "severity": "info",
+            "location": "for loop incrementation"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Integrator specific fee validation",
+            "description": "Specific fee of an integrator being set in the constructor and setSpecificFee function is not validated.",
+            "severity": "info",
+            "location": "contracts/SquidFeeCollector.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Integrator specific fee cannot be zero",
+            "description": "An integrator specific fee cannot be set to zero.",
+            "severity": "info",
+            "location": "contracts/SquidFeeCollector.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Maximum integrator fee check can be bypassed",
+            "description": "The maximum integrator fee check in the collectFee function can be bypassed.",
+            "severity": "info",
+            "location": "contracts/SquidFeeCollector.sol"
+        }
+    ]
+}

@@ -1,0 +1,188 @@
+{
+    "path": "artifacts/Mute Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/muteio/mute-contracts/tree/main/contracts/Gov",
+        "commit_id": "f9763b5c4ee61c903238463f87d39c98f6244587",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "mute-contracts": "contracts/Mute Audit Report - QuillAudits/mute-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Contract completely locks Ether and fails to provide a way to Unlock it",
+            "description": "The execute function includes the payable keyword, but no function to withdraw Ether from the contract was found.",
+            "severity": "high",
+            "location": "GovCoordinator.sol - 137, GovFunding.sol - 147"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "block.timestamp is being compared to block.number",
+            "description": "In the state function, block.timestamp is being compared to proposal.endBlock which is a block.number.",
+            "severity": "high",
+            "location": "GovCoordinator.sol - 170, GovFunding.sol - 180"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "State of a Proposal ID will never reach ProposalState.Expired state",
+            "description": "The State function does not allow the control flow to reach the ProposalState.Expired state.",
+            "severity": "high",
+            "location": "GovCoordinator.sol - 170, GovFunding.sol - 180"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Use require() instead of revert()",
+            "description": "The execute function includes a revert() statement to ensure successful execution of the external call.",
+            "severity": "medium",
+            "location": "GovCoordinator.sol - 142, GovFunding.sol - 152"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "No Events emitted after imperative State Variable modification",
+            "description": "Functions that update arithmetic state variable contract should emit an event after the updation.",
+            "severity": "medium",
+            "location": "GovCoordinator.sol - 87, 93, 99, GovFunding.sol - 90, 96, 102"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "External visibility should be preferred",
+            "description": "Public functions that are never called throughout the contract should be marked as external.",
+            "severity": "low",
+            "location": "GovCoordinator.sol - various lines, GovFunding.sol - various lines"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Comparison to boolean Constant",
+            "description": "Boolean constants can directly be used in conditional statements or require statements.",
+            "severity": "low",
+            "location": "GovCoordinator.sol - 150"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Absence of Error messages in Require Statements",
+            "description": "Some require statements don't include an error message.",
+            "severity": "low",
+            "location": "Various lines"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "NatSpec Annotations must be included",
+            "description": "Smart Contract does not include the NatSpec Annotations adequately.",
+            "severity": "low",
+            "location": "MuteGovernance.sol - various lines"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ],
+                "3": [
+                    "CWE-184"
+                ]
+            },
+            "title": "Require Statements should be used for Zero Address Validation Checks",
+            "description": "The _moveDelegates function use if statements to validate the addresses passed by the user.",
+            "severity": "medium",
+            "location": "MuteGovernance.sol - 99-117"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "SafeMath library should be used for arithmetic operations",
+            "description": "The contract includes some functions that do not use the Safemath library while performing arithmetic operations.",
+            "severity": "low",
+            "location": "MuteGovernance.sol - various lines"
+        }
+    ]
+}

@@ -1,0 +1,69 @@
+{
+    "path": "artifacts/MagmaStablecoin_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/magma-fi/WEN-Contracts",
+        "commit_id": "37e92613994f2cfc90d1390c373f9a95c132bf8c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": "n/a",
+        "project_path": "n/a"
+    },
+    "findings": [
+        {
+            "id": 0,
+            "title": "Unprotected Initialize Function",
+            "description": "Initialize function can be called by anyone, allowing unauthorized ownership of contracts.",
+            "severity": "Medium/High",
+            "location": "Various contracts (ActivePool, StabilityPool, TroveManager, BorrowerOperations)"
+        },
+        {
+            "id": 1,
+            "title": "Signature Forgery or Replay",
+            "description": "Built-in ecrecover function is susceptible to signature malleability.",
+            "severity": "Low",
+            "location": "LUSDToken.sol (function permit) at lines 171-192"
+        },
+        {
+            "id": 2,
+            "title": "Ownership Change without Two-Step Process",
+            "description": "Not provided",
+            "severity": "Low",
+            "location": "OwnableUpgradeable.sol at lines 19-76"
+        },
+        {
+            "id": 3,
+            "title": "biakia",
+            "description": "The contract `OwnableUpgradeable` does not implement a two-step process for transferring ownership, which can lead to ownership loss.",
+            "severity": "n/a",
+            "location": "Contract `OwnableUpgradeable`"
+        },
+        {
+            "id": 4,
+            "title": "MSC-6: Redundant code",
+            "description": "Unused events in the ITroveManager contract and StabilityPool contract.",
+            "severity": "Informational",
+            "location": "contracts/Interfaces/ITroveManager.sol#L24, contracts/StabilityPool.sol#L246"
+        },
+        {
+            "id": 5,
+            "title": "MSC-7: Missing event",
+            "description": "Missing events in the DefaultPool and CollSurplusPool contracts.",
+            "severity": "Informational",
+            "location": "code/contracts/DefaultPool.sol#L104-L108, code/contracts/CollSurplusPool.sol#L118-L121"
+        },
+        {
+            "id": 6,
+            "title": "MSC-8: Incorrect token name",
+            "description": "Token named as \"WEN\" instead of \"LUSD\"",
+            "severity": "Informational",
+            "location": "LiquityBase.sol#L28, LUSDToken.sol#L31-L32"
+        },
+        {
+            "id": 7,
+            "title": "MSC-9: Missing Zero Address Check",
+            "description": "Lack of zero address check in the constructor function may cause unexpected results",
+            "severity": "Informational",
+            "location": "Timelock.sol#L28-L34"
+        }
+    ]
+}

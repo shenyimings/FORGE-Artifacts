@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/SlowMist Audit Report - wBETH_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/earn-tech-git/wbeth/tree/develop_unwrap",
+        "commit_id": "279917103288e378765d50993165e8805d7e639e",
+        "address": "0xa2E3356610840701BDf5611a53974510Ae27E2e1",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "FiatTokenProxy": "contracts/SlowMist Audit Report - wBETH_en-us/FiatTokenProxy"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Risk of excessive authority",
+            "description": "Wrong configuration and sudden modification will affect the user's normal withdrawal request and claim.",
+            "severity": "medium",
+            "location": "staking/UnwrapTokenV1.sol#344-388, staking/StakedTokenV1.sol#169-239, staking/upgrade/StakedTokenV2.sol#185-255"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Preemptive Initialization",
+            "description": "Malicious attackers preemptively call the initialize function to initialize.",
+            "severity": "info",
+            "location": "staking/UnwrapTokenV1.sol#129, Deployer.sol#58"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible calculation truncation",
+            "description": "Truncation can lead to a failure in updating the caller’s allowance.",
+            "severity": "info",
+            "location": "RateLimit.sol#195-196"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ],
+                "4": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Dev address setting enhancement suggestions",
+            "description": "Private keys are leaked, and team rewards will be stolen.",
+            "severity": "info",
+            "location": "staking/StakedTokenV1.sol#205-219, staking/upgrade/StakedTokenV2.sol#221-235"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-280"
+                ]
+            },
+            "title": "Inability to claim due to insufficient availableAllocateAmount",
+            "description": "Users cannot call the claimWithdraw function to withdraw their eth.",
+            "severity": "info",
+            "location": "staking/UnwrapTokenV1.sol#187"
+        }
+    ]
+}

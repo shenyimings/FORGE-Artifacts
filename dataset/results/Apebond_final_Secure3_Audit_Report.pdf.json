@@ -1,0 +1,377 @@
+{
+    "path": "artifacts/Apebond_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/SoulSolidity/SoulZapV1",
+        "commit_id": "158665422506e5e11e53a1801637fa656a42d3bb",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "SoulZapV1": "contracts/Apebond_final_Secure3_Audit_Report/SoulZapV1"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing check msg.value == 0 in SoulZap::verifyMsgValueAndWrap",
+            "description": "Missing check on msg.value == 0 in verifyMsgValueAndWrap modifier",
+            "severity": "critical",
+            "location": "code/contracts/SoulZap_UniV2.sol#L111-L114"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lower bound fee rate for SoulFeeManager::getFee",
+            "description": "Missing check on the lowest configured fee in getFee function",
+            "severity": "medium",
+            "location": "code/contracts/fee-manager/SoulFeeManager.sol#L155-L162"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "ArrakisMath inconsistencies for different tokens decimals",
+            "description": "Inconsistent decimal handling in _normalizeTokenDecimals function can cause integer overflow or underflow",
+            "severity": "medium",
+            "location": "code/contracts/extensions/Arrakis/lib/ArrakisMath.sol#L50-L92, #L59-L60, #L97-L99"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate Token Amount Calculation in Liquidity Addition",
+            "description": "Not provided",
+            "severity": "medium",
+            "location": "code/contracts/SoulZap_UniV2.sol#L237-L341, #L272-L273, #L281-L307"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Unwithdrawable tokens permanently locked in the contract",
+            "description": "Division truncation problem leads to unwithdrawable tokens being locked in the contract",
+            "severity": "low",
+            "location": "SoulZap_UniV2 sol#L260-L276"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "No protection of uninitialized implementation contracts from attacker",
+            "description": "Failure to invoke `_disableInitializers` function leads to vulnerability in implementation contract",
+            "severity": "low",
+            "location": "SoulAccessRegistry sol#L19-L25"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of validation on caller-provided SwapPath.swapRouter with fake router address",
+            "description": "No validation of SwapPath.swapRouter leads to potential security risks",
+            "severity": "low",
+            "location": "ISoulZap_UniV2 sol#L34, SoulZap_UniV2 sol#L135-L186, and multiple other locations"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Attack contract can bypass fee payment",
+            "description": "A malicious actor can use a fake router to avoid paying fees, resulting in revenue loss for the protocol",
+            "severity": "high",
+            "location": "_handleFee function, SoulZap_UniV2 contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unvalidated swapRouter and lpRouter parameters",
+            "description": "An attacker can exploit user-controlled router addresses to steal funds mistakenly transferred to the contract",
+            "severity": "critical",
+            "location": "swapParams and LiquidityPath structures, SoulZap_UniV2 contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Loss of fees due to unverified _inputToken",
+            "description": "An attacker can use an alternative token for _feeSwapPath.path[0] to cause a loss of fees for the protocol",
+            "severity": "medium",
+            "location": "_handleFee function, SoulZap_UniV2 contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked return value of token.approve()",
+            "description": "The approve() function may fail, but its return value is not checked",
+            "severity": "low",
+            "location": "SoulZap_UniV2.sol (L197, L288, L303, L312-L313, L442)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Big deadline used for swap/zap functions",
+            "description": "The hardcoded deadline may cause delayed transaction execution",
+            "severity": "low",
+            "location": "SoulZap_UniV2_Lens.sol (L56)"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Divide before multiply",
+            "description": "Performing integer division before multiplication truncates the low bits, losing precision in calculations",
+            "severity": "low",
+            "location": "ArrakisMath.sol (L79-L89)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Any role can be set as Admin in SoulAccessRegistry::setRoleAdminByName()",
+            "description": "The function allows setting admin for any role, including the Admin role",
+            "severity": "low",
+            "location": "SoulAccessRegistry.sol (L93-L103)"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Hardcoded gas value can cause DOS",
+            "description": "The hardcoded gas stipend may not be sufficient under certain conditions, leading to potential reentrancy attacks",
+            "severity": "low",
+            "location": "TransferHelper.sol (L86)"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use abi.encodeCall instead of abi.encodeWithSelector",
+            "description": "abi.encodeWithSelector lacks type safety compared to abi.encodeCall",
+            "severity": "low",
+            "location": "SoulZap_UniV2_Lens.sol (L150, L270)"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong initialization of EpochVolumeTracker constructor leads to very large epoch duration",
+            "description": "The wrong initialization leads to an extremely long epoch duration",
+            "severity": "low",
+            "location": "EpochVolumeTracker.sol (L41), SoulZap_UniV2.sol (L91-L92)"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Don't use block.timestamp as deadline in SoulZap_UniV2_Lens::_getSwapData function",
+            "description": "Don't use block.timestamp as deadline in _getSwapData function",
+            "severity": "low",
+            "location": "SoulZap_UniV2_Lens::_getSwapData function, code/contracts/SoulZap_UniV2_Lens.sol#L232"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Values returned by EpochVolumeTracker::getEpochVolumeInfo() are incorrect, buggy implementation",
+            "description": "Values returned by getEpochVolumeInfo() are incorrect, buggy implementation",
+            "severity": "low",
+            "location": "EpochVolumeTracker::getEpochVolumeInfo(), code/contracts/utils/EpochVolumeTracker.sol#L77-L101"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Absence of validation for feeSwapPath.swapRouter in the function SoulZap_UniV2._handleFee()",
+            "description": "Absence of validation for feeSwapPath.swapRouter in the function _handleFee()",
+            "severity": "low",
+            "location": "ISoulZap_UniV2.sol#L34, SoulZap_UniV2.sol#L374, SoulZap_UniV2.sol#L443"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Use of slot0 to get sqrtPriceLimitX96 in ArrakisMath::pairTokensAndValue function can lead to price manipulation",
+            "description": "Use of slot0 to get sqrtPriceLimitX96 in pairTokensAndValue function can lead to price manipulation",
+            "severity": "info",
+            "location": "code/contracts/extensions/Arrakis/lib/ArrakisMath.sol#L134-L161, code/contracts/extensions/Arrakis/lib/ArrakisMath.sol#L149-L160, code/contracts/extensions/Arrakis/lib/ArrakisMath.sol#L151"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Price Manipulation via Uniswap V3 slot0",
+            "description": "An attacker can manipulate sqrtPriceX96 by manipulating the underlying Uniswap pool, leading to incorrect price calculations.",
+            "severity": "high",
+            "location": "ArrakisMath.sol, function pairTokensAndValue"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Modifier whenNotPaused can be omitted in _swap function",
+            "description": "The internal function _swap uses whenNotPaused modifier, which is not needed because it's already used in the swap function.",
+            "severity": "info",
+            "location": "SoulZap_UniV2.sol, functions swap and _swap"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Empty constructor not needed in abstract contract",
+            "description": "The empty constructor in the abstract contract SoulZap_Ext_ApeBond can be removed because it doesn't serve any purpose.",
+            "severity": "info",
+            "location": "SoulZap_Ext_ApeBond.sol, constructor"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "isSoulFeeManager can be constant",
+            "description": "The variable isSoulFeeManager can be declared as a constant to improve gas efficiency.",
+            "severity": "info",
+            "location": "SoulFeeManager.sol, variable isSoulFeeManager"
+        }
+    ]
+}

@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/ImmuneBytes-NFY_Finance(LPStaking)_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/NFYFinance/NFY-Staking-Platform",
+        "commit_id": "7a8cc8994dc23442c3cd874f4e3dd8ccca93a844",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "NFY-Staking-Platform": "contracts/ImmuneBytes-NFY_Finance(LPStaking)_Audit_Report/NFY-Staking-Platform"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "No mechanism to remove platform addresses in Ownable.sol",
+            "description": "In Ownable smart contract, there is no function to remove addresses from the platformAddress mapping, which can be an issue if any NFY’s system contract gets redeployed/upgraded.",
+            "severity": "medium",
+            "location": "Ownable smart contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Admin rights",
+            "description": "The LPStaking contract has various admin protected functions which can be misused intentionally or unintentionally (in case admin’s private key gets lost).",
+            "severity": "medium",
+            "location": "LPStaking contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked return value of ERC20 functions",
+            "description": "In LPStaking smart contract, the return value of transfer() and transferFrom() functions of ERC20 tokens is not checked.",
+            "severity": "low",
+            "location": "LPStaking smart contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Precision loss errors",
+            "description": "The getRewardPerBlock() function of LPStaking smart contract performs a division before multiplication which may result in minute precision loss.",
+            "severity": "low",
+            "location": "LPStaking smart contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ],
+                "3": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Functions should be declared as external",
+            "description": "Some functions in LPStaking smart contract are declared as public but are never accessed from within the contract and are only meant to be called externally.",
+            "severity": "low",
+            "location": "LPStaking smart contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "No need to assign zero value to uint variables",
+            "description": "At Line 60 of LPStaking, the uint variable accNfyPerShare is assigned with a zero(0) value.",
+            "severity": "low",
+            "location": "LPStaking smart contract"
+        }
+    ]
+}

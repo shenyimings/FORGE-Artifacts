@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-ERC20-YYDS-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/yydsfinance/yyds/tree/9239dc8",
+        "commit_id": "9239dc8",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "yyds": "contracts/PeckShield-Audit-Report-ERC20-YYDS-v1/yyds"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Interval Restriction Bypass in Token Buys",
+            "description": "The YYDS token contract has a rule enforcing that a given EOA wallet can only buy tokens once within 40 seconds, but this rule may be bypassed using a Sybil attack.",
+            "severity": "low",
+            "location": "YYDS::_tokenTransfer()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-241"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20-Compliant Tokens",
+            "description": "The approve() routine does not handle non-standard ERC-20 tokens that have additional functionalities beyond the specification.",
+            "severity": "low",
+            "location": "USDT Token Contract and YYDS::_approve()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved Parameter Validation Upon Their Changes",
+            "description": "The update logic on protocol-wide parameters can be improved by applying more rigorous sanity checks to prevent mis-configuration.",
+            "severity": "low",
+            "location": "YYDS contract, functions setBuyMarketingFee, setMarketingWallet, setShareholderAddr, setTreasureAddr, setSellMarketingFee, setNumTokensSellToSwap"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged admin account owner has critical role in regulating token-wide operations and needs to be governed by a DAO-like structure.",
+            "severity": "medium",
+            "location": "YYDS contract, functions setVault, setLimitedTrade, setBuyInterval, setPair, excludeFromFees, excludeMultipleAccountsFromFees, setMaxTokenVaulePerTx"
+        }
+    ]
+}

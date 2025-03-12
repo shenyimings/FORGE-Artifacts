@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/BNBStalker_AuditReport_InterFi.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xffb87211f1E45FA0403B70A3aF248179c10BE860",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "BNBStalker": "contracts/BNBStalker_AuditReport_InterFi/BNBStalker"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Potential front-running",
+            "description": "Functions like `invest()`, `withdraw()`, `withdrawAll()` can be manipulated by front-running a transaction to deposit assets and make profits by back-running a transaction to withdraw assets.",
+            "severity": "low",
+            "location": "`invest()`, `withdraw()`, `withdrawAll()` functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Re-entrancy",
+            "description": "Functions like `invest()`, `withdraw()`, `withdrawAll()`, `withdrawRef()` do not use re-entrancy guards.",
+            "severity": "n/a",
+            "location": "`invest()`, `withdraw()`, `withdrawAll()`, `withdrawRef()` functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Timestamp manipulation via block.timestamp",
+            "description": "The timestamp of the block can be manipulated by a miner, allowing them to post a timestamp within 15 seconds of the block being validated.",
+            "severity": "low",
+            "location": "Contracts using `block.timestamp` for random number generation"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Missing use of ownable library",
+            "description": "The smart contract does not utilize Open Zeppelin's standard Ownable.sol library, making it impossible to transfer or renounce contract ownership.",
+            "severity": "low",
+            "location": "Smart contract ownership"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Missing contract balance withdraw",
+            "description": "The smart contract may collect tokens and ethers from external addresses without a way to withdraw them.",
+            "severity": "n/a",
+            "location": "Contract balance management"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Third Party Dependencies",
+            "description": "The smart contract interacts with third-party protocols, which can be compromised or exploited.",
+            "severity": "low",
+            "location": "Interactions with third-party protocols (e.g., Pancakeswap, Uniswap)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Floating compiler status",
+            "description": "The compiler version is not fixed to the intended deployment version.",
+            "severity": "low",
+            "location": "Compiler version pragma"
+        }
+    ]
+}

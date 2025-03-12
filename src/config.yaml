@@ -1,0 +1,44 @@
+app:
+    name: FORGE
+    version: 0.0.6
+    description: FORGE smart contract vulnerability datasets automatically
+
+global:
+    verbose: True # Verbose mode for debugging, if true, will print out prompt messages with LLM responses. Recommended for turning off in massive processing.
+    env_path: .env # Path to .env file which contains API keys
+    interval: 3 # Request interval in seconds
+    max_retries: 3 # Max retries for requests
+    timeout: 60 # Timeout for requests
+    log_level: INFO # Log level, DEBUG, INFO, WARNING, ERROR, CRITICAL
+    log_dir: logs # Log directory
+    log_file: logs/forge.log # Log file
+
+
+llm:
+    # For online LLM: 
+    # model: "deepseek-chat" # LLM name
+    # base_url: "https://api.deepseek.com" # API base URL align with OpenAI format
+    
+    # For local LLM, e.g., ollama: 
+    model: "llama3:70b-instruct_Q8"
+    base_url: "http://127.0.0.1:11434"
+    parameters:
+        context_window: -1 # Context window size, -1 for default
+        temperature: 0.8 # Temperature
+        streaming: True # Streaming support for LLM
+
+
+extractor:
+    mode: strict # strict or normal, strict mode will only keep the findings with no "n/a" entry.
+    parser: default # Parser for input documents
+    max_heading_level: 4 # Max heading level for document processor when processing markdown files
+    valid_ext: [".txt",".pdf",".md"] # Valid file extensions for document processor
+    chunk_length: 4096 # Chunk length for MapReduce
+
+classifier:
+    cwe_data: core/cwe_dict.json # CWE entries
+
+fetcher:
+    mode: default  # addr_only, url_only, default
+    enabled: ["github","eth","bsc","polygon"] # Enabled fetchers.
+

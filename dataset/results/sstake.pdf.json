@@ -1,0 +1,212 @@
+{
+    "path": "artifacts/sstake.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xa70740B48C29E14464B9F40F9793E6c7f6579705",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.6+commit.7338295f"
+        ],
+        "project_path": {
+            "SimpleStake": "contracts/sstake/SimpleStake"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ULTW - Unlimited Liquidity to Team Wallet",
+            "description": "The contract owner has the authority to transfer funds to the team wallet without restrictions.",
+            "severity": "low",
+            "location": "contract.sol#L732"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "BC - Blacklisted Contracts",
+            "description": "The contract owner has the authority to stop contracts from transactions without restrictions.",
+            "severity": "medium",
+            "location": "contract.sol#L584"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "MAL - Misused Algorithmic Logic",
+            "description": "The algorithmic flow does not follow the required business logic.",
+            "severity": "low",
+            "location": "contract.sol#L518"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "MTS - Manipulate Total Supply",
+            "description": "The contract is manipulating the total supply, which can have a direct impact on the token price and Market Cap.",
+            "severity": "low",
+            "location": "contract.sol#L529"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L01 - Public Function could be Declared External",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "contract.sol#L349,362,367,393,397,401,884,903"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L02 - State Variables could be Declared Constant",
+            "description": "Constant state variables should be declared constant to save gas.",
+            "severity": "low",
+            "location": "contract.sol#L443,444,415,413,414,441,436,432,433,435 and 2 more"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L05 - Unused State Variable",
+            "description": "There are segments that contain unused state variables.",
+            "severity": "low",
+            "location": "contract.sol#L18"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The naming convention defined by Solidity is not followed.",
+            "severity": "low",
+            "location": "contract.sol#L151,152,169,189,781,790,853,873,874,875 and 18 more"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "L09 - Dead Code Elimination",
+            "description": "Functions that are not used in the contract make the code's size bigger.",
+            "severity": "low",
+            "location": "contract.sol#L46"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "L14 - Uninitialized Variables in Local Scope",
+            "description": "There are variables that are defined in the local scope and are not initialized.",
+            "severity": "low",
+            "location": "contract.sol#L512"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L13 - Divide before Multiply Operation",
+            "description": "Performing divisions before multiplications may cause loss of precision.",
+            "severity": "low",
+            "location": "contract.sol#L509,619,884"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Backdoor functionality for owner",
+            "description": "Owner can abuse certain functions, such as blacklisting contracts and transferring funds to the team's wallet.",
+            "severity": "high",
+            "location": "Various functions in the SimpleStake contract (e.g., setWhitelist, setBotBlacklist, transferOwnership)"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Maximum fee percentage manipulation",
+            "description": "The maximum fee percentage can be set to 14% for buys and 16% for sales.",
+            "severity": "medium",
+            "location": "SimpleStake contract"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rebase technique manipulation",
+            "description": "The contract uses a rebase technique that manipulates the total supply.",
+            "severity": "high",
+            "location": "SimpleStake contract"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of protection against potential hacks",
+            "description": "Without multi-wallet signing, the contract is vulnerable to hacks.",
+            "severity": "critical",
+            "location": "SimpleStake contract"
+        }
+    ]
+}

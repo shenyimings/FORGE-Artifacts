@@ -1,0 +1,161 @@
+{
+    "path": "artifacts/New_Alchemy_Security_Audit-Right Mesh Smart Contract%U00A0Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/firstcoincom/solidity",
+        "commit_id": "n/a",
+        "address": "0x5D51E3558757Bfdfc527867d046260fD5137Fc0F",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "solidity": "contracts/New_Alchemy_Security_Audit-Right Mesh Smart Contract%U00A0Audit/solidity"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Predefined tokens can be minted multiple times",
+            "description": "The `mintPredefinedTokens` function in `MeshCrowdsale` can be called multiple times, allowing the owner to issue large quantities of tokens.",
+            "severity": "critical",
+            "location": "MeshCrowdsale.mintPredefinedTokens"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Lack of two-phase ownership transfer",
+            "description": "The contracts use a single-owner model, which can lead to irrecoverable loss of ownership if the owner makes a mistake.",
+            "severity": "low",
+            "location": "Ownable contract (inherited by MeshToken, MeshCrowdsale, and Timelock)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Lack of short-address attack protections",
+            "description": "Methods that transfer tokens to destination addresses are vulnerable to short-address attacks.",
+            "severity": "low",
+            "location": "Various methods in MeshToken and Timelock"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Predefined token allocations are not hard-coded",
+            "description": "The predefined token allocations are not transparent or well-documented.",
+            "severity": "low",
+            "location": "Configuration of predefined token allocations"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Lack of Transparency in Token Allocation",
+            "description": "The current predefined token allocation in config/predefined-minting-config.js appears to try five times to assign 100 tokens to the address.",
+            "severity": "n/a",
+            "location": "config/predefined-minting-config.js"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Outdated OpenZeppelin Contracts",
+            "description": "OpenZeppelin has radically refactored their crowdsale contracts as of late February 2018, which may cause compatibility issues.",
+            "severity": "n/a",
+            "location": "MeshCrowdsale.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary bool Returns",
+            "description": "Some functions return bool values unnecessarily, making code simpler and cheaper to execute if removed.",
+            "severity": "n/a",
+            "location": "Various locations in the smart contracts (Lines 96, 116, 132, 149, 159)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ]
+            },
+            "title": "Incorrect Function Visibility",
+            "description": "A function should be tagged public or external rather than relying on the default visibility.",
+            "severity": "n/a",
+            "location": "MeshToken.sol (Line 60)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential Cliff Release Issue",
+            "description": "The cliffReleasePercentage and slopeReleasePercentage may sum to less than 100, causing unintended behavior.",
+            "severity": "n/a",
+            "location": "Timelock.sol (Line 91)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Misleading availableForWithdrawal Function",
+            "description": "availableForWithdrawal reports a non-zero quantity for a paused address, which may be misleading.",
+            "severity": "n/a",
+            "location": "Timelock.sol (Line 157)"
+        }
+    ]
+}

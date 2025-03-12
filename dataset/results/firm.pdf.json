@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/firm.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "main",
+        "address": "0xd70a7bd8de63e0b5e1880358dd2dac73d7ad80a8",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.13+commit.abaa5c0e"
+        ],
+        "project_path": {
+            "FirmSeed": "contracts/firm/FirmSeed"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ST - Stops Transactions",
+            "description": "The transactions are initially disabled for all users excluding the authorized addresses.",
+            "severity": "critical",
+            "location": "FirmSeed contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "MRM - Missing Revert Messages",
+            "description": "The contract is missing error messages, making it difficult to identify and fix issues.",
+            "severity": "low",
+            "location": "FirmSeed.sol#L301"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RSW - Redundant Storage Writes",
+            "description": "The contract performs redundant storage writes, leading to unnecessary gas consumption and inefficiencies in contract execution.",
+            "severity": "low",
+            "location": "FirmSeed.sol#L237,242,251"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PVC - Price Volatility Concern",
+            "description": "The contract accumulates tokens from taxes to swap them for ETH, which can lead to significant price volatility.",
+            "severity": "low",
+            "location": "FirmSeed.sol#L288,251"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ]
+            },
+            "title": "IDI - Immutable Declaration Improvement",
+            "description": "The contract declares state variables that are initialized once in the constructor and not modified afterwards.",
+            "severity": "low",
+            "location": "FirmSeed.sol#L127,128"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The Solidity code does not conform to naming conventions, making it difficult to read and maintain.",
+            "severity": "low",
+            "location": "FirmSeed.sol#L50,77,78,79,97"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "L07 - Missing Events Arithmetic",
+            "description": "The contract is missing events that are required for logging and tracking changes or actions.",
+            "severity": "low",
+            "location": "FirmSeed.sol#L239"
+        }
+    ]
+}

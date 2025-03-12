@@ -1,0 +1,179 @@
+{
+    "path": "artifacts/Mufex_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/MUFEX-Exchange/smart-contract",
+        "commit_id": "2b7b95417098376b3e69c9a17cd6406213db8ee0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smart-contract": "contracts/Mufex_final_Secure3_Audit_Report/smart-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Verifier does not constrain the relationship between IC and input length",
+            "description": "In groth16, the length of VK.IC should be equal to the input length plus one. The length of the input should be constrained by verifyProof.",
+            "severity": "medium",
+            "location": "code/contracts/Verifier.sol#L69-L120 (verifyProof function)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Insufficient Balance Check",
+            "description": "`batchWithdrawETH` function does not check if the contract balance is sufficient to cover the total withdrawal amount.",
+            "severity": "low",
+            "location": "`batchWithdrawETH` function in `DepositWalletFactory.sol`"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Inconsistent Array Lengths",
+            "description": "The `batchCollectTokens` function does not check if the lengths of the `wallets`, `tokens`, and `requestIds` arrays are consistent.",
+            "severity": "low",
+            "location": "`batchCollectTokens` function in `DepositWalletFactory.sol`"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "No native tokens transferred in function collectETH",
+            "description": "The function collectETH() is used to transfer all the ETH deposit in the contract to the treasury, but there will be no native tokens to transfer due to the receive() function transferring native tokens directly to the treasury.",
+            "severity": "low",
+            "location": "DepositWallet.sol, function collectETH()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incompatibility With Deflationary Tokens",
+            "description": "When transferring standard ERC20 deflationary tokens, the input amount may not be equal to the received amount due to transaction fees.",
+            "severity": "low",
+            "location": "BaseTreasury.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "The forceWithdrawOpened cannot be set to false",
+            "description": "Once forceWithdrawOpened is set to true, you cannot call updateZKP() as there is no other code in the contract to set forceWithdrawOpened to false.",
+            "severity": "low",
+            "location": "MainTreasury.sol, function forceWithdraw()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-667"
+                ],
+                "4": [
+                    "CWE-414"
+                ]
+            },
+            "title": "Inconsistent checks in generalWithdraw and updateZKP functions",
+            "description": "The getWithdrawn[token] is not reset, causing inconsistent checks between generalWithdraw and updateZKP functions.",
+            "severity": "critical",
+            "location": "functions generalWithdraw() and updateZKP()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent code implementation and comments in MiMC library",
+            "description": "The function `MiMCpe7()` should use exponent of 7, but the current implementation uses exponent of 5.",
+            "severity": "low",
+            "location": "library MiMC, function MiMCpe7()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code redundancy in TransferHelper.sol",
+            "description": "The safeApprove() function is redundant and not used in the project.",
+            "severity": "info",
+            "location": "code/contracts/libraries/TransferHelper.sol#L6-L17"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Gas Optimization in multiple contracts",
+            "description": "Loops can be optimized to reduce gas consumption.",
+            "severity": "info",
+            "location": "Multiple locations listed (Verifier.sol, MainTreasury.sol, DepositWalletFactory.sol, etc.)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Gas Optimization in MainTreasury.sol",
+            "description": "Cache array length out of the loop to save gas.",
+            "severity": "info",
+            "location": "code/contracts/MainTreasury.sol#L94-L96"
+        }
+    ]
+}

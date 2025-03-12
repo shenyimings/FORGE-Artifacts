@@ -1,0 +1,83 @@
+{
+    "path": "artifacts/Iosiro-Synthetix Phase 2 Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix/tree/fdd4782ebebd7b4892c8a68000f76708d5d1aa7b",
+        "commit_id": "fdd4782ebebd7b4892c8a68000f76708d5d1aa7b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix": "contracts/Iosiro-Synthetix Phase 2 Smart Contract Audit/synthetix"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Slashing defense mechanism",
+            "description": "Can inadvertently result in the loss of legitimate user funds.",
+            "severity": "high",
+            "location": "Oracle functionality, slashing defense mechanism"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Overly Aggressive Front-Running Defense",
+            "description": "The mechanism could lead to loss of user funds due to network interruptions or latency.",
+            "severity": "high",
+            "location": "Synthetix.sol, Lines 434-440"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate Tracking of Available Tokens",
+            "description": "Unclaimed tokens from the previous period would not be included in the calculation.",
+            "severity": "low",
+            "location": "SupplySchedule.sol, Line 213"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent XDR Exchange Rate Calculation",
+            "description": "The XDR exchange rate could spike when adding or removing currencies from the basket.",
+            "severity": "low",
+            "location": "ExchangeRates.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "No Maximum Exchange Rate Validation",
+            "description": "Lack of maximum exchange fee rate enforcement in `setExchangeFeeRate` function",
+            "severity": "medium",
+            "location": "FeePool.sol, Line 179"
+        }
+    ]
+}

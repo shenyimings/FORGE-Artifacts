@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Duneswap-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/duneswap/duneswap-contracts/tree/d602b5d",
+        "commit_id": "d602b5d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "duneswap-contracts": "contracts/PeckShield-Audit-Report-Duneswap-v1/duneswap-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Incorrect walletTokenBalance Update In DuneLocker::lockTokens()",
+            "description": "The wrong key is used when updating the state variable walletTokenBalance.",
+            "severity": "high",
+            "location": "DuneLocker contract, lockTokens() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ],
+                "3": [
+                    "CWE-940"
+                ]
+            },
+            "title": "Fork-Resistant Domain Separator In DuneERC20",
+            "description": "The DOMAIN_SEPARATOR can be replayed on a different chain in case of a hard-fork, allowing for approvals to be made via secp256k1 signatures.",
+            "severity": "medium",
+            "location": "DuneERC20 contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Implicit Assumption Enforcement In AddLiquidity()",
+            "description": "The _addLiquidity() function has implicit assumptions that may not trigger reverts if conditions are not met, leading to unchecked slippage control.",
+            "severity": "low",
+            "location": "DuneRouter02::addLiquidity()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20-Compliant Tokens",
+            "description": "The transfer() function may not revert the transaction when it fails, which is not compliant with the ERC20 standard.",
+            "severity": "low",
+            "location": "DuneswapToken contract, transfer() and transferFrom() functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Duplicate Pool Detection And Prevention",
+            "description": "The add() function may allow duplicate pools to be created without validation.",
+            "severity": "low",
+            "location": "DuneDistributor/DuneVault contracts, add() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged accounts may have excessive power and pose a counter-party risk to contract users.",
+            "severity": "medium",
+            "location": "Multiple contracts, privileged functions"
+        }
+    ]
+}

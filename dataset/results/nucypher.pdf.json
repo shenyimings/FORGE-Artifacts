@@ -1,0 +1,347 @@
+{
+    "path": "artifacts/nucypher.pdf",
+    "project_info": {
+        "url": "https://github.com/nucypher/nucypher",
+        "commit_id": "436ae0f134255fabcd49a1d6b5b1eae4fd8c9d51",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "nucypher": "contracts/NuCypher/nucypher"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-327"
+                ],
+                "3": [
+                    "CWE-328"
+                ]
+            },
+            "title": "Unsalted HKDF in utils.py",
+            "description": "The `kdf` function in `utils.py` sets salt to `None`, which can lead to brute-force attacks.",
+            "severity": "low",
+            "location": "utils.py, KDF function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Multiple issues related to curve specification",
+            "description": "Inconsistent curve parameters and assumptions lead to functionality bugs and potential decryption failures.",
+            "severity": "high",
+            "location": "PyUmbral library, multiple functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Multiple issues related to parametrization over arbitrary curves",
+            "description": "Umbral implementation allows for arbitrary elliptic curves, which can cause undefined behavior and security issues.",
+            "severity": "high",
+            "location": "pyUmbral (multiple files and functions)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Insufficient validation of signatures",
+            "description": "The Signature class implements no verification for the r and s parameters, allowing for the construction of signatures that don’t depend on the private key used to sign.",
+            "severity": "high",
+            "location": "signature.py, signature class"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Network cannot detect malicious nodes",
+            "description": "NuCypherKMS does not currently have a way to establish whether a miner is performing valid re-encryptions, leading to potential DoS attacks and malicious node activity.",
+            "severity": "high",
+            "location": "NuCypher system, network component"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Transaction Reordering Attack on approve function",
+            "description": "A race condition in the ERC20 standard allows an attacker to take more tokens than allotted with approve by reordering transactions.",
+            "severity": "medium",
+            "location": "NuCypherKMSToken.sol, approve function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Transaction Reordering Attack on decreaseApproval function",
+            "description": "A similar vulnerability exists in decreaseApproval, allowing an attacker to dequeue a transfer between its origination and resolution.",
+            "severity": "medium",
+            "location": "NuCypherKMSToken.sol, decreaseApproval function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Server implements no rate-limiting functionality",
+            "description": "Lack of rate limiting makes it easy for clients to exhaust server resources.",
+            "severity": "high",
+            "location": "NuCypher server code"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "Database has no snapshot and rollback functionality",
+            "description": "No solution to revert changes in case of database issues.",
+            "severity": "medium",
+            "location": "NuCypher/keystore database"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-1230"
+                ]
+            },
+            "title": "Lack of anonymity allows collusion-based attacks",
+            "description": "Re-encryption nodes can acquire information about senders and recipients.",
+            "severity": "high",
+            "location": "NuCypher system"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Database has no access controls",
+            "description": "Unencrypted sqlite database with no permission-based access controls.",
+            "severity": "low",
+            "location": "NuCypher/keystore sqlite database"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ProxyRESTServer.set_policy can be used to invalidate policy arrangements",
+            "description": "An attacker can make policy arrangements held by any node effectively useless.",
+            "severity": "medium",
+            "location": "NuCypher/network/server.py"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Several issues related to policy issuance",
+            "description": "Multiple issues in the policy system, including lack of signing and validation, enable replay attacks.",
+            "severity": "medium",
+            "location": "nucypher, policy class"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ]
+            },
+            "title": "Work orders have no protection from replay attacks",
+            "description": "Work order submission process lacks blockchain component and protection against replay attacks.",
+            "severity": "low",
+            "location": "nucypher/keystore/keystore.py"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ],
+                "3": [
+                    "CWE-306"
+                ]
+            },
+            "title": "Ursula's responses are unauthenticated",
+            "description": "Ursula never signs her response to work orders, allowing impersonation.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused constants KFRAG_LENGTH and CFRAG_LENGTH_WITHOUT_PROOF",
+            "description": "These constants are neither initialized nor used anywhere else in the codebase.",
+            "severity": "n/a",
+            "location": "Constants.py, KFRAG_LENGTH and CFRAG_LENGTH_WITHOUT_PROOF constants"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused constant _EXPECTED_LENGTH",
+            "description": "This constant is unused in the codebase.",
+            "severity": "n/a",
+            "location": "models.py, _EXPECTED_LENGTH constant"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "No self-transfer allowed in NuCypherKMSToken",
+            "description": "Transfers from a person to themselves are not allowed via transfer or transferFrom, causing unexpected behavior.",
+            "severity": "n/a",
+            "location": "NuCypherKMSToken"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Blockchain portion of the system is not ERC900 compatible",
+            "description": "The blockchain portion of the system implements staking but is not ERC900 compatible.",
+            "severity": "n/a",
+            "location": "Blockchain portion of the system"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused label in smart contract",
+            "description": "There is an unused label in the smart contract.",
+            "severity": "n/a",
+            "location": "Smart Contract code"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "unsafe label in smart contract",
+            "description": "The label in the smart contract can cause unexpected behavior.",
+            "severity": "n/a",
+            "location": "Smart Contract code"
+        }
+    ]
+}

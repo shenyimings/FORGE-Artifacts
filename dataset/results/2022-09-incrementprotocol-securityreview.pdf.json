@@ -1,0 +1,254 @@
+{
+    "path": "artifacts/2022-09-incrementprotocol-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/Increment-Finance/increment-protocol",
+        "commit_id": "9368b23ac2d2f5dc954cc849d20cdeca21d627c6",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "increment-protocol": "contracts/2022-09-incrementprotocol-securityreview/increment-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Governance role is a single point of failure",
+            "description": "The governance role constitutes a single point of failure because of the large number of privileges granted to it.",
+            "severity": "high",
+            "location": "Governance role"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent lower bounds on collateral weights",
+            "description": "The lower bound on a collateral asset's initial weight is different from that enforced if the weight is updated.",
+            "severity": "medium",
+            "location": "contracts/Vault.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Support for multiple reserve tokens allows for arbitrage",
+            "description": "An arbitrageur could leverage the price difference between two tokens to make a risk-free profit.",
+            "severity": "info",
+            "location": "contracts/tokens/UA.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Ownership transfers can be front-run",
+            "description": "A malicious user could front-run a call to transferPerpOwner to cause a DoS.",
+            "severity": "high",
+            "location": "contracts/utils/PerpOwnable.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Funding payments are made in the wrong token",
+            "description": "Funding payments owed to users are made in vBase instead of UA tokens.",
+            "severity": "high",
+            "location": "contracts/ClearingHouse.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Excessive dust collection may lead to premature closures of long positions",
+            "description": "The protocol collects dust to encourage complete closures, but the upper bound may lead to premature closure of long positions.",
+            "severity": "medium",
+            "location": "Perpetual.sol, _reducePositionOnMarket function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Problematic use of primitive operations on fixed-point integers",
+            "description": "The protocol's use of primitive operations over fixed-point signed and unsigned integers increases the risk of overflows and undefined behavior.",
+            "severity": "info",
+            "location": "LibMath.sol, various functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Liquidations are vulnerable to sandwich attacks",
+            "description": "Token swaps used in liquidations use a hard-coded zero as the minimum-amount-out value, making them vulnerable to sandwich attacks.",
+            "severity": "medium",
+            "location": "ClearingHouse.sol, _liquidateTrader and _liquidateLp functions"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Accuracy of market and oracle TWAPs is tied to the frequency of user interactions",
+            "description": "The accuracy of TWAPs can be affected by a downtick in user interactions.",
+            "severity": "info",
+            "location": "ClearingHouse.sol, various functions"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Liquidations of short positions may fail because of insufficient dust collection",
+            "description": "The system will treat the position as closed and donate the dust to the insurance protocol if netPositionSize is between 0 and 1e17.",
+            "severity": "low",
+            "location": "Perpetual.sol, various functions"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Inconsistent Dust Collection",
+            "description": "The protocol does not collect dust associated with short positions, leading to liquidation failures.",
+            "severity": "medium",
+            "location": "_reducePositionOnMarket function in Perpetual.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Dependency Vulnerabilities",
+            "description": "Multiple dependencies contain known vulnerabilities (e.g., arbitrary code injection, prototype pollution).",
+            "severity": "low",
+            "location": "Various dependencies (underscore, async, lodash, node-fetch)"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Risks associated with oracle outages",
+            "description": "Chainlink oracle outages may cause unexpected behavior in the Increment Protocol.",
+            "severity": "info",
+            "location": "Off-chain monitoring solution for Chainlink oracles"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Collection of dust (TOB-INC-7)",
+            "description": "excessive collection of dust",
+            "severity": "medium",
+            "location": "Arithmetic operations"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect use of fixed-point and normal integers in the same primitive operations (TOB-INC-8)",
+            "description": "incorrect use of fixed-point and normal integers",
+            "severity": "medium",
+            "location": "Arithmetic operations"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Front-running opportunities (TOB-INC-5, TOB-INC-9)",
+            "description": "front-running opportunities that could degrade user experience and lead to a DoS",
+            "severity": "low",
+            "location": "Front-Running Resistance"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Single point of failure (TOB-INC-1)",
+            "description": "single point of failure due to the governance role",
+            "severity": "medium",
+            "location": "Authentication / Access Controls, governance role"
+        }
+    ]
+}

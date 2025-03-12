@@ -1,0 +1,182 @@
+{
+    "path": "artifacts/SlowMist Audit Report - DODO-NFTPool_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/DODOEX/contractV2/tree/feature/nftPool",
+        "commit_id": "e16ceb038ed6bf070ea75d9359c7ad54e6f3e226",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contractV2": "contracts/SlowMist Audit Report - DODO-NFTPool_en-us/contractV2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Conditional racing attack",
+            "description": "Malicious caller can pre-initialize initOwner function.",
+            "severity": "n/a",
+            "location": "lib/InitializableOwnable.sol#L42-L45, NFTPool/impl/FilterERC1155V1.sol#L27-L53, NFTPool/impl/FilterERC721V1.sol#L30-L55"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "SuperOwner permission control attack",
+            "description": "SuperOwner can modify contract configurations, leading to inconsistent prices.",
+            "severity": "medium",
+            "location": "NFTPool/impl/BaseFilterV1.sol#L109-L303"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owner permission control attack",
+            "description": "Owner can modify Filter contract configurations.",
+            "severity": "high",
+            "location": "NFTPool/impl/Controller.sol#L37-L63, NFTPool/impl/FilterERC1155V1.sol#L142-L166, NFTPool/impl/FilterERC721V1.sol#L137-L163"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ALLOWED_PROXY permission control attack",
+            "description": "ALLOWED_PROXY role can transfer authorized contract amounts.",
+            "severity": "high",
+            "location": "NFTPool/impl/DODONFTApprove.sol#L70-L100"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-330"
+                ],
+                "3": [
+                    "CWE-1241"
+                ]
+            },
+            "title": "Predictable randomness issue",
+            "description": "Random number generation is based on block data, making it predictable.",
+            "severity": "high",
+            "location": "NFTPool/impl/BaseFilterV1.sol#L182-L186, NFTPool/impl/FilterERC721V1.sol#L98-L112, NFTPool/impl/FilterERC1155V1.sol#L89-L108"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Business logic error",
+            "description": "Error in ERC721TargetOut function implementation.",
+            "severity": "high",
+            "location": "NFTPool/impl/FilterERC721V1.sol#L83-L112, SmartRoute/proxies/DODONFTPoolProxy.sol#L85-L107"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unchecked caller of TargetOut and RandomOut functions",
+            "description": "The caller of TargetOut and RandomOut functions was not checked, allowing unauthorized access.",
+            "severity": "n/a",
+            "location": "ERC1155TargetOut and ERC1155RandomOut functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate init function in FilterAdmin contract",
+            "description": "Two identical init functions existed in the FilterAdmin contract, potentially causing confusion.",
+            "severity": "n/a",
+            "location": "FilterAdmin contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Arithmetic operations without SafeMath",
+            "description": "Arithmetic operations were performed without using the SafeMath module, potentially leading to integer overflow/underflow attacks.",
+            "severity": "low",
+            "location": "FilterAdmin contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Function visibility issue in queryMintFee and queryBurnFee functions",
+            "description": "The queryMintFee and queryBurnFee functions should have been declared as view, but were not.",
+            "severity": "low",
+            "location": "FilterAdmin contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Open external call in erc721ToErc20 function",
+            "description": "An open external call was made without following the Checks-Effects-Interactions pattern, potentially leading to security risks.",
+            "severity": "critical",
+            "location": "DODONFTPoolProxy contract"
+        }
+    ]
+}

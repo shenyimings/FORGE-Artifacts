@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/POA-Network-Bridge-audit-report.pdf",
+    "project_info": {
+        "url": "https://github.com/poanetwork/poa-bridge-contracts",
+        "commit_id": "2bf70c7e9fd42968aec2dc352017618907834401",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "poa-bridge-contracts": "contracts/POA-Network-Bridge-audit-report/poa-bridge-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary functionality",
+            "description": "Inherited renounceOwnership function from OpenZeppelin's Ownable contract.",
+            "severity": "low",
+            "location": "ERC677BridgeToken contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Contract does not prevent accidental token transferring",
+            "description": "Transfer method does not prevent token transferring to ForeignBridgeNativeToErc.",
+            "severity": "medium",
+            "location": "ERC677BridgeToken contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No message checking",
+            "description": "SubmitSignature function does not check the message entities within the function.",
+            "severity": "low",
+            "location": "HomeBridgeNativeToErc contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Possible Denial of Service",
+            "description": "HomeBridgeNativeToErc contract throws an exception if a recipient is a contract that cannot receive ether.",
+            "severity": "medium",
+            "location": "HomeBridgeNativeToErc contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant checks and code",
+            "description": "Redundant check in BridgeValidators.sol#L30.",
+            "severity": "low",
+            "location": "BridgeValidators contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Function does not generate the event",
+            "description": "Initialize function sets requiredSignatures var but does not generate the RequiredSignaturesChanged event.",
+            "severity": "low",
+            "location": "BridgeValidators contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Double spending",
+            "description": "Signatures for NativeToERC and ERC20ToERC20 transfers are not different, allowing double spending.",
+            "severity": "high",
+            "location": "General issues"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Possible Validators/RequiredSignatures desync",
+            "description": "No on-chain way to sync the \"Home\" and \"Foreign\" sides in terms of \"current Validators list\" and/or RequiredSignatures.",
+            "severity": "n/a",
+            "location": "General issues"
+        }
+    ]
+}

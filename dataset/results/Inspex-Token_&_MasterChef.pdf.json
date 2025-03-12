@@ -1,0 +1,161 @@
+{
+    "path": "artifacts/Inspex-Token_&_MasterChef.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x5D21D02378670119453530478288AEe67b807e2a",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "SamoyedMasterChef": "contracts/Inspex-Token_&_MasterChef/SamoyedMasterChef"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Improper Delegation Handling",
+            "description": "The delegation mechanism allows for double spending attacks in the aspect of voting mechanism.",
+            "severity": "high",
+            "location": "KennelClub contract, delegate() and _moveDelegates() functions."
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation (Duplicated LP Token)",
+            "description": "The $SMOY reward miscalculation can lead to an unfair $SMOY token distribution to the users.",
+            "severity": "medium",
+            "location": "SamoyedMasterChef contract, add() and updatePool() functions."
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation (BONUS_MULTIPLIER)",
+            "description": "The BONUS MULTIPLIER state variable is used as a factor to calculate the reward in getMultiplier() function, but it can be updated without updating the pending reward first, leading to an unfair $SMOY distribution to users.",
+            "severity": "medium",
+            "location": "SamoyedMasterChef contract, function updateMultiplier()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation (smoyPerBlock)",
+            "description": "The smoyPerBlock variable is used to determine the total number of $SMOY to be minted as a reward per block, but it can be modified without updating the pending reward first, leading to an unfair $SMOY token distribution to users.",
+            "severity": "medium",
+            "location": "SamoyedMasterChef contract, function updateSmoyPerBlock()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "Critical state variables can be updated by the controlling authorities without notifying users.",
+            "severity": "medium",
+            "location": "SamoyedMasterChef contract, various update functions (e.g., updateMultiplier(), add(), set())"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Design Flaw in massUpdatePools() Function",
+            "description": "Excessive gas usage leading to unavailability of the function",
+            "severity": "low",
+            "location": "SamoyedMasterChef contract, massUpdatePools() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unchecked Deposit Fee Value",
+            "description": "Inappropriate deposit fee rate set by owner causing unusable deposit() function",
+            "severity": "low",
+            "location": "SamoyedMasterChef contract, add() and set() functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions that are executable by the controlling parties are not logged properly by emitting events.",
+            "severity": "low",
+            "location": "SamoyedMasterChef contract, functions updateMultiplier(), add(), set(), dev(), updateFeeCollector(), and updateMinimumSmoy()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unsupported Design for Deflationary Token",
+            "description": "The deposit() function does not recognize the token amount correctly when a deflationary token is used, leading to scenarios where users can drain the contract's tokens or claim an exceedingly large amount of reward.",
+            "severity": "info",
+            "location": "SamoyedMasterChef contract, function deposit()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "SamoyToken contract (specifically, the mint function), KennelClub contract, and SamoyedMasterChef contract"
+        }
+    ]
+}

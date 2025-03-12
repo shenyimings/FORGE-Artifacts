@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Horizon_Games.pdf",
+    "project_info": {
+        "url": "https://github.com/arcadeum/multi-token-standard",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "multi-token-standard": "contracts/ConsenSys_Diligence-Horizon_Games/multi-token-standard"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Tokens with no decimals can be locked in Niftyswap",
+            "description": "Tokens with zero decimals can lead to rounding errors, resulting in incorrect balances and prices.",
+            "severity": "high",
+            "location": "Niftyswap contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Incorrect response from price feed if called during an onERC1155Received callback",
+            "description": "Calling onERC1155Received/BatchReceived functions can lead to incorrect price reporting, allowing other systems to take advantage of it.",
+            "severity": "medium",
+            "location": "Price feed function in Niftyswap contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Callback vulnerability in ERC1155 Received/BatchReceived functions",
+            "description": "Calling onERC1155Received/BatchReceived functions can lead to incorrect price reporting, allowing other systems to take advantage of it.",
+            "severity": "medium",
+            "location": "NiftyswapExchange.sol (L163-L169, L485-L487, L403-L407)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Avoid named return values",
+            "description": "Using named return values but not referring to them",
+            "severity": "n/a",
+            "location": "Functions getBaseTokenInfo() and divRound()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent math in buy/sell price calculations",
+            "description": "The math in getBuyPrice() and getSellPrice() does not match consistently with the spec",
+            "severity": "n/a",
+            "location": "Functions getBuyPrice() and getSellPrice()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Use require instead of getIDAddress",
+            "description": "Using require instead of getIdAddress for token ID registration verification",
+            "severity": "n/a",
+            "location": "ERC1155, getIdAddress() function"
+        }
+    ]
+}

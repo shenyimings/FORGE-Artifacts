@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/SmartContract_Audit_Solidproof_MarsInu.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xfbbcb4bcaf3033a51e4a2ad1d904927ca0edbde7",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "MARSINU": "contracts/SmartContract_Audit_Solidproof_MarsInu/MARSINU"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unrestricted Owner Privileges",
+            "description": "The deployer can set various fees and limits without restrictions",
+            "severity": "medium",
+            "location": "OnlyOwner modifiers, functions Set _taxFee, Set _liquidityFee, Set _maxTxAmount, etc."
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Deployer can lock user funds",
+            "description": "The deployer can prevent the transfer by dividing the percentages (_liquidityFee + _taxFee) into 2 equal shares that add up to a maximum of 100 or nearly 100, so the whole amount that was sent can be reduced to the minimum.",
+            "severity": "high",
+            "location": "Main Contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "CWE-664: Improper Control of a Resource Through its Lifetime",
+            "severity": "low",
+            "location": "Main Contract, Line 26"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "Check that the address is not zero",
+            "severity": "low",
+            "location": "Main Contract, Line 927"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State variable visibility is not set",
+            "description": "It is best practice to set the visibility of state variables explicitly",
+            "severity": "low",
+            "location": "Main Contract, Line 474"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "A floating pragma is set",
+            "description": "The current pragma Solidity directive is „“^0.8.4““.",
+            "severity": "low",
+            "location": "Main Contract, Line 26"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Contract doesn’t import npm packages from source",
+            "description": "We recommend to import all packages from npm directly without flatten the contract. Functions could be modified or can be susceptible to vulnerabilities.",
+            "severity": "low",
+            "location": "Main Contract"
+        }
+    ]
+}

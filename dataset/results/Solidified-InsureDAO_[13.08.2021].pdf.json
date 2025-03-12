@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/Solidified-InsureDAO_[13.08.2021].pdf",
+    "project_info": {
+        "url": "https://github.com/insureDAO/pool-contracts",
+        "commit_id": "13000d2bb8ad5b46625e4351616aa37c0bb61881",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "pool-contracts": "contracts/Solidified-InsureDAO_[13/pool-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "CDS.sol: Function initialize() can be called after contract initialization",
+            "description": "The initialize() function can be called multiple times after initial contract initialization, thus compromising the immutability of all initialized variables.",
+            "severity": "critical",
+            "location": "CDS.sol, function initialize()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "PoolTemplate.sol: The function _divFloor() implementation is incorrect",
+            "description": "The function _divFloor() incorrectly subtracts 1 from c. Also in case a < b, the c-1 will result in an arithmetic underflow.",
+            "severity": "high",
+            "location": "PoolTemplate.sol, function _divFloor()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Vault.sol: An attacker can compromise attribution calculations by directly depositing tokens to the vault",
+            "description": "Function addValue() calculates the beneficiary’s attribution using the formula _attributions = _amount.mul(totalAttributions).div(_pool).",
+            "severity": "high",
+            "location": "Vault.sol, function addValue()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "IndexTemplate.sol: Function setLeverage() does not adjust credit allocation",
+            "description": "Function setLeverage() does not call adjustAlloc() after setting the new leverage, thus leaving the credit allocation out of sync.",
+            "severity": "low",
+            "location": "IndexTemplate.sol, function setLeverage()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "IndexTemplate.sol: Providers can potentially be locked out of withdrawing their collateral from the pool",
+            "description": "If the poolList array were to eventually grow to a sufficiently large size, this will end up exceeding the current block gas limit.",
+            "severity": "low",
+            "location": "IndexTemplate.sol, function withdraw()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "PoolTemplate.sol: Users can allocate credit while the pool is paused",
+            "description": "Function allocateCredit() allows users to allocate credit even when the pool is paused.",
+            "severity": "low",
+            "location": "PoolTemplate.sol, function allocateCredit()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "IndexTemplate.sol: The owner can add any contract to pools by calling the set() function",
+            "description": "Function set() does not check if the _pool parameter is a whitelisted market contract in the Registry.sol.",
+            "severity": "low",
+            "location": "IndexTemplate.sol, function set()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Misc Notes",
+            "description": "Various minor issues and suggestions for improvement.",
+            "severity": "info",
+            "location": "Various contracts (Vault.sol, etc.)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "There are no means to deal with an insurance fraud",
+            "description": "InsureDAO would provide extra financial incentives to exploit the insured contracts.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

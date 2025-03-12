@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/Solidified-SingularityNet_[12.02.2019].pdf",
+    "project_info": {
+        "url": "https://github.com/singnet/platform-contracts/tree/master",
+        "commit_id": "master",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "platform-contracts": "contracts/Solidified-SingularityNet_[12/platform-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Denial of Service (DoS)",
+            "description": "Iterating unbound arrays can cause DoS.",
+            "severity": "low",
+            "location": "Registry.sol, functions deleteOrganization(), deleteServiceRegistrationInternal(), deleteTypeRepositoryRegistrationInternal()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Nonces",
+            "description": "Emitting events with incorrect nonces about channel states to clients.",
+            "severity": "low",
+            "location": "MultiPartyEscrow.sol, functions channelClaim() and channelClaimTimeout()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas Optimization",
+            "description": "Writing variable channel.value twice when calling channelClaim() with isSendback can be optimized.",
+            "severity": "low",
+            "location": "MultiPartyEscrow.sol, function channelClaim()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Implementation",
+            "description": "Redundant implementation of supportsInterface().",
+            "severity": "low",
+            "location": "contracts/IRegistry.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ],
+                "4": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Incorrect Expiration Time",
+            "description": "Setting channel expiration to a past value.",
+            "severity": "low",
+            "location": "MultiPartyEscrow.sol, function channel initialization"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1288"
+                ]
+            },
+            "title": "Lack of Uniqueness Enforcement",
+            "description": "Not enforcing the uniqueness of groupId between channels with the same sender/recipient pair.",
+            "severity": "low",
+            "location": "MultiPartyEscrow.sol, variable groupId"
+        }
+    ]
+}

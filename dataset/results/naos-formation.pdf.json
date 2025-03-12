@@ -1,0 +1,194 @@
+{
+    "path": "artifacts/naos-formation.pdf",
+    "project_info": {
+        "url": "https://github.com/NAOS-Finance/NAOS-Formation",
+        "commit_id": "19f4967",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "NAOS-Formation": "contracts/naos-formation/NAOS-Formation"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Centralization of power",
+            "description": "Governance role has too much power, which can lead to infinite token minting and other security issues.",
+            "severity": "low",
+            "location": "NAOSToken.sol, NToken.sol, Transmuter.sol, StakingPools.sol, Formation.sol, TimeToken.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Incorrect implementation of IsHealthy()",
+            "description": "The function returns true if the ratio is equal to the global collateralization limit, instead of greater than.",
+            "severity": "low",
+            "location": "CDP.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Lack of check for new users in forceTransmute()",
+            "description": "A fresh address could invoke forceTransmute(), leading to incorrect bookkeeping.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing revert in flushActiveVault()",
+            "description": "The function should revert if an emergency exit is active, but it does not.",
+            "severity": "low",
+            "location": "Formation.sol L440"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma",
+            "description": "Using an unlocked pragma can lead to unexpected behavior in the future.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Use of experimental ABIEncoderV2",
+            "description": "The feature is more likely to include unknown bugs in the implementation.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Inefficient gas usage in loops",
+            "description": "The functions may fail due to gas limits or cause an unnecessary amount of storage load.",
+            "severity": "info",
+            "location": "MultiSigWallet.sol, StakingPools.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of access control in YearnVaultAdapter.deposit()",
+            "description": "Users may accidentally deposit to the wrong contract.",
+            "severity": "info",
+            "location": "YearnVaultAdapter.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Economic attack vector in flush()",
+            "description": "The function can be exploited for economic gains if the share price of the vault cannot be manipulated.",
+            "severity": "info",
+            "location": "Formation.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Unnecessary activation of flush()",
+            "description": "The function is activated in withdraw() when not necessary, leading to unnecessary gas usage.",
+            "severity": "info",
+            "location": "Formation.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused contract",
+            "description": "The TimeToken contract is not used in the system and can be removed.",
+            "severity": "info",
+            "location": "TimeToken.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect default value for flushActivator",
+            "description": "The default value does not consider token decimals, leading to potential issues.",
+            "severity": "n/a",
+            "location": "Formation.sol"
+        }
+    ]
+}

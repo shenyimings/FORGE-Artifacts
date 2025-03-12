@@ -1,0 +1,431 @@
+{
+    "path": "artifacts/Audit Report - Kresko.pdf",
+    "project_info": {
+        "url": "https://github.com/kreskohq/kresko-protocol",
+        "commit_id": "cc5ae9bbb7eab7a1c88ddfc4fce3d538d45e729c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "kresko-protocol": "contracts/Audit Report - Kresko/kresko-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unlimited Kresko asset minting due to faulty account liquidation",
+            "description": "Removing Kresko assets from mintedKreskoAssets array when repaying all principal debt, allowing unlimited minting of debt without risk of future liquidation.",
+            "severity": "critical",
+            "location": "LiquidationFacet contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unlimited Kresko asset minting due to not considering the accrued interest when burning assets",
+            "description": "Removing Kresko assets from mintedKreskoAssets array when burning assets with accrued interest, allowing unlimited minting of debt without risk of future liquidation.",
+            "severity": "critical",
+            "location": "BurnFacet.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Hardcoded krFactor in debt calculation",
+            "description": "krFactor is hardcoded in debt calculation, which may lead to inaccurate results.",
+            "severity": "medium",
+            "location": "LibUI.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Loss of precision due to division before multiplication",
+            "description": "Division operation performed before multiplication, leading to potential loss of precision in calculations.",
+            "severity": "low",
+            "location": "LibDecimals.sol and LibCalculation.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Typo in increment/assignment operator",
+            "description": "Typo in increment/assignment operator may lead to incorrect behavior.",
+            "severity": "low",
+            "location": "LibUI.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent getter behavior",
+            "description": "Getter function returns inconsistent results under certain conditions.",
+            "severity": "medium",
+            "location": "FluxPriceFeed.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Potential underflow",
+            "description": "Underflow condition possible in calculation, leading to inaccurate results.",
+            "severity": "low",
+            "location": "LibCalculation.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Inability to retrieve sent native tokens",
+            "description": "Native tokens sent to the contract cannot be retrieved.",
+            "severity": "medium",
+            "location": "Diamond.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Unclear documentation",
+            "description": "Documentation lacks clarity on specific implementation details.",
+            "severity": "low",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Naming conventions",
+            "description": "Boolean variables named in negative form, and confusing rebase nomenclature.",
+            "severity": "low",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "DiamondOwnershipFacet.sol: Redundant check for owner and pending owner",
+            "description": "Redundant checks for owner and pending owner in DiamondOwnershipFacet.sol.",
+            "severity": "low",
+            "location": "DiamondOwnershipFacet.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "LibDiamondCut.sol: Unnecessary use of require statement",
+            "description": "Unnecessary require statement in LibDiamondCut.sol.",
+            "severity": "low",
+            "location": "LibDiamondCut.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "KISS.sol: Unused constant role variable",
+            "description": "Unused constant role variable in KISS.sol.",
+            "severity": "low",
+            "location": "KISS.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-300"
+                ]
+            },
+            "title": "Centralization risk",
+            "description": "The protocol's centralization may lead to security risks.",
+            "severity": "high",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Missing events in important functions",
+            "description": "Important functions lack event emissions, reducing transparency and debugability.",
+            "severity": "medium",
+            "location": "FluxPriceFeedFactory.sol and KrStaking.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ]
+            },
+            "title": "Usage of tx.origin",
+            "description": "tx.origin used instead of msg.sender in liquidate function, potentially introducing security vulnerabilities.",
+            "severity": "medium",
+            "location": "LiquidationFacet.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect calculation of collateralization ratio",
+            "description": "Collateralization ratio is set to 0 if user has no debt, potentially leading to inaccurate results.",
+            "severity": "low",
+            "location": "AccountStateFacet.sol and LibUI.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant declaration of library use",
+            "description": "Redundant declaration of library use in AccountStateFacet.sol.",
+            "severity": "low",
+            "location": "AccountStateFacet.sol"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Partial repayment of stability rate interest not enforced",
+            "description": "Require statement does not enforce partial repayment of stability rate interest.",
+            "severity": "medium",
+            "location": "StabilityRateFacet.sol"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-547"
+                ]
+            },
+            "title": " ERC-165 interfaceIds are not self-evident",
+            "description": "interfaceIds hardcoded as plain bytes4 values, reducing readability and maintainability.",
+            "severity": "low",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Kresko protocol does not support fee-on-transfer collateral tokens",
+            "description": "Protocol does not expect fee-on-transfer tokens as collateral assets, potentially limiting its functionality.",
+            "severity": "medium",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Kresko protocol does not support native cryptocurrencies as collateral assets",
+            "description": "Documentation lists native cryptocurrencies as possible Collateral Asset Types, but implementation only supports ERC20 tokens.",
+            "severity": "medium",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "KreskoAssetAnchor accounting differences between issue/destroy and deposit/mint/withdraw/redeem break system invariants",
+            "description": "The test case indicates that the Kresko asset's total supply increased as expected after minting.",
+            "severity": "n/a",
+            "location": "KreskoAssetAnchor contract, deposit function"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Loss of assets due to deposit and withdrawal from KreskoAssetAnchor",
+            "description": "The test case indicates that the user lost 50% of their assets just by depositing/withdrawing.",
+            "severity": "n/a",
+            "location": "KreskoAssetAnchor contract, withdraw function"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Dust deposit creation due to almost complete asset collateral withdrawal",
+            "description": "The test case indicates that withdrawing almost all asset collateral causes a dust deposit.",
+            "severity": "n/a",
+            "location": "Minter contract, withdrawCollateral function"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Duplicate collateral asset in deposited collateral assets array",
+            "description": "The test case indicates that the collateral asset is still present in the account's deposited collateral assets array after withdrawal.",
+            "severity": "n/a",
+            "location": "Diamond contract, getDepositedCollateralAssets function"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Duplicate Minted Kresko Assets",
+            "description": "Burning Kresko assets can cause duplicates when minting and repaying within the same transaction.",
+            "severity": "high",
+            "location": "Minter contract, burnKreskoAsset function"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unfair Liquidation",
+            "description": "Liquidator receives less collateral than entitled, causing him to spend more Kresko assets repaying debt than necessary.",
+            "severity": "high",
+            "location": "Minter contract, liquidate function"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Collateral Seizure Calculation",
+            "description": "Calculation error in collateral seizure amount may lead to unfair liquidation proceedings.",
+            "severity": "medium",
+            "location": "Liquidations helper, liquidate function"
+        }
+    ]
+}

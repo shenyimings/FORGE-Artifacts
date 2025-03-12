@@ -1,0 +1,215 @@
+{
+    "path": "artifacts/2023-10-saltyio-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/othernet-global/salty-io/tree/9dbd6c0c963ff5cfb177e106a5c470a39fb0bb5f",
+        "commit_id": "9dbd6c0c963ff5cfb177e106a5c470a39fb0bb5f",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "salty-io": "contracts/2023-10-saltyio-securityreview/salty-io"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Risk of denial-of-service attacks on token whitelisting process",
+            "description": "Malicious actor submits spurious proposals to saturate queue and prevent legitimate token whitelisting proposals.",
+            "severity": "high",
+            "location": "src/dao/Proposal.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Insufficient event generation",
+            "description": "No events generated during contract execution, making it difficult to review contracts' behavior for correctness.",
+            "severity": "info",
+            "location": "src/*"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Transactions to add liquidity may be front run",
+            "description": "Sole liquidity holder can exploit depositor's transaction and steal funds by resetting reserves ratio.",
+            "severity": "high",
+            "location": "src/pools/Pools.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Whitelisted pools may exceed the maximum allowed",
+            "description": "No check against current length of whitelistedPools when decreasing maximum number of whitelistedPools via proposal.",
+            "severity": "low",
+            "location": "src/pools/PoolsConfig.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Any user can add liquidity to any pool and bypass the token whitelist",
+            "description": "Absence of token whitelist checks in addLiquidity function allows users to create trading pairs with malicious tokens.",
+            "severity": "medium",
+            "location": "src/pools/Pools.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Liquidation fee is volatile and may be manipulated",
+            "description": "Liquidation reward can range from close to 0% to close to 10%, allowing manipulation by sandwiching a call to liquidateUser with WBTC/WETH swap transactions.",
+            "severity": "medium",
+            "location": "src/stable/Collateral.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Collateral contract deployment results in permanent loss of rewards",
+            "description": "Rewards intended for collateral pool are misdirected to Liquidity contract, resulting in permanent loss.",
+            "severity": "high",
+            "location": "src/rewards/RewardsEmitter.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Collateral can be withdrawn without repaying USDS loan",
+            "description": "Users could bypass collateralization checks and reclaim their collateral assets without repaying their USDS loans.",
+            "severity": "high",
+            "location": "src/stable/Collateral.sol#L81-L88, withdrawCollateralAndClaim function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Lack of chain ID validation allows signature reuse across forks",
+            "description": "Without chain ID validation, a valid signature obtained on one blockchain fork or network can be reused on another with a different chain ID.",
+            "severity": "info",
+            "location": "src/accessManager.sol, grantAccess function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Chainlink oracles could return stale price data",
+            "description": "The latestRoundData() function from Chainlink oracles returns five values: roundId, answer, startedAt, updatedAt, and answeredInRound.",
+            "severity": "info",
+            "location": "src/price_feed/CoreChainlinkFeed.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "Lack of timely price feed updates may result in loss of funds",
+            "description": "The prices used to check loan health and maximum borrowable value are updated manually by calling performUpkeep on the PriceAggregator contract.",
+            "severity": "high",
+            "location": "src/price_feed/PriceAggregator.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "USDS stablecoin may become undercollateralized",
+            "description": "In a downtrending market, a black swan type event could cause the USDS stablecoin to become undercollateralized.",
+            "severity": "high",
+            "location": "src/stable/USDS.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Zap operations may approve an incorrect number of tokens, leading to reversion",
+            "description": "During the audit, the client found and reported this issue, stating the following: ",
+            "severity": "low",
+            "location": "src/staking/Liquidity.sol, addLiquidityAndIncreaseShare function"
+        }
+    ]
+}

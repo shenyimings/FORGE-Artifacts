@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/2023-03-primitive-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/primitivefinance/hyper",
+        "commit_id": "0bcadb708272276dd77a99f58e57f9f8dfed3c79",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "hyper": "contracts/2023-03-primitive-securityreview/hyper"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Incorrect Rounding",
+            "description": "The current strategy has resulted in incorrect rounding, allowing attackers to benefit from dust and misprices and steal assets.",
+            "severity": "high",
+            "location": "Rounding directions always benefiting the pool"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Upgradeable Pools",
+            "description": "Pools should never be upgradeable due to inherent risks that may not be apparent with different versions.",
+            "severity": "high",
+            "location": "User-created pairs and pools"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Destructible Tokens",
+            "description": "Tokens should not have a self-destruct capability due to inherent risks, including malicious upgrades through create2.",
+            "severity": "high",
+            "location": "User-created token pairs and pools"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Changeable Token Decimals",
+            "description": "Adjusting a token's decimals to either less than six or greater than 18 will break the token's composability with the arithmetic in the pool.",
+            "severity": "medium",
+            "location": "User-created token pairs and pools"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Interest-Bearing Tokens",
+            "description": "The formulaic derivation for the AMM relies on a risk-free rate of return for the asset token, and interest-bearing tokens pose risks to the codebase.",
+            "severity": "medium",
+            "location": "User-created token pairs and pools"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Overflow and Underflow in Assembly Blocks",
+            "description": "Operations in assembly blocks can be problematic if the code does not check for overflows or underflows.",
+            "severity": "medium",
+            "location": "Assembly blocks in the Primitive Hyper codebase"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Staking Issues",
+            "description": "Various issues with staking, including unstakeTimestamp not being updated, unclear fee payment behavior, and users unable to withdraw liquidity after unstaking.",
+            "severity": "medium",
+            "location": "Staking-related code"
+        }
+    ]
+}

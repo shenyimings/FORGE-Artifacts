@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/BAD APES Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xc4f5424ef52499fa496a07f3fe9daab88553d4c3",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "CoinToken": "contracts/BAD APES Full Smart Contract Security Audit/CoinToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeAccount()` uses a loop to find and remove addresses from the `_excluded` list, which can lead to an OUT_OF_GAS exception if there are too many excluded addresses. Similarly, `_getCurrentSupply` also uses a loop for evaluating total supply, which can cause the same issue.",
+            "severity": "low",
+            "location": "`includeAccount()` and `_getCurrentSupply` functions in the `CoinToken` contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has too many privileges, including including/excluding from reward, changing charity wallet address, and updating tax, burn, and charity fees.",
+            "severity": "low",
+            "location": "`CoinToken` contract, specifically the functions that can be called by the owner"
+        }
+    ]
+}

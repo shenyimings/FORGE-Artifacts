@@ -1,0 +1,350 @@
+{
+    "path": "artifacts/IOTAMPC Bridge-Smart-Contract-Audit-Report-Numen.pdf",
+    "project_info": {
+        "url": "https://github.com/TanglePay/bridge",
+        "commit_id": "48ad2ac76b5d226502a3c8d7b96c9536c4dd3fa4",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bridge": "contracts/IOTAMPC Bridge-Smart-Contract-Audit-Report-Numen/bridge"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "A signatory can remove multiple signatures",
+            "description": "A malicious signer address can remove signers with zero signers[index] by calling the removeSigner method multiple times.",
+            "severity": "high",
+            "location": "multiSign.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "A signatory can update the number of signatures to zero",
+            "description": "Any signatory can change the number of signatures to zero by calling it multiple times, and if there is a malicious signatory, any signatory can call the signature implementation method call individually when the number of signatures is changed to zero.",
+            "severity": "high",
+            "location": "multiSign.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "ADDSIGNER address cannot be changed after it has been added",
+            "description": "addSigner method is used to add a new signer, any signer submitted to addSigner address is not address(0), the remaining signature address also can not set other addresses for the signer.",
+            "severity": "medium",
+            "location": "multiSign.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "REMOVESIGNER address cannot be changed after it has been added",
+            "description": "removeSigner method is used to remove existing signers, any signer submitted to add removingIndex address is not address(0), the remaining signature address can not remove other signers.",
+            "severity": "medium",
+            "location": "multiSign.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "The CHANGEREQUIRECOUNT number cannot be changed again after it has been updated",
+            "description": "After any signer submits a non-zero newRequireCount value, the remaining signature addresses cannot be changed to other values either.",
+            "severity": "medium",
+            "location": "multiSign.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "FEE Extraction Security",
+            "description": "The withdrawFee method is used to withdraw the team fee, but may steal the team fee when the owner privileged role is malicious.",
+            "severity": "low",
+            "location": "wrap.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant codes",
+            "description": "The addSigner method is used to add a new signer and clear the original data on the first call, but the contract uses a for loop statement to make a judgement that has no real meaning.",
+            "severity": "info",
+            "location": "multiSign.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "NEWOWNER may be a zero address",
+            "description": "The transferOwner method is used to modify the new owner privileged address, but the privileged address may be called accidentally when the transferOwner method is called resulting in the newOwner becoming address(0).",
+            "severity": "info",
+            "location": "Ownable.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Signer address and number cannot be too small",
+            "description": "As a multiSign contract, if the number of signatories or signatures is small, it may lead to one address controlling the signature and there is a security risk.",
+            "severity": "info",
+            "location": "multiSign.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Any signer can add ADDRESS(0) as a signer",
+            "description": "The addSigner method is used to add a new signer, but an arbitrary signer can be added as a signer by calling the addSigner method multiple times with the ADDRESS(0) address.",
+            "severity": "info",
+            "location": "multiSign.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ]
+            },
+            "title": "Authorization Access Control",
+            "description": "Permission checks for external integral functions",
+            "severity": "critical",
+            "location": "Contract"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Forged Transfer Vulnerability",
+            "description": "Assess whether there is a forged transfer notification vulnerability in the contract",
+            "severity": "critical",
+            "location": "Contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Transaction Rollback Attack",
+            "description": "Assess whether there is transaction rollback attack vulnerability in the contract",
+            "severity": "critical",
+            "location": "Contract"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Transaction Block Stuffing Attack",
+            "description": "Assess whether there is transaction blocking attack vulnerability",
+            "severity": "critical",
+            "location": "Contract"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Soft Fail Attack Assessment",
+            "description": "Assess whether there is soft fail attack vulnerability",
+            "severity": "critical",
+            "location": "Contract"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Hard Fail Attack Assessment",
+            "description": "Examine for hard fail attack vulnerability",
+            "severity": "critical",
+            "location": "Contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Abnormal Memo Assessment",
+            "description": "Assess whether there is abnormal memo vulnerability in the contract",
+            "severity": "critical",
+            "location": "Contract"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Abnormal Resource Consumption",
+            "description": "Examine whether abnormal resource consumption in contract processing",
+            "severity": "critical",
+            "location": "Contract"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-330"
+                ]
+            },
+            "title": "Random Number Security",
+            "description": "Examine whether the code uses insecure random number",
+            "severity": "critical",
+            "location": "Contract"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Cryptography Security",
+            "description": "Examine for weakness in cryptograph implementation",
+            "severity": "high",
+            "location": "Contract"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Account Permission Control",
+            "description": "Examine permission control issue in the contract",
+            "severity": "medium",
+            "location": "Contract"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Malicious Code Behaviour",
+            "description": "Examine whether sensitive behaviour present in the code",
+            "severity": "medium",
+            "location": "Code"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Sensitive Information Disclosure",
+            "description": "Examine whether sensitive information disclosure issue present in the code",
+            "severity": "medium",
+            "location": "Code"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "System API",
+            "description": "Examine whether system API application issue present in the code",
+            "severity": "low",
+            "location": "Code"
+        }
+    ]
+}

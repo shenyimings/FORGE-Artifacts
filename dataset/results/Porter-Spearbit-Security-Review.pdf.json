@@ -1,0 +1,140 @@
+{
+    "path": "artifacts/Porter-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/porter-finance/v1-core/tree/985fb85f03917cb48c85259c53af89ee36a8521e",
+        "commit_id": "985fb85f03917cb48c85259c53af89ee36a8521e",
+        "address": "0x0000000000000000000000000000000000000000",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "v1-core": "contracts/Porter-Spearbit-Security-Review/v1-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Freeze Redeems if bonds too Large",
+            "description": "Arithmetic overflow in previewRedeemAtMaturity prevents users from redeeming bonds.",
+            "severity": "medium",
+            "location": "Bond.sol#L309"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "`burn() and burnFrom() allow users to lose their bonds`",
+            "description": "Users can get their bonds burned due to an error or a front-end attack.",
+            "severity": "low",
+            "location": "Bond#L31"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Missing two-step transfer ownership pattern",
+            "description": "Ownership transfer is a critical operation and transferring it to an inaccessible wallet or renouncing ownership by mistake can effectively lock the collateral in the contract forever.",
+            "severity": "low",
+            "location": "Bond.sol#L28"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Inefficient initialization of minimal proxy implementation",
+            "description": "The implementation contract can be left uninitialized, giving an attacker the opportunity to invoke the initialization.",
+            "severity": "low",
+            "location": "BondFactory.sol#L71, deploy_bond_factory.ts#L24"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Verify amount is greater than 0 to avoid unnecessarily safeTransfer() calls",
+            "description": "Balance should be checked to avoid unnecessary safeTransfer() calls with an amount of 0.",
+            "severity": "info",
+            "location": "Bond.sol#L263"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Improper token allow-list screening process",
+            "description": "Malicious tokens and issuers can slip through the screening process, leading to mass scam attacks and loss of user funds.",
+            "severity": "info",
+            "location": "BondFactory.sol#L93"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Incorrect revert message",
+            "description": "The error description is incorrect, which may cause confusion.",
+            "severity": "info",
+            "location": "Bond#L81, IBond.sol#14"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Non-existent bonds naming/symbol restrictions",
+            "description": "The issuer can define any name and symbol during bond creation, leading to potential abusive or misleading names.",
+            "severity": "info",
+            "location": "BondFactory.sol#L93"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Deflationary payment tokens are not handled in the pay() function",
+            "description": "The pay() function does not support rebasing/deflationary/inflationary payment tokens.",
+            "severity": "info",
+            "location": "Bond.sol#L145"
+        }
+    ]
+}

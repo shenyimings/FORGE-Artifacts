@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/Inspex-Ratoken.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x43c612590Ad7Ac3f5fc217Bf71487B49A034E195",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.6+commit.11564f7e"
+        ],
+        "project_path": {
+            "Token": "contracts/Inspex-Ratoken/Token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Improper Ownership Locking Mechanism",
+            "description": "The previous contract owner can reclaim the ownership of the contract when the ownership is transferred to another address or renounced, giving that address the ability to perform privileged actions again.",
+            "severity": "high",
+            "location": "Token contract, lock() and unlock() functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Balance Calculation",
+            "description": "The balance of a previously excluded address can be inflated by using the includeInReward() function, which is unfair to the token holders.",
+            "severity": "medium",
+            "location": "Token contract, excludeFromReward() and includeInReward() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "Critical state variables can be updated by the controlling authorities without notifying users.",
+            "severity": "low",
+            "location": "Token.sol (L:503, L:512, L:523, L:904, L:913), Contract: Token, Functions: renounceOwnership(), transferOwnership(), lock(), excludeFromReward(), includeInReward()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Division Before Multiplication",
+            "description": "Rounding error can cause fees to be slightly miscalculated.",
+            "severity": "low",
+            "location": "Token.sol (L:1153, L:1159, L:1165), Contract: Token, Function: swapAndLiquify()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions that are executable by the controlling parties are not logged properly by emitting events.",
+            "severity": "low",
+            "location": "Token contract, various functions (excludeFromReward(), includeInReward(), excludeFromFee(), etc.)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unchecked Return Value of ERC20 Transfer",
+            "description": "The return value of the transfer() function is not checked, so the transfer transactions of tokens that return false on failure will not be reverted.",
+            "severity": "info",
+            "location": "Token contract, recoverBEP20() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "Token contract, various functions (transfer(), allowance(), approve(), etc.)"
+        }
+    ]
+}

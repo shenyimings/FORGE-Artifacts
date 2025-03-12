@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/Amplify Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/amplify-labs/contracts/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Amplify Smart Contract Audit Report - QuillAudits/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Value Verification",
+            "description": "Certain functions lack a safety check in the value, which can hurt the contract's functionality.",
+            "severity": "low",
+            "location": "Contract - Asset (Line 23 and 75)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "The contract uses a floating-point pragma, which may introduce issues in the contract system.",
+            "severity": "low",
+            "location": "A.Contract - Asset (Line 3), D.Contract - Controller (Line 3), F.Contract - Rewards (Line 3), G.Contract - StableCoin (Line 3)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "For Loop Over Dynamic Array",
+            "description": "Modifying an unknown-size array that grows in size over time can result in a Denial-of-Service attack.",
+            "severity": "medium",
+            "location": "D.Contract - Controller (Line 280), F.Contract - Rewards (Lines 26, 39, and 63)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Missing Address Verification",
+            "description": "Certain functions lack a safety check in the address, which can make the contract's functionality inaccessible or tokens may be burned in perpetuity.",
+            "severity": "low",
+            "location": "D.Contract - Controller (Lines 247, 273, and 289), G.Contract - StableCoin (Line 12)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Approve Race Condition",
+            "description": "Racing condition in approve function allows spender to get both approval amounts.",
+            "severity": "low",
+            "location": "H.Contract - ERC20, Line 62"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Usage Of block.timestamp",
+            "description": "The variable block(timestamp) does not always reflect the current time and may be inaccurate, which can enable Maximal Extractable Value attacks.",
+            "severity": "low",
+            "location": "O.Contract - VotingEscrow, Line 325"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1177"
+                ],
+                "3": [
+                    "CWE-676"
+                ]
+            },
+            "title": "Usage Of Inline Assembly",
+            "description": "Discards several important safety features in Solidity.",
+            "severity": "medium",
+            "location": "O.Contract - VotingEscrow, Line 611"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Denial-of-Service attack",
+            "description": "Modifying an unknown-size array that grows in size over time can result in a Denial-of-Service attack.",
+            "severity": "low",
+            "location": "R.Contract - Borrower, Lines 56 and 211; T.Contract - Pool, Lines 157 and 229"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked loanId ",
+            "description": "No check for loanId can lead to unnecessary looking up storage",
+            "severity": "low",
+            "location": "closeCreditLineInternal, unlockAssetInternal, borrowBalanceSnapshot (functions in Lender.sol and Pool.sol)"
+        }
+    ]
+}

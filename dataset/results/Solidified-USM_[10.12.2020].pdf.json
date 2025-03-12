@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/Solidified-USM_[10.12.2020].pdf",
+    "project_info": {
+        "url": "https://github.com/usmfum/USM",
+        "commit_id": "5b450aea474bc07f38606851b9ef6f84d2be0b3f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "USM": "contracts/Solidified-USM_[10/USM"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Proxy.sol: Anyone can burn/defund someone else’s USM/FUM",
+            "description": "The `burn()` and `defund()` functions in Proxy.sol don't check `msg.sender`. ",
+            "severity": "critical",
+            "location": "Proxy.sol, `burn()` and `defund()` functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Proxy.sol: Anyone can mint USM and FUM using someone else’s approved WETH",
+            "description": "Anyone can call `mint()` or `fund()` using someone else's approved WETH.",
+            "severity": "critical",
+            "location": "Proxy.sol, `mint()` and `fund()` functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "EIP712 signature domain leftover from another project",
+            "description": "The EIP712 signature domain in Delegable.sol seems to have been re-used from the Yield project.",
+            "severity": "low",
+            "location": "Delegable.sol, EIP712 signature domain"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Oracles might disappear or become unreliable",
+            "description": "Hardcoded oracles may become unreliable or disappear.",
+            "severity": "n/a",
+            "location": "Oracles implementation"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Malleable signatures accepted",
+            "description": "The `addDelegateBySignature()` function in Delegable.sol still allows malleable signatures for backward compatibility reasons.",
+            "severity": "n/a",
+            "location": "Delegable.sol, `addDelegateBySignature()` function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Tautologies in WadMath.sol",
+            "description": "Unnecessary require statements in the `wadHalfExp()` function.",
+            "severity": "n/a",
+            "location": "WadMath.sol, `wadHalfExp()` function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Variable shadowed in inherited contracts",
+            "description": "The constant `NUM_UNISWAP_PAIRS` is declared twice in USM.sol and MedianOracle.sol.",
+            "severity": "n/a",
+            "location": "USM.sol, MedianOracle.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "ETH can be forced into the USM contract bypassing mint()",
+            "description": "ETH can be forcibly sent to the USM contract without triggering the execution of a receive function.",
+            "severity": "n/a",
+            "location": "ETH handling in USM contract"
+        }
+    ]
+}

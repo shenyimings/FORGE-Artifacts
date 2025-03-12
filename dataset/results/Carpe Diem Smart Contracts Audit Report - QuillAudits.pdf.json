@@ -1,0 +1,485 @@
+{
+    "path": "artifacts/Carpe Diem Smart Contracts Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/CarpeDiemCDP/Pension/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Pension": "contracts/Carpe Diem Smart Contracts Audit Report - QuillAudits/Pension"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "User can claim/compound a very big amount without depositing and waiting for days/years",
+            "description": "Referral address snapshot not set, allowing users to claim rewards for all days or create a large pending amount",
+            "severity": "high",
+            "location": "Pension.sol, function depositCDP()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Precision loss + unscaled value while calculating rewardPerShare in mintCDP()",
+            "description": "RewardPerShare calculation leads to precision loss due to Solidity's lack of decimal support",
+            "severity": "medium",
+            "location": "Pension.sol, mintCDP()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Multiplication can give incorrect answers because of unscaled values",
+            "description": "Unscaled values lead to incorrect multiplication results",
+            "severity": "medium",
+            "location": "Pension.sol, multiple lines (113, 151, 176, 213, 265, and 288)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Protocol allocate shares for all days, even when there are no deposits",
+            "description": "Protocol allocates shares even if no one participated in the auction",
+            "severity": "medium",
+            "location": "Auction.sol, _mintDailyCDPandShares()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Users would always have their user.referral remain address(0), due to a logic error",
+            "description": "Incorrect if-else logic leads to users' referrals remaining address(0)",
+            "severity": "medium",
+            "location": "Pension.sol, depositCDP()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Accounting errors for the protocol due to totalBurned not being correctly tracked",
+            "description": "totalBurned variable is not updated correctly in burnFrom function",
+            "severity": "medium",
+            "location": "CDPToken.sol, burn(), burnFrom()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Add a check for the minimum amount that should be deposited",
+            "description": "Deposits with very small amounts can lead to calculation errors",
+            "severity": "medium",
+            "location": "Pension.sol, depositCDP()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Automate doDailyUpdate() call for the 20hr interval so that it won’t skip any day",
+            "description": "Skipping doDailyUpdate() can lead to unintended scenarios and state changes not being reflected",
+            "severity": "medium",
+            "location": "Auction.sol, doDailyUpdate()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "getStatsLoops adds static 1 instead of i",
+            "description": "Incorrect logic in getStatsLoops function leads to incorrect results",
+            "severity": "low",
+            "location": "Auction.sol, getStatsLoops()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "User can trick referral to extract more CDP",
+            "description": "A user can input any other address as the _referral, allowing them to claim the CDP for themselves.",
+            "severity": "low",
+            "location": "Pension.sol#L79, depositCDP()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-911"
+                ]
+            },
+            "title": "Unutilized totalRefShares and Missing Decrement on Share Destruction",
+            "description": "The variable totalRefShares is unused and does not get decremented when a referred user's shares are destroyed.",
+            "severity": "low",
+            "location": "Pension.sol#L292-L299, Destroyshares()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unfixed pragma",
+            "description": "Contracts use unfixed solidity versions, which can lead to deployment with a different version than tested.",
+            "severity": "low",
+            "location": "CDPToken#L2, Auction.sol#L2, Pension.sol#L2"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "CDPToken is not protected for the ERC20 approval race condition",
+            "description": "The CDPToken contract is not protected against ERC20 approval race conditions.",
+            "severity": "medium",
+            "location": "CDPToken.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Use of payable.transfer() might render contract funds Impossible to Withdraw",
+            "description": "Transfer and send forward a hardcoded amount of gas are discouraged as gas costs can change, which may result in issues.",
+            "severity": "medium",
+            "location": "Auction.sol#L231, withdrawPLS()"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Use Check Effects Interaction pattern",
+            "description": "The CDP token uses ERC20 implementation without hooks, which can lead to unintended consequences.",
+            "severity": "low",
+            "location": "Pension.sol, depositCDP(), claimCDP(), compoundCDP(), Destroyshares()"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ],
+                "3": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Use the latest erc20 permit contract implementation",
+            "description": "The contract inherited from a draft OpenZeppelin contract, which may be liable to change with future development.",
+            "severity": "low",
+            "location": "CDPToken.sol#L6"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "user.lastInteraction can be manipulated/broken",
+            "description": "User.lastInteraction can be set by anyone before depositing, which can manipulate the NoUsers count.",
+            "severity": "medium",
+            "location": "Pension.sol, depositCDP()"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Function call can fail because of static length used",
+            "description": "The getStatsLoops() function declares return value variables arrays with a static size of 10, which may lead to out-of-bounds errors.",
+            "severity": "low",
+            "location": "Auction.sol, getStatsLoops()"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "doDailyUpdate() call tx can go out of gas",
+            "description": "The doDailyUpdate() function can revert with an out-of-gas error if the loop exceeds a certain amount of iterations.",
+            "severity": "medium",
+            "location": "Auction.sol, doDailyUpdate()"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Fix Natspec error",
+            "description": "Natspec comment for the pendingRewardCDP() function returns an error while compiling.",
+            "severity": "low",
+            "location": "Pension.sol#L250"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Check the intended logic in compoundCDP",
+            "description": "The pending amount is added to user.CDPCollected but not sent to the user, and then burned during compounding.",
+            "severity": "medium",
+            "location": "Pension.sol#L196, compoundCDP()"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "FEE_DENOMINATOR variable is never used",
+            "description": "The FEE_DENOMINATOR variable is created but never used.",
+            "severity": "info",
+            "location": "Auction.sol#L43"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Set minterAddress to immutable",
+            "description": "The minterAddress variable is set once in the constructor and never changed again, making it a candidate for immutability.",
+            "severity": "info",
+            "location": "CDPToken.sol#L13"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "lastUpdate from UserInfo struct is never used",
+            "description": "The variable lastUpdate within the UserInfo struct is declared but remains unused throughout the codebase.",
+            "severity": "info",
+            "location": "Pension.sol#L32"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Constructor can be used for variable initialization",
+            "description": "The constructor can be used for variable initialization, which would take arguments and execute during contract deployment.",
+            "severity": "info",
+            "location": "Pension.sol#L62-L69"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Time Unit Discrepancy",
+            "description": "A 24-hour day is used in the Destroyshares() function, whereas a 20-hour day is used in the Auction contract.",
+            "severity": "info",
+            "location": "Pension.sol#L279"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Confirm the intentional logic",
+            "description": "mintCDP() sets NoUsersPerDay[_day] = NoUsers; it's unclear if this is intended.",
+            "severity": "info",
+            "location": "Pension.sol, mintCDP()"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Use require instead of if condition",
+            "description": "Using a require statement would revert the transaction in case of an invalid amount, rather than just skipping execution.",
+            "severity": "low",
+            "location": "Pension.sol#L80, depositCDP()"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Redundant call to calcDay() in startAuction()",
+            "description": "The currentDay can be directly set to 0 (or 1) instead of calling calcDay().",
+            "severity": "info",
+            "location": "Auction.sol, startAuction()"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "User may opt for cheap alternative to earn CDP",
+            "description": "A user may try to buy CDP from a cheaper alternative, resulting in fewer people interacting with the auction.",
+            "severity": "info",
+            "location": "Auction.sol"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "enterAuction() is not updating user.lastInteraction",
+            "description": "The user's last interaction timestamp is not updated when entering an auction.",
+            "severity": "info",
+            "location": "Auction.sol, enterAuction()"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant variable assignment",
+            "description": "The _tokenValue variable is assigned a default value of 0, making the else{} block redundant.",
+            "severity": "info",
+            "location": "Auction.sol"
+        }
+    ]
+}

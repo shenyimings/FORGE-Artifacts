@@ -1,0 +1,257 @@
+{
+    "path": "artifacts/Inspex-Infinitee_Vault.pdf",
+    "project_info": {
+        "url": "https://github.com/infiniteefinance/vault",
+        "commit_id": "a73f9333dccbdbb043d06b28cf5c7713b67c8765",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "vault": "contracts/Inspex-Infinitee_Vault/vault"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Withdrawal Logic on userEmergencyWithdraw() Function",
+            "description": "Users can withdraw the whole balance of farmToken in the InfiniteeVault contract.",
+            "severity": "critical",
+            "location": "InfiniteeVault.sol, userEmergencyWithdraw() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Potential Centralized Control of State Variable",
+            "description": "The controlling authorities can potentially change the critical state variables to drain all staked tokens.",
+            "severity": "high",
+            "location": "InfiniteeFeeManager.sol, InfiniteeVault.sol, MasterChefWorker.sol, MasterChefWithVaultWorker.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Transaction Ordering Dependence",
+            "description": "Front running attack can be performed, resulting in a bad swapping rate and a lower reward.",
+            "severity": "high",
+            "location": "MasterChefWorker.sol, MasterChefWithVaultWorker.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Abuse of Reward Using Flashloan Attack",
+            "description": "A part of the pending reward can be claimed by the attacker.",
+            "severity": "medium",
+            "location": "MasterChefWorker.sol, MasterChefWithVaultWorker.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Dangerous Approval to External Contract",
+            "description": "The external contract can steal all approved tokens from the worker contract.",
+            "severity": "medium",
+            "location": "MasterChefWithVaultWorker(sol, MasterChefWorker.sol (constructor function and _giveAllowances() function)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Design Flaw in emergencyWithdraw() Function of MasterChefWorker",
+            "description": "All staked tokens will be stuck in the MasterChefWorker contract.",
+            "severity": "medium",
+            "location": "MasterChefWorker.sol (emergencyWithdraw() function)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Improper Kill-Switch Mechanism in MasterChefWorker",
+            "description": "If an attack happens when the contract is unpausable, further damage cannot be prevented.",
+            "severity": "medium",
+            "location": "MasterChefWorker.sol (no pause mechanism)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Improper Migration of Funds",
+            "description": "The setWorker() and setVault() functions can be called multiple times without migrating the balance deposited to the new contracts, causing the balances to be stuck inside the original smart contracts.",
+            "severity": "medium",
+            "location": "InfiniteeVault.sol, MasterChefWorker.sol, MasterChefWithVaultWorker.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Conflicting Permission",
+            "description": "The emergencyWithdraw() function in the MasterChefWorker contract has an onlyOwner modifier, making it unusable.",
+            "severity": "low",
+            "location": "MasterChefWorker.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Improper Logic in claimReward() Function",
+            "description": "If the remaining amount of reward token stored in the worker contract is greater than the claiming amount, the transaction will be reverted because the subtraction overflow protection is triggered.",
+            "severity": "low",
+            "location": "MasterChefWithVaultWorker.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Input Validation",
+            "description": "There is no limit of delay in setDelayWithdrawalBlock() function, allowing the setting of improperly lengthy delay, making users unable to withdraw from the smart contract.",
+            "severity": "low",
+            "location": "InfiniteeVault.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Use of Data From Multiple Sources",
+            "description": "Inconsistency in data sources can cause a small amount of reward miscalculation.",
+            "severity": "low",
+            "location": "InfiniteeVault.sol, function deposit()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Public functions that are not called from internal functions should be external to save gas.",
+            "severity": "info",
+            "location": "InfiniteeVault.sol, MasterChefWithVaultWorker.sol, Timelock.sol, multiple functions"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Inexplicit Solidity Compiler Version",
+            "description": "The Solidity compiler versions declared in the smart contracts were not explicit.",
+            "severity": "info",
+            "location": "InfiniteeFeeManager.sol, InfiniteeVault.sol, MasterChefWithVaultWorker.sol, MasterChefWorker.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Solidity Compiler Version",
+            "description": "The Solidity compiler version specified in the smart contract was outdated.",
+            "severity": "info",
+            "location": "Timelock.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Function Declaration",
+            "description": "The _removeAllowances() function in MasterChefWorker is never used in the contract and should be removed for reducing gas used during deployment.",
+            "severity": "info",
+            "location": "MasterChefWorker.sol"
+        }
+    ]
+}

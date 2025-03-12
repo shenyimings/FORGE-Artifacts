@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/Verichains Public Audit Report - CryptoPlanes - v1.1.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xc0e36a4c8bf041f0e54b82e2e32aa4c6c207505e",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "CPAN": "contracts/Verichains Public Audit Report - CryptoPlanes - v1/CPAN"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Unused onSellSuccess on selling tokens",
+            "description": "limiter.onSellSuccess callback doesn't fire when an address sells tokens with transferFrom, leading to a broken limiter logic.",
+            "severity": "low",
+            "location": "CPAN_final.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Hardcoded pancakeswap v2 router address",
+            "description": "The pancakeswap v2 router address is hardcoded in the transfer function which could confuse readers.",
+            "severity": "info",
+            "location": "CPAN_final.sol, transfer function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-184"
+                ]
+            },
+            "title": "Unchecked zero address",
+            "description": "The contract checks for zero addresses in setFeeReceiveAddress but not in other functions.",
+            "severity": "info",
+            "location": "CPAN_final.sol, setRewardAddress, setLPCreatorAddress functions"
+        }
+    ]
+}

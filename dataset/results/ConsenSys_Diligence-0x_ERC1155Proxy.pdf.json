@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-0x_ERC1155Proxy.pdf",
+    "project_info": {
+        "url": "https://github.com/0xProject/0x-monorepo/tree/77484dc69eea1f4f1a8397590199f3f2489751d2",
+        "commit_id": "77484dc69eea1f4f1a8397590199f3f2489751d2",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "0x-monorepo": "contracts/ConsenSys_Diligence-0x_ERC1155Proxy/0x-monorepo"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Asset data manipulation can lead to unexpected trade outcomes",
+            "description": "The ERC1155Proxy contract doesn't perform any validation on the asset data, which can lead to unexpected trades due to data manipulation and lack of validation around ABI-encoded values.",
+            "severity": "high",
+            "location": "ERC1155Proxy contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Check for invalid offsets and lengths",
+            "description": "The contract doesn't check for invalid offsets and lengths, which can lead to reading bogus values from the call data.",
+            "severity": "low",
+            "location": "Unspecified function in ERC1155Proxy contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Consider using safeTransferFrom for single-asset transfers",
+            "description": "ERC-1155 contract uses `safeBatchTransferFrom` for both batch and single transfers, which is less efficient for single transfers.",
+            "severity": "low",
+            "location": "ERC1155Proxy contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Copying more data than necessary",
+            "description": "Unnecessary data copying in the code, which can be optimized.",
+            "severity": "low",
+            "location": "ERC1155Proxy.sol:L156-L165 and L218-L225"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "For consistency and simplicity, assetDataOffset should account for the function selector",
+            "description": "`assetDataOffset` not accounting for the function selector, leading to unnecessary complexity.",
+            "severity": "low",
+            "location": "ERC1155Proxy.sol:L148-L165"
+        }
+    ]
+}

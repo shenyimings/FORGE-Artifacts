@@ -1,0 +1,212 @@
+{
+    "path": "artifacts/ImmuneBytes-STYK_Initial_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/Jill04/STYK",
+        "commit_id": "8162f6b4f909489f95d436576f98ef222376c8c8",
+        "address": "0xbfae05757d8401268039027e216bb516eccf8d41",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "STYK": "contracts/ImmuneBytes-STYK_Initial_Audit_Report/STYK"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect calculation of user's token percentage",
+            "description": "Calculation errors in crucial functions can impact the contract's internal ledger for user funds.",
+            "severity": "high",
+            "location": "STYK smart contract, lines 517, 660, 725"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Re-entrancy in STYKRewardsPayOuts() function",
+            "description": "Incorrect implementation opens up a possible attack vector for reentrancy attacks.",
+            "severity": "high",
+            "location": "STYKRewardsPayOuts() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "monthlyRewardsPayOuts() function can be called infinite times by a user",
+            "description": "Function can be exploited to drain the contract's ETH funds.",
+            "severity": "high",
+            "location": "monthlyRewardsPayOuts() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Re-entrancy in earlyAdopterBonus() function",
+            "description": "Incorrect implementation opens up a possible attack vector for reentrancy attacks.",
+            "severity": "high",
+            "location": "earlyAdopterBonus() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected setStakingRequirement() function",
+            "description": "Anyone can change the staking requirement, impacting contract functionality.",
+            "severity": "high",
+            "location": "setStakingRequirement() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected setAuctionExpiryTime() function",
+            "description": "Anyone can change the auction expiry time, impacting contract functionality.",
+            "severity": "high",
+            "location": "setAuctionExpiryTime() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected state variable modification functions",
+            "description": "Anyone can change crucial state variables, impacting contract functionality.",
+            "severity": "high",
+            "location": "setInflationTime(), setStakeTime(), and setAuctionEthLimit() functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted token metadata modification",
+            "description": "Anyone can change the token name and symbol.",
+            "severity": "medium",
+            "location": "setName() and setSymbol() functions"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Looping through unbounded arrays",
+            "description": "Potential gas usage issues due to array size.",
+            "severity": "medium",
+            "location": "STYKRewardsPayOuts() function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-compliance with ERC20 standard",
+            "description": "Lack of implementation of approve(), transferFrom(), and allowance() functions.",
+            "severity": "medium",
+            "location": "STYK token implementation"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Hardcoded AggregatorV3Interface address",
+            "description": "Manual change required for different Ethereum network deployments.",
+            "severity": "low",
+            "location": "PriceConsumerV3 constructor"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent token balance retrieval methods",
+            "description": "Consistency issue in token balance retrieval methods.",
+            "severity": "low",
+            "location": "STYK contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing receive() function implementation",
+            "description": "Compiler warning for no receive() function.",
+            "severity": "low",
+            "location": "STYK contract"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent event emission syntax",
+            "description": "Inconsistent event emission syntax.",
+            "severity": "low",
+            "location": "Various events in the STYK contract"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Typo in calculateInfaltionHours() function",
+            "description": "Spelling mistake for an external function.",
+            "severity": "low",
+            "location": "Line 508, STYK contract"
+        }
+    ]
+}

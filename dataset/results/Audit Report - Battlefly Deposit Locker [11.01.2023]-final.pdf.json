@@ -1,0 +1,227 @@
+{
+    "path": "artifacts/Audit Report - Battlefly Deposit Locker [11.01.2023]-final.pdf",
+    "project_info": {
+        "url": "https://github.com/mudgen/diamond-3-hardhat/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "diamond-3-hardhat": "contracts/Audit Report - Battlefly Deposit Locker [11/diamond-3-hardhat"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Loss of User Funds due to setMagic() Function",
+            "description": "Calling function setMagic() with a new magic_ value can lead to loss of user funds.",
+            "severity": "high",
+            "location": "DepositLockerAdminFacet.sol, function setMagic()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Permanent Loss of Access to Funds due to Pausing",
+            "description": "Users can permanently lose access to their funds if DepositLockerUsersFacet is paused indefinitely.",
+            "severity": "low",
+            "location": "DepositLockerUsersFacet.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "No Removal or Deactivation of LockOption",
+            "description": "The contract does not provide the admin with any way to remove an added LockOption or set its active variable to false.",
+            "severity": "low",
+            "location": "DepositLockerAdminFacet.sol, function addLockOption()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ],
+                "4": [
+                    "CWE-789"
+                ]
+            },
+            "title": "Arbitrarily High LockInDays Value",
+            "description": "A LockOption that is erroneously set up, having an extremely high value would cause requestWithdrawal to always revert.",
+            "severity": "low",
+            "location": "DepositLockerAdminFacet.sol, function addLockOption()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of Event Emission in pause() and unpause() Functions",
+            "description": "Functions pause() and unpause() do not emit events.",
+            "severity": "info",
+            "location": "ACLAdminFacet.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No Check for Existing Admin in addAdmin() Function",
+            "description": "Failing to check that the provided admin already exists can result in an AdminAdded event being emitted when no actual admin has been added.",
+            "severity": "info",
+            "location": "ACLAdminFacet.sol, function addAdmin()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-283"
+                ]
+            },
+            "title": "Single-Step Ownership Transfer is Dangerous",
+            "description": "Single-step ownership transfer can potentially lose contract ownership if the wrong address is provided.",
+            "severity": "info",
+            "location": "DiamondOwnable.sol, function transferOwnership()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Non-Meaningful Error in withdraw() Function",
+            "description": "The user will only get a generic error that does not provide meaningful information when amountToWithdraw exceeds liquidBalance.",
+            "severity": "info",
+            "location": "DepositLockerUsersFacet.sol, function withdraw()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Lack of Indexed Parameters in Events",
+            "description": "Most of the contracts’ event parameters are not indexed.",
+            "severity": "info",
+            "location": "Multiple Contracts"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated LibDiamond.sol Implementation",
+            "description": "The implementation of LibDiamond.sol is more than one and a half years old, with several minor improvements being introduced by the author that improve the overall code quality and introduce gas optimizations.",
+            "severity": "info",
+            "location": "LibDiamond.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas Optimization Issues",
+            "description": "The EVM operates on 256-bit storage slots, thus smaller lengths need to be padded and unpadded costing more gas.",
+            "severity": "info",
+            "location": "VaultAdapter.sol, structs UserStakeV1, UserStakeV2, UserDepositState"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Miscellaneous Issues",
+            "description": "Unnecessary usage of library in DepositLockerAdminFacet.sol and function parameter magic in IDepositLockerAdmin.sol shadows IDepositLocker: magic.",
+            "severity": "info",
+            "location": "Multiple Contracts"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Fund Managers have Unrestricted Access to User Funds",
+            "description": "Fund managers are able to withdraw all user funds without any guarantees that these funds will be returned back to the protocol.",
+            "severity": "info",
+            "location": "Contract Design"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Exceeding Block Gas Limit in updateWithdrawableAmount() Function",
+            "description": "The function updateWithdrawableAmount() is used to delete withdrawals that have reached maturity date from withdrawalsByDay and add its amount to withdrawableDeposits.",
+            "severity": "info",
+            "location": "DepositLockerLib.sol, function updateWithdrawableAmount()"
+        }
+    ]
+}

@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/PeckShield-Arche.pdf",
+    "project_info": {
+        "url": "https://github.com/Archenetwork/Arche_v1.0_Eros/tree/7c6b673378e1a5d73fea41c328528733e86a1f91",
+        "commit_id": "7c6b673378e1a5d73fea41c328528733e86a1f91",
+        "address": "0x2815d3272baE3ebde5D7c128Eea5f4A8da402783",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "FFI_ERC20": "contracts/PeckShield-Arche/FFI_ERC20"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Incompatibility With Deflationary Tokens",
+            "description": "Receive_Token() function reverts when received deflationary tokens, affecting protocol-wide operation and maintenance.",
+            "severity": "low",
+            "location": "Arche_v1.0_Eros contract, D_Swap_Main, D_Swap contracts, Receive_Token() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged owner account needs to be scrutinized and potentially transferred to a multisig contract or DAO.",
+            "severity": "medium",
+            "location": "Arche_v1.0_Eros contract, Multiple Contracts, Set_Arche_Address() and Set_Arche_Amount_Per_Deal() functions in D_Swap_Main contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Safe-Version Replacement With safeTransfer() And safeTransferFrom()",
+            "description": "The transfer() function does not have a return value, which may cause reversion when called.",
+            "severity": "medium",
+            "location": "Multiple Contracts, Coding Practices"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Possible Overflow Prevention With SafeMath",
+            "description": "The D_Swap contract can be improved by using SafeMath to prevent overflow or underflow issues.",
+            "severity": "low",
+            "location": "D_Swap, Coding Practices"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Suggested Adherence Of Checks-Effects-Interactions Pattern",
+            "description": "Violation of checks-effects-interactions principle, potential re-entrancy vulnerability in Impl_Delivery() function.",
+            "severity": "high",
+            "location": "D_Swap contract, Impl_Delivery() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improved Precision By Multiplication-Before-Division",
+            "description": "Potential precision loss due to incorrect order of multiplication and division in Amount() function.",
+            "severity": "low",
+            "location": "Trading_Charge contract, Amount() function"
+        }
+    ]
+}

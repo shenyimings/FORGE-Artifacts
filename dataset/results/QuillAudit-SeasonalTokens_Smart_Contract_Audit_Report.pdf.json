@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/QuillAudit-SeasonalTokens_Smart_Contract_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/seasonaltokens/seasonaltokens",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "seasonaltokens": "contracts/QuillAudit-SeasonalTokens_Smart_Contract_Audit_Report/seasonaltokens"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Divisions performed before multiplication",
+            "description": "Performing division before multiplication can result in truncated amounts being amplified by future calculations.",
+            "severity": "medium",
+            "location": "Autumn contract (L220, L222, L253)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Internal functions can be called",
+            "description": "approveAndCall() and approve() functions are still callable by users, even though safeApproveAndCall() and safeApprove() are used.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Lack of error message for require() and revert() functions",
+            "description": "The require statements in transfer() and transferFrom() should include error messages that detail the cause of errors.",
+            "severity": "low",
+            "location": "transfer() and transferFrom() functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-283"
+                ]
+            },
+            "title": "Missing zero address validation",
+            "description": "Missing zero address validation for the entire codebase, including the transferOwnership() function of Owned contract.",
+            "severity": "low",
+            "location": "Owned contract (transferOwnership() function)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Solidity Private Modifier Do Not Hide Data",
+            "description": "The Auditee should be aware that making something private only prevents other contracts from reading or modifying the information.",
+            "severity": "info",
+            "location": "SeasonalTokens contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Public function that could be declared external",
+            "description": "Using the external attribute for functions never called from the contract to save gas.",
+            "severity": "low",
+            "location": "acceptOwnership(), transferAnyERC20Token(), safeApproveAndCall(), and safeApprove() functions"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Variables declared as uint instead of uint256",
+            "description": "To favor explicitness, consider changing all instances of uint into uint256 in the entire codebase.",
+            "severity": "low",
+            "location": "Entire codebase"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "block.timestamp may not be reliable",
+            "description": "Timestamps can be slightly altered by miners to favor them in contracts that have logics that depend strongly on them.",
+            "severity": "info",
+            "location": "Time contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Conformance to Solidity naming conventions",
+            "description": "Constants should be named with all capital letters with underscores separating words.",
+            "severity": "low",
+            "location": "Constant variables (symbol, name)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent coding style",
+            "description": "Deviations from the Solidity Style Guide were identified throughout the entire codebase.",
+            "severity": "low",
+            "location": "Entire codebase"
+        }
+    ]
+}

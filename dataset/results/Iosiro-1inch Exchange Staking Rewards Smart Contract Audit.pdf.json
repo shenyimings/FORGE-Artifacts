@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/Iosiro-1inch Exchange Staking Rewards Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/1inch-exchange/1inch-liquidity-protocol",
+        "commit_id": "c9c8bc600e8e7897f70f84b006de601d4f4bcbe3",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "1inch-liquidity-protocol": "contracts/Iosiro-1inch Exchange Staking Rewards Smart Contract Audit/1inch-liquidity-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owner can change the duration of any TokenReward",
+            "description": "The owner could change the duration of any TokenReward instance through the setDuration function by bypassing its onlyRewardDistribution() access control.",
+            "severity": "low",
+            "location": "BaseRewards.sol#L105, BaseRewards.sol#L110"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing reentrancy protection",
+            "description": "The getReward function did not make use of a modifier to protect against potential reentrancy attacks.",
+            "severity": "info",
+            "location": "BaseRewards.sol#L75"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1111"
+                ]
+            },
+            "title": "Missing inline comments",
+            "description": "The BaseReward contract did not include any in-line comments describing the function's purpose, parameters and return values.",
+            "severity": "info",
+            "location": "BaseReward.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Unbounded for-loop anti-pattern",
+            "description": "The tokenRewards array would continually grow in the future, which will impact the gas cost of any functions that loop through it.",
+            "severity": "info",
+            "location": "BaseReward.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Low reward amount and long duration leads to zero rewardRate",
+            "description": "When calling the notifyRewardAmount() function, the rewardRate is instantiated with the amount or updated to reflect the additional reward.",
+            "severity": "low",
+            "location": "BaseRewards.sol#L90, BaseRewards.sol#L94"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Potential conflict between TokenRewards with the same gift",
+            "description": "The contract owner could add multiple TokenReward programs with the same ERC-20 gift.",
+            "severity": "low",
+            "location": "BaseRewards.sol#L116"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Not using safeTransfer",
+            "description": "The getReward function did not make use of the safeTransfer function from the OpenZeppelin SafeERC20 library.",
+            "severity": "low",
+            "location": "BaseRewards.sol#L80"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "SafeMath multiplication overflow",
+            "description": "The rewardPerToken function was subject to a multiplication overflow bug.",
+            "severity": "low",
+            "location": "BaseRewards.sol#L98"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing function events",
+            "description": "The newly added functions setRewardDistribution(), setDuration() and addGift() did not emit any events when executed.",
+            "severity": "info",
+            "location": "BaseRewards.sol#L105, BaseRewards.sol#L110, BaseRewards.sol#L116"
+        }
+    ]
+}

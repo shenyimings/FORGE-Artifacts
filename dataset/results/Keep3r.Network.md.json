@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/Keep3r.Network.md",
+    "project_info": {
+        "url": "https://github.com/keep3r-network/StakingRewardsV3",
+        "commit_id": "13ecc6966ae1a413f62224382bfd4d64b1a22351",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "StakingRewardsV3": "contracts/Keep3r/StakingRewardsV3"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Impossible withdraw for smart contract",
+            "description": "If any smart contract deposits NFT to StakingRewardsV3 it must have `onERC721Received()` function or `withdraw()` will always revert.",
+            "severity": "critical",
+            "location": "StakingRewardsV3-1.sol#L256"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect withdraw sequence for users",
+            "description": "If user calls `deposit()` -> `withdraw()` -> `getReward()` then contract will incorrectly calculate `totalLiquidity` which will lead to incorrect calculations of rewards for users.",
+            "severity": "critical",
+            "location": "StakingRewardsV3-1.sol#L342"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect calculation of rewardPerLiquidity",
+            "description": "If the first user deposits NFT after some time from `notify()` call, then `(lastTimeRewardApplicable() - lastUpdateTime)` always will be less than `DURATION` which leads to freezing some funds on the contract.",
+            "severity": "high",
+            "location": "StakingRewardsV3-1.sol#L156"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Possible DDoS attack via withdraw function",
+            "description": "Malicious user can front run `withdraw()` function to change the current price in pool, so user can lost all his rewards.",
+            "severity": "high",
+            "location": "StakingRewardsV3-1.sol#L195"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ],
+                "3": [
+                    "CWE-306"
+                ]
+            },
+            "title": "Addresses not checked",
+            "description": "Input addresses are not checked.",
+            "severity": "info",
+            "location": "StakingRewardsV3-1.sol#L139"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ],
+                "3": [
+                    "CWE-839"
+                ]
+            },
+            "title": "Impossible situation in index check",
+            "description": "_index >= _length can't be true.",
+            "severity": "info",
+            "location": "StakingRewardsV3-1.sol#L236"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Last update time can be equal to zero",
+            "description": "_lastUpdateTime can be equal to zero if user deposits NFT before the first call of `notify`.",
+            "severity": "info",
+            "location": "StakingRewardsV3-1.sol#L337"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Input parameters in notify() not checked",
+            "description": "notify() can be called with `amount` equal to zero.",
+            "severity": "info",
+            "location": "StakingRewardsV3-1.sol#L299"
+        }
+    ]
+}

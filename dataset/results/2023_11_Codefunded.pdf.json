@@ -1,0 +1,158 @@
+{
+    "path": "artifacts/2023_11_Codefunded.pdf",
+    "project_info": {
+        "url": "https://github.com/codefunded/sc-fundswap/",
+        "commit_id": "b279c659c822415ddca778dc44a15c176ede68e5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "sc-fundswap": "contracts/2023_11_Codefunded/sc-fundswap"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Loss and theft of tokens in batch executor",
+            "description": "The batchFillPublicOrdersInSequence function allows users to fill a chain of orders, but the contract will pull tokens from the user only for the first order and then use the output tokens in the next one.",
+            "severity": "critical",
+            "location": "FundSwapBatchExecutor.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Cancelling order via re-entrancy",
+            "description": "The cancelOrder function is not protected from re-entrancy and can be called from the tokens’ callback function, allowing attackers to cancel their order during the filling process and retrieve twice as much tokens.",
+            "severity": "high",
+            "location": "FundSwap.sol, FundSwapOrderManager.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Stealing treasury tokens via re-entrancy",
+            "description": "The withdraw function is used by the treasury owner to withdraw outstanding balance of any provided token, but can be manipulated using re-entrancy.",
+            "severity": "medium",
+            "location": "FundSwap.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Critical impact on FundSwap by malicious plugin",
+            "description": "Malicious plugins can change makerBuyToken and makerSellToken, steal other approved tokens from takers and makers or cause a Denial of Service on the selected functionalities in the protocol.",
+            "severity": "medium",
+            "location": "FundSwap.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Invalid fee used",
+            "description": "The _calculateFeeAmount function calculates the fee for a specific pair of assets and an input amount, but it iterates over all levels and checks whether the amount is greater than the current level’s minAmount.",
+            "severity": "medium",
+            "location": "FeeAggregatorPlugin.sol, _calculateFeeAmount function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Tokens theft via modified fee",
+            "description": "Plugin owner can front-run the filling transactions and update the fees to 100%.",
+            "severity": "medium",
+            "location": "FeeAggregatorPlugin.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Inconsistent use of modified order",
+            "description": "Plugins are able to change orders before and after they are created or filled, leading to incorrect token transfers.",
+            "severity": "medium",
+            "location": "FundSwap.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Incorrect handling of non-standard ERC20 tokens",
+            "description": "Using non-standard ERC20 tokens can lead to Denial of Service and token loss.",
+            "severity": "medium",
+            "location": "FundSwap.sol, FundSwapPrivateOrderExecutor.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Unfavorable rounding for the maker",
+            "description": "During partial fill, the OrderLib library calculates how many tokens should be left after the order is partially filled, but the amount is calculated using division and is rounded down.",
+            "severity": "low",
+            "location": "OrderLib.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Lack of 2-step ownership transfer",
+            "description": "The TokenWhitelistPlugin and FeeAggregatorPlugin contracts do not have a 2-step ownership transfer, leading to potential loss of ownership.",
+            "severity": "low",
+            "location": "FeeAggregatorPlugin.sol, TokenWhitelistPlugin.sol"
+        }
+    ]
+}

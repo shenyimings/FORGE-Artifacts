@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/QuillAudit-RuufPay_stakefarm_Smart_Contract_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/RuufPay/smartcontracts",
+        "commit_id": "2c3357a6f8d787202c3bdfbed52ce53c3488fc8e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smartcontracts": "contracts/QuillAudit-RuufPay_stakefarm_Smart_Contract_Audit_Report/smartcontracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization issues",
+            "description": "Owner can change interest rates and withdraw user stakes without consent.",
+            "severity": "medium",
+            "location": "`changeIr()` function, `Owner` privileges"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zero check",
+            "description": "Contracts lack zero address checks, prone to incorrect initializations.",
+            "severity": "low",
+            "location": "Constructor, `changeOwner` function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Critical address change",
+            "description": "One-step process for transferring critical roles may lead to accidental loss of access control.",
+            "severity": "low",
+            "location": "`changeOwner()` function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Not Emitting Events",
+            "description": "`changeIr()` doesn't emit events, affecting user rewards.",
+            "severity": "low",
+            "location": "`changeIr()` function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "untilRewards return value",
+            "description": "Negative values may be returned due to block.timestamp and stakeDate calculations.",
+            "severity": "low",
+            "location": "`getUserData()` function, `untilRewards` calculation"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "getUserData() reverts",
+            "description": "Function reverts when fetching data for users who have staked for 9 and 12 months.",
+            "severity": "low",
+            "location": "`getUserData()` function, type conversions"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant functions",
+            "description": "Duplicate `withdraw()` functions with identical functionality.",
+            "severity": "info",
+            "location": "`withdraw()` functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Unindexed event parameters",
+            "description": "Events lack indexed parameters, making off-chain monitoring difficult.",
+            "severity": "info",
+            "location": "Events (`HomeTokenStaked`, `WithdrawWithRewards`, `WithdrawWithoutRewards`)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Denial-Of-Service attack",
+            "description": "Any user can stake for another user, leading to reverts and potential DOS.",
+            "severity": "n/a",
+            "location": "`stake()` function"
+        }
+    ]
+}

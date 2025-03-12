@@ -1,0 +1,269 @@
+{
+    "path": "artifacts/2023-08-scroll-zkEVM-wave2-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/scroll-tech/mpt-circuit/tree/v0.4",
+        "commit_id": "v0.4",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "mpt-circuit": "contracts/2023-08-scroll-zkEVM-wave2-securityreview/mpt-circuit"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1284"
+                ]
+            },
+            "title": "The NonceChanged configuration circuit does not constrain the new value nonce value",
+            "description": "The config.new_value parameter is not constrained to be 8 bytes, allowing a malicious prover to update the Account node with arbitrary length values for Nonce and Codesize parameters.",
+            "severity": "high",
+            "location": "NonceChanged configuration circuit (mpt-circuit/src/gadgets/mpt_update.rs#1209-1228)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ]
+            },
+            "title": "The Copy circuit does not totally enforce the tag values",
+            "description": "The Copy circuit tag validation function does not ensure that exactly one of the Boolean values is true, allowing a malicious prover to manipulate the tag value.",
+            "severity": "info",
+            "location": "Copy circuit (copy_circuit/copy_gadgets.rs#13-62)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "The “invalid creation” error handling circuit is unconstrained",
+            "description": "The error handling circuit does not constrain the first byte of actual memory to be 0xef, allowing a malicious prover to redirect EVM execution.",
+            "severity": "high",
+            "location": "“Invalid creation” error handling circuit (evm_circuit/execution/error_invalid_creation_code.rs#36-67)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "The OneHot primitive allows more than one value at once",
+            "description": "The OneHot primitive allows more than one value at once, allowing a malicious prover to bypass constraints.",
+            "severity": "high",
+            "location": "OneHot primitive (constraint_builder/binary_column.rs#29-37 and mpt-circuit/src/gadgets/one_hot.rs#14-30)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "Intermediate columns are not explicit",
+            "description": "The MPT update circuit includes intermediate columns without explicit definitions, making it error-prone.",
+            "severity": "info",
+            "location": "MPT update circuit (mpt-circuit/src/gadgets/mpt_update.rs#65-66 and other locations)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Dead code linting issue",
+            "description": "The dead_code lint is disabled, and enabling it can help detect unused functions and variables.",
+            "severity": "n/a",
+            "location": "mpt-circuit/src/lib.rs#L1-L1"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Meaningless constraint labels",
+            "description": "Using meaningless labels hinders code readability.",
+            "severity": "n/a",
+            "location": "mpt-circuit/src/constraint_builder/column.rs#52–55, mpt-circuit/src/gadgets/canonical_representation.rs#72–89"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate and unused functions",
+            "description": "The types.rs and util.rs files have several duplicate functions.",
+            "severity": "n/a",
+            "location": "mpt-circuit/src/types(rs#L906-L906)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrectly copy-pasted constraint label",
+            "description": "A constraint label was incorrectly copy-pasted.",
+            "severity": "n/a",
+            "location": "mpt-circuit/src/gadgets/mpt_update.rs#163–167"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant constraints in empty storage/account constraints",
+            "description": "The configure_empty_storage and configure_empty_account functions require the new_value and old_value fields to be 0 but also constrain them to be equal.",
+            "severity": "n/a",
+            "location": "mpt-circuit/src/gadgets/mpt_update.rs#1785–1811, mpt-circuit/src/gadgets/mpt_update.rs#L1869-L1893"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Imprecise constraint label",
+            "description": "The label should read rwc_inc_left[1] == rwc_inc_left[0] - rwc_diff, or 0 at the end to match the code.",
+            "severity": "n/a",
+            "location": "src/copy_circuit/copy_gadgets.rs#L524-L537"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "IsZeroGadget assign function does not assign witness value",
+            "description": "The IsZeroGadget assign function does not assign the witness value.",
+            "severity": "n/a",
+            "location": "mpt-circuit/src/gadgets/is_zero.rs#20–46"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "OneHot assign function should ensure no more than one item is assigned",
+            "description": "The OneHot assign function should ensure that no more than one item is assigned.",
+            "severity": "n/a",
+            "location": "mpt-circuit/src/gadgets/one_hot.rs#31–36"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant condition in configure_empty_account function",
+            "description": "The function could just match SegmentType::Start.",
+            "severity": "n/a",
+            "location": "mpt-circuit/src/gadgets/mpt_update.rs#1878–1880"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant .and() call in MptUpdateConfig configure function",
+            "description": "The cb.every_row_selector() function returns the first condition in the condition stack, so this condition is equivalent to is_start.",
+            "severity": "n/a",
+            "location": "mpt-circuit/src/gadgets/mpt_update.rs#124"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Rw_counter constraints could be consolidated",
+            "description": "Constraining rw_counter requires constraining the tag to Memory or TxLog and constraining the Padding to 0.",
+            "severity": "n/a",
+            "location": "src/copy_circuit.rs#340–341, copy_circuit/copy_gadgets.rs#L525"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Imprecise constraint label",
+            "description": "The label should read assign real_bytes_left {}.",
+            "severity": "n/a",
+            "location": "src/copy_circuit.rs#776–782"
+        }
+    ]
+}

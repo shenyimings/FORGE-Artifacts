@@ -1,0 +1,173 @@
+{
+    "path": "artifacts/Inspex-SimpliChef,_Token,_ZapBSC_&_Broker.pdf",
+    "project_info": {
+        "url": "https://github.com/SimpliFinanceLab/simpli-smart-contract",
+        "commit_id": "4627062c76e7e065e63e5b7b07a1948525e71c0e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "simpli-smart-contract": "contracts/Inspex-SimpliChef,_Token,_ZapBSC_&_Broker/simpli-smart-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "Critical state variables can be updated by the controlling authorities without notifying users.",
+            "severity": "high",
+            "location": "SimpliChef, SimpliToken, StratX2_PCS, Zap contracts; setBroker(), add(), set(), withdrawOnlyBroker(), inCaseTokensGetStuck() functions."
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Use of Upgradable Contract Design",
+            "description": "The logic of affected contracts can be arbitrarily changed by the proxy owner.",
+            "severity": "high",
+            "location": "ZapBSC contract; inherited OwnableUpgradeable contract."
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation on _withUpdate Parameter",
+            "description": "When the `add()` and `set()` functions are called without updating the pools, the reward will be miscalculated, leading to unfair reward distribution.",
+            "severity": "medium",
+            "location": "SimpliChef contract, specifically in the `add()` and `set()` functions."
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Design Flaw in massUpdatePools() Function",
+            "description": "The massUpdatePools() function will eventually be unusable due to excessive gas usage.",
+            "severity": "low",
+            "location": "SimpliChef.sol, function massUpdatePools()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation (Duplicated Strategy)",
+            "description": "The reward of the pool that has the same strategy contract address token will be slightly lower than what it should be, causing the users to gain less reward.",
+            "severity": "low",
+            "location": "SimpliChef.sol, function updatePool() and function add()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Compliance to the Tokenomics",
+            "description": "$SIMPLI can be minted and slightly exceed the expected amount compared to the platform’s business design.",
+            "severity": "low",
+            "location": "SimpliChef.sol, updatePool() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improper Allowance Checking in Approval Functions",
+            "description": "The token transfer flow from any operation could be stuck if the given allowance value is deducted until it is less than the input amount, resulting in denial of service of that contract.",
+            "severity": "low",
+            "location": "Broker and ZapBSC contracts, specifically in the `_approveTokenForZap()`, `_approveTokenForSimpliChef()`, and `_approveTokenIfNeeded()` functions."
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing Boundary State Variable Setting in Constructor",
+            "description": "Unexpected fee factor value can lead to incorrect calculation, resulting in unforeseen outcomes.",
+            "severity": "low",
+            "location": "StratX2_PCS contract constructor"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Function Declaration",
+            "description": "The `_approveTokenForBroker()` function is not necessary and can be removed.",
+            "severity": "info",
+            "location": "Broker contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1110"
+                ]
+            },
+            "title": "Inexplicit Solidity Compiler Version",
+            "description": "The Solidity compiler versions declared in the smart contracts were not explicit.",
+            "severity": "info",
+            "location": "SimpliToken.sol, Broker.sol, ZapBSC.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "SimpliChef.sol, SimpliToken.sol, StratX2_PCS.sol, ZapBSC.sol"
+        }
+    ]
+}

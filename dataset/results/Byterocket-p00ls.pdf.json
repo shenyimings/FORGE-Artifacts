@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/Byterocket-p00ls.pdf",
+    "project_info": {
+        "url": "https://github.com/p00ls/contracts",
+        "commit_id": "8c50460480757b52f377d2ab98430e4b155a4372",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Byterocket-p00ls/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Insufficient AccessControl check in hasRole function",
+            "description": "The hasRole function returns true for an address that holds the DEFAULT_ADMIN_ROLE but does not hold the owner-NFT.",
+            "severity": "medium",
+            "location": "P00lsCreatorRegistry.sol - Line 110"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unmet requirements in overwritten function",
+            "description": "The ERC721 function _isApprovedOrOwner is expected to fail in case the tokenId does not exist.",
+            "severity": "low",
+            "location": "P00lsCreatorRegistry.sol - Line 92-99"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-451"
+                ],
+                "4": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missing vanity checks for fees",
+            "description": "The fee variable can be changed via the setFee function, but there is no upper limit, and the denomination is not documented.",
+            "severity": "low",
+            "location": "FeeManager.sol - Line 110-116"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Use of deprecated function",
+            "description": "AccessControl's _setupRole function is used, which is deprecated in favor of _grantRole.",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary use of the payable modifier",
+            "description": "The address argument is labeled as payable, but no ETH is sent to the address.",
+            "severity": "low",
+            "location": "Auction.sol - Line 108-115"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Incorrect version pragma in library",
+            "description": "The UniswapV2Library has a version pragma set to >=0.5.0, which is incorrect.",
+            "severity": "low",
+            "location": "UniswapV2Library.sol - Line 2"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Undocumented API change",
+            "description": "The internal API of the forked UniswapV2Library has been changed inside the pairFor function.",
+            "severity": "low",
+            "location": "UniswapV2Library.sol - Line 18-26"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unnecessary require statement",
+            "description": "The createPair function includes unnecessary require statements.",
+            "severity": "low",
+            "location": "UniswapV2Factory.sol - Line 38-46"
+        }
+    ]
+}

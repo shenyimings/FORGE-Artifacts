@@ -1,0 +1,50 @@
+{
+    "path": "artifacts/HODL 2.0 Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x6D5023CBF2073eb4f0C78A59040826c8F2FDe050",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.5.16+commit.9c3226ce"
+        ],
+        "project_path": {
+            "PancakePair": "contracts/HODL 2/PancakePair"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can cause an OUT_OF_GAS exception if the excluded addresses list is too long. Similarly, the `_getCurrentSupply` function also uses a loop that can be aborted with an OUT_OF_GAS exception.",
+            "severity": "low",
+            "location": "`includeInReward()` and `_getCurrentSupply` functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Wrong reward transfer",
+            "description": "The functions `redeemRewards()` and `migrateToken()` use the `_transferStandard()` function to send tokens, but do not check for exclusions, which can cause issues.",
+            "severity": "low",
+            "location": "`redeemRewards()` and `migrateToken` functions"
+        }
+    ]
+}

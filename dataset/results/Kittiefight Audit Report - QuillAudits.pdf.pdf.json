@@ -1,0 +1,209 @@
+{
+    "path": "artifacts/Kittiefight Audit Report - QuillAudits.pdf.pdf",
+    "project_info": {
+        "url": "https://github.com/kittiefight/yieldFarming",
+        "commit_id": "57224c4858c80fe17868ad7ecc8317548dfb3df8",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "yieldFarming": "contracts/Kittiefight Audit Report - QuillAudits/yieldFarming"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner can steal all tokens",
+            "description": "Using the `returnTokens` function, the owner of the YieldFarming contract can steal all tokens including all LP tokens, KTY reward tokens, and SDAO reward tokens at any time.",
+            "severity": "high",
+            "location": "YieldFarming contract, `returnTokens` function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Dependence on Volcie token",
+            "description": "The system heavily depends on the Volcie token that is not in scope for this Audit. If the Volcie token has improper access control checks implemented, the system can be exploited.",
+            "severity": "medium",
+            "location": "System architecture"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner can hold LP tokens hostage",
+            "description": "The owner can hold LP tokens hostage by changing reward token or withdrawing rewards by using the `returnTokens` function.",
+            "severity": "medium",
+            "location": "YieldFarming contract, `returnTokens` function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unreadable literals",
+            "description": "Literals with many digits are difficult to read and review.",
+            "severity": "low",
+            "location": "Various places in the codebase"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-669"
+                ]
+            },
+            "title": "Inefficient storage operations",
+            "description": "`monthsStartAt` and `programEndAt` are cheaper to calculate on the fly compared to reading them from storage when `programStartAt` is already read.",
+            "severity": "low",
+            "location": "Various places in the codebase"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused state variables",
+            "description": "`calculated` and `calculated1` state variables are unused and should be removed.",
+            "severity": "low",
+            "location": "YieldFarming.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary abstraction",
+            "description": "`pairCode` is an unneeded abstraction when `pairPoolAddress` can be used directly instead.",
+            "severity": "low",
+            "location": "YieldFarming.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant if statement",
+            "description": "On L771 of YieldFarming.sol, `if (_currentMonth < 5)` is not needed since the same condition is checked in the next line (in the for loop).",
+            "severity": "low",
+            "location": "L771 of YieldFarming.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Expensive storage reads",
+            "description": "Reading storage values is quite expensive. At some places like L628 of YieldFarming.sol, the value of `totalNumberOfPairPools` storage variable is read multiple times in a loop.",
+            "severity": "low",
+            "location": "L628 of YieldFarming.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Inefficient code optimization",
+            "description": "Can be optimized to `(reserveA, reserveB,) = pair.getReserves();`",
+            "severity": "low",
+            "location": "L486-490 of YieldFarmingHelper"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Incorrect condition in for loop",
+            "description": "In `getMonth` and `getCurrentMonth` functions, the condition used to break the for loop is `i >= 0` where `i` is a uint256 with values ranging from 0 to 2^256 - 1.",
+            "severity": "low",
+            "location": "`getMonth` and `getCurrentMonth` functions"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicated code",
+            "description": "There is some duplicated code like the functions `getCurrentMonth` and `getMonth` that can be factored out in a common library contract.",
+            "severity": "low",
+            "location": "`YieldFarmingHelper` and `YieldsCalculator`"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Broken test cases",
+            "description": "Test cases are not working and the following error is being returned by Truffle: `Error: Could not find artifacts for Migrations from any sources`.",
+            "severity": "low",
+            "location": "Test cases"
+        }
+    ]
+}

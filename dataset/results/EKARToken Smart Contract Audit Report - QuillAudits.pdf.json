@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/EKARToken Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xd2e1cd904d1903c3746fa4bdf02e3dcd01c4548c",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "EKARTINU": "contracts/EKARToken Smart Contract Audit Report - QuillAudits/EKARTINU"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Anyone can mutate the balance of any user",
+            "description": "Any user on the blockchain can mutate the balance of any user of the token.",
+            "severity": "high",
+            "location": "EKAR Token smart contract, Line No: 196"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Token decay, Token and Covid tax are not scaled with decimal",
+            "description": "Token decay, Token and Covid tax is not scaled with EKARToken decimals; instead of deducting x percent of the amount, x / 10^7 is going to be deducted.",
+            "severity": "high",
+            "location": "EKAR Token smart contract, Line No: 165"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "No events are emitted for critical operations",
+            "description": "Proper events are not getting emitted for many of the critical operations; these are highly sensitive administrative operations.",
+            "severity": "high",
+            "location": "EKAR Token smart contract, various functions (isExcludedFromReward, excludeFromFee, includeInFee, setLiquidityFee, setTaxFee, setCovidFee)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Improper error handling",
+            "description": "Across the codebase, appropriate conditions are checked, but error messages are not being emitted.",
+            "severity": "medium",
+            "location": "EKAR Token smart contract, various functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Owner cannot be transferred",
+            "description": "The contract owner is immutable - it cannot be transferred.",
+            "severity": "medium",
+            "location": "EKAR Token smart contract, ownership function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1093"
+                ]
+            },
+            "title": "Lack of unit tests",
+            "description": "The code is taken from PolygonScan, so we are under the assumption that there are no unit tests for the codebase.",
+            "severity": "low",
+            "location": "EKAR Token smart contract, overall codebase"
+        }
+    ]
+}

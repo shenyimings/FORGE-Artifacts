@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/Inspex-xALPACA.pdf",
+    "project_info": {
+        "url": "https://github.com/alpaca-finance/xALPACA-contract",
+        "commit_id": "8c58dd3aaade09ae51de49dc44e7784fd63efa53",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "xALPACA-contract": "contracts/Inspex-xALPACA/xALPACA-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Use of Upgradable Contract Design",
+            "description": "Smart contracts are designed to be used as agreements that cannot be changed forever. When a smart contract is upgraded, the agreement can be changed from what was previously agreed upon.",
+            "severity": "high",
+            "location": "AlpacaFeeder, GrassHouse, ProxyToken, xALPACA"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralized Control of State Variables",
+            "description": "Critical state variables can be updated any time by the controlling authorities without notifying the users.",
+            "severity": "medium",
+            "location": "AlpacaFeeder (fairLaunchWithdraw function), GrassHouse (kill function), ProxyToken (setOkHolders function)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Denial of Service on Type Casting",
+            "description": "The claim transaction can be reverted when the week with a completely decayed balance is used in the calculation, making it unusable.",
+            "severity": "medium",
+            "location": "GrassHouse contract, _claim() function, specifically in lines 288-292"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Token Distribution Calculation",
+            "description": "A part of the token feeded to the contract will not be distributed to the users and stuck in the contract, causing the users to gain less reward.",
+            "severity": "low",
+            "location": "GrassHouse contract, _checkpointToken() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions' executions cannot be monitored easily by the users.",
+            "severity": "low",
+            "location": "ProxyToken contract, setOkHolders() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "AlpacaFeeder contract (function initialize() in AlpacaFeeder.sol L: 49), GrassHouse contract (function initialize() in GrassHouse.sol L: 70), ProxyToken contract (functions setOkHolders(), mint(), and burn() in ProxyToken.sol L: 46, L: 52, L: 57), xALPACA contract (function initialize() in xALPACA.sol L: 96)"
+        }
+    ]
+}

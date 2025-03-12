@@ -1,0 +1,49 @@
+{
+    "path": "artifacts/YuklaSwap.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x4279AF04121F948398FA0A2204e75D86d5AaCCc6, 0xb30333b3983eebd968adff63eaf6c39378f8f375, 0x878f46773e99f7dd308ebf0a3a331e7ebbb24b25, 0xBBC0C95a839deA1d5482701AB7Fa84f27B5c8fd9",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.5.16+commit.9c3226ce",
+            "v0.6.6+commit.6c089d02",
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "PancakeRouter": "contracts/YuklaSwap/PancakeRouter",
+            "PancakeFactory": "contracts/YuklaSwap/PancakeFactory",
+            "YuklaSwap": "contracts/YuklaSwap/YuklaSwap",
+            "MasterChef": "contracts/YuklaSwap/MasterChef"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "add, set, and updateEmissionRate functions can invoke massUpdatePools function, which can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "MasterChef contract, add, set, and updateEmissionRate functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "add function issue",
+            "description": "Incorrect total amount of reward in updatePool function if an LP token is added to the contract twice using the add function.",
+            "severity": "low",
+            "location": "MasterChef contract, add function"
+        }
+    ]
+}

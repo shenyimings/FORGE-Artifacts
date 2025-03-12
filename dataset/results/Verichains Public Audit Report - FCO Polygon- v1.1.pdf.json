@@ -1,0 +1,215 @@
+{
+    "path": "artifacts/Verichains Public Audit Report - FCO Polygon- v1.1.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xc058228fdc4c4d70fdd324bdf8377e3c64564450",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "FCOToken": "contracts/Verichains Public Audit Report - FCO Polygon- v1/FCOToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-940"
+                ]
+            },
+            "title": "Cross-chain signature replay",
+            "description": "Cross-chain replay attacks arise when signatures can be reused across different blockchain systems.",
+            "severity": "high",
+            "location": "FCOToken.sol#processRewards(), PublicationHub.sol#mint(), PublicationHub.sol#collect()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "epochsState.unlocked has not been updated in the _unlock() function",
+            "description": "The value of `epochsState.unlocked` should be updated when an epoch is completely unlocked.",
+            "severity": "low",
+            "location": "FCOToken.sol, _unlock() function, L323"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Excessive variables and logic",
+            "description": "The variable internaCall is declared but not used, and the statement eventEmitter.register() has already been called inside the __EventEmitter_init() function.",
+            "severity": "info",
+            "location": "PublicationHub.sol, L65 and L83"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Best practices to defend against reentrancy attacks",
+            "description": "Consider using OpenZeppelin's ReentrancyGuard library or updating contract state completely before making any external calls.",
+            "severity": "info",
+            "location": "PublicationHub.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Avoid relying on tx.origin for authentication",
+            "description": "Use `msg.sender` instead of `tx.origin` to check the caller's identity, as `tx.origin` can be manipulated by malicious contracts.",
+            "severity": "info",
+            "location": "FCOToken.sol, L200 and L276"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Signature Reuse",
+            "description": "Users who have an operator's signature can reuse it on other chains to receive rewards via the `processRewards()` function.",
+            "severity": "n/a",
+            "location": "FCO Smart Contract, `processRewards()` function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ],
+                "3": [
+                    "CWE-940"
+                ]
+            },
+            "title": "Phishing Attack",
+            "description": "The smart contract uses `tx.origin` for delegation, making it susceptible to phishing attacks.",
+            "severity": "high",
+            "location": "`EventEmitter.sol#L32`, `register()` function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Loss of Funds",
+            "description": "Users will lose money if they unlock and then lock within the same epoch.",
+            "severity": "medium",
+            "location": "`FCOToken.sol`"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Storage Slot Collision",
+            "description": "No storage gap for upgradeable contract might lead to storage slot collision.",
+            "severity": "medium",
+            "location": "Multiple contracts (`AccessControl.sol`, `EventEmitter.sol`, `FCOToken.sol`, `PublicationHub.sol`)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Logic to Check Msg.Value",
+            "description": "There is no check to verify how many native tokens are provided or if it matches the specified price.",
+            "severity": "low",
+            "location": "`PublicationHub.sol#L147`, `mint()` function, and `PublicationHub.sol#L291`, `collect()` function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Losing Money Due to Native Token Deposit",
+            "description": "Users risk losing money if they deposit an ERC20 token but unintentionally attach a native token.",
+            "severity": "low",
+            "location": "`PublicationHub.sol#L147`, `mint()` function, and `PublicationHub.sol#L291`, `collect()` function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Duplicated Address in setPaymentToken()",
+            "description": "The admin can add a duplicated address in the `setPaymentToken()` function.",
+            "severity": "low",
+            "location": "`PublicationHub.sol#L124`, `setPaymentToken()` function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Missing cancelCollect() Function",
+            "description": "Consider adding the `cancelCollect()` function to allow the owner to change the price or stop collect().",
+            "severity": "low",
+            "location": "`PublicationHub.sol`"
+        }
+    ]
+}

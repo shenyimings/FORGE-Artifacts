@@ -1,0 +1,203 @@
+{
+    "path": "artifacts/SlowMist Audit Report - Helio Money_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/agiledev624/helio-smart-contracts",
+        "commit_id": "b8587950d2b1bcc62a8ab3d99198cbae12bc5c78",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "helio-smart-contracts": "contracts/SlowMist Audit Report - Helio Money_en-us/helio-smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Ratio arbitrage attack vulnerability",
+            "description": "Allows attackers to gain additional value by reordering transactions or selectively including or excluding them.",
+            "severity": "critical",
+            "location": "contracts/ceros/CeVault.sol and upgrades/CeVaultV2.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Performs a multiplication on the result of a division",
+            "description": "Arithmetic accuracy deviation vulnerability.",
+            "severity": "low",
+            "location": "oracle/libraries/FullMath.sol and oracle/PriceOracleTestnet.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "vaultToken burned may exceed the actual number needed",
+            "description": "When Strategy balance is not enough, the actual withdrawn amount returned by withdrawFromActiveStrategies will lower than shares - ethBalance passed.",
+            "severity": "high",
+            "location": "contracts/masterVault/MasterVault.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "_rewardsToken can be arbitrary contract",
+            "description": "Malicious user can attack target contract by passing a malicious _rewardsToken address.",
+            "severity": "high",
+            "location": "contracts/mediator/ElipsisMediator.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing check BnbOracle status",
+            "description": "Need to check roundID/startedAt/timeStamp/answeredInRound to get a correct price.",
+            "severity": "medium",
+            "location": "contracts/oracle/BnbOracle.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Upgrading contracts may introduce new risks",
+            "description": "Rigorous auditing of contract upgrades is needed.",
+            "severity": "info",
+            "location": "contracts/oracle/HelioOracle.sol, contracts/oracle/PriceOracle.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "HelioOracle owner is never initialized",
+            "description": "_owner is never initialized, changePriceToken call will fail in any condition.",
+            "severity": "high",
+            "location": "contracts/oracle/HelioOracle.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "HelioOracle price oracle is not rigorous",
+            "description": "The oracle price is too simple and doesn't have parameters for determining the validity of prices, such as timestamp.",
+            "severity": "low",
+            "location": "contracts/oracle/HelioOracle.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Oracle price should not return 0",
+            "description": "Price oracle should break the operation when peek an error, instead of returning 0.",
+            "severity": "medium",
+            "location": "contracts/HelioRewards.sol, contracts/Interaction.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "ERC777 reentrancy risks",
+            "description": "stkBNB is a ERC777 token, which is vulnerable to reentrancy attacks due to a design flaw.",
+            "severity": "medium",
+            "location": "contracts/strategy/StkBnbStrategy.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missing events access control",
+            "description": "Emission of an event for critical parameter changes is recommended.",
+            "severity": "info",
+            "location": "MasterVault._updateCerosStrategyDebt()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Reentry prevention best practices",
+            "description": "Applying check-effects-interactions pattern when making external calls in these functions is recommended.",
+            "severity": "info",
+            "location": "contracts/HelioRewards.sol, contracts/Interaction.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Missing check return value (2)",
+            "description": "Verifying the return value may lead to logical errors if not checked.",
+            "severity": "low",
+            "location": "jug.drip(collateralType.ilk) (Interaction.sol#145)"
+        }
+    ]
+}

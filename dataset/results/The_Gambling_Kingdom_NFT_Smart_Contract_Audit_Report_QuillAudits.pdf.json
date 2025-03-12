@@ -1,0 +1,257 @@
+{
+    "path": "artifacts/The_Gambling_Kingdom_NFT_Smart_Contract_Audit_Report_QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/shrishtieth/TGK/",
+        "commit_id": "6a40f189280bea16572ac65a602870f58ac5dbf0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "TGK": "contracts/The_Gambling_Kingdom_NFT_Smart_Contract_Audit_Report_QuillAudits/TGK"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Wrong check of Total supply",
+            "description": "The sum of all quantities in the quantity array should be used to check if total supply is reached and not the length of the array",
+            "severity": "high",
+            "location": "Contract - TGK/NFT, Function - airdropNft"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Withdraw before RenounceOwnership",
+            "description": "If renounceOwnership is called then all the ether in the contract will be locked and become inaccessible",
+            "severity": "medium",
+            "location": "Contract - TGK/NFT, Function - renounceOwnership"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Require check in refundIfOver",
+            "description": "The require statement at Line no. 1305 is not needed as the require statement in the function publicSaleMint does the same before calling refundIfOver",
+            "severity": "low",
+            "location": "Contract - TGK/NFT, Function - refundIfOver"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Taking constructor arguments as input",
+            "description": "The arguments of the constructor are hardcoded",
+            "severity": "low",
+            "location": "Contract - TGK/NFT, Constructor"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing require in owner update methods",
+            "description": "There is no check(require statement) to ensure that these update values are less than the totalSupply",
+            "severity": "low",
+            "location": "Contract - TGK/NFT, Function - airdropNft and others"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "The events PublicSaleMinted and NftsAirdropped should be indexed",
+            "description": "The indexed parameters for logged events will enable searching of these events using the indexed parameters as filters",
+            "severity": "low",
+            "location": "Contract - TGK/NFT, Events - PublicSaleMinted & NtfsAirdropped"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Use of loops",
+            "description": "Loops are used in teamMint and airDropNft methods. It is important to note that the looping has a limit in smart contracts",
+            "severity": "info",
+            "location": "Contract - TGK/NFT, Function - teamMint and airDropNft"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Avoid use of multiple zeros",
+            "description": "The public sale price is defined as 1000000000000000000 wei",
+            "severity": "info",
+            "location": "Contract - TGK/NFT, Variable - publicSalePrice"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Following solidity naming conventions",
+            "description": "Event names should start with capital letters",
+            "severity": "info",
+            "location": "Contract - TGK/NFT, Events"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Enhanced teamMint functionality",
+            "description": "Currently, the teamMint function only mints when quantity is divisible by the maxBatchSize. It could be changed to mint any number of NFTs",
+            "severity": "info",
+            "location": "Contract - TGK/NFT, Function - teamMint"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Follow same pattern of transfer/call",
+            "description": "The withdrawMoney method uses call with reentrancy guard, and publicSaleMint function uses transfer. Both are safe options with no possibilities of a reentrancy attack but still for better code readability we would suggest using one of them at both the places",
+            "severity": "low",
+            "location": "Contract - TGK/NFT, Function - withdrawMoney and publicSaleMint"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Improper variable name in airdropNft",
+            "description": "The parameter array quantity should be renamed to quantities",
+            "severity": "info",
+            "location": "Contract - TGK/NFT, Function - airdropNft"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Functionality of teamMint",
+            "description": "Need to confirm that the owner won’t be able to mint more NFTs for the dev team after the amountForTeam number of NFTs have been minted.",
+            "severity": "info",
+            "location": "Contract - TGK/NFT, Function - teamMint and updateTeamNftStock"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Downside of ERC721A",
+            "description": "Although ERC721A saves gas fees on minting but transferFrom and safeTransferFrom transactions cost more gas, which means it may cost more to gift or sell an ERC721A NFT after minting on secondary markets",
+            "severity": "info",
+            "location": "Contract - ERC721A"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unnecessary underflow/overflow checks",
+            "description": "In some cases there is no possibility of an underflow or overflow and in those cases using unchecked scoping to perform computations saves a significant amount of gas",
+            "severity": "info",
+            "location": "Contract - ERC721A, Function - ownershipOf, _safeMint, _transfer"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Variables declared anywhere in between",
+            "description": "The variable nextOwnerToExplicitlySet should be declared at the top along with other variable declarations and not between functions",
+            "severity": "info",
+            "location": "Contract - ERC721A, Variable - nextOwnerToExplicitlySet"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Use of _setOwnersExplicit",
+            "description": "Need to confirm that this functionality is needed or not as this will cost the owner to update the _ownerships array which need not be updated and is the whole point of using ERC721A over ERC721",
+            "severity": "info",
+            "location": "Contract - ERC721A, Function - _setOwnersExplicit"
+        }
+    ]
+}

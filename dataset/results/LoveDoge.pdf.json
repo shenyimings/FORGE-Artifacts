@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/LoveDoge.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x7144e379c827fa71a7ecaa01d00607cbb7eb1b7a",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "MyCoinToken": "contracts/LoveDoge/MyCoinToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "The function _userTransfer() does not transfer burn amount anywhere or decrease totalSupply, it just increases totalBurn value and takes burn amount from transferring amount.",
+            "severity": "high",
+            "location": "_userTransfer()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unattached bonus rewards",
+            "description": "Owner can call sumTheBounsPool() function, that distributes half of the token balance in dayPoolBouns storage. Until users gain their rewards, this balance stay unaccounted.",
+            "severity": "high",
+            "location": "sumTheBounsPool()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Abuse of authority",
+            "description": "Owner can call sumBounsPiece() function with very big amount and record it to dayPoolBounsPiece storage. And function _sumCanGetToken() will always revert because of too high value subtracting from dayPoolBouns[yesToday].",
+            "severity": "high",
+            "location": "sumBounsPiece()"
+        }
+    ]
+}

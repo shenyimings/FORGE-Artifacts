@@ -1,0 +1,197 @@
+{
+    "path": "artifacts/bulls-run.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "856847544af15cfc9104dc304374f0c5b44a4a402a52e13c60e05379f6f2c356",
+        "address": "0x615c6ac9e6c3f8a29b41d5ba4f59b3e3ef268ee8",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.6+commit.7338295f"
+        ],
+        "project_path": {
+            "BullsRunToken": "contracts/bulls-run/BullsRunToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Stops Transactions",
+            "description": "The contract owner can stop all users from buying excluding the owner.",
+            "severity": "medium",
+            "location": "BullsRunToken.sol#L479"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Transfers User's Tokens",
+            "description": "The contract owner has the authority to transfer the balance of a user's address to any address or addresses without allowance.",
+            "severity": "low",
+            "location": "BullsRunToken.sol#L687,714"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Exceeds Fees Limit",
+            "description": "The contract owner has the authority to increase over the allowed limit of 25%",
+            "severity": "critical",
+            "location": "BullsRunToken.sol#L637"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Decimal Division Precision",
+            "description": "Division of decimal numbers can result in rounding errors.",
+            "severity": "low",
+            "location": "BullsRunToken.sol#L587"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Price Volatility Concern",
+            "description": "The contract accumulates tokens from the taxes to swap them for ETH, which can lead to price volatility.",
+            "severity": "low",
+            "location": "BullsRunToken.sol#L653"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Immutable Declaration Improvement",
+            "description": "Variables are not defined as immutable.",
+            "severity": "low",
+            "location": "BullsRunToken.sol#L399,400,403"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State Variables could be Declared Constant",
+            "description": "State variables can be declared as constant using the constant keyword.",
+            "severity": "low",
+            "location": "BullsRunToken.sol#L184,185,198,342,343,344,345,351"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Conformance to Solidity Naming Conventions",
+            "description": "The code does not follow the Solidity naming conventions.",
+            "severity": "low",
+            "location": "Multiple lines in BullsRunToken.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing Events Arithmetic",
+            "description": "Events are missing or not properly implemented.",
+            "severity": "low",
+            "location": "BullsRunToken.sol#L224,550,634,651,655"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Validate Variable Setters",
+            "description": "Variables are missing proper checks for zero values.",
+            "severity": "low",
+            "location": "BullsRunToken.sol#L106,644,645"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Succeeded Transfer Check",
+            "description": "The transfer methods should be checked if the result is successful.",
+            "severity": "low",
+            "location": "BullsRunToken.sol#L301"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner Abuse",
+            "description": "The owner has capabilities to stop transactions, transfer user tokens, and manipulate fees.",
+            "severity": "high",
+            "location": "BullsRunToken contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of Security Measures",
+            "description": "The contract lacks multi-wallet signing pattern, temporary locking or renouncing ownership.",
+            "severity": "medium",
+            "location": "BullsRunToken contract"
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    "path": "artifacts/EgonSwap.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x05995a068bdac17c582ec75ab46bb8e7394be1d9, 0x560f672CC695d846F7AE0E7FE60909737544D886, 0xcbdf4cb386b42c1ab41f8b5009cb3d87f6dc623e, 0xcc5414e7ce73b717a14e682e9899785a13002db9",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.5.16+commit.9c3226ce",
+            "v0.6.6+commit.6c089d02",
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "EgonToken": "contracts/EgonSwap/EgonToken",
+            "MasterChef": "contracts/EgonSwap/MasterChef",
+            "EgonRouter": "contracts/EgonSwap/EgonRouter",
+            "EgonFactory": "contracts/EgonSwap/EgonFactory"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Block gas limit (MasterChef)",
+            "description": "add(uint256 _allocPoint, …), set(uint256 _pid, …) and updateEmissionRate() could invoke massUpdatePools() function, that can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "MasterChef contract, functions add, set, and updateEmissionRate"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "add function issue (MasterChef)",
+            "description": "If some LP token is added to the contract twice using function add, then the total amount of reward in function updatePool will be incorrect.",
+            "severity": "low",
+            "location": "MasterChef contract, function add"
+        }
+    ]
+}

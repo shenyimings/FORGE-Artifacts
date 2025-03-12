@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/SlowMist Audit Report - Shield_en-us.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.4.24+commit.e67f0147"
+        ],
+        "project_path": {
+            "WBTC": "contracts/SlowMist Audit Report - Shield_en-us/WBTC"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Risk of Oracle Manipulation",
+            "description": "The price is obtained from Uniswap's getAmountsIn through the getPriceByWBTCDAI function, but this interface obtains the real-time price of the WBTC/DAI pool, and there is a risk of malicious manipulation.",
+            "severity": "critical",
+            "location": "DDSContracts.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Price acquisition issue when opening and closing positions",
+            "description": "The price used when opening and closing a position is passed in from the outside, which will cause the user to pass in any price.",
+            "severity": "critical",
+            "location": "DDSContracts.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "The available funds were not processed when the riskControl closed the position",
+            "description": "The user's available funds are not actually set to 0 after the transfer of insurance funds.",
+            "severity": "high",
+            "location": "Pool.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Insecure random number",
+            "description": "Block difficulty and block time now can be predicted or manipulated as a random number seed.",
+            "severity": "low",
+            "location": "DDS Pool.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Event missing",
+            "description": "No event recording is performed when owner sets key parameters.",
+            "severity": "n/a",
+            "location": "DDSContracts.sol, setExchageAddress, setPoolTokenAddr, setPrivatePool, setPublicPool, setFormular, and setrepayFudAddr functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Checks-effects-interactions model not followed",
+            "description": "State is changed before token transfer.",
+            "severity": "n/a",
+            "location": "Contracts.sol, Pool2.sol, deposit and provide functions"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant code",
+            "description": "UpdateImpliedVolrate and updatePriceByOwner interfaces are not used by the Contracts contract.",
+            "severity": "n/a",
+            "location": "DDSFormular.sol"
+        }
+    ]
+}

@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/ApeX_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/ApeX-Protocol/periphery/, https://github.com/ApeX-Protocol/apexpro-contracts",
+        "commit_id": "4661330a339e1e7e5888ec7d7e457f6ee8c1af53, 2fa3161d72e21908a012cac778bfafc45819e46e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "periphery": "contracts/ApeX_final_Secure3_Audit_Report/periphery"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing msg.value check in deposit",
+            "description": "Missing check for amount argument to equal msg.value in deposit native token function.",
+            "severity": "medium",
+            "location": "gPool.sol#L103, code/multisig/contracts/core/MultiSig"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Reset allowance when using safeApprove",
+            "description": "The initial intention of safeApprove to only allow allowance change from zero to non-zero is to avoid excessive spend.",
+            "severity": "low",
+            "location": "gPool.sol#L128, code/multisig/contracts/core/MultiSig"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ],
+                "3": [
+                    "CWE-302"
+                ]
+            },
+            "title": "Signature replay for different chains",
+            "description": "Signatures used in withdrawErc20() and withdrawETH() do not contain a chainid field, making the contract vulnerable to replay attacks on different chains.",
+            "severity": "critical",
+            "location": "gPool.sol#L190, code/multisig/contracts/core/MultiSig"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "User-provided exchangeData is not sufficiently validated.",
+            "description": "User-controlled exchangeData should be carefully checked to prevent attacks.",
+            "severity": "medium",
+            "location": "gPool.sol#L117-L121, code/multisig/contracts/core/MultiSig"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "When the user transfers tokens to himself, the amount of tokens is double counted",
+            "description": "In the _transfer function, if sender == recipient, the amount of tokens will be double counted.",
+            "severity": "critical",
+            "location": "SelfSufficientERC20.sol#L120-L121"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Banana.approve() can be front-run",
+            "description": "The ERC20 approve() is vulnerable to front-run attack, allowing the spender to take more tokens than approved.",
+            "severity": "low",
+            "location": "Banana.sol#L102"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Banana::_mint should check to avoid tokens being permanently locked",
+            "description": "The mint function does not check the 0 address of the incoming address, potentially locking tokens permanently.",
+            "severity": "info",
+            "location": "Banana.sol#L45-L60 and #L119-L123"
+        }
+    ]
+}

@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/DexterLabs Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x363b5A986B1F2D36B0a870782658f658997b7495",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.18+commit.87f61d96"
+        ],
+        "project_path": {
+            "DexterLabs": "contracts/DexterLabs Smart Contract Audit Report - QuillAudits/DexterLabs"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "The contract is heavily centralized, and any compromise of the owner could lead to bricking the contract or a loss of funds.",
+            "severity": "high",
+            "location": "DexterLabs.sol contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Privileged account transfers",
+            "description": "If renouncing privileges is not done appropriately, the current beneficiary can renounce their privileges and still be excluded from fees while the new beneficiary will be able to collect fees and still retain same privileges.",
+            "severity": "medium",
+            "location": "setFeesAddress(), setBuybackAddress(), setMarketingAddress(), setDevelopmentAddress and setLPtokenReciver() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Input sanitization",
+            "description": "Majority of functions could behave irregularly because of the lack of input validation.",
+            "severity": "medium",
+            "location": "Multiple functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Missing test cases",
+            "description": "The codebase lacks unit test coverage.",
+            "severity": "medium",
+            "location": "Codebase"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Event emission",
+            "description": "Some contract functions that update the vault’s state do not emit events when called.",
+            "severity": "info",
+            "location": "Contract functions"
+        }
+    ]
+}

@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/PlanetFinance Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x72B7D61E8fC8cF971960DD9cfA59B8C829D91991",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "AQUA": "contracts/PlanetFinance Full Smart Contract Security Audit/AQUA"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "The updateEmissionRate function can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "PlanetFinance contract, updateEmissionRate function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "add function issue",
+            "description": "If some LP token is added to the contract twice using function add, then the total amount of reward AQUAReward in function updatePool will be incorrect.",
+            "severity": "low",
+            "location": "PlanetFinance contract, add function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges - change AQUA token address",
+            "description": "Owner can change the AQUA token address in PlanetFinance contract to any not audited contract.",
+            "severity": "info",
+            "location": "PlanetFinance contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges - withdraw tokens",
+            "description": "Owner can withdraw tokens from the PlanetFinance contract using the function inCaseTokensGetStuck.",
+            "severity": "info",
+            "location": "PlanetFinance contract, inCaseTokensGetStuck function"
+        }
+    ]
+}

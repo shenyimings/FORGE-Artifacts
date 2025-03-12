@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/Governance Crosschain Bridges V1.md",
+    "project_info": {
+        "url": "https://github.com/aave/governance-crosschain-bridges",
+        "commit_id": "7f56e7ae63f30ba8dcd7ced6a11a34c2eb865a1d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "governance-crosschain-bridges": "contracts/Governance Crosschain Bridges V1/governance-crosschain-bridges"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "No validation of the address parameter value in contract constructor",
+            "description": "The variable is assigned the value of the constructor input parameter without checking if it's zero.",
+            "severity": "info",
+            "location": "contracts/BridgeExecutorBase.sol#L41, contracts/PolygonBridgeExecutor.sol#L21 and L22, contracts/ArbitrumBridgeExecutor.sol#L18"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Missing validation on relation",
+            "description": "No comparison of the `minimumDelay` and `maximumDelay` variables.",
+            "severity": "info",
+            "location": "contracts/BridgeExecutorBase.sol#L34-L39"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "The value is assigned to a variable, but not used",
+            "description": "The `_queuedActions[actionHash]` variable is set but not validated before executing `delegatecall` and `call`.",
+            "severity": "info",
+            "location": "contracts/BridgeExecutorBase.sol#L202, L269, L235"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Caching the value will improve the code",
+            "description": "Calculation of the same value is done multiple times.",
+            "severity": "info",
+            "location": "contracts/BridgeExecutorBase.sol#L176-L183"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1099"
+                ]
+            },
+            "title": "Confusing variable name",
+            "description": "The function name `getActionsSetState()` can be confusing.",
+            "severity": "info",
+            "location": "contracts/BridgeExecutorBase.sol#L124"
+        }
+    ]
+}

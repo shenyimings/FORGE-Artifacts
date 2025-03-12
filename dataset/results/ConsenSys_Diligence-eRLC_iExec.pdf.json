@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-eRLC_iExec.pdf",
+    "project_info": {
+        "url": "https://github.com/iExecBlockchainComputing/eRLC",
+        "commit_id": "b16266d4940f9cc695859a47c483485c48fbda66",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "eRLC": "contracts/ConsenSys_Diligence-eRLC_iExec/eRLC"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Inconsistent status codes between ERC20KYC and IexecERC20CoreKYC",
+            "description": "Status codes for ERC20KYC.detectTransferRestriction may lead to conflicts between the two definitions.",
+            "severity": "n/a",
+            "location": "code/eRLC/contracts/ERC20KYC.sol:L28-L30, code/PoCo/contracts/modules/delegates/IexecERC20CoreKYC.sol:L36-L40"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Transfer event in eRLC",
+            "description": "The ERC-677 standard includes an event that is not emitted from the transferAndCall() function, which may lead to deviation from the token standard.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Lack of delay period before granting KYC_ADMIN_ROLE",
+            "description": "The KYC Admin can freeze funds without a delay, and implementing a time delay could decrease trust requirements from users.",
+            "severity": "n/a",
+            "location": "code/eRLC/contracts/KYC.sol:L56-L72"
+        }
+    ]
+}

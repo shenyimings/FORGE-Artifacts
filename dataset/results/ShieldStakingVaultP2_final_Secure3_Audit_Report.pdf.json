@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/ShieldStakingVaultP2_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "4338af5d9e2494a7689e023aa60cd3086c299fd6",
+        "address": "0x182b723a58739a9c974cfdb385ceadb237453c28",
+        "chain": "eth",
+        "compiler_version": [
+            "vyper:0.2.8"
+        ],
+        "project_path": {
+            "Vyper_contract": "contracts/ShieldStakingVaultP2_final_Secure3_Audit_Report/Vyper_contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Logic error in StakingVault contract getAllEtherInvested function",
+            "description": "Only the amount of claimable LDO Token is read, not real claim.",
+            "severity": "medium",
+            "location": "StakingVault contract, code/contracts/StakingVault.sol#L716"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Variable broker can never be changed in StakingVault contract",
+            "description": "The variable broker is always empty, and the function addBrokerRelationship can never be called.",
+            "severity": "medium",
+            "location": "StakingVault contract, code/contracts/StakingVault.sol#L148"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "settlement function is vulnerable to MEV attack",
+            "description": "The way the settlement function implements trading is still vulnerable to MEV attack.",
+            "severity": "medium",
+            "location": "StakingVault contract, code/contracts/StakingVault.sol#L482"
+        }
+    ]
+}

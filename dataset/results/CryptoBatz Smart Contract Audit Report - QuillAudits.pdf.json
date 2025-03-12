@@ -1,0 +1,173 @@
+{
+    "path": "artifacts/CryptoBatz Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/lucid-eleven/crypto-batz-contracts/tree/07ee07dd442c34622798f1ee5b73ef8ff59cef48",
+        "commit_id": "07ee07dd442c34622798f1ee5b73ef8ff59cef48",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "crypto-batz-contracts": "contracts/CryptoBatz Smart Contract Audit Report - QuillAudits/crypto-batz-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Random number generation in rollStartIndex",
+            "description": "The generated number can be controlled by the owner or miner, benefiting either party.",
+            "severity": "high",
+            "location": "function rollStartIndex() external onlyOwner"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-1419"
+                ]
+            },
+            "title": "mintAncientBatz function mints NFT with inconsistent tokenId",
+            "description": "Inconsistent token Id can brick the contract and cause reverts.",
+            "severity": "medium",
+            "location": "function mintAncientBatz()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient events",
+            "description": "Important functions do not emit specific events for off-chain monitoring.",
+            "severity": "low",
+            "location": "Across the codebase"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "function ERC2981.setRoyalties lacks documentation",
+            "description": "Royalties resetting functionality is undocumented and unclear.",
+            "severity": "info",
+            "location": "function setRoyalties, ERC2981 contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Unvalidated Configuration",
+            "description": "Owner can configure the sale as he likes, which can interfere with each other's supply limit.",
+            "severity": "n/a",
+            "location": "dutchAuctionConfig, DutchAuctionConfig contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistent Comment and Implementation",
+            "description": "The comment above the reserve() function does not match its implementation.",
+            "severity": "n/a",
+            "location": "reserve() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Zero Address Check",
+            "description": "There is no zero address check for recipient address parameter in _setRoyalties().",
+            "severity": "info",
+            "location": "_setRoyalties() function, ERC2981 contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Solidity Versions",
+            "description": "Using very old versions of Solidity prevents benefits of bug fixes and newer security checks.",
+            "severity": "info",
+            "location": "Across the codebase"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistent Interface Definition",
+            "description": "The interface defined in IERC2981 is inconsistent with the function defined in ERC2981.",
+            "severity": "info",
+            "location": "IERC2981 interface, ERC2981 contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Accidental Renounce Ownership",
+            "description": "CryptoBatz contract can be renounced accidentally.",
+            "severity": "info",
+            "location": "renounceOwnership function"
+        }
+    ]
+}

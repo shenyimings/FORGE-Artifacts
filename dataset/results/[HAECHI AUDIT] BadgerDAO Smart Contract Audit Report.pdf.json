@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/[HAECHI AUDIT] BadgerDAO Smart Contract Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/badger-finance/badger-system/",
+        "commit_id": "537ef9c44196893cb9760beca2dcc501952e9a4a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "badger-system": "contracts/[HAECHI AUDIT] BadgerDAO Smart Contract Audit Report/badger-system"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Unchecked Reward Rate",
+            "description": "The function can lead to a high reward rate for farmers who get rewards faster than others, making others unable to earn the rewards.",
+            "severity": "low",
+            "location": "RewardPool#notifyRewardAmount()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unchecked Decrease in Reward Rate",
+            "description": "The function does not check if the rewardRate decreases after notification, which can lead to a continuous decrease on reward rate.",
+            "severity": "low",
+            "location": "StakingRewards#notifyRewardAmount()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Insecure Numerator and Denominator Operations",
+            "description": "Multiple functions do not check if the numerator can be larger than the denominator, which can lead to contracts reverting on normal interactions.",
+            "severity": "low",
+            "location": "Various functions"
+        }
+    ]
+}

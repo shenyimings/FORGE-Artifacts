@@ -1,0 +1,102 @@
+{
+    "path": "sample/sample.pdf",
+    "project_info": {
+        "url": "https://github.com/pocket-arena/POC_ERC20-BEP20",
+        "commit_id": "68c9a327e50c1ae3dad45f95cd104dfd98c78240",
+        "address": [
+            "0x095cf7f3e82a1dcadbf0fbc59023f419883ea296",
+            "0x1b6609830c695f1c0692123bd2fd6d01f6794b98"
+        ],
+        "chain": [
+            "eth",
+            "bsc"
+        ],
+        "compiler_version": "v0.8.10+commit.fc410830",
+        "project_path": {
+            "BEP20POC": "./sample/sample.pdf-source"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Contracts are vulnerable to permanent blocking by any token holder",
+            "description": "Arrays `ERC20POC.arr_pegin_submit` and `BEP20POC.pegout_submit` could be filled by a malicious token holder using the methods listed above. This would drastically increase the gas cost of methods `pegout_submit_complete`, `pegout_submit_delete`, `pegout_submit_cancel`, `pegin_submit_complete`, `pegin_submit_delete`, and `pegin_submit_cancel`, leading to permanent inoperability of these methods.",
+            "severity": "High",
+            "location": "Contracts: `POC_ERC20.sol`, `POC_BEP20.sol`; Functions: `pegin_submit`, `pegout_submit`"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Potential loss of users’ submits and data inconsistency",
+            "description": "When several users call methods within one block, only the last one will create an order because the key for storing data in `arr_pegout_submit` and `arr_pegin_submit` is generated only based on `block.timestamp`.",
+            "severity": "Medium",
+            "location": "Contracts: `POC_ERC20.sol`, `POC_BEP20.sol`; Functions: `pegin_submit`, `pegout_submit`"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Missing event for changing `_fee_rate`",
+            "description": "Changing critical values should be followed by event emitting for better off-chain tracking.",
+            "severity": "Low",
+            "location": "Contracts: `POC_ERC20.sol`, `POC_BEP20.sol`; Functions: `_fee_rate_set`"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "A public function that could be declared external",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "Low",
+            "location": "Contracts: `POC_ERC20.sol`, `POC_BEP20.sol`; Functions: Multiple functions listed (e.g., `pegin_run`, `transferFrom`, `staff_list`, etc.)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1254"
+                ]
+            },
+            "title": "Boolean equality",
+            "description": "Boolean constants can be used directly and do not need to be compared to `true` or `false`.",
+            "severity": "Low",
+            "location": "Contracts: `POC_ERC20.sol`, `POC_BEP20.sol`; Functions: `transfer`, `transferFrom`, `staff_add`, `staff_quota_add`, `pegin_reserve`, `pegout_reserve`"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Code and documentation inconsistency",
+            "description": "According to documentation, the maximum fee should be 100%, but contracts allow setting it up to 1000%.",
+            "severity": "Low",
+            "location": "Contracts: `POC_ERC20.sol`, `POC_BEP20.sol`; Functions: `_fee_rate_set`"
+        }
+    ]
+}

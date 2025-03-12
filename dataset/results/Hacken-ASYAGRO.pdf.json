@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/Hacken-ASYAGRO.pdf",
+    "project_info": {
+        "url": "https://github.com/Asyagro/ASY",
+        "commit_id": "7ed2ad0ba2de200ace36f9e21eb0ebcaa1e343ff",
+        "address": "0xc0cc1e5761ba5786916fd055562551798e50d573",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.5.16+commit.9c3226ce"
+        ],
+        "project_path": {
+            "ASYAGRO": "contracts/Hacken-ASYAGRO/ASYAGRO"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Owners can mint tokens",
+            "description": "Owners can mint more tokens than stated in tokenomics",
+            "severity": "critical",
+            "location": "ASYAGRO contract, mint function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owners can lock all tokens of any user anytime",
+            "description": "Lock functionality should be limited by clear contract rules",
+            "severity": "critical",
+            "location": "ASYAGRO contract, lock function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owners can change the lock time after the lock is created",
+            "description": "Ability to change the lock time of an already created lock can lead to various manipulations",
+            "severity": "critical",
+            "location": "ASYAGRO contract, extendLockTime and reduceLockTime functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owners can unlock tokens anytime",
+            "description": "Ability to unlock tokens for any account at any time can lead to various manipulations",
+            "severity": "critical",
+            "location": "ASYAGRO contract, unlockToken and releaseLock functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly permissive owner access",
+            "description": "Owners can add the user's address to the 'frozen' list, leading to various manipulations and loss of funds by users",
+            "severity": "high",
+            "location": "ASYAGRO contract, freezeAccount function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused function",
+            "description": "The freezeAccount function does nothing",
+            "severity": "medium",
+            "location": "ASYAGRO contract, freezeAccount function"
+        }
+    ]
+}

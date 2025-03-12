@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/Sovryn Security Audit Smart Contracts v201218.pdf",
+    "project_info": {
+        "url": "https://github.com/DistributedCollective/oracle-based-amm",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "oracle-based-amm": "contracts/Sovryn Security Audit Smart Contracts v201218/oracle-based-amm"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Price feed oracle fake timestamp",
+            "description": "The MoC oracles do not provide the last update timestamp, which can result in Sovryn components operating with a potentially outdated exchange rate.",
+            "severity": "high",
+            "location": "MocBTCToUSDOracle.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "WRBTC ERC20 approve front running",
+            "description": "The wrapped RBTC token contract suffers from a well-known ERC20 standard security vulnerability that allows an attacker to front-run the approve transaction.",
+            "severity": "low",
+            "location": "WRBTC contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "internalSwap function name is misleading",
+            "description": "The use of 'internal' in a public function name can lead to a developer incorrectly assuming the function cannot be accessed from outside the contract, resulting in a security vulnerability.",
+            "severity": "low",
+            "location": "SwapsImplSovrynSwap contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Infinite transfer allowance",
+            "description": "The SwapsImplSovrynSwap contract allows the oracle-based AMM component to transfer unlimited amounts of its tokens, which can lead to abuse.",
+            "severity": "medium",
+            "location": "SwapsImplSovrynSwap contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-544"
+                ]
+            },
+            "title": "Missing or numeric non descriptive error messages",
+            "description": "Error messages returned to users are missing or numeric and not self-explanatory.",
+            "severity": "low",
+            "location": "LoanTokenLogicStandard.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Transaction size and slippage limits not enforced for external swaps",
+            "description": "The swapExternal function in the SwapsExternal contract permits unbounded swaps with no slippage checks enforced, bypassing the limits imposed by other functions.",
+            "severity": "medium",
+            "location": "SwapsExternal contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Leftover code from debugging",
+            "description": "The function _updateCheckpoints emits a Debug event, which is likely a leftover from a debug session.",
+            "severity": "info",
+            "location": "LoanTokenLogicStandard.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Function _totalDeposit doesn't revert when the precision is 0",
+            "description": "The function `_totalDeposit` does not revert when `sourceToDestPrecision` is 0, which can lead to unexpected behavior.",
+            "severity": "low",
+            "location": "_totalDeposit function"
+        }
+    ]
+}

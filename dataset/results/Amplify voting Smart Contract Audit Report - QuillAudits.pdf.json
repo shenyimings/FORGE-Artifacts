@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/Amplify voting Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/amplify-labs/contracts",
+        "commit_id": "9dd44ac15cb66685a5beb038065f1673bcd6a8bb",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Amplify voting Smart Contract Audit Report - QuillAudits/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Total locked balance is not getting updated on withdraw",
+            "description": "TotalLocked balance does not get updated when the function withdrawInternal resets the balance of the depositor’s lock.",
+            "severity": "high",
+            "location": "Voting.sol, function withdrawInternal (#L325-327)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Mappings were not being updated appropriately",
+            "description": "The delegateInternal function was deleting existing mappings but failed to update mappings for the delegatee if the oldDelegatee was not equal to address(0).",
+            "severity": "high",
+            "location": "Voting.sol, function delegateInternal (#L405-L#414)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Local Variable Shadowing",
+            "description": "The owner variable in function userOwnsTheLock shadows the owner variable in Ownable.sol, which may lead to unintended behavior.",
+            "severity": "low",
+            "location": "Voting.sol, function userOwnsTheLock (#L108-110)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Required Zero-Trust Policy",
+            "description": "Delegators should follow a zero-trust policy and sign their message hashes by themselves to prevent attacks.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Use != 0 instead of > 0 for Unsigned Integer Comparison",
+            "description": "Using != 0 is cheaper than > 0 when comparing unsigned integer types.",
+            "severity": "info",
+            "location": "Voting.sol (#L95, #L100, #L238, #L272, #L343, #L346, #L396, #L452, #L457, #L473)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Don’t initialize variables with default values",
+            "description": "Explicitly initializing variables with their default value costs unnecessary gas.",
+            "severity": "info",
+            "location": "Voting.sol (#150, #470)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Cache array length outside of loop",
+            "description": "Caching the array length outside a loop saves reading it on each iteration.",
+            "severity": "info",
+            "location": "Voting.sol (#L100, #101)"
+        }
+    ]
+}

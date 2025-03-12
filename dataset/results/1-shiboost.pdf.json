@@ -1,0 +1,194 @@
+{
+    "path": "artifacts/1-shiboost.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "main",
+        "address": "0x1322310635cc6bb6435e70120c563535e3d0cf86",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "Shiboost": "contracts/1-shiboost/Shiboost"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner can stop sales for all users excluding themselves",
+            "description": "The owner has the authority to set `_maxTxAmount` and `_walletMax` to zero, stopping sales for all users.",
+            "severity": "info",
+            "location": "Contract owner functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Owner can claim all contract balance",
+            "description": "The owner has the authority to call the `rescueStuckedToken` function, claiming all contract balance.",
+            "severity": "info",
+            "location": "Contract owner functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Potential revert from underlying contracts during transfer flow",
+            "description": "The contract sends funds to `marketingWallet` and `DeveloperWallet`, which may revert from incoming payment, propagating the error.",
+            "severity": "info",
+            "location": "Transfer functionality"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-405"
+                ]
+            },
+            "title": "Potential price volatility due to large token swaps",
+            "description": "The contract accumulates tokens and swaps them for ETH, potentially causing significant price volatility.",
+            "severity": "info",
+            "location": "Token swap functionality"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Usage of redundant SafeMath library",
+            "description": "The contract uses the SafeMath library, which is unnecessary since Solidity version 0.8.0 provides native arithmetic operations that revert on underflow and overflow.",
+            "severity": "info",
+            "location": "Arithmetic operations"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State variables not declared as constant",
+            "description": "Some state variables can be declared as constant, reducing gas consumption and ensuring their values cannot be changed.",
+            "severity": "low",
+            "location": "State variable declarations"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-conformity to Solidity naming conventions",
+            "description": "The contract does not follow the recommended naming conventions, making it harder to read and maintain.",
+            "severity": "low",
+            "location": "Function and variable names"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing events in contract arithmetic",
+            "description": "Some events are missing from the contract, which can cause issues with its arithmetic.",
+            "severity": "low",
+            "location": "Event declarations"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Presence of dead code",
+            "description": "The contract has dead code that is never executed or reached during normal execution.",
+            "severity": "low",
+            "location": "Dead code sections"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing validation for variable setters",
+            "description": "The contract does not validate user-supplied input, which can lead to problems when the value is zero.",
+            "severity": "low",
+            "location": "Variable setter functions"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Unstable compiler version",
+            "description": "The contract uses a non-specific compiler version, which can lead to compatibility issues.",
+            "severity": "low",
+            "location": "Compiler version specification"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Missing check for successful transfers",
+            "description": "The contract does not check if transfer methods are successful, potentially leading to incorrect assumptions.",
+            "severity": "low",
+            "location": "Transfer functionality"
+        }
+    ]
+}

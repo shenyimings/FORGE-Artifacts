@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/SlowMist Audit Report - Earning Farm - ETH Leverage_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/Shata-Capital/ENF_ETH_Leverage",
+        "commit_id": "ebc757f3d78c84800a4fb46285f5dfe43c1568f1",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ENF_ETH_Leverage": "contracts/SlowMist Audit Report - Earning Farm - ETH Leverage_en-us/ENF_ETH_Leverage"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of access control issue",
+            "description": "The flashLoan function allows any user to call, but it is more expected that the flashLoan function can only be called by the SS contract.",
+            "severity": "info",
+            "location": "contracts/subStrategies/loanReceivers/BalancerReceiver.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas optimization",
+            "description": "The _harvest function does not check whether the difference between lastEarnBlock and block.number is 0, which may cause unnecessary gas consumption.",
+            "severity": "info",
+            "location": "contracts/subStrategies/ETH_Leverage.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant logic issue",
+            "description": "The exchange and harvestFee parameters are not used in the Controller contract.",
+            "severity": "info",
+            "location": "contracts/core/Controller.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "The problem of checking the number of swaps",
+            "description": "The swapExactETH function checks if the swap amount is larger than the expected required amount, but it is acceptable for the number of swaps to be equal to what is expected to be required.",
+            "severity": "low",
+            "location": "contracts/subStrategies/exchange/Exchange.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Risk of excessive authority",
+            "description": "The owner role has many permissions, which will greatly increase the single point of risk.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Risk of exchange slippage",
+            "description": "The exchange slippage is not limited in the ETHLeverExchange contract, which will make users vulnerable to sandwich attacks when withdrawing.",
+            "severity": "medium",
+            "location": "contracts/subStrategies/exchange/Exchange.sol"
+        }
+    ]
+}

@@ -1,0 +1,161 @@
+{
+    "path": "artifacts/PeckShield-AstridDAO.pdf",
+    "project_info": {
+        "url": "https://github.com/AstridDAO/contracts/tree/c0a5bc38c93828cbf7c9ad00cc67759acc908d8b",
+        "commit_id": "c0a5bc38c93828cbf7c9ad00cc67759acc908d8b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/PeckShield-AstridDAO/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Improved Validation in BAIToken/ATIDToken::permit()",
+            "description": "Insufficient validation of owner address",
+            "severity": "low",
+            "location": "BAIToken, ATIDToken contracts, permit() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20-Compliant Tokens",
+            "description": "Incompatible token implementation",
+            "severity": "low",
+            "location": "Multiple contracts, transfer() routine"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Improved Validation On Protocol Parameters",
+            "description": "Insufficient validation of protocol-wide risk parameters",
+            "severity": "low",
+            "location": "AstridBase contract, setBAIGasCompensation(), setMinNetDebt(), setPercentageDivisor(), setBorrowingFeeFloor() functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged account owners can pose counter-party risk to protocol users.",
+            "severity": "medium",
+            "location": "Multiple contracts, AstridBase contract (specifically functions setMCR(), setCCR(), etc.)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential Reentrancy Risks In AstridDAO",
+            "description": "Reentrancy risk in addColl() function due to ERC777 token implementation.",
+            "severity": "low",
+            "location": "BorrowerOperations contract, addColl() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incompatibility with Deflationary/Rebasing Tokens",
+            "description": "Asset-transferring routines may introduce balance inconsistencies with deflationary/rebasing tokens.",
+            "severity": "medium",
+            "location": "Multiple contracts, including BorrowerOperations contract (addColl() function) and others."
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Improved Sanity Checks Of System/Function Parameters",
+            "description": "Insufficient validation of function parameters",
+            "severity": "info",
+            "location": "Coding Practices, AstridDAO contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistent Implementation In ATIDStaking::_insertLockedStake()",
+            "description": "The `_insertLockedStake` function uses `msg.sender` as the key for updating one mapping state variable, but uses `_stakerAddress` as the key for other mapping state variables.",
+            "severity": "info",
+            "location": "ATIDStaking contract, `_insertLockedStake` function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of input validation in `withdrawATID` function",
+            "description": "The `withdrawATID` function does not check if the input amount is greater than 0, allowing users to withdraw zero tokens, which is a waste of gas.",
+            "severity": "info",
+            "location": "LockupContract, `withdrawATID` function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Inconsistent event generation in `setAddresses` function",
+            "description": "The `setAddresses` function does not emit an event when the collateral token address is updated.",
+            "severity": "info",
+            "location": "Multiple contracts, including CollSurplusPool, ActivePool, and DefaultPool."
+        }
+    ]
+}

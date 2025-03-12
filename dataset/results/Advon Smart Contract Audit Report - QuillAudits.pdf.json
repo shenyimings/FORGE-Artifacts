@@ -1,0 +1,197 @@
+{
+    "path": "artifacts/Advon Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/razzorsec/RazzorSec-Contracts/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "RazzorSec-Contracts": "contracts/Advon Smart Contract Audit Report - QuillAudits/RazzorSec-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "The contract owner can adjust the tax to as high as 100% on transactions, limit the tradeable limit of each user's balance.",
+            "severity": "high",
+            "location": "Advon.sol (contract owner)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-283"
+                ]
+            },
+            "title": "Frontrunning",
+            "description": "Initialize function can be frontrun by a malicious actor, making them the owner of the contract with owner privileges.",
+            "severity": "high",
+            "location": "Advon.sol (initialize function)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Token allocation and transfers",
+            "description": "EcosystemFund address is never set, leading to loss of funds; 50% of supply minted to contract instead of respective addresses.",
+            "severity": "high",
+            "location": "Advon.sol (ecosystemFund address, token allocation)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Early token unlocks",
+            "description": "releaseTime can be manipulated to dispense more tokens earlier than expected; salesEndTime can also be manipulated.",
+            "severity": "medium",
+            "location": "Advon.sol (setRealeaseTime function, salesEndTime check)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Null token transfers",
+            "description": "Arithmetic calculations for token transfers are correct, but tokens are not actually transferred from caller to msg.sender.",
+            "severity": "medium",
+            "location": "Advon.sol (token transfer logic)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Input sanitization/Parity checks",
+            "description": "Multiple logical arithmetic checks needed in codebase; setReleaseTime, setSupply_Team_Allocation, setBuyandSellTax, setTokenPrice functions vulnerable.",
+            "severity": "medium",
+            "location": "Advon.sol (multiple functions)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing test cases",
+            "description": "Codebase lacks unit test coverage, making it advisable to have >95% code coverage.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused code",
+            "description": "Unused interfaces and variables declared in contract (IPancakeFactory, IPancakeRouter, IPancakePair, TradeableLimit, ProcessingFee, NetworkingFee).",
+            "severity": "low",
+            "location": "Advon.sol (unused code)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Event emission",
+            "description": "Changes to state not tracked using events; advisable to emit events for key variable changes.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma",
+            "description": "Solidity pragma version unlocked, making it advisable to use a specific version when deploying to production.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Unnecessary access control",
+            "description": "Internal _mint function has onlyOwner modifier attached, leading to extra gas costs; consider removing the modifier.",
+            "severity": "info",
+            "location": "Advon.sol (_mint function)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Low code and documentation readability",
+            "description": "Whitepaper accounts for 95% of token supply, with unspecified 5% allocation; typos in codebase; error message inaccurate.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

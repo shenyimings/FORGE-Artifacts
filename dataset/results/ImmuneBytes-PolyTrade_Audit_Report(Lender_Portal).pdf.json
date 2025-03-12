@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/ImmuneBytes-PolyTrade_Audit_Report(Lender_Portal).pdf",
+    "project_info": {
+        "url": "https://github.com/polytrade-finance/lender-portal-contracts/tree/dev",
+        "commit_id": "75497f0a0371e7b274eb06e1a94eaaba9062aca1",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "lender-portal-contracts": "contracts/ImmuneBytes-PolyTrade_Audit_Report(Lender_Portal)/lender-portal-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Sandwich transaction attack in _swapExactTokens() function",
+            "description": "The _swapExactTokens() function is susceptible to sandwich attacks due to using 0 as amountOutMin, making withdraw transactions for lenders vulnerable.",
+            "severity": "high",
+            "location": "LenderPool contract, _swapExactTokens() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Incorrect input validation in withdraw() function",
+            "description": "The withdraw() function accepts invalid inputs and does not validate them, leading to unintended execution.",
+            "severity": "medium",
+            "location": "LenderPool contract, withdraw() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-221"
+                ]
+            },
+            "title": "No function to pull out extra reward tokens",
+            "description": "There is no mechanism to pull out extra reward tokens from the LenderPool contract, making it difficult for the PolyTrade team to retrieve them.",
+            "severity": "medium",
+            "location": "LenderPool contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect use of Pausable contract",
+            "description": "The LenderPool contract inherits the Pausable contract unnecessary and does not provide a mechanism to pause and unpause the contract.",
+            "severity": "medium",
+            "location": "LenderPool contract, Pausable contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Repeated ERC20.approve() external calls",
+            "description": "The _claimRewards() function performs repeated approve() calls, resulting in unnecessary gas costs.",
+            "severity": "low",
+            "location": "LenderPool contract, _claimRewards() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Mappings can be combined into one struct",
+            "description": "The _amountLent and _roundCount mappings can be combined into a single struct for optimized storage.",
+            "severity": "low",
+            "location": "LenderPool contract, _amountLent and _roundCount mappings"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Smaller-sized uint variables can be used",
+            "description": "The uint256 startPeriod and endPeriod variables in the Round struct can be replaced with smaller-sized uint variables for optimized storage.",
+            "severity": "low",
+            "location": "LenderPool contract, Round struct"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "No function to read _stableAPY variable",
+            "description": "The _stableAPY variable is declared private and lacks a view function to read its value, making it inaccessible from outside the contract.",
+            "severity": "low",
+            "location": "LenderPool contract, _stableAPY variable"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "No Events emitted after imperative State Variable modification",
+            "description": "The setMinimumDeposit() function updates a crucial state variable but does not emit an event, making it difficult to track off-chain.",
+            "severity": "info",
+            "location": "LenderPool contract, setMinimumDeposit() function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "_getFinishedRounds() function can be optimized and redesigned effectively",
+            "description": "The _getFinishedRounds() function includes repetitive code and can be redesigned for better readability and gas efficiency.",
+            "severity": "info",
+            "location": "LenderPool contract, _getFinishedRounds() function"
+        }
+    ]
+}

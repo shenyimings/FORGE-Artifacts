@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-ShibaNova-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/ShibaNova/Contracts/tree/e7041e5",
+        "commit_id": "e7041e5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Contracts": "contracts/PeckShield-Audit-Report-ShibaNova-v1/Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Trading Fee Discrepancy Between ShibaSwap And ShibaNova",
+            "description": "The built-in trading fee in ShibaLibrary is 0.16%, but it's assumed to be 0.2% in ShibaPair.",
+            "severity": "high",
+            "location": "Multiple Contracts, Business Logic"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Sybil Attacks on sNova Voting",
+            "description": "The current token contract is vulnerable to Sybil attacks, which can amplify the voting powers arbitrarily.",
+            "severity": "low",
+            "location": "SNovaToken, Business Logic"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20- Compliant Tokens",
+            "description": "Transfer() routine does not have a return value defined and implemented, which may cause the call to revert.",
+            "severity": "low",
+            "location": "Multiple Contracts (PresaleContract::swap())"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged account needs to be scrutinized; a multi-sig account or community-governed DAO can alleviate this concern.",
+            "severity": "medium",
+            "location": "Multiple Contracts (ShibaFactory::setFeeAmount() and MasterShiba::set())"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Timely massUpdatePools During Pool Weight Changes",
+            "description": "Need to timely invoke massUpdatePools() when any pool's weight has been updated.",
+            "severity": "low",
+            "location": "MasterShiba (MasterShiba::set())"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistency Between Document and Implementation",
+            "description": "Misleading comment in the ShibaPair contract; minted liquidity should be equal to 1/(IShibaFactory(factory).feeAmount()+1) of the growth in sqrt(k).",
+            "severity": "info",
+            "location": "ShibaPair (ShibaPair::_mintFee())"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Code Removal",
+            "description": "Presence of unnecessary redundancies that can be safely removed.",
+            "severity": "info",
+            "location": "ShibaLibrary (ShibaLibrary::getReserves())"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy Risk in deposit()/withdraw()/harvestReward()",
+            "description": "Violation of the checks-effects-interactions principle, making it possible for a malicious contract to re-enter the vulnerable contract via nested calls, potentially leading to re-entrancy attacks.",
+            "severity": "low",
+            "location": "MasterShiba contract (deposit(), withdraw(), and harvestReward() functions)"
+        }
+    ]
+}

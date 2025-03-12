@@ -1,0 +1,140 @@
+{
+    "path": "artifacts/Moow-deal_SC-Audit_080823_SA-1605.pdf",
+    "project_info": {
+        "url": "https://github.com/superchainers/mw_chain/tree/main/contracts",
+        "commit_id": "17445da642fb56dba128b4e79db04dcd93ba8431, 6e2ff3d4c389937208e4d415879df60a914e93ac",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "mw_chain": "contracts/Moow-deal_SC-Audit_080823_SA-1605/mw_chain"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Data Inconsistency",
+            "description": "Inconsistent implementation of a bot prevention method allows unlimited requests to be sent by anyone after a certain block number is reached.",
+            "severity": "critical",
+            "location": "BEP20TokenImplementation.sol, _transfer() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Funds Lock",
+            "description": "Malicious addresses can ban arbitrary addresses and lock their funds in the contract permanently by entering an arbitrary address as recipient via transfer function.",
+            "severity": "critical",
+            "location": "BEP20TokenImplementation.sol, transfer() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Using a floating pragma can introduce bugs that affect the contract system negatively.",
+            "severity": "low",
+            "location": "./contracts/*"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Use of SafeMath",
+            "description": "The overflow/underflow check is implemented via ABIEncoderV2 on the language level, making SafeMath library redundant.",
+            "severity": "info",
+            "location": "./contracts/bep20/BEP20TokenImplementation.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation",
+            "description": "Following Solidity Style guidelines facilitates code comprehension.",
+            "severity": "info",
+            "location": "/contracts/BEP20TokenImplementation.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Function",
+            "description": "The constructor function is redundant and causes consuming extra Gas.",
+            "severity": "info",
+            "location": "./contracts/BEP20TokenImplementation.sol: constructor()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Functions That Can Be Declared External",
+            "description": "\"public\" functions that are never called by the contract should be declared \"external\" to save Gas.",
+            "severity": "info",
+            "location": "./contracts/BEP20TokenImplementation.sol: constructor(), initialize(), renounceOwnership(), transferOwnership(), increaseAllowance(), decreaseAllowance(), mint(), burn(), isBlacklisted()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "CEI Pattern Violation",
+            "description": "The Checks-Effects-Interactions pattern is violated, which can lead to vulnerabilities.",
+            "severity": "n/a",
+            "location": "./contracts/bep20/BEP20TokenImplementation.sol: transferFrom()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Import",
+            "description": "Proxy and Address imports are redundant because they are never used.",
+            "severity": "info",
+            "location": "./contracts/BEP20UpgradeableProxy.sol"
+        }
+    ]
+}

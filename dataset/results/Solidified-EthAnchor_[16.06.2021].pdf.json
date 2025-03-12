@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/Solidified-EthAnchor_[16.06.2021].pdf",
+    "project_info": {
+        "url": "https://github.com/Anchor-Protocol/eth-anchor-contracts/tree/develop",
+        "commit_id": "785f2cebd32c145687c627471d16f0824499c911",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "eth-anchor-contracts": "contracts/Solidified-EthAnchor_[16/eth-anchor-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Inheritance Mismatch due to duplicate libraries",
+            "description": "Duplicate OpenZeppelin dependencies are included from module dependencies and project codebase.",
+            "severity": "low",
+            "location": "Ownable.sol, Proxy.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Token swaps do not validate the pool existence",
+            "description": "swapToken() function in CurveSwapper.sol does not validate if the Curve pool exists before transferring tokens.",
+            "severity": "low",
+            "location": "CurveSwapper.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Index 0 of an enumerable set is not in any order",
+            "description": "Fetching item at index 0 from an enumerable set may not return the intended element due to no guarantee on the order.",
+            "severity": "low",
+            "location": "OperationFactory, OperationStore"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "allocate() does not check if the operation already exists in other queues",
+            "description": "allocate() method does not validate if the input operation address is already present in any other contract.",
+            "severity": "low",
+            "location": "OperationStore.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input validations",
+            "description": "Contracts are missing input validation for addresses, which can lead to gas wastage or unintentional ownership renounce.",
+            "severity": "low",
+            "location": "Multiple files (Operator.sol, OperationACL.sol, Router.sol, RouterV2.sol, UniswapSwapper.sol)"
+        }
+    ]
+}

@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/Iosiro- Synthetix SIP-37 Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix",
+        "commit_id": "6ac6f4b642e6f06e7531d9fcdfd655ad27acda9e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix": "contracts/Iosiro- Synthetix SIP-37 Smart Contract Audit/synthetix"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ]
+            },
+            "title": "Use a Synth-specific Waiting Period",
+            "description": "The waiting period for all exchanges was set to a fixed period of N minutes, which may not be suitable for assets with varying volatilities.",
+            "severity": "info",
+            "location": "ExchangeRates.sol, Exchanger.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ],
+                "3": [
+                    "CWE-1060"
+                ]
+            },
+            "title": "Inefficient Search for Max Timestamp",
+            "description": "The getMaxTimestamp(...) function iterated through an array of a user's exchanges to find the exchange with the most recent timestamp, which could be optimized.",
+            "severity": "info",
+            "location": "ExchangeState.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Implement Temporal Validation in effectiveValueAtRound(...)",
+            "description": "The effectiveValueAtRound(...) function did not include validation to ensure that the rounds are within a certain time period of each other, which could be exploited if exchange rates were set at vastly different times.",
+            "severity": "info",
+            "location": "Exchanger.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Comment Incorrectly Describes Code",
+            "description": "The comment specifies that the function returns a bool, but it actually returns (uint, uint)",
+            "severity": "n/a",
+            "location": "Synthetix.sol#L246"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1116"
+                ]
+            },
+            "title": "Language Mistakes in Comments and Revert Messages",
+            "description": "Spelling and grammatical errors in comments and revert messages can affect the end-user experience and code maintainability",
+            "severity": "n/a",
+            "location": "Multiple locations (Exchanger.sol#L107, ExchangeRates.sol#L7, etc.)"
+        }
+    ]
+}

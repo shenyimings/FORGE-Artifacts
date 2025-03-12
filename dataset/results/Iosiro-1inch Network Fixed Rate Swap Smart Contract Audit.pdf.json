@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/Iosiro-1inch Network Fixed Rate Swap Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/1inch/fixed-rate-swap",
+        "commit_id": "65b144ab9c5c55dc451a6cf964c6a90c96038eae",
+        "address": "0x40bbdE0eC6F177C4A67360d0f0969Cfc464b0bB4",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "fixed-rate-swap": "contracts/Iosiro-1inch Network Fixed Rate Swap Smart Contract Audit/fixed-rate-swap"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Token pairs must have the same number of decimals",
+            "description": "No logic was included in the contract to account for token pairs with a differing number of decimals.",
+            "severity": "info",
+            "location": "Fixed Rate Swap Contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Token transfer fees could lead to incorrect system states",
+            "description": "The mainnet contract in scope for the audit used the USDC-USDT pair, and USDT has an optional transfer fee that can optionally be enabled by Tether.",
+            "severity": "info",
+            "location": "Fixed Rate Swap Contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Potential overflow",
+            "description": "The `_powerHelper(uint256 x) function made use of the unchecked keyword to reduce the gas expenditure for the calculation performed.",
+            "severity": "info",
+            "location": "Fixed Rate Swap Contract, `_powerHelper` function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing validation for to value",
+            "description": "Additional validation can be added to the `withdrawFor(uint256 amount, address to)` function to ensure that the `to parameter is non-zero.",
+            "severity": "info",
+            "location": "Fixed Rate Swap Contract, `withdrawFor` function"
+        }
+    ]
+}

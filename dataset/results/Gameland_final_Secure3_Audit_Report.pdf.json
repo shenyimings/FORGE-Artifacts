@@ -1,0 +1,269 @@
+{
+    "path": "artifacts/Gameland_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/Gameland0/smart-contract",
+        "commit_id": "2c524d8da26876951350afb8c5310bc232ea4a51",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smart-contract": "contracts/Gameland_final_Secure3_Audit_Report/smart-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Ether may locked in GameLand_verify contract",
+            "description": "Every Ether sent to GameLand_verify contract will be lost.",
+            "severity": "medium",
+            "location": "code/payment_contract.sol#L7, L9, L213 (contract, function: fallback, receive)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Logic Error in GameLand_verify::verify_address_amount",
+            "description": "The value of variable 're' should be address_info[zt].price instead of allowance of USDT.",
+            "severity": "medium",
+            "location": "code/payment_contract.sol#L118, L142 (contract, function: verify_address_amount)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Logic error in GameLand_verify::get_whethertobuy ",
+            "description": "Returns 1 instead of index i",
+            "severity": "low",
+            "location": "contract, function: get_whethertobuy "
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing require check in GameLand_verify::verify_address_amount after call",
+            "description": "Missing keyword 'require'",
+            "severity": "medium",
+            "location": "contract, function: verify_address_amount"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Missing 0 address check in GameLand_verify:updateOwner",
+            "description": "The owner permission may be lost because the 0 address check is missing",
+            "severity": "low",
+            "location": "contract, function: updateOwner "
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Missing Event in GameLand_verify contract",
+            "description": "Functions that change storage should emit events",
+            "severity": "info",
+            "location": "contract (GameLand_verify)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing check array parameter length in GameLand_verify::batch_set_address_amount",
+            "description": "Lack of verification on the lengths of incoming arrays",
+            "severity": "info",
+            "location": "contract, function: batch_set_address_amount"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Missing update verify_info::dt and address_amount_info::sl in GameLand_verify::set_address_amount if zt != 999999999",
+            "description": "The 'dt' and 'sl' are never updated when find_address returns 999999999",
+            "severity": "low",
+            "location": "contract, function: set_address_amount "
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Not following the pull-over-push pattern in GameLand_verify::verify_address_amount",
+            "description": "The contract does not follow the pull-over-push pattern, which may affect user experience and gas usage",
+            "severity": "info",
+            "location": "contract, function: verify_address_amount"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Precision issue in GameLand_verify::verify_address_amount",
+            "description": "Performing division before multiplication can lead to precision loss",
+            "severity": "low",
+            "location": "contract, function: verify_address_amount "
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant use of receive and fallback in GameLand_verify",
+            "description": "The contract has redundant use of receive and fallback functions",
+            "severity": "info",
+            "location": "contract (GameLand_verify)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary use of receive() function",
+            "description": "Using both fallback and receive functions when only one is needed",
+            "severity": "n/a",
+            "location": "Contract, receive() function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy risk in GameLand_verify contract",
+            "description": "Potential reentrancy attack due to multiple function calls in verify_address_amount function",
+            "severity": "info",
+            "location": "GameLand_verify contract, verify_address_amount function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Unuse of latest solidity version",
+            "description": "Using an outdated Solidity version (0.8.0)",
+            "severity": "info",
+            "location": "payment_contract.sol, line 2"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused function: erc20approve",
+            "description": "Unused internal function erc20approve in GameLand_verify contract",
+            "severity": "info",
+            "location": "payment_contract.sol, line 225"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Using a state variable to track the balance instead of address(this).balance",
+            "description": "Tracking ether balance using address(this).balance instead of a state variable",
+            "severity": "low",
+            "location": "payment_contract.sol, line 213"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "for loop unlimited number of iterations risk in GameLand_verify contract",
+            "description": "Potential gas exhaustion due to unlimited for loops in find_address and batch_set_addresses_amount functions",
+            "severity": "low",
+            "location": "payment_contract.sol, lines 66-72 and 76-100"
+        }
+    ]
+}

@@ -1,0 +1,290 @@
+{
+    "path": "artifacts/Sudoswap-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/sudoswap/lssvm",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "lssvm": "contracts/Sudoswap-Spearbit-Security-Review/lssvm"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Clones with malicious extradata are also considered valid clones",
+            "description": "Malicious contracts can be verified as legitimate clones by only checking the first 54 bytes of proxy code.",
+            "severity": "critical",
+            "location": "LSSVMPairCloner.sol#L121, LSSVMPair.sol#L687-695, LSSVMRouter.sol#L574-594, LSSVMPairFactory.sol#L223-257, LSSVMPairCloner.sol#L206232"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Factory Owner can steal user funds approved to the Router",
+            "description": "A pair owner can make arbitrary calls to any contract that has been approved by the factory owner, stealing user funds.",
+            "severity": "high",
+            "location": "LSSVMPair.sol#L687-695, LSSVMRouter.sol#L574"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing check in the number of Received Tokens when tokens are transferred directly",
+            "description": "No checks are done on the number of received tokens when transferring tokens directly.",
+            "severity": "medium",
+            "location": "LSSVMPairERC20.sol#L41-78, function _validateTokenInput()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Malicious assetRecipient could get an unfair amount of tokens",
+            "description": "A malicious assetRecipient could manipulate its NFT balance to obtain an unfair amount of tokens.",
+            "severity": "medium",
+            "location": "LSSVMRouter.sol#L754-789, function _swapNFTsForToken()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Malicious Router can exploit cacheAssetRecipientNFTBalance to drain pair funds",
+            "description": "A malicious router could drain pair funds by exploiting the cacheAssetRecipientNFTBalance function.",
+            "severity": "medium",
+            "location": "LSSVMPair.sol#L371-379, LSSVMPair.sol#L318-366"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Malicious Router can steal NFTs via Re-Entrancy attack",
+            "description": "A malicious router could steal NFTs by exploiting a re-entrancy vulnerability.",
+            "severity": "medium",
+            "location": "LSSVMPair.sol, LSSVMPairERC20.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "getAllHeldIds() of LSSVMPairMissingEnumerable is vulnerable to a denial of service attack",
+            "description": "The getAllHeldIds() function is vulnerable to a denial of service attack due to unregistered NFTs.",
+            "severity": "medium",
+            "location": "LSSVMPairMissingEnumerable.sol#L90-97, LSSVMPair.sol#L125"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "With NFT pools the protocol fees end up in assetRecipient instead of _factory",
+            "description": "Protocol fees end up in assetRecipient instead of _factory due to incorrect fee handling.",
+            "severity": "medium",
+            "location": "LSSVMPair.sol#L192-245, LSSVMPairERC20.sol#L90-105, LSSVMPairETH.sol#L53-66"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Error codes of Quote functions are unchecked",
+            "description": "The error return values from functions getBuyNFTQuote() and getSellNFTQuote() are not checked.",
+            "severity": "medium",
+            "location": "LSSVMPair.sol#L389-431, LSSVMRouter.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Front-running swaps",
+            "description": "Pair owner can front-run swaps to steal slippage allowance.",
+            "severity": "low",
+            "location": "LSSVMPair.sol#L630, LSSVMPair.sol#L644, LSSVMPair.sol#L660"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing input validation",
+            "description": "Functions getBuyInfo() and getSellInfo() in ExponentialCurve.sol do not check for numItems != 0.",
+            "severity": "low",
+            "location": "ExponentialCurve.sol#L45-65, LinearCurve.sol#L38-58"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected fallback function",
+            "description": "The contract LSSVMPairETH contains an open fallback() function.",
+            "severity": "low",
+            "location": "LSSVMPairETH.sol#L133-139"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unnecessary fund transfers",
+            "description": "Functions _initializePairETH() and _initializePairERC20() allow for unnecessary ETH/ERC20 and NFT transfers.",
+            "severity": "low",
+            "location": "LSSVMPairFactory.sol#L363-416"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input validation",
+            "description": "Functions setCallAllowed() and setBondingCurveAllowed() do not check for target != 0.",
+            "severity": "low",
+            "location": "LSSVMPairFactory.sol#L291-356"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Underflow vulnerability",
+            "description": "Calculation in functions factory(), bondingCurve(), nft(), poolType(), and token() may underflow if too few parameters are supplied.",
+            "severity": "low",
+            "location": "LSSVMPair.sol#L447-494, LSSVMPairERC20.sol#L24-32"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input validation",
+            "description": "Functions swapNFTsForToken(), routerSwapNFTsForToken(), and getSellNFTQuote() do not perform input verification on the number of NFTs.",
+            "severity": "low",
+            "location": "LSSVMPair.sol#L258-310, LSSVMPair.sol#L318-366, LSSVMPair.sol#L413-431"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Insecure function calls",
+            "description": "ETH-based swap functions use isRouter==false and routerCaller==address(0) as parameters to swapTokenForAnyNFTs() and swapTokenForSpecificNFTs().",
+            "severity": "low",
+            "location": "LSSVMRouter.sol, LSSVMPair.sol, LSSVMPairETH.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy vulnerability",
+            "description": "The codebase lacks reentrancy guard modifiers in various functions.",
+            "severity": "low",
+            "location": "All LSSVM Contracts."
+        }
+    ]
+}

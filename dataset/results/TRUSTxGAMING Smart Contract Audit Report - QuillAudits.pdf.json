@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/TRUSTxGAMING Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x9f46ecf92e7f6ee8c03f393adf04c2e17b8cd0b0",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.5.17+commit.d19bba13"
+        ],
+        "project_path": {
+            "TRUSTxGAMING": "contracts/TRUSTxGAMING Smart Contract Audit Report - QuillAudits/TRUSTxGAMING"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner Can Increase Its Balance When Burning Tokens",
+            "description": "The burn function can be called by the contract owner, allowing them to burn tokens from any user account and increase their own balance, causing an inconsistency with the total supply.",
+            "severity": "high",
+            "location": "TRUSTxGAMING.sol, _burn internal function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "The contract owner has privileges to call certain functions, including burning tokens from any account, freezing accounts, pausing and unpausing the token contract, and withdrawing tokens sent to the contract.",
+            "severity": "medium",
+            "location": "TRUSTxGAMING.sol, Ownable contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Double Frozen Account Require Check in the Approve Function",
+            "description": "There is a redundant check in the approve function that causes extra gas cost when called by users.",
+            "severity": "info",
+            "location": "TRUSTxGAMING.sol, approve and _approve functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Insufficient Code Comment and Specification",
+            "description": "Some functions lack sufficient code comments to explain their purpose, and the smart contract specification is not detailed.",
+            "severity": "info",
+            "location": "TRUSTxGAMING.sol, various functions"
+        }
+    ]
+}

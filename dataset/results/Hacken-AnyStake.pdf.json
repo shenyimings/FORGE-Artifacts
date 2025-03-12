@@ -1,0 +1,164 @@
+{
+    "path": "artifacts/Hacken-AnyStake.pdf",
+    "project_info": {
+        "url": "https://github.com/defiat-crypto/anystake-contracts/tree/main/contracts",
+        "commit_id": "d67d526121a2d24ed0f0b616bf6d81af78645484",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "anystake-contracts": "contracts/Hacken-AnyStake/anystake-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inaccessible AnyStakeBooster code",
+            "description": "Not finalized, not tested and not ready for audit.",
+            "severity": "critical",
+            "location": "AnyStakeBooster"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "AddReward function accessibility",
+            "description": "External function in AnyStakeRegulator accessible by anyone.",
+            "severity": "critical",
+            "location": "AnyStakeRegulator, AddReward function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "emergencyWithdraw function fee handling",
+            "description": "Function doesn't charge any fee.",
+            "severity": "critical",
+            "location": "emergencyWithdraw function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Frontrunning buybacks",
+            "description": "Transaction may fail or have a bad exchange rate due to frontrunning.",
+            "severity": "high",
+            "location": "Buyback functionality"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Uniswap migration limitations",
+            "description": "Impossible to change router and factory addresses if Uniswap migrates to a new version.",
+            "severity": "high",
+            "location": "Uniswap integration"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ]
+            },
+            "title": "LP token price manipulation risk",
+            "description": "AnyStake uses only 1 source for LP token price, which could be manipulated via flashloans.",
+            "severity": "high",
+            "location": "LP token pricing"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Deposit function gas optimization",
+            "description": "Claim function called on every deposit, but can be optimized for gas usage.",
+            "severity": "medium",
+            "location": "Deposit function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Code optimization for gas usage",
+            "description": "Code is not optimized for gas usage.",
+            "severity": "medium",
+            "location": "General codebase"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "claimAll function reversion risk",
+            "description": "Function will always revert if a user doesn't have stake in each pool.",
+            "severity": "medium",
+            "location": "claimAll function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Solidity version lock issue",
+            "description": "Solidity version is not locked to a specific stable version.",
+            "severity": "low",
+            "location": "Solidity configuration"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Comment inconsistency in AnyStake",
+            "description": "Wrong comment on line 84, base should be 1000.",
+            "severity": "low",
+            "location": "AnyStake contract, line 84"
+        }
+    ]
+}

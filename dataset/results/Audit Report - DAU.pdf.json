@@ -1,0 +1,185 @@
+{
+    "path": "artifacts/Audit Report - DAU.pdf",
+    "project_info": {
+        "url": "https://github.com/Lexim-gold/Lexim-ERC20-Token",
+        "commit_id": "3f7807cba6f6f7facf50013c9b3432500c215169",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Lexim-ERC20-Token": "contracts/Audit Report - DAU/Lexim-ERC20-Token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "High degree of centralization",
+            "description": "The contract deployer withholds all roles upon initialization, creating a single point of failure.",
+            "severity": "low",
+            "location": "Contract deployer and DEFAULT_ADMIN_ROLE"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "A removed gold bar cannot be added again",
+            "description": "When a gold bar is removed, its \"isIn\" value is not set to 0, preventing it from being added again.",
+            "severity": "low",
+            "location": "removeGoldBar function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Change of fee rate can be set unreasonably high post-minting",
+            "description": "The feeRate can be modified at any time and set arbitrarily high, resulting in unexpected losses for users.",
+            "severity": "low",
+            "location": "setFeeRate function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Changeable token name and symbol may be problematic for integrations",
+            "description": "The token name and symbol can be changed, causing discrepancies with DeFi protocols that expect static values.",
+            "severity": "info",
+            "location": "setNameAndSymbol function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Fee-on-transfer mechanism may be problematic for integrations",
+            "description": "The configurable fee on every transfer can cause issues with DeFi protocols that assume equal requested and transferred amounts.",
+            "severity": "info",
+            "location": "Fee-on-transfer mechanism"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "notPaying functions do not emit events",
+            "description": "The addNotPaying and removeNotPaying functions do not emit events.",
+            "severity": "info",
+            "location": "addNotPaying and removeNotPaying functions"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Use of deprecated OpenZeppelin library",
+            "description": "The contract inherits from a deprecated OpenZeppelin library.",
+            "severity": "info",
+            "location": "ERC20PermitUpgradeable library"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Contract size exceeds 24 Kibibytes",
+            "description": "The contract size is too large, making it undeployable on mainnet.",
+            "severity": "n/a",
+            "location": "Contract code"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "_beforeTokenTransfer missing virtual keyword",
+            "description": "The overridden _beforeTokenTransfer hook is missing the virtual keyword.",
+            "severity": "n/a",
+            "location": "_beforeTokenTransfer hook"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-284"
+                ]
+            },
+            "title": "No check to ensure total supply of ERC20 tokens is sufficiently backed by gold bars",
+            "description": "There are no checks to ensure that the total supply of ERC20 tokens is backed by physical gold bars.",
+            "severity": "n/a",
+            "location": "Mint function"
+        }
+    ]
+}

@@ -1,0 +1,287 @@
+{
+    "path": "artifacts/2022-10-shimacapital-ondo-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/ondoprotocol/monopoly/tree/814cfcfa04a7bfa4ae3fa395cafa329767dc67ec",
+        "commit_id": "814cfcfa04a7bfa4ae3fa395cafa329767dc67ec",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.4.18+commit.9cf6e910"
+        ],
+        "project_path": {
+            "TetherToken": "contracts/2022-10-shimacapital-ondo-securityreview/TetherToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Risk of DoS attacks due to rate limits",
+            "description": "An attacker could grief the protocol by exhausting the minting and redeeming rate limits in a single transaction.",
+            "severity": "high",
+            "location": "PSM contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Risk of accounting errors due to missing check in the invest function",
+            "description": "Investing different collateral tokens in a single strategy contract could result in incorrect accounting and the loss of user funds.",
+            "severity": "high",
+            "location": "Treasury contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing functionality in the _rescueTokens function",
+            "description": "The _rescueTokens function does not transfer the entire token balance when it reaches a zero-value entry in the _amounts array.",
+            "severity": "low",
+            "location": "contracts/RegistryClient.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1038"
+                ],
+                "4": [
+                    "CWE-733"
+                ]
+            },
+            "title": "Solidity compiler optimizations can be problematic",
+            "description": "Optional compiler optimizations in Solidity may introduce security vulnerabilities.",
+            "severity": "info",
+            "location": "Ondo protocol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of contract existence check on call",
+            "description": "The multiexcall function does not include a contract existence check before calling the target address.",
+            "severity": "info",
+            "location": "contracts/factory/MonoFactory.sol, contracts/factory/PolyFactory.sol, contracts/RegistryClient.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Arbitrage opportunity in the PSM contract",
+            "description": "Users could take advantage of price differences between two stablecoins to engage in arbitrage.",
+            "severity": "info",
+            "location": "contracts/PSM.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Problematic use of safeApprove",
+            "description": "The redeem function uses the safeApprove function, which is deprecated and can cause reverts if not used correctly.",
+            "severity": "low",
+            "location": "contracts/BaseStablecoinStrategy.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Lack of upper bound for fees and system parameters",
+            "description": "Minting and redeeming fees lack upper bounds.",
+            "severity": "info",
+            "location": "contracs/PSM.sol, setMintFee and setRedeemFee functions"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Insufficient use of allowance",
+            "description": "The safeApprove function in SafeERC20.sol does not completely use the allocated allowance, preventing subsequent redemption operations.",
+            "severity": "n/a",
+            "location": "CompoundStrategy contract and Treasury contract, safeApprove function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Unreviewed contracts",
+            "description": "Interacting with contracts that lack a security review",
+            "severity": "high",
+            "location": "Contract integration checklist"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Complex code",
+            "description": "Tokens with complex code require a higher standard of review",
+            "severity": "medium",
+            "location": "Contract composition checklist"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "No SafeMath usage",
+            "description": "Contracts that do not use SafeMath require a higher standard of review",
+            "severity": "high",
+            "location": "Contract composition checklist"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Multiple non-token-related functions",
+            "description": "Non-token-related functions increase the likelihood of an issue in the contract",
+            "severity": "medium",
+            "location": "Contract composition checklist"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Upgradeable contracts",
+            "description": "Upgradeable contracts may change their rules over time",
+            "severity": "high",
+            "location": "Owner privileges checklist"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Malicious or compromised owners",
+            "description": "Malicious or compromised owners can abuse minting capabilities",
+            "severity": "high",
+            "location": "Owner privileges checklist"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Pausable tokens",
+            "description": "Pausable tokens can trap contracts relying on them",
+            "severity": "medium",
+            "location": "Owner privileges checklist"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Blacklist features",
+            "description": "Malicious or compromised owners can trap contracts relying on tokens with a blacklist",
+            "severity": "medium",
+            "location": "Owner privileges checklist"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "ERC20 non-conformity",
+            "description": "Tokens that do not conform to the ERC20 standard may have issues",
+            "severity": "high",
+            "location": "ERC20 conformity checks"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "ERC721 non-conformity",
+            "description": "Tokens that do not conform to the ERC721 standard may have issues",
+            "severity": "high",
+            "location": "ERC721 conformity checks"
+        }
+    ]
+}

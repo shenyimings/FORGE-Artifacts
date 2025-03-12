@@ -1,0 +1,602 @@
+{
+    "path": "artifacts/2023-04-chainflip-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/chainflip-io/chainflip-eth-contracts",
+        "commit_id": "55402af70f6f68636b4bac424bd75c1b90d339fd",
+        "address": "0x4ed848684aa07be818da85923ca701e0e36ef602",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "chainflip-eth-contracts": "contracts/2023-04-chainflip-securityreview/chainflip-eth-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ]
+            },
+            "title": "Step 2 of the handover protocol can be forged",
+            "description": "The hash calculation in step 2 of the handover protocol does not include the commitment, allowing anyone to generate a random and compute z, making it possible for participant 𝔸 to forge step 2.",
+            "severity": "medium",
+            "location": "Handover protocol, step 2"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Ceremony participants can send many delayed messages",
+            "description": "Participants can send multiple ceremony data for future rounds, which may be an indication of malicious behavior.",
+            "severity": "info",
+            "location": "engine/src/multisig/client/ceremony_runner.rs"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Binding value can be zero",
+            "description": "The gen_rho_i function does not check that the return value lies in the range [1, q), which may result in a binding value of zero.",
+            "severity": "info",
+            "location": "engine/src/multisig/client/signing/signing_detail.rs"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "The Chainflip back end and smart contracts have vulnerable dependencies",
+            "description": "The Chainflip back-end codebase uses vulnerable Rust dependencies, including openssl, remove_dir_all, time, ansi_term, mach, parity-util-mem, and parity-wasm, which can result in information disclosure and other side effects.",
+            "severity": "medium",
+            "location": "Chainflip back end and smart contracts"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential panic in KeyId::from_bytes",
+            "description": "The KeyId::from_bytes method can panic when given input shorter than the value of size_of_epoch_index.",
+            "severity": "n/a",
+            "location": "state-chain/primitives/src/lib.rs (lines 133-139)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Solidity compiler optimizations can be problematic",
+            "description": "Chainflip has enabled optional compiler optimizations in Solidity, which may not be safe.",
+            "severity": "n/a",
+            "location": "Solidity codebase"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "ERC-20 token transfer fails for certain tokens",
+            "description": "Transfer function can fail due to incorrect checks on return data from nonstandard ERC-20 tokens.",
+            "severity": "high",
+            "location": "contracts/Vault.sol (line 243)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "addGasNative is missing check for nonzero value",
+            "description": "The addGasNative function does not check for nonzero msg.value amounts.",
+            "severity": "info",
+            "location": "contracts/Vault.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "StakeManager contains unnecessary receive function",
+            "description": "The StakeManager contract has a receive function that can lead to unexpected ETH acceptance.",
+            "severity": "info",
+            "location": "contracts/StakeManager.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing events for important operations",
+            "description": "Some functions in the Vault and KeyManager contracts do not emit events.",
+            "severity": "low",
+            "location": "contracts/Vault.sol, contracts/KeyManager.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-241"
+                ]
+            },
+            "title": "Nonstandard ERC-20 tokens get stuck when depositing",
+            "description": "Fetch function does not handle transfer function correctly for nonstandard ERC-20 tokens.",
+            "severity": "high",
+            "location": "contracts/Deposit.sol (lines 26-38)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Transfer can fail due to a fixed gas stipend",
+            "description": "The govWithdrawNative function can fail if the recipient has complex logic that requires more than 2300 gas.",
+            "severity": "info",
+            "location": "contracts/KeyManager.sol (lines 282-288)"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-667"
+                ],
+                "4": [
+                    "CWE-414"
+                ]
+            },
+            "title": "Low number of block confirmations configured for external blockchains",
+            "description": "The configuration for block confirmations may be too low.",
+            "severity": "n/a",
+            "location": "state-chain/runtime/src/constants.rs"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Risk of accepting uncle blocks as finalized",
+            "description": "Accepting uncle blocks as finalized due to insufficient block confirmation safety margins",
+            "severity": "n/a",
+            "location": "State Chain constants (Ethereum and Bitcoin)"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ],
+                "3": [
+                    "CWE-837"
+                ]
+            },
+            "title": "Failed broadcast nominees are not punished if epoch ends during broadcast",
+            "description": "Malicious validators can delay certain broadcast transactions near the end of an epoch without punishment",
+            "severity": "low",
+            "location": "state-chain/pallets/cf-broadcast/src/lib.rs"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Validators can report non-participants in ceremonies",
+            "description": "Participants in a threshold signing ceremony can report failure using the signed report_signature_failed extrinsic, but there is no check for whether the offenders were participants of the ceremony.",
+            "severity": "low",
+            "location": "state-chain/pallets/cf-threshold-signature/src/lib.rs and state-chain/pallets/cf-vaults/src/lib.rs"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Staker funds can be locked via front-running",
+            "description": "An attacker can front-run a valid staking transaction by submitting the same node ID as the pending transaction, the minimum staking amount, and a different return address, locking the legitimate staker's funds.",
+            "severity": "high",
+            "location": "eth-contracts/contracts/StakeManager.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Unbounded loop execution may result in out-of-gas errors",
+            "description": "The allBatch function has the potential to run out of gas during execution due to repeated logic for deploying, fetching, and transferring funds.",
+            "severity": "info",
+            "location": "contracts/Vault.sol"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Anyone can cause the Chainflip engine to panic",
+            "description": "The Chainflip engine panics when decoding token values that exceed the maximum u128 value, and anyone can trigger a panic in the engine.",
+            "severity": "medium",
+            "location": "engine/src/eth/vault.rs"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Unhandled Panic in Decode_Log_Closure Function",
+            "description": "The decode_log_closure function does not handle edge cases where the number of tokens can overflow.",
+            "severity": "n/a",
+            "location": "engine/src/eth/vault.rs"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Failed Deposits are Incorrectly Witnessed as Having Succeeded",
+            "description": "Transactions for Ethereum deposits are not checked for their success status, resulting in failed transactions being falsely credited to the user.",
+            "severity": "high",
+            "location": "engine/src/eth/ingress_witnesser.rs"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Validators are Not Reimbursed for Transactions Submitted to External Chains",
+            "description": "The cf-broadcast pallet tracks transaction fees incurred for successful broadcasts, but validators are never reimbursed for the fee incurred.",
+            "severity": "low",
+            "location": "state-chain/pallets/cf-broadcast/src/lib.rs"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "MEV Incentives are Unclear and Require Further Investigation",
+            "description": "The design of the automated market maker (AMM) deviates from Uniswap v3 implementation, leading to unclear economic and game theoretic incentives.",
+            "severity": "n/a",
+            "location": "state-chain/pallets/cf-swapping/src/lib.rs"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Unprotected use of panicking functions",
+            "description": "Use of `assert`, `unreachable`, `unwrap`, and `expect` in production code.",
+            "severity": "n/a",
+            "location": "Production code (outside unit tests)"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Unchecked casting",
+            "description": "Silent truncation of integers using the `as` keyword.",
+            "severity": "n/a",
+            "location": "Casting operations (e.g., `data.len()` to a `u32` can truncate the input length)"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ]
+            },
+            "title": "Unexpected comparisons before subtraction",
+            "description": "Errors in code that may indicate underflow issues.",
+            "severity": "n/a",
+            "location": "Subtraction operations with unexpected comparisons"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy issue",
+            "description": "Potential reentrancy vulnerability in contract callbacks.",
+            "severity": "n/a",
+            "location": "Contract callbacks ( Vault and CFReceiver contracts)"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Improper error handling",
+            "description": "Unhandled errors in code, reducing maintainability.",
+            "severity": "n/a",
+            "location": "Various locations in the codebase"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Risks of Third-Party Contract Calls",
+            "description": "The Vault smart contract executes arbitrary third-party contract calls without validating their calldata, which could facilitate theft of user funds or cause undefined system behavior.",
+            "severity": "n/a",
+            "location": "Vault smart contract"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Upgradeable Contracts",
+            "description": "Upgradeable contracts introduce additional security risks, including the risk that an attacker could use the create2 opcode to upgrade a contract to a malicious version.",
+            "severity": "n/a",
+            "location": "Third-party contracts"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Self-Destructible Contracts",
+            "description": "If a target contract can be destroyed, users may lose the funds they have deposited.",
+            "severity": "n/a",
+            "location": "Third-party contracts"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Unidentified Parameters",
+            "description": "The contract’s parameters are not identified and documented, making it difficult for users to review them.",
+            "severity": "n/a",
+            "location": "Third-party contracts"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-267"
+                ]
+            },
+            "title": "Mutable Parameters",
+            "description": "The contract uses mutable parameters instead of immutable ones, which can increase the risk of state manipulation by privileged users.",
+            "severity": "n/a",
+            "location": "Third-party contracts"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Incorrect Use of msg.sender",
+            "description": "If the correct parameter is not used, msg.sender may be set to an incorrect address during a message call.",
+            "severity": "n/a",
+            "location": "Third-party contracts"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unreviewed Contracts",
+            "description": "The contract has not been reviewed by a third-party vendor, which may increase the risk of undetected security vulnerabilities.",
+            "severity": "n/a",
+            "location": "Third-party contracts"
+        },
+        {
+            "id": 35,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ]
+            },
+            "title": "Step 2 of Handover Protocol Can Be Forged",
+            "description": "Step 2 of the handover protocol can be forged.",
+            "severity": "medium",
+            "location": "Handover protocol"
+        },
+        {
+            "id": 36,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-327"
+                ],
+                "3": [
+                    "CWE-1240"
+                ]
+            },
+            "title": "Hash Function Used as KDF in Handover Protocol",
+            "description": "The hash function is used as a key derivation function (KDF) in the handover protocol.",
+            "severity": "info",
+            "location": "Handover protocol"
+        },
+        {
+            "id": 37,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Ceremony Participants Can Send Many Delayed Messages",
+            "description": "Ceremony participants can send many delayed messages.",
+            "severity": "info",
+            "location": "Ceremony protocol"
+        }
+    ]
+}

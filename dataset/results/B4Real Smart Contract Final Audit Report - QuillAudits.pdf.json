@@ -1,0 +1,212 @@
+{
+    "path": "artifacts/B4Real Smart Contract Final Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/B4Biz/B4real-smart-contracts-Audit",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "B4real-smart-contracts-Audit": "contracts/B4Real Smart Contract Final Audit Report - QuillAudits/B4real-smart-contracts-Audit"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Wrong tokens purchased in case when decimals for input token > 18",
+            "description": "In a scenario where the input token has more than 18 decimals, the exchange rate calculation is incorrect, leading to incorrect token purchasing.",
+            "severity": "high",
+            "location": "Crowdsale contract, line 168"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Crowdsale tokens not transferred to contract",
+            "description": "When updating allocated tokens for crowdsale, the actual number of tokens on the contract should also be updated atomically in a single transaction.",
+            "severity": "medium",
+            "location": "Crowdsale contract, line 287"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Withdraw fee bypass",
+            "description": "An attacker can bypass the withdrawal fee by combining vulnerabilities D2 and D3, allowing them to withdraw LP tokens without any fee deduction.",
+            "severity": "high",
+            "location": "StakingPoolUpdatableFixedAPR contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-424"
+                ]
+            },
+            "title": "rewardLockedUp not set to zero in emergencyWithdraw",
+            "description": "In the emergency withdrawal method, rewardLockedUp is not being set to zero, allowing users to withdraw locked-up rewards even after emergency withdrawing LP tokens.",
+            "severity": "medium",
+            "location": "StakingPoolUpdatableFixedAPR contract, line 561"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "No withdraw fee in emergencyWithdraw method",
+            "description": "Users can use the emergency withdrawal method to avoid paying fees, as there is no withdraw fee deductions in this method.",
+            "severity": "medium",
+            "location": "StakingPoolUpdatableFixedAPR contract, line 561"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Struct lose packing",
+            "description": "Reordering struct variables can save gas costs by occupying fewer storage slots.",
+            "severity": "info",
+            "location": "Metadata contract, line 5"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "DoS attack possibility on for loops",
+            "description": "Care needs to be taken when using for loops as they may exceed the block gas limit if there are too many iterations.",
+            "severity": "low",
+            "location": "StakingPoolUpdatableFixedAPR contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "blockRewardPersec redundant values",
+            "description": "The blockRewardPerSec field is redundant and can be removed from the RewardInfo struct, as it will always have the same value for all pools.",
+            "severity": "low",
+            "location": "StakingPoolUpdatableFixedAPR contract, line 381"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary code",
+            "description": "User is being added as a whitelisted handler for themselves, which may be unnecessary and can be removed.",
+            "severity": "info",
+            "location": "StakingPoolUpdatableFixedAPR contract, line 218"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Extra if check",
+            "description": "There is an extra if check that can be removed as it serves no purpose.",
+            "severity": "info",
+            "location": "StakingPoolUpdatableFixedAPR contract, line 530"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused event",
+            "description": "The MaxAllowedDepositUpdated event is not used anywhere in the code and can be removed.",
+            "severity": "info",
+            "location": "StakingPoolUpdatableFixedAPR contract, line 90"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused function parameter",
+            "description": "There is an unused function parameter that can be removed to improve code quality.",
+            "severity": "info",
+            "location": "StakingPoolUpdatableFixedAPR contract, line 677"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused storage variable and function",
+            "description": "The maxAllowedDeposit variable is not used anywhere in the methods and can be removed to improve code quality.",
+            "severity": "info",
+            "location": "StakingPoolUpdatableFixedAPRWhitelisting contract, line 80, 284"
+        }
+    ]
+}

@@ -1,0 +1,272 @@
+{
+    "path": "artifacts/Zivoe_Core_Contracts.pdf",
+    "project_info": {
+        "url": "https://github.com/Zivoe/zivoe-core-foundry/tree/5f10e68966507caeec4abcefeefb151b1c00125e",
+        "commit_id": "5f10e68966507caeec4abcefeefb151b1c00125e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "zivoe-core-foundry": "contracts/Zivoe_Core_Contracts/zivoe-core-foundry"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Access Control Transfer",
+            "description": "Transfer of ZVL ownership can lead to loss of protocol functionality.",
+            "severity": "high",
+            "location": "ZivoeGlobals or ZivoeDAO (unclear)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Timelock Update",
+            "description": "Update of timelock can lead to loss of protocol functionality.",
+            "severity": "high",
+            "location": "ZivoeGTC.sol, updateTimelock function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Loss of Functionality due to Timelock Update",
+            "description": "Update of timelock can lead to loss of functionality in ZivoeTranches.",
+            "severity": "medium",
+            "location": "ZivoeGTC.sol, updateTimelock function; ZivoeTranches"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reward Vesting Schedule Manipulation",
+            "description": "Extremely large daysToVest values can lead to zero vestingPerSecond.",
+            "severity": "low",
+            "location": "ZivoeRewardsVesting.sol (unclear)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-638"
+                ],
+                "5": [
+                    "CWE-424"
+                ]
+            },
+            "title": "Revert and Lock Yield Distribution",
+            "description": "Transfers to a recipient can be blocked due to blacklisting, reverting all yield distribution operations.",
+            "severity": "n/a",
+            "location": "ZivoeYDL.sol, distributeYield function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Unprotected Ownership Transfer",
+            "description": "The `transferOwnershipAndLock` function does not check for address(0) before assigning the `_locked` variable to true.",
+            "severity": "medium",
+            "location": "ZivoeDAO.sol, `transferOwnershipAndLock` function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Function Call",
+            "description": "The `pushERC721` and `pushMultiERC721` functions set approval for all token IDs before calling the push function in the locker.",
+            "severity": "medium",
+            "location": "ZivoeDAO.sol, `pushERC721` and `pushMultiERC721` functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Invalid Address Handling",
+            "description": "The `transferZVL` function does not check for address(0) before transferring access control to a new address.",
+            "severity": "medium",
+            "location": "ZivoeGlobals.sol, `transferZVL` function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Uninitialized Variables",
+            "description": "The contract variables storing relevant addresses for the protocol are not initialized in the `initializeGlobals` function.",
+            "severity": "low",
+            "location": "ZivoeGlobals.sol, `initializeGlobals` function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Executor Role Management",
+            "description": "The `execute` and `executeBatch` functions do not check if the executor role has been revoked or renounced.",
+            "severity": "medium",
+            "location": "ZivoeGovernorV2.sol, `execute` and `executeBatch` functions"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Proposal Scheduling",
+            "description": "The `scheduleBatch` function does not check if the TLC gets without an EXECUTOR_ROLE.",
+            "severity": "medium",
+            "location": "ZivoeGovernorV2.sol, `scheduleBatch` function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Unrestricted Rewards Duration",
+            "description": "No upper limit check for rewards duration, allowing practically zero rewards.",
+            "severity": "medium",
+            "location": "ZivoeRewards.sol, addReward function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked Upper Limit in Incentives Ratio Update",
+            "description": "Upper bound update functions do not check if the upper > lower limit is kept by the update.",
+            "severity": "medium",
+            "location": "ZivoeTranches.sol, updateMaxTrancheRatio function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Equal Limits in ZVE Tokens Minted per JTT Tokens",
+            "description": "Initially both upper and lower limits are set to 0, violating the property since values are equal.",
+            "severity": "low",
+            "location": "ZivoeTranches.sol, minZVEPerJTTMint and maxZVEPerJTTMint variables"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked Update in Upper Limit of ZVE Tokens Minted per JTT Tokens",
+            "description": "Updates to the upper limits do not control upper>lower check which may potentially violate this property.",
+            "severity": "medium",
+            "location": "ZivoeTranches.sol, updates to maxZVEPerJTTMint variable"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Governance can Update Governance Settings to Unreasonable Values Griefing the Protocol",
+            "description": "Governance settings such as voting delay, voting period, proposal threshold, and quorum numerator can be updated to unreasonable values through governance proposals.",
+            "severity": "high",
+            "location": "setVotingDelay, setVotingPeriod, and setProposalThreshold functions in Governance contract"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ],
+                "3": [
+                    "CWE-839"
+                ]
+            },
+            "title": "Upper Bound Updates May Go Below Lower Bounds",
+            "description": "Functions updateMaxZVEPerJTTMint() and updateUpperRatioIncentiveBIPS() do not check if upper limits are higher than lower limits.",
+            "severity": "low",
+            "location": "ZivoeTranches contract"
+        }
+    ]
+}

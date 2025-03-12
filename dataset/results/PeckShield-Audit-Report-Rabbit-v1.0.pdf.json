@@ -1,0 +1,158 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Rabbit-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/RabbitFinanceProtocol/rabbit_finance_bsc/tree/94d87ec",
+        "commit_id": "94d87ec",
+        "address": "0x5085c49828b0b8e69bae99d96a8e0fcf0a033369",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "StrategyLiquidate": "contracts/PeckShield-Audit-Report-Rabbit-v1/StrategyLiquidate"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Force Investment Risk in Bank",
+            "description": "Potential force investment risk that has been exploited in earlier hacks",
+            "severity": "high",
+            "location": "Bank contract, work() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-669"
+                ]
+            },
+            "title": "Use Of Proper Prize Recipient in kill()",
+            "description": "Collected prize is returned back to the devAddr instead of the liquidator",
+            "severity": "low",
+            "location": "Bank contract, kill() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Proper totalReserve Accounting in calInterest() And withdrawReserve()",
+            "description": "The internal accounting does not consider totalReserve as part of totalVal, which affects the share calculation for supplying users.",
+            "severity": "medium",
+            "location": "calInterest() and withdrawReserve() functions in Bank contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Timely massUpdatePools During Pool Updates",
+            "description": "Failure to timely invoke massUpdatePools() when updating pool weights can lead to unfair reward distribution.",
+            "severity": "medium",
+            "location": "setPool() function in FairLaunch contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged governor account has too much control over the system, which can lead to security issues if compromised.",
+            "severity": "medium",
+            "location": "Multiple Contracts (Bank contract, PancakeswapWorkerGoblin contract)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Trading Fee Discrepancy In PancakeGoblin And EspAddStrategy",
+            "description": "Inconsistent trading fee assumption",
+            "severity": "medium",
+            "location": "PancakeGoblin, StrategyAddTwoSidesOptimal"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Suggested Adherence Of Checks-Effects-Interactions Pattern",
+            "description": "Violation of checks-effects-interactions principle",
+            "severity": "low",
+            "location": "Boardroom"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20-Compliant Tokens",
+            "description": "Inadequate handling of non-compliant ERC20 tokens, which may cause issues.",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved Sanity Checks For System Parameters",
+            "description": "Insufficient sanity checks for system parameters",
+            "severity": "low",
+            "location": "Bank and BankConfig contracts"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Possible Sandwich/MEV Attacks For Reduced Returns",
+            "description": "The `reinvest()` function in the PancakeswapGoblin contract is vulnerable to front-running attacks, resulting in a smaller gain for this round of yielding.",
+            "severity": "low",
+            "location": "PancakeswapGoblin contract, `reinvest()` function"
+        }
+    ]
+}

@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/MiniMeToken Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x8765b1a0eb57ca49be7eacd35b24a574d0203656",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.4.24+commit.e67f0147"
+        ],
+        "project_path": {
+            "MiniMeToken": "contracts/MiniMeToken Smart Contract Audit Report - QuillAudits/MiniMeToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Incorrect version of solidity",
+            "description": "Using an old version of Solidity prevents access to new security checks.",
+            "severity": "medium",
+            "location": "Contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "transferFrom(),transfer() returns false bool instead of reverting on failure",
+            "description": "Transfer functions return 'false' if allowance is less than amount, instead of reverting.",
+            "severity": "medium",
+            "location": "[Line 202] transferFrom() and [Line 226] doTransfer()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralization risk of Minimetoken",
+            "description": "Transfer of MiniMeTokens can be disabled by the controller, leading to Denial of Service attack.",
+            "severity": "medium",
+            "location": "[Line 202] transferFrom()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Critical Address change",
+            "description": "Changing critical addresses should be a two-step process to avoid losing privileges.",
+            "severity": "low",
+            "location": "[Line 70] changeController function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Usage of isContract() does not guarantee that an address is a Contract or not",
+            "description": "isContract() function has limitations and should be used with caution.",
+            "severity": "low",
+            "location": "[Line 223, 229, 268, 502]"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-1038"
+                ]
+            },
+            "title": "Public function that could be declared external",
+            "description": "Public functions should be declared external to save gas.",
+            "severity": "info",
+            "location": "[Line 70] changeController function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Using Inline Assembly",
+            "description": "Inline assembly is error-prone and should be avoided.",
+            "severity": "info",
+            "location": "[Line 229] isContract function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Usage of Deprecated keywords",
+            "description": "Deprecated keywords should not be used.",
+            "severity": "n/a",
+            "location": "Various lines"
+        }
+    ]
+}

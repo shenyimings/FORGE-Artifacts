@@ -1,0 +1,143 @@
+{
+    "path": "artifacts/4RX (MasterChef.sol) - Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/FourRX/4rx",
+        "commit_id": "f7d395e86028056ba5e88ee50ddbd933a1a0779d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "4rx": "contracts/4RX (MasterChef/4rx"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "safeFRXTransfer function issues",
+            "description": "The safeFRXTransfer function doesn't store information about remaining tokens owed to users, leading to unexpected scenarios.",
+            "severity": "medium",
+            "location": "MasterChef.sol, Lines 295-302"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Multiplication performed on the result of Division",
+            "description": "Performing division before multiplication leads to loss of precision.",
+            "severity": "medium",
+            "location": "MasterChef.sol, Lines 137, 180, 182, 192"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Contract State Variables updated after External Calls",
+            "description": "Updating state variables after external calls violates the Check-Effects-Interaction Pattern.",
+            "severity": "medium",
+            "location": "MasterChef.sol, Lines 90-101, 198-223, 288-291, 228-268, 182-186"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "updatePool and massUpdatePools functions have Public visibility",
+            "description": "Public visibility makes these functions accessible to everyone, which is insecure.",
+            "severity": "medium",
+            "location": "MasterChef.sol, Lines 166, 158"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "getMultiplier function could be marked as INTERNAL",
+            "description": "Marking getMultiplier as internal would improve security and gas optimization.",
+            "severity": "low",
+            "location": "MasterChef.sol, Line 122"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Return Value of an External Call is never used Effectively",
+            "description": "Not using return values from external calls effectively could lead to insecurities.",
+            "severity": "low",
+            "location": "MasterChef.sol, Lines 286, 298, 300"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "External Visibility should be preferred",
+            "description": "Marking certain functions as external instead of public would improve gas optimization and security.",
+            "severity": "low",
+            "location": "Various locations throughout the contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Constant declaration should be preferred",
+            "description": "Declaring constant variables improves code readability and maintainability.",
+            "severity": "low",
+            "location": "MasterChef.sol, Lines 53-63"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Too many Digits used",
+            "description": "Using too many digits reduces code readability and maintainability.",
+            "severity": "low",
+            "location": "MasterChef.sol, Line 57"
+        }
+    ]
+}

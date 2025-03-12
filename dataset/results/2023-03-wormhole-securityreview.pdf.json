@@ -1,0 +1,296 @@
+{
+    "path": "artifacts/2023-03-wormhole-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/wormhole-foundation/wormhole/tree/3b8de17d02ca60e2cac3f4d86d3112c5f572ba96",
+        "commit_id": "3b8de17d02ca60e2cac3f4d86d3112c5f572ba96",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "wormhole": "contracts/2023-03-wormhole-securityreview/wormhole"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of doc comments",
+            "description": "Inadequately documented code can be misunderstood, leading to improper bug fixes or mis-implemented features.",
+            "severity": "info",
+            "location": "Governor and watchers codebase"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Fields protected by mutex are not documented",
+            "description": "A developer adding functionality to the governor is unlikely to know whether the mutex must be locked for their application.",
+            "severity": "info",
+            "location": "node/pkg/governor/governor.go"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential nil pointer dereference in reloadPendingTransfer",
+            "description": "A potential nil pointer dereference exists in reloadPendingTransfer, making it impossible to restart the node.",
+            "severity": "low",
+            "location": "node/pkg/governor/governor_db.go"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked type assertion in queryCoinGecko",
+            "description": "The code that processes CoinGecko responses contains an unchecked type assertion, which could be exploited for denial of service (DoS).",
+            "severity": "low",
+            "location": "node/pkg/governor/governor_prices.go"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ]
+            },
+            "title": "Governor relies on a single external source of truth for asset prices",
+            "description": "The governor relies on a single external source (CoinGecko) for asset prices, which could enable an attacker to transfer more than they would otherwise be allowed.",
+            "severity": "info",
+            "location": "node/pkg/governor/governor_prices.go"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Potential resource leak",
+            "description": "Calls to some Contexts’ cancel functions are missing along certain code paths involving panics, leading to a potential DoS.",
+            "severity": "info",
+            "location": "node/pkg/watchers/evm/watcher.go"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "PolygonConnector does not properly use channels",
+            "description": "The Polygon connector does not read from the quit channel, nor does it write to the unsubDone channel.",
+            "severity": "n/a",
+            "location": "node/pkg/watchers/evm/connectors/polygon.go"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Receiver closes channel, contradicting Golang guidance",
+            "description": "The receiver of a channel closes the channel, which contradicts Golang's official guidance.",
+            "severity": "n/a",
+            "location": "node/pkg/watchers/evm/connectors/common.go"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Watcher configuration is overly complex",
+            "description": "The Run function of the Watcher configures each chain's connection based on its fields, resulting in a cyclomatic complexity over 90.",
+            "severity": "info",
+            "location": "node/pkg/watchers/evm/watcher.go"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "evm.Watcher.Run’s default behavior could hide bugs",
+            "description": "evm.Watcher.Run tries to create an evm watcher even if called with a ChainID that does not correspond to an evm chain.",
+            "severity": "info",
+            "location": "node/cmd/guardiand/node.go, pkg/watchers/evm/watcher.go"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Race condition in TestBlockPoller",
+            "description": "A race condition causes TestBlockPoller to fail sporadically.",
+            "severity": "info",
+            "location": "poller_test.go:300 (contract), poller_test.go:189 (function)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unconventional test structure",
+            "description": "Relying on a coarse testing mechanism makes it difficult to know that all necessary conditions and edge cases are tested.",
+            "severity": "info",
+            "location": "Various source files in node/pkg/watchers"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ],
+                "3": [
+                    "CWE-1104"
+                ]
+            },
+            "title": "Vulnerable Go packages",
+            "description": "The packages used by Wormhole have known vulnerabilities.",
+            "severity": "n/a",
+            "location": "node/go.mod (dependencies)"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1103"
+                ]
+            },
+            "title": "Wormhole node does not build with latest Go version",
+            "description": "Attempting to build a Wormhole node with the latest Go version produces an error.",
+            "severity": "info",
+            "location": "Various source files"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Missing or wrong context",
+            "description": "In several places, a new background Context is created rather than using the passed-in Context.",
+            "severity": "low",
+            "location": "node/pkg/watchers/{algorand, cosmwasm, sui, wormchain}/watcher.go"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ],
+                "3": [
+                    "CWE-835"
+                ]
+            },
+            "title": "Use of defer in a loop",
+            "description": "The Solana watcher uses defer within an infinite loop, constituting a waste of resources.",
+            "severity": "low",
+            "location": "node/pkg/watchers/solana/client.go"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Finalizer is allowed to be nil",
+            "description": "The configuration of a chain's watcher can allow a finalizer to be nil, which may permit edge cases that could otherwise be avoided.",
+            "severity": "medium",
+            "location": "BlockPollConnector in poller.go#L149-L164"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Uncontrolled heap memory allocation",
+            "description": "The use of `defer cancel()` causes significant heap memory allocation during the loop, leading to uncontrolled memory growth.",
+            "severity": "n/a",
+            "location": "Code in figure E.1, function foo()"
+        }
+    ]
+}

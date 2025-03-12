@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/GoingApe - Smart Contract Audit Final Report.pdf",
+    "project_info": {
+        "url": "https://github.com/GoingApe-Official/nft-smart-contract",
+        "commit_id": "16d80a9bba1ee3621d8e5d19ea109ce068e1c0ab",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "nft-smart-contract": "contracts/GoingApe - Smart Contract Audit Final Report/nft-smart-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Maximum mint amount for Private and Public Sales do not match the intended design.",
+            "description": "The maximum mint limit for private and public sales should be 5 and 3 respectively, but it was found to be 10 and 5 in the contract.",
+            "severity": "high",
+            "location": "GoingApeSigVerifyNft contract, Line no - 44-46"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1077"
+                ]
+            },
+            "title": "Strict Equality should be avoided in Require Statements",
+            "description": "The require statements contain a strict equality check that ensures msg.value being passed during the transaction is exactly equal to purchase amount.",
+            "severity": "low",
+            "location": "GoingApeSigVerifyNft contract, Line no - 78, 103, 136"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Violation of Check_Effects_Interaction Pattern in Mint functions",
+            "description": "The state variables were updated after the external calls are being made.",
+            "severity": "low",
+            "location": "GoingApeSigVerifyNft contract, Line no - 82, 115, 144, 145"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "No Events emitted after imperative State Variable modification",
+            "description": "Functions that update an imperative arithmetic state variable do not emit an event.",
+            "severity": "low",
+            "location": "GoingApeSigVerifyNft contract, Line no -173, 177, 181"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "External Visibility should be preferred",
+            "description": "Some functions with public visibility can be marked as external for gas optimization.",
+            "severity": "low",
+            "location": "Various functions in the GoingApeSigVerifyNft contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Absence of Error messages in Require Statements",
+            "description": "The withdrawBalance() function contains a require statement that doesn’t involve any error messages.",
+            "severity": "info",
+            "location": "GoingApeSigVerifyNft contract, Line no - 223"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked Pragma statements found in the contracts",
+            "description": "The contracts included unlocked pragma solidity version statements.",
+            "severity": "info",
+            "location": "GoingApeSigVerifyNft contract, Line no: 3"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Test Cases need to be modified and fixed",
+            "description": "The test cases designed for the current contract structure fail at particular instances.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

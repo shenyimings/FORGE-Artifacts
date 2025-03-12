@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-VRHDAO-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/Versailles-heroes-com/versailles-heroes-DAO/tree/8b0940b",
+        "commit_id": "8b0940b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "versailles-heroes-DAO": "contracts/PeckShield-Audit-Report-VRHDAO-v1/versailles-heroes-DAO"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Lack of Protection Against Oversized Gauge/Type Weights",
+            "description": "Potential pitfall with oversized guild or type weight updates",
+            "severity": "medium",
+            "location": "GuildController"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Implicit Threshold On Supported Distinct Guild Types",
+            "description": "An implicit restriction on the number of guild types that can be supported, but it's not enforced when a new guild type is being added.",
+            "severity": "medium",
+            "location": "GuildController"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved AddType() Event Generation",
+            "description": "The AddType event is not emitted if weight==0 and weight information is missing.",
+            "severity": "info",
+            "location": "GuildController"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved Sanity Checks of Guild/Type Weight Updates",
+            "description": "The update logic for guild and type weights can be improved by applying more rigorous sanity checks to prevent undesirable consequences, including reporting a lower guild relative weight and a higher get total weight.",
+            "severity": "low",
+            "location": "GuildController contracts, _change_type_weight() and _change_guild_weight() functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged account admin has the power to control or govern the flow of assets managed by this protocol, which may be a counter-party risk to contract users.",
+            "severity": "medium",
+            "location": "Multiple Contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Handling of Ownership Transfer",
+            "description": "Insecure ownership transfer process in GuildController contract.",
+            "severity": "low",
+            "location": "GuildController, commit_transfer_ownership() and apply_transfer_ownership() functions."
+        }
+    ]
+}

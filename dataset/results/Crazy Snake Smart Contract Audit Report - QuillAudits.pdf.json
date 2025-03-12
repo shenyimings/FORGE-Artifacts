@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/Crazy Snake Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/CrazySnakeTeam/CrazyToken",
+        "commit_id": "489ae9dab8eb5ba684fa1c7dbbd803c9db52dc9d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "CrazyToken": "contracts/Crazy Snake Smart Contract Audit Report - QuillAudits/CrazyToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing address verification",
+            "description": "Certain functions lack a safety check in the address, the address-type argument should include a zero-address test, otherwise, the contract's functionality may become inaccessible or tokens may be burned in perpetuity.",
+            "severity": "low",
+            "location": "Contract - CrazySnake (#L35,L43,L55,L68,L78,L89)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked Pragma",
+            "description": "Contracts should be deployed with the same compiler version and flags that they have been tested with thoroughly. Locking the pragma helps to ensure that contracts do not accidentally get deployed using, for example, an outdated compiler version that might introduce bugs that affect the contract system negatively.",
+            "severity": "info",
+            "location": "Contract - CrazySnake (pragma solidity ^0.5.0)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Public functions that could be declared external inorder to save gas",
+            "description": "Public functions can be declared as external to save gas, since external function parameters are not copied into memory but are read from calldata directly.",
+            "severity": "info",
+            "location": "Contract - CrazySnake (totalSupply(), decimals(), name(), symbol(), increaseAllowance(), decreaseAllowance())"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "BEP20 Standard violation",
+            "description": "Implementation of transfer() function does not allow the input of zero amount as it's demanded in ERC20 and BEP20 standards, and the GetOwner() function is missing from the contract.",
+            "severity": "info",
+            "location": "Contract - CrazySnake (transfer() function)"
+        }
+    ]
+}

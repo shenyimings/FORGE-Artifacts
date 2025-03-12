@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-PANZ.NEXTGEN-v1.0.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xB3c8a4D882533bb072542d2F984B0B5ED91d246d",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "PanzRaffle": "contracts/PeckShield-Audit-Report-PANZ/PanzRaffle"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Fee Withdraw Logic",
+            "description": "The current implementation of withdrawFee() function is not correct, causing the fee claimed by msg.sender to always be 0.",
+            "severity": "medium",
+            "location": "PanzLending contract, withdrawFee() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Incorrect Sanity Checks",
+            "description": "The editOffer() function fails to validate the given argument of _count, resulting in invalid sanity checks.",
+            "severity": "low",
+            "location": "PanzLending contract, editOffer() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged accounts (owner and DEFAULT_ADMIN_ROLE) have excessive power, posing a counter-party risk to protocol users.",
+            "severity": "medium",
+            "location": "PanzLending/PanzRaffle contracts"
+        }
+    ]
+}

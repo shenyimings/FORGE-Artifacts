@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-ERD-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/Ethereum-ERD/dev-upgradeable/tree/0725084e",
+        "commit_id": "0725084e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "dev-upgradeable": "contracts/PeckShield-Audit-Report-ERD-v1/dev-upgradeable"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential Reentrancy Risk",
+            "description": "in sendCollateral()",
+            "severity": "medium",
+            "location": "sendCollateral()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improved WETH Input Amount in _adjustArray()",
+            "description": "Incorrect update of input amount of WETH when it exists in the input collateral list.",
+            "severity": "medium",
+            "location": "BorrowerOperations, _adjustArray() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Revised Collateral Priority Update in setCollateralPriority()",
+            "description": "Logical issue that may mess up the collaterals priority order and their parameters.",
+            "severity": "medium",
+            "location": "CollateralManager, setCollateralPriority() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Revised Transfer Validation in EToken::transferFrom()",
+            "description": "Logic issue that may permit a transfer that should be forbidden or block a transfer that should be permitted.",
+            "severity": "high",
+            "location": "EToken, transferFrom() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Revised EUSD Amount to Mint in _mintToTreasury()",
+            "description": "The treasury receives a scaled token balance which may be less than the minted amount due to division by newLiquidityIndex.",
+            "severity": "medium",
+            "location": "_mintToTreasury() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Lack of share balance update for recipient",
+            "description": "The EToken::transfer() routine does not add the share amount to the recipient's share balance.",
+            "severity": "high",
+            "location": "EToken contract, transfer() function"
+        }
+    ]
+}

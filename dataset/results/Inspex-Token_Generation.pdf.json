@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/Inspex-Token_Generation.pdf",
+    "project_info": {
+        "url": "https://github.com/Evry-Finance/evry-finance-toolkit",
+        "commit_id": "4120ed4afaf2ba01b222f469498922277d47cd73",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "evry-finance-toolkit": "contracts/Inspex-Token_Generation/evry-finance-toolkit"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "Critical state variables can be updated any time by the controlling authorities without notifying users.",
+            "severity": "medium",
+            "location": "PerformanceDistribution, ReleaseController, TimeBasedDistribution contracts (addReward(), removeMember(), transferExceedAmount() functions)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1112"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions are not logged properly by emitting events, making it difficult for users to monitor their execution.",
+            "severity": "low",
+            "location": "PerformanceDistribution, ReleaseController, TimeBasedDistribution contracts (transferExceedAmount() function)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Function Parameter",
+            "description": "The lastUpdateBlock parameter is not used anywhere else in the function and does not have any effect on the state of the contract.",
+            "severity": "info",
+            "location": "PerformanceDistribution.sol, addReward() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-407"
+                ]
+            },
+            "title": "Code Improvement in _getPeriodTimes() Function",
+            "description": "The recursive function has redundant calculations that could be simplified for better readability and gas saving.",
+            "severity": "info",
+            "location": "PerformanceDistribution.sol, _getPeriodTimes() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Inexplicit Solidity Compiler Version",
+            "description": "The Solidity compiler version declared in the Timelock contracts was not explicit.",
+            "severity": "info",
+            "location": "Timelock.sol"
+        }
+    ]
+}

@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/Inspex-Token.pdf",
+    "project_info": {
+        "url": "https://github.com/inspex-archive/iAM-Admin-Poll-Token",
+        "commit_id": "0f8bb7a04c439286a5dffa223c3b30265acb4b5c",
+        "address": "0xcB682b97CAF58290494aC8E076e08333D5AFa21e, 0xA992ad80Fa6136702382123Ae717890Bc587491d",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "iAM-Admin-Poll-Token": "contracts/Inspex-Token/iAM-Admin-Poll-Token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Arbitrarily Tokens Transfer",
+            "description": "Admin users can transfer tokens from any address to any address.",
+            "severity": "medium",
+            "location": "adminTransfer() function in EventToken.sol and MainToken.sol (lines 35 and 29 respectively)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Arbitrarily Token Minting",
+            "description": "The contract admin can arbitrarily mint the affected tokens, leading to unfair token distribution.",
+            "severity": "medium",
+            "location": "mint() function in EventToken.sol (line 49)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Solidity Compiler Version",
+            "description": "The solidity compiler versions declared in the smart contracts were outdated.",
+            "severity": "low",
+            "location": "EventToken.sol and MainToken.sol (pragma solidity =0.8.4;)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary Assert Statement",
+            "description": "The owner of the EventToken contract cannot mint a low amount of token when the _totalBurn amount is high, and functions that use the unnecessary assert statement will consume more gas.",
+            "severity": "low",
+            "location": "mint() function in EventToken.sol (line 52), _beforeTokenTransfer() function in EventToken.sol (line 63) and MainToken.sol (line 45)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Gas Usage Optimization",
+            "description": "The _beforeTokenTransfer() function checks the receiver address of transfer, making the transfer transaction consume more gas.",
+            "severity": "info",
+            "location": "EventToken.sol and MainToken contracts, specifically in the _transfer() function"
+        }
+    ]
+}

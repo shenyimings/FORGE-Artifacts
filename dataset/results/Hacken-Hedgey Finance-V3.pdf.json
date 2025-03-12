@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/Hacken-Hedgey Finance-V3.pdf",
+    "project_info": {
+        "url": "https://github.com/hedgey-finance/NFT_OTC_Core",
+        "commit_id": "b43c40d0a44e72d96a2d68dec1bcab7748571807",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "NFT_OTC_Core": "contracts/Hacken-Hedgey Finance-V3/NFT_OTC_Core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Using 'transfer()' function",
+            "description": "Starting EIP 1884 and Istanbul hard fork, it is not recommended to use either “transfer()” or the “send()” functions to send ether to the address.",
+            "severity": "medium",
+            "location": "FuturesNFT.sol, HedgeyOTC.sol in function _withdraw"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Using storage instead of memory",
+            "description": "Using the local storage variable will not allocate memory for its value but instead will do calls to the storage each time accessing it.",
+            "severity": "low",
+            "location": "FuturesNFT.sol, CeloFuturesNFT.sol in function _redeemNFT; CeloHedgeyOTC.sol, HedgeyOTC.sol in function buy"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated version of solidity",
+            "description": "While the latest solidity version is 0.8.13, contracts are still written using the half-year-old 0.8.7 compiler version.",
+            "severity": "low",
+            "location": "CeloFuturesNFT.sol, CeloHedgeyOTC.sol, FuturesNFT.sol, HedgeyOTC.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Benign reentrancy",
+            "description": "The function contains reentrancy. The reentrancy is benign because its exploitation would have the same effect as two consecutive calls.",
+            "severity": "low",
+            "location": "CeloHedgeyOTC.sol in function create; HedgeyOTC.sol in function create; CeloHedgey.sol in function createNFT; FuturesNFT.sol in function createNFT"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "No event emitting",
+            "description": "Changing the crucial state value requires emitting an event.",
+            "severity": "low",
+            "location": "CeloFuturesNFT.sol, FuturesNFT.sol in function updateBaseURI"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Uninformative function parameter",
+            "description": "Function parameter '_d' neither self-descriptive nor has a NatSpec description.",
+            "severity": "low",
+            "location": "CeloHedgeyOTC.sol, HedgeyOTC.sol in functions close and buy"
+        }
+    ]
+}

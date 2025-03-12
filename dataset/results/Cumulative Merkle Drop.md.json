@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/Cumulative Merkle Drop.md",
+    "project_info": {
+        "url": "https://github.com/1inch/cumulative-merkle-drop",
+        "commit_id": "96fb63d0cbfea73603e7500961c71e8ab1fb8c10",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "cumulative-merkle-drop": "contracts/Cumulative Merkle Drop/cumulative-merkle-drop"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-326"
+                ],
+                "3": [
+                    "CWE-328"
+                ]
+            },
+            "title": "Shorted root hash can be brute forced",
+            "description": "Malicious user can brute force proof for case `leaf = _keccak128(abi.encodePacked(address(malicious_user), token.balanceOf(address(this))))` because root hash is shorted.",
+            "severity": "critical",
+            "location": "CumulativeMerkleDrop128.sol, CumulativeMerkleDrop160.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Possible incorrect initialization",
+            "description": "In `CumulativeMerkleDropXXX` constructor `token_` can be zero address.",
+            "severity": "info",
+            "location": "CumulativeMerkleDrop128.sol, CumulativeMerkleDrop.sol, CumulativeMerkleDrop160.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Owner can set unlimited amount",
+            "description": "Owner can set merkle root in which, for his account, allowed amount can be very big.",
+            "severity": "info",
+            "location": "CumulativeMerkleDrop128.sol, CumulativeMerkleDrop.sol, CumulativeMerkleDrop160.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Incorrect change of the root",
+            "description": "In the following function it is possible to update root with the same value.",
+            "severity": "info",
+            "location": "CumulativeMerkleDrop128.sol, CumulativeMerkleDrop.sol, CumulativeMerkleDrop160.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-908"
+                ],
+                "4": [
+                    "CWE-457"
+                ]
+            },
+            "title": "Possible work with uninitialized `merkleRoot`",
+            "description": "In the following function it is possible to `merkleRoot == 0`.",
+            "severity": "info",
+            "location": "CumulativeMerkleDrop128.sol, CumulativeMerkleDrop.sol, CumulativeMerkleDrop160.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "`merkleProof` can has length == 0",
+            "description": "In the following function it is possible to `merkleProof.length == 0`.",
+            "severity": "info",
+            "location": "CumulativeMerkleDrop128.sol, CumulativeMerkleDrop.sol, CumulativeMerkleDrop160.sol"
+        }
+    ]
+}

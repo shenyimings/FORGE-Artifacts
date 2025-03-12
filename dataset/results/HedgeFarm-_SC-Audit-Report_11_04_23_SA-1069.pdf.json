@@ -1,0 +1,302 @@
+{
+    "path": "artifacts/HedgeFarm-_SC-Audit-Report_11_04_23_SA-1069.pdf",
+    "project_info": {
+        "url": "https://github.com/HedgeFarm/smart-farmooor-contracts",
+        "commit_id": "4706853dff0f2ca317f3c7c4b9a3bebb5e3df77c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smart-farmooor-contracts": "contracts/HedgeFarm-_SC-Audit-Report_11_04_23_SA-1069/smart-farmooor-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Requirements Violation",
+            "description": "Inconsistency between implementation and requirements",
+            "severity": "critical",
+            "location": "./contracts/yield/SmartFarmoor.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Non-Finalized Code - Requirements Violation",
+            "description": "Unused variable automationRules in SmartFarmoor contract",
+            "severity": "medium",
+            "location": "./contracts/yield/SmartFarmoor.sol : setAutomationRules()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Data Consistency",
+            "description": "Possibility to add one reward token to rewards array multiple times",
+            "severity": "medium",
+            "location": "./contracts/yield/module/BaseModule.sol : _setRewards()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Best Practice Violation - Uninitialized Implementation",
+            "description": "Leaving implementation contracts uninitialized can be exploited by attackers",
+            "severity": "medium",
+            "location": "./contracts/yield/SmartFarmooor.sol, ./contracts/yield/module/AaveYieldModule.sol, ./contracts/yield/module/CompoundV2Module.sol, ./contracts/yield/module/StargateYieldModule.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Redundant Inheritance",
+            "description": "executionFee variable is defined in BaseModule and inherited by AaveYieldModule and CompoundV2Module but always returns 0",
+            "severity": "medium",
+            "location": "./contracts/yield/module/AaveYieldModule.sol, ./contracts/yield/module/CompoundV2YieldModule.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "NatSpecs Contradiction",
+            "description": "Incorrect NatSpec comments in AaveModule and StargateYieldModule",
+            "severity": "low",
+            "location": "./contracts/yield/module/AaveModule.sol : getLastUpdatedBalance(), _rewardsProfit(), ./contracts/yield/module/StargateYieldModule.sol : getLastUpdatedBalance()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Function State Mutability Can Be Changed To View",
+            "description": "The function _allocationIsCorrect does not modify state variables and can be declared as view",
+            "severity": "low",
+            "location": "./contracts/yield/SmartFarmoor.sol : _allocationIsCorrect()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Variable Shadowing",
+            "description": "Variable uint256 error shadows another variable in CompoundV2Module",
+            "severity": "low",
+            "location": "./contracts/yield/module/CompoundV2Module.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Variable",
+            "description": "The variable expectedAmount is never used",
+            "severity": "low",
+            "location": "./contracts/yield/module/CompoundV2Module.sol : _swapTokenRewardsForBaseToken()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "No validation against zero address for parameters in CompoundV2Module",
+            "severity": "low",
+            "location": "./contracts/yield/module/CompoundV2Module.sol : initialize()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation",
+            "description": "Incorrect order and grouping of contract elements",
+            "severity": "low",
+            "location": "./contracts/"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Redundant State Variable Update",
+            "description": "Unnecessary interaction in removeModule function",
+            "severity": "low",
+            "location": "./contracts/yield/SmartFarmoor.sol : removeModule()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1108"
+                ]
+            },
+            "title": "Use of Hard-Coded Values",
+            "description": "Hard-coded values used in setModuleAllocation and finishPanic functions",
+            "severity": "low",
+            "location": "./contracts/yield/SmartFarmoor.sol : setModuleAllocation(), finishPanic()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Misleading Error Message",
+            "description": "Incorrect error message in _rescueNative function",
+            "severity": "low",
+            "location": "./contracts/common/Rescuable.sol : _rescueNative()"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Code",
+            "description": "Unused variable netProfit in harvest function",
+            "severity": "low",
+            "location": "./contracts/yield/SmartFarmoor.sol : _harvest()"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Functions that can be declared external",
+            "description": "Public functions never called from the contract should be declared external to save gas",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Empty String Check",
+            "description": "No check for empty string in _setName function",
+            "severity": "low",
+            "location": "./contracts/yield/module/BaseModule.sol : _setName()"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Events",
+            "description": "Critical state changes do not emit events",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Upgradeable contracts",
+            "description": "Contracts are subject to future modification.",
+            "severity": "n/a",
+            "location": "SmartFarmooor.sol and others"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Slippage risk in rewards swap",
+            "description": "Rewards are swapped through the DEX module without setting slippage.",
+            "severity": "n/a",
+            "location": "TraderJoeDexModule.sol"
+        }
+    ]
+}

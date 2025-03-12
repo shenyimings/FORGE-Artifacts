@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/SlowMist Audit Report - O3 swap_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/O3Labs/o3swap-contracts",
+        "commit_id": "c46ed522534fdfc279344a4945e9159241f2c9bf",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "o3swap-contracts": "contracts/SlowMist Audit Report - O3 swap_en-us/o3swap-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Did not check whether the pair exists",
+            "description": "The `_swapSupportingFeeOnTransferTokens` function did not verify the existence of the pair, causing the exchange to fail.",
+            "severity": "info",
+            "location": "O3swapBSCPancakeBridge / O3swapETHUniswapBridge / O3swapHecoMdexBridge contract, `_swapSupportingFeeOnTransferTokens` function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Excessive permissions",
+            "description": "The `collect` function of the O3 staking contract has excessive authority, allowing it to transfer any tokens in the contract, including user assets.",
+            "severity": "medium",
+            "location": "O3 staking contract, `collect` function"
+        }
+    ]
+}

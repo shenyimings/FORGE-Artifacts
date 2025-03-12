@@ -1,0 +1,161 @@
+{
+    "path": "artifacts/SmartContract_Audit_Solidproof_ZONOSwap.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xaff2b0031aa7a5c19c9cba9589817a704234d492",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "MasterChef": "contracts/SmartContract_Audit_Solidproof_ZONOSwap/MasterChef"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Minting Function",
+            "description": "The `MasterChef` contract allows minting tokens without any limitations.",
+            "severity": "high",
+            "location": "MasterChef contract, `updateMulitplier` function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Burning Function",
+            "description": "The `RouterAddress` contract allows burning tokens without any limitations.",
+            "severity": "high",
+            "location": "RouterAddress contract, `removeLiquidity` function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "OnlyOwner Functions without Restrictions",
+            "description": "Several functions in the `MasterChef`, `TokenAddress`, and `FactoryAddress` contracts can be called without restrictions.",
+            "severity": "medium",
+            "location": "Various contracts, including `changeZonoPerBlock`, `updateMulitplier`, `addLiquidity`, and others"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Contract Pausing",
+            "description": "The owner can pause the contract without any limitations.",
+            "severity": "medium",
+            "location": "ZONOToken contract, `pause` function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted Fee Setting",
+            "description": "Fees such as liquidityFee, marketingFee, autoBurn, and charity can be set without any restrictions.",
+            "severity": "low",
+            "location": "FactoryAddress contract, various fee-setting functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "Check that the address is not zero",
+            "severity": "low",
+            "location": "Factory Address (lines 469, 494, 499, 319), MasterChef (lines 1257, 1477), RouterAddress (line 362), ZONOToken (V2.0) (lines 1347, 1343, 1079, 1357)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Unused return values",
+            "description": "Ensure that all the return values of the function calls are used",
+            "severity": "low",
+            "location": "ZONOToken (V2.0) (line 1242)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State variable visibility is not set",
+            "description": "It is best practice to set the visibility of state variables explicitly",
+            "severity": "low",
+            "location": "ZONOToken (V2.0) (lines 989, 1009, 1020, 1021)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Functions that are not used",
+            "description": "Remove unused functions",
+            "severity": "info",
+            "location": "RouterAddress (line 26), ZONOToken (V2.0) (lines 1189, 1194, 1172, 1156)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State variables that could be declared constant",
+            "description": "Add the `constant` attributes to state variables that never change",
+            "severity": "info",
+            "location": "ZONOToken (V2.0) (lines 1003, 1002, 1018)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused state variables",
+            "description": "Remove unused state variables",
+            "severity": "info",
+            "location": "ZONOToken (V2.0) (lines 534, 1003)"
+        }
+    ]
+}

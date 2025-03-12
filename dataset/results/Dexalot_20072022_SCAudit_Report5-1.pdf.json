@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/Dexalot_20072022_SCAudit_Report5-1.pdf",
+    "project_info": {
+        "url": "https://github.com/Dexalot/contracts/",
+        "commit_id": "ba38d6e804e49fa58e7cabc6a677218f1f72a5d0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Dexalot_20072022_SCAudit_Report5-1/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Requirements Violation",
+            "description": "In `releaseToPortfolio` function, unreleased amount of tokens are transferred to `_beneficiary address`.",
+            "severity": "critical",
+            "location": "./contracts/Portfolio.sol, ./contracts/token/TokenVesting.sol, ./contracts/token/TokenVestingCloneable.sol, ./contracts/token/TokenVestingV1.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Data Consistency",
+            "description": "Owner can update percentages for the amount vested at TGE, and reinstate vesting, which may incorrectly calculate the amount of tokens released.",
+            "severity": "high",
+            "location": "./contracts/token/TokenVesting.sol, ./contracts/token/TokenVestingCloneable.sol, ./contracts/token/TokenVestingV1.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Functionality",
+            "description": "The `stringToBytes32` function is redundant and can be removed.",
+            "severity": "medium",
+            "location": "./contracts/token/TokenVesting.sol, ./contracts/token/TokenVestingCloneable.sol, ./contracts/token/TokenVestingV1.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Missing Events Emit on Changing Important Values",
+            "description": "No events are emitted when important values are changed.",
+            "severity": "medium",
+            "location": "./contracts/token/TokenVesting.sol, ./contracts/token/TokenVestingCloneable.sol, ./contracts/token/TokenVestingV1.sol, ./contracts/Portfolio.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Contracts use floating pragma ^0.8.4, which may lead to undiscovered bugs.",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Functions that Can Be Declared External",
+            "description": "Public functions can be declared external for less gas usage.",
+            "severity": "low",
+            "location": "./contracts/token/TokenVesting.sol, ./contracts/token/TokenVestingCloneable.sol, ./contracts/token/TokenVestingV1.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Block Values as a Proxy for Time Using",
+            "description": "The contract uses block.timestamp for time calculations, which is not precise and safe.",
+            "severity": "low",
+            "location": "./contracts/token/TokenVesting.sol, ./contracts/token/TokenVestingCloneable.sol, ./contracts/token/TokenVestingV1.sol"
+        }
+    ]
+}

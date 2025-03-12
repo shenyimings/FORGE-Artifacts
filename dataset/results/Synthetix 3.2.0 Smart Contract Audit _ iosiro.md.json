@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/Synthetix 3.2.0 Smart Contract Audit _ iosiro.md",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix-v3",
+        "commit_id": "ce5edb2f96d466fe42a0f714e8d0334adc112b7a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix-v3": "contracts/Synthetix 3/synthetix-v3"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "New collateral types are unrestricted",
+            "description": "The default behavior for any new collateral type was to allow delegation and issuance without restriction.",
+            "severity": "high",
+            "location": "Pool.sol#L531"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Collateral balances are incorrectly updated when calling `burnUsd`",
+            "description": "Incorrect updates to collateral balances when `burnUsd` is called, leading to incorrect account balances.",
+            "severity": "high",
+            "location": "IssueUSDModule.sol#L158"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Incorrect precision when validating `liquidationRatioD18` and `issuanceRatioD18`",
+            "description": "Validation checks have the incorrect decimal precision to denote 100%.",
+            "severity": "low",
+            "location": "CollateralConfiguration.sol#L145"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Undocumented breaking changes",
+            "description": "Breaking changes introduced in `IExternalNode` interface.",
+            "severity": "low",
+            "location": "IExternalNode.sol#L11"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect event emitted",
+            "description": "Incorrect event emitted when `setPoolCollateralIssuanceRatio` is called.",
+            "severity": "low",
+            "location": "PoolModule.sol#L268"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Mismatched array lengths",
+            "description": "Assumption that `runtimeKey` and `runtimeValues` arrays are of equal length, but this is not validated.",
+            "severity": "low",
+            "location": "NodeModule.sol#L154"
+        }
+    ]
+}

@@ -1,0 +1,206 @@
+{
+    "path": "artifacts/Solidified-EZToken_[02.11.18].pdf",
+    "project_info": {
+        "url": "https://github.com/ezpos/eztoken-contract",
+        "commit_id": "2ccbd1432030353e679ba242eb8f4bfaed757da6",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "eztoken-contract": "contracts/Solidified-EZToken_[02/eztoken-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Token is not ERC compliant",
+            "description": "The EZToken contract does not implement the ERC20 standard fully.",
+            "severity": "n/a",
+            "location": "EZToken.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Lack of re-entrancy guard",
+            "description": "The approveAndCall() function in EZToken.sol is vulnerable to re-entrancy attacks.",
+            "severity": "n/a",
+            "location": "EZToken.sol, Line 178"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Transaction-Ordering Dependence (TOD)",
+            "description": "The approve and approveAndCall methods can be exploited due to transaction ordering issues.",
+            "severity": "n/a",
+            "location": "EZToken.sol, Lines 163 & 178"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Balance overwrite risk during contract deployment",
+            "description": "If the same address is used for different years in the constructor, the balance will be overwritten.",
+            "severity": "n/a",
+            "location": "EZToken.sol, Lines 50-99"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Unsafe arithmetic operations",
+            "description": "The contract does not use SafeMath library to prevent underflow/overflow attacks.",
+            "severity": "n/a",
+            "location": "EZToken.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ]
+            },
+            "title": "Insecure ERC20 implementation",
+            "description": "The EZToken contract does not use OpenZeppelin's ERC20 implementation, which is well-tested and secure.",
+            "severity": "n/a",
+            "location": "EZToken.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Gas optimization in constructor",
+            "description": "The constructor can be optimized to reduce gas usage.",
+            "severity": "n/a",
+            "location": "EZToken.sol, Lines 50-99"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inefficient use of time variables",
+            "description": "The contract does not use Solidity's built-in 'years' alias for timestamps.",
+            "severity": "n/a",
+            "location": "EZToken.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated compiler version",
+            "description": "The compiler version used is outdated and may have known bugs.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Unused variable",
+            "description": "The 'transfersEnabled' variable is declared but not used in the contract.",
+            "severity": "n/a",
+            "location": "EZToken.sol, Line 37"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inefficient decimal case",
+            "description": "The token has less decimal cases than the Ether, which may cause compatibility issues.",
+            "severity": "n/a",
+            "location": "EZToken.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicated transfer functions",
+            "description": "There are two separate 'transfer' and '_transfer' functions that can be unified.",
+            "severity": "n/a",
+            "location": "EZToken.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Missing constant keyword",
+            "description": "The contract does not use the 'constant' keyword for variables that will not change.",
+            "severity": "n/a",
+            "location": "EZToken.sol"
+        }
+    ]
+}

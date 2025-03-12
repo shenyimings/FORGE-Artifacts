@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/Abyss Eth2 Depositor.md",
+    "project_info": {
+        "url": "https://github.com/abyssfinance/abyss-eth2depositor",
+        "commit_id": "a2d58dea4d79846dc682fe93ac3e0eca02323d11",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "abyss-eth2depositor": "contracts/Abyss Eth2 Depositor/abyss-eth2depositor"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Absent ETH2 depositor BLS signature parameters check",
+            "description": "No checks for correctness of BLS signature parameters, potentially leading to faulty signatures and loss of withdrawal possibility.",
+            "severity": "info",
+            "location": "`deposit` function in AbyssEth2Depositor.sol (https://github.com/abyssfinance/abyss-eth2depositor/blob/a2d58dea4d79846dc682fe93ac3e0eca02323d11/contracts/AbyssEth2Depositor.sol#L61)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrant ETH2 depositor function",
+            "description": "Function `deposit` is potentially reentrant, leading to unpredictable deposits chain.",
+            "severity": "info",
+            "location": "`deposit` function in AbyssEth2Depositor.sol (https://github.com/abyssfinance/abyss-eth2depositor/blob/a2d58dea4d79846dc682fe93ac3e0eca02323d11/contracts/AbyssEth2Depositor.sol#L61)"
+        }
+    ]
+}

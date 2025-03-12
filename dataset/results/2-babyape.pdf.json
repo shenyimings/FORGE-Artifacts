@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/2-babyape.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xf8aa749821852bc54ea5dd84dd3842d28523fc86",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.6+commit.7338295f"
+        ],
+        "project_path": {
+            "BabyApeCoin": "contracts/2-babyape/BabyApeCoin"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can mint tokens",
+            "description": "The contract owner has the authority to mint tokens, which may lead to token inflation",
+            "severity": "critical",
+            "location": "contract.sol#L851, function \"mint\""
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Contract Owner can burn tokens from specific wallets",
+            "description": "The contract owner has the authority to burn tokens from specific addresses without checking for allowance of the user",
+            "severity": "critical",
+            "location": "contract.sol#L742, function \"_burn\""
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Public Function could be Declared External",
+            "description": "Public functions that are never called by the contract should be declared external to save gas",
+            "severity": "low",
+            "location": "contract.sol#L212,219,238,247,253,258,565,582,589,616,627,663,682,857"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Conformance to Solidity Naming Conventions",
+            "description": "The code does not follow the Solidity naming convention",
+            "severity": "low",
+            "location": "contract.sol#L851,857,1007,813,825"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Dead Code Elimination",
+            "description": "There are unused functions in the contract that make the code's size bigger",
+            "severity": "low",
+            "location": "contract.sol#L408,340,350,365,375,390,400,287,314,780"
+        }
+    ]
+}

@@ -1,0 +1,122 @@
+{
+    "path": "artifacts/SmartContract_Audit_Solidproof_StellarFinance.pdf",
+    "project_info": {
+        "url": "https://github.com/stellardiamond/StellarDiamondToken",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "StellarDiamondToken": "contracts/SmartContract_Audit_Solidproof_StellarFinance/StellarDiamondToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Local variables shadowing (shadowing-local)",
+            "description": "StellarDiamond.allowance(address,address).owner shadows: • Ownable.owner() (base/access/Ownable.sol, Line: 36-38)",
+            "severity": "low",
+            "location": "Main contract, line 496"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Dangerous usage of `block.timestamp` (timestamp)",
+            "description": "StellarDiamond.setNextAvailableClaimDate(address,uint256) uses timestamp for comparisons",
+            "severity": "low",
+            "location": "Main contract, lines 432-437"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation (missing-zero-check)",
+            "description": "StellarDiamond.setPancakeSwapRouter(address).routerAddress lacks a zero-check on : • _pancakeSwapRouterAddress = routerAddress (Line: 404)",
+            "severity": "low",
+            "location": "Main contract, line 403"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Functions that send Ether to arbitrary destinations (arbitrary-send)",
+            "description": "StellarDiamond.executeSwap(uint256) sends eth to arbitrary user • (bnbAddedToLiquidity) = _pancakeswapV2Router.addLiquidityETH{value: bnbToBeAddedToLiquidity} (address(this),tokensToAddAsLiquidity,0,0,owner(),block.timestamp + 360) (Line: 263)",
+            "severity": "low",
+            "location": "Main contract, lines 248-269"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Tautology or contradiction (tautology)",
+            "description": "StellarDiamond.setFees(uint8,uint8,uint8) contains a tautology or contradiction: • require(bool,string) (distributionFee >= 0 && distributionFee <= 2,Distribution fee must be between 0% and 2%) (Line: 414)",
+            "severity": "low",
+            "location": "Main contract, lines 410-423"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-561"
+                ]
+            },
+            "title": "Functions that are not used (dead-code)",
+            "description": "Address._verifyCallResult(bool,bytes,string) is never used and should be removed",
+            "severity": "info",
+            "location": "base/utils/Address.sol, lines 171-188"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Conformity to Solidity naming conventions (naming-convention)",
+            "description": "Constant StellarDiamond._burnWallet is not in UPPER_CASE_WITH_UNDERSCORES",
+            "severity": "info",
+            "location": "Main contract, line 32"
+        }
+    ]
+}

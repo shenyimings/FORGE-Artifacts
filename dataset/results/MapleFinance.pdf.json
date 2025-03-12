@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/MapleFinance.pdf",
+    "project_info": {
+        "url": "https://github.com/maple-labs/debt-locker",
+        "commit_id": "05b4f2fe119e2ddf3dc0e441055c602f748e7d52",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "debt-locker": "contracts/MapleFinance/debt-locker"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Attackers can prevent lenders from funding or refinancing loans",
+            "description": "An attacker could prevent a lender from funding a loan by making a small transfer of funds every time the lender tried to fund it (front-running the transaction).",
+            "severity": "low",
+            "location": "MapleLoan.sol, Refinancer.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancies can lead to misordered events",
+            "description": "Several functions in the codebase do not use the checks-effects-interactions pattern, lack reentrancy guards, or emit events after interactions.",
+            "severity": "low",
+            "location": "DebtLocker.sol, Liquidator.sol, MapleLoan.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Lack of two-step process for critical operations",
+            "description": "The MapleLoan contract’s setBorrower and setLender functions transfer the privileged borrower and lender roles to new addresses without a two-step process.",
+            "severity": "low",
+            "location": "MapleLoan.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ]
+            },
+            "title": "IERC20Like.decimals returns non-standard uint256",
+            "description": "IERC20Like.decimals declares uint256 as its return type, whereas the ERC20 standard specifies that it must return a uint8.",
+            "severity": "n/a",
+            "location": "Interfaces.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Transfers in Liquidator.liquidatePortion can fail silently",
+            "description": "Calls to ERC20Helper.transfer in the codebase are wrapped in require statements, except for the first such call in the liquidatePortion function of the Liquidator contract.",
+            "severity": "medium",
+            "location": "Liquidator.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "ERC20Helper’s functions do not revert on a failure",
+            "description": "The ERC20Helper contract’s transfer, transferFrom, and approve functions do not revert on a failure.",
+            "severity": "info",
+            "location": "ERC20Helper.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of contract existence checks before low-level calls",
+            "description": "The ERC20Helper contract fills a purpose similar to that of OpenZeppelin’s SafeERC20 contract, but it lacks contract existence checks.",
+            "severity": "high",
+            "location": "Throughout the codebase"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zero checks",
+            "description": "A number of constructors and functions do not revert if zero is passed in for a parameter that should not be set to zero.",
+            "severity": "medium",
+            "location": "Liquidator.sol, MapleLoan.sol, MapleProxyFactory.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Lack of user-controlled limits for input amount in Liquidator.liquidatePortion",
+            "description": "The liquidatePortion function does not have an upper limit to the amount paid by the caller.",
+            "severity": "medium",
+            "location": "Liquidator.sol"
+        }
+    ]
+}

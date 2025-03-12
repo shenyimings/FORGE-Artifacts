@@ -1,0 +1,205 @@
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.4;
+
+import {OwnableUpgradeable as Ownable} from '@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol';
+import {PausableUpgradeable as Pausable} from '@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol';
+import {ReentrancyGuardUpgradeable as ReentrancyGuard} from '@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol';
+import '@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol';
+import {IERC20MetadataUpgradeable as IERC20} from "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/IERC20MetadataUpgradeable.sol";
+import {SafeERC20Upgradeable as SafeERC20} from "@openzeppelin/contracts-upgradeable/token/ERC20/utils/SafeERC20Upgradeable.sol";
+import "../interfaces/IveMNT.sol";
+
+
+contract MockMarketplace is Initializable, Ownable, Pausable, ReentrancyGuard {
+    using SafeERC20 for IERC20;
+    using SafeERC20 for IveMNT;
+
+    event ListingAdded(address indexed seller, uint256 indexed lid, Listing listing);
+    event ListingDeleted(address indexed seller, uint256 indexed lid);
+    event AuctionBid(address indexed seller, uint256 indexed lid, address indexed bidder, address token, uint256 amount);
+    event Bought(address indexed seller, uint256 indexed lid, address indexed buyer, address token, uint256 amount);
+
+    event TreasuryUpdated(address indexed treasury);
+    event FeesUpdated(uint256 indexed fees);
+    event CooldownUpdated(uint256 indexed cooldown);
+    event MaxAuctionDurationUpdated(uint256 indexed maxAuctionDuration);
+    event AllowedTokenSet(address indexed token, bool status);
+
+    struct Listing {
+        uint256 mntAmount;
+        uint256 veMntAmount;
+        uint256 veMntRate;
+        uint256 minPrice;       // 6 decimals
+        uint256 startTime;
+        uint256 endTime;
+        bool isAuction;
+        bool sold;
+    }
+
+    struct Bid {
+        address bidder;
+        address token;
+        uint256 amount;         // 6 decimals
+        uint256 bidAt;
+    }
+
+    mapping(address => bool) public allowedTokens;      // stablecoins only
+
+    mapping(address => mapping(uint256 => Listing)) public listings;
+    mapping(address => uint256) public userListingCount;
+
+    mapping(address => mapping(uint256 => Bid)) public bids;
+
+    address public treasury;
+    uint256 public exchangeFees;     // 4 decimals. 200 = 2%
+    uint256 public cooldown;
+    uint256 public maxAuctionDuration;
+
+    IERC20 public mnt;
+    IveMNT public veMnt;
+
+
+    modifier zeroCheck(uint256 value) {
+        require(value > 0, "Cannot be 0");
+        _;
+    }
+
+    function initialize() external initializer {
+        __Ownable_init_unchained();
+        __Pausable_init_unchained();
+        __ReentrancyGuard_init_unchained();
+
+        exchangeFees = 2_00;
+        cooldown = 0;
+        maxAuctionDuration = 5 days;
+    }
+
+    function setTreasury(address _treasury) external onlyOwner {
+        require(_treasury != address(0), "Cannot be zero address");
+        treasury = _treasury;
+        emit TreasuryUpdated(_treasury);
+    }
+
+    function setExchangeFees(uint256 _exchangeFees) external onlyOwner {
+        require(_exchangeFees <= 10_00, "Cannot be more than 10%");
+        exchangeFees = _exchangeFees;
+        emit FeesUpdated(_exchangeFees);
+    }
+
+    function setCooldown(uint256 _cooldown) external onlyOwner {
+        require(_cooldown > 0, "Cannot be 0");
+        require(_cooldown < maxAuctionDuration, "Cannot be more than max");
+        cooldown = _cooldown;
+        emit CooldownUpdated(_cooldown);
+    }
+
+    function setMaxAuctionDuration(uint256 _maxAuctionDuration) external onlyOwner {
+        require(_maxAuctionDuration > cooldown, "Cannot be less than cooldown");
+        maxAuctionDuration = _maxAuctionDuration;
+        emit MaxAuctionDurationUpdated(_maxAuctionDuration);
+    }
+
+    function setAllowedToken(address _token, bool _status) external onlyOwner {
+        require(_token != address(0), "Cannot be zero address");
+        allowedTokens[_token] = _status;
+        emit AllowedTokenSet(_token, _status);
+    }
+
+    function pause() external onlyOwner {
+        _pause();
+    }
+
+    function unpause() external onlyOwner {
+        _unpause();
+    }
+
+    function addListing(
+        uint256 percent,
+        uint256 minPrice,
+        uint256 endDuration,
+        bool isAuction,
+        uint mntAmount,
+        uint veMntAmount,
+        uint veMntRate
+    ) external zeroCheck(percent) zeroCheck(minPrice) whenNotPaused nonReentrant {
+        require(percent < 100_00, "Cannot be > 100%");
+        require(!isAuction || (endDuration > 0 && endDuration <= maxAuctionDuration), "Incorrect end duration");
+        uint256 startTime = block.timestamp + cooldown;
+        uint256 endTime = startTime + endDuration;
+
+        require(veMntAmount > 0, "Cannot be 0 amount");
+
+        uint256 lid = userListingCount[msg.sender] + 1;
+        Listing memory listing = Listing({
+            mntAmount: mntAmount,
+            veMntAmount: veMntAmount,
+            veMntRate: veMntRate,
+            minPrice: minPrice,
+            startTime: startTime,
+            endTime: endTime,
+            isAuction: isAuction,
+            sold: false
+        });
+        listings[msg.sender][lid] = listing;
+        userListingCount[msg.sender] = lid;
+        emit ListingAdded(msg.sender, lid, listing);
+    }
+
+    function deleteListing(uint256 lid) external nonReentrant {
+        Listing memory listing = listings[msg.sender][lid];
+        require(listing.veMntAmount > 0 && !listing.sold, "No such listing");
+        require(bids[msg.sender][lid].bidder == address(0), "Bid already made");
+
+        delete listings[msg.sender][lid];
+        emit ListingDeleted(msg.sender, lid);
+    }
+
+    function buy(address seller, uint256 lid, address token) external whenNotPaused nonReentrant {
+        Listing memory listing = listings[seller][lid];
+        require(listing.veMntAmount > 0 && !listing.sold && !listing.isAuction, "Not a valid listing");
+        require(block.timestamp > listing.startTime, "Not Started");
+        uint256 tokenAmount = listing.minPrice;
+        uint256 feeAmount = tokenAmount * exchangeFees / 1e4;
+        uint256 sellerAmount = tokenAmount - feeAmount;
+        listings[seller][lid].sold = true;
+        emit Bought(seller, lid, msg.sender, token, listing.minPrice);
+    }
+
+    function makeAuctionBid(
+        address seller,
+        uint256 lid,
+        address token,
+        uint256 amount  // 6 decimals
+    ) external whenNotPaused nonReentrant {
+        Listing memory listing = listings[seller][lid];
+        require(listing.veMntAmount > 0 && !listing.sold && listing.isAuction, "Not a valid listing");
+        require(block.timestamp > listing.startTime, "Not Started");
+        require(block.timestamp < listing.endTime, "Auction Ended");
+        Bid memory bid = bids[seller][lid];
+        uint256 currentBidAmount = bid.amount;
+        require(amount >= listing.minPrice && amount > currentBidAmount, "Amount too low");
+        uint256 tokenAmount = amount;
+        bids[seller][lid] = Bid({
+            bidder: msg.sender,
+            token: token,
+            amount: amount,
+            bidAt: block.timestamp
+        });
+        emit AuctionBid(seller, lid, msg.sender, token, amount);
+    }
+
+    function claimAuctionBid(address seller, uint256 lid) external whenNotPaused nonReentrant {
+        Listing memory listing = listings[seller][lid];
+        require(block.timestamp >= listing.endTime, "Auction not over");
+        Bid memory bid = bids[seller][lid];
+        address bidder = bid.bidder;
+        require(bidder != address(0), "No bids found");
+        address token = bid.token;
+        uint256 tokenAmount = bid.amount;
+        uint256 feeAmount = tokenAmount * exchangeFees / 1e4;
+        uint256 sellerAmount = tokenAmount - feeAmount;
+        listings[seller][lid].sold = true;
+        emit Bought(seller, lid, bidder, token, bid.amount);
+    }
+}

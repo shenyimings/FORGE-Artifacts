@@ -1,0 +1,71 @@
+{
+    "path": "artifacts/MarginCallToken Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x899dcde4f486816afae42442d4b1b6a7c6fe9c63",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "MarginCallToken": "contracts/MarginCallToken Full Smart Contract Security Audit/MarginCallToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong dead fee adding",
+            "description": "DeadFee amount taken from _tOwned[deadWallet] without checking in _isExcluded array and not multiplied with currentRate.",
+            "severity": "high",
+            "location": "_transferBothExcluded(), _transferStandard(), _transferToExcluded(), _transferFromExcluded()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong airdrop amount distribution",
+            "description": "Airdrop amount not multiplied with currentRate when subtracting from _rOwned[address(this)] and adding to _rOwned[msg.sender].",
+            "severity": "high",
+            "location": "Airdrop function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Functions includeInReward() and _getCurrentSupply may be aborted with OUT_OF_GAS exception due to long excluded addresses list.",
+            "severity": "low",
+            "location": "includeInReward(), _getCurrentSupply()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Owner has excessive privileges, including changing fees, maximum transaction amount, excluding from fee, locking and unlocking, starting airdrop, and taking all contract balance.",
+            "severity": "low",
+            "location": "Various functions with onlyOwner modifiers"
+        }
+    ]
+}

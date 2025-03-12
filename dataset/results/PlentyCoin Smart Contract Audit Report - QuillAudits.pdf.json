@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/PlentyCoin Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xa5e8a886b6bab60e1a2273b79caa72143ed8b418",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.0+commit.c7dfd78e"
+        ],
+        "project_path": {
+            "Plenty": "contracts/PlentyCoin Smart Contract Audit Report - QuillAudits/Plenty"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Transfer is from msg.sender instead of contract balance",
+            "description": "In the function swapAndLiquify(), a call to the function transfer() is done to make a transfer from the contract address to the _buyBackAddress. But as the msg.sender for this transfer call will be the user doing the transaction, the amount will be deducted from that user’s account.",
+            "severity": "high",
+            "location": "Contract, function swapAndLiquify()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "_lockedAmount state variable underflow",
+            "description": "Due to the failure to update the _lockedAmount state variable in various functions, an underflow can occur while unlocking.",
+            "severity": "high",
+            "location": "Functions lock(), transferFromWithLock(), increaseLockAmount(), and unlock()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized risk in addLiquidity",
+            "description": "The role owner has the authority to update settings, manage the list containing contracts excluding from reward, fee, or max transaction limitation, withdraw ether from the contract at any point of time, and unlock tokens for any user.",
+            "severity": "medium",
+            "location": "Function addLiquidity"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Locks cannot be extended or increased in amount",
+            "description": "Tokens locked with transferFromWithLock() cannot be extended or increased in amount due to lack of isWhitelistAdmin check.",
+            "severity": "low",
+            "location": "Function transferFromWithLock()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Critical operation lacks event log",
+            "description": "Critical operations like setting tax fee, liquidity fee, and max tx percent lack event logs.",
+            "severity": "critical",
+            "location": "Functions setTaxFeePercent(), setLiquidityFeePercent(), and setMaxTxPercent()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Variable Typo",
+            "description": "Typo in variable tokensIntoLiqudity.",
+            "severity": "info",
+            "location": "Line 2124"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Public function that could be declared external",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "info",
+            "location": "Various public functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Code",
+            "description": "Redundant code else if (!_isExcluded[sender] && !_isExcluded[recipient]) or else.",
+            "severity": "n/a",
+            "location": "Line 1815"
+        }
+    ]
+}

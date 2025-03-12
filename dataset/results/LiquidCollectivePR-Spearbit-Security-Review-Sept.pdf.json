@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/LiquidCollectivePR-Spearbit-Security-Review-Sept.pdf",
+    "project_info": {
+        "url": "https://github.com/liquid-collective/liquid-collective-protocol",
+        "commit_id": "4618fe9826f972bdfb71bccf71148bdb2a224454",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "liquid-collective-protocol": "contracts/LiquidCollectivePR-Spearbit-Security-Review-Sept/liquid-collective-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Schedule amounts cannot be revoked or released",
+            "description": "Tokens would not be able to be released due to capping the time by the end timestamp, and also these tokens cannot be revoked since the set [start, end] where end < start would be empty.",
+            "severity": "low",
+            "location": "TLC_globalUnlockScheduleMigration.sol#L62-L72, ERC20VestableVotesUpgradeable.1.sol#L432-L434, ERC20VestableVotesUpgradeable.1.sol#L303-L306"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "A revoked schedule might be able to be fully released before the 2 year global lock period",
+            "description": "The unlockedAmount calculated in _computeGlobalUnlocked(...) is based on the original scheduledAmount.",
+            "severity": "low",
+            "location": "ERC20VestableVotesUpgradeable.1.sol#L410-L412, ERC20VestableVotesUpgradeable.1.sol#L458"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unlock date of certain vesting schedules does not meet the requirement",
+            "description": "All vesting schedules should have the unlock date (start + lockDuration) set to 16/10/2024 0:00 GMT+0 post-migration.",
+            "severity": "low",
+            "location": "TLC_globalUnlockScheduleMigration.sol#L359"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "ERC20VestableVotesUpgradeableV1._computeVestingReleasableAmount: Users with VestingSchedule.releasedAmount > globalUnlocked will be temporarily denied of service",
+            "description": "The implementation consists of an accounting error caused by a wrong implicit assumption that during the execution of _computeVestingReleasableAmount globalUnlocked should not be less than releasedAmount.",
+            "severity": "low",
+            "location": "ERC20VestableVotesUpgradeable.1.sol#L413"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "TlcMigration.migrate: Missing input validation",
+            "description": "The migrate function is missing necessary validation checks to make sure no erroneous values are inserted.",
+            "severity": "low",
+            "location": "TLC_globalUnlockScheduleMigration.sol#L365-L386"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rounding Error in Unlocked Token Amount Calculation",
+            "description": "Rounding error in calculating unlocked amount may lead to minor discrepancies in tokens available for release.",
+            "severity": "info",
+            "location": "ERC20VestableVotesUpgradeable.1.sol, L458"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "It might take longer than 2 years to release all the vested schedule amount after the lock period ends",
+            "description": "Releasing total vested value might take longer than 2 years if lockDuration + 2 years is small compared to duration.",
+            "severity": "info",
+            "location": "ERC20VestableVotesUpgradeable.1.sol, L413"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Comments and NatSpec",
+            "description": "Various comment and NatSpec issues.",
+            "severity": "info",
+            "location": "ERC20VestableVotesUpgradeable.1.sol, L343, L396-L404, L441"
+        }
+    ]
+}

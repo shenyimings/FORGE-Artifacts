@@ -1,0 +1,188 @@
+{
+    "path": "artifacts/GnosisSafe.pdf",
+    "project_info": {
+        "url": "https://github.com/gnosis/safe-contracts/tree/bfb8abac580d76dd44f68307a5356a919c6cfb9b",
+        "commit_id": "bfb8abac580d76dd44f68307a5356a919c6cfb9b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "safe-contracts": "contracts/GnosisSafe/safe-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy Vulnerability",
+            "description": "Vulnerability allows an owner using EIP-1271 signature validation to run the same payload multiple times.",
+            "severity": "critical",
+            "location": "GnosisSafe Contract, function execTransaction"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-405"
+                ]
+            },
+            "title": "Gas and Refund Abuse",
+            "description": "An owner can consume large amounts of gas for free and receive a larger than expected refund.",
+            "severity": "critical",
+            "location": "ISignatureValidator, function checkSignatures"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Transaction Reordering Vulnerability",
+            "description": "Reordering transactions can result in an incorrect threshold value.",
+            "severity": "critical",
+            "location": "OwnerManager Contract, functions addOwnerWithThreshold, removeOwner, and changeThreshold"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unauthorized Transaction to Zero Address",
+            "description": "Allows internal transactions to the zero address, potentially causing Ether to remain stuck at 0x0.",
+            "severity": "critical",
+            "location": "GnosisSafe Contract, function execTransaction"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Contract Existence Check",
+            "description": "execTransaction may result in loss of Ether if the target address is non-existent.",
+            "severity": "high",
+            "location": "GnosisSafe Contract, function execTransaction"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Potential Overflow",
+            "description": "Arithmetic operations without SafeMath may lead to overflows and unexpected behavior.",
+            "severity": "medium",
+            "location": "Multiple locations (e.g., GnosisSafe.sol, OwnerManager.sol)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential List Index Out of Bounds",
+            "description": "signatureSplit function does not check for index bounds, potentially leading to out-of-bounds access.",
+            "severity": "medium",
+            "location": "GnosisSafe Contract, function signatureSplit"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ]
+            },
+            "title": "Missing Well-Formedness Check",
+            "description": "checkSignatures does not validate the signature encoding, potentially leading to memory access issues.",
+            "severity": "high",
+            "location": "GnosisSafe Contract, function checkSignatures"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unauthorized Ether Transfer",
+            "description": "handlePayment allows sending Ether to precompiled contract addresses.",
+            "severity": "info",
+            "location": "GnosisSafe Contract, function handlePayment"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Insufficient External Call Result Check",
+            "description": "Insufficient external call result check and gas efficiency of transferToken.",
+            "severity": "info",
+            "location": "GnosisSafe Contract, function transferToken"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ],
+                "4": [
+                    "CWE-789"
+                ]
+            },
+            "title": "Stack and Memory Overflow",
+            "description": "input stack size may exceed maximum allowed value or memory allocation may exceed maximum allowed value",
+            "severity": "high",
+            "location": "checkSignatures function"
+        }
+    ]
+}

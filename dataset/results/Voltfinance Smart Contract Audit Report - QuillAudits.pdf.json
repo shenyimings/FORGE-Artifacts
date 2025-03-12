@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/Voltfinance Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/voltfinance/saddle-contract",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "saddle-contract": "contracts/Voltfinance Smart Contract Audit Report - QuillAudits/saddle-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralization risk",
+            "description": "Owner can mint any amount of tokens to any address and here minting has no maximum limit.",
+            "severity": "info",
+            "location": "Contract - LPToken"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Incorrect compiler version",
+            "description": "Contract is using old solidity version 0.6.12, Using an old version prevents access to new Solidity security checks.",
+            "severity": "info",
+            "location": "Contract - LPToken, SwapFlashLoan, Swap.sol, SwapUtils.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Timestamp Dependence",
+            "description": "The part of code shows timestamp dependence, malicious miners can use this dependency for their profit by manipulating block timestamp.",
+            "severity": "info",
+            "location": "Contract - Swap.sol, SwapUtils.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Loss Making updates to A",
+            "description": "Since volt finance contracts are derived from Curve finance they are also vulnerable to an economic attack identified by Peter Zeitz.",
+            "severity": "medium",
+            "location": "Contract - SwapUtils.sol"
+        }
+    ]
+}

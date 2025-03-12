@@ -1,0 +1,212 @@
+{
+    "path": "artifacts/LiquidCollective3-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/liquid-collective/liquid-collective-protocol",
+        "commit_id": "3a23e607c2c45334fc7fa37032ad389b4fa6dbae",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "liquid-collective-protocol": "contracts/LiquidCollective3-Spearbit-Security-Review/liquid-collective-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "_pickNextValidatorsToExitFromActiveOperators uses the wrong index to query stopped validator count",
+            "description": "Using idx in the cached operator's array instead of the cached index of this array element",
+            "severity": "critical",
+            "location": "OperatorsRegistry.1.sol#L628"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Oracles' reports votes are not stored in storage",
+            "description": "ReportVariants.get() returns a memory array instead of a storage array",
+            "severity": "critical",
+            "location": "Oracle.1.sol#L268"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "User's LsETH might be locked due to out-of-gas error during recursive calls",
+            "description": "Recursive calls in _claimRedeemRequest function can lead to out-of-gas errors",
+            "severity": "high",
+            "location": "RedeemManager.1.sol#L417"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Allowed users can directly transfer their share to RedeemManager",
+            "description": "Users can directly transfer shares without requesting a redeem",
+            "severity": "medium",
+            "location": "RedeemManager.1.sol#L280-L281, SharesManager.1.sol#L105, SharesManager.1.sol#L119"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "Invariants are not enforced for stopped validator counts",
+            "description": "_setStoppedValidatorCounts does not enforce invariants",
+            "severity": "medium",
+            "location": "OperatorsRegistry.1.sol#L419-L440"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential out-of-gas exceptions",
+            "description": "Gas-intensive operations in _requestExitsBasedOnRedeemDemandAfterRebalancings and _pickNextValidatorsToDepositFromActiveOperators",
+            "severity": "medium",
+            "location": "OracleManager.1.sol#L432, OperatorsRegistry.1.sol#L529"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect validator count to exit assumption",
+            "description": "The validatorCountToExit calculation assumes that selected validators are active, not penalized, and have a balance of at least MAX_EFFECTIVE_BALANCE.",
+            "severity": "low",
+            "location": "River.1.sol#L568-L571"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Unused report bufferRebalancingMode and slashingContainmentMode",
+            "description": "report.bufferRebalancingMode and report.slashingContainmentMode are only used during the reporting transaction process and their previous values are not used in the protocol.",
+            "severity": "info",
+            "location": "OracleManager.1.sol#L340-L341"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of comments/documentation for ConsensusLayerReport and StoredConsensusLayerReport structs",
+            "description": "The ConsensusLayerReport and StoredConsensusLayerReport structs are defined but lack comments regarding their specified fields.",
+            "severity": "info",
+            "location": "IOracleManager.1.sol#L102-L125"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Exit validator picking strategy does not consider slashed validators",
+            "description": "The current picking strategy in the OperatorsRegistry might pick slashed validators to exit the protocol.",
+            "severity": "info",
+            "location": "Operators.2.sol#L281, OperatorsRegistry.1.sol#L615"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicated functions",
+            "description": "The Operator.2._getStoppedValidatorCountAtIndex and OperatorsRegistry.1._getStoppedValidatorsCountFromRawArray functions are duplicated.",
+            "severity": "info",
+            "location": "Operators.2.sol#L142, OperatorsRegistry.1.sol#L484"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Funds might be pulled from CoverageFundV1 even when there has been no slashing incident",
+            "description": "vars.availableAmountToUpperBound might be positive even though no validators have been slashed.",
+            "severity": "info",
+            "location": "CoverageFund.1.sol#L18-L19, OracleManager.1.sol#L416-L422"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Document/mark unused (would-be-stale) storage parameters after migration",
+            "description": "The following storage parameters will be unused after the migration of the protocol to v1.",
+            "severity": "info",
+            "location": "CLValidatorCount.sol#L10, CLValidatorTotalBalance.sol#L10-L11, LastOracleRoundId.sol#L10-L11, Operators.1.sol#L10, ReportVariants.sol#L8-L9"
+        }
+    ]
+}

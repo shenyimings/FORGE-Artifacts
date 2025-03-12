@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/PlatON安全审计报告.pdf",
+    "project_info": {
+        "url": "https://github.com/PlatONnetwork/PlatON-Go",
+        "commit_id": "v0.7.2.4",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "PlatON-Go": "contracts/PlatON安全审计报告/PlatON-Go"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Error Unhandled",
+            "description": "Errors were not handled properly, which could lead to object dereference or execution of incorrect logic, causing node crashes.",
+            "severity": "low",
+            "location": "Various places in the codebase"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Weak Password Storage",
+            "description": "Wallet did not perform password strength detection, allowing weak passwords to store private keys.",
+            "severity": "medium",
+            "location": "Wallet implementation"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "\"假充值\" attack via inline call",
+            "description": "A special constructed contract can cause a \"假充值\" attack",
+            "severity": "n/a",
+            "location": "Contract A and Contract B"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-347"
+                ]
+            },
+            "title": "Transaction replay attack",
+            "description": "Fixed by including Nonce and chainID in the signed fields",
+            "severity": "n/a",
+            "location": "core/types/transaction_signing.go, EIP155Signer Hash function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-405"
+                ]
+            },
+            "title": "Virtual machine security issue (WASM)",
+            "description": "A \"交易排挤攻击\" attack was tested, but the attack cost is high",
+            "severity": "n/a",
+            "location": "WASM virtual machine"
+        }
+    ]
+}

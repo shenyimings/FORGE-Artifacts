@@ -1,0 +1,81 @@
+{
+    "path": "artifacts/ySwaps.md",
+    "project_info": {
+        "url": "https://github.com/yearn/hardhat-monorepo",
+        "commit_id": "a1b210e78f6e7936ca0d7d79d512800b794fff2a",
+        "address": "0x7BAF843e06095f68F4990Ca50161C2C4E4e01ec6 (Ethereum mainnet), 0x711d1D8E8B2b468c92c202127A2BBFEFC14bf105 (Ethereum mainnet)",
+        "chain": "Ethereum"
+    },
+    "findings": [
+        {
+            "id": 0,
+            "title": "Grants too much access on Yearn Vaults strategies funds",
+            "description": "Access to a single centralized account key known as Mechanic may be compromised by a person performing infrastructure maintenance.",
+            "severity": "medium",
+            "location": "Yearn Vaults strategies funds, related to the Mechanic key"
+        },
+        {
+            "id": 1,
+            "title": "Security and sanity check bypass in MultiCallOptimizedSwapper",
+            "description": "Arbitrary code execution can lead to loss of funds due to accidental bug or compromised Mechanic account key.",
+            "severity": "medium",
+            "location": "MultiCallOptimizedSwapper contract, _executeSwap function"
+        },
+        {
+            "id": 2,
+            "title": "Unnecessary and unrestricted trade() at BancorSwapper",
+            "description": "Unused and unrestricted trade() function can be called by anyone.",
+            "severity": "medium",
+            "location": "BancorSwapper contract, trade() function"
+        },
+        {
+            "id": 3,
+            "title": "Incompatibility with fee-on-transfer tokens",
+            "description": "TransferFrom may result in less tokens received due to fees.",
+            "severity": "medium",
+            "location": "TradeFactoryExecutor contract, transferFrom functions"
+        },
+        {
+            "id": 4,
+            "title": "Incorrect slippage check",
+            "description": "Condition in slippage check is logically reversed.",
+            "severity": "low",
+            "location": "TradeFactoryExecutor contract, slippage check condition"
+        },
+        {
+            "id": 5,
+            "title": "Unrestricted setter in Machinery contract",
+            "description": "Setter for mechanics registry has no access restriction.",
+            "severity": "low",
+            "location": "Machinery contract, setMechanicsRegistry function"
+        },
+        {
+            "id": 6,
+            "title": "Unnecessary assembly in MultiCallOptimizedSwapper.sol",
+            "description": "Assembly usage for gas optimization does not make significant impact and makes code complex.",
+            "severity": "low",
+            "location": "MultiCallOptimizer.sol contract, assembly usage"
+        },
+        {
+            "id": 7,
+            "title": "Variables can be declared as immutable",
+            "description": "Some variables in Bancor swappers can be declared as immutable.",
+            "severity": "low",
+            "location": "BancorSwapper contracts, contractRegistry and bancorNetworkName variables"
+        },
+        {
+            "id": 8,
+            "title": "Duplicating sanity check",
+            "description": "Sanity check maxSlippage != 0 duplicates another check.",
+            "severity": "low",
+            "location": "TradeFactoryExecutor contract, sanity check condition"
+        },
+        {
+            "id": 9,
+            "title": "Redundant operation on return values",
+            "description": "Redundant operations on return values make no impact on security or performance.",
+            "severity": "low",
+            "location": "UniswapV2Swapper and UniswapV2AnchorSwapper contracts, swapExactTokensForTokens() function"
+        }
+    ]
+}

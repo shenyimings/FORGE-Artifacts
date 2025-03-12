@@ -1,0 +1,440 @@
+{
+    "path": "artifacts/2024-08-superposition.md",
+    "project_info": {
+        "url": "https://github.com/code-423n4/2024-08-superposition",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "superposition": "contracts/2024-08-superposition"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-430"
+                ]
+            },
+            "title": "Incorrect update of emergency council",
+            "description": "The function intended to update the `emergency_council` variable instead updates the `nft_manager` variable, which could have significant consequences for the system.",
+            "severity": "high",
+            "location": "n/a"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Unrevoked approvals allow NFT recovery by previous owner",
+            "description": "After a token transfer, the approval status for the token is not revoked, allowing the previous owner (or any approved address) to reclaim the NFT using the approval mechanism.",
+            "severity": "high",
+            "location": "token transfer function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Token Transfer Approval Issue",
+            "description": "approvals are not cleared when an NFT is transferred, allowing the NFT to be recovered after transfer.",
+            "severity": "high",
+            "location": "token transfer function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ],
+                "3": [
+                    "CWE-839"
+                ]
+            },
+            "title": "Missing `lower < upper` check in `mint_position`",
+            "description": "The implementation does not perform a check for `lower < upper` during `mint_position`, allowing malicious actors to exploit inconsistencies.",
+            "severity": "high",
+            "location": "pkg/seawater/src/pool.rs, mint_position function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Invalid validation of tick values in a position",
+            "description": "The implementation does not properly validate tick values, leading to potential security vulnerabilities.",
+            "severity": "high",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Underflow/overflow issue in `get_fee_growth_inside` function",
+            "description": "The function implicitly relies on underflow/overflow when calculating the fee growth, and if underflow is prevented, some operations that depend on fee growth will revert.",
+            "severity": "high",
+            "location": "tick.rs, get_fee_growth_inside function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect token transfer in `collect_protocol_7540_F_A_9_F` function",
+            "description": "The function attempts to transfer a token with the recipient address as the 'token', which will fail on each invocation.",
+            "severity": "high",
+            "location": "lib::collect_protocol_7540_F_A_9_F function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Underflow vulnerability in `get_fee_growth_inside` function",
+            "description": "The current implementation of `tick::get_fee_growth_inside` does not allow underflow/overflow to happen when calculating `fee_growth_inside_0` and `fee_growth_inside_1`.",
+            "severity": "high",
+            "location": "pkg/seawater/src/tick.rs"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Incorrect token transfer in `collect_protocol_7540_F_A_9_F` function (duplicate)",
+            "description": "The function attempts to transfer a token with the recipient address as the 'token', which will fail on each invocation.",
+            "severity": "high",
+            "location": "lib::collect_protocol_7540_F_A_9_F function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "`swapOut` functions have invalid slippage check, causing user loss of funds",
+            "description": "Incorrect slippage checks in `swapOut5E08A399` and `swapOutPermit23273373B` functions, leading to potential loss of user funds during swaps.",
+            "severity": "high",
+            "location": "SeawaterAMM.sol#L317 (swapOut5E08A399) and SeawaterAMM.sol#L339 (swapOutPermit23273373B)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "_onTransferReceived() does not work as intended",
+            "description": "The function may revert or prevent transfers to contracts that have correctly implemented the `ERC721TokenReceiver` interface.",
+            "severity": "n/a",
+            "location": "OwnershipNFTs.sol, lines 65-67 and 82-95"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ]
+            },
+            "title": "EIP-721 `safeTransferFrom()` function incorrect implementation",
+            "description": "The implementation does not follow the EIP-721 spec, causing reverts or inaccessibility to this function/feature of the ERC721.",
+            "severity": "medium",
+            "location": "OwnershipNFTs.sol#L148-L157"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Insecure Implementation of ERC721 Token Receiver Callback",
+            "description": "The `_onTransferReceived()` function does not accept a `bytes data` parameter, which obstructs the use case of the ERC721Receiver callback/hook.",
+            "severity": "medium",
+            "location": "_onTransferReceived() and safeTransferFrom() functions in the ERC721 token contract"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong liquidity formula used",
+            "description": "The protocol uses the wrong liquidity formula in the `incrPositionC3AC7CAA` function, which can lead to incorrect calculations.",
+            "severity": "medium",
+            "location": "SeawaterAmm.sol#L464, lib.rs#L914, pool.rs#L253 and L265"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Liquidity Calculation in `get_liquidity_for_amounts` Function",
+            "description": "The function incorrectly calculates liquidity, leading to a reverted transaction when `amount0Desired` and `amount0Min` are very close.",
+            "severity": "high",
+            "location": "`get_liquidity_for_amounts` function in `pool.rs` file (LOC-312)"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Liquidity Equations used in `adjust_position()` Function",
+            "description": "Superposition uses wrong equations, similar to Uniswap V3's `addLiquidity()` function, leading to fund loss.",
+            "severity": "medium",
+            "location": "`adjust_position()` function"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Base Price of `sqrt_price` when performing `swap` and the swap position does not cover `swap amount`",
+            "description": "The issue arises when a user initiates a swap operation with an amount that exceeds the total token amount available in the current pool, leading to incorrect `sqrt_price` value.",
+            "severity": "medium",
+            "location": "`swap` function"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Update of `sqrt_price` when `price_limit` is set to `U256::MAX` in the second swap",
+            "description": "The issue causes incorrect pool configurations due to incorrect update of `sqrt_price`.",
+            "severity": "medium",
+            "location": "`swap` function"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Unintended under/overflow of the amount already swapped in/out due to unmatching logic",
+            "description": "Unintended under/overflow of the amount already swapped in/out due to unmatching logic",
+            "severity": "medium",
+            "location": "pkg/seawater/src/pool.rs#L439"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Users can't remove liquidity while a pool is disabled",
+            "description": "The check for pool status prevents users from removing liquidity when the pool is disabled.",
+            "severity": "medium",
+            "location": "update_position_internal function in pkg/seawater/src/lib.rs#L687C25-L687C83"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "`swap_2` implementation will randomly revert due to improper check",
+            "description": "The `swap_2` implementation has an improper check that causes it to randomly revert.",
+            "severity": "n/a",
+            "location": "swap_2 function"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "Improper check in `swap_2_internal` function can cause valid swap to revert due to partial liquidity",
+            "description": "An improper check can cause a valid swap to revert due to partial liquidity in the second leg of the swap.",
+            "severity": "n/a",
+            "location": "swap_2_internal function"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "`swap_2_internal_erc20` operation may result in overpayment of funds if input amount is not consumed in full",
+            "description": "`swap_2_internal_erc20` operation may result in overpayment of funds if input amount is not consumed in full.",
+            "severity": "n/a",
+            "location": "swap_2_internal_erc20 function"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Volatile pools with higher fee structure cannot be created due to `tick_spacing` datatype constraint",
+            "description": "Volatile pools with higher fee structure cannot be created due to `tick_spacing` datatype constraint.",
+            "severity": "n/a",
+            "location": "tick_spacing datatype"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "[L-9] Unprotected Function Calls",
+            "description": "Multiple functions in `SeawaterAMM.sol` lack proper access control and reentrancy protection, making them vulnerable to unauthorized calls and potential reentrancy attacks.",
+            "severity": "critical",
+            "location": "SeawaterAMM.sol (swap_904369_B_E, swap_2_exact_in_41203_F1_D, swap_permit_2_E_E84_A_D91)"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "[L-10] Lack of Deadline Checks",
+            "description": "Several functions in `SeawaterAMM.sol` are missing deadline checks, allowing transactions to stay in the mempool for an extended period.",
+            "severity": "critical",
+            "location": "SeawaterAMM.sol (swap_904369_B_E, swap_2_exact_in_41203_F1_D, swap_permit_2_E_E84_A_D91)"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ]
+            },
+            "title": "[L-11] Incomplete Ownership NFT Functionality",
+            "description": "`OwnershipNFTs.sol` lacks essential mint and burn functionalities, rendering the contract incomplete and potentially useless.",
+            "severity": "critical",
+            "location": "OwnershipNFTs.sol"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "[L-12] `calldata` is not used during NFT transfers",
+            "description": "The `transferFrom` and `safeTransferFrom` functions take the `calldata` parameter but it's not used, especially in the `_onTransferReceived` hook.",
+            "severity": "medium",
+            "location": "https://github.com/code-423n4/2024-08-superposition/blob/4528c9d2dbe1550d2660dac903a8246076044905/pkg/sol/OwnershipNFTs.sol#L148-L157 and https://github.com/code-423n4/2024-08-superposition/blob/4528c9d2dbe1550d2660dac903a8246076044905/pkg/sol/OwnershipNFTs.sol#L118-L126"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-183"
+                ]
+            },
+            "title": "[L-13] Prevent transfer to self when transferring positions",
+            "description": "The `transfer_position_E_E_C7_A3_C_D` function allows users to transfer tokens to themselves, which should be prevented.",
+            "severity": "medium",
+            "location": "https://github.com/code-423n4/2024-08-superposition/blob/4528c9d2dbe1550d2660dac903a8246076044905/pkg/sol/../rust/(specific file not provided)"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "[L-14] Prevent swapping with oneself",
+            "description": "The `P2Pswap` function allows users to swap with themselves, which should be prevented.",
+            "severity": "medium",
+            "location": "https://github.com/code-423n4/2024-08-superposition/blob/4528c9d2dbe1550d2660dac903a8246076044905/pkg/sol/../rust/(specific file not provided)"
+        }
+    ]
+}

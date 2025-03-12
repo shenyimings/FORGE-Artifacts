@@ -1,0 +1,248 @@
+{
+    "path": "artifacts/CertiK Security Assessment for Alpaca Finance 1.pdf",
+    "project_info": {
+        "url": "https://github.com/alpaca-finance/bsc-alpaca-contract/tree/7b8389ac08f2025af8bad23af0ba7ea91ca94c26",
+        "commit_id": "7b8389ac08f2025af8bad23af0ba7ea91ca94c26",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bsc-alpaca-contract": "contracts/CertiK Security Assessment for Alpaca Finance 1/bsc-alpaca-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Lack of State Update in `manualMint`",
+            "description": "The function `manualMint` does not update the value of `manualMinted`.",
+            "severity": "critical",
+            "location": "token/AlpacaToken.sol: 50, 15"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Variables Should Be Declared Constant",
+            "description": "State variables _cap and manualMintLimit do not change within the contract.",
+            "severity": "info",
+            "location": "token/AlpacaToken.sol, lines 9, 14"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralization Risks",
+            "description": "Functions setParams and setWorkers can be modified by owner after contract initialization.",
+            "severity": "high",
+            "location": "protocol/ConfigurableInterestRateModel.sol: 52-60"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Non-Optimal Parameter Set",
+            "description": "vulnerable to front running attack",
+            "severity": "info",
+            "location": "pancakeswap/StrategyWithdrawMinimizeTrading.sol (lines 47-56)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ],
+                "3": [
+                    "CWE-912"
+                ]
+            },
+            "title": "Potential Liquidating Issue",
+            "description": "intended by design, but needs review",
+            "severity": "info",
+            "location": "protocol/Vault.sol (line 311)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Unexpected Revert",
+            "description": "might suffer unexpected loss",
+            "severity": "low",
+            "location": "protocol/Vault.sol (line 317)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Risk When Opening a Farming Position",
+            "description": "vulnerable to on-chain DeFi attack",
+            "severity": "high",
+            "location": "protocol/Vault.sol (line 236)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Residue in the Contract",
+            "description": "intended by design, but needs review",
+            "severity": "low",
+            "location": "protocol/Vault.sol (line 201)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unkillable Position When Worker Is Unstable",
+            "description": "might suffer unexpected loss when worker is not stable",
+            "severity": "low",
+            "location": "protocol/workers/WorkerConfig.sol (lines 86-89)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Boolean Function Never Returns False",
+            "description": "intended by design, but needs review",
+            "severity": "info",
+            "location": "protocol/workers/WorkerConfig.sol (line 52)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risks I",
+            "description": "owner can change Oracle, increasing centralization risk",
+            "severity": "high",
+            "location": "protocol/workers/WorkerConfig.sol (line 33)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risks II",
+            "description": "owner can change configurations, increasing centralization risk",
+            "severity": "high",
+            "location": "protocol/workers/WorkerConfig.sol (line 38)"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "If the owner accidentally updates significant configurations to improper values, it might cause unexpected loss.",
+            "severity": "n/a",
+            "location": "setConfigs function in WorkerConfig contract"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "WCC-05 | Function Should Be Declared External",
+            "description": "The function `initialize` is never called internally within the contract and thus should have external visibility.",
+            "severity": "info",
+            "location": "protocol/workers/WorkerConfig.sol: 27"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ]
+            },
+            "title": "WNR-01 | Function Should Be Declared External",
+            "description": "The function `withdraw` is never called internally within the contract and thus should have external visibility.",
+            "severity": "info",
+            "location": "protocol/WNativeRelayer.sol: 27"
+        }
+    ]
+}

@@ -1,0 +1,470 @@
+{
+    "path": "artifacts/2023-05-17_Lido_Polygon_v2.pdf",
+    "project_info": {
+        "url": "https://github.com/lidofinance/polygon-contracts/tree/eb197c6c189a07c1f30b72206ccb41ae02b639fc",
+        "commit_id": "eb197c6c189a07c1f30b72206ccb41ae02b639fc",
+        "address": "0x60a91E2B7A1568f0848f3D43353C453730082E46",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "RateProvider": "contracts/2023-05-17_Lido_Polygon_v2/RateProvider"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect minimum calculation",
+            "description": "The NodeOperatorRegistry contract has several places where the minimum value `minAmount` might be calculated wrong.",
+            "severity": "high",
+            "location": "NodeOperatorRegistry contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Broken delegated flag",
+            "description": "The system balanced check is incorrect, which can lead to rebalancing when it's not needed.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Excessive return data",
+            "description": "NodeOperatorRegistry::_getValidatorsRequestWithdraw should return only non-Inactive validators.",
+            "severity": "medium",
+            "location": "NodeOperatorRegistry::_getValidatorsRequestWithdraw function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Insufficient input validation",
+            "description": "Validator could break contract logic by passing his own address to the NodeOperatorRegistry's setRewardAddress function.",
+            "severity": "medium",
+            "location": "NodeOperatorRegistry's setRewardAddress function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Delegation issue",
+            "description": "Distance threshold percents and stake per operator calculation can lead to incorrect delegation amounts.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ],
+                "3": [
+                    "CWE-1121"
+                ]
+            },
+            "title": "Optimize mint function",
+            "description": "The mint function can be optimized for gas usage.",
+            "severity": "info",
+            "location": "Mint function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Bad comments",
+            "description": "Comments for `minAmount` and `maxAmount` are identical.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Differences in naming of Matic",
+            "description": "Inconsistency in variable names for MATIC token.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Zero-valued activeValidators during requestWithdraw",
+            "description": "Zero-valued structs can lead to incorrect length values and reverts.",
+            "severity": "info",
+            "location": "RequestWithdraw function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Excessive memory usage",
+            "description": "DISTANCE_THRESHOLD_PERCENTS is saved into memory and used only once.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant SLOADs",
+            "description": "Redundant SLOAD operations can be optimized.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Variable mismatching",
+            "description": "Variables with the same value but different names are used.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code duplication for a minimum of two values",
+            "description": "Code duplication can be replaced with a simple function call.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Zero check",
+            "description": "Zero checks should be added to avoid unnecessary calculations.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Calculation of an unnecessary variable",
+            "description": "Unnecessary variable calculation can be optimized.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Extra calculations",
+            "description": "Extra calculations can be avoided in certain cases.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Storage clearing",
+            "description": "Storage should be cleared after burning NFT and claiming tokens.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong return value",
+            "description": "Wrong return values can occur in certain cases.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "minAmount variable conversion",
+            "description": "The minAmount variable can be equal to 1 even if the minimum amount is 0, causing issues with withdrawals.",
+            "severity": "info",
+            "location": "NodeOperatorRegistry contract, _getValidatorsRequestWithdraw function"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Better naming of global variables",
+            "description": "Global variables are not constants and some have expensive casting to uint8.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant inheritance",
+            "description": "PoLidoNFT contract inherits ERC721Upgradeable and ERC721PausableUpgradeable unnecessarily.",
+            "severity": "info",
+            "location": "PoLidoNFT contract"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Uninitialized state",
+            "description": "StMATIC.token2WithdrawRequest is never initialized and used in several functions.",
+            "severity": "high",
+            "location": "StMATIC contract"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Unused state",
+            "description": "StMATIC.recovered is never used.",
+            "severity": "info",
+            "location": "StMATIC contract"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1099"
+                ]
+            },
+            "title": "Similar names",
+            "description": "Several variables have similar names, which can lead to confusion.",
+            "severity": "info",
+            "location": "NodeOperatorRegistry contract"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "External calls in loops",
+            "description": "External calls are made inside loops in several functions.",
+            "severity": "low",
+            "location": "StMATIC and NodeOperatorRegistry contracts"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zero checks",
+            "description": "Zero checks are missing in several function parameters.",
+            "severity": "low",
+            "location": "StMATIC contract"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Reentrancy (benign)",
+            "description": "Reentrancy is possible in several functions, but it's benign.",
+            "severity": "low",
+            "location": "StMATIC and NodeOperatorRegistry contracts"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Incorrect equality checks",
+            "description": "Strict equality checks are used instead of safe equality checks.",
+            "severity": "medium",
+            "location": "StMATIC contract"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Division before multiplication",
+            "description": "Division is performed before multiplication in several functions, which can lead to loss of precision.",
+            "severity": "medium",
+            "location": "StMATIC and NodeOperatorRegistry contracts"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy (no ether)",
+            "description": "Reentrancy is possible in several functions, but it's not related to ether transfers.",
+            "severity": "medium",
+            "location": "StMATIC contract"
+        }
+    ]
+}

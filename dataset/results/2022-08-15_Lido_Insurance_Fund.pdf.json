@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/2022-08-15_Lido_Insurance_Fund.pdf",
+    "project_info": {
+        "url": "https://github.com/lidofinance/insurance-fund/tree/e2aadf7b548a69860a3f535faaf7170712466463",
+        "commit_id": "e2aadf7b548a69860a3f535faaf7170712466463",
+        "address": "0x8B3f33234ABD88493c0Cd28De33D583B70beDe35",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "insurance-fund": "contracts/2022-08-15_Lido_Insurance_Fund/insurance-fund"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No zero-address check in the constructor",
+            "description": "Constructor allows to pass zero-address as the _owner parameter.",
+            "severity": "info",
+            "location": "InsuranceFund.sol, constructor"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Single point of failure in transferOwnership()",
+            "description": "The function sets _owner if called with a non-zero address which is a potential risk if the address is not controlled by the Lido DAO and could lead to the loss of assets in the contract.",
+            "severity": "info",
+            "location": "InsuranceFund.sol, transferOwnership()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Directions of funds transfer from the Insurance Fund should be more restricted",
+            "description": "In current implementation funds can be transferred to any address.",
+            "severity": "info",
+            "location": "InsuranceFund.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Clone of OpenZeppelin repo",
+            "description": "There are two sources of OpenZeppelin contracts, a clone and brownie dependency.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Shadowing local variable",
+            "description": "_owner shadows Ownable._owner (state variable) in the constructor.",
+            "severity": "low",
+            "location": "InsuranceFund.sol, constructor"
+        }
+    ]
+}

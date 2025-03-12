@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/MoonGalaxy.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x1edaa6699bd58425d8f7bb6a44b44fdf709d2bda",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "MoonGalaxy": "contracts/MoonGalaxy/MoonGalaxy"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeAccount()` uses a loop to find and remove addresses from the `_excluded` list, which can lead to an OUT_OF_GAS exception if the excluded addresses list is too long. Similarly, the `_getCurrentSupply` function also uses a loop to evaluate total supply, which can be aborted with an OUT_OF_GAS exception if the excluded addresses list is too big.",
+            "severity": "low",
+            "location": "Functions `includeAccount()` and `_getCurrentSupply`"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has privileges to change tax, burn, and charity fees, and set the charity address once, which can lead to unintended consequences.",
+            "severity": "low",
+            "location": "Owner's role in the contract"
+        }
+    ]
+}

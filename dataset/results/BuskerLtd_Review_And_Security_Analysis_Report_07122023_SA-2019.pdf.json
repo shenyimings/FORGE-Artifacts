@@ -1,0 +1,448 @@
+{
+    "path": "artifacts/BuskerLtd_Review_And_Security_Analysis_Report_07122023_SA-2019.pdf",
+    "project_info": {
+        "url": "https://github.com/ProjectOpenSea/operator-filter-registry/tree/v1.3.1",
+        "commit_id": "v1.3.1",
+        "address": "0xb6EA4627e5feFF6DE2F9b863DB7CF504Bdb3C2cB",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "operator-filter-registry": "contracts/BuskerLtd_Review_And_Security_Analysis_Report_07122023_SA-2019/operator-filter-registry"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-460"
+                ]
+            },
+            "title": "DoS Due To Reentrancy",
+            "description": "AuctionSale.sol contract contains a vulnerability within its bid function that can lead to a denial-of-service attack due to reentrancy.",
+            "severity": "critical",
+            "location": "AuctionSaleUpgradeable.sol, bid() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy Vulnerability In FixedSaleUpgradable Contract",
+            "description": "Malicious contract can exploit the contract's logic and regain control, manipulating the contract state.",
+            "severity": "critical",
+            "location": "FixedSaleUpgradable contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "NFT / Fund Lock in The Contract",
+            "description": "Funds and NFT can be locked within the contract if the highest bidder is a smart contract without an onERC721Received function.",
+            "severity": "high",
+            "location": "AuctionSaleUpgradeable.sol: endAuction(), OffersUpgradeable.sol: acceptOffer()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Highly Centralization Function May Cause DOS",
+            "description": "The emergencyWithdrawNFT function can lead to Denial-of-Service (DOS) vulnerabilities due to its centralization mechanism.",
+            "severity": "high",
+            "location": "AuctionSaleUpgradeable.sol: emergencyWithdrawNFT()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "State Variables Not Limited To Reasonable Values",
+            "description": "Unchecked platform and creator fees during NFT transactions",
+            "severity": "medium",
+            "location": "setPlatformFee() and endAuction() in AuctionSaleUpgradeable.sol, setPlatformFee() and buy() in FixedSaleUpgradeable.sol, setPlatformFee() and acceptOffer() in OffersUpgradeable.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Invalid Offers In OffersUpgradeable",
+            "description": "Unresolved offers persist indefinitely if not completed within stipulated time frame",
+            "severity": "medium",
+            "location": "OffersUpgradeable.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Missing Reentrancy Modifier",
+            "description": "Absence of reentrancy guards in functions",
+            "severity": "medium",
+            "location": "listSale() and delistSale() in FixedSaleUpgradeable.sol, bid() in AuctionsaleUpgradeable.sol, acceptOffer() and makeOffer() in OffersUpgradeable.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Reorder Interactions and Effects for Correct Function Execution",
+            "description": "Improper ordering of interactions and effects",
+            "severity": "medium",
+            "location": "buy() in FixedSaleUpgradeable.sol, endAuction() in AuctionsaleUpgradeable.sol, acceptOffer() in OffersUpgradeable.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Utilization of a floating pragma notation ^0.8.18",
+            "severity": "low",
+            "location": "Various contracts (listed in the report)"
+        },
+        {
+            "id": 9,
+            "category": {},
+            "title": "Insufficient Gas modeling",
+            "description": "Gas modeling issues (03, I08)",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-638"
+                ]
+            },
+            "title": "Front-Running; Pricing Manipulation in Fixed Sale",
+            "description": "Sellers can modify the price after observing a purchase request and expedite mining to take advantage of the buyer",
+            "severity": "medium",
+            "location": "AuctionSaleUpgradeable.sol: emergencyWithdrawNFT()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Ownership Irrevocability Vulnerability in Smart Contract",
+            "description": "Renouncing ownership renders the contract immutable and potentially useless for future administrative changes",
+            "severity": "n/a",
+            "location": "ProxyAdmin.sol, MultiTransactions.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Avoid Unnecessary Initializations Of Uint256 And Bool Variable To 0/false",
+            "description": "Initializing `uint256` variables to `0` and `bool` variables to `false` leads to unnecessary Gas consumption and code clutter",
+            "severity": "n/a",
+            "location": "MultiTransactions.sol, FixedSaleUpgradeable.sol, AuctionSaleUpgradeable.sol, CollectionManagerUpgradeable.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Custom Errors For Better Gas Efficiency",
+            "description": "Using custom errors instead of revert strings can reduce Gas costs",
+            "severity": "n/a",
+            "location": "MultiTransactions.sol, FixedSaleUpgradeable.sol, AuctionSaleUpgradeable.sol, SideaRegistryUpgradeable.sol, OffersUpgradeable.sol, CollectionManagerUpgradeable.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Revert String Size",
+            "description": "Long revert strings can be expensive in terms of Gas usage",
+            "severity": "n/a",
+            "location": "CollectionManagerUpgradeable.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Immutable Keyword For Gas Optimization",
+            "description": "Marking state variables as immutable can greatly improve Gas costs",
+            "severity": "n/a",
+            "location": "MultiTransactions.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "Missing Revert Messages In The require Statements",
+            "description": "Lack of informative error messages makes it challenging to debug failed transactions or understand why an operation was not allowed",
+            "severity": "n/a",
+            "location": "FixedSaleUpgradeable.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "`event` Declared But Not Emitted",
+            "description": "Unused event declarations consume unnecessary space and may lead to misunderstandings for developers or users",
+            "severity": "n/a",
+            "location": "CollectionManagerUpgradeable.sol"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Avoid Using State Variables Directly In `emit`",
+            "description": "Directly using state variables within the `emit` function can be costly and affect contract reliability",
+            "severity": "n/a",
+            "location": "OffersUpgradeable.sol"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Validation of Fee Setter",
+            "description": "Redundant declarations cause unnecessary Gas spending and decrease code readability",
+            "severity": "n/a",
+            "location": "AuctionSaleUpgradeable.sol, FixedSaleUpgradeable.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "I10. Do Not Use totalSupply() In For Loop",
+            "description": "Using totalSupply() in a loop can lead to unnecessary gas consumption.",
+            "severity": "n/a",
+            "location": "CollectionManagerUpgradeable.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "I11. Unfinalized Implementation",
+            "description": "The callNft function lacks implementation and includes to-do comments, indicating that its existence is unclear.",
+            "severity": "n/a",
+            "location": "SideaFactoryUpgradeable.sol"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "I12. Unnecessary Initialization of Variables",
+            "description": "Redundant initialization of state variables adds verbosity to the code and may be considered a suboptimal coding practice.",
+            "severity": "n/a",
+            "location": "CollectionManagerUpgradeable.sol: initialize()"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "I13. Increments Can Be ‘unchecked’ In For Loops",
+            "description": "Using unchecked math can block overflow / underflow checks to save gas.",
+            "severity": "n/a",
+            "location": "Multiple locations (MultiTransactions.sol, AuctionSaleUpgradeable.sol, CollectionManagerUpgradeable.sol, FixedSaleUpgradeable.sol)"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "I14. Unpacked Variables Consuming Gas",
+            "description": "The order of storage variables declaration affects gas costs.",
+            "severity": "n/a",
+            "location": "OffersUpgradeable.sol"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "I15. Style Guide Violation",
+            "description": "Not following the official Solidity guidelines can decrease code quality and readability.",
+            "severity": "n/a",
+            "location": "./*"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "I16. Copy and Modifying Well-Known Contracts",
+            "description": "Directly modifying well-known contracts from external libraries may introduce potential risks.",
+            "severity": "n/a",
+            "location": "ProxyAdmin.sol, TransparentUpgradeableProxy.sol"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "I17. Enhancing Security with New OpenSea Project Version",
+            "description": "Staying updated with the latest versions is a proactive step towards maintaining a robust and secure system.",
+            "severity": "n/a",
+            "location": "libs/*"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "I18. Usage of Toggle Switch Mechanism",
+            "description": "The toggle-switch mechanism can pose a risk if inadvertently invoked several times.",
+            "severity": "n/a",
+            "location": "AuctionSaleUpgradeable.sol, CollectionManagerUpgradeable.sol, FixedSaleUpgradeable.sol"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "I19. Redundant Require Statements",
+            "description": "Redundant require statements cause unnecessary Gas spending and decrease code readability.",
+            "severity": "n/a",
+            "location": "AuctionSaleUpgradeable.sol: batchDelegatedOpenAuction(), FixedSaleUpgradeable.sol: delegatedBatchList()"
+        }
+    ]
+}

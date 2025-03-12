@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/Hacken-QANplatform.pdf",
+    "project_info": {
+        "url": "https://github.com/qanplatform/qanx-token",
+        "commit_id": "ebf0352af6ccb8d991827a0fba3ac5cfe9ca6b70",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "qanx-token": "contracts/Hacken-QANplatform/qanx-token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Unlocked pragma",
+            "description": "Contracts with unlocked pragmas may be deployed by the latest compiler, which may have higher risks of undiscovered bugs.",
+            "severity": "low",
+            "location": "QANplatform.sol contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Redundant check",
+            "description": "Checking if block.timestamp > _locks[account].hardLockUntil is redundant because it is already included in unlockableBalanceOf function which is called before.",
+            "severity": "low",
+            "location": "QANplatform.sol contract, Function: unlock#549"
+        }
+    ]
+}

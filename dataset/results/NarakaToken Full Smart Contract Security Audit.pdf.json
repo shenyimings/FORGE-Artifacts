@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/NarakaToken Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x8e3fe7cdf4ebb605bbbac3a43d76ea757f7f06e2",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "NarakaToken": "contracts/NarakaToken Full Smart Contract Security Audit/NarakaToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Exclude from reward",
+            "description": "The function excludeFromReward() does not check if the address is already excluded.",
+            "severity": "low",
+            "location": "Function excludeFromReward()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas in includeInReward()",
+            "description": "The function includeInReward() uses a loop to find and remove addresses from the _excluded list, which can lead to an OUT_OF_GAS exception if there are many excluded addresses.",
+            "severity": "low",
+            "location": "Function includeInReward()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas in _getCurrentSupply()",
+            "description": "The function _getCurrentSupply() uses a loop for evaluating total supply, which can lead to an OUT_OF_GAS exception if there are many excluded addresses.",
+            "severity": "low",
+            "location": "Function _getCurrentSupply()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas in manage_trusted() and manage_Snipers()",
+            "description": "The functions manage_trusted() and manage_Snipers() use a loop for iterating through addresses lists from function arguments, which can lead to an OUT_OF_GAS exception if there are many addresses.",
+            "severity": "low",
+            "location": "Functions manage_trusted() and manage_Snipers()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas in excludeFromFee()",
+            "description": "The function excludeFromFee() uses a loop for iterating through addresses lists from function arguments, which can lead to an OUT_OF_GAS exception if there are many addresses.",
+            "severity": "low",
+            "location": "Function excludeFromFee()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Owner Privileges",
+            "description": "Owner has extensive privileges, including enabling trading, changing fees, withdrawing contract assets, and more.",
+            "severity": "n/a",
+            "location": "Various functions with onlyOwner modifier"
+        }
+    ]
+}

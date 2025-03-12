@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/Iron Bank.md",
+    "project_info": {
+        "url": "https://github.com/ibdotxyz/compound-protocol",
+        "commit_id": "8cd45803b48552e344e22be280c9e1c03ec8644a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "compound-protocol": "contracts/Iron Bank/compound-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Set credit limit by pausing the guardian",
+            "description": "Pausing the guardian can set a new credit limit for users with the credit limit.",
+            "severity": "medium",
+            "location": "Comptroller.sol, function _setCreditLimit"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Exchange rate vulnerability",
+            "description": "An exchange rate bug for new pools and empty pools (without borrowers and suppliers) for CToken contracts without the 'internalCash' variable.",
+            "severity": "medium",
+            "location": "CToken contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Interest rate model update impacts the old time period",
+            "description": "After an admin changes the interest rate model parameters, indexes will be recalculated in the upcoming accrueInterest() function call, applying new interest settings to the previous period of time which is not correct.",
+            "severity": "medium",
+            "location": "TripleSlopeRateModel.sol, function accrueInterest"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "A flashloan will be broken if the USDT fee is more than zero",
+            "description": "The flashloan() function does not take into consideration the USDT fee value, causing a revert in the repayment process.",
+            "severity": "medium",
+            "location": "CCollateralCapErc20.sol, function flashloan"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Undesired repay and/or liquidation of ex-credit account",
+            "description": "An ex-credit account will be subject to repay and/or liquidation of its borrowed debt after becoming an ordinary account.",
+            "severity": "medium",
+            "location": "Comptroller.sol, function setCreditLimit"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Typos in descriptions",
+            "description": "Several typos in descriptions throughout the contract",
+            "severity": "low",
+            "location": "Various contracts (CTokenInterfaces.sol, PriceOracle/PriceOracleProxy.sol, Comptroller.sol, etc.)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No null checks for input addresses",
+            "description": "Lacking a check for null address in some code",
+            "severity": "n/a",
+            "location": "PriceOracle/PriceOracleProxyIB.sol#L157"
+        }
+    ]
+}

@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/Xttp-Domain-NFT_14012022SCAudit_Report_3.pdf",
+    "project_info": {
+        "url": "https://github.com/xtblock/xt-domain-nft",
+        "commit_id": "b1c821ab2f1a7da0bef63654f6fb701e9fe78672",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "xt-domain-nft": "contracts/Xttp-Domain-NFT_14012022SCAudit_Report_3/xt-domain-nft"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Some methods could become inoperable",
+            "description": "Arrays nftExtTokenMap[extName]._tokenIds and nftUserTokenMap[owner]._tokenIds have no limits, therefore view functions that return them and function that iterate over them could become inoperable.",
+            "severity": "medium",
+            "location": "XT-Domain-NFT.sol, Functions: getTokenIdsByAddress, getTokenIdsByExt, buyNFTFromMarketPlace"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Dead code",
+            "description": "Ternary operators are not necessary since conditions are true, which is ensured by require operators.",
+            "severity": "low",
+            "location": "XT-Domain-NFT.sol, Functions: registerNFT, importNFT"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Boolean equality",
+            "description": "Boolean constants can be used directly and do not need to be compared to true or false.",
+            "severity": "low",
+            "location": "XT-Domain-NFT.sol, Function: buyNFTFromMarketPlace (line #512)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "A public function that could be declared external",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "XT-Domain-NFT.sol, Functions: getNameExt, getCurrentTokenId, balanceTokenForPayment, registerNFT, extendNFTSubscription, importNFT, extendImportedNFTSubscription, buyNFTFromMarketPlace, getTokenIdsByAddress, getTokenIdsByExt, getNFTURI, getNFTDataByName, getNFTDataById, getNFTNameById, setNFTURI"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Too many digits",
+            "description": "Literals with many digits are difficult to read and review.",
+            "severity": "low",
+            "location": "XT-Domain-NFT.sol"
+        }
+    ]
+}

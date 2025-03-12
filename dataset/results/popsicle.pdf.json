@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/popsicle.pdf",
+    "project_info": {
+        "url": "https://github.com/Popsicle-Finance/PopsicleV3Optimizer/tree/d1513776bffd634e9e83330495adce9d9d0a5cb0",
+        "commit_id": "d1513776bffd634e9e83330495adce9d9d0a5cb0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "PopsicleV3Optimizer": "contracts/popsicle/PopsicleV3Optimizer"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible Truncation While Calculating Users Deposits Shares",
+            "description": "Truncation of users' shares due to incorrect calculation of initial liquidity deposit and fees generated later.",
+            "severity": "high",
+            "location": "PopsicleV3Optimizer_flat.sol, _calcShare() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Un-compounded Protocol Fees",
+            "description": "Not compounding protocol fees in the withdraw() function, reducing user rewards.",
+            "severity": "high",
+            "location": "PopsicleV3Optimizer_flat.sol, withdraw() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Input Validation",
+            "description": "Missing input validation for 0x0 address in several functions.",
+            "severity": "low",
+            "location": "PopsicleV3Optimizer_flat.sol, Various functions (constructor, setGovernance, deposit)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Possible Incorrect Execution Order in collectProtocolFees()",
+            "description": "Incorrect execution order of _earnFees() and requirements validation in collectProtocolFees().",
+            "severity": "low",
+            "location": "PopsicleV3Optimizer_flat.sol, collectProtocolFees() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "MEV Protection Can Disrupt Gas Fees",
+            "description": "MEV protection can disrupt gas fees incentives due to London Fork changes.",
+            "severity": "info",
+            "location": "PopsicleV3Optimizer_flat.sol, rerange() and rebalance() functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Low Code Coverage",
+            "description": "Poor code coverage scores, which may indicate hidden functional bugs.",
+            "severity": "medium",
+            "location": "Various contracts and libraries (listed in the document)"
+        }
+    ]
+}

@@ -1,0 +1,365 @@
+{
+    "path": "artifacts/Hacken-Fidometa-V2.pdf",
+    "project_info": {
+        "url": "https://github.com/fidometa/Smart_Contract",
+        "commit_id": "ad56b0ce678f77d162752dbb5d987d2f4a29fddf",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Smart_Contract": "contracts/Hacken-Fidometa-V2/Smart_Contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing functionality",
+            "description": "Functions emit Transfer event but do not change any balances, leading to possible double-spending or reduction of users’ rewards.",
+            "severity": "critical",
+            "location": "FidoMeta.sol, functions: _burn, _mint, constructor"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Excluding from receiving rewards logic is corrupted",
+            "description": "User's reflection balance updates along with their prime balance after excluding and including them back, leading to unexpected behavior.",
+            "severity": "critical",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Operation between different time units",
+            "description": "block.timestamp may be bigger than startTime plus initialLock in seconds, but initialLock is given in days, leading to unexpected unlocking of funds or reverting the transaction.",
+            "severity": "critical",
+            "location": "FidoMeta.sol, function: unlock"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Significant impact on market price",
+            "description": "Functions change the balances of all users at one moment, which could be used for changing market price significantly and looting untrained users.",
+            "severity": "critical",
+            "location": "FidoMeta.sol, functions: burn, mint"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "A new vesting period may not be created",
+            "description": "locks mapping is not cleared on finishing of the vesting period, so the owner will not be able to set new vesting for the same user.",
+            "severity": "high",
+            "location": "FidoMeta.sol, functions: transferWithLock, unlock"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "No checks to prevent percentage overflow",
+            "description": "Fees may become more than 100%, leading to reverting of all transactions.",
+            "severity": "high",
+            "location": "FidoMeta.sol, functions: setCommunityCharge, setEcoSysFee, setSurcharge1, setSurcharge2, setSurcharge3"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "User balance may exceed the total supply",
+            "description": "If the owner excludes himself from rewards and then burns all tokens, the total supply will be lower than the sum of user balances.",
+            "severity": "high",
+            "location": "FidoMeta.sol, function: burn"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Integer Underflow",
+            "description": "Transaction may be reverted due to underflow if a user unlocks vesting firstly in the first four months and then in the sixth month or later.",
+            "severity": "high",
+            "location": "FidoMeta.sol, function: unlock"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing management of excluded accounts",
+            "description": "Adding excluded accounts to _excluded array is missed, leading to wrong rates calculation, unexpected contract behavior, and possible reentrancy attacks.",
+            "severity": "high",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "A new vesting period may not be created ( duplicate )",
+            "description": "locks mapping is not cleared on finishing of the vesting period, so the owner will not be able to set new vesting for the same user.",
+            "severity": "high",
+            "location": "FidoMeta.sol, functions: transferWithLock, unlock"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Old wallets are not included back to changes and rewards",
+            "description": "Functions set new wallets and exclude them from charging but do not include the old ones back.",
+            "severity": "medium",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unprotected access to wallet settings",
+            "description": "Unrestricted access to wallet variables",
+            "severity": "high",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Unnecessary public functions",
+            "description": "Public functions not used within the contract",
+            "severity": "low",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused variables",
+            "description": "Variables defined but not used in the contract",
+            "severity": "info",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Template code",
+            "description": "Using costly reassignment operations and changing/reverting values for special calls",
+            "severity": "medium",
+            "location": "FidoMeta.sol, Function: _tokenTransfer"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Overwhelmed code",
+            "description": "Unneeded reassignment and unused variables",
+            "severity": "low",
+            "location": "FidoMeta.sol, Function: _transfer"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Repeated code",
+            "description": "Duplicate operation (updating r-space balance) in multiple functions",
+            "severity": "medium",
+            "location": "FidoMeta.sol, Functions: _transferFromExcluded, _transferToExcluded, _transferStandard, _transferBothExcluded"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary code",
+            "description": "Unused else case in transfer function",
+            "severity": "low",
+            "location": "FidoMeta.sol, Function: _tokenTransfer"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Functions that can be declared as external",
+            "description": "Public functions not called in the contract should be declared as external",
+            "severity": "low",
+            "location": "FidoMeta.sol, Function: totalSupply"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary checks",
+            "description": "Redundant checks for each fee separately",
+            "severity": "low",
+            "location": "FidoMeta.sol, Function: setCharges"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Modification of well-known contract",
+            "description": "Modified imported contract (Ownable) with unused variable",
+            "severity": "medium",
+            "location": "FidoMeta.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Hardcoded values",
+            "description": "Hardcoded decimals value making development harder and code less readable",
+            "severity": "low",
+            "location": "FidoMeta.sol, Function: _getTValues"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Local variable shadowing",
+            "description": "Shadowed local variables",
+            "severity": "medium",
+            "location": "FidoMeta.sol, function: _approve; BreederDaoTokenLockWallet.sol"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-Constant State Variables",
+            "description": "State variables that are not marked as constant",
+            "severity": "low",
+            "location": "FidoMeta.sol"
+        }
+    ]
+}

@@ -1,0 +1,212 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Brahma_Fi.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "cb7eb1ed869d31b2f97cc36c025b1a0aa630fd8e",
+        "address": "0x06325440D014e39736583c165C2963BA99fAf14E",
+        "chain": "eth",
+        "compiler_version": [
+            "vyper:0.2.8"
+        ],
+        "project_path": {
+            "Vyper_contract": "contracts/ConsenSys_Diligence-Brahma_Fi/Vyper_contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Virtual price may not correspond to actual price in the pool",
+            "description": "The virtual price formula may not match the actual price in some cases, leading to discrepancies in deposit or withdrawal results.",
+            "severity": "high",
+            "location": "ConvexPositionHandler and Curve pool function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect calculation of LP tokens to unstake",
+            "description": "The contract incorrectly calculates the yield earned in ETH and then converts it to LP tokens, leading to accounting issues.",
+            "severity": "high",
+            "location": "ConvexPositionHandler._claimReward"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "WETH tokens are not taken into account in ConvexTradeExecutor.totalFunds function",
+            "description": "The totalFunds function does not include WETH balances, leading to an incomplete representation of contract funds.",
+            "severity": "high",
+            "location": "ConvexTradeExecutor.totalFunds"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Inaccurate modifier onlyAuthorized may lead to funds loss if keeper is compromised",
+            "description": "The onlyAuthorized modifier allows the L2CrossDomainMessenger and keeper to call certain functions, potentially leading to funds loss if the keeper is compromised.",
+            "severity": "medium",
+            "location": "LyraPositionHandlerL2"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "No Slippage Protection in Swap",
+            "description": "The `exactInputSingle` function has no slippage protection, making it vulnerable to frontrunning and sandwich attacks.",
+            "severity": "medium",
+            "location": "Harvester.sol, function `_swapLidoForWETH`"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "No Slippage Protection in Curve Pools Swap",
+            "description": "The `.exchange` functions have no slippage protection, making them vulnerable to frontrunning and sandwich attacks.",
+            "severity": "medium",
+            "location": "Harvester.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "LDO Token Not Accounted for in Reward Tokens",
+            "description": "The `rewardTokens` function does not include the LDO token address, resulting in missed rewards and yield.",
+            "severity": "medium",
+            "location": "Harvester.sol, function `rewardTokens()`"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Keeper Design Complexity",
+            "description": "The protocol relies on the keeper being operated correctly in a complex manner, which can lead to inconsistencies and issues with accounting of vault shares and funds.",
+            "severity": "medium",
+            "location": "Keeper logic"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Vault.deposit - Possible front-running attack",
+            "description": "An attacker can front-run a deposit call to the Vault contract, causing the depositor to receive fewer shares than expected.",
+            "severity": "medium",
+            "location": "Vault.sol, function `deposit`"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Approving MAX_UINT amount of ERC20 tokens",
+            "description": "Approving the maximum value of uint256 can increase the impact of an attack if the approved contract gets hacked.",
+            "severity": "low",
+            "location": "Multiple contracts (BaseTradeExecutor, Batcher, ConvexExecutor, LyraL2)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Batcher.depositFunds may allow for more deposits than vaultInfo.maxAmount",
+            "description": "The Batcher contract may allow more deposits than vaultInfo.maxAmount due to mismatches in evaluating the total supply and pending withdrawals.",
+            "severity": "low",
+            "location": "Batcher.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Deposit and Withdraw event are always emitted with zero amount",
+            "description": "The events emitted during deposit or withdraw contain zero amounts instead of the actual amounts involved.",
+            "severity": "low",
+            "location": "ConvexExecutor/ConvexPositionHandler.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Violation of the \"checks-effects-interactions\" pattern",
+            "description": "The confirmDeposit and confirmWithdraw functions may be re-entered by the keeper in case the derived contract allows the execution of untrusted code.",
+            "severity": "low",
+            "location": "BaseTradeExecutor.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1287"
+                ]
+            },
+            "title": "Batcher doesn’t work properly with arbitrary tokens",
+            "description": "The Batcher contract is not compatible with arbitrary ERC-20 tokens due to specific assumptions about WETH.",
+            "severity": "low",
+            "location": "Batcher.sol"
+        }
+    ]
+}

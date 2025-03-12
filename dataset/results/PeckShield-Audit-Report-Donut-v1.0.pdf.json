@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Donut-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/donutcrypto/crossroad/tree/1f4b53355d794e9a8d0ca49d16dddd7583a2aa5f",
+        "commit_id": "1f4b53355d794e9a8d0ca49d16dddd7583a2aa5f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "crossroad": "contracts/PeckShield-Audit-Report-Donut-v1/crossroad"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Proper Refund of The Excess BNB",
+            "description": "addLiquidityBnb() function does not refund the excess BNB properly.",
+            "severity": "medium",
+            "location": "LiquidityProxy contract, addLiquidityBnb() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Possible Sandwich/MEV Attack For Reduced Returns",
+            "description": "buyTokenFromBnb() function is vulnerable to sandwich attacks due to the lack of slippage control.",
+            "severity": "medium",
+            "location": "DjinnAutoBuyer contract, buyTokenFromBnb() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant State/Code Removal",
+            "description": "Presence of redundant code and variables that can be safely removed for better gas efficiency.",
+            "severity": "info",
+            "location": "Multiple contracts (Crossroad and LiquidityProxy)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas Efficient Replacement of amountIn() and amountOut()",
+            "description": "The current implementation of amountIn()/amountOut() can be replaced with UniswapV2's getAmountIn()/getAmountsOut() for gas efficiency.",
+            "severity": "low",
+            "location": "DjinnAutoBuyer contract, amountIn()/amountOut() functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent Fee Rate Between PancakeSwap And DjinnAutoBuyer",
+            "description": "The fee rate using in the PancakeSwap BUSD-WBNB pair is different from the fee rate using in DjinnAutoBuyer, leading to more BNB spend for the same amount of fee tokens.",
+            "severity": "high",
+            "location": "PancakeSwap and DjinnAutoBuyer contracts"
+        }
+    ]
+}

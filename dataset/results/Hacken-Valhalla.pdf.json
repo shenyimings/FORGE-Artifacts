@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/Hacken-Valhalla.pdf",
+    "project_info": {
+        "url": "https://github.com/ValhallaLand/Solidity",
+        "commit_id": "9a42f0d87132d1f39005f259b0a8b1ff92f56405",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Solidity": "contracts/Hacken-Valhalla/Solidity"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Balance Storage Misconception",
+            "description": "The contract uses the same balance for liquidity and vestings, which can lead to a user claiming locked vesting or liquidity balance.",
+            "severity": "high",
+            "location": "ERC20.sol, Functions: constructor"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ],
+                "3": [
+                    "CWE-1100"
+                ]
+            },
+            "title": "Non-Separation of Concerns",
+            "description": "The ERC20 contract does not follow the single responsibility principle and implements more logic on top of the token.",
+            "severity": "medium",
+            "location": "ERC20.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "The verifier is set to an address but never checked if it is a zero address, and the _wallet parameter is never checked if it's a zero address.",
+            "severity": "low",
+            "location": "ERC20.sol, Functions: constructor, addVestingLock"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use of Hardcoded Values",
+            "description": "Hardcoded values are used in calculations in the constructor, initTreasure, and splitSignature functions.",
+            "severity": "low",
+            "location": "ERC20.sol, Functions: splitSignature, constructor, initTreasure"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "ERC20.sol uses a floating pragma ^0.8.0.",
+            "severity": "low",
+            "location": "ERC20.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "State Variables that could be Declared as constant",
+            "description": "State variables that don't change their value should be declared constant to save gas.",
+            "severity": "low",
+            "location": "ERC20.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Functions that can be Declared as external",
+            "description": "Public functions that are never called in the contract should be declared as external to save gas.",
+            "severity": "low",
+            "location": "FeedLp.sol, Functions: name(), symbol(), decimals(), totalSupply(), balanceOf, transfer, approve, increaseAllowance, decreaseAllowance"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Incorrect Solidity Version",
+            "description": "Using an old version prevents access to new Solidity security checks.",
+            "severity": "low",
+            "location": "ERC20.sol"
+        }
+    ]
+}

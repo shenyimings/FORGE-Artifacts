@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/Certik-Audit-Report-KokomoSwap-2021-05-26.pdf",
+    "project_info": {
+        "url": "https://github.com/KokomoSwap/kokomo-swap-core",
+        "commit_id": "4b945f3be319c55e8845ec83f1933a870f1b9d5e43c74bae068ded2c7d85b5f3",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "kokomo-swap-core": "contracts/Certik-Audit-Report-KokomoSwap-2021-05-26/kokomo-swap-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Divide by Zero",
+            "description": "The call to `burn()` function will fail if the value of `totalSupply` is 0.",
+            "severity": "high",
+            "location": "projects/KokomoSwap/contracts/kokomo-swap-core-main/contracts/KokomoPair.sol: 144"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incompatibility With Deflationary Tokens",
+            "description": "The input amount may not be equal to the received amount due to charged transaction fee when transferring standard ERC20 deflationary tokens.",
+            "severity": "low",
+            "location": "projects/KokomoSwap/contracts/kokomo-swap-periphery-main/contracts/KokomoRouter01.sol: 70, 71, 91, 109, 188, 200, 226, 240"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Variable Naming Convention",
+            "description": "The linked variables do not conform to the standard naming convention of Solidity.",
+            "severity": "info",
+            "location": "projects/KokomoSwap/contracts/kokomo-farm-main/contracts/MasterChef.sol: 66"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing Emit Events",
+            "description": "The function that affects the status of sensitive variables should be able to emit events as notifications to customers.",
+            "severity": "info",
+            "location": "projects/KokomoSwap/contracts/kokomo-farm-main/contracts/MasterChef.sol: 114, 166"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of Bonus Multiplier",
+            "description": "The function can alter the `BONUS_MULTIPLIER` variable and consequently the output of which is directly utilized for the minting of new tokens.",
+            "severity": "medium",
+            "location": "projects/KokomoSwap/contracts/kokomo-farm-main/contracts/MasterChef.sol: 115"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "add() Function Not Restricted",
+            "description": "The total amount of KOKOMO Reward in function `updatePool()` will be incorrectly calculated if the same LP token is added into the pool more than once in function `add()`.",
+            "severity": "high",
+            "location": "projects/KokomoSwap/contracts/kokomo-farm-main/contracts/MasterChef.sol: 124"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Recommended Explicit Pool Validity Checks",
+            "description": "There's no sanity check to validate if a pool is existing.",
+            "severity": "info",
+            "location": "projects/KokomoSwap/contracts/kokomo-farm-main/contracts/MasterChef.sol: 140"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Public 'premint' function",
+            "description": "The `premint` function is public, which means everyone can call this function.",
+            "severity": "info",
+            "location": "projects/KokomoSwap/contracts/kokomo-farm-main/contracts/MasterChef.sol: 344"
+        }
+    ]
+}

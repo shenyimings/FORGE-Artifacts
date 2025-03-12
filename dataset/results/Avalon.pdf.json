@@ -1,0 +1,56 @@
+{
+    "path": "artifacts/Avalon.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x19591885f60a325de2e577f03506a9491bbcb548",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "AVALON": "contracts/Avalon/AVALON"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Abuse of authority",
+            "description": "The function Deposit() could be called by the server address and could withdraw token amount from any address.",
+            "severity": "high",
+            "location": "Function Deposit()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function includeInReward() uses a loop to find and remove addresses from the _excluded list, which can cause an OUT_OF_GAS exception if there are many excluded addresses.",
+            "severity": "low",
+            "location": "Function includeInReward()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "The function _reflectFee() doesn't check _BurnWallet to be excluded from reward and doesn't increase _tOwned[_BurnWallet] value.",
+            "severity": "low",
+            "location": "Function _reflectFee()"
+        }
+    ]
+}

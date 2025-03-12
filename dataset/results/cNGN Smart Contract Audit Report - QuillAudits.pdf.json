@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/cNGN Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/asc-africa/stablecoin/",
+        "commit_id": "4540e0958961307104265e0fdc4dd4449adbe614",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "stablecoin": "contracts/cNGN Smart Contract Audit Report - QuillAudits/stablecoin"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Blacklisted address is allowed to transfer tokens if allowance>0",
+            "description": "If a blacklisted function has allowance to transfer tokens of non-blacklisted address then it can transfer it using transferFrom function.",
+            "severity": "high",
+            "location": "cngn.sol, Function: transferFrom(), Path: https://github.com/asc-africa/stablecoin/blob/169aaecf4309a54022a9f05403645eb3614c0511/contracts/cngn.sol#L114"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Any non-blacklisted address can transfer tokens to a blacklisted address",
+            "description": "Any non-blacklisted address can send tokens to a blacklisted address.",
+            "severity": "high",
+            "location": "cngn.sol, Functions: transfer(), transferFrom(), Paths: https://github.com/asc-africa/stablecoin/blob/169aaecf4309a54022a9f05403645eb3614c0511/contracts/cngn.sol#L97, https://github.com/asc-africa/stablecoin/blob/169aaecf4309a54022a9f05403645eb3614c0511/contracts/cngn.sol#L114"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "The owner might mistakenly mint tokens to blacklisted address",
+            "description": "The mint function does not check if the address passed is blacklisted or not. The owner might mistakenly pass a blacklisted address to it.",
+            "severity": "high",
+            "location": "cngn.sol, Function: mint(), Path: https://github.com/asc-africa/stablecoin/blob/169aaecf4309a54022a9f05403645eb3614c0511/contracts/cngn.sol#L139"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Experimental ABIEncoderV2 is deprecated",
+            "description": "Compiler version 0.8.0 and above support ABIEncoderV2 by default and experimental ABIEncoderV2 is deprecated.",
+            "severity": "info",
+            "location": "cngn.sol, Path: https://github.com/asc-africa/stablecoin/blob/4540e0958961307104265e0fdc4dd4449adbe614/contracts/cngn.sol#L5"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Use the latest compiler version",
+            "description": "Use the latest solidity compiler instead of 0.8.4 to avoid any security issues.",
+            "severity": "info",
+            "location": "cngn.sol, Path: https://github.com/asc-africa/stablecoin/blob/4540e0958961307104265e0fdc4dd4449adbe614/contracts/cngn.sol#L4"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Reentrancy contract import",
+            "description": "Reentrancy guard is imported but not used anywhere, so it will just consume gas on deployment.",
+            "severity": "info",
+            "location": "cngn.sol, Path: https://github.com/asc-africa/stablecoin/blob/4540e0958961307104265e0fdc4dd4449adbe614/contracts/cngn.sol#L11"
+        }
+    ]
+}

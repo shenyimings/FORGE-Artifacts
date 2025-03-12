@@ -1,0 +1,410 @@
+{
+    "path": "artifacts/MapleV2.pdf",
+    "project_info": {
+        "url": "https://github.com/maple-labs/maple-core-v2/tree/912fb38d924efdee4676d8a7d9ae9e85d82dcf60",
+        "commit_id": "912fb38d924efdee4676d8a7d9ae9e85d82dcf60",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "maple-core-v2": "contracts/MapleV2/maple-core-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "First pool depositor can be front-run and have part of their deposit stolen",
+            "description": "The first deposit with a totalSupply of zero shares will mint shares equal to the deposited amount, making it possible for an attacker to front-run and profit from a rounding issue.",
+            "severity": "high",
+            "location": "Pool"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Users depositing to a pool with unrealized losses will take on the losses",
+            "description": "The pool share price used for deposits is always totalAssets() / totalSupply, but when redeeming it's totalAssets() - unrealizedLosses() / totalSupply.",
+            "severity": "medium",
+            "location": "Pool"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "TransitionLoanManager.add does not account for accrued interest since last call",
+            "description": "The add function advances the domain start but doesn't account for accrued interest.",
+            "severity": "medium",
+            "location": "TransitionLoanManager.add"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unaccounted collateral is mishandled in triggerDefault",
+            "description": "TriggerDefault miscalculates repossessed funds due to unaccounted collateral tokens.",
+            "severity": "medium",
+            "location": "LoanManager.triggerDefault"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Unexpected behavior in previewWithdraw and withdraw functions",
+            "description": "The `previewWithdraw` function always reverts, while the `withdraw` function can succeed.",
+            "severity": "low",
+            "location": "WithdrawalManager"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Funds can be locked when setting a new WithdrawalManager",
+            "description": "The old WithdrawalManager cannot be accessed after setting a new one, locking user shares.",
+            "severity": "low",
+            "location": "PoolManager"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Incomplete protection against protocol pauses",
+            "description": "The `whenProtocolNotPaused` modifier is not applied to the `migrate()` function.",
+            "severity": "low",
+            "location": "Liquidator, MapleLoan, WithdrawalManager"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Funds can be lost due to uninitialized poolDelegateCover address",
+            "description": "The `poolDelegateCover` address might not be initialized, causing funds to be lost.",
+            "severity": "low",
+            "location": "PoolManager"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Overwriting of ownedPoolManager mapping",
+            "description": "The `ownedPoolManager` mapping can be overwritten, causing issues with pool delegate management.",
+            "severity": "low",
+            "location": "Globals.MapleGlobals"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rounding error in collateral requirement calculation",
+            "description": "The `_getCollateralRequiredFor` function rounds down, benefiting the borrower.",
+            "severity": "low",
+            "location": "Loan.MapleLoan"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Cache calculation in getExpectedAmount",
+            "description": "The decimal precision calculation is used twice in the getExpectedAmount function.",
+            "severity": "info",
+            "location": "pool-v2.LoanManager"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-920"
+                ]
+            },
+            "title": "Pool._divRoundUp can be more efficient",
+            "description": "The gas cost of Pool._divRoundUp can be reduced in the context that it's used in.",
+            "severity": "info",
+            "location": "pool-v2.Pool"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Use block.timestamp instead of domainStart in removeLoanImpairment",
+            "description": "The removeLoanImpairment function adds back all interest from the payment's start date to domainStart.",
+            "severity": "info",
+            "location": "pool-v2.LoanManager"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "setTimelockWindows checks isGovernor multiple times",
+            "description": "The Globals.setTimelockWindows function calls setTimelockWindow in a loop and each time setTimelockWindow's isGovernor is checked.",
+            "severity": "info",
+            "location": "globals-v2.MapleGlobals"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "fullDaysLate computation can be optimized",
+            "description": "The fullDaysLate computation can be optimized.",
+            "severity": "info",
+            "location": "loan.MapleLoan"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Users can prevent repossessed funds from being claimed",
+            "description": "An arbitrary user sending 1 wei to a liquidator's address prevents borrowers from claiming repossessed funds.",
+            "severity": "info",
+            "location": "debt-locker.DebtLocker"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "`PoolManager.removeLoanManager` errors with out-of-bounds if loan manager not found",
+            "description": "The function errors with an out-of-bounds error if the loan manager is not found.",
+            "severity": "info",
+            "location": "pool-v2::PoolManager.sol#L188"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "`PoolManager.removeLoanManager` does not clear loanManagers mapping",
+            "description": "The function does not clear the reverse loanManagers[mapleLoan] = loanManager mapping.",
+            "severity": "info",
+            "location": "pool-v2::PoolManager.sol#L188"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "`Pool._requestRedeem` reduces the wrong approval amount",
+            "description": "The function transfers escrowShares_ from owner but reduces the approval by shares_.",
+            "severity": "info",
+            "location": "pool-v2::Pool.sol#L213"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Issuance rate for double-late claims does not need to be updated",
+            "description": "The previousRate_ for the 8c) case in claim is always zero because the payment is late.",
+            "severity": "info",
+            "location": "pool-v2::LoanManager.sol#L223"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Additional verification that paymentIdOf[loan_] is not 0",
+            "description": "Most functions in the loan manager use the value paymentIdOf[loan_] without first checking if it's the default value of 0.",
+            "severity": "info",
+            "location": "pool-v2::LoanManager.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "`LoanManager` redundant check on late payment",
+            "description": "The claim function has a check for block.timestamp > previousPaymentDueDate_ && block.timestamp <= nextPaymentDueDate_ in one of the if statements.",
+            "severity": "info",
+            "location": "pool-v2::LoanManager.sol#L208"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Add encodeArguments/decodeArguments to WithdrawalManagerInitializer",
+            "description": "The WithdrawalManagerInitializer.sol does not have public encodeArguments/decodeArguments functions, and PoolDeployer needs to be changed to use these functions correctly.",
+            "severity": "info",
+            "location": "withdrawal-manager::WithdrawalManagerInitializer.sol"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Reorder WM.processExit parameters",
+            "description": "The WM.processExit function has its parameters reversed (address, uint256).",
+            "severity": "info",
+            "location": "withdrawal-manager::WithdrawalManager.sol#L210"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Additional verification in MapleLoanInitializer",
+            "description": "The MapleLoanInitializer could verify additional arguments to avoid bad pool deployments.",
+            "severity": "info",
+            "location": "loan::MapleLoanInitializer.sol#L87"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Clean up updatePlatformServiceFee",
+            "description": "The updatePlatformServiceFee can be cleaned up to use an existing helper function.",
+            "severity": "info",
+            "location": "loan::MapleLoanFeeManager.sol#L109-L110"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Document restrictions on Refinancer",
+            "description": "The refinancer may not set unexpected storage slots, like changing the _fundsAsset because _drawableFunds, _refinanceInterest are still measured in the old fund's asset.",
+            "severity": "info",
+            "location": "loan::MapleLoan.sol#L290, loan::Refinancer.sol"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Typos / Incorrect documentation",
+            "description": "The code and comments contain typos or are sometimes incorrect.",
+            "severity": "info",
+            "location": "loan::MapleLoan.sol#L93, withdrawal-manager::WithdrawalManager.sol#L222"
+        }
+    ]
+}

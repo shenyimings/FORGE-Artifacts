@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Tender-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/tender-finance/compound-protocol/tree/2ba64e2",
+        "commit_id": "2ba64e2",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "compound-protocol": "contracts/PeckShield-Audit-Report-Tender-v1/compound-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possibly Inaccurate Interest Accrual in CErc20",
+            "description": "The compoundFresh() function may be abused to update accrualBlockNumber without collecting interest.",
+            "severity": "medium",
+            "location": "CToken (CErc20), compoundFresh() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Potential Front-Running/MEV With Reduced Return",
+            "description": "The swapExactInputSingle() function is vulnerable to front-running attacks due to the lack of slippage control.",
+            "severity": "low",
+            "location": "CTokenGmx, swapExactInputSingle() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Non-VIP Withdraw Fee Bypass with JIT VIP Status",
+            "description": "The getIsAccountVip() function can be bypassed by flashloaning the required balance for VIP membership benefits.",
+            "severity": "medium",
+            "location": "Comptroller, getIsAccountVip() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged owner account has unchecked accesses and poses counter-party risk to exchange users.",
+            "severity": "medium",
+            "location": "Multiple Contracts"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Non ERC20-Compliance Of CToken/CTokenGmx",
+            "description": "Inconsistency or incompatibility issues found in the CToken contract regarding ERC20 compliance.",
+            "severity": "medium",
+            "location": "CToken, CTokenGmx contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Interface Inconsistency Between CErc20 And CEther",
+            "description": "Different interfaces between CErc20 and CEther types.",
+            "severity": "info",
+            "location": "Multiple Contracts (CErc20, CEther)"
+        }
+    ]
+}

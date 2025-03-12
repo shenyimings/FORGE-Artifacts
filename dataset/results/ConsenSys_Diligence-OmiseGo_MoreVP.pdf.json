@@ -1,0 +1,317 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-OmiseGo_MoreVP.pdf",
+    "project_info": {
+        "url": "https://github.com/omisego/plasma-contracts",
+        "commit_id": "e13aaf759c979cf6516c1d8de865c9e324bc2db6",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "plasma-contracts": "contracts/ConsenSys_Diligence-OmiseGo_MoreVP/plasma-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Merkle Tree Membership Proofs",
+            "description": "Allows existence proofs for the same leaf in multiple locations in the tree, enabling users to exit double their deposited amount.",
+            "severity": "critical",
+            "location": "Merkle.sol contract, checkMembership function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Improper Spending Condition Initialization",
+            "description": "Allows 'v2 transactions' to exit using PaymentExitGame",
+            "severity": "high",
+            "location": "PaymentOutputToPaymentTxCondition, verify function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-172"
+                ],
+                "3": [
+                    "CWE-173"
+                ]
+            },
+            "title": "RLPReader Multiple Valid Encodings",
+            "description": "The current implementation of RLP decoding can take two different txBytes and decode them to the same structure",
+            "severity": "high",
+            "location": "RLPReader, toUint method"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "EthVault Unused State Variable",
+            "description": "The withdrawEntryCounter state variable is unused.",
+            "severity": "low",
+            "location": "EthVault contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "TxPosLib Merge and Decode Function",
+            "description": "Lack of sanity checks on the values packed inside a utxo position variable.",
+            "severity": "low",
+            "location": "TxPosLib, UtxoPosLib contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inaccurate Description of Child Block Interval",
+            "description": "The comment in the submitDepositBlock function is inaccurate, stating that it’s possible to have at most 'childBlockInterval' deposit blocks between two child chain blocks.",
+            "severity": "low",
+            "location": "BlockController contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper checkMembership function in Merkle.sol",
+            "description": "The current implementation allows validating nodes other than leaves.",
+            "severity": "medium",
+            "location": "Merkle.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Merkle tree height limitation not checked",
+            "description": "The maximum height of the Merkle tree is neglected to be checked.",
+            "severity": "low",
+            "location": "Merkle.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "PaymentChallengeIFEInputSpent",
+            "description": "Lack of input validation and storage read checks",
+            "severity": "low",
+            "location": "code/plasma_framework/contracts/src/exits/payment/controllers/PaymentChallengeIFEInpu"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "PaymentChallengeIFENotCanonical",
+            "description": "Lack of input validation and storage read checks",
+            "severity": "low",
+            "location": "code/plasma_framework/contracts/src/exits/payment/controllers/PaymentChallengeIFENotCan"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "PaymentChallengeIFEOutputSpent",
+            "description": "Lack of input validation and storage read checks",
+            "severity": "low",
+            "location": "code/plasma_framework/contracts/src/exits/payment/controllers/PaymentChallengeIFEOut"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "PaymentChallengeStandardExit",
+            "description": "Lack of input validation and storage read checks",
+            "severity": "low",
+            "location": "code/plasma_framework/contracts/src/exits/payment/controllers/PaymentChallengeStanda"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "PaymentPiggybackInFlightExit",
+            "description": "Lack of input validation and storage read checks",
+            "severity": "low",
+            "location": "code/plasma_framework/contracts/src/exits/payment/controllers/PaymentPiggybackInFligh"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "PaymentStartInFlightExit",
+            "description": "Lack of input validation and storage read checks",
+            "severity": "low",
+            "location": "code/plasma_framework/contracts/src/exits/payment/controllers/PaymentStartInFlightExit"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "PaymentStartStandardExit",
+            "description": "Lack of input validation and storage read checks",
+            "severity": "low",
+            "location": "code/plasma_framework/contracts/src/exits/payment/controllers/PaymentStartStandardExi"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused code",
+            "description": "Unused arguments, functions, return values, and struct fields",
+            "severity": "low",
+            "location": "Various contracts"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Missing Check for Malformed Signatures",
+            "description": "The OpenZeppelin ECDSA library returns address(0x00) for many cases with malformed signatures, which is not handled by the PaymentOutputToPaymentTxCondition contract.",
+            "severity": "n/a",
+            "location": "contracts/cryptography/ECDSA.sol, code/plasma_framework/contracts/src/exits/payment/spendingConditions/PaymentOutputToPaymentTxCondition"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked Return Values for Block Root and Timestamp Reads",
+            "description": "The exit game libraries make several queries to the main PlasmaFramework contract where plasma block hashes and timestamps are stored, but the return values of these queries are not checked for existence.",
+            "severity": "low",
+            "location": "Multiple locations in PaymentStartStandardExit, PaymentChallengeIFENotCanonical, PaymentPiggybackInFlightExit, and TxFinalizationVerifier contracts"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Redundant plasmaFramework Declarations",
+            "description": "PaymentExitGame inherits from both PaymentInFlightExitRouter and PaymentStandardExitRouter, which declare and initialize their own PlasmaFramework variable.",
+            "severity": "low",
+            "location": "PaymentExitGame, PaymentInFlightExitRouter, and PaymentStandardExitRouter contracts"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Unauthorized Authority Change",
+            "description": "The setAuthority function allows the authority to set a new authority at will, which is unexpected in a system maintained by a maintainer role (multi-sig).",
+            "severity": "n/a",
+            "location": "BlockController contract"
+        }
+    ]
+}

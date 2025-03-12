@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Atomic_Loans_2.pdf",
+    "project_info": {
+        "url": "https://github.com/AtomicLoans/atomicloans-eth-contracts",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "atomicloans-eth-contracts": "contracts/ConsenSys_Diligence-Atomic_Loans_2/atomicloans-eth-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-281"
+                ]
+            },
+            "title": "Intentional secret reuse can block borrower and lender from accepting liquidation payment",
+            "description": "For Dave (the liquidator) to claim the collateral he’s purchasing, he must reveal secret D. Once that secret is revealed, Alice and Bob (the borrower and lender) can claim the payment.",
+            "severity": "high",
+            "location": "Sales.provideSecret() function in code/ethereum/contracts/Sales.sol:L193-L200"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "No way to convert between custom and non-custom funds",
+            "description": "Each fund is created using either Funds.create() or Funds.createCustom(). Both enforce a limitation that there can only be one fund per account.",
+            "severity": "medium",
+            "location": "code/ethereum/contracts/Funds.sol:L348-L355 and code/ethereum/contracts/Funds.sol:L383-L397"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Funds.maxFundDur has no effect if maxLoanDur is set",
+            "description": "Funds.maxFundDur specifies the maximum amount of time a fund should be active. It’s checked in request() to ensure the duration of the loan won’t exceed that time, but the check is skipped if maxLoanDur is set.",
+            "severity": "medium",
+            "location": "code/ethereum/contracts/Funds.sol:L510-L514"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Funds.update() lets users update fields that may not have any effect",
+            "description": "Funds.update() allows users to update the following fields which are only used if bools[fund].custom is set.",
+            "severity": "low",
+            "location": "code/ethereum/contracts/Funds.sol:L454-L478"
+        }
+    ]
+}

@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/super-rare-token.pdf",
+    "project_info": {
+        "url": "https://github.com/pixura/rarest-token/tree/8c5abd3c3273de70520d7b519d16893f431830f9",
+        "commit_id": "8c5abd3c3273de70520d7b519d16893f431830f9",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "rarest-token": "contracts/super-rare-token/rarest-token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-754"
+                ]
+            },
+            "title": "QSP-1 Missing Checks If Important Parameters Are Non-Zero",
+            "description": "Constructors do not check if superRareToken and merkleRoot are non-zero.",
+            "severity": "low",
+            "location": "contracts/claim/SuperRareTokenMerkleDrop.sol, contracts/erc20/SuperRareToken.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "QSP-2 Privileged Roles and Ownership",
+            "description": "Smart contract admins can mint tokens without restriction and pause transfers.",
+            "severity": "info",
+            "location": "SuperRareToken.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "QSP-3 Unlocked Pragma",
+            "description": "Unlocked pragma implies use of compiler versions above the specified one, which may cause unexpected behavior.",
+            "severity": "info",
+            "location": "Various files (see description)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "QSP-4 Allowance Double-Spend Exploit",
+            "description": "Vulnerable to allowance double-spend exploit due to incorrect implementation of approve() and transferFrom() functions.",
+            "severity": "info",
+            "location": "SuperRareToken.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "QSP-5 Tokens Can Potentially Get Locked in the Airdrop Contract",
+            "description": "Incorrect merkleRoot value can cause tokens to get locked in the contract.",
+            "severity": "n/a",
+            "location": "SuperRareTokenMerkleDrop.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "QSP-6 Potentially Zero-Addressed Retrieved Contracts",
+            "description": "getContractVersionCount function counts removed contracts, and getContract function can return zero address.",
+            "severity": "n/a",
+            "location": "Registry.sol"
+        }
+    ]
+}

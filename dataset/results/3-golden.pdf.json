@@ -1,0 +1,134 @@
+{
+    "path": "artifacts/3-golden.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xd87996ff3d06858bfc20989aef50cc5fcd4d84ca",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.13+commit.abaa5c0e"
+        ],
+        "project_path": {
+            "StandardTokenWithAntibot": "contracts/3-golden/StandardTokenWithAntibot"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "ST - Stops Transactions",
+            "description": "The contract owner can stop transactions for all users by setting `maxTransactionAmount` or `maxWallet` to zero, potentially operating as a honeypot.",
+            "severity": "medium",
+            "location": "contracts/Tokens/StandardTokens/StandardTokenWithAntibot.sol#L710,716"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "EPC - Existing Pair Creation",
+            "description": "The contract does not handle the scenario where a pair already exists prior to its execution, potentially locking the contract to an old pair and preventing updates.",
+            "severity": "low",
+            "location": "contracts/Tokens/StandardTokens/StandardTokenWithAntibot.sol#L527"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PVC - Price Volatility Concern",
+            "description": "The contract can potentially cause significant price volatility for the parties involved due to the variable `minAmountToTakeFee`.",
+            "severity": "low",
+            "location": "contracts/Tokens/StandardTokens/StandardTokenWithAntibot.sol#L614,672"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "IDI - Immutable Declaration Improvement",
+            "description": "The contract declares state variables that are not modified after initialization, but does not use the `immutable` declaration.",
+            "severity": "low",
+            "location": "contracts/Tokens/StandardTokens/StandardTokenWithAntibot.sol#L456,463"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the Solidity naming convention guidelines.",
+            "severity": "low",
+            "location": "contracts/Tokens/StandardTokens/StandardTokenWithAntibot.sol#L10,246,279,351,518,542,548,565,566,584,585,603,604,614"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "L14 - Uninitialized Variables in Local Scope",
+            "description": "The contract uses uninitialized local variables.",
+            "severity": "low",
+            "location": "contracts/Tokens/StandardTokens/StandardTokenWithAntibot.sol#L683,684"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "L16 - Validate Variable Setters",
+            "description": "The contract performs operations on variables without proper checks for zero values.",
+            "severity": "low",
+            "location": "contracts/Tokens/StandardTokens/StandardTokenWithAntibot.sol#L519,538"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "L20 - Succeeded Transfer Check",
+            "description": "The contract does not check if the result of the transfer methods is successful.",
+            "severity": "low",
+            "location": "contracts/Tokens/StandardTokens/StandardTokenWithAntibot.sol#L753"
+        }
+    ]
+}

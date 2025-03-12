@@ -1,0 +1,122 @@
+{
+    "path": "artifacts/QuillAudit-RuufPay_Smart_Contract_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/RuufPay/smartcontracts/blob/main/contracts/",
+        "commit_id": "af1263f9569a4030fd724cdeaa08475d407ec57c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smartcontracts": "contracts/QuillAudit-RuufPay_Smart_Contract_Audit_Report/smartcontracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unlimited rewards can be withdrawn",
+            "description": "Rewards calculation uses updated amount, allowing users to withdraw all tokens as rewards.",
+            "severity": "high",
+            "location": "StakeFarm.sol, lines 41-45"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Centralization Risks",
+            "description": "Owner has authority to withdraw all tokens from the contract at any point in time.",
+            "severity": "medium",
+            "location": "Withdraw function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Function input parameters lack of check",
+            "description": "No condition checks if user has any amount of tokens staked or not.",
+            "severity": "medium",
+            "location": "Withdraw function, lines 64-66"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zero address validation",
+            "description": "Owner address update does not check for zero address.",
+            "severity": "low",
+            "location": "ChangeOwner function, lines 86-89"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked Transfer",
+            "description": "Return value of external transfer/transferFrom call is not checked.",
+            "severity": "low",
+            "location": "Multiple locations (lines 47, 59, 72, 81)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Missing Events for Significant Transactions",
+            "description": "No event emitted for change of ownership.",
+            "severity": "info",
+            "location": "ChangeOwner function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Contract should be deployed with the same compiler version and flags that it was tested with thoroughly.",
+            "severity": "info",
+            "location": "Solidity pragma"
+        }
+    ]
+}

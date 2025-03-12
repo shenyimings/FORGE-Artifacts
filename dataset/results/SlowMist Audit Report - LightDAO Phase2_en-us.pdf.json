@@ -1,0 +1,173 @@
+{
+    "path": "artifacts/SlowMist Audit Report - LightDAO Phase2_en-us.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x0d80a72c9F98e5b1C7Fb3e3dC4d58aecA5966066",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "BurnerManager": "contracts/SlowMist Audit Report - LightDAO Phase2_en-us/BurnerManager"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Risk of external manipulation",
+            "description": "An attacker can construct a malicious external contract to steal rewards from UniswapV2Pair.",
+            "severity": "critical",
+            "location": "swap-core/contracts/UniswapV2Pair.sol#L211-225, function claimLightReward"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Denial of Service Vulnerability",
+            "description": "A user can cause DoS by passing a large array to certain functions in feeDistributor contracts.",
+            "severity": "low",
+            "location": "light-dao/contracts/feeDistributor/feeDistributor.sol#L384-416, function claimMany; light-dao/contracts/feeDistributor/GombocFeeDistributor.sol#L348-413, function claimMany; light-dao/contracts/feeDistributor/SwapFeeToVault.sol#L38-42, function withdrawMany"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Token compatibility issue",
+            "description": "Deflationary tokens can cause issues with token transfer in LightSwapBurner contract.",
+            "severity": "low",
+            "location": "light-dao/contracts/feeDistributor/LightSwapBurner.sol#L37-66, function burn; light-dao/contracts/feeDistributor/UnderlyingBurner.sol#L104-128, function burn"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing slippage check",
+            "description": "swapExactTokensForTokens function does not perform a slippage check, making it vulnerable to sandwich attacks.",
+            "severity": "low",
+            "location": "light-dao/contracts/feeDistributor/LightSwapBurner.sol#L37-66, function burn; light-dao/contracts/feeDistributor/UnderlyingBurner.sol#L104-128, function burn"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Risk of excessive authority",
+            "description": "feeToSetter role can set the feeRateNumerator without limits, which can lead to high user fees.",
+            "severity": "low",
+            "location": "swap-periphery/contracts/UniswapV2Factory.sol#L74-78, function setFeeRateNumerator"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zero address check",
+            "description": "Lack of zero address checks in certain functions can affect normal transactions.",
+            "severity": "info",
+            "location": "swap-core/contracts/ApprovedTokenManager.sol#L13-16, function approveToken; light-dao/contracts/feeDistributor/feeDistributor.sol#L81-99, function initialize; light-dao/contracts/feeDistributor/GombocFeeDistributor.sol#L79-97, function initialize; light-dao/contracts/feeDistributor/SwapFeeToVault.sol#L23-26, constructor; light-dao/contracts/feeDistributor/UnderlyingBurner.sol#L50-65, function initialize"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant code",
+            "description": "Redundant code in FeeDistributor contract.",
+            "severity": "info",
+            "location": "light-dao/contracts/feeDistributor/FeeDistributor.sol#L202, function _checkpointTotalSupply"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing event records",
+            "description": "Lack of event logs for certain functions that modify sensitive parameters.",
+            "severity": "info",
+            "location": "swap-core/contracts/UniswapV2Factory.sol#L47-60, functions setFeeTo, setFeeToSetter, setApprovedTokenManager; light-dao/contracts/feeDistributor/feeDistributor.sol#L458-460, function setEmergencyReturn; light-dao/contracts/feeDistributor/GombocFeeDistributor.sol#L468-470, function setEmergencyReturn; light-dao/contracts/feeDistributor/LightSwapBurner.sol#L33-35, function setRouters; light-dao/contracts/feeDistributor/UnderlyingBurner.sol#L100-102, function setRouters"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Function Call",
+            "description": "Anyone can call the claimLightReward function to claim and deposit rewards.",
+            "severity": "high",
+            "location": "UniswapV2Pair contract, claimLightReward function."
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Manipulable Address Parameters",
+            "description": "Incoming address parameters (lightGomboc, minter, lightToken, gomboc) are externally manipulable.",
+            "severity": "high",
+            "location": "UniswapV2Pair contract, claimLightReward function."
+        }
+    ]
+}

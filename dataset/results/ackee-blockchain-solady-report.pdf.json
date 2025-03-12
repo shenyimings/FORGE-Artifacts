@@ -1,0 +1,227 @@
+{
+    "path": "artifacts/ackee-blockchain-solady-report.pdf",
+    "project_info": {
+        "url": "https://github.com/Vectorized/solady/tree/e158762ba98db40a06411db7f80a54b93e951818",
+        "commit_id": "e158762ba98db40a06411db7f80a54b93e951818",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "solady": "contracts/ackee-blockchain-solady-report/solady"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "ERC-1155 _setApprovalForAll emits incorrect owner",
+            "description": "The function `_setApprovalForAll` in the ERC1155 contract emits an `ApprovalForAll` event with the wrong owner, which can lead to incorrect behavior of off-chain services relying on this event.",
+            "severity": "high",
+            "location": "tokens/ERC1155.sol, function _setApprovalForAll"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "ERC-1155 safe transfer re-entrancy",
+            "description": "The functions `_safeTransfer` and `_safeBatchTransfer` of the ERC1155 contract call post-transfer hooks in the reverse order, allowing for a reentrancy attack.",
+            "severity": "medium",
+            "location": "tokens/ERC1155.sol, function _safeTransfer and _safeBatchTransfer"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "ERC-1155 safe transfer hooks order inconsistency",
+            "description": "The internal `_afterTokenTransfer` and external `_checkOnERC1155Received` (or `_checkOnERC1155BatchReceived`) hooks are called in a different order across all safe transfer functions in the ERC1155 contract, leading to unexpected behavior.",
+            "severity": "info",
+            "location": "tokens/ERC1155.sol, function _safeTransfer and _safeBatchTransfer"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ]
+            },
+            "title": "Limited configurability in EIP712 abstract contract",
+            "description": "The implementation does not allow inheriting the EIP712 contract and overriding necessary functions to make both parameters (verifyingContract and salt) configurable.",
+            "severity": "n/a",
+            "location": "EIP712 abstract contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "ERC-20 mint to zero address",
+            "description": "The ERC20 contract allows minting tokens to the zero address, which contrasts with the OpenZeppelin implementation.",
+            "severity": "info",
+            "location": "tokens/ERC20.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Execution order of Yul arguments relied on",
+            "description": "Solady relies on an undocumented behavior of the solc compiler that arguments of Yul internal functions are evaluated from the last to the first.",
+            "severity": "info",
+            "location": "utils/SignatureCheckerLib.sol, utils/SafeTransferLib.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "MerkleProofLib duplicated code",
+            "description": "The MerkleProofLib library implements emptyProof and emptyLeafs helper functions with the same functionality but different names.",
+            "severity": "info",
+            "location": "utils/MerkleProofLib.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Token revert checks order inconsistency",
+            "description": "Revert checks are performed in a different order across ERC1155 and ERC721 functions.",
+            "severity": "info",
+            "location": "tokens/ERC721.sol, tokens/ERC1155.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Token approvals to self allowed",
+            "description": "The ERC721 and ERC1155 contracts allow calling approve and setApprovalForAll with by and account pointing to the same address.",
+            "severity": "info",
+            "location": "tokens/ERC721.sol, tokens/ERC1155.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading comments referring to delegatecall",
+            "description": "Comments refer to delegatecall, but the call instruction is used instead.",
+            "severity": "info",
+            "location": "tokens/ERC721.sol, tokens/ERC1155.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Increase balance comment in burn function",
+            "description": "Comment says 'Increase and store the updated balance of `to`,' but it's actually a burning function.",
+            "severity": "info",
+            "location": "tokens/ERC1155.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect Comment",
+            "description": "The comment in the _batchBurn function of the ERC1155 contract is incorrect, saying it increases balance when it actually decreases.",
+            "severity": "info",
+            "location": "_batchBurn function of the ERC1155 contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "H1 (Reentrancy)",
+            "description": "The contract is vulnerable to reentrancy attacks due to incorrect order of calling ERC1155 hooks.",
+            "severity": "high",
+            "location": "_setApprovalForAll function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "M1 (Reentrancy)",
+            "description": "The contract is vulnerable to reentrancy attacks, allowing an attacker to drain the victim's tokens.",
+            "severity": "medium",
+            "location": "ERC1155 hooks and transfer functions"
+        }
+    ]
+}

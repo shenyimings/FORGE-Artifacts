@@ -1,0 +1,275 @@
+{
+    "path": "artifacts/YearnV2Vaults.pdf",
+    "project_info": {
+        "url": "https://github.com/yearn/yearn-vaults/tree/f8a5f1d417fb707cd0117551067af2ea08ed660d",
+        "commit_id": "f8a5f1d417fb707cd0117551067af2ea08ed660d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "yearn-vaults": "contracts/YearnV2Vaults/yearn-vaults"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-283"
+                ]
+            },
+            "title": "Shares are indirectly transferable to 0x0",
+            "description": "Users can bypass transfer protections and send shares to the 0x0 address, burning them.",
+            "severity": "low",
+            "location": "Yearn v2 Vaults contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Use of zero or contract address as rewards address can block fee computations",
+            "description": "If governance sets the recipient's address to 0x0 or the address of the contract, it can block fee computation.",
+            "severity": "low",
+            "location": "Yearn v2 Vaults contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Division rounding may affect issuance of shares",
+            "description": "Users might not receive shares after making deposits due to large 'donations' affecting total asset amount.",
+            "severity": "medium",
+            "location": "_issueSharesForAmount function in Vault.vy"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "revokeStrategy function can be error-prone",
+            "description": "Issues in implementation and documentation of revokeStrategy function may cause errors.",
+            "severity": "low",
+            "location": "revokeStrategy function in Vault.vy"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Vault initialize function does not validate ERC20 decimals",
+            "description": "Initialization function uses unvalidated ERC20 decimals, leading to potential data type mismatches.",
+            "severity": "info",
+            "location": "initialize function in Vault.vy"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Vault deposits can bypass guest list deposit limits",
+            "description": "Users can bypass deposit limits by making multiple calls to the deposit function.",
+            "severity": "info",
+            "location": "deposit function in Vault.vy"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Strategy owner can reduce or bypass loss penalty",
+            "description": "Strategy owners can manipulate debt ratio change using flash loans, avoiding penalties for losses.",
+            "severity": "high",
+            "location": "_reportLoss function in Vault.vy"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "setWithdrawalQueue allows for duplicated strategies",
+            "description": "The setWithdrawalQueue function does not prevent duplicated strategies, which can force the vault into an invalid state.",
+            "severity": "low",
+            "location": "setWithdrawalQueue function in Vault.vy"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Strategy migrations can be problematic and should be avoided",
+            "description": "Strategy migrations can have serious effects on vault security and correctness if not performed manually.",
+            "severity": "high",
+            "location": "Vault.vy, migrateStrategy function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Large withdrawals can block other users from making withdrawals",
+            "description": "Large withdrawals can block other users from making subsequent withdrawals.",
+            "severity": "medium",
+            "location": "withdraw function in Vault.vy"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Current debt calculations can differ depending on context",
+            "description": "Debt calculations differ depending on context.",
+            "severity": "medium",
+            "location": "_creditAvailable and _debtOutstanding functions in Vault.vy"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Registry cache is not verified when registry address is updated",
+            "description": "Updates to registry address do not properly update the old registry cache.",
+            "severity": "high",
+            "location": "BaseWrapper.sol, setRegistry function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "name, symbol, and decimals functions can change during the lifetime of yToken",
+            "description": "Dynamic changes to ERC20 properties can affect internal bookkeeping.",
+            "severity": "medium",
+            "location": "yToken.sol, name, symbol, and decimals functions"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "A strategy declaring a loss can keep excess debt",
+            "description": "Strategies declaring losses do not have their debt clawed back by the vault contract.",
+            "severity": "info",
+            "location": "reporting function in Vault.vy"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Performance fees can exceed 100%",
+            "description": "The vault contract assumes that the sum of the vault performance fee and the performance fee of a given strategy will be at most 100%.",
+            "severity": "info",
+            "location": "_assessFees function in Vault.vy"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-669"
+                ]
+            },
+            "title": "Management fees can be avoided",
+            "description": "A strategy owner can take out credit, use it to turn a profit, and then repay the debt in the same block, eliminating the management fee.",
+            "severity": "low",
+            "location": "_assessFees function in Vault.vy"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ]
+            },
+            "title": "Vaults should not use inflationary or deflationary ERC20 tokens",
+            "description": "Using ERC20 tokens with dynamic supply or balance can severely affect the internal bookkeeping of the vault.",
+            "severity": "high",
+            "location": "deposit function in Vault.vy"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PR 273 introduces multiple issues",
+            "description": "Issues with locked profit calculation and underflow in freeFunds calculation.",
+            "severity": "low",
+            "location": "_calculateLockedProfit function and withdraw function in Vault.vy"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Front-running opportunities",
+            "description": "Opportunities for transaction front-running exist due to interactions between the vault and strategies.",
+            "severity": "low",
+            "location": "Various functions in Vault.vy"
+        }
+    ]
+}

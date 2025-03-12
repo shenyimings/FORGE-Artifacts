@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/carry-token-crowdsale-audit.pdf",
+    "project_info": {
+        "url": "https://github.com/carryprotocol/carry-token-crowdsale/tree/94a4e0c733eb8d3a5a5c3020c7efb80a0917766c",
+        "commit_id": "94a4e0c733eb8d3a5a5c3020c7efb80a0917766c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "carry-token-crowdsale": "contracts/carry-token-crowdsale-audit/carry-token-crowdsale"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-286"
+                ]
+            },
+            "title": "Beneficiary added multiple times",
+            "description": "A beneficiary can be added multiple times, compromising the gradual delivery of tokens.",
+            "severity": "low",
+            "location": "GradualDeliveryCrowdsale.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Allowance double-spend exploit",
+            "description": "The contract is vulnerable to an allowance double-spend exploit, similar to other ERC20 tokens.",
+            "severity": "info",
+            "location": "CarryPublicTokenCrowdsale.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Solidity code defects",
+            "description": "Various code defects, including bugs, non-adherence to Solidity best practices, gas usage issues, and deprecated/obsolete code.",
+            "severity": "info",
+            "location": "CarryPublicTokenCrowdsale.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ],
+                "3": [
+                    "CWE-15"
+                ]
+            },
+            "title": "Block time manipulation",
+            "description": "Still vulnerable to block time manipulation",
+            "severity": "n/a",
+            "location": "Contract (not specified), Solution 1"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-405"
+                ]
+            },
+            "title": "Unfair gas burden",
+            "description": "Burden of gas will be higher on some users than others",
+            "severity": "n/a",
+            "location": "Contract (not specified), Solution 2, iterations"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused code",
+            "description": "L221 super._updatePurchasingState(_beneficiary, _weiAmount); is unnecessary as it isn't implemented in any of the base classes.",
+            "severity": "n/a",
+            "location": "Line 221"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out-of-gas error",
+            "description": "L227 the for loop in addAddressesToWhitelist may run out of gas if the length of _beneficiaries is too big",
+            "severity": "n/a",
+            "location": "Line 227, addAddressesToWhitelist function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Confusing function name",
+            "description": "Rename function _deliverTokens(address _beneficiary) internal. _deliverTokens(_beneficiary, amount) is already used in the standard",
+            "severity": "n/a",
+            "location": "Contract (not specified), _deliverTokens function"
+        }
+    ]
+}

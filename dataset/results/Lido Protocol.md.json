@@ -1,0 +1,248 @@
+{
+    "path": "artifacts/Lido Protocol.md",
+    "project_info": {
+        "url": "https://github.com/lidofinance/lido-dao",
+        "commit_id": "08436ce13d67501fa723169c1dc69fe47b90cde4",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "lido-dao": "contracts/Lido Protocol/lido-dao"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Opportunity to add bufferedETH without submitting to LIDO",
+            "description": "It is possible to send ETH to the `LidoMevTxFeeVault` contract and when the oracle reports, the contract sends ETH to LIDO, which will be used to rewards, it may fluctuate the price of lido shares.",
+            "severity": "high",
+            "location": "LidoMevTxFeeVault.sol, line 79"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Function",
+            "description": "One of two similar functions is redundant.",
+            "severity": "medium",
+            "location": "Lido.sol, lines 139-142 and 158-165"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unvalidated Input Parameter",
+            "description": "The input parameter `_treasury` is not checked before initialization.",
+            "severity": "medium",
+            "location": "LidoMevTxFeeVault.sol, line 72"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Incorrect Max Members Value",
+            "description": "Max members are 255 instead of 256 which may affect the quorum.",
+            "severity": "medium",
+            "location": "LidoOracle.sol, line 432"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing ERC721 Recovery Function",
+            "description": "The `transferToVault()` function doesn't support ERC721 tokens.",
+            "severity": "medium",
+            "location": "Lido.sol, line 356"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Event Emitted",
+            "description": "In case of cover, `stETH` doesn't burn.",
+            "severity": "medium",
+            "location": "StETH.sol, line 461"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Missing Excess stETH Recovery Function",
+            "description": "It is possible to transfer `stETH` to `wstETH` so it will be frozen in the contract.",
+            "severity": "medium",
+            "location": "WstETH.sol, lines 28-118"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Callback Verification",
+            "description": "A callback which has no implementation of the `processLidoOracleReport()` method can be added.",
+            "severity": "medium",
+            "location": "OrderedCallbacksArray.sol, line 60"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked Initialization",
+            "description": "If the value of variable `mevRewards` is equal to 0, then the initialization of variable `BUFFERED_ETHER_POSITION` will still be performed.",
+            "severity": "low",
+            "location": "Lido.sol, lines 339-340"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Missing Value Comparison",
+            "description": "The variable is initialized without checking if the new value is equal to the old value.",
+            "severity": "low",
+            "location": "DepositSecurityModule.sol, line 204"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Node Operator Count Check",
+            "description": "There is a comment about the node operator count but there is no functionality related to it.",
+            "severity": "low",
+            "location": "NodeOperatorsRegistry.sol, line 23"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1111"
+                ]
+            },
+            "title": "Incomplete Comment",
+            "description": "The description of two parameters `_treasury` and `_insuranceFund` must be added.",
+            "severity": "low",
+            "location": "Lido.sol, line 97"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Code Inconsistency",
+            "description": "The address above is not cast to address.",
+            "severity": "low",
+            "location": "Lido.sol, line 111"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Typo Mistake",
+            "description": "It should be `stored`.",
+            "severity": "low",
+            "location": "LidoOracle.sol, line 78"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Function Usage",
+            "description": "Transfer can be made via `transferShares()`.",
+            "severity": "low",
+            "location": "WstETH.sol, line 73"
+        }
+    ]
+}

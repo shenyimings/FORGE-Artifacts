@@ -1,0 +1,194 @@
+{
+    "path": "artifacts/LiquidCollective2-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/liquid-collective/liquid-collective-protocol",
+        "commit_id": "7693929ce487f2467f0558dd47e6f3ff59399121",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "liquid-collective-protocol": "contracts/LiquidCollective2-Spearbit-Security-Review/liquid-collective-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-920"
+                ]
+            },
+            "title": "Consider using unchecked block to save some gas",
+            "description": "Gas optimization issue",
+            "severity": "n/a",
+            "location": "Not specified"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Mismatch between revert error message and code behavior",
+            "description": "The error message requires the schedule duration to be greater than the cliff duration, but the code allows it to be greater than or equal to the cliff duration.",
+            "severity": "info",
+            "location": "ERC20VestableVotesUpgradeable.1.sol#L196"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ],
+                "4": [
+                    "CWE-567"
+                ]
+            },
+            "title": "Coverage funds might be left stuck in the contract",
+            "description": "Funds might be pulled from CoverageFundV1 to the River contract, and if a major loss is reported in a single transaction, oracles will have to report this loss gradually using multiple calls.",
+            "severity": "info",
+            "location": "OracleManager.1.sol#L79 Oracle.1.sol#L416"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Consider reverting if the msg.value is zero in CoverageFundV1.donate",
+            "description": "In the current implementation of CoverageFundV1.donate, there is no check on the msg.value value. This allows senders to \"spam\" the function and emit multiple useless Donate events.",
+            "severity": "info",
+            "location": "CoverageFund.1.sol#L41-L46"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Extensively document how the Coverage Funds contract works",
+            "description": "The Coverage Fund contract has a crucial role inside the Protocol, and the current contract's documentation does not properly cover all the needed aspects.",
+            "severity": "info",
+            "location": "CoverageFund.1.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing/wrong natspec comment and typos",
+            "description": "Various issues with natspec comments and typos in multiple contracts.",
+            "severity": "info",
+            "location": "Multiple contracts (listed in the report)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Different behavior between River _pullELFees and _pullCoverageFunds",
+            "description": "The two functions implement similar functionality but have different behaviors in certain scenarios.",
+            "severity": "info",
+            "location": "River.1.sol#L254-L265, River.1.sol#L270-L283"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Local mask variable in wrong location",
+            "description": "DENY_MASK is a local variable in Allowlist.1.sol instead of LibAllowlistMasks.sol",
+            "severity": "info",
+            "location": "Allowlist.1.sol#L21, LibAllowlistMasks.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Inadequate event parameters for filtering and monitoring",
+            "description": "Some events lack additional parameters to improve tracking in dApps or monitoring tools",
+            "severity": "info",
+            "location": "IVestingScheduleManager.1.sol#L15, L20, L25, L31"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Missing indexed keyword in event parameters",
+            "description": "Some event parameters are missing the indexed keyword, making filtering difficult",
+            "severity": "info",
+            "location": "IRiver.1.sol#L27, IVestingScheduleManager.1.sol#L31, ICoverageFund.1.sol#L15"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of natspec documentation in TLC contract",
+            "description": "The TLC contract lacks natspec documentation to explain its functionality and usage",
+            "severity": "info",
+            "location": "TLC.1.sol"
+        }
+    ]
+}

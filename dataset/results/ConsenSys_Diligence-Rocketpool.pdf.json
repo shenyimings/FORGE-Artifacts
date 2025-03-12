@@ -1,0 +1,284 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Rocketpool.pdf",
+    "project_info": {
+        "url": "https://github.com/rocket-pool/rocketpool",
+        "commit_id": "44cbf038b97abffa91058cebb2f60",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "rocketpool": "contracts/ConsenSys_Diligence-Rocketpool/rocketpool"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted Access to Storage Values",
+            "description": "The access restriction to storage values is very broad, allowing any registered contract in the system to change storage values even if they do not belong to this specific contract.",
+            "severity": "n/a",
+            "location": "RocketStorage contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unsecured Deposit of Tokens",
+            "description": "The depositToken method allows anyone to make the vault pull-in any token (any address, no whitelist) and account it to one of the registered system tokens (by name).",
+            "severity": "n/a",
+            "location": "RocketVault contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Storage Values After Deployment",
+            "description": "After deployment of the contract, anyone can theoretically set any value in the contract.",
+            "severity": "n/a",
+            "location": "RocketStorage contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted Node Registration",
+            "description": "Any Ethereum address can register as a node without any fees or restrictions.",
+            "severity": "low",
+            "location": "RocketNodeManager contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Arbitrary Timezone Location Setting",
+            "description": "Node operators can set arbitrary TimezoneLocations, which could lead to misinformation.",
+            "severity": "low",
+            "location": "Node registration process"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected Node Deposit Amount",
+            "description": "Node deposit amounts (16ETH or 32ETH) are not protected from manipulation.",
+            "severity": "medium",
+            "location": "RocketNodeDeposit contract, deposit function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Slashing Event Not Fired on Withdrawal",
+            "description": "The slashing event is not fired when a node withdraws its deposit.",
+            "severity": "low",
+            "location": "RocketNodeDeposit contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "DAO Membership changes can result in votes getting stuck",
+            "description": "Changes in the DAO's trusted node members can result in votes getting stuck.",
+            "severity": "medium",
+            "location": "RocketMinipoolStatus - DAO Membership (contract, function)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Trusted/oracle nodes submitting multiple different results for the same minipool/block",
+            "description": "Nodes can submit multiple different results for one minipool/block.",
+            "severity": "n/a",
+            "location": "RocketMinipoolStatus, RocketNetworkBalances, RocketNetworkPrices (contracts, functions)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "nETH token minting and deposition of collateral happens in two different stages",
+            "description": "nETH tokens are minted without collateral, which can lead to undercollateralization.",
+            "severity": "n/a",
+            "location": "RocketMinipoolStatus (contract, function)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "On destroy(), leftover ETH is sent to RocketVault where it cannot be recovered",
+            "description": "Leftover ETH is sent to the RocketVault contract where it cannot be recovered.",
+            "severity": "medium",
+            "location": "RocketMinipoolDelegate (contract, function)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ]
+            },
+            "title": "DAO - personally identifiable member information (PII) stored on-chain",
+            "description": "PII is stored on-chain, which can lead to de-pseudonymization and targeted phishing campaigns.",
+            "severity": "medium",
+            "location": "RocketDAONodeTrusted (contract, function)"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Deployment - Docker containers running as root",
+            "description": "Docker containers run commands as the root user, negating file permissions.",
+            "severity": "medium",
+            "location": "smartnode-2.5-Tokenomics/docker/rocketpool-dockerfile, smartnode-2.5-Tokenomics/docker/rocketpool-pow-proxy-dockerfile"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Block number validation",
+            "description": "High block numbers can prevent price updates.",
+            "severity": "low",
+            "location": "rocketpool-2.5-Tokenomics-updates/contracts/contract/network/RocketNetworkPrices.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-170"
+                ]
+            },
+            "title": "Missing Trailing Dot in daoNamespace",
+            "description": "The string private daoNameSpace is missing a trailing dot.",
+            "severity": "low",
+            "location": "RocketDAONodeTrusted.sol, RocketDAONodeTrustedActions.sol, RocketDAOProtocol.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Zero Amount Deposit/Withdrawal Requests",
+            "description": "Functions depositEther, withdrawEther, and transferToken allow zero amount transactions.",
+            "severity": "low",
+            "location": "RocketVault.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Unused Boolean Return Values in Token Methods",
+            "description": "The Token methods in RocketVault return a static value of true but can never return false.",
+            "severity": "n/a",
+            "location": "RocketVault.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-424"
+                ],
+                "3": [
+                    "CWE-674"
+                ]
+            },
+            "title": "Overloaded Ubuntu Base Image in Deployment",
+            "description": "The SmartNode and proxy Dockerfiles use an ubuntu:20.10 image, increasing the container's attack surface.",
+            "severity": "low",
+            "location": "rocketpool-dockerfile, rocketpool-pow-proxy-dockerfile"
+        }
+    ]
+}

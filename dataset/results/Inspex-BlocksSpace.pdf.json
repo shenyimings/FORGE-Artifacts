@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/Inspex-BlocksSpace.pdf",
+    "project_info": {
+        "url": "https://github.com/1000Blocks-space/smart-contracts",
+        "commit_id": "51efffaa45e95db5e28c5d550d351b84a03d098f",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "smart-contracts": "contracts/Inspex-BlocksSpace/smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Arbitrary Share Amount Setting",
+            "description": "The contract owner can increase the share amount of any address on any space, allowing them to claim most of the $BLS rewards distributed from BlocksRewardsManager.",
+            "severity": "high",
+            "location": "BlocksRewardsManager contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Reward Calculation from takeoverRewards",
+            "description": "The miscalculation can cause the users to gain less rewards, and some $BNB rewards to be stuck in the contract and unclaimable by the users.",
+            "severity": "high",
+            "location": "BlocksStaking contract, particularly in the `distributeRewards` and `calculateRewardsDistribution` functions."
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Reward Calculation from allUsersRewardDebt",
+            "description": "The miscalculation can cause users to gain less rewards, and some $BNB rewards will be stuck in the contract and unclaimable by users.",
+            "severity": "high",
+            "location": "BlocksStaking contract, specifically in the `calculateRewardsDistribution` function and `deposit` function."
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Reward Calculation from Total Rewards Rate",
+            "description": "The miscalculation can cause some $BLS rewards to be stuck in the contract and unclaimable by the users.",
+            "severity": "high",
+            "location": "BlocksRewardsManager contract, functions depositBlsRewardsForDistribution, addSpace, blocksAreaBoughtOnSpace"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Token Stealing via BlocksRewardsManager Address Setting",
+            "description": "The owner can set rewardPool to be any address in the updateRewardsPoolContract() function, allowing the newly set contract to maliciously receive $BNB from users.",
+            "severity": "medium",
+            "location": "BlocksSpace contract, updateRewardsPoolContract() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Token Stealing via BlocksStaking Address Setting",
+            "description": "The owner can set blocksStaking to be any address with the updateBlocksStatingContract() function, allowing a malicious contract to receive $BNB from users.",
+            "severity": "medium",
+            "location": "BlocksRewardsManager contract, updateBlocksStatingContract() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "Controlling authorities can change critical state variables to gain additional profit, which is unfair to other users.",
+            "severity": "medium",
+            "location": "Multiple contracts (BlocksRewardsManager, BlocksSpace, BlocksStaking) with privileged functions that can be modified by the owner."
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Incorrect Condition",
+            "description": "The `blsBalance > blsRewardsAcc` condition does not include the amount claimed by the user, causing the `blsRewardsFinishedBlock` variable to not be updated even when there is enough $BLS to be distributed.",
+            "severity": "medium",
+            "location": "BlocksRewardsManager contract, `blocksAreaBoughtOnSpace()` function (line 160) and `depositBlsRewardsForDistribution()` function (line 282)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Reward Calculation from blsPerBlockAreaPerBlock",
+            "description": "The $BLS rewards will be incorrectly calculated on the changing of blsPerBlockAreaPerBlock.",
+            "severity": "low",
+            "location": "BlocksRewardsManager contract, claim function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Compiler Version",
+            "description": "The Solidity compiler versions specified in the smart contracts were outdated.",
+            "severity": "info",
+            "location": "BLSToken contract"
+        }
+    ]
+}

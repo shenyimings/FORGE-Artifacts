@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/ogn.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x3675c3521f8a6876c8287e9bb51e056862d1399b",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "SingleAssetStaking": "contracts/ogn/SingleAssetStaking"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Using uint256 for MAX_STAKES variable",
+            "description": "The contract uses uint256 to store the MAX_STAKES variable, which can be represented by 2^8 + 1 digits.",
+            "severity": "low",
+            "location": "contracts/staking/SingleAssetStaking.sol#L47"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Using storage keyword in view functions",
+            "description": "The contract uses the storage keyword in a view function, which is unnecessary and can make the code less readable.",
+            "severity": "low",
+            "location": "contracts/staking/SingleAssetStaking.sol#L96,117,269,299"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Using SafeMath library with Solidity version 0.8.0 or greater",
+            "description": "The contract uses the SafeMath library for arithmetic operations, which is redundant with Solidity version 0.8.0 or greater.",
+            "severity": "low",
+            "location": "contracts/staking/SingleAssetStaking.sol#L5"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Transferred amount may be less than expected due to fees or taxes",
+            "description": "The contract does not consider the actual transferred amount after deducting fees or taxes.",
+            "severity": "low",
+            "location": "contracts/staking/SingleAssetStaking.sol#L207"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Variables may overflow when accumulating values",
+            "description": "The contract uses variables to accumulate values, which can lead to overflows.",
+            "severity": "low",
+            "location": "contracts/staking/SingleAssetStaking.sol#L104,278,441"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-compliance with Solidity naming conventions",
+            "description": "The contract does not follow the Solidity style guide for naming conventions.",
+            "severity": "low",
+            "location": "contracts/staking/SingleAssetStaking.sol#L62,63,64,245,463,464,498,509,510,519,530,531,532"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "Local variables may shadow outer scope variables",
+            "description": "The contract uses local variables with the same name as outer scope variables.",
+            "severity": "low",
+            "location": "contracts/staking/SingleAssetStaking.sol#L102,109,307"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Variables may be set to zero without proper checks",
+            "description": "The contract does not check for zero values when setting variables.",
+            "severity": "low",
+            "location": "contracts/staking/SingleAssetStaking.sol#L520"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1127"
+                ]
+            },
+            "title": "Unstable compiler version due to use of ^ symbol in pragma",
+            "description": "The contract uses the ^ symbol in the pragma, which can lead to unexpected behavior.",
+            "severity": "low",
+            "location": "contracts/staking/SingleAssetStaking.sol#L2"
+        }
+    ]
+}

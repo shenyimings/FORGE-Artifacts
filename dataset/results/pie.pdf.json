@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/pie.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "27d51765",
+        "address": "0xd8c152d3b94084d7c8ec951e81fbbfc4b6de5b2b",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "PieShare": "contracts/pie/PieShare"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unlimited Increase Fees",
+            "description": "The contract owner can increase fees without limit by calling the setMarketingFee function with a high percentage value.",
+            "severity": "critical",
+            "location": "https://bscscan.com/address/0xd8c152d3b94084d7c8ec951e81fbbfc4b6de5b2b#code#L1363,L1379"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Stop Transactions",
+            "description": "The contract owner can stop transactions by setting a very small amount maxWalletToken, which could potentially reduce the variable to an extremely small percentage.",
+            "severity": "critical",
+            "location": "https://bscscan.com/address/0xd8c152d3b94084d7c8ec951e81fbbfc4b6de5b2b#code#L1351"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Blacklisted Contracts",
+            "description": "The contract owner can stop contracts from transactions by calling the blacklistAddress function.",
+            "severity": "critical",
+            "location": "https://bscscan.com/address/0xd8c152d3b94084d7c8ec951e81fbbfc4b6de5b2b#code#L1392"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Unlimited Fee Manipulation",
+            "description": "Owner can manipulate fees without limitations",
+            "severity": "critical",
+            "location": "Pie Share Token contract, fee-related function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Address Blacklisting",
+            "description": "Owner can blacklist addresses without restrictions",
+            "severity": "critical",
+            "location": "Pie Share Token contract, address management function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Max Token Amount Restriction",
+            "description": "Owner can reduce the max amount of tokens a wallet can have without restrictions",
+            "severity": "critical",
+            "location": "Pie Share Token contract, token amount management function"
+        }
+    ]
+}

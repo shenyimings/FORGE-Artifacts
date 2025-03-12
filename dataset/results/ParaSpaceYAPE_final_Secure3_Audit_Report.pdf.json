@@ -1,0 +1,131 @@
+{
+    "path": "artifacts/ParaSpaceYAPE_final_Secure3_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/para-space/paraspace-core",
+        "commit_id": "7bb3e5151197eb57a6875238ffeba26fb7f069c8",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "paraspace-core": "contracts/ParaSpaceYAPE_final_Secure3_Audit_Report/paraspace-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "ApeCoin token address are marked as immutable",
+            "description": "The erc20 tokens have been declared as `immutable`, which means they cannot be updated on the code once deployed.",
+            "severity": "info",
+            "location": "code/contracts/misc/AutoCompoundApe.sol#L30, code/contracts/misc/AutoYieldApe.sol#L37"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Miss 0 amount check for autocompoundape::withdraw()",
+            "description": "In `autocompoundape::withdraw()`, the tokens of the user's amountShare will be burned, but the contract will still send the user the amount of tokens.",
+            "severity": "low",
+            "location": "code/contracts/misc/AutoCompoundApe.sol#L65-L82"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "The withdrawFee in PYieldToken will be locked in the contract",
+            "description": "The withdrawFee in pyAPE to be locked in the contract.",
+            "severity": "medium",
+            "location": "code/contracts/protocol/tokenization/PYieldToken.sol#L165-L171, code/contracts/misc/AutoYieldApe.sol#L370-L382"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "The security library is not used correctly",
+            "description": "PYieldToken.sol refers to SafeCast, but it is not used correctly.",
+            "severity": "low",
+            "location": "code/contracts/protocol/tokenization/PYieldToken.sol#L43, code/contracts/protocol/tokenization/PYieldToken.sol#L54, code/contracts/protocol/tokenization/PYieldToken.sol#L68, code/contracts/protocol/tokenization/PYieldToken.sol#L69, code/contracts/protocol/tokenization/PYieldToken.sol#L162"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Using OpenZeppelin's libraries with vulnerabilities",
+            "description": "The project is using a vulnerable dependency of OpenZeppelin.",
+            "severity": "low",
+            "location": "code/package.json#L33-L34"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Deprecated function usage",
+            "description": "Using `safeApprove()` instead of `safeIncreaseAllowance()` or `safeDecreaseAllowance()`",
+            "severity": "medium",
+            "location": "initialize() function in the provided contract fragment"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ]
+            },
+            "title": "Lack of from!=to check",
+            "description": "In `_transfer()` function, when `from == to`, the withdrawal fee is charged unnecessarily.",
+            "severity": "medium",
+            "location": "PYieldToken.sol#L62-L72 and PYieldToken.sol#L140-L170"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "WithdrawLockAmount without paying withdrawFee",
+            "description": "In `_updateUserIndex()`, when `balanceDiff < 0`, the `withdrawFee` may be zero due to rounding issues.",
+            "severity": "low",
+            "location": "PYieldToken.sol#L170"
+        }
+    ]
+}

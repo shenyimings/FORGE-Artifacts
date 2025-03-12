@@ -1,0 +1,197 @@
+{
+    "path": "artifacts/BlockSec-blocksec_stnd_v1.7_signed.pdf",
+    "project_info": {
+        "url": "https://github.com/digitalnativeinc/standard-evm",
+        "commit_id": "d7c016ca098a4e5a554583c499fc0cead4db7088",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "standard-evm": "contracts/BlockSec-blocksec_stnd_v1/standard-evm"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Local variables shadow global ones",
+            "description": "The local variables `collateral` and `debt` shadow the global ones.",
+            "severity": "low",
+            "location": "Vault.sol, function `getStatus`"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Fees cannot be distributed as expected due to unreachable branch",
+            "description": "All fees in vaults are not distributed to three accounts: dividend, feeTo, and treasury.",
+            "severity": "low",
+            "location": "FeeHelper.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential mistakes",
+            "description": "Possible mistake in code logic for `removeLiquidity` function.",
+            "severity": "medium",
+            "location": "(commit C6)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Anyone can withdraw liquidated collaterals",
+            "description": "The function distribute transfers the collateral to Uniswap V2 pool directly.",
+            "severity": "high",
+            "location": "Liquidator.sol, Listing 2.5"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "VaultManager contract does not handle debt decimals correctly",
+            "description": "The function isValidCDP handles collateral decimals but not debt decimals.",
+            "severity": "high",
+            "location": "VaultManager.sol, Listing 2.6"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Check in `liquidate` function cannot be passed",
+            "description": "The function liquidate always checks if the CDP is valid using IERC20Minimal(debt).balanceOf(address(this)), which returns zero.",
+            "severity": "high",
+            "location": "Vault.sol, Listing 2.7"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Uninitialized CDP vaults may incur infinite MTR minted",
+            "description": "Uninitialized CDP vaults bypass the function isValidCDP.",
+            "severity": "high",
+            "location": "VaultFactory.sol, Listing 2.8"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Incorrect usage of `isValidCDP` function may incur infinite MTR minted",
+            "description": "The last parameter of isValidCDP is set to dAmount_, which can be controlled by users.",
+            "severity": "high",
+            "location": "Vault.sol, Listings 2.10"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Global variable borrow not updated correctly",
+            "description": "The functions borrowMore and borrowMoreNative do not update the variable borrow.",
+            "severity": "high",
+            "location": "Vault.sol, Listing 2.11"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Users' collaterals may be locked in vaults",
+            "description": "The function closeVault does not transfer remaining collaterals to users.",
+            "severity": "high",
+            "location": "Vault.sol, Listing 2.12"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential reentrancy risk",
+            "description": "The variable borrow is updated after the code TransferHelper.safeTransferFrom(collateral, msg.sender, address(this), cAmount_).",
+            "severity": "medium",
+            "location": "Vault.sol, Listing 2.13"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Minting cap may be bypassed",
+            "description": "The MTR mint is made after the fund transfer.",
+            "severity": "low",
+            "location": "Vault.sol, Listings 2.14"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ]
+            },
+            "title": "Price manipulation attacks against FeeRoll contract",
+            "description": "Two price manipulation methods can cause the FeeRoll contract to lose collaterals.",
+            "severity": "high",
+            "location": "FeeRoll.sol, Listing 2.15"
+        }
+    ]
+}

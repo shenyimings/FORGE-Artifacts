@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-PikaProtocol-v1.1.pdf",
+    "project_info": {
+        "url": "https://github.com/PikaProtocol/PikaPerpV2",
+        "commit_id": "1eac910",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "PikaPerpV2": "contracts/PeckShield-Audit-Report-PikaProtocol-v1/PikaPerpV2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improved claimable Calculation in claimable()",
+            "description": "The `claimable()` routine may return an unexpected amount for a given `_depositId` if it was created before the `vestingPeriod` is updated.",
+            "severity": "medium",
+            "location": "PikaPerpV3, claimable() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Improper Validation of Function Arguments",
+            "description": "The `setPriceDuration()` routine does not validate the input parameter `_priceDuration`, which can lead to an unexpectedly long price duration.",
+            "severity": "low",
+            "location": "PikaPriceFeed contract, setPriceDuration() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue Of Admin Keys",
+            "description": "Privileged accounts have extra power that may be a counter-party risk to contract users.",
+            "severity": "medium",
+            "location": "Multiple contracts (Pika, Vester, PikaPriceFeed)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect ETH tokenBase Used in OrderBook",
+            "description": "The cancelOpenOrder() routine uses the wrong token base for ETH if the collateralToken is not equal to ETH.",
+            "severity": "medium",
+            "location": "OrderBook contract, createOpenOrder() and cancelOpenOrder() functions (lines 289 and 377)"
+        }
+    ]
+}

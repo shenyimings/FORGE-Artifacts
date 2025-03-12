@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/SlowMist Audit Report - Synclub_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/agiledev624/synclub-contracts",
+        "commit_id": "ab8e36ff7760caa635cc0197b6ebf1bcfd574b57",
+        "address": "0xB0b84D294e0C75A6abe60171b70edEb2EFd14A1B",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.9+commit.e5eed63a"
+        ],
+        "project_path": {
+            "TransparentUpgradeableProxy": "contracts/SlowMist Audit Report - Synclub_en-us/TransparentUpgradeableProxy"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Risk of excessive authority",
+            "description": "DEFAULT_ADMIN_ROLE can set the stakeManager contract as the StakeManager role, allowing arbitrary minting and burning of tokens.",
+            "severity": "medium",
+            "location": "SnBnb.sol#26-54"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Risk of excessive authority",
+            "description": "Manager role can set/revoke the BOT contract, change the bcValidator contract, and DEFAULT_ADMIN_ROLE can set the synFee parameter.",
+            "severity": "medium",
+            "location": "SnStakeManager.sol#413-479"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "The mint amount can be 0 in the deposit function",
+            "description": "Calculation of snBnbToMint can result in 0, but BNB amount still adds to amountToDelegate.",
+            "severity": "low",
+            "location": "SnStakeManager.sol#116-125"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "The BNB can be remained in the contract",
+            "description": "Rounding issue in claimWithdraw function can cause BNB to remain in the contract.",
+            "severity": "info",
+            "location": "SnStakeManager.sol#286-287"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unclear business logic",
+            "description": "ClaimUndelegated function calculates withdrawal value and assigns it to temporary variables with no other usage.",
+            "severity": "info",
+            "location": "SnStakeManager.sol#355-356"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing validator check",
+            "description": "Redelagate function lacks validation of srcValidator and dstValidator.",
+            "severity": "info",
+            "location": "SnStakeManager.sol#187-207"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing event records",
+            "description": "ClaimUndelegated and claimFailedDelegation functions lack event logs.",
+            "severity": "info",
+            "location": "SnStakeManager.contract (multiple locations)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Preemptive initialization",
+            "description": "Initialize function can be maliciously called by attackers before contract creation.",
+            "severity": "info",
+            "location": "SnStakeManager.sol#73, SnBnb.sol#17"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Dev address setting enhancement suggestions",
+            "description": "RevenuePool address can be set to an EOA address, risking private key leakage and theft of team revenue.",
+            "severity": "info",
+            "location": "SnStakeManager.sol#468-479"
+        }
+    ]
+}

@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/MATX Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xebdDE907c6D8E38f8A12C456D73948C56d784619",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "MATX": "contracts/MATX Full Smart Contract Security Audit/MATX"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Centralized risk",
+            "description": "The function addLiquidity() sends owner addresses as a parameter, potentially accumulating a huge portion of LP tokens.",
+            "severity": "medium",
+            "location": "MATX contract, addLiquidity() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Functions includeInReward() and _getCurrentSupply use loops that could lead to OUT_OF_GAS exceptions if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "MATX contract, includeInReward() and _getCurrentSupply functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has various privileges that could be exploited if not renounced.",
+            "severity": "n/a",
+            "location": "MATX contract, various functions"
+        }
+    ]
+}

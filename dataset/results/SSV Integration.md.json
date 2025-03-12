@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/SSV Integration.md",
+    "project_info": {
+        "url": "https://github.com/p2p-org/p2p-ssv-proxy",
+        "commit_id": "9dd4728002d9c275e29e8ba38bcf7d90efc7531b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "p2p-ssv-proxy": "contracts/SSV Integration/p2p-ssv-proxy"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unauthorized users can drain the `SsvToken` balance",
+            "description": "Lack of restrictions on the `SsvPayload.tokenAmount` parameter allows users to drain the entire `SsvToken` balance.",
+            "severity": "high",
+            "location": "`depositEthAndRegisterValidators()` function in `P2pSsvProxyFactory` contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Inability to revoke rights given in `setAllowedSelectorsForClient` and `setAllowedSelectorsForOperator`",
+            "description": "No mechanism to revoke access rights granted through these functions, posing a security risk.",
+            "severity": "medium",
+            "location": "`setAllowedSelectorsForClient` and `setAllowedSelectorsForOperator` functions in `P2pSsvProxyFactory` contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant event emission in `P2pSsvProxy.fallback`",
+            "description": "Emitting an event before a `revert` operation is redundant as it will be erased upon the execution of `revert`.",
+            "severity": "low",
+            "location": "`P2pSsvProxy` contract, `fallback` function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant parameter in `P2pSsvProxy.registerValidators` function",
+            "description": "Passing the `feeDistributor` parameter to `registerValidators` is unnecessary.",
+            "severity": "low",
+            "location": "`P2pSsvProxy` contract, `registerValidators` function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Repeated assignment of the same value in the loop",
+            "description": "Repeatedly assigning the same value to `withdrawCredentials` within a loop is unnecessary and increases gas costs.",
+            "severity": "low",
+            "location": "`P2pSsvProxyFactory` contract, `_makeBeaconDeposit` function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Mitigating error risks in setting `SsvToken` exchange rate",
+            "description": "The contract owner can arbitrarily set the exchange rate of `SsvToken` to `ETH`, posing a risk of potential errors.",
+            "severity": "n/a",
+            "location": "`P2pSsvProxyFactory` contract, `setSsvPerEthExchangeRateDividedByWei` function"
+        }
+    ]
+}

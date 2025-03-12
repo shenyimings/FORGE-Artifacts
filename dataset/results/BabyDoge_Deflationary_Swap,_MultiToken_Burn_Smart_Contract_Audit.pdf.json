@@ -1,0 +1,212 @@
+{
+    "path": "artifacts/BabyDoge_Deflationary_Swap,_MultiToken_Burn_Smart_Contract_Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Baby-doge/BurnPortal/tree/041416802e20d17f61dc7b4922212f440fd71202",
+        "commit_id": "041416802e20d17f61dc7b4922212f440fd71202",
+        "address": "0x10025F952Fd3dac40d52f09F58afC3bAaB4c2556",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.19+commit.7dd6d404"
+        ],
+        "project_path": {
+            "MultiTokenBurnPortal": "contracts/BabyDoge_Deflationary_Swap,_MultiToken_Burn_Smart_Contract_Audit/MultiTokenBurnPortal"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "User can take discount without actually burning tokens for non-reverting tokens",
+            "description": "ERC20 token doesn't revert on transfer, allowing users to take discounts without burning tokens.",
+            "severity": "high",
+            "location": "burnTokens() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Fee amount collected by contract can be used by user to buy tokens",
+            "description": "User can use collected fees to buy tokens if token's transferFrom doesn't revert on failure.",
+            "severity": "high",
+            "location": "buyTokensWithERC20() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "_checkDiscounts() fails to validate given discounts",
+            "description": "_checkDiscounts() function doesn't update prevDiscount correctly, leading to incorrect validation.",
+            "severity": "medium",
+            "location": "_checkDiscounts() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy guard can be added for extra security",
+            "description": "External calls in buyTokensWithBNB() and buyTokensWithERC20() functions allow reentrancy.",
+            "severity": "low",
+            "location": "buyTokensWithBNB() and buyTokensWithERC20() functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Unlocked pragma (pragma solidity ^0.8.0)",
+            "description": "Using floating pragma can lead to deployment with a different compiler version.",
+            "severity": "low",
+            "location": "Contract's pragma declaration"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization",
+            "description": "Critical functions are called by the owner and manager, creating risk in case of key compromise.",
+            "severity": "n/a",
+            "location": "various functions called by owner and manager"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Change the data type size",
+            "description": "Using uint128 for totalBought and totalBurned variables may lead to issues in the future.",
+            "severity": "low",
+            "location": "BurnPortal struct's variables"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Care should be taken while setting discounts",
+            "description": "Burn amounts must be specified according to token decimals.",
+            "severity": "info",
+            "location": "n/a (general recommendation)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused imports",
+            "description": "Imported interfaces IBabyDogeFactory and IBabyDogePair are not used.",
+            "severity": "low",
+            "location": "Contract's import statements"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "General recommendations",
+            "description": "Set trusted addresses for adminFeeReceiver and feeReceiver, and follow other recommendations.",
+            "severity": "n/a",
+            "location": "various functions and variables"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Implemented code mismatches the functionality mentioned in readme/documentation",
+            "description": "Readme file states incorrect condition for swap path.",
+            "severity": "low",
+            "location": "Readme file and implemented code"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma (pragma solidity ^0.8.0)",
+            "description": "Using floating pragma can lead to deployment with a different compiler version.",
+            "severity": "low",
+            "location": "Contract's pragma declaration"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused imports",
+            "description": "Imported interfaces SafeOwnable and IFactory are not used.",
+            "severity": "low",
+            "location": "Contract's import statements"
+        }
+    ]
+}

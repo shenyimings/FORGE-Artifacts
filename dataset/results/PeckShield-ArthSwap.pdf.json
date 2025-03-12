@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/PeckShield-ArthSwap.pdf",
+    "project_info": {
+        "url": "https://github.com/ArthSwap/ArthSwap-MasterChef/tree/ed57306180eceb4ed88102e1c333fb93e71b3344",
+        "commit_id": "ed57306180eceb4ed88102e1c333fb93e71b3344",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ArthSwap-MasterChef": "contracts/PeckShield-ArthSwap/ArthSwap-MasterChef"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Timely massUpdatePools During Pool Weight Changes",
+            "description": "If the call to massUpdatePools() is not immediately invoked before updating the pool weights, certain situations may be crafted to create an unfair reward distribution.",
+            "severity": "medium",
+            "location": "ArthSwap MasterChef, function massUpdatePools or MasterChef::set()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Incompatibility With Deflationary/Rebasing Tokens",
+            "description": "The ArthSwap MasterChef implementation may introduce unexpected balance inconsistencies when interacting with deflationary/rebasing tokens.",
+            "severity": "low",
+            "location": "ArthSwap MasterChef or MasterChef::deposit()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Duplicate Pool Detection And Prevention",
+            "description": "The addition of a new pool in add() does not perform necessary sanity checks to prevent a new pool with a duplicate token from being added.",
+            "severity": "low",
+            "location": "ArthSwap MasterChef or MasterChef::add()"
+        }
+    ]
+}

@@ -1,0 +1,275 @@
+{
+    "path": "artifacts/2022-11-25_Arrakis_V2_core_and_palm.pdf",
+    "project_info": {
+        "url": "https://github.com/ArrakisFinance/v2-core/tree/376bfcec803f0644fdc601db3a5772d2179c13a0",
+        "commit_id": "376bfcec803f0644fdc601db3a5772d2179c13a0",
+        "address": "0xAf0f96e8702cB1b8160e43c8c020C608cD7B134d",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.13+commit.abaa5c0e"
+        ],
+        "project_path": {
+            "ArrakisV2": "contracts/2022-11-25_Arrakis_V2_core_and_palm/ArrakisV2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Possible loss of funds by the manager",
+            "description": "The manager has full access to vault rebalance parameters, allowing them to burn all liquidity in the Uniswap pool or execute a sandwich attack.",
+            "severity": "high",
+            "location": "PALMManager.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Possible uniswap pool manipulation",
+            "description": "Users can burn all the pool's liquidity and negatively affect other Uniswap users.",
+            "severity": "high",
+            "location": "ArrakisV2.sol (burn function)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Possible fee hijacking (or DOS) by the manager",
+            "description": "An attacker with manager access can set managerFeeBPS to steal all yield and accrued manager fees.",
+            "severity": "high",
+            "location": "PALMManager.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "First minter can change LP token pricing",
+            "description": "The first minter can manipulate LP token pricing by minting a small amount of shares.",
+            "severity": "high",
+            "location": "ArrakisV2.sol (mint function)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Vault can renew the term for free",
+            "description": "The vault owner can renew the term without paying the required emolument shares.",
+            "severity": "high",
+            "location": "PALMTerms.sol (renewTerm function)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Vault owner can lose tokens when increasing liquidity",
+            "description": "If all LP tokens are burned, a future call to increaseLiquidity would result in token loss.",
+            "severity": "high",
+            "location": "PALMTerms.sol (increaseLiquidity function)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ],
+                "4": [
+                    "CWE-551"
+                ]
+            },
+            "title": "Rebalance DoS",
+            "description": "An attacker can block rebalance by minting dust to Arrakis Uni position, causing the transaction to revert.",
+            "severity": "high",
+            "location": "ArrakisV2.sol (rebalance function)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-638"
+                ],
+                "5": [
+                    "CWE-424"
+                ]
+            },
+            "title": "Inadequate view functions in ArrakisV2Storage",
+            "description": "No view functions for pools and routers used in the vault.",
+            "severity": "n/a",
+            "location": "ArrakisV2Storage.sol, lines 65-66"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "Function removePools() doesn't remove ranges",
+            "description": "The pool is only removed from _pools, but there might be active positions with the same fee tier in _ranges.",
+            "severity": "n/a",
+            "location": "ArrakisV2Storage.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Costly operations inside a loop",
+            "description": "delete ranges[index] and ranges.pop() are costly operations inside a loop",
+            "severity": "medium",
+            "location": "ArrakisV2.rebalance(Range[],Rebalance,Range[])"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Similar variable names",
+            "description": "Multiple variables with similar names may lead to confusion",
+            "severity": "medium",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Too many digits in literals",
+            "description": "Literals with too many digits can be hard to read and maintain",
+            "severity": "medium",
+            "location": "Underlying._computeFeesEarned(ComputeFeesPayload)"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Variable used before declaration",
+            "description": "Variables may be used before they are declared, potentially causing issues",
+            "severity": "low",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "External calls in loop",
+            "description": "External calls inside loops can cause performance and security issues",
+            "severity": "low",
+            "location": "Underlying._getFeesEarned(GetFeesPayload), ArrakisV2Resolver.standardRebalance(RangeWeight[],IArrakisV2), ArrakisV2Resolver.standardBurnParams(uint256,IArrakisV2)"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero-Checks",
+            "description": "Lack of zero-checks on variables",
+            "severity": "low",
+            "location": "ArrakisV2FactoryStorage.getProxyImplementation, ArrakisV2Storage.setRestrictedMint, ArrakisV2FactoryStorage.getProxyAdmin"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy through Events",
+            "description": "Reentrancy possible due to events emitted after external calls",
+            "severity": "low",
+            "location": "Various functions (ArrakisV2.withdrawManagerBalance, ArrakisV2._rebalance, etc.)"
+        }
+    ]
+}

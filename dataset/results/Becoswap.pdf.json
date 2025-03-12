@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/Becoswap.pdf",
+    "project_info": {
+        "url": "https://github.com/becoswap/becoswap-periphery/tree/770ada0ab6e30c7b399c8cee511436c7229af141",
+        "commit_id": "770ada0ab6e30c7b399c8cee511436c7229af141",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "becoswap-periphery": "contracts/Becoswap/becoswap-periphery"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "Sending tokens to the dead address instead of burning them in the token contract.",
+            "severity": "medium",
+            "location": "Token contract, _transfer function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "The updateEmissionRate function can fail due to the block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "updateEmissionRate function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "add function issue",
+            "description": "If an LP token is added to the contract twice using the add function, then the total amount of reward in the updatePool function will be incorrect.",
+            "severity": "low",
+            "location": "add function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Various owner privileges that can lead to potential security issues (e.g., unlocking tokens, draining tokens, changing operator, transfer tax rate, burn rate, etc.)",
+            "severity": "n/a",
+            "location": "BecoLocker.sol, Referral contract, and other contracts"
+        }
+    ]
+}

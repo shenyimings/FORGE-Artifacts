@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/SeaportProtocol.pdf",
+    "project_info": {
+        "url": "https://github.com/ProjectOpenSea/seaport",
+        "commit_id": "f17082fca3e99b409f53040d8858e84b0246aa22",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "seaport": "contracts/SeaportProtocol/seaport"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Error-prone approach to data validation",
+            "description": "Use of assert functions to validate results instead of modifiers",
+            "severity": "n/a",
+            "location": "Data validation in general, consideration/ (data validation functions)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy through onERC721Received callback",
+            "description": "A user can alter the state of another NFT they own during the order fulfillment process.",
+            "severity": "n/a",
+            "location": "_performFinalChecksAndExecuteOrders function, ConsiderationInternal.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use of Yul optimization pipeline and solc 0.8.13",
+            "description": "The codebase cannot be compiled and tested without the new optimization pipeline.",
+            "severity": "info",
+            "location": "Compilation process, Consideration contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-300"
+                ]
+            },
+            "title": "Potential front-running of channel-removal transactions",
+            "description": "Transactions sent by conduit owners to remove channels are vulnerable to front-running.",
+            "severity": "info",
+            "location": "Channel removal transactions, Consideration.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of a zero-value check in the validate function",
+            "description": "The validate function does not check whether an order's token amount is set to zero and will validate such an order.",
+            "severity": "low",
+            "location": "Validate function, Consideration.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "fulfillAdvancedOrder may revert and prevent order fulfillment",
+            "description": "Arithmetic overflows in checked blocks can cause fulfillAdvancedOrder to revert.",
+            "severity": "n/a",
+            "location": "_getFraction and _locateCurrentAmount functions, Consideration.sol"
+        }
+    ]
+}

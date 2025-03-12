@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/Inspex-YAY_Token.pdf",
+    "project_info": {
+        "url": "https://github.com/YAY-Games/token-contract/tree/2ce6932441",
+        "commit_id": "2ce6932441",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "token-contract": "contracts/Inspex-YAY_Token/token-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Design Flaw in Minting Cap Validation",
+            "description": "The contract owner can mint tokens arbitrarily by exploiting the burn mechanism logic and stealing tokens with no limitation.",
+            "severity": "high",
+            "location": "BEP20YAY contract, `mint` function and `_mint` function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unusable Tokens via Blacklisting",
+            "description": "Specific users cannot use the tokens freely due to getting their transactions reverted or burned by the contract owner.",
+            "severity": "high",
+            "location": "BEP20YAY.sol, functions _transfer, _beforeTokenTransfer, burnBlackFunds, isBlacklisted, blacklist"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Untransferable Tokens via Contract Pausing",
+            "description": "The platform can gain advantages from users by controlling token transfer flows, resulting in disadvantages for users.",
+            "severity": "medium",
+            "location": "BEP20YAY contract, _beforeTokenTransfer function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Token Draining by emergencyWithdrawal()",
+            "description": "The contract owner can drain the deposited tokens using the emergencyWithdrawal() function.",
+            "severity": "medium",
+            "location": "YayVesting contract, emergencyWithdrawal() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Unsafe Token Transfer",
+            "description": "Improper implementation of token transfer in the claim() function allows execution without reverting when an invalid transfer amount occurs, causing damage to the smart contract.",
+            "severity": "info",
+            "location": "YayVesting.sol, claim() function, lines 99-145 (specifically line 144)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "BEP20YAY.sol, function burnBlackFunds(), line 645"
+        }
+    ]
+}

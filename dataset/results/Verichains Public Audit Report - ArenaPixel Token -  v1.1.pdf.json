@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/Verichains Public Audit Report - ArenaPixel Token -  v1.1.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x247B62BAACBeE6BAc0E6b3e48CA86BEA23800E70",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.18+commit.87f61d96"
+        ],
+        "project_path": {
+            "ArenaPixelToken": "contracts/Verichains Public Audit Report - ArenaPixel Token -  v1/ArenaPixelToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "A blacklist mechanism of transferFrom function can be bypassed",
+            "description": "The blacklist check can be bypassed by using another wallet to call with a sender parameter that is blacklisted.",
+            "severity": "medium",
+            "location": "transferFrom function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Lack of input validation when set start time for eco stages details and dev stage details",
+            "description": "There is no validation to check the validity of the _stages values containing zero when setting the start time.",
+            "severity": "low",
+            "location": "setEcoStage and setDevStage functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "The lack of event emission when change configurations",
+            "description": "Certain methods do not emit events for global variable adjustments, leading to a worse user experience.",
+            "severity": "low",
+            "location": "Multiple functions (setSellTax, setBuyTax, enableTax, addExcludeFee, removeExcludeFee, setMktWallet, setEcosystemWallet, setDevWallet, and setPauseContract)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zero address validation",
+            "description": "The absence of zero address validation in certain methods can prevent the contract from transferring tokens to other users.",
+            "severity": "low",
+            "location": "setMktWallet, setEcosystemWallet, and setDevWallet functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Approve for a pancake pair allowed to spend all tokens that is unnecessary",
+            "description": "The Pancake pair can use all tokens when using the 'approve' procedure.",
+            "severity": "low",
+            "location": "Constructor function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized mechanism",
+            "description": "Compromise to the owner account may allow hackers to take advantage of centralized privileges.",
+            "severity": "n/a",
+            "location": "Contract (owner-related functions: setPauseContract, addBlacklist, removeBlacklist, etc.)"
+        }
+    ]
+}

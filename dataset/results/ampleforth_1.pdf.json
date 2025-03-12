@@ -1,0 +1,125 @@
+{
+    "path": "artifacts/ampleforth_1.pdf",
+    "project_info": {
+        "url": "https://github.com/ampleforth/uFragments/tree/1ca2ae2243b867dd3341ea1e56748ea1a24569f9",
+        "commit_id": "1ca2ae2243b867dd3341ea1e56748ea1a24569f9",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "uFragments": "contracts/ampleforth/uFragments"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Rebasing will fail if no market sources are fresh",
+            "description": "If no market oracles are fresh, then getPriceAnd24HourVolume() on line 57 of MarketOracle.sol will revert due to division by zero.",
+            "severity": "low",
+            "location": "market-oracle/contracts/MarketOracle.sol and uFragments/contracts/UFragmentsPolicy.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Malicious or erroneous MarketSource can break rebasing",
+            "description": "If MarketSource reports a large value for partialRate and/or partialVolume, it causes a revert in the calculation of volumeWeightedSum and thereby prevents rebasing.",
+            "severity": "low",
+            "location": "market-oracle/contracts/MarketOracle.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Zos-lib is deprecated",
+            "description": "The ZeppelinOS Library (zos-lib) was recently deprecated.",
+            "severity": "info",
+            "location": "uFragments"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Possible reentrancy if the minimum rebase interval is zero",
+            "description": "If the minimum rebase time interval (_minRebaseTimeIntervalSec) is set to zero, then a market source can reentrantly call UfragmentPolicy.rebase.",
+            "severity": "low",
+            "location": "uFragments"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Market source removal is dangerous",
+            "description": "The removeSourceAtIndex private function makes assumptions about the state of the contract, which could lead to serious security implications if called with invalid arguments.",
+            "severity": "info",
+            "location": "market-oracle/contracts/MarketOracle.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Contract upgrades can catastrophically fail if the storage layout changes",
+            "description": "Changes in state variables between deployments can lead to a broken contract.",
+            "severity": "low",
+            "location": "All upgradable contracts"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Rebase predictability may make Ampleforth a target for arbitrage",
+            "description": "Predictable rebasing process allows traders to exploit arbitrage opportunities.",
+            "severity": "n/a",
+            "location": "the Ampleforth token"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "ERC20 approve race condition",
+            "description": "Idempotent approve function can be exploited by malicious parties to steal tokens.",
+            "severity": "n/a",
+            "location": "Ampleforth's compliance with ERC20 standard"
+        }
+    ]
+}

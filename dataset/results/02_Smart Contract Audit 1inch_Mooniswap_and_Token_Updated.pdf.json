@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/02_Smart Contract Audit 1inch_Mooniswap_and_Token_Updated.pdf",
+    "project_info": {
+        "url": "https://github.com/1inch/liquidity-protocol/tree/57f3b0d22a2a9a0b11fc870e01cb4d50a7a8d306/",
+        "commit_id": "57f3b0d22a2a9a0b11fc870e01cb4d50a7a8d306",
+        "address": "0x111111111117dc0aa78b770fa6a738034120c302,0xbAF9A5d4b0052359326A6CDAb54BABAa3a3A9643",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "OneInch": "contracts/02_Smart Contract Audit 1inch_Mooniswap_and_Token_Updated/OneInch"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Cannot pause / shutdown Mooniswap Factory",
+            "description": "The Mooniswap.sol contract needs a mechanism for the owner to pause the contract, but there is no corresponding mechanism to shutdown the contract.",
+            "severity": "medium",
+            "location": "Mooniswap.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential violation of Checks-Effects-Interaction pattern",
+            "description": "Could potentially lead to reentrancy vulnerability.",
+            "severity": "medium",
+            "location": "ReferralFeeReceiver.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Potential front running attack or losing of allowance",
+            "description": "The _approve method replaces the allowance, so there are two potential problems here: 1. If a signer wants to increase the allowance from A to B , a receiver may withdraw A+B using the front-running attack. 2. If a signer wants to send A and B , but a receiver forgot to withdraw A , the receiver will lose ability to withdraw A .",
+            "severity": "low",
+            "location": "ERC20Permit.sol (1INCH Token)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Mismatch of argument name in _PERMIT_TYPEHASH and permit function",
+            "description": "At the line ERC20Permit.sol#L27 the value argument is used, but at the line ERC20Permit.sol#L32 the argument name is amount.",
+            "severity": "low",
+            "location": "ERC20Permit.sol (1INCH Token)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Use SafeCast library for uintXX/intXX wrapper",
+            "description": "Wrappers over Solidity's uintXX/intXX casting operators with added overflow checks.",
+            "severity": "low",
+            "location": "MooniswapFactoryGovernance.sol, MooniswapGovernance.sol, ExplicitLiquidVoting.sol, LiquidVoting.sol, VirtualBalance.sol"
+        }
+    ]
+}

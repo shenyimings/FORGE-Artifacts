@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Raffle-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/LooksRare/contracts-raffle/tree/d6c377d",
+        "commit_id": "d6c377d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts-raffle": "contracts/PeckShield-Audit-Report-Raffle-v1/contracts-raffle"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Inconsistent Enforcement of whenNotPaused in cancel()",
+            "description": "The `cancel()` function does not have the `whenNotPaused` modifier, which may allow cancellation when the protocol is paused.",
+            "severity": "medium",
+            "location": "Raffle contract, `cancel()` function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Simplified depositPrizes() Logic in Raffle",
+            "description": "The `_validateCaller(raffle.owner)` requirement may be safely removed.",
+            "severity": "low",
+            "location": "Raffle contract, `depositPrizes()` function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "A compromised admin account could modify system parameters, undermining the protocol's design assumptions.",
+            "severity": "low",
+            "location": "Raffle protocol, privileged owner account"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Possible Cancellation Denial-of-Service in Raffle",
+            "description": "The raffle owner may block cancellation by reverting the callback on ERC1155-based prizes.",
+            "severity": "medium",
+            "location": "Raffle contract, `cancel()` function"
+        }
+    ]
+}

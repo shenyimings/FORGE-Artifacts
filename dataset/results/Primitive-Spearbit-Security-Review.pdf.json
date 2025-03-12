@@ -1,0 +1,212 @@
+{
+    "path": "artifacts/Primitive-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/primitivefinance/portfolio",
+        "commit_id": "b920d50d88763d112c73ed05ef7dc6c422dbceb2",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "portfolio": "contracts/Primitive-Spearbit-Security-Review/portfolio"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Protocol fees are double-counted as registry balance and pool reserve",
+            "description": "Protocol fee is reinvested in the pool, causing it to be counted twice as part of the registry's user balance and the pool reserve.",
+            "severity": "critical",
+            "location": "Registry balance and pool reserve"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "LP fees are in WAD instead of token decimal units",
+            "description": "LP fees are calculated and stored in WAD units, which can lead to stealing tokens with fewer than 18 decimals.",
+            "severity": "critical",
+            "location": "Portfolio.sol#L485"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Swaps can be done for free and steal the reserve given large liquidity allocation",
+            "description": "An attacker can perform a swap without transferring any input amount by allocating a large amount of liquidity, resulting in stealing the entire asset reserve.",
+            "severity": "critical",
+            "location": "Portfolio.sol#L509"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Unsafe type-casting",
+            "description": "There are multiple instances of unsafe type-castings throughout the contract, which can lead to overflows and bad consequences.",
+            "severity": "high",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "LP fees are in WAD instead of token decimal units",
+            "description": "Fees are credited to the REGISTRY in WAD units, leading to incorrect fee amounts when tokens have less than 18 decimals.",
+            "severity": "high",
+            "location": "Portfolio.sol#L489"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Invariant getX computation is wrong",
+            "description": "The `getX` function documentation is incorrect, and the computation should use `y - k` instead of `y + k`.",
+            "severity": "high",
+            "location": "solstat/Invariant.sol#L114-L140, RMM01Lib.sol#L70"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Liquidity can be (de-)allocated at a bad price",
+            "description": "An MEV searcher can sandwich the allocation transaction with swaps that move the price in an unfavorable way.",
+            "severity": "high",
+            "location": "Portfolio.sol#L295-L296"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Token amounts are in wrong decimals if useMax parameter is used",
+            "description": "The allocate and swap functions have a useMax parameter that sets the token amounts to be used to the net balance of the contract.",
+            "severity": "high",
+            "location": "Portfolio.sol#L227-L237, Portfolio.sol#L444-L448"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing signextend when dealing with non-full word signed integers",
+            "description": "The AssemblyLib is using non-full word signed integers operations without proper signextension, potentially leading to reverts.",
+            "severity": "medium",
+            "location": "AssemblyLib.sol#L83"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Tokens With Multiple Addresses Can Be Stolen Due to Reliance on balanceOf",
+            "description": "Tokens with multiple valid contract addresses can be stolen due to reliance on the return value of balanceOf for manipulated tokens.",
+            "severity": "medium",
+            "location": "AccountLib.sol#L230"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "getAmountOut underestimates outputs leading to losses",
+            "description": "When computing the output, the getAmountOut performs a bisection, but it returns any root of the function, not the lowest root.",
+            "severity": "medium",
+            "location": "BisectionLib.sol#L54"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "getAmountOut Calculates an Output Value That Sets the Invariant to Zero, Instead of Preserving Its Value",
+            "description": "The swap function enforces that the pool's invariant value does not decrease; however, the getAmountOut function computes an expected swap output based on setting the pool's invariant to zero.",
+            "severity": "medium",
+            "location": "RMM01Lib.sol#L84, RMM01Lib.sol#L215, RMM01Lib.sol#L231"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "getAmountOut Does Not Adjust The Pool's Reserve Values Based on the liquidityDelta Parameter",
+            "description": "The liquidityDelta parameter allows a caller to adjust the liquidity in a pool before simulating a swap, but corresponding adjustments are not made to the per-pool reserves.",
+            "severity": "medium",
+            "location": "RMM01Lib.sol#L111-L128"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Bisection always uses max iterations",
+            "description": "The current bisection algorithm chooses the mid point as root = (lower + upper) / 2; and the bisection terminates if either upper - lower < 0 or maxIterations is reached.",
+            "severity": "low",
+            "location": "BisectionLib.sol#L51"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Potential reentrancy in claimFees",
+            "description": "The contract performs all transfers in the _settlement function and therefore _settlement can call-back to the user for reentrant tokens.",
+            "severity": "low",
+            "location": "Portfolio.sol#L890"
+        }
+    ]
+}

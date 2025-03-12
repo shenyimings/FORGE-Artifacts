@@ -1,0 +1,185 @@
+{
+    "path": "artifacts/Polymath Core Audit - CoinFabrik Blog.pdf",
+    "project_info": {
+        "url": "https://github.com/PolymathNetwork/polymath-core/tree/dev-3.1.0",
+        "commit_id": "bdb055769dd87a09327c6200aed5d994ab0237e8",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "polymath-core": "contracts/Polymath Core Audit - CoinFabrik Blog/polymath-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential gas issue with transfers in Istanbul",
+            "description": "The activation of the Istanbul fork of Ethereum’s mainnet will increase the cost of several common opcodes, potentially affecting all contracts that use a fixed amount of gas when calling another contract.",
+            "severity": "low",
+            "location": "USDTieredSTO (function buyWithETHRateLimited)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Token granularity is not respected",
+            "description": "The function _modifyTiers of USDTieredSTO receives an array containing the amount of available tokens per tier and another array with the amount of tokens available with discount, without verifying if these amounts respect the granularity.",
+            "severity": "low",
+            "location": "USDTieredSTO (function _modifyTiers), CappedSTO"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Code does nothing in function finalize of USDTieredSTO",
+            "description": "The code seems to be there to check for invalid conditions but doesn't do anything.",
+            "severity": "info",
+            "location": "USDTieredSTO (function finalize)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary imports",
+            "description": "The files RestrictedPartialSaleTM.sol and Module.sol import unnecessary libraries.",
+            "severity": "info",
+            "location": "RestrictedPartialSaleTM.sol, Module.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unvetted Oracle Configuration",
+            "description": "Owner can manipulate price by configuring a malicious oracle.",
+            "severity": "n/a",
+            "location": "USDTieredSTO, owner configuration"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Lack of Event Emission",
+            "description": "No events emitted when tiers are modified with pre-minting enabled.",
+            "severity": "low",
+            "location": "Function _modifyTiers"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Implicit Zero Address Return",
+            "description": "getCustomOracleAddress returns zero address when called with FundRaiseType.SC.",
+            "severity": "n/a",
+            "location": "USDTieredSTO, function getCustomOracleAddress"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Unnamed Magic Constant",
+            "description": "uint256(10) ** 18 is used without definition as a constant.",
+            "severity": "n/a",
+            "location": "Function _getTokenAmount in CappedSTO"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated Version Number",
+            "description": "Constructor in DummySTOFactory calls UpgradableModuleFactory with version 3.0.0.",
+            "severity": "n/a",
+            "location": "DummySTOFactory constructor"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Inconsistent Access Qualifier",
+            "description": "Public functions declared previously as external in base contracts.",
+            "severity": "low",
+            "location": "ModuleFactory.sol and CappedSTO.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missing Access Qualifier",
+            "description": "Variables without access qualifiers.",
+            "severity": "low",
+            "location": "ModuleFactory.sol, USDTieredSTOStorage.sol"
+        }
+    ]
+}

@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/Big League Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xea01d8d9eacca9996db6bb3377c1fe64308e7328",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.5+commit.a4f2e591"
+        ],
+        "project_path": {
+            "StandardToken": "contracts/Big League Smart Contract Audit Report - QuillAudits/StandardToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Backdoor in transferFrom function",
+            "description": "Allowing infinite token spending on a user's behalf if an allowance of the maximum value of uint256 is given.",
+            "severity": "high",
+            "location": "transferFrom function, Line No: 131"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible denial of service for transfer functionality",
+            "description": "Reverting of tx due to disparity between ether and tokens when adding ether liquidity, affecting successive transfers.",
+            "severity": "high",
+            "location": "transfer function, Line No: 167"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ],
+                "4": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Using the approve function of the token standard",
+            "description": "Inadequate event emission for critical operations (e.g., forbidMint, setFees).",
+            "severity": "high",
+            "location": "Various functions (forbidMint, setFees, etc.)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Improper error handling",
+            "description": "Inadequate checking of user balance before transferring tokens, leading to unexpected reverts.",
+            "severity": "medium",
+            "location": "Multiple functions (transfer, approve, etc.)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Tokens can be burned at the Owner's behest",
+            "description": "Unrestricted burning of tokens by the owner without proper analysis.",
+            "severity": "low",
+            "location": "burn function, Line No: 213"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of unit tests",
+            "description": "Inadequate testing coverage for the contract.",
+            "severity": "low",
+            "location": "n/a (codebase overall)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas costs optimization",
+            "description": "Suboptimal storage variable packing, leading to unnecessary gas costs.",
+            "severity": "info",
+            "location": "Storage variables"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "State variables that could be declared constants",
+            "description": " Stateless variables that can be optimized for gas savings.",
+            "severity": "info",
+            "location": "address public WNB"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Arithmetic calculations are not scaled off-chain",
+            "description": "On-chain arithmetic calculations can be optimized by handling them off-chain.",
+            "severity": "info",
+            "location": "FeeSettings"
+        }
+    ]
+}

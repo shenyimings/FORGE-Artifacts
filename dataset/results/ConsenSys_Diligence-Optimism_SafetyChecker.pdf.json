@@ -1,0 +1,182 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Optimism_SafetyChecker.pdf",
+    "project_info": {
+        "url": "https://github.com/ethereum-optimism/contracts",
+        "commit_id": "606577457191973b46034602f46ddcc130a5c0ac",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/ConsenSys_Diligence-Optimism_SafetyChecker/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unforeseen changes to EVM invalidating reachability analysis",
+            "description": "Future changes to EVM opcodes may invalidate the Safety Checker's reachability analysis",
+            "severity": "high",
+            "location": "OVM_SafetyChecker contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Multi-byte opcode assignment potentially making SELFDESTRUCT reachable",
+            "description": "Assignment of new multi-byte opcodes could make SELFDESTRUCT instruction reachable",
+            "severity": "high",
+            "location": "OVM_SafetyChecker contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Unassigned opcodes in runtime bytecode potentially becoming unsafe due to EVM changes",
+            "description": "Unassigned opcodes may become unsafe if assigned different semantics in future EVM updates",
+            "severity": "medium",
+            "location": "OVM_SafetyChecker contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Deviation in gas metering between EVM and OVM leading to consensus failure",
+            "description": "Inconsistent gas metering can lead to fraudulent state transitions",
+            "severity": "critical",
+            "location": "OVM_FraudVerifier contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas Metering Inconsistencies",
+            "description": "Inconsistent gas metering between Optimism system's execution environments (EVM and OVM) due to complexities in GAS opcode and \"all but one 64th\" gas semantics of CALL",
+            "severity": "n/a",
+            "location": "OVM_ExecutionManager contract, State Manager interactions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas Metering Challenges",
+            "description": "Difficulty in meeting gas metering requirements due to complexities in estimating gas costs of the State Manager",
+            "severity": "n/a",
+            "location": "State Manager implementation (Go and bytecode)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Future Gas Metering Concerns",
+            "description": "Increasing complexity of gas metering for certain instructions, potential issues with EIP-2929 and EIP-2930",
+            "severity": "n/a",
+            "location": "Upcoming Berlin Hardfork (EIP-2929 and EIP-2930)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Non-Deterministic Fraud Proofs",
+            "description": "EIP-2929 breaks an existing invariant in gas costs, allowing attackers to craft transactions with non-deterministic fraud proofs",
+            "severity": "high",
+            "location": "EVM (EIP-2929)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected use of CALLER opcode",
+            "description": "The CALLER opcode is only allowed in specific magic sequences, but its unrestricted use can lead to security issues",
+            "severity": "high",
+            "location": "safetyChecker.IsBytecodeSafe function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Unreachable code execution",
+            "description": "Certain opcodes (e.g., JUMP, RETURN) can make the next instruction unreachable, potentially leading to unexpected behavior",
+            "severity": "medium",
+            "location": "safetyChecker.IsBytecodeSafe function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Banned opcode usage",
+            "description": "The use of banned opcodes (e.g., SELFDESTRUCT, REVERT) can lead to security vulnerabilities",
+            "severity": "high",
+            "location": "isValidInOVM and isValidInEVM maps"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ]
+            },
+            "title": "Invalid EVM opcode usage",
+            "description": "Using invalid or reserved opcodes can lead to unexpected behavior or security issues",
+            "severity": "medium",
+            "location": "safetyChecker.IsBytecodeSafe function"
+        }
+    ]
+}

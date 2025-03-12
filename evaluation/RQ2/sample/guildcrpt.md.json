@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/guildcrpt.md",
+    "project_info": {
+        "url": "https://github.com/GuildCrypt",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a"
+    },
+    "findings": [
+        {
+            "id": 0,
+            "title": "Reentrancy in submitBid() function",
+            "description": "Externally calling DAI token contract and transferring tokens to previous bidder, and updating states after external calls.",
+            "severity": "High",
+            "location": "RiftPact token contract"
+        },
+        {
+            "id": 1,
+            "title": "Unauthorized token transfer in transferfrom() function",
+            "description": "User can use safeTransferfrom() function to transfer tokens even after sunsetlength is exceeded.",
+            "severity": "High",
+            "location": "OathForge Contract"
+        },
+        {
+            "id": 2,
+            "title": "Untracked token fracturizer and voting",
+            "description": "No tracking of token fracturizer, and no check on whether voting is already going on for a particular token.",
+            "severity": "Medium",
+            "location": "OathForge contract"
+        },
+        {
+            "id": 3,
+            "title": "Redemption possible after sunset length exceeded",
+            "description": "Token holder can redeem token even after sunset length exceeded.",
+            "severity": "Medium",
+            "location": "submitRedemptionCodeHash() function"
+        },
+        {
+            "id": 4,
+            "title": "No pause functionality",
+            "description": "No use of pause() Function or Pausable library to stop functionalities in emergency situations.",
+            "severity": "Medium",
+            "location": "Both contracts"
+        },
+        {
+            "id": 5,
+            "title": "Missing symbol and name in ERC20 token contract",
+            "description": "No public variables for name and symbol.",
+            "severity": "Medium",
+            "location": "RiftPact token contract"
+        },
+        {
+            "id": 6,
+            "title": "initiateSunset() can be done before minting",
+            "description": "initiateSunset() can be called before minting.",
+            "severity": "Medium",
+            "location": "OathForge Smart contract"
+        },
+        {
+            "id": 7,
+            "title": "Solidity version not fixed",
+            "description": "Usingpragma solidity ^0.4.24; instead of fixed version.",
+            "severity": "Low",
+            "location": "Both contracts"
+        },
+        {
+            "id": 8,
+            "title": "Unused SafeMath library",
+            "description": "Importing SafeMath library but not using it.",
+            "severity": "Low",
+            "location": "Both contracts"
+        },
+        {
+            "id": 9,
+            "title": "Unnecessary import of ERC721.sol contract",
+            "description": "Importing ERC721.sol contract when already imported in OathForge contract.",
+            "severity": "Low",
+            "location": "RiftPact contract"
+        },
+        {
+            "id": 10,
+            "title": "Missing require statement in RiftPact constructor",
+            "description": "Missing require (__auctionAllowedAt > now)",
+            "severity": "Low",
+            "location": "RiftPact contract"
+        },
+        {
+            "id": 11,
+            "title": "Variable Uninitialized constructor values of RiftPack Contract for unminted TokenID",
+            "description": "Failed test case indicating that the constructor values of RiftPack Contract are not correctly initialized for unminted TokenIDs.",
+            "severity": "High",
+            "location": "RiftPact contract"
+        }
+    ]
+}

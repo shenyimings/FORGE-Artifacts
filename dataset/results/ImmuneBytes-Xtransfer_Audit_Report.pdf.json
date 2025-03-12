@@ -1,0 +1,74 @@
+{
+    "path": "artifacts/ImmuneBytes-Xtransfer_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/xtransfer/xtn_smartcontract",
+        "commit_id": "04fbd88c70456797d957c9f762c3bf0e57e3abe7",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "xtn_smartcontract": "contracts/ImmuneBytes-Xtransfer_Audit_Report/xtn_smartcontract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Workaround to skip Transfer Fee",
+            "description": "A user can bypass the fee deduction mechanism by using the transferFrom() function instead of transfer().",
+            "severity": "low",
+            "location": "XTRANSFER Token contract, transfer() and transferFrom() functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use _msgSender() instead of msg.sender",
+            "description": "Inconsistency in using _msgSender() and msg.sender to access the caller's address.",
+            "severity": "low",
+            "location": "XTRANSFER Token contract, constructor()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "_addressTreasury should be declared as a public constant variable",
+            "description": "Private variable _addressTreasury makes it difficult for off-chain elements to read its value.",
+            "severity": "low",
+            "location": "XTRANSFER Token contract, _addressTreasury variable"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Use indexed parameters in events",
+            "description": "Non-indexed address parameter in AddToWhitelist and RemoveFromWhitelist events makes it difficult to filter out events.",
+            "severity": "low",
+            "location": "XTRANSFER Token contract, AddToWhitelist and RemoveFromWhitelist events"
+        }
+    ]
+}

@@ -1,0 +1,71 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Firebird-Swap-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/firebird-finance/firebird-core/tree/5f18a16",
+        "commit_id": "5f18a16",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "firebird-core": "contracts/PeckShield-Audit-Report-Firebird-Swap-v1/firebird-core"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Potential Sandwich/MEV Attack For zapOutToPair()",
+            "description": "The zapOutToPair() function is vulnerable to possible front-running attacks due to the lack of slippage control.",
+            "severity": "medium",
+            "location": "FireBirdZap.sol, zapOutToPair()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Accommodation Of Possible Non-Compliant ERC20 Tokens",
+            "description": "The transfer() routine may not handle non-compliant ERC20 tokens properly.",
+            "severity": "low",
+            "location": "FireBirdZap contract, transfer() and withdrawTokenAmount() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Potential DoS With Permission-Based Operations",
+            "description": "A potential Denial of Service (DoS) vulnerability in the `permit()` function of the FireBirdERC20 contract.",
+            "severity": "n/a",
+            "location": "FireBirdRouter/FireBirdZap, `FireBirdERC20::permit()` and `FireBirdRouter::removeLiquidityWithPermit()`"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved Validation Of Function Arguments",
+            "description": "Lack of validation in the `getFactoryReserveAndWeights()` function, which may introduce unexpected behavior.",
+            "severity": "medium",
+            "location": "FireBirdRouter, `_swapSingleSupportFeeOnTransferTokens()` and `FireBirdFormula::getFactoryReserveAndWeights()`"
+        }
+    ]
+}

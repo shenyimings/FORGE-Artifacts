@@ -1,0 +1,164 @@
+{
+    "path": "artifacts/RevomonVR Smart Contract Audit by Solidity Finance.pdf",
+    "project_info": {
+        "url": "https://github.com/RevomonVR/Contracts",
+        "commit_id": "9d0da49342a1a87b6cafebd4945612c2cfb8669d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Contracts": "contracts/RevomonVR Smart Contract Audit by Solidity Finance/Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Unsecured reward balance modification",
+            "description": "The owner or PoolManager can set the total reward balance of each pool to any value at any time without contributing any Revo tokens.",
+            "severity": "high",
+            "location": "RevoStaking contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1286"
+                ],
+                "4": [
+                    "CWE-1286"
+                ]
+            },
+            "title": "Incorrect token transfer function usage",
+            "description": "The increaseLockAmount() function incorrectly uses a transfer() on line 487, when intending to use a transferFrom() in order to transfer tokens from the msg.sender to the contract.",
+            "severity": "high",
+            "location": "LockRevoTokenContract, increaseLockAmount() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate multiplication and division operations",
+            "description": "Two instances of multiplication occurring on the result of a division can lead to integer truncation.",
+            "severity": "low",
+            "location": "RevoStaking contract, getUserPoolReward() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Incorrect file type for solidity contract",
+            "description": "The RevoPoolManager file is saved as a (.ts) Typescript file when it should be a .sol (Solidity) file.",
+            "severity": "n/a",
+            "location": "RevoPoolManager file"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Inefficient looping for removing pool addresses",
+            "description": "Expensive looping is used when removing pool addresses which does not account for duplicates that may be in the list.",
+            "severity": "n/a",
+            "location": "RevoPoolManager contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated version of ReentrancyGuard",
+            "description": "The contract uses an outdated version of ReentrancyGuard which is very expensive in terms of gas consumption.",
+            "severity": "n/a",
+            "location": "RevoFarming contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused inherited functionality",
+            "description": "The contract inherits the functionality of ERC20Capped, but this functionality is not used at all as there is no minting functionality present.",
+            "severity": "n/a",
+            "location": "RevomonToken contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused local variable",
+            "description": "The local variable countNotEmpty is never used within the getTokensDbIdByOwnerAndCollection() function.",
+            "severity": "n/a",
+            "location": "RevoNFT contract, getTokensDbIdByOwnerAndCollection() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused functions and state variables",
+            "description": "Several functions are declared public, but are never called internally. Several state variables can never be modified, but are not declared constant.",
+            "severity": "n/a",
+            "location": "RevoStaking contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralization of Control",
+            "description": "The project team can withdraw staked tokens and reward tokens from both the RevoStaking and RevoFarming contracts, but can forfeit the right to do so.",
+            "severity": "info",
+            "location": "RevoStaking and RevoFarming contracts"
+        }
+    ]
+}

@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/MesonProtocolDesignReview.pdf",
+    "project_info": {
+        "url": "https://github.com/MesonFi/meson-contracts-solidity",
+        "commit_id": "b1fe6bc055f670e7b3f4fd14ce4b340dbc480e95",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "meson-contracts-solidity": "contracts/MesonProtocolDesignReview/meson-contracts-solidity"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Front-running issue in UUPS proxy contracts",
+            "description": "The initialize() function can be front-run by a malicious user during deployment to take control over the contracts’ ownership and their tokens",
+            "severity": "high",
+            "location": "Meson protocol's contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Infinite Token Approvals",
+            "description": "Approvals are never revoked, posing major security risks",
+            "severity": "high",
+            "location": "Meson contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1335"
+                ]
+            },
+            "title": "Hard-Coded Bit Shifts",
+            "description": "Bit shifts could be problematic when interacting with different tokens",
+            "severity": "medium",
+            "location": "Helper methods throughout the codebase"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Front-Running Risks",
+            "description": "A malicious user could front-run transactions to grief users or make a profit",
+            "severity": "high",
+            "location": "Mempool and relayer service"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Signature Malleability",
+            "description": "Signatures are vulnerable to malleability attacks due to lack of restriction on the s parameter",
+            "severity": "medium",
+            "location": "ECDSA signing algorithm"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "LP Misbehavior",
+            "description": "Malicious LPs could refuse to accept transactions or bond to a swap and refuse to lock their funds",
+            "severity": "high",
+            "location": "LP component of the Meson protocol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Insufficient Documentation",
+            "description": "Documentation lacks coverage of all system components and risks",
+            "severity": "low",
+            "location": "DOCUMENTATION"
+        }
+    ]
+}

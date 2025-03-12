@@ -1,0 +1,149 @@
+{
+    "path": "artifacts/Bihu.pdf",
+    "project_info": {
+        "url": "https://github.com/bihu-id/bihu-contracts",
+        "commit_id": "f9a7ab65",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bihu-contracts": "contracts/Bihu/bihu-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Insecure function call",
+            "description": "The transferTokens function can call an arbitrary contract under this contract’s permission.",
+            "severity": "n/a",
+            "location": "KeyRewardPool.sol, Line 123"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent type usage",
+            "description": "Mixed use of uint and uint256 types",
+            "severity": "n/a",
+            "location": "WarmWallet.sol, Lines 21-22"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-768"
+                ]
+            },
+            "title": "Incorrect require statement order",
+            "description": "The likelihood that the first require throws is much lower than the likelihood that the second one throws.",
+            "severity": "n/a",
+            "location": "WarmWallet.sol, Lines 70-72"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-241"
+                ]
+            },
+            "title": "Invalid call data handling",
+            "description": "The function silently truncates and takes the remaining bytes as the address input value when a client makes a mistake encoding an address.",
+            "severity": "n/a",
+            "location": "WarmWallet.sol, setOwner function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated library usage",
+            "description": "The old version of DSToken uses assert() instead of require() for input validation.",
+            "severity": "n/a",
+            "location": "KEY token contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Unprotected use of transfer function",
+            "description": "The forwardToHotWallet function does not verify the external call to key.transfer, which could lead to potential security risks.",
+            "severity": "high",
+            "location": "forwardToHotWallet function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected access control in forwardToHotWallet function",
+            "description": "The function only checks if the caller is the withdrawer, but does not restrict access to other unauthorized users.",
+            "severity": "medium",
+            "location": "forwardToHotWallet function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Insufficient validation of input parameters in forwardToHotWallet function",
+            "description": "The function does not thoroughly validate input parameters, which could lead to potential security risks.",
+            "severity": "medium",
+            "location": "forwardToHotWallet function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential denial-of-service vulnerability in forwardToHotWallet function",
+            "description": "If an attacker repeatedly calls the forwardToHotWallet function with large amounts, it could lead to a denial-of-service attack.",
+            "severity": "low",
+            "location": "Not explicitly mentioned, but the function's logic and gas usage could potentially lead to this issue."
+        }
+    ]
+}

@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/rari-capital-on-chain-governance.pdf",
+    "project_info": {
+        "url": "https://github.com/Rari-Capital/compound-protocol",
+        "commit_id": "79229d4...134db9c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "compound-protocol": "contracts/rari-capital-on-chain-governance/compound-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "ChainlinkPriceOracleV2._price Does Not Consult Decimal Values",
+            "description": "The function _price queries various Chainlink oracles without considering decimal values, leading to potential over/undervaluation of underlying tokens.",
+            "severity": "medium",
+            "location": "ChainlinkPriceOracleV2.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "FixedEurPriceOracle May Return Stale Prices",
+            "description": "The function _price consults several oracles without ensuring recent data, leading to stale pricing results and potential arbitrage.",
+            "severity": "medium",
+            "location": "FixedEurPriceOracle.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unintended Code Removal In Comptroller.mintAllowed",
+            "description": "Removed code snippet seems necessary based on function name, related to whitelisting minters.",
+            "severity": "low",
+            "location": "Comptroller.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect getUnderlyingPrice Computation",
+            "description": "The function getUnderlyingPrice relates token price to ETH instead of EUR.",
+            "severity": "low",
+            "location": "FixedEurPriceOracle.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Constant TokenErrorReporter.UTILIZATION_ABOVE_MAX",
+            "description": "Newly defined constant is not used anywhere in the code.",
+            "severity": "info",
+            "location": "ErrorReporter.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unchecked Function Arguments",
+            "description": "Several functions lack input validation, potentially leading to issues with admin roles and invalid addresses.",
+            "severity": "info",
+            "location": "ChainlinkPriceOracleV2.sol, UniswapV3TwapPriceOracle.sol, RariGovernanceToken.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Allowance Double-Spend Exploit",
+            "description": "The contract is vulnerable to the allowance double-spend exploit, similar to other ERC20 tokens.",
+            "severity": "info",
+            "location": "RariGovernanceToken.sol"
+        }
+    ]
+}

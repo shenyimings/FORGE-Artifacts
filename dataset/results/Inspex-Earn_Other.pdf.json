@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/Inspex-Earn_Other.pdf",
+    "project_info": {
+        "url": "https://github.com/Evry-Finance/evry-finance-farm",
+        "commit_id": "b1b534ee02aa5001b9aee52b7730d88590e30812",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "evry-finance-farm": "contracts/Inspex-Earn_Other/evry-finance-farm"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Division Before Multiplication",
+            "description": "The value of rewardPerBlock will be slightly miscalculated due to the loss of precision, causing the reward to be slightly miscalculated, which may result in minor loss of funds for the users and loss of reputation to the platform.",
+            "severity": "medium",
+            "location": "EarnOtherFixedAPR contract (line 85), EarnOtherFixedAPRLockReward contract (line 82)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change the state variable that has an effect on the reward of all users without any prior notification.",
+            "severity": "medium",
+            "location": "EarnOtherFixedAPR, EarnOtherFixedAPRLockReward, and EarnOtherNoFixedAPR contracts (functions setRewardPerBlock(), transferOwnership(), renounceOwnership())"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improper Reward Amount Verification in EarnOtherFixedAPR",
+            "description": "When the contract owner has not transferred sufficient reward token into the contract, the staking token cannot be withdrawn by calling the withdraw() function, and the reward cannot be harvested by calling the harvest() function.",
+            "severity": "low",
+            "location": "EarnOtherFixedAPR contract, specifically in the harvest() and withdraw() functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ]
+            },
+            "title": "Improper Reward Amount Verification in EarnOtherFixedAPRLockReward",
+            "description": "The users will lose the opportunity to invest with their staking token during the reward distribution period without being rewarded if the contract owner has not transferred sufficient reward token into the contract.",
+            "severity": "low",
+            "location": "EarnOtherFixedAPRLockReward contract, withdraw() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Amount Verification in EarnOtherNoFixedAPR",
+            "description": "The users will lose the opportunity to invest with their staking token without being rewarded if the balance of the reward in the contract is insufficient.",
+            "severity": "low",
+            "location": "EarnOtherNoFixedAPR contract, harvest() and withdraw() functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Unnecessary Condition Checking",
+            "description": "The deposit() function contains an unnecessary condition check that always evaluates to false.",
+            "severity": "info",
+            "location": "EarnOtherFixedAPRLockReward.sol, function deposit(), lines 100-101"
+        }
+    ]
+}

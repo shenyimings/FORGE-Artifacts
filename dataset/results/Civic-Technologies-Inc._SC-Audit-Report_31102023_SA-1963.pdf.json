@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/Civic-Technologies-Inc._SC-Audit-Report_31102023_SA-1963.pdf",
+    "project_info": {
+        "url": "https://github.com/identity-com/on-chain-identity-gateway/tree/release/v2-upgrade-full/ethereum",
+        "commit_id": "b7bc57e40497b44e694b75b76603f046de7bbaa",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "on-chain-identity-gateway": "contracts/Civic-Technologies-Inc/on-chain-identity-gateway"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unauthorized Super Admin Removal",
+            "description": "The revokeSuperAdmin() function can be used by the last super admin to remove themselves, causing a situation where no other addresses can be assigned the super admin role.",
+            "severity": "medium",
+            "location": "./contracts/ParameterizedAccessControl.sol: revokeSuperAdmin()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "A function fails to validate whether an address is set to zero before accepting it as an argument.",
+            "severity": "low",
+            "location": "./contracts/GatewayToken.sol: updateFlagsStorage(), ./contracts/GatedERC2771.sol: constructor(), ./contracts/GatedERC2771Upgradeable.sol: __GatedERC2771Upgradeable_init()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "ERC-2771 Implementation Difference",
+            "description": "The implementation of ERC-2771 deviates from the accepted proposal, which can result in an underflow error when msg.data's length is less than 20 bytes.",
+            "severity": "low",
+            "location": "./contracts/MultiERC2771Context.sol: _msgData(), _msgSender(), ./contracts/MultiERC2771ContextUpgradeable.sol: _msgData(), _msgSender()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "The FlagsStorage contract is highly centralized, with the super admin having the power to add or remove flags, update the super admin, and authorize contract upgrades.",
+            "severity": "n/a",
+            "location": "FlagsStorage contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Trust Issue in Gatekeeper Component",
+            "description": "The system design necessitates trust in both the Forwarder and Gatekeeper components.",
+            "severity": "n/a",
+            "location": "Gatekeeper component"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Potential Token Theft",
+            "description": "If a malicious user gains access to the handleCharge function, they could potentially steal tokens that have been authorized for expenditure by the ChargeHandler contract.",
+            "severity": "n/a",
+            "location": "CHARGE_CALLER_ROLE setting in ChargeHandler contract"
+        }
+    ]
+}

@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/SecuraMasterchef.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xdca9c8810d8a7bDce68C0Aec7D803584a842d3a3",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "SecuraMasterchef": "contracts/SecuraMasterchef/SecuraMasterchef"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "add, set, and updateEmissionRate functions can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "MasterChef smart contract, functions add, set, and updateEmissionRate"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "add function issue",
+            "description": "If some LP token is added to the contract twice using function add, then the total amount of reward in function updatePool will be incorrect.",
+            "severity": "low",
+            "location": "MasterChef smart contract, function add"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "emergencyWithdraw function issue",
+            "description": "emergencyWithdraw function has updatePool call, so it seems like not as emergency as it should be.",
+            "severity": "n/a",
+            "location": "MasterChef smart contract, function emergencyWithdraw"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Various owner privileges can lead to unwanted changes in the contract state.",
+            "severity": "n/a",
+            "location": "MasterChef smart contract, various functions"
+        }
+    ]
+}

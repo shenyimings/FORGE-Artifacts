@@ -1,0 +1,166 @@
+{
+    "path": "artifacts/Inspex-AMM,_DMM_&_Farm.pdf",
+    "project_info": {
+        "url": "https://github.com/Evry-Finance/evry-finance-dmm-swap",
+        "commit_id": "144843b7db62e6fc1cb764ade4ab02af08c8450d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "evry-finance-dmm-swap": "contracts/Inspex-AMM,_DMM_&_Farm/evry-finance-dmm-swap"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Design Flaw in Fee Calculation",
+            "description": "The fees of the platform can be bypassed by calling the swap() function through a custom contract, causing loss of profit to the platform and reducing the reward of liquidity providers.",
+            "severity": "high",
+            "location": "EvryPair contract, swap() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "Critical state variables can be updated by the controlling authorities without notifying users, potentially resulting in unfair profit.",
+            "severity": "medium",
+            "location": "AMM Swap and DMM Swap contracts, EvryFactory contract, functions setFeeToPlatform(), setPlatformFee(), and setLiquidityFee()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unchecked Value for Fees Setting",
+            "description": "The total fee (platform fee and liquidity fee) can exceed 10,000 basis points, causing an integer subtraction overflow and transaction reversion.",
+            "severity": "low",
+            "location": "AMM Swap contract, EvryLibrary contract, function getAmountOut(), EvryFactory contract, functions setPlatformFee() and setLiquidityFee()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions' executions cannot be monitored easily by the users.",
+            "severity": "low",
+            "location": "AMM Swap and DMM Swap contracts, EvryFactory contract, setFeeToPlatform(), setPlatformFee(), setLiquidityFee(), and transferAdmin() functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": " Improper Platform Fee Condition",
+            "description": "The platform fee can be lower than what the platform intended, and that difference will be added to the part owned by the liquidity providers instead.",
+            "severity": "low",
+            "location": "DMM Swap contract, DMMPool contract (specifically in the swap() function)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Use of Upgradable Contract",
+            "description": "The Farms smart contract is upgradable, allowing the owner to modify the logic anytime, making the contract untrustworthy.",
+            "severity": "high",
+            "location": "Farms contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Denial of Service in Beneficiary Mechanism",
+            "description": "Malicious actors can perform deposits with 0 amount for another _for address without prior deposit, preventing that _for address from being used by the actual owner.",
+            "severity": "high",
+            "location": "Farms contract, deposit() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Improper Token Release Mechanism",
+            "description": "The updatePool() function in the Farms contract uses the release() function of the EVRYDistributor contract to distribute rewards, but this can lead to the cap being reached, causing transactions to revert and disrupting platform availability.",
+            "severity": "high",
+            "location": "EVRYDistributor contract, release() function, Farms contract, updatePool() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reward Miscalculation",
+            "description": "Reward miscalculation can lead to an unfair $EVRY distribution for the platform users.",
+            "severity": "medium",
+            "location": "Farms.sol, updatePool() function"
+        },
+        {
+            "id": 9,
+            "category": {},
+            "title": "Unsupported Design for Deflationary Token",
+            "description": "The deposit() function does not properly handle deflationary tokens, which can lead to users being unable to withdraw their tokens and exploit the reward calculation.",
+            "severity": "info",
+            "location": "Farms contract, deposit() function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Availability of Emergency Withdraw Function",
+            "description": "The Farms contract lacks an emergencyWithdraw() function, which can be useful in unforeseen circumstances.",
+            "severity": "info",
+            "location": "Farms contract"
+        }
+    ]
+}

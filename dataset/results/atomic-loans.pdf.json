@@ -1,0 +1,161 @@
+{
+    "path": "artifacts/atomic-loans.pdf",
+    "project_info": {
+        "url": "https://github.com/AtomicLoans/atomicloans-eth-contracts",
+        "commit_id": "878917d67cbba4aeabb785c364abcbdfca871a0c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "atomicloans-eth-contracts": "contracts/atomic-loans/atomicloans-eth-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Testing code included amongst main code repository",
+            "description": "Mainnet constants commented out in favor of testnet constants.",
+            "severity": "low",
+            "location": "BlockchainInfo.sol, Funds.sol, ChainLink.sol, OraclizeAPITesting.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Loans can be requested for extremely long periods of time",
+            "description": "Variables maxLoanDur_ and fundExpiry_ can still be set to large values.",
+            "severity": "low",
+            "location": "Funds.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Code does not adhere to the checks-effects-interactions pattern",
+            "description": "Functions in Funds.sol and Loans.sol do not follow the checks-effects-interactions pattern.",
+            "severity": "info",
+            "location": "Funds.sol, Loans.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked Pragma",
+            "description": "Pragma solidity version is unlocked, which can lead to unexpected behavior.",
+            "severity": "info",
+            "location": "All Contracts"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization of Power",
+            "description": "Owner variables have special privileges, which needs to be documented and limited.",
+            "severity": "info",
+            "location": "Loans.sol, Funds.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Undocumented magic constants",
+            "description": "Several constants are used without documentation.",
+            "severity": "info",
+            "location": "ChainLink.sol, Loans.sol, Funds.sol, Sales.sol, BlockchainInfo.sol, CoinMarketCap.sol, CryptoCompare.sol, Gemini.sol, SoChain.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Possible unhandled exception in BitcoinCollateralProvider.setPaymentVariants()",
+            "description": "Missing conditional exception in BitcoinCollateralProvider.js.",
+            "severity": "n/a",
+            "location": "BitcoinCollateralProvider.js"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Unchecked inputs in Loans.create()",
+            "description": "Multiple unchecked input parameters",
+            "severity": "n/a",
+            "location": "Loans.create()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected function calls",
+            "description": "Functions can be called by anyone, potentially leading to unauthorized state changes.",
+            "severity": "medium",
+            "location": "setSales, setP2WSH, setOnDemandSpv, etc."
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Token pausability and pauses issues",
+            "description": "Tokens may be paused when they should not be, or vice versa.",
+            "severity": "low",
+            "location": "Various contracts"
+        }
+    ]
+}

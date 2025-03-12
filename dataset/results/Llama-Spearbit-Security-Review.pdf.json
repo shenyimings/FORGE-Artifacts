@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/Llama-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/llamaxyz/llama-periphery",
+        "commit_id": "3c5fae52496f4342d35de6ce0cb7cf3be18281f1",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "llama-periphery": "contracts/Llama-Spearbit-Security-Review/llama-periphery"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unreachable branch in ILlamaCore.actionsCount check",
+            "description": "The check performed in the LlamaTokenGovernor.initialize function will never revert with the error InvalidLlamaCoreAddress.",
+            "severity": "low",
+            "location": "LlamaTokenGovernor.sol#L249"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "delayPeriod only works if isFixedLengthApprovalPeriod=true or Governor is the only policyholder",
+            "description": "The delayPeriod concept assumes that the active voting period in LlamaCore has always a fixed length, which can lead to edge cases.",
+            "severity": "low",
+            "location": "LlamaTokenGovernor.sol#L683"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "LlamaTokenGovernor only supports one role",
+            "description": "The Governor contract can hold roles but becomes impossible to participate in the voting processes associated with additional roles if assigned more than one role.",
+            "severity": "low",
+            "location": "LlamaTokenGovernor.sol#L199"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "uint16 cannot be less than 0",
+            "description": "The vote and veto quorum percentage checks compare to 0 unnecessarily ensuring they are not <= 0, which can be simplified.",
+            "severity": "info",
+            "location": "LlamaTokenGovernor.sol#L780-L781"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Save deploy cost and reduce maintenance overhead by using existing Checkpoint lib",
+            "description": "Packing data before writing a checkpoint and unpacking after reading a checkpoint could allow for use of the unmodified Checkpoints lib.",
+            "severity": "info",
+            "location": "PeriodPctCheckpoints.sol, QuorumCheckpoints.sol"
+        }
+    ]
+}

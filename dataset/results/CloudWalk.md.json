@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/CloudWalk.md",
+    "project_info": {
+        "url": "https://github.com/cloudwalk/brlc-multisig",
+        "commit_id": "b5d6c2b6273162d5666d48649890b15a113df7a7",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "brlc-multisig": "contracts/CloudWalk/brlc-multisig"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Double-approval attack by malicious owner",
+            "description": "Pending transactions have the `_approvalCount` counter, which can lead to a scenario where the minority of owners can execute a transaction.",
+            "severity": "critical",
+            "location": "MultiSigWalletBase.sol#L345 and #L370"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "_execute allows you to execute unsuccessful tasks in the future",
+            "description": "If a transaction is unsuccessful, then a revert will occur, but if a condition allows the transaction to be executed later, it will be completed as success.",
+            "severity": "high",
+            "location": "MultiSigWalletBase.sol#L378"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "A transaction doesn't have the sequence information",
+            "description": "In case of multiple transactions, any owner is able to choose the sequence of transactions.",
+            "severity": "high",
+            "location": "IMultiSigWallet.sol#L11-L18 and MultiSigWalletBase.sol#L378"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "`WalletUpgradable` initialization is risky",
+            "description": "The current initialization of an upgradable wallet includes multiple steps, where a wallet proxy is owned by some external admin.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Low Expiration Time",
+            "description": "_expirationTime can be set to low values, potentially freezing transactions",
+            "severity": "low",
+            "location": "Wallet._configureExpirationTime(), MultiSigWalletBase.sol#L314"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Transfer Ownership in Two Steps",
+            "description": "Immediate owner replacement can lead to contract lock if new owners don't control provided addresses",
+            "severity": "n/a",
+            "location": "configureOwners(), MultiSigWalletBase.sol#L190"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Transaction Exposure",
+            "description": "Large trading transactions are visible in the contract state, vulnerable to griefing or profit reduction",
+            "severity": "n/a",
+            "location": "MultiSigWalletBase.sol#L316"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Inability to Cancel Transactions after Owner Replacement",
+            "description": "New owners can't cancel transactions with long expiration times submitted by previous owners",
+            "severity": "n/a",
+            "location": "MultiSigWalletBase.sol#L314, #L387"
+        }
+    ]
+}

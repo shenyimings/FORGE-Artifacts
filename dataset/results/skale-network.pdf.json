@@ -1,0 +1,341 @@
+{
+    "path": "artifacts/skale-network.pdf",
+    "project_info": {
+        "url": "https://github.com/skalenetwork/skale-manager/commit/50c8f4e037f6bf578d62bd752516b17237b55811",
+        "commit_id": "50c8f4e037f6bf578d62bd752516b17237b55811",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "skale-manager": "contracts/skale-network/skale-manager"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Potentially Unsafe Use of Arithmetic Operations",
+            "description": "Some arithmetic operations may lead to integer underflows or overflows.",
+            "severity": "high",
+            "location": "Multiple files (Distributor.sol, SkaleBalances.sol, ValidatorService.sol, DelegationRequestManager.sol, TimeHelpers.sol, ERC777/LockableERC777.sol, DelegationController.sol)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Ability to register Address that already exists",
+            "description": "A user can invoke requestForNewAddress(...) where newValidatorAddress is an already existing address.",
+            "severity": "low",
+            "location": "delegation/ValidatorService.sol, delegation/DelegationService.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Free Tokens for Owner from Testing Code",
+            "description": "The code labeled as '// TODO remove after testing' issues free tokens for the owner.",
+            "severity": "high",
+            "location": "SkaleToken.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Validator Denial-of-Service",
+            "description": "Third-party can run a denial-of-service attack which causes some methods to run out of gas upon execution.",
+            "severity": "high",
+            "location": "delegation/DelegationService.sol, delegation/DelegationRequestManager.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked Pragma",
+            "description": "Every Solidity file specifies an unlocked pragma version.",
+            "severity": "low",
+            "location": "(multiple)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1357"
+                ]
+            },
+            "title": "Use of Experimental Features",
+            "description": "The project is using an experimental version of the ABI encoder.",
+            "severity": "low",
+            "location": "delegation/*.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization of Power",
+            "description": "Smart contracts have owner variables to designate a person with special privileges to make modifications.",
+            "severity": "low",
+            "location": "(multiple)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "Unhandled Edge Case in Validator Existence Check",
+            "description": "Incorrectly returns true if the input is 0, which could affect any function with the modifier checkValidatorExists()",
+            "severity": "info",
+            "location": "delegation/DelegationService.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potentially Unsafe Use of Loops",
+            "description": "\"For\" loops are used throughout to iterate over active delegations or distribution shares, which may cause a transaction to run out of gas and potentially lead to other higher-severity issues.",
+            "severity": "info",
+            "location": "multiple files (DelegationController.sol, DelegationService.sol, Distributor.sol, TokenState.sol)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Denial-of-Service (DoS)",
+            "description": "The owner can overwrite the launchTimestamp at any point using setLaunchTimestamp(), which could lock the two Distributor functions withdrawBounty() and withdrawFee()",
+            "severity": "medium",
+            "location": "ConstantsHolder.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Denial-of-Service (DoS)",
+            "description": "Iterates over all numberOfValidators validator entries, which could extend the load or execution time of the Ethereum node that executes the method",
+            "severity": "low",
+            "location": "ValidatorService.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Out-of-Gas Issue in DelegationController.sol",
+            "description": "Unbounded loops can cause a block gas limit exceeded issue.",
+            "severity": "n/a",
+            "location": "DelegationController.sol, processAllSlashes and sendSlashingSignals functions"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Out-of-Gas Issue in ValidatorService.sol",
+            "description": "Unbounded loops can cause a block gas limit exceeded issue.",
+            "severity": "n/a",
+            "location": "ValidatorService.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of Code Documentation",
+            "description": "Poor code documentation, unclear architecture, and grammatical errors",
+            "severity": "n/a",
+            "location": "Various files"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "IncreaseApproval Functionality",
+            "description": "The approve function increases the allowance instead of setting it to a new value",
+            "severity": "info",
+            "location": "TokenSaleManager.sol L47, L51"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Typo in Interface",
+            "description": "A typo in the IHolderDelegation interface",
+            "severity": "info",
+            "location": "IHolderDelegation.sol L26"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Function",
+            "description": "The boundedSubWithoutEvent function is unused outside tests",
+            "severity": "n/a",
+            "location": "MathUtils.sol L40"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate Definitions",
+            "description": "Duplicate definitions of PartialDifferencesValue and getAndUpdateValue in TokenLaunchLocker.sol",
+            "severity": "n/a",
+            "location": "TokenLaunchLocker.sol L46"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Unreachable else-branch in add() function",
+            "description": "The else-branch on L698 of add() can never be reached due to L686 and L688.",
+            "severity": "n/a",
+            "location": "DelegationController.sol, L698, add() function"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary if-conditional in sequence.firstUnprocessedMonth <= month",
+            "description": "The if-conditional on L725 can never fail due to the require-condition on L720.",
+            "severity": "n/a",
+            "location": "DelegationController.sol, L725"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate code in reduce() functions",
+            "description": "Lots of duplicate code in the two reduce() functions on L780 and L815.",
+            "severity": "n/a",
+            "location": "DelegationController.sol, L780 and L815, reduce() functions"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary require condition",
+            "description": "The require on L586 is not necessary due to the use of .sub() directly below.",
+            "severity": "n/a",
+            "location": "DelegationController.sol, L586"
+        }
+    ]
+}

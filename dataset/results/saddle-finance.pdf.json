@@ -1,0 +1,296 @@
+{
+    "path": "artifacts/saddle-finance.pdf",
+    "project_info": {
+        "url": "https://github.com/saddle-finance/saddle-contract/tree/83491b34387021984026d74eeba429b95f4671c0",
+        "commit_id": "83491b34387021984026d74eeba429b95f4671c0",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "saddle-contract": "contracts/saddle-finance/saddle-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect computation in getD",
+            "description": "Incorrect add(1) for denominator of dP inside inner for-loop",
+            "severity": "high",
+            "location": "SwapUtils.sol, L241"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Integer Overflow / Underflow",
+            "description": "Subtraction without SafeMath in withdrawAdminFees and getAdminBalance",
+            "severity": "medium",
+            "location": "SwapUtils.sol, multiple locations"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input validation",
+            "description": "Missing checks for user input in various functions",
+            "severity": "medium",
+            "location": "Swap.sol and Allowlist.sol, multiple locations"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Virtual price calculation is not future-proof",
+            "description": "Incorrect calculation of virtual price due to hardcoded decimals",
+            "severity": "low",
+            "location": "SwapUtils.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Increased loss of precision due to multiplication after division",
+            "description": "Loss of precision in D calculation due to repeated divisions",
+            "severity": "low",
+            "location": "SwapUtils.sol, L240-L245"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Crude check of contract address does not work",
+            "description": "Insufficient checks for Allowlist contract instance",
+            "severity": "low",
+            "location": "Swap.sol, L94"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Checks-effects-interactions pattern violated in addLiquidity",
+            "description": "Incorrect ordering of operations in addLiquidity",
+            "severity": "low",
+            "location": "SwapUtils.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Privileged Roles and Ownership",
+            "description": "Centralization of power with contract owners",
+            "severity": "info",
+            "location": "Allowlist.sol, LPToken.sol, and Swap.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked Pragma",
+            "description": "Unlocked Solidity version pragma",
+            "severity": "info",
+            "location": "All files"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Methods with different names and same implementation",
+            "description": "Duplicate methods with same logic",
+            "severity": "info",
+            "location": "SwapUtils.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing assertion in removeLiquidityImbalance",
+            "description": "Missing check for tokenAmount being zero",
+            "severity": "info",
+            "location": "SwapUtils.sol, L759"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Block Timestamp Manipulation",
+            "description": "Potential timestamp manipulation by miners",
+            "severity": "info",
+            "location": "Multiple files"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Accidental overwriting of multipliers",
+            "description": "Overwriting of multipliers due to duplicate addresses",
+            "severity": "info",
+            "location": "Allowlist.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Allowed amount could be higher than pool cap",
+            "description": "Potential issue with allowed amounts exceeding pool caps",
+            "severity": "n/a",
+            "location": "Allowlist.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-829"
+                ]
+            },
+            "title": "The value of the A parameter can be influenced by block.timestamp",
+            "description": "Potential impact of timestamp manipulation on A parameter",
+            "severity": "medium",
+            "location": "SwapUtils.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "stopRampA may be called repeatedly",
+            "description": "No verification when stopRampA() function is called to check if the current ramp has already ended or it was already called before.",
+            "severity": "low",
+            "location": "SwapUtils.sol, stopRampA() function"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Ramping can be started while previous ramp is still ongoing",
+            "description": "Error message in rampA() function does not accurately reflect the condition to start a new ramp.",
+            "severity": "info",
+            "location": "SwapUtils.sol, rampA() function"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Integer Overflow",
+            "description": "Primitive addition and multiplication operators used in rampA() function can cause an overflow if input parameter is too large.",
+            "severity": "info",
+            "location": "SwapUtils.sol, rampA() function"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-405"
+                ]
+            },
+            "title": "Loss-Making Updates to A",
+            "description": "An economic attack on the Curve contracts was discovered by Peter Zeitz, which also affects Saddle Finance contracts.",
+            "severity": "medium",
+            "location": "SwapUtils.sol"
+        }
+    ]
+}

@@ -1,0 +1,317 @@
+{
+    "path": "artifacts/Aurora-08.06.2022-SC_Audit_Report_2.pdf",
+    "project_info": {
+        "url": "https://github.com/aurora-is-near/aurora-staking-contracts",
+        "commit_id": "b59cc2926cbaf31d351c9d048b5a2dc07cbddf70",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "aurora-staking-contracts": "contracts/Aurora-08/aurora-staking-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Assets integrity",
+            "description": "Funds are not protected and can be withdrawn without proper permissions.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "User Balances manipulation",
+            "description": "Contract owners or any other third party can access funds belonging to users.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Gas Limit and Loops",
+            "description": "Transaction execution costs depend dramatically on the amount of data stored on the contract, potentially leading to execution failure due to block gas limit.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong user shares calculation",
+            "description": "Adding additional value to user shares may lead to wrong contract behavior.",
+            "severity": "high",
+            "location": "JetStakingV1, Functions: _stake, unstakeAll, unstake"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible broken calculations",
+            "description": "Calculations of reward during the endIndex period use startIndex period.",
+            "severity": "high",
+            "location": "JetStakingV1, Function: rewardsSchedule"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Possible race conditions",
+            "description": "Withdrawal amount and shares amount highly depend on the order of transactions.",
+            "severity": "high",
+            "location": "JetStakingV1, Functions: _stake, _unstake, _before"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Missing ability to pause contract",
+            "description": "Owners of PAUSE_ROLE should be able to pause contracts, but this ability is missed.",
+            "severity": "high",
+            "location": "AdminControlled, Function: adminPause"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Distributing Aurora tokens",
+            "description": "Due to wrong shares calculation, Aurora is distributed from the contract.",
+            "severity": "high",
+            "location": "JetStakingV1, Function: _before"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Missing managing roles",
+            "description": "To prevent significant impact of the previous admin, revoke all actual roles on ownership transfer.",
+            "severity": "medium",
+            "location": "AdminControlled, JetStakingV1, Treasury, Function: transferOwnership"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Missing setting admin account",
+            "description": "Set the admin account in the initialize function to prevent sending assets to zero account.",
+            "severity": "medium",
+            "location": "AdminControlled, Function: __AdminControlled_init"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Main stream could be canceled",
+            "description": "Aurora stream is set to be proposed on contract creation, it could be canceled.",
+            "severity": "medium",
+            "location": "JetStakingV1, Functions: initialize, cancelStreamProposal"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing validations",
+            "description": "Implement validation checks according to the documentation.",
+            "severity": "medium",
+            "location": "JetStakingV1, Functions: initialize, updateTreasury, stake, unstake, unstakeAll, stakeOnBehalfOfOtherUsers, stakeOnBehalfOfAnotherUser"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Mixing role purposes",
+            "description": "Implement a separate role for managing reward streams.",
+            "severity": "medium",
+            "location": "JetStakingV1"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Locking tokens in Treasury",
+            "description": "Add proposed stream token to the list of supported tokens or check if it is included.",
+            "severity": "medium",
+            "location": "JetStakingV1, Function: proposeStream"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Transfer can fail",
+            "description": "Send Ether via call and pass Gas limit via function parameter to prevent transfer failures.",
+            "severity": "medium",
+            "location": "AdminControlled, Function: adminSendEth"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing emitting events",
+            "description": "Emit an event every time the mapping is updated in Treasury contract.",
+            "severity": "medium",
+            "location": "Treasury, Function: initialize"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code with no effects",
+            "description": "Remove unneeded code linked to Aurora main stream initialization.",
+            "severity": "medium",
+            "location": "JetStakingV1"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-684"
+                ]
+            },
+            "title": "Missing functionality",
+            "description": "Implement claiming rewards if the selected user has actual staking.",
+            "severity": "medium",
+            "location": "JetStakingV1, Functions: initialize, updateTreasury, stake, unstake, unstakeAll, stakeOnBehalfOfOtherUsers, stakeOnBehalfOfAnotherUser"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Possible gas exceeding",
+            "description": "Implement an ability to remove old streams and keep their quantity under the provided number for which Gas limit is not exceeded.",
+            "severity": "medium",
+            "location": "JetStakingV1, Function: _stake, _before"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong constant value",
+            "description": "Set the constant FOUR_YEARS to the right calculated value.",
+            "severity": "low",
+            "location": "JetStakingV1"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ],
+                "3": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Public function that could be declared external",
+            "description": "Declare public functions as external to save Gas.",
+            "severity": "low",
+            "location": "JetStakingV1, Function: getStreamSchedule"
+        }
+    ]
+}

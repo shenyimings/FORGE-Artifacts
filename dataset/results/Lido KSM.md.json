@@ -1,0 +1,200 @@
+{
+    "path": "artifacts/Lido KSM.md",
+    "project_info": {
+        "url": "https://github.com/mixbytes/lido-dot-ksm",
+        "commit_id": "76a10efa5f223c4c613f26794802b8fb9bb188e1",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "lido-dot-ksm": "contracts/Lido KSM/lido-dot-ksm"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Possible underflow",
+            "description": "Underflow can occur if a ledger's stake dramatically decreases due to rebalance and after that the ledger receives a huge slash.",
+            "severity": "critical",
+            "location": "Lido.sol#L608"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Possible overflow on cast to uint",
+            "description": "Overflow can occur if `newStake` is a negative number.",
+            "severity": "critical",
+            "location": "Lido.sol#L730"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Public access to all functions",
+            "description": "All functions in the Controller contract have public access, which can be exploited.",
+            "severity": "high",
+            "location": "Controller.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ]
+            },
+            "title": "Controller can be initialized several times",
+            "description": "The `initialize` function in the Controller contract can be called several times.",
+            "severity": "high",
+            "location": "Controller.sol#L140"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Incorrect condition",
+            "description": "The condition is incorrect, leading to an infinite loop.",
+            "severity": "high",
+            "location": "Lido.sol#L748"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible burn of zero shares",
+            "description": "Due to rounding errors, a user can burn zero shares.",
+            "severity": "high",
+            "location": "Lido.sol#L522"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Possible division by zero",
+            "description": "Division by zero can occur in certain cases.",
+            "severity": "high",
+            "location": "Lido.sol#L658, Lido.sol#L708"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Insufficient xcKSm balance on `Lido`",
+            "description": "Lido may have less than `_readyToClaim`.",
+            "severity": "high",
+            "location": "Lido.sol#L563"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Possible zero balance on `Lido`",
+            "description": "Lido can have zero balance on reward distribution.",
+            "severity": "high",
+            "location": "Lido.sol#L588"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Possible underflow",
+            "description": "Free balance from the report can be less than free balance from the previous era.",
+            "severity": "high",
+            "location": "Ledger.sol#L297"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Possible free tokens on Ledger",
+            "description": "Someone can send `xcKSM` to Ledger.",
+            "severity": "info",
+            "location": "Ledger.sol#L282"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Rewards can be lost",
+            "description": "If addresses are set to 0, rewards can be lost.",
+            "severity": "info",
+            "location": "Lido.sol#L218, Lido.sol#L225, Lido.sol#L318, Lido.sol#L328"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unusable variable",
+            "description": "The variable is defined and initialized but not used in the smart contract.",
+            "severity": "info",
+            "location": "Lido.sol#L201"
+        }
+    ]
+}

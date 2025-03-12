@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/refactor.md",
+    "project_info": {
+        "url": "https://github.com/refactorteam/Crowdsale-Contracts",
+        "commit_id": "144b38652a5ed501b5d3f6e9256c9067bba71b1d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Crowdsale-Contracts": "contracts/refactor/Crowdsale-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Insufficient Burn Functionality",
+            "description": "The burn function only allows burning of own tokens, not excess unsold tokens.",
+            "severity": "high",
+            "location": "REFACTOR TOKEN.sol#L197"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "False Event Generation",
+            "description": "A false event can be generated for transferring any amount of tokens to oneself due to an error in StandardToken from Zeppelin Solidity.",
+            "severity": "info",
+            "location": "REFACTOR TOKEN.sol#L108"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unnecessary Division",
+            "description": "The formula has unnecessary division by `1 ether`, making it prone to errors.",
+            "severity": "info",
+            "location": "REFACTOR TOKEN.sol#L283"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Transfer Event",
+            "description": "The burn function should generate a Transfer event for updating balances correctly.",
+            "severity": "info",
+            "location": "REFACTOR TOKEN.sol#L202"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No Check for Ether Amount",
+            "description": "There is no check for the amount of Ether provided, allowing purchasing 0 tokens.",
+            "severity": "info",
+            "location": "REFACTOR TOKEN.sol#L281"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Multiple Issues and Suggestions",
+            "description": "Multiple issues and suggestions, including using an outdated version of Zeppelin Solidity, incomplete implementation of token functions, and poor coding practices.",
+            "severity": "info",
+            "location": "Various locations"
+        }
+    ]
+}

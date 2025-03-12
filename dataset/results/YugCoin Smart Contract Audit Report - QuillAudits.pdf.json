@@ -1,0 +1,191 @@
+{
+    "path": "artifacts/YugCoin Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xF3FD85Ec9eAf17e469Ebad5D6027282ebc7a5eF2",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "YUG": "contracts/YugCoin Smart Contract Audit Report - QuillAudits/YUG"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Infinite Mint",
+            "description": "The owner of the contract can mint an infinite number of tokens because there's no cap to the supply or check for how much can be minted.",
+            "severity": "high",
+            "location": "YUG.sol, mint function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Issues",
+            "description": "All power and core functionality is centralized in the owner, which can lead to token loss, price manipulation, or denial of service if the owner account gets compromised.",
+            "severity": "high",
+            "location": "YUG.sol, Core Functionality"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "BNB Stuck in Contract",
+            "description": "A small amount of BNB is left in the contract after token swap (YUG to BNB) with no function to withdraw it.",
+            "severity": "medium",
+            "location": "YUG.sol, swapAndLiquify function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Fee Limits Not Coded",
+            "description": "The owner can set fees >98% which could siphon funds from transactions.",
+            "severity": "medium",
+            "location": "YUG.sol, setLiquidityFeePercent and setTaxFeePercent functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Check in tokenTransfer function",
+            "description": "!isExcluded[sender] && !isExcluded[recipient] performs the same function as the else clause.",
+            "severity": "low",
+            "location": "YUG.sol, tokenTransfer function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-561"
+                ]
+            },
+            "title": "Unused Code",
+            "description": "The deliver() function is defined but never implemented in the scope of the codebase.",
+            "severity": "low",
+            "location": "YUG.sol, deliver function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Inaccurate Error Message",
+            "description": "Inaccurate error messages in includeInReward and _mint functions.",
+            "severity": "info",
+            "location": "YUG.sol, includeInReward and _mint functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked Pragma",
+            "description": "The solidity pragma version is unlocked which can reduce security with future releases.",
+            "severity": "low",
+            "location": "YUG.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Static Variables Can Be Constant",
+            "description": "Private variables (name, symbol, and decimals) can save gas by being declared as constants.",
+            "severity": "info",
+            "location": "YUG.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unhandled Return Values",
+            "description": "The return values from the addLiquidityETH function call are not properly handled.",
+            "severity": "low",
+            "location": "YUG.sol, addLiquidityETH function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Naming Convention",
+            "description": "Inconsistencies in naming conventions between Ethereum and Binance Smart Chain environments.",
+            "severity": "info",
+            "location": "YUG.sol"
+        }
+    ]
+}

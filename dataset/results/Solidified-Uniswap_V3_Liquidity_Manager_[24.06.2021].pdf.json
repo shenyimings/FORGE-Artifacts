@@ -1,0 +1,194 @@
+{
+    "path": "artifacts/Solidified-Uniswap_V3_Liquidity_Manager_[24.06.2021].pdf",
+    "project_info": {
+        "url": "https://github.com/reflexer-labs/geb-uni-v3-manager",
+        "commit_id": "5d15f33bed17e7b6606de940e87c00f7b61ec0b1",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "geb-uni-v3-manager": "contracts/Solidified-Uniswap_V3_Liquidity_Manager_[24/geb-uni-v3-manager"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "unwrapWETH9() Drain",
+            "description": "Anyone can call function unwrapWETH9(), potentially draining the entire contract WETH balance",
+            "severity": "critical",
+            "location": "PeripheryPayments.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "removeAuthorization() Self Deauthorization",
+            "description": "Function does not check for self deauthorization, leading to potential stuck contract",
+            "severity": "low",
+            "location": "GebUniswapV3ManagerBase.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "modifyParameters() Revert Issue",
+            "description": "Function does not revert on invalid parameter, emitting ModifyParameters event without modification",
+            "severity": "low",
+            "location": "GebUniswapV3ManagerBase.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Multiple Castings Overflow/Underflow",
+            "description": "Multiple castings between different integers sizes without result check, leading to potential over/under flows",
+            "severity": "low",
+            "location": "GebUniswapV3ManagerBase.sol, GebUniswapV3LiquidityManager.sol, GebUniswapV3TwoTrancheManager.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Value Check",
+            "description": "Redundant value check for delay_ in constructor",
+            "severity": "info",
+            "location": "GebUniswapV3LiquidityManager.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "authorizedAccounts Mapping Type",
+            "description": "authorizedAccounts mapping uses uint256 instead of bool",
+            "severity": "info",
+            "location": "GebUniswapV3ManagerBase.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Documentation Mismatch",
+            "description": "Function _getTokenAmountsFromLiquidity() documentation mismatch, stating it as a view function when it's state modifying",
+            "severity": "info",
+            "location": "GebUniswapV3ManagerBase.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "ERC20 Import Missing",
+            "description": "Contract does not explicitly import ERC20",
+            "severity": "info",
+            "location": "GebUniswapV3ManagerBase.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Spelling Mistakes",
+            "description": "Multiple spelling mistakes exist in both code and comments",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1061"
+                ]
+            },
+            "title": "Magic Numbers Usage",
+            "description": "Consider using named constants instead of magic numbers in getTargetTick()",
+            "severity": "info",
+            "location": "GebUniswapV3ManagerBase.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Simulation Fragility",
+            "description": "Simulation functionality is fragile, unable to distinguish between reverts and genuine returns",
+            "severity": "info",
+            "location": "PoolViewer.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading Function Names",
+            "description": "State modifying functions have misleading names, such as getMaxLiquidity() sounding like a view function",
+            "severity": "info",
+            "location": "Various contracts"
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Pikaster-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/pikasterdev/pikaster/tree/a6088fe",
+        "commit_id": "a6088fe",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "pikaster": "contracts/PeckShield-Audit-Report-Pikaster-v1/pikaster"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "Incorrect Logic Of ERC721Template::remint()",
+            "description": "The remint() function does not burn the existing token before minting a new one, which can cause reversion if the tokenId was not burned before by the MINTER_ROLE.",
+            "severity": "low",
+            "location": "ERC721Template contract, remint() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Safe-Version Replacement With safeTransfer()",
+            "description": "The transfer() function does not have a return value, which may cause the call to revert.",
+            "severity": "low",
+            "location": "ERC20Template, ERC721Template contracts, transfer() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue Of Admin Keys",
+            "description": "Privileged DEFAULT_ADMIN_ROLE/MINTER/BURNER accounts may pose a counter-party risk to contract users.",
+            "severity": "medium",
+            "location": "ERC20Template, ERC721Template contracts, privileged functions (e.g., mint(), pause(), blacklistAccount())"
+        }
+    ]
+}

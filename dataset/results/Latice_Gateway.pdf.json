@@ -1,0 +1,125 @@
+{
+    "path": "artifacts/Latice_Gateway.pdf",
+    "project_info": {
+        "url": "https://github.com/StardustCollective/lattice-fixed-reward-staking-contract",
+        "commit_id": "afac65c439b5427b2db8ba74714ca236025ae296",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "lattice-fixed-reward-staking-contract": "contracts/Latice_Gateway/lattice-fixed-reward-staking-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ]
+            },
+            "title": "C01. Data Inconsistency",
+            "description": "Owner can withdraw reward funds, causing unfair rewards for users.",
+            "severity": "critical",
+            "location": "LatticeFixedRewardStaking.sol, withdrawProgramRewards() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "C02. Invalid Calculations",
+            "description": "First user of a pool may not get any rewards due to incorrect calculation.",
+            "severity": "critical",
+            "location": "LatticeFixedRewardStaking.sol, _stake() and _accrueRewardsPeriod functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "H01. Highly Permissive Admin Access - Undocumented Behavior",
+            "description": "Stewards have permissive access to withdraw rewards, claim stuck ERC20 tokens, and lost rewards without notifying users.",
+            "severity": "high",
+            "location": "TeLatticeFixedRewardStakingstToken.sol, withdrawProgramRewards(), withdrawProgramLostRewards(), and reoverErc20() functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "M01. Inconsistent Data - Unused Return",
+            "description": "Ignored return values in _stake() and _withdraw() functions can lead to wrong assumptions.",
+            "severity": "medium",
+            "location": "LatticeFixedRewardStaking.sol, _stake() and _withdraw() functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "M02: Best Practice Violation - Checks-Effects-Interactions Pattern",
+            "description": "The pattern is violated, leading to reentrancies, race conditions, and denial of service vulnerabilities.",
+            "severity": "medium",
+            "location": "./contracts/LatticeFixedRewardStaking.sol: depositProgramRewards()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L01: Floating Pragma",
+            "description": "Locking the pragma helps ensure that contracts do not accidentally get deployed using an out-dated compiler version.",
+            "severity": "low",
+            "location": "./contracts/LatticeFixedRewardStaking.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "I03: Redundant Multiplication",
+            "description": "Redundant operations decrease code readability.",
+            "severity": "info",
+            "location": "./contracts/LatticeFixedRewardStaking.sol (line 91)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "I05: Variables With Complex Names",
+            "description": "Renaming variables can improve code readability.",
+            "severity": "info",
+            "location": "./contracts/LatticeFixedRewardStaking.sol"
+        }
+    ]
+}

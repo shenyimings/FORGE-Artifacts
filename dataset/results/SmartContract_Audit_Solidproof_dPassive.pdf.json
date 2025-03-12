@@ -1,0 +1,92 @@
+{
+    "path": "artifacts/SmartContract_Audit_Solidproof_dPassive.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x59973dc5a69ae1ecc8561b7b1ea6189769f7578a",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.10+commit.00c0fcaf"
+        ],
+        "project_path": {
+            "DPassive": "contracts/SmartContract_Audit_Solidproof_dPassive/DPassive"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Dangerous usage of `block.timestamp`",
+            "description": "DPassive.delegateBySig() uses timestamp for comparisons",
+            "severity": "low",
+            "location": "Main contract, lines 167-176"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Dangerous strict equalities",
+            "description": "nCheckpoints > 0 && checkpoints[delegatee][nCheckpoints - 1].fromBlock == blockNumber",
+            "severity": "low",
+            "location": "Main contract, lines 268-279"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Is not in UPPER_CASE_WITH_UNDERSCORES",
+            "description": "DPassive.totalSupply",
+            "severity": "info",
+            "location": "Main contract, line 21"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1177"
+                ],
+                "3": [
+                    "CWE-242"
+                ]
+            },
+            "title": "Uses inline ASM",
+            "description": "assembly { chainId := chainid() }",
+            "severity": "info",
+            "location": "Main contract, lines 302-306"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Uses literals with too many digits",
+            "description": "uint public constant totalSupply = 300000000e18",
+            "severity": "info",
+            "location": "Main contract, line 21"
+        }
+    ]
+}

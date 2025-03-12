@@ -1,0 +1,284 @@
+{
+    "path": "artifacts/Bond Appetit.md",
+    "project_info": {
+        "url": "https://github.com/bondappetit/bondappetit-protocol",
+        "commit_id": "c131f5dacf02ff8b6008c4da7788b71d86b26427",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bondappetit-protocol": "contracts/Bond Appetit/bondappetit-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Potential `safeApprove` blocking",
+            "description": "`safeApprove` can block next calls if Uniswap doesn't use full provided allowance.",
+            "severity": "high",
+            "location": "Investment.sol (L182), Market.sol (L248), Buyback.sol (L125), ProfitSplitter.sol (L195, L204), UniswapMarketMaker.sol (multiple lines)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrongly calculated ETH amount to transfer",
+            "description": "Contract tries to get as much ETH as closer to `amount` instead of using correct calculation.",
+            "severity": "high",
+            "location": "ProfitSplitter.sol (L198-205)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential re-entrancy problem",
+            "description": "Transfering incoming tokens to recipient can be re-entered in case of callbacks from `incoming` contract.",
+            "severity": "high",
+            "location": "ProfitSplitter.sol (L227)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Blocked LP tokens on contract",
+            "description": "Changing `incoming` token without removing liquidity can block LP tokens.",
+            "severity": "high",
+            "location": "UniswapMarketMaker.sol (L85)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missed depositary check",
+            "description": "Missing depositary check can lead to collateralization disbalance.",
+            "severity": "high",
+            "location": "CollateralMarket.sol (L120)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Invalid depositary add/remove logic",
+            "description": "Depositary index check allows adding already added depositaries or removing non-existent ones.",
+            "severity": "high",
+            "location": "AgregateDepositaryBalanceView.sol (L49, L62)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Wrongly used `safeApprove`",
+            "description": "`safeApprove` method can fail if account has remaining allowed tokens.",
+            "severity": "high",
+            "location": "Treasury.sol (L51)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Budget payment blocking",
+            "description": "Single recipient with payable fallback method can block whole `pay` function execution.",
+            "severity": "high",
+            "location": "Budget.sol (L109)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Potential integer overflow",
+            "description": "Integer overflow in case if `cumulative.decimals() > 18`.",
+            "severity": "info",
+            "location": "Investment.sol, L147"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-369"
+                ]
+            },
+            "title": "Potential div by zero error",
+            "description": "Div by zero if `cumulativePrice` is zero.",
+            "severity": "info",
+            "location": "Market.sol, L189"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-237"
+                ],
+                "4": [
+                    "CWE-240"
+                ]
+            },
+            "title": "Vesting account duplication",
+            "description": "Duplicated accounts in input `accounts` array.",
+            "severity": "info",
+            "location": "VestingSplitter.sol, L92"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unchecked vesting contract address",
+            "description": "No sanity checks for vesting contract address.",
+            "severity": "info",
+            "location": "VestingSplitter.sol, L111"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong reward calculation of balance < 100",
+            "description": "Calculation always returns zero if `balance < 100`.",
+            "severity": "info",
+            "location": "VestingSplitter.sol, L126"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missed zero share check",
+            "description": "Never checked that new share is more than zero.",
+            "severity": "info",
+            "location": "ProfitSplitter.sol, L139"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Potential custodial asset collateral incorrect signatures",
+            "description": "Absent signature correctness checks in Proof data structure.",
+            "severity": "info",
+            "location": "RealAssetDepositaryBalanceView.sol, L88"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Mixed `msg.sender` and `_msgSender()`",
+            "description": "Used directly `msg.sender` instead of `_msgSender()`.",
+            "severity": "info",
+            "location": "Staking.sol, L173; StableToken.sol, L12"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Too flexible configuration",
+            "description": "Contracts have too much implicit restrictions.",
+            "severity": "info",
+            "location": "CollateralMarket.sol, Issuer.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Potentially wrong-sized access control list",
+            "description": "Access list array being returned of a potentially wrong length.",
+            "severity": "info",
+            "location": "AccessControl.sol, L44"
+        }
+    ]
+}

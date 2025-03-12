@@ -1,0 +1,239 @@
+{
+    "path": "artifacts/Melodity Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/Do-inc/melodity-stacking",
+        "commit_id": "b37c965b7b0e4df69317a1eabc6fae7b31af7cea",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "melodity-stacking": "contracts/Melodity Smart Contract Audit Report - QuillAudits/melodity-stacking"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Governance token can be transferred without any whitelisted & blacklisted check.",
+            "description": "Missing an overridden transfer function which should have isWhitelisted and isBlacklisted modifier to check whether the recipient is allowed to receive the tokens or not.",
+            "severity": "high",
+            "location": "MelodityGovernance.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Funds would get locked for perpetuity during blind auctions.",
+            "description": "The reveal() function allows the user to reveal its bid and transfer the funds back to the user if the bid is fake, but as per human nature, it can’t hold 100% true that users may fail to call the reveal() method during the reveal duration, causing funds of the user get locked for perpetuity.",
+            "severity": "high",
+            "location": "contracts/Marketplace/BlindAuction.sol [#L107]"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reward pool gets exhausted quicklier and locks deposited funds for perpetuity.",
+            "description": "The amount that consists of principal & reward both while it gets subtracted from the poolInfo.rewardPool to reduce the reward pool instead of only subtracting the reward part of the withdrawal amount, leading to exhaustion of the rewardPool variable quicker than expected.",
+            "severity": "high",
+            "location": "contracts/Stacking/MelodityStacking.sol [#L381]"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Inefficient algorithm to refresh the receipt value that may make it uncallable because of high gas usage.",
+            "description": "The eraInfos is an unbounded array that would drain the block gas limit if the eraInfos length would get inappropriate, making this more function more gas consumable and more prone to gas exhaustion which cause a ripple effect and make deposit() and withdraw() function uncallable as well.",
+            "severity": "high",
+            "location": "contracts/Stacking/MelodityStacking.sol [#L477]"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect receiptValue calculation.",
+            "description": "Calculating the receiptValue for the current timestamp code has to parse those eras and calculate the respective receiptValue using the different eraInfos[eraIndex].rewardFactorPerEpoch, but it is not implemented correctly.",
+            "severity": "high",
+            "location": "contracts/Stacking/MelodityStacking.sol [#L543]"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ],
+                "3": [
+                    "CWE-674"
+                ]
+            },
+            "title": "Recursive nature of the refreshReceiptValue() function would make it gas exhaustive and make it uncallable.",
+            "description": "Theoretically, it is possible that now is in the very distant future and refreshReceiptValue() would not be able to find the valid era that would trigger the _triggerErasInfoRefresh(), theoretically causing gas exhaustion and inability to call.",
+            "severity": "high",
+            "location": "contracts/Stacking/MelodityStacking.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Centralization risk in governance model.",
+            "description": "Governance vote quorum fraction is set to 4 which means 4 % quorum gets set that leads to centralization risk as 4 % supply can easily be owned by the owner of the project or team members, making it highly centralized.",
+            "severity": "medium",
+            "location": "contracts/DAO/MeoldityDAO.sol [#L20]"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inappropriate way of deduction of the withdrawFee.",
+            "description": "Fee would only be deducted when staker tries to withdraw the staking amount before the lastAction + feeInfo.withdrawFeePeriod while lastAction gets always re-written when user deposits the funds init, making users hesitate to re-enter into the staking pool.",
+            "severity": "medium",
+            "location": "contracts/Stacking/MelodityStacking.sol [#L390]"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Exhaustion status is not updating even if the reward pool amount gets increased.",
+            "description": "Reward pool value gets increased using the increaseRewardPool() function, but it is not updating the poolInfo.exhausting variable even if the value of the reward pool value is higher than 1 Million, giving a false indication that reward pool value is less than 1 Million and allowing owner to call dimissionWithdraw().",
+            "severity": "medium",
+            "location": "contracts/Stacking/MelodityStacking.sol [#L639]"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Minting of stackPanda allow to send NFT to non- ERC 721 Receiver.",
+            "description": "mint() function is using the _mint() function internally instead of using the safeMint() that checks whether the receiver is IERC721Receiver compliant or not, allowing to transfer the NFT to the address that is not compliant with ERC721Receiver.",
+            "severity": "medium",
+            "location": "contracts/StackingPanda.sol [#L75]"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect week calculation in number of blocks for different EVM based chains.",
+            "description": "Voting period is set to 1 week in the block number terms, but block duration varies for different EVM based blockchain, so if the same contract gets deployed on the other chain like Fantom or Ethereum then voting period length would be less than or greater than 1 week as per the chain selected.",
+            "severity": "low",
+            "location": "contracts/DAO/MeoldityDAO.sol [#L16]"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ],
+                "3": [
+                    "CWE-595"
+                ]
+            },
+            "title": "Missing event misleads the offchain accounting.",
+            "description": "All funds are sent to the beneficiary when the beneficiary and royaltyReceiver are same, but there is no emission of RoyaltyPaid event as it is happening at [#L160] or [#L201], even if both the addresses are the same it doesn’t mean the royalty did not get paid by the marketplace strategy.",
+            "severity": "low",
+            "location": "contracts/Marketplace/Auction.sol[#L151] & contracts/Marketplace/BlindAuction.sol[#L201]"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Inefficient use of rotate() function in the entire codebase.",
+            "description": "prng.rotate() gets used in almost every function of the contracts, The rationale seems to update the seed value to make it unpredictable as per the operations performed but it is not an efficient way to do it as calculating hash is an expensive operation that gets performed during the rotate() call and the output never get used in the parent function.",
+            "severity": "low",
+            "location": "entire codebase"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect interface id of ERC20 metadata.",
+            "description": "contracts/Stacking/MelodityStacking.sol [#L19] has incorrect interface id for the ERC20 metadata, it should be 0xa219a025 as per the type(IERC20Metadata).interfaceId but it is assigned to 0x942e8b22.",
+            "severity": "low",
+            "location": "contracts/Stacking/MelodityStacking.sol [#L19]"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Inefficient storage usage in reading maximum and minimum Fee values.",
+            "description": "FeeInfo struct stores maxFeePercentage & minFeePercentage but these two values never get changed during the entire lifecycle of the MelodityStacking contract, because of the nature of storage,reading those values costs gas that can be saved by marking those variables constant or immutable.",
+            "severity": "low",
+            "location": "contracts/Stacking/MelodityStacking.sol [#L167][#L168]"
+        }
+    ]
+}

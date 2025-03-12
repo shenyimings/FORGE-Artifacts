@@ -1,0 +1,125 @@
+{
+    "path": "artifacts/paxos.pdf",
+    "project_info": {
+        "url": "https://github.com/paxosglobal/pax-contracts/tree/f85b4a835b52de844be8f57e3bab40d65768d451",
+        "commit_id": "f85b4a835b52de844be8f57e3bab40d65768d451",
+        "address": "0x00a329c0648769a73afac7f9381e08fb43dbea70",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "pax-contracts": "contracts/paxos/pax-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "lawEnforcementRole can freeze the supplyController",
+            "description": "The LawEnforcementRole is able to freeze the supplyController balance.",
+            "severity": "info",
+            "location": "PAXImplementation.sol, function wipeFrozenAddress"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "lawEnforcementRole can decrease supply",
+            "description": "The lawEnforcementRole is able to control contractions through freeze functionality.",
+            "severity": "info",
+            "location": "PAXImplementation.sol, function wipeFrozenAddress"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "lawEnforcementRole operations are highly visible",
+            "description": "Knowledge of the new lawEnforcementRole’s presence could lead a malicious user to preemptively liquidate PAX.",
+            "severity": "info",
+            "location": "PAXImplementation.sol, function setLawEnforcementRole"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "supplyController address changes result in orphaned balances",
+            "description": "The setSupplyController function assigns a new supply controller without transferring the balance of the previous supply controller.",
+            "severity": "low",
+            "location": "PAXImplementation.sol, function setSupplyController"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Users can send PAX to supplyController",
+            "description": "There is no check to ensure a user cannot send PAX to the supplyController.",
+            "severity": "info",
+            "location": "PAXImplementation.sol, function transfer"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1118"
+                ]
+            },
+            "title": "Insufficient Logging",
+            "description": "The contract uses require for halting a transaction in certain instances, such as an authentication failure, but does not emit an event, making it difficult to reconstruct security-relevant logging information during a regulatory audit or to detect when an intrusion has occurred.",
+            "severity": "low",
+            "location": "PaxImplementation.sol, function wipeFrozenAddress"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "ERC20 approve race condition",
+            "description": "Unavoidable race condition in the ERC20 token standard, allows malicious actors to steal funds",
+            "severity": "high",
+            "location": "Paxos ERC20 token implementation"
+        }
+    ]
+}

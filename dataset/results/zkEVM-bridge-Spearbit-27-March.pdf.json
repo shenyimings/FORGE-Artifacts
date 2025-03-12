@@ -1,0 +1,422 @@
+{
+    "path": "artifacts/zkEVM-bridge-Spearbit-27-March.pdf",
+    "project_info": {
+        "url": "https://github.com/0xPolygonHermez/zkevm-contracts",
+        "commit_id": "5de59e18690e877a10e3f1ed679969166313f899",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "zkevm-contracts": "contracts/zkEVM-bridge-Spearbit-27-March/zkevm-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Funds can be sent to a non-existing destination",
+            "description": "The function bridgeAsset() and bridgeMessage() do not check if the destination network exists, leading to potential fund loss.",
+            "severity": "medium",
+            "location": "PolygonZkEVMBridge.sol#L129-L257"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Fee on transfer tokens",
+            "description": "The bridge contract does not work properly with fee-on-transfer tokens, potentially causing DOS for other users using the same token.",
+            "severity": "medium",
+            "location": "PolygonZkEVMBridge.sol#L171"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Function consolidatePendingState() can be executed during emergency state",
+            "description": "The function consolidatePendingState() can be executed by everyone even when the contract is in an emergency state, potentially interfering with cleaning up the emergency.",
+            "severity": "medium",
+            "location": "PolygonZkEVM.sol#L783-L793"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Variable named incorrectly",
+            "description": "The variable veryBatchTimeTarget was meant to be named verifyBatchTimeTarget as evidenced from the comment below.",
+            "severity": "info",
+            "location": "PolygonZkEVM.sol#L854"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Add additional comments to function forceBatch()",
+            "description": "The function forceBatch() contains a comment about synch attacks, but it's not immediately clear what is meant by that.",
+            "severity": "info",
+            "location": "PolygonZkEVM.sol#L920-L966"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1254"
+                ]
+            },
+            "title": "Check against MAX_VERIFY_BATCHES",
+            "description": "In several functions a comparison is made with < MAX_VERIFY_BATCHES, which should probably be <= MAX_VERIFY_BATCHES.",
+            "severity": "info",
+            "location": "PolygonZkEVM.sol#L409-L533, PolygonZkEVM.sol#L545-L611, PolygonZkEVM.sol#L972-L1054"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Prepare for multiple aggregators/sequencers to improve availability",
+            "description": "As long as there is one (trusted) sequencer and one (trusted) aggregator, the availability risks are relatively high.",
+            "severity": "info",
+            "location": "PolygonZkEVM.sol#L377-L391"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Temporary Fund freeze on using Multiple Rollups",
+            "description": "Claiming of Assets will freeze temporarily if multiple rollups are involved.",
+            "severity": "info",
+            "location": "PolygonZkEVMBridge.sol#L157-L165"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Allowance is not required to burn wrapped tokens",
+            "description": "The burn of tokens of the deployed TokenWrapped doesn’t use up any allowance, because the Bridge has the right to burn the wrapped token.",
+            "severity": "info",
+            "location": "TokenWrapped.sol#L62-L64"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Messages are lost when delivered to EOA by claimMessage()",
+            "description": "The function claimMessage() calls the function onMessageReceived() via a low-level call. When the receiving address doesn’t contain a contract, the low-level call still succeeds and delivers the ETH.",
+            "severity": "info",
+            "location": "PolygonZkEVMBridge.sol#L388-L436"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Replace assembly of _getSelector() with Solidity",
+            "description": "The function _getSelector() gets the first four bytes of a series of bytes and uses assembly, which can also be implemented in Solidity.",
+            "severity": "info",
+            "location": "PolygonZkEVMBridge.sol#L611-L736"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Improvement suggestions for Verifier.sol",
+            "description": "There are some details that can be improved on this contract.",
+            "severity": "info",
+            "location": "Verifier.sol#L14, IVerifierRollup.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Remove unused import in PolygonZkEVMGlobalExitRootL2",
+            "description": "The contract PolygonZkEVMGlobalExitRootL2 imports SafeERC20.sol, but it isn’t used.",
+            "severity": "info",
+            "location": "PolygonZkEVMGlobalExitRootL2.sol#L5-L11"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Common interface for PolygonZkEVMGlobalExitRoot and PolygonZkEVMGlobalExitRootL2",
+            "description": "The contracts PolygonZkEVMGlobalExitRoot and PolygonZkEVMGlobalExitRootL2 implement similar interfaces, but don’t inherit from the same file.",
+            "severity": "info",
+            "location": "PolygonZkEVMGlobalExitRoot.sol#L5, PolygonZkEVMGlobalExitRootL2.sol#L11"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Abstract the way to calculate GlobalExitRoot",
+            "description": "The algorithm to combine the mainnetExitRoot and rollupExitRoot is implemented in several locations.",
+            "severity": "info",
+            "location": "PolygonZkEVMGlobalExitRoot.sol#L54-L85, PolygonZkEVMBridge.sol#L520-L581"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "ETH honeypot on L2",
+            "description": "The initial ETH allocation to the Bridge contract on L2 is rather large.",
+            "severity": "info",
+            "location": "genesis-gen.json#L9"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1254"
+                ]
+            },
+            "title": "Off by one error in MAX_TRANSACTIONS_BYTE_LENGTH constant",
+            "description": "When comparing against MAX_TRANSACTIONS_BYTE_LENGTH, the valid range should be <= instead of <",
+            "severity": "info",
+            "location": "PolygonZkEVM.sol#L933, PolygonZkEVM.sol#L471"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "trustedAggregatorTimeout value may impact batchFees",
+            "description": "If trustedAggregatorTimeout and veryBatchTimeTarget are valued nearby, all batches verified by 3rd party will be above target (totalBatchesAboveTarget) and this would impact batch fees.",
+            "severity": "info",
+            "location": "PolygonZkEVM.sol#L855-L858, PolygonZkEVM.sol#L557-L562"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Largest allowed batch fee multiplier is 1023 instead of 1024",
+            "description": "The largest allowed batch fee multiplier is 1023 instead of 1024.",
+            "severity": "info",
+            "location": "PolygonZkEVM.sol#L1155, PolygonZkEVM.sol#L133"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-610"
+                ]
+            },
+            "title": "Deposit token associated Risk Awareness",
+            "description": "The deposited tokens locked in L1 could be at risk due to external conditions.",
+            "severity": "info",
+            "location": "PolygonZkEVMBridge.sol#L129"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Fees might get stuck when Aggregator is unable to verify",
+            "description": "The collected fees from Sequencer will be stuck in the contract if Aggregator is unable to verify the batch.",
+            "severity": "info",
+            "location": "PolygonZkEVM.sol#L523"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Risk of transactions not yet in Consolidated state on L2",
+            "description": "There is a relatively long period for batches and thus transactions are to be between Trusted state and Consolidated state.",
+            "severity": "info",
+            "location": "PolygonZkEVMBridge.sol#L540-L548"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ]
+            },
+            "title": "Delay of bridging from L2 to L1",
+            "description": "The bridge uses the Consolidated state while bridging from L2 to L1 and the user interface shows \"Waiting for validity proof. It can take between 15 min and 1 hour.\"",
+            "severity": "info",
+            "location": "PolygonZkEVMBridge.sol#L540-L548"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing Natspec documentation",
+            "description": "Some NatSpec comments are either missing or are incomplete.",
+            "severity": "info",
+            "location": "PolygonZkEVM.sol#L672, PolygonZkEVM.sol#L98"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "_minDelay could be 0 without emergency",
+            "description": "min delay can be set to 0 even in non-emergency mode via the updateDelay function.",
+            "severity": "info",
+            "location": "PolygonZkEVMTimelock.sol#L40-L46"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Informational - Enforce parameters limits in initialize() of PolygonZkEVM",
+            "description": "The function initialize() of PolygonZkEVM doesn’t enforce limits on trustedAggregatorTime-out and pendingStateTimeout, whereas the update functions setTrustedAggregatorTimeout() and setPendingStateTimeout().",
+            "severity": "info",
+            "location": "PolygonZkEVM.sol#L337-L370, PolygonZkEVM.sol#L1110-L1149"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Junk code in etherscan verification",
+            "description": "Some contracts have extra junk code in the etherscan verification. This is not a security risk, but could be a reputation risk.",
+            "severity": "n/a",
+            "location": "Multiple contracts (PolygonZkEVMBridge proxy, ProxyAdmin)"
+        }
+    ]
+}

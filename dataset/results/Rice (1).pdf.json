@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/Rice (1).pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xc4eeff5aab678c3ff32362d80946a3f5de4a1861",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "RiceToken": "contracts/Rice (1)/RiceToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "add, set, and updateEmissionRate functions can invoke massUpdatePools function, which can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "massUpdatePools function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "add function issue",
+            "description": "If an LP token is added to the contract twice using the add function, then the total amount of reward in updatePool will be incorrect.",
+            "severity": "low",
+            "location": "add function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ],
+                "4": [
+                    "CWE-683"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "Tokens are sent to the dead address instead of being burned in the token contract.",
+            "severity": "low",
+            "location": "_transfer functions and burn function in RiceToken contract"
+        }
+    ]
+}

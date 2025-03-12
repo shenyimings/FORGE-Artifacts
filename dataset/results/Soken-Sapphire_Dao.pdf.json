@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/Soken-Sapphire_Dao.pdf",
+    "project_info": {
+        "url": "https://github.com/sokenteam/smart_contract_audits",
+        "commit_id": "n/a",
+        "address": "0x039639Ed22A7654f74C1B0017C9d0DF85C26B63B",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.5+commit.eb77ed08"
+        ],
+        "project_path": {
+            "SapToken": "contracts/Soken-Sapphire_Dao/SapToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Inexistent Zero Address Check",
+            "description": "The setVault function of VaultOwned does not properly sanitize the input vault_ argument, allowing misconfiguration.",
+            "severity": "medium",
+            "location": "VaultOwned contract, setVault function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-345"
+                ],
+                "3": [
+                    "CWE-353"
+                ]
+            },
+            "title": "Cross-Chain Replay Attack",
+            "description": "The DOMAIN_SEPARATOR of the Sapphire Token (SAP) contract is not compliant with the EIP-712 recommended implementation.",
+            "severity": "medium",
+            "location": "SAP contract, DOMAIN_SEPARATOR calculation"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-283"
+                ]
+            },
+            "title": "Pull-Over-Push Pattern",
+            "description": "The transferOwnership function overwrites the previously set _owner without validating that the new owner is able to actuate transactions on the blockchain.",
+            "severity": "medium",
+            "location": "transferOwnership function"
+        }
+    ]
+}

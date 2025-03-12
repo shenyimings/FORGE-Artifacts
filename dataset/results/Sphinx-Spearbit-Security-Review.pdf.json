@@ -1,0 +1,377 @@
+{
+    "path": "artifacts/Sphinx-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/sphinx-labs/sphinx",
+        "commit_id": "fdf4670089d026ad0bfd20e0ca2b46a02ee5a332",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "sphinx": "contracts/Sphinx-Spearbit-Security-Review/sphinx"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Unchecked safe wallet integrity",
+            "description": "When SphinxModule is initialised the integrity of the used safe wallet is not checked.",
+            "severity": "low",
+            "location": "SphinxModule initialisation"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing networkDeploymentData.txs validation",
+            "description": "Check that networkDeploymentData.txs conforms to SphinxTransaction.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked 3rd merkle tree invariant",
+            "description": "3rd merkle tree invariant isn't checked when generating merkle tree.",
+            "severity": "low",
+            "location": "Merkle tree generation"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Missing execute function return data handling",
+            "description": "The execute function does not handle the return data.",
+            "severity": "low",
+            "location": "Execute function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing EIP-712 domain separator version field",
+            "description": "The EIP-712 domain separator is missing the version field.",
+            "severity": "low",
+            "location": "EIP-712 domain separator"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent OpenZeppelin library sorting",
+            "description": "OpenZeppelin library leaves sorting differs from 9th merkle tree invariant.",
+            "severity": "low",
+            "location": "Merkle tree sorting"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary reads of known variables",
+            "description": "Removing unnecessary reads of known variables will save gas.",
+            "severity": "info",
+            "location": "SphinxModule.sol#L183, SphinxModule.sol#L267"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ],
+                "3": [
+                    "CWE-1060"
+                ]
+            },
+            "title": "Inefficient caching of accessed variables",
+            "description": "Caching variables accessed multiple times will save gas.",
+            "severity": "info",
+            "location": "SphinxModule.sol#L273-L403, SphinxModule.sol#L306-L312, SphinxModule.sol#L285-L399"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Inefficient use of executor variable",
+            "description": "msg.sender is cheaper gas-wise and provides more clarity than the executor variable.",
+            "severity": "info",
+            "location": "SphinxModule.sol#L140, SphinxModule.sol#L150, SphinxModule.sol#L234, SphinxModule.sol#L242, SphinxModule.sol#L253"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "SphinxMerkleRootApproved event gas optimization",
+            "description": "SphinxMerkleRootApproved event can avoid reading from the state.",
+            "severity": "info",
+            "location": "SphinxModule.sol#L136-L143"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-768"
+                ]
+            },
+            "title": "Revert-optimized require statements ordering",
+            "description": "Reordering require statements can save gas in case of revert.",
+            "severity": "info",
+            "location": "SphinxModule.sol#L92-L94, SphinxModule.sol#L201-L202"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "MerkleRootNonce increment optimization",
+            "description": "merkleRootNonce increment can be gas optimized and avoid a SLOAD.",
+            "severity": "info",
+            "location": "SphinxModule.sol#L153, SphinxModule.sol#L256"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Custom errors for gas savings",
+            "description": "Custom errors can be used for gas savings.",
+            "severity": "info",
+            "location": "Various locations in ManagedService.sol and SphinxModule.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate _safeProxy zero address check",
+            "description": "Duplicate _safeProxy zero address check.",
+            "severity": "info",
+            "location": "SphinxModuleProxyFactory.sol#L55"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant variable setters",
+            "description": "Redundant variable setters.",
+            "severity": "info",
+            "location": "SphinxModule.sol#L167, SphinxModule.sol#L380"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Inconsistent OpenZeppelin's StandardMerkleTree usage",
+            "description": "OpenZeppelin's StandardMerkleTree allows creating trees with leaves that carry the same information.",
+            "severity": "info",
+            "location": "merkle-tree.ts#L289"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Mixed uint256 and uint usage",
+            "description": "Mixed usage of uint256 and uint.",
+            "severity": "info",
+            "location": "me kle-tree.ts#L163, mekle-tree.ts#L88"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant explicit boolean comparisons",
+            "description": "Redundant explicit boolean comparisons.",
+            "severity": "info",
+            "location": "merkle-tree.ts#L153, merkle-tree.ts#L157"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing exec function documentation",
+            "description": "Consider adding more documentation to exec function and its arbitrary external call.",
+            "severity": "info",
+            "location": "ManagedService.sol#L57"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent role usage",
+            "description": "Use the already defined DEFAULT_ADMIN_ROLE rather than bytes32(0) for consistency.",
+            "severity": "info",
+            "location": "ManagedService.sol#L34"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary castings",
+            "description": "Unnecessary castings can be removed for consistency and clarity.",
+            "severity": "info",
+            "location": "SphinxModuleProxyFactory.sol#L95, SphinxModuleProxyFactory.sol#L57"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Limited safe owners knowledge",
+            "description": "Safe owners only sign a typed data hash for the root of a merkle tree and might not know the leaf information.",
+            "severity": "info",
+            "location": "SphinxModule.sol#L47, SphinxModule.sol#L178-L183, SphinxModule.sol#L262-L267"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Typographical issues",
+            "description": "Typographical issues.",
+            "severity": "info",
+            "location": "SphinxModule.sol#L125, SphinxModule.sol#L134"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent pragma version usage",
+            "description": "Open pragma version is inconsistent and can lead to unexpected behaviors.",
+            "severity": "info",
+            "location": "SphinxModuleProxyFactory.sol#L2, ManagedService.sol#L2, SphinxModule.sol#L2"
+        }
+    ]
+}

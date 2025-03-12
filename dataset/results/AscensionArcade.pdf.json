@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/AscensionArcade.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x2180F5cC1ddf117640963AE91868948bd3EF6838",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.5+commit.a4f2e591"
+        ],
+        "project_path": {
+            "AscensionArcade": "contracts/AscensionArcade/AscensionArcade"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Function includeInReward() uses a loop to find and remove addresses from the _excluded list, which can be aborted with OUT_OF_GAS exception if there will be a long excluded addresses list.",
+            "severity": "low",
+            "location": "includeInReward() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Function _getCurrentSupply also uses a loop for evaluating total supply, which can be aborted with OUT_OF_GAS exception if there will be a long excluded addresses list.",
+            "severity": "low",
+            "location": "_getCurrentSupply function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Burn event issue",
+            "description": "The function _burn and burnTokens emits transferring burn amount from address to burn to contract address, which is wrong.",
+            "severity": "low",
+            "location": "_burn and burnTokens functions"
+        }
+    ]
+}

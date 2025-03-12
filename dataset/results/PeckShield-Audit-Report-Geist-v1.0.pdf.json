@@ -1,0 +1,122 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Geist-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/geist-finance/geist-protocol/tree/8702175",
+        "commit_id": "8702175",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "geist-protocol": "contracts/PeckShield-Audit-Report-Geist-v1/geist-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Proper answer Type in ChainlinkResponse",
+            "description": "Type inconsistency in the answer member field of the ChainlinkResponse data structure.",
+            "severity": "low",
+            "location": "ChainlinkResponse function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent Use Of IncentivesController::handleAction()",
+            "description": "Inconsistency in using pre-update or post-update balance in the invocation of IncentivesController::handleAction().",
+            "severity": "low",
+            "location": "StableDebtToken::_mint()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "ERC20 Compliance Of GeistToken",
+            "description": "Inconsistent type for decimals state (uint256 instead of uint8)",
+            "severity": "info",
+            "location": "GeistToken contract, decimals state"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Fork-Resistant Domain Separator in AToken",
+            "description": "The DOMAIN_SEPARATOR is not recalculated inside the permit() function to prevent cross-chain replay attacks.",
+            "severity": "medium",
+            "location": "AToken contract, permit() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-115"
+                ]
+            },
+            "title": "Staking Incompatibility With Deflationary Tokens",
+            "description": "Inconsistencies in asset-transferring routines with deflationary tokens.",
+            "severity": "n/a",
+            "location": "MasterChef contract, deposit() and withdraw() functions"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged owner account could be compromised, allowing unauthorized control over the system.",
+            "severity": "medium",
+            "location": "Multiple contracts, including LendingPoolAddressesProvider"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Violation of Checks-Effects-Interactions Principle",
+            "description": "The emergencyWithdraw() function in MasterChef contract violates this principle, making it vulnerable to reentrancy attacks.",
+            "severity": "low",
+            "location": "MasterChef contract, emergencyWithdraw() function"
+        }
+    ]
+}

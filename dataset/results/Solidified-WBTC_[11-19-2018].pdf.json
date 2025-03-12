@@ -1,0 +1,104 @@
+{
+    "path": "artifacts/Solidified-WBTC_[11-19-2018].pdf",
+    "project_info": {
+        "url": "https://github.com/WrappedBTC/bitcoin-token-smart-contracts/tree/audit2",
+        "commit_id": "099ac7be60205d04a342773ab4ee0a5d58dd1f3b",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bitcoin-token-smart-contracts": "contracts/Solidified-WBTC_[11-19-2018]/bitcoin-token-smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "RenounceOwnership is not in accordance with specifications",
+            "description": "The function renounceOwnership could render the token frozen for minting/burning, and the controller contract no longer upgradeable.",
+            "severity": "n/a",
+            "location": "All contracts that inherit from OpenZeppelin's Ownable.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Upgrading logic for Members.sol and Factory.sol may lead to inconsistent state",
+            "description": "The upgrading logic does not allow for re-use of state/data, leading to inconsistencies between states.",
+            "severity": "n/a",
+            "location": "Members.sol, Factory.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Merchant can generate a large amount of small burn requests",
+            "description": "Merchants could attack the custodian by dividing burn requests into smaller transactions, increasing operational cost (BTC fees).",
+            "severity": "n/a",
+            "location": "Burn request functionality"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-758"
+                ],
+                "3": [
+                    "CWE-1102"
+                ]
+            },
+            "title": "Usage of strings for storing BTC transaction hashes and addresses is inefficient",
+            "description": "Operations using Strings in Solidity consume more gas than fixed sized types.",
+            "severity": "n/a",
+            "location": "All contracts that store BTC transaction hashes and addresses as strings"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Consider upgrading to recent versions",
+            "description": "The use of outdated compiler and library versions may lead to security issues.",
+            "severity": "n/a",
+            "location": "Solidity compiler 0.4.24, Openzepellin-solidity 1.12"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Static analysis denotes potential integer underflow",
+            "description": "Potential integer underflow in the remove function in IndexedMapping.sol.",
+            "severity": "low",
+            "location": "IndexedMapping.sol"
+        }
+    ]
+}

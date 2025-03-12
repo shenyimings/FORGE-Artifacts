@@ -1,0 +1,131 @@
+{
+    "path": "artifacts/QuillAudit-The_Gamble_Kingdom_Smart_Contract_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/shrishtieth/TGK/tree/main",
+        "commit_id": "main",
+        "address": "0xefcDc0fc735a3cBb3a1b9F7D75da65507Af06498",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "TGK": "contracts/QuillAudit-The_Gamble_Kingdom_Smart_Contract_Audit_Report/TGK"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "The blacklist account still can make transfer",
+            "description": "As per require check on line 125, the blackListed account still can make the transfer to other non-blackListed accounts or vice versa.",
+            "severity": "high",
+            "location": "Token.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "setTeamWalletAddress doesn’t update the address correctly",
+            "description": "SetTeamWallet is setting the address of investorWallet instead of teamWallet.",
+            "severity": "high",
+            "location": "taxDistributionContract.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "setSlippage doesn’t update the address",
+            "description": "SetSlippage function is setting the address of slippage instead of _slippage.",
+            "severity": "high",
+            "location": "taxDistributionContract.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Require check missing",
+            "description": "InitialInvestorPercentage and investorPercentage in their respective setter should be less than 10,000.",
+            "severity": "low",
+            "location": "taxDistributionContract.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Owner should be multisig",
+            "description": "We recommend to use a multisig account address (gnosis-safe) for owner to achieve decentralization in the system.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant code",
+            "description": "The code in if and else block of distributeTax is redundant.",
+            "severity": "info",
+            "location": "taxDistributionContract.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas optimizations",
+            "description": "Approval to uniswapV2Router with INTMAX is made which is a wastage of gas; Also, using unchecked flag at the time of dividing can save gas.",
+            "severity": "info",
+            "location": "taxDistributionContract.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing netspec comments",
+            "description": "We recommend adding netspec comments for each method and variables for better readability and understanding of code.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

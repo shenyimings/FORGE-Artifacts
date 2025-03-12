@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/JumpToken Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://bscscan.com/address/0x88d7e9b65dc24cf54f5edef929225fc3e1580c25#code",
+        "commit_id": "n/a",
+        "address": "0x88D7e9B65dC24Cf54f5eDEF929225FC3E1580C25",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "JumpToken Audit Report - QuillAudits": "contracts/JumpToken Audit Report - QuillAudits"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Important Checks",
+            "description": "JumpTokenTimelock lacks important checks for token and beneficiary addresses, and releaseTime value.",
+            "severity": "medium",
+            "location": "JumpTokenTimelock contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "BEP20 approve race condition",
+            "description": "The standard BEP20 implementation contains a widely-known racing condition in its approve function.",
+            "severity": "high",
+            "location": "JumpToken contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary/Unused SafeERC20 library",
+            "description": "JumpToken implements SafeERC20 library but does not use its features.",
+            "severity": "low",
+            "location": "JumpToken contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "SafeERC20 vs SafeBEP20",
+            "description": "JumpTokenTimelock uses SafeERC20 instead of SafeBEP20 for BEP20 operations.",
+            "severity": "low",
+            "location": "JumpTokenTimelock contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unnecessary Constructor visibility",
+            "description": "JumpTokenTimelock defines public visibility for the constructor which is not needed anymore from solidity 0.7 onwards.",
+            "severity": "info",
+            "location": "JumpTokenTimelock contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Centralization Risk",
+            "description": "Deployer can control the entire token liquidity, prone to centralization risk if the deployer loses its private key.",
+            "severity": "info",
+            "location": "JumpToken contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Multiple pragma directives used",
+            "description": "Contracts should be deployed using the same compiler version/flags with which they have been tested.",
+            "severity": "low",
+            "location": "n/a"
+        }
+    ]
+}

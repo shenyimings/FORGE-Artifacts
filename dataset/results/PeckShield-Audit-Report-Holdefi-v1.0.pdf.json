@@ -1,0 +1,188 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Holdefi-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/holdefi/Holdefi/tree/cbd6845",
+        "commit_id": "cbd6845",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Holdefi": "contracts/PeckShield-Audit-Report-Holdefi-v1/Holdefi"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Race Conditions with Approves",
+            "description": "A well-known race condition vulnerability in ERC20 contracts applies to approveWithdrawSupply, approveWithdrawCollateral, and approveBorrow functions.",
+            "severity": "low",
+            "location": "Holdefi::approveWithdrawSupply(), Holdefi::approveWithdrawCollateral(), and Holdefi::approveBorrow()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Flawed Logic Of depositLiquidationReserve()",
+            "description": "The depositLiquidationReserveInternal function does not treat ERC20 tokens differently from ETH, causing reverts for ERC20 token deposits.",
+            "severity": "high",
+            "location": "Holdefi::depositLiquidationReserveInternal()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Owner Address Centralization Risk",
+            "description": "The owner address is an Externally-Owned-Account (EOA) instead of a multi-sig contract account, representing a centralization risk.",
+            "severity": "medium",
+            "location": "Holdefi protocol, onlyOwner modifier"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Incompatibility with Deflationary/Rebasing Tokens",
+            "description": "The Holdefi protocol's asset-transferring routines may introduce balance inconsistencies when used with deflationary or rebasing tokens.",
+            "severity": "low",
+            "location": "Holdefi contract, functions transferFromHoldefi() and transferToHoldefi()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential Reentrancy Risks",
+            "description": "Violation of checks-effects-interactions principle in repayBorrowInternal() function, potentially leading to re-entrancy attacks.",
+            "severity": "medium",
+            "location": "Holdefi contract, repayBorrowInternal() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect newPriceAggregator Events Emitted in setPriceAggregator()",
+            "description": "Emitting incorrect event in setPriceAggregator() function due to inconsistent use of decimals parameter.",
+            "severity": "low",
+            "location": "HoldefiPrices contract, setPriceAggregator() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Not Pausable Promotion/Liquidation Reserve Deposits",
+            "description": "depositPromotionReserveInternal() and depositLiquidationReserveInternal() functions lack pause functionality, potentially leading to protocol state changes during paused operations.",
+            "severity": "low",
+            "location": "Holdefi contract, depositPromotionReserveInternal() and depositLiquidationReserveInternal() functions"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect Natspec Comment",
+            "description": "Incorrect @notice comment in batchUnpause() function.",
+            "severity": "info",
+            "location": "HoldefiPPausableOwnable contract, batchUnpause() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Removal Of No-Effect Redundant Code",
+            "description": "The presence of redundant code with no actual effect in the addMarket() and addCollateral() functions.",
+            "severity": "info",
+            "location": "HoldefiSettings contract, addMarket() function (lines 328-330) and addCollateral() function (lines 388-390)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas Optimization In HoldefiSettings::removeMarket()",
+            "description": "Two possible optimizations can be applied to the removeMarket() function to save gas.",
+            "severity": "low",
+            "location": "HoldefiSettings contract, removeMarket() function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Misuse of beforeChangeSupplyRate() instead of beforeChangeBorrowRate()",
+            "description": "The function beforeChangeSupplyRate() is called in three places where beforeChangeBorrowRate() should be called, leading to incorrect updates of the borrow index.",
+            "severity": "n/a",
+            "location": "Holdefi protocol, functions liquidateBorrowerCollateral(), borrowInternal(), repayBorrowInternal()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Insufficient Return Value Check in ERC20 Token Transfers",
+            "description": "The Holdefi protocol uses transfer() and transferFrom() without checking the return values, which can lead to serious vulnerabilities.",
+            "severity": "medium",
+            "location": "Holdefi contract, functions transferFromHoldefi() and transferToHoldefi()"
+        }
+    ]
+}

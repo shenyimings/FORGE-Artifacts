@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/4RX (FourRXFinance.sol) - Final Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/FourRX/4rx",
+        "commit_id": "f7d395e86028056ba5e88ee50ddbd933a1a0779d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "4rx": "contracts/4RX (FourRXFinance/4rx"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "State Variables Updated After External Call",
+            "description": "Violation of Check_Effects_Interaction Pattern in Solidity",
+            "severity": "medium",
+            "location": "FourRXFinance contract, functions: deposit, withdraw, withdrawDevFee"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "calcPercentage allows passing ZERO as its second argument",
+            "description": "basisPoints argument can be equal to ZERO",
+            "severity": "high",
+            "location": "PercentageCalculator contract, line 13"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Multiplication is being performed on the result of Division",
+            "description": "Integer Divisions in Solidity might truncate",
+            "severity": "medium",
+            "location": "RewardsAndPenalties.sol contract, functions: _calcContractBonus, _calcHoldRewards"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-657"
+                ],
+                "3": [
+                    "CWE-656"
+                ]
+            },
+            "title": "Contract includes Hardcoded Addresses",
+            "description": "Immutable nature of smart contracts, hardcoded addresses in the contract before deployment",
+            "severity": "low",
+            "location": "_sharedVariables contract, line 17"
+        }
+    ]
+}

@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/Solidified-Morpho_Protocol_[04.11.2021].pdf",
+    "project_info": {
+        "url": "https://github.com/morpho-labs/morpho-contracts",
+        "commit_id": "f6ab54e055dd729ca1a5795a686c4232a56fe6a8",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "morpho-contracts": "contracts/Solidified-Morpho_Protocol_[04/morpho-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Tree traversal operations could potentially bring the protocol to a halt",
+            "description": "PositionsManagerForCompound tree operations require traversal of their respective trees using while() loops, which can exceed the block gas limit and bring the protocol to a halt.",
+            "severity": "high",
+            "location": "PositionsManagerForCompound.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Function updateThreshold() does not validate _marketAddress",
+            "description": "The function doesn't include any validation to ensure that the market has actually been created for the address being passed as an argument.",
+            "severity": "info",
+            "location": "MarketsManagerForCompound.sol, updateThreshold() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Function _repay() does not validate _amount",
+            "description": "The function doesn't check if _amount > 0.",
+            "severity": "info",
+            "location": "PositionsManagerForCompound.sol, _repay() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Miscellaneous Notes",
+            "description": "Various best practices and minor issues (spelling mistakes, providing a license).",
+            "severity": "info",
+            "location": "Multiple locations"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Protocol security relies heavily on external protocols",
+            "description": "The Morpho protocol relies heavily on external protocols, which can limit its security.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

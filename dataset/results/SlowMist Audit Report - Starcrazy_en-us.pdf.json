@@ -1,0 +1,164 @@
+{
+    "path": "artifacts/SlowMist Audit Report - Starcrazy_en-us.pdf",
+    "project_info": {
+        "url": "https://github.com/GameFantasyDev/starcrazy-contracts",
+        "commit_id": "e9e11d234ac065726e108a73dfcd5efbad26f2c5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "starcrazy-contracts": "contracts/SlowMist Audit Report - Starcrazy_en-us/starcrazy-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ]
+            },
+            "title": "Business logic issue",
+            "description": "Anyone can use the receiveApproval function to manipulate other users' assets without authorization.",
+            "severity": "low",
+            "location": "AlianaMinting.sol, GFSBonus.sol, GFSMint.sol, LPMint.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Parameter modification issue",
+            "description": "The CEO can modify sensitive parameters in the auction information.",
+            "severity": "low",
+            "location": "Auction contract, setMinAddPrice function (#L103-L105), FlashSale contract (multiple locations)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Excessive authority",
+            "description": "CEO has the right to modify the address of the genScience contract.",
+            "severity": "low",
+            "location": "starcrazy-contracts/contract/aliana/AlianaBase.sol #L42-L47, starcrazy-contracts/contract/aliana/GFAccessControl.sol #L26-L117"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unauthorized withdrawal",
+            "description": "CEO can withdraw tokens for users without their authorization.",
+            "severity": "low",
+            "location": "starcrazy-contracts/contract/AlianaMinting.sol #L330-L337, #L345-L347, starcrazy-contracts/contract/AlianaSale.sol #L134-L151"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Authorization issue in Auction contract",
+            "description": "Anyone can call the receiveApproval function without authorization to bid for any user at any price higher than the minimum bid.",
+            "severity": "n/a",
+            "location": "Auction.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ]
+            },
+            "title": "Authorization issue in FlashSale contract",
+            "description": "Anyone can call the receiveApproval function without authorization to bid for any user at any price higher than the minimum bid.",
+            "severity": "n/a",
+            "location": "FlashSale.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant code",
+            "description": "The require check for the action parameter in the receiveApproval function is redundant.",
+            "severity": "info",
+            "location": "AlianaMinting.sol, AlianaSale.sol, Auction.sol, FakeAliana.sol, FlashSale.sol, GFSBonus.sol, GFSMint.sol, LPMint.sol, WGFT.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary condition check",
+            "description": "The condition _cycleBlock > 0 is unnecessary in the setCycleBlock function.",
+            "severity": "n/a",
+            "location": "FlashSale.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Code",
+            "description": "The if judgment in the _swapBurn function is meaningless.",
+            "severity": "low",
+            "location": "WGFT contract, _swapBurn function (#L349-L358)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing Event Record",
+            "description": "Events are not logged when sensitive parameters are modified in several places in the contract.",
+            "severity": "n/a",
+            "location": "Various contracts, multiple functions"
+        }
+    ]
+}

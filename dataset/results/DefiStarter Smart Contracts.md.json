@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/DefiStarter Smart Contracts.md",
+    "project_info": {
+        "url": "https://github.com/defistarter/contracts/tree/",
+        "commit_id": "9ffe009ee6047ced669711dde14fe38483abdf7e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/DefiStarter Smart Contracts/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-369"
+                ]
+            },
+            "title": "Potential claiming stuck for several periods after withdraw",
+            "description": "Division by zero in `_historyTotalSupply` can cause users to be unable to claim rewards.",
+            "severity": "high",
+            "location": "StakingPool.sol#L341"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential inability to claim reward",
+            "description": "`for` loop with potentially huge amounts of iterations can cause inability to calculate reward amount for particular users.",
+            "severity": "medium",
+            "location": "StakingPool.sol#L328"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "`claimReward`/`withdraw` allowed to execute before staking starts",
+            "description": "Methods can be executed before staking starts but after setup, which is not critical but should be explicitly checked.",
+            "severity": "medium",
+            "location": "StakingPool.sol#L259 and #L245"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unoptimized check in `calculateReward` loop",
+            "description": "Check always returns true after the first iteration, wasting excess gas each iteration.",
+            "severity": "low",
+            "location": "StakingPool.sol#L331"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Different code style",
+            "description": "Inconsistent naming convention used for `_fee_beneficiary`.",
+            "severity": "low",
+            "location": "StakingPool.sol#L105"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Typo in modifier name",
+            "description": "Missed character in `onlyAferSetup` modifier.",
+            "severity": "low",
+            "location": "StakingPool.sol#L68"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Too complicated status checks",
+            "description": "Complex status checks can cause potential issues related to incorrect status interpretation.",
+            "severity": "low",
+            "location": "Multiple locations in StakingPool.sol"
+        }
+    ]
+}

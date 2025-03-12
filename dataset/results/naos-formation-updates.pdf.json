@@ -1,0 +1,71 @@
+{
+    "path": "artifacts/naos-formation-updates.pdf",
+    "project_info": {
+        "url": "https://github.com/NAOS-Finance/NAOS-Formation/tree/c1404ec0f5de6f80189b528acf5f0923ff8d4e6e",
+        "commit_id": "c1404ec0f5de6f80189b528acf5f0923ff8d4e6e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "NAOS-Formation": "contracts/naos-formation-updates/NAOS-Formation"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "QSP-1 amountOutMin too low in swapExactTokensForTokens call",
+            "description": "The amountOutMin value is set to 0, which can result in very few bUSD tokens being withdrawn if the pool is out-of-balance or manipulated unfavourably.",
+            "severity": "medium",
+            "location": "AlpacaVaultAdapter.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "QSP-2 Missing ensureUserActionDelay modifier",
+            "description": "The ensureUserActionDelay modifier is missing in TransmuterV2.sol, which may leave it open to unforeseen attacks such as flash loan attacks.",
+            "severity": "info",
+            "location": "TransmuterV2.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "QSP-3 Unchecked return values",
+            "description": "Return values are not checked in several functions across multiple files, which may lead to unexpected behaviour.",
+            "severity": "info",
+            "location": "AlpacaVaultAdapter.sol, TransmuterV2.sol, YearnVaultAdapter.sol, Formation.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "QSP-4 Unlocked Pragma",
+            "description": "The pragma solidity version is unlocked, which may lead to unexpected behaviour in the future.",
+            "severity": "info",
+            "location": "Multiple files"
+        }
+    ]
+}

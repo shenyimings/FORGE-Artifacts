@@ -1,0 +1,359 @@
+{
+    "path": "artifacts/Iosiro-Timvi Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/TimviOfficial/Timvi",
+        "commit_id": "9324706d1160996f7847e1989c8567168261382e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Timvi": "contracts/Iosiro-Timvi Smart Contract Audit/Timvi"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Unspecified low-risk issue",
+            "description": "Not provided",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Design comments and best practices",
+            "description": "Code quality impacted auditability, with limited documentation and inline comments.",
+            "severity": "info",
+            "location": "Various contracts (Logic.sol, TimviSettings.sol, etc.)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Possible for Emitter to Lose Funds",
+            "description": "Excess ether sent to `takeBuyRequest` function could be lost if bond expires or owner forfeits ETH to increase collateralization ratio.",
+            "severity": "low",
+            "location": "BondService.sol, Line 320, `takeBuyRequest` function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "State Variable Changes After External Calls",
+            "description": "State variables modified after calls to external contracts, potentially leading to re-entrancy style vulnerabilities.",
+            "severity": "info",
+            "location": "Logic.sol (lines 140, 169, 175, 320, 339, 357), BondService.sol (lines 359, 361, 396, 400)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Logic Optimizations",
+            "description": "Unnecessary ether transfer in `fill` function.",
+            "severity": "info",
+            "location": "Gate.sol, Line 224, `fill` function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Susceptible to Frontrunning Attacks",
+            "description": "No protective mechanisms against frontrunning attacks.",
+            "severity": "high",
+            "location": "Timvi system (price oracle and Gate/Exchange services)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Incorrect Variable Assignment",
+            "description": "_oldYearFee variable assigned to bonds[_id].expiration instead of bond[_id].yearFee.",
+            "severity": "low",
+            "location": "BondService.sol, line 284"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unsafe Funding Method for Gate",
+            "description": "Ether deposited through fallback function allocated to admin's balance, potentially causing users to lose control of funds.",
+            "severity": "low",
+            "location": "Gate.sol, line 97"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Test Code Available in Audited Codebase",
+            "description": "setPrice_TESTNET_ONLY() function allowed manual setting of USD/ETH exchange rate.",
+            "severity": "info",
+            "location": "PriceGetter.sol, lines 131-135"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-654"
+                ]
+            },
+            "title": "Design Comments (Centralized Oracle)",
+            "description": "System reliant on a centralized oracle for updates.",
+            "severity": "info",
+            "location": "Oraclize API"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Low Degree of Code Reuse",
+            "description": "Large portions of similar logic implemented independently in multiple contracts.",
+            "severity": "info",
+            "location": "BondService, ExchangeService, and LeverageService smart contracts"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ],
+                "3": [
+                    "CWE-1078"
+                ],
+                "4": [
+                    "CWE-1099"
+                ]
+            },
+            "title": "Inappropriate Naming",
+            "description": "Poorly named contract (Logic.sol).",
+            "severity": "info",
+            "location": "Logic.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Incorrect Variable Name Casing",
+            "description": "Variables in TimviSettings.sol named in all caps, indicating constant values.",
+            "severity": "info",
+            "location": "TimviSettings.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unclear Revert Behavior",
+            "description": "Unclear error message when approval balance for contract is insufficient.",
+            "severity": "n/a",
+            "location": "Gate.sol, lines 150 & 154"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use of Single Line If Statements",
+            "description": "Decreased readability and potential security issues due to use of single line if statements.",
+            "severity": "n/a",
+            "location": "Throughout the project"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Unnecessarily Emitting Events",
+            "description": "Unnecessary event emissions when no value is transferred.",
+            "severity": "n/a",
+            "location": "Gate.sol"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Logic Optimizations",
+            "description": "Unnecessary calculation performed when adding commission to total ETH.",
+            "severity": "n/a",
+            "location": "BondService.sol, line 398"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Spelling and Grammatical Errors",
+            "description": "Language mistakes in comments and revert messages.",
+            "severity": "n/a",
+            "location": "Throughout the project"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading Function Names",
+            "description": "Functions named incorrectly, leading to confusion about their purpose.",
+            "severity": "n/a",
+            "location": "BondService.sol"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect Comment",
+            "description": "Comment referring to EthWithdrawn instead of TmvWithdrawn.",
+            "severity": "n/a",
+            "location": "Gate.sol, line 50"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Implied Visibility",
+            "description": "Implicitly private visibility of systemETH variable.",
+            "severity": "n/a",
+            "location": "BondService.sol, line 18"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Unused Variable",
+            "description": "Unused COMM_DIVIDER variable declared and initialized but never used.",
+            "severity": "n/a",
+            "location": "TimviSettings.sol, line 30"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Unaudited Compiler Version",
+            "description": "No publicly available security reviews for Solidity compiler version 0.5.11.",
+            "severity": "n/a",
+            "location": "Throughout the project"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Outdated Interfaces",
+            "description": "Outdated IBond, IExchange, and ILeverage interfaces not accurately representing current contract implementations.",
+            "severity": "n/a",
+            "location": "Throughout the project"
+        }
+    ]
+}

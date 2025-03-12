@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/Inspex-Otoro.pdf",
+    "project_info": {
+        "url": "https://github.com/0xstudio/Otoro-Audit",
+        "commit_id": "441f0995a86a421d7062f30abcdf654d86d0013c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Otoro-Audit": "contracts/Inspex-Otoro/Otoro-Audit"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "Critical state variables can be updated by controlling authorities without notifying users, potentially leading to unfair gains.",
+            "severity": "low",
+            "location": "Various contracts (BlockbasedSale, RequestSigning, Revealable, Roles) and functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Expression is Always True",
+            "description": "The condition in line 102, j <= maxSupply, of the Otoro contract always evaluates to true due to the modulo operation.",
+            "severity": "info",
+            "location": "Revealable.sol (L:102), Otoro contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Condition Checks",
+            "description": "Redundant condition checks in mintOg() and mintToken() functions.",
+            "severity": "info",
+            "location": "Otoro.sol (L:127, L:210-213)"
+        }
+    ]
+}

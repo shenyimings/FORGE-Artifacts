@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/TinyDoge Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x01ac68f93ae1e026daad8c0886b65d6bd84761a0",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "TinyDoge": "contracts/TinyDoge Full Smart Contract Security Audit/TinyDoge"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can cause an OUT_OF_GAS exception if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "Contract's `includeInReward()` function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges, including changing tax, marketing, and liquidity fees, maximum transaction amounts, excluding from fees, locking, and unlocking.",
+            "severity": "low",
+            "location": "Contract's owner-related functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Owner can change marketing wallet address",
+            "description": "The owner can change the marketing wallet address.",
+            "severity": "low",
+            "location": "Contract's marketing wallet address-related function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary function",
+            "description": "There are two functions to take marketing, and it is recommended to remain only one (`_takeMarketing()`).",
+            "severity": "low",
+            "location": "Contract's marketing-related functions"
+        }
+    ]
+}

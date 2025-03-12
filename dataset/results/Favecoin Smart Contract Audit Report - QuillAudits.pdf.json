@@ -1,0 +1,176 @@
+{
+    "path": "artifacts/Favecoin Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/balajipachai/favecoin-sc/blob/master/contracts/",
+        "commit_id": "e590b6c5fedb69d22d4edf502ffdb65b543f7638",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "favecoin-sc": "contracts/Favecoin Smart Contract Audit Report - QuillAudits/favecoin-sc"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unauthorized token minting",
+            "description": "No access control for the mint() function, allowing anyone to call it with any amount and mint tokens.",
+            "severity": "high",
+            "location": "function mint(address account, uint256 amount) public whenNotPaused"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unauthorized token burning",
+            "description": "Lack of access control for the burn() function, allowing users to burn anyone's tokens.",
+            "severity": "high",
+            "location": "function burn(address account, uint256 amount) public whenNotPaused"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Incorrect token transfer",
+            "description": "The transferFrom() function transfers tokens from the msg.sender instead of the intended sender.",
+            "severity": "high",
+            "location": "function transferFrom(address sender, address recipient, uint256 amount) public override"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Unauthorized token transfers during pause",
+            "description": "The transfer() and transferFrom() functions can be called even when the contract is paused.",
+            "severity": "medium",
+            "location": "function transfer(address recipient, uint256 amount) public override, function transferFrom(address sender, address recipient, uint256 amount) public override"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Insecure Ether transfer",
+            "description": "Using .send() for Ether transfers may break deployed contracts due to gas repricing.",
+            "severity": "low",
+            "location": "function withdrawAll() public payable onlyOwner whenNotPaused"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked project address update",
+            "description": "The updateProject() function does not check for zero addresses, which could lead to tokens being sent to an invalid address.",
+            "severity": "low",
+            "location": "function updateProject(address payable _project) external onlyOwner"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1111"
+                ]
+            },
+            "title": "Lack of event logging",
+            "description": "The updateDecimals() function does not emit an event to log significant transactions.",
+            "severity": "info",
+            "location": "function updateDecimals(uint8 noOfDecimals) public onlyOwner whenNotPaused"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading code comments",
+            "description": "Incorrect comments in the code may affect readability and understanding.",
+            "severity": "info",
+            "location": "various functions with incorrect comments"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Gas optimization opportunity",
+            "description": "Some public functions can be declared external to save gas.",
+            "severity": "info",
+            "location": "various functions"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary payable attribute",
+            "description": "The 'address project' variable does not need the payable attribute since it is never sent Ether.",
+            "severity": "info",
+            "location": "address payable _project"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Compiler version lock",
+            "description": "Thepragma solidity version should be locked to prevent potential security issues.",
+            "severity": "info",
+            "location": "Solidity compiler version"
+        }
+    ]
+}

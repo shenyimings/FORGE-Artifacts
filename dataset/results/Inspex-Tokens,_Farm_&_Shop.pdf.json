@@ -1,0 +1,284 @@
+{
+    "path": "artifacts/Inspex-Tokens,_Farm_&_Shop.pdf",
+    "project_info": {
+        "url": "https://github.com/HellFactory/speedstar-audit",
+        "commit_id": "9d2450297515f302fca000275d4c1a47afcf909d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "speedstar-audit": "contracts/Inspex-Tokens,_Farm_&_Shop/speedstar-audit"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy Attack",
+            "description": "The reward token can be claimed multiple times resulting in reward draining from the Staking contract.",
+            "severity": "critical",
+            "location": "Staking contract, withdrawHorseInStable() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Broken Access Control in withdrawHorseInStable() Function",
+            "description": "Due to improper authorization checks in the withdrawHorseInStable() function, any staked horses in the Staking contract can be withdrawn by the attacker.",
+            "severity": "critical",
+            "location": "Staking contract, withdrawHorseInStable() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Manual Minting by Privileged Role",
+            "description": "The admin role can mint the tokens and NFTs without any restriction.",
+            "severity": "high",
+            "location": "JOC, Speed, Star, Facility, Horse contracts (mint() functions)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Missing user.rewardDebt State Update After payReward()",
+            "description": "The user.rewardDebt state is not updated after claiming the reward in depositFacility() and depositStable() functions.",
+            "severity": "high",
+            "location": "Staking contract (depositFacility() and depositStable() functions)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-405"
+                ],
+                "4": [
+                    "CWE-408"
+                ]
+            },
+            "title": "Double Reward Payout in withdrawStable() Function",
+            "description": "The reward will be paid twice when the withdrawStable() function is called, resulting in a reward drained from the contract and a denial of service on all deposit/withdraw functions.",
+            "severity": "high",
+            "location": "withdrawStable() function in Staking.sol contract, specifically lines 574 and 661."
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Missing pool.totalStake State Update",
+            "description": "The pool.totalStake state is not updated properly, resulting in the pool.accSpeedPerShare state being higher than the actual amount and the reward being distributed more than expected.",
+            "severity": "high",
+            "location": "Staking.sol, functions: depositFacility(), payReward(), withdrawFacility(), depositHorseInStable(), withdrawHorseInStable()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Horse.bornAt Value Assignment",
+            "description": "The bornAt state of the minted horse is updated when the mint() function is executed, leading to retired horse miscalculation.",
+            "severity": "high",
+            "location": "Horse.sol, function: mint()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Miscalculation in calculateRewardAndUpdateRemainHorse() Function",
+            "description": "The popularity of retired horses will drop to 20% of the previous reward every time that calculateRewardAndUpdateRemainHorse() function is called, resulting in a miscalculation.",
+            "severity": "high",
+            "location": "Staking contract, calculateRewardAndUpdateRemainHorse() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Running Block Value Calculation",
+            "description": "Miscalculation of reward due to incorrect calculation of runningBlock value, leading to users receiving less reward than expected and potential denial of service on deposit and withdraw functions.",
+            "severity": "high",
+            "location": "Staking contract, specifically in the depositHorse() function (line 711) and calculateRewardAndUpdateRemainHorse() function (lines 429 and 454)"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change critical state variables to gain additional profit, which is unfair to other users.",
+            "severity": "high",
+            "location": "Staking, JOC, Speed, Star, Facility, Horse, Shop (multiple functions with onlyOwner modifier)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper horseLimitStaking() Function Implementation",
+            "description": "Due to the miscalculation of the starBalance state and missing update of the totalHorse state, users can stake more than two horses for free, violating the business design.",
+            "severity": "medium",
+            "location": "Staking.sol, horseLimitStaking() modifier"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect Price Incremental Calculation in buyPack() Function",
+            "description": "The packPriceDollar[0] state will be increased by 10 every sale until packAvaliable[0] state is below 100.",
+            "severity": "medium",
+            "location": "Shop contract, buyPack() function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Improper Sale Properties Modification During On-Going Sale Event",
+            "description": "The modification of the sale properties is unfair for the users since the total number of packs and the price can be changed from what is known by the users.",
+            "severity": "medium",
+            "location": "Shop contract, setPriceFeed(), setPackPrice(), and setPackAvaliable() functions"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Loop Over Unbounded Data Structure",
+            "description": "The getPopularityInStable function loops through the user.stables state to find the desired index of the user.stables, which can lead to Denial-of-Service in several functions.",
+            "severity": "low",
+            "location": "Staking.sol, function getPopularityInStable()"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Inexplicit Solidity Compiler Version",
+            "description": "The Solidity compiler versions declared in the smart contracts were not explicit.",
+            "severity": "info",
+            "location": "Multiple contracts (Staking, JOC, Speed, Star, Facility, Horse, Shop)"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "Multiple contracts (Facility, Horse, Shop)"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect Logging Parameter",
+            "description": "The facility's popularity is not emitted correctly in the DepositFacility event.",
+            "severity": "info",
+            "location": "Staking contract, function depositFacility(), line 505"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Use of transfer() Function to Transfer Native Token",
+            "description": "Using the transfer() function for sending native tokens might result in a reverted transaction.",
+            "severity": "info",
+            "location": "Shop contract, function claimToken(), line 119"
+        }
+    ]
+}

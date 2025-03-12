@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/Doge Cake.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x88b9bbdaf00770ba398c9a2e0d3c02d45dcb9820",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "DogeCake": "contracts/Doge Cake/DogeCake"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Wrong distributeDividends",
+            "description": "The function distributeDividends(uint256 amount) has public access modifier, allowing anyone to call it with any amount and ruin the contract logic.",
+            "severity": "high",
+            "location": "Function distributeDividends(uint256 amount)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1287"
+                ]
+            },
+            "title": "Unchecked random",
+            "description": "In buyBackAndLiquifyEnabled block of transfer function, buyBackOrLiquidity random value is unused further.",
+            "severity": "medium",
+            "location": "Transfer function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Rounding error",
+            "description": "At each calculation with division, it goes first, leading to rounding errors in Solidity.",
+            "severity": "low",
+            "location": "Calculations with division"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function excludeMultipleAccountsFromFees() uses a loop to exclude multiple accounts from fees and may be aborted with OUT_OF_GAS exception if there is a long addresses list.",
+            "severity": "low",
+            "location": "Function excludeMultipleAccountsFromFees()"
+        }
+    ]
+}

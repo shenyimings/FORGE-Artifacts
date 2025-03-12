@@ -1,0 +1,548 @@
+{
+    "path": "artifacts/POA Consensus.md",
+    "project_info": {
+        "url": "https://github.com/poanetwork/poa-network-consensus-contracts",
+        "commit_id": "8089b20d6b491acaf08f61ab82242c79b8aac41a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "poa-network-consensus-contracts": "contracts/POA Consensus/poa-network-consensus-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-654"
+                ]
+            },
+            "title": "Obsolete mechanism of voting",
+            "description": "Inability to vote against and fixed decision threshold",
+            "severity": "high",
+            "location": "ValidatorMetadata.sol#L131"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "Unverified remaining validators after deletion",
+            "description": "Denial of service may occur if the total number of voting keys remaining in the system is still greater than the current threshold",
+            "severity": "high",
+            "location": "VotingToChangeMinThreshold.sol#L98"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Ballot limit overflow",
+            "description": "No one will be able to create new ballots if there are > 200 validators",
+            "severity": "info",
+            "location": "BallotsStorage.sol#L101"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Incorrect use of open ballots",
+            "description": "The ballot of a non-effective validator cannot be closed",
+            "severity": "info",
+            "location": "VotingToChangeKeys.sol#L116"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Possibility to add more validators than maxLimitValidators",
+            "description": "Exceeding maxLimitValidators via addMiningKey",
+            "severity": "info",
+            "location": "KeysManager.sol#L263"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Incorrect logging limits for mining key exchanges",
+            "description": "Limits on mining keys logging are different and can lead to denial of service",
+            "severity": "info",
+            "location": "VotingTo.sol#L191"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Incomplete documentation",
+            "description": "Outdated global limits for ballots in the documentation",
+            "severity": "info",
+            "location": "Documentation"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect block reward distribution",
+            "description": "Distribution of rewards to miners using an outdated list",
+            "severity": "info",
+            "location": "BlockReward.sol#L115"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "Insecure use of initialKey",
+            "description": "Multiple `initialKey`s can use the same mining key.",
+            "severity": "n/a",
+            "location": "KeysManager.sol#L238-L265"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unsecured swapMiningKey function",
+            "description": "An attacker can overwrite a mining key and create an infinite loop in the `miningKeyHistory` chain.",
+            "severity": "n/a",
+            "location": "KeysManager.sol#L346-L368"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Linear complexity in verifying voting fact",
+            "description": "No real problem due to array length limit.",
+            "severity": "n/a",
+            "location": "ValidatorMetadata.sol#L317"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Potential problems with explicit enum value specification",
+            "description": "Directly specifying an integer value (enum) can cause issues when making changes.",
+            "severity": "n/a",
+            "location": "ValidatorMetadata.sol#L367"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked mining key",
+            "description": "`mining key != address(0)` not checked after `areBallotParamsValid` call.",
+            "severity": "n/a",
+            "location": "VotingToChangeKeys.sol#L93"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ],
+                "4": [
+                    "CWE-825"
+                ],
+                "5": [
+                    "CWE-416"
+                ]
+            },
+            "title": "Outdated free memory pointer value",
+            "description": "Not updated before using a fragment of memory.",
+            "severity": "n/a",
+            "location": "EternalStorageProxy.sol#L59"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Unmigrated ballot parameters during migration",
+            "description": "`NEW_PAYOUT_KEY` and `NEW_VOTING_KEY` not migrated.",
+            "severity": "n/a",
+            "location": "VotingToChangeKeys.sol#L219"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Potential unclosable ballot",
+            "description": "An attacker can force specification of another voting key on their mining key.",
+            "severity": "n/a",
+            "location": "KeysManager.sol#L409"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Global state changes during ballot creation and finalization",
+            "description": "Checks only valid at ballot creation time, not at finalization.",
+            "severity": "n/a",
+            "location": "VotingToChangeKeys.sol#L116"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "One validator can nullify another's metadata change ballot",
+            "description": "Validator can cancel another's metadata change request.",
+            "severity": "n/a",
+            "location": "ValidatorMetadata.sol#L279"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Voting key taken into account during ballot, not mining key",
+            "description": "Allows one validator to vote several times.",
+            "severity": "n/a",
+            "location": "ValidatorMetadata.sol#L334"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Meta information loss when changing a validator's mining key",
+            "description": "Meta information lost when changing the mining key of a validator.",
+            "severity": "n/a",
+            "location": "ValidatorMetadata.sol"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "DoS attack on emission funds payout",
+            "description": "A malicious validator can create ballots to disrupt emission funds payout.",
+            "severity": "n/a",
+            "location": "VotingToManageEmissionFunds.sol#L48"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Collision via abi.encodePacked",
+            "description": "Key generation through `abi.encodePacked` can cause collisions.",
+            "severity": "n/a",
+            "location": "n/a"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Enum comparison and assignment assumptions",
+            "description": "Solidity documentation does not guarantee enum behavior, so we recommend avoiding these techniques.",
+            "severity": "n/a",
+            "location": "Various contracts using enums"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-799"
+                ]
+            },
+            "title": "Potential EVM stack overflow attack",
+            "description": "An attacker can fill the EVM stack to disrupt emission funds payout.",
+            "severity": "n/a",
+            "location": "EmissionFunds.sol#L49"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Uncontrolled Gas Limit",
+            "description": "Potential gas limit exploit in _hbbftRefreshPayoutKeys() function.",
+            "severity": "n/a",
+            "location": "BlockReward.sol#L122"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Unconditional Payout",
+            "description": "Payout to validator occurs regardless of Boolean flag keysManager.isPayoutActive(miningKey).",
+            "severity": "n/a",
+            "location": "BlockReward.sol#L151"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Unused Threshold Type",
+            "description": "MetadataChange threshold type is not used during consensus work.",
+            "severity": "n/a",
+            "location": "BallotsStorage.sol#L20"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate Function Names",
+            "description": "Functions initialKeys and getInitialKey have the same signature and return the same result.",
+            "severity": "n/a",
+            "location": "KeysManager.sol#L109 and KeysManager.sol#L318"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Redundant Function Call",
+            "description": "The function hasAlreadyVoted calls hasMiningKeyAlreadyVoted unnecessarily.",
+            "severity": "n/a",
+            "location": "VotingTo.sol#L186"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Unsafe Arithmetic Operations",
+            "description": "Increment/decrement operations without using SafeMath.",
+            "severity": "n/a",
+            "location": "VotingToChange.sol#L124-L126"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Interface Declaration",
+            "description": "The function rewardHBBFT should be declared in the IBlockReward interface.",
+            "severity": "n/a",
+            "location": "BlockReward.sol#L88"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Redundant Array Reset",
+            "description": "Deleting and resetting the last element of the pendingList array is unnecessary.",
+            "severity": "n/a",
+            "location": "PoaNetworkConsensus.sol#L168"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Array Length Check",
+            "description": "The check if (pendingList.length > 0) in removeValidator function is unnecessary.",
+            "severity": "n/a",
+            "location": "PoaNetworkConsensus.sol#L169"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Missing Requirement Check",
+            "description": "Missing require statement to check if the mining key is active.",
+            "severity": "n/a",
+            "location": "VotingToChangeKeys.sol#L230"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Parallel Execution Risk",
+            "description": "Migration and regular ballot code can be executed in parallel, causing unintended behavior.",
+            "severity": "n/a",
+            "location": "VotingToChange.sol#L73"
+        }
+    ]
+}

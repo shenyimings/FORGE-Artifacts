@@ -1,0 +1,68 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-OpenSkyBespokeLoan-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/OpenSky-Finance/opensky-protocol/tree/1210016ac8087d4bc13abaa65d29eb1048917995",
+        "commit_id": "1210016ac8087d4bc13abaa65d29eb1048917995",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "opensky-protocol": "contracts/PeckShield-Audit-Report-OpenSkyBespokeLoan-v1/opensky-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Revisited Logic Of OpenSkyApeCoinStakingHelper::depositBAYC()",
+            "description": "The depositBAYC() routine does not validate the recipient address when transferring Ape Coins, allowing a bad actor to stake Ape Coins using another user's approved amount.",
+            "severity": "high",
+            "location": "OpenSkyApeCoinStakingHelper::depositBAYC()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged admin account needs to be scrutinized, as it has the privilege to control or govern the flow of assets managed by this protocol.",
+            "severity": "medium",
+            "location": "OpenSkyBespokeSettings contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential Reentrancy Risk in flashLoanSimple()",
+            "description": "The `flashClaim()` function in the `TransferAdapterCollateralBase` contract violates the checks-effects-interactions principle, making it vulnerable to re-entrancy attacks.",
+            "severity": "low",
+            "location": "`TransferAdapterCollateralBase` contract, `flashClaim()` function"
+        }
+    ]
+}

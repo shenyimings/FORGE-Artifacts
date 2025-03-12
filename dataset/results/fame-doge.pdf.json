@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/fame-doge.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x3fbB54A733dF9F02EdEC5B8be8CEff305ca37C49",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "Fame": "contracts/fame-doge/Fame"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "ST - Stop Transactions",
+            "description": "The contract owner has the authority to stop transactions for all users excluding the owner by setting _maxTxAmount or _walletMax to zero.",
+            "severity": "critical",
+            "location": "contract.sol#L658,677,757"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "ELFM - Exceed Limit Fees Manipulation",
+            "description": "The contract owner has the authority to increase over the allowed limit of 25% by calling the setSelTaxes function with a high percentage value.",
+            "severity": "critical",
+            "location": "contract.sol#L553"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Abuse of owner privileges",
+            "description": "The contract can be converted into a honeypot and prevent users from selling if the owner abuses admin functions.",
+            "severity": "high",
+            "location": "Fame contract, various admin functions (e.g. setMarketPairStatus, setIsTxLimitExempt, etc.)"
+        }
+    ]
+}

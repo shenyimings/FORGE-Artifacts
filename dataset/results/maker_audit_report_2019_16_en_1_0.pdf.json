@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/maker_audit_report_2019_16_en_1_0.pdf",
+    "project_info": {
+        "url": "https://github.com/makerdao/dss/tree/526fa6afb9ea771f846b895ae0aee361876f2bdb",
+        "commit_id": "526fa6afb9ea771f846b895ae0aee361876f2bdb",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "dss": "contracts/maker_audit_report_2019_16_en_1_0/dss"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Potential Denial-of-Service in Global Settlement",
+            "description": "Potential denial-of-service attack when vat.dai(address(vow)) > 0",
+            "severity": "info",
+            "location": "Global Settlement contract, src/end.sol, function thaw()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "approve()/transferFrom() Race Condition",
+            "description": "Potential race condition issue regarding approve() / transferFrom()",
+            "severity": "low",
+            "location": "src/dai.sol, function approve()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Misadjusted CDP Cancellation",
+            "description": "Debt misadjustment in CDP cancellation due to missing par factor.",
+            "severity": "medium",
+            "location": "skim() function in end.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Auction Kick-Off Authorization",
+            "description": "Lack of authorization for auction kick-offs, allowing unauthorized auctions.",
+            "severity": "high",
+            "location": "flip.kick(), flap.kick() functions in flip.sol and flap.sol respectively."
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Auction Tick Validity",
+            "description": "No validation of auction ID in tick mechanism, allowing non-present auctions to be extended.",
+            "severity": "info",
+            "location": "tick() function in flip.sol and flop.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Auction Deal Inconsistency",
+            "description": "Sanity checks are subtly inconsistent between flip.deal(), flap.deal(), and flop.deal()",
+            "severity": "low",
+            "location": "src/{flop, flap}.sol (functions deal(uint id))"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missed Deployment Dependency Checks",
+            "description": "Missing dependency checks for addresses vat, vow, pot, spotter in deployLiquidator(), deployShutdown() and deployPause() functions.",
+            "severity": "info",
+            "location": "dss-deploy/src/DssDeploy.sol, functions deployLiquidator(), deployShutdown(), deployPause()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Excessive Authorization in Deployment",
+            "description": "Improper authorization settings in deployTaxationAndAuctions() function",
+            "severity": "low",
+            "location": "dss-deploy/src/DssDeploy.sol, deployTaxationAndAuctions() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Collateral Check in MCD CDP Manager",
+            "description": "Lack of validation for collateral type (ilk) when opening a new MCD CDP",
+            "severity": "info",
+            "location": "dss-cdp-manager/src/DssCdpManager.sol, open() function"
+        }
+    ]
+}

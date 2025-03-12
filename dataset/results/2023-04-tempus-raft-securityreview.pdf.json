@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/2023-04-tempus-raft-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/pappas999/historical-price-feed-data/tree/37d6ee1245dae871ab7a96bd9b70ffd20f57086e",
+        "commit_id": "37d6ee1245dae871ab7a96bd9b70ffd20f57086e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "historical-price-feed-data": "contracts/2023-04-tempus-raft-securityreview/historical-price-feed-data"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Issues with Chainlink oracle’s return data validation",
+            "description": "Validation issues in Chainlink oracle responses",
+            "severity": "low",
+            "location": "contracts/Oracles/ChainlinkPriceOracle.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect constant for 1000-year periods",
+            "description": "Incorrect _MINUTES_IN_1000_YEARS constant",
+            "severity": "info",
+            "location": "contracts/Dependencies/MathUtils.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistent use of safeTransfer for collateralToken",
+            "description": "Missing safeTransfer function in some places",
+            "severity": "medium",
+            "location": "PositionManager.sol, PositionManagerStETH.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Tokens may be trapped in an invalid position",
+            "description": "Positions with zero debt but non-zero collateral cannot be closed",
+            "severity": "info",
+            "location": "PositionManager.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Price deviations between stETH and ETH may cause Tellor oracle to return an incorrect price",
+            "description": "Tellor oracle uses ETH/USD price feed for stETH, which can be problematic during black swan events",
+            "severity": "info",
+            "location": "TellorPriceOracle.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect constant value for MAX_REDEMPTION_SPREAD",
+            "description": "MAX_REDEMPTION_SPREAD is set to 2% instead of 100%",
+            "severity": "medium",
+            "location": "PositionManager.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Liquidation rewards are calculated incorrectly",
+            "description": "Liquidator reward calculation omits matchingCollateral amount",
+            "severity": "medium",
+            "location": "SplitLiquidationCollateral.sol"
+        }
+    ]
+}

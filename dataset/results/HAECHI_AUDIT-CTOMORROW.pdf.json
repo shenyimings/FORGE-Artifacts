@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/HAECHI_AUDIT-CTOMORROW.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xb850CAC12Ab85d4400db61ac78DC5Fc2418b6868",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "CTP_Token": "contracts/HAECHI_AUDIT-CTOMORROW/CTP_Token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Additional tokens can be issued without restrictions",
+            "description": "Owner can issue additional tokens without restrictions by calling the CTP_Token#mint(address, uint256) and BEP20#mint(uint256) functions.",
+            "severity": "info",
+            "location": "CTP_Token contract, mint function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused functions",
+            "description": "The Context#_msgData() function, BEP20#_burn() function, and BEP20#_burnFrom() function are declared as internal and not being used.",
+            "severity": "info",
+            "location": "Various contracts (Context, BEP20)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing Events",
+            "description": "There are missing events in the mint function that make it difficult to identify whether correct values are recorded on the blockchain.",
+            "severity": "info",
+            "location": "CTP_Token contract, mint function"
+        }
+    ]
+}

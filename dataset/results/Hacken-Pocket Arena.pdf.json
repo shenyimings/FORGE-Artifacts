@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/Hacken-Pocket Arena.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x095cf7f3e82a1dcadbf0fbc59023f419883ea296",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.10+commit.fc410830"
+        ],
+        "project_path": {
+            "ERC20POC": "contracts/Hacken-Pocket Arena/ERC20POC"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contracts are vulnerable to permanent blocking by any token holder.",
+            "description": "Arrays ERC20POC.arr_pegin_submit and BEP20POC.pegout_submit could be filled by the malicious token holder, resulting in permanent inoperability of certain methods.",
+            "severity": "high",
+            "location": "POC_ERC20.sol, POC_BEP20.sol; functions: pegin_submit, pegout_submit"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-188"
+                ]
+            },
+            "title": "Potential loss of users’ submits and data inconsistency.",
+            "description": "When several users call methods within one block, only the last one will create an order due to using block.timestamp to generate storage index.",
+            "severity": "medium",
+            "location": "POC_ERC20.sol, POC_BEP20.sol; functions: pegin_submit, pegout_submit"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ],
+                "4": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing event for changing _fee_rate",
+            "description": "Changing critical values should be followed by the event emitting for better tracking off-chain.",
+            "severity": "low",
+            "location": "POC_ERC20.sol, POC_BEP20.sol; function: _fee_rate_set"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "A public function that could be declared external.",
+            "description": "Public functions that are never called by the contract should be declared external to save gas.",
+            "severity": "low",
+            "location": "POC_ERC20.sol, POC_BEP20.sol; multiple functions (listed in the report)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Boolean equality",
+            "description": "Boolean constants can be used directly and do not need to be compared to true or false.",
+            "severity": "low",
+            "location": "POC_ERC20.sol, POC_BEP20.sol; functions: transfer, transferFrom, staff_add, staff_quota_add, pegin_reserve, pegout_reserve"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Code and documentation inconsistency.",
+            "description": "Maximum fee should be 100%, but contracts allow setting it up to 1000%.",
+            "severity": "low",
+            "location": "POC_ERC20.sol, POC_BEP20.sol; function: _fee_rate_set"
+        }
+    ]
+}

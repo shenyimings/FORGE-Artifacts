@@ -1,0 +1,137 @@
+{
+    "path": "artifacts/[KALOS] ZeroDev Wallet Kernel 2.1 Audit Report-v1.0 (ENG).pdf",
+    "project_info": {
+        "url": "https://github.com/zerodevapp/kernel",
+        "commit_id": "199ae7d838f21b37f069267c86e8eeb6f0175a69",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "kernel": "contracts/[KALOS] ZeroDev Wallet Kernel 2/kernel"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Violation of Storage Access Rule in ECDSAKernelFactory",
+            "description": "Not staking a certain amount in the EntryPoint due to Storage Access rules, causing Bundler error.",
+            "severity": "high",
+            "location": "src/factory/ECDSAKernelFactory.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Bypass Permission Check in ValidateUserOp of SessionKeyValidator Contract",
+            "description": "Incorrect Merkle Proof calculation, allowing bypass of permission checks.",
+            "severity": "medium",
+            "location": "src/validator/SessionKeyValidator.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Wrong Parameter for _packValidationData upon Successful Merkle Proof in validateUserOp of SessionKeyValidator",
+            "description": "The value set for _packValidationData upon a successful Merkle Proof in the validateUserOp function is 1, which causes a conflict in the contract's logic.",
+            "severity": "medium",
+            "location": "SessionKeyValidator contract, validateUserOp function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong dataOffset Calculation in ValidateUserOp within SessionKeyValidator",
+            "description": "The data offset calculation is incorrect and can cause a revert event during the execution of the Kernel Execute Function.",
+            "severity": "medium",
+            "location": "SessionKeyValidator contract, validateUserOp function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Discrepancies in Parsing validUntil and validAfter",
+            "description": "The order of parsing validUntil and validAfter is incorrect, causing a revert event consistently.",
+            "severity": "medium",
+            "location": "Kernel contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ],
+                "3": [
+                    "CWE-940"
+                ]
+            },
+            "title": "Replay Attack in Setting DefaultValidator in KillSwitchValidator",
+            "description": "A replay attack can occur due to the assignment of KillSwitchValidatorStorage based on _userOp.sender, while the validator is designated based on msg.sender.",
+            "severity": "critical",
+            "location": "KillSwitchValidator contract, validateUserOp function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "DefaultValidator Security",
+            "description": "The defaultValidator has the authority to arbitrarily activate a validator and should be handled with care.",
+            "severity": "high",
+            "location": "Kernel contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "DelegateCall Risk",
+            "description": "Misusing the DelegateCall option can lead to overwriting crucial storage variables due to Storage Layout Collisions.",
+            "severity": "info",
+            "location": "Kernel contract, execute function"
+        }
+    ]
+}

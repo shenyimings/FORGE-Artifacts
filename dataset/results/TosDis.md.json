@@ -1,0 +1,113 @@
+{
+    "path": "artifacts/TosDis.md",
+    "project_info": {
+        "url": "https://github.com/tosdis/TosDisFinance",
+        "commit_id": "be50dbf8a52a8f919694498bf30394d328d88fbb",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "TosDisFinance": "contracts/TosDis/TosDisFinance"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Wrongly increased `participants` amount",
+            "description": "Increasing `participants` amount when `_amountToStake` is zero can lead to infinite increase of `participants`.",
+            "severity": "high",
+            "location": "StakingPool.sol, line 120"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Potentially differentiating message senders",
+            "description": "Inconsistent use of `msg.sender` and `_msgSender()` may lead to incorrect message sender address choice.",
+            "severity": "medium",
+            "location": "FeeToken.sol, lines 37, 39, 40"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Non-explicit multiplier computation checks",
+            "description": "Implicit checks in `getMultiplier` function can lead to business logic failure if input arguments are incorrect.",
+            "severity": "medium",
+            "location": "StakingPool.sol, line 66"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Keep invariant `burnPercent <= divider`",
+            "description": "`burnPercent` should be less or equal than `divider`, but this invariant is never checked in the contract.",
+            "severity": "medium",
+            "location": "StakeMaster.sol, line 75"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Restrict deflationary tokens",
+            "description": "Contract does not support deflationary tokens, which can break the logic of the contract if used.",
+            "severity": "medium",
+            "location": "StakingPool.sol, line 124"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading docs",
+            "description": "Documentation mentions a `PAUSER_ROLE` that does not exist in this case.",
+            "severity": "low",
+            "location": "FeeToken.sol, line 27"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted emergency withdrawal",
+            "description": "Emergency withdrawal function can be called anytime with burning all rewards earned.",
+            "severity": "low",
+            "location": "StakingPool.sol, line 170"
+        }
+    ]
+}

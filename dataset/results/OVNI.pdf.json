@@ -1,0 +1,50 @@
+{
+    "path": "artifacts/OVNI.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "37f",
+        "address": "0x84E5bB602Ce815D791eF7a8454ce7671410318EF",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.4+commit.3f05b770"
+        ],
+        "project_path": {
+            "Ovni": "contracts/OVNI/Ovni"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "add(uint256 _allocPoint, …), set(uint256 _pid, …) and updateEmissionRate() could invoke massUpdatePools() function, that can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "massUpdatePools() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "There is sending tokens to the dead address in safeOvniTransfer functions, instead of burning them in token contract.",
+            "severity": "low",
+            "location": "safeOvniTransfer functions"
+        }
+    ]
+}

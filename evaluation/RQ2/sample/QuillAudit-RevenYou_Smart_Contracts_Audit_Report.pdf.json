@@ -1,0 +1,48 @@
+{
+    "path": "artifacts/QuillAudit-RevenYou_Smart_Contracts_Audit_Report.pdf",
+    "project_info": {
+        "url": "https://github.com/RevenyouIO/eurb",
+        "commit_id": "1190d65c5bab3dc45c479e7f9454669438408582",
+        "address": "n/a",
+        "chain": "Ethereum and Binance Smart Chain",
+        "compiler_version": "n/a",
+        "project_path": "n/a"
+    },
+    "findings": [
+        {
+            "id": 0,
+            "title": "Broken Access Control",
+            "description": "The accounts having the asset protection role have permissions to even freeze the owner’s account.",
+            "severity": "Medium",
+            "location": "Contract - EURB, Function - freezeAccount (Line 268)"
+        },
+        {
+            "id": 1,
+            "title": "Missing check for feePercentage",
+            "description": "No check for the _feePercentage that could be easily set to 100 and result in transferring the whole transfer amount to the fee Receiver’s account.",
+            "severity": "Low",
+            "location": "Contract - EURB, Function - transferFee (Line 335)"
+        },
+        {
+            "id": 2,
+            "title": "Unlocked Pragma",
+            "description": "Contracts should be deployed with the same compiler version and flags that they have been tested with thoroughly.",
+            "severity": "Informational",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "title": "Misleading error message",
+            "description": "In the burn function, the error message may mislead users by mentioning 'Asset Protection' role without checking for it.",
+            "severity": "Informational",
+            "location": "burn function (line 173)"
+        },
+        {
+            "id": 4,
+            "title": "General Recommendation",
+            "description": "Roles with privileges should be given to accounts with proven authority, and functions like finishMinting and finishBurning must be used cautiously.",
+            "severity": "Informational",
+            "location": "n/a"
+        }
+    ]
+}

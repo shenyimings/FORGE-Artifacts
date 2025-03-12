@@ -1,0 +1,50 @@
+{
+    "path": "artifacts/Kenny.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x6b1faaa2771E8B3AA0e0ba6830436E2DF2a0abD6",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.8.0+commit.c7dfd78e"
+        ],
+        "project_path": {
+            "SouthParkToken": "contracts/Kenny/SouthParkToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "add(uint256 _allocPoint, …), set(uint256 _pid, …) could invoke massUpdatePools() function, that can fail due to block gas limit if the pool size is too big.",
+            "severity": "low",
+            "location": "massUpdatePools() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges (In the period when the owner is not renounced)",
+            "description": "Multiple issues with owner/operator/dev/fee address permissions (e.g., changing kennyEthPair, transfer tax rate, minimum liquidity amount, enabling/disabling autoLiquidity, setting new devAddress, feeAddress)",
+            "severity": "low",
+            "location": "Various functions related to owner/operator/dev/fee addresses"
+        }
+    ]
+}

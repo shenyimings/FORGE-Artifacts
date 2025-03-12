@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/Solidified-Animoca_[26.07.2021].pdf",
+    "project_info": {
+        "url": "https://github.com/wighawag/universal-forwarder/tree/0ac0b2ece2feaee7ce0e5401480eca4016835b9c",
+        "commit_id": "0ac0b2ece2feaee7ce0e5401480eca4016835b9c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "universal-forwarder": "contracts/Solidified-Animoca_[26/universal-forwarder"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected `onERC20Received()` function",
+            "description": "The message sender is never checked in any of the function `onERC20Received()` implementations, allowing anyone to call it.",
+            "severity": "high",
+            "location": "Multiple contracts (ChildERC20.sol, ChildERC20Burnable.sol, PolygonREVV.sol)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect `_totalSupply` update in `_batchBurnFrom()` function",
+            "description": "The function `_batchBurnFrom()` reduces `_totalSupply` supply multiple times by the amount burned so far while executing the loop.",
+            "severity": "high",
+            "location": "ERC20.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "`recoverERC20s()` function may fail to recover certain ERC-20 tokens",
+            "description": "The function `recoverERC20s()` will not transfer ERC20 tokens which `transfer()` function does not return true.",
+            "severity": "low",
+            "location": "Multiple contracts (ChildERC20Mock.sol, Recoverable.sol, PolygonREVV.sol)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralized design of bridging contracts",
+            "description": "The bridging contracts are controlled by one address, allowing the address to withdraw the escrow funds anytime.",
+            "severity": "low",
+            "location": "Bridging contracts"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Outdated compiler warning suppression in `ManagedIdentity.sol`",
+            "description": "The function `_msgData()` uses the `this;` statement to suppress a compiler warning, which is no longer necessary with current compiler versions.",
+            "severity": "n/a",
+            "location": "contracts/metatx/ManagedIdentity.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Assumption about ERC-20 token contract transfer() and transferFrom() functions in `ERC20EscrowPredicate.sol`",
+            "description": "The function `exitTokens()` will fail if ERC20 `transfer()` does not return true, and the function `lockTokens()` will fail if ERC20 `transferFrom()` does not return true.",
+            "severity": "n/a",
+            "location": "ERC20EscrowPredicate.sol"
+        }
+    ]
+}

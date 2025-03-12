@@ -1,0 +1,95 @@
+{
+    "path": "artifacts/Hacken-MetagamZ.pdf",
+    "project_info": {
+        "url": "https://github.com/avnishmishra04/MetagamZ",
+        "commit_id": "n/a",
+        "address": "0x43d141d7e4e9bd76851ac707b9b55bb9cf90c8aa",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "MetagamZ": "contracts/Hacken-MetagamZ/MetagamZ"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Using SafeMath on solidity >=0.8.0",
+            "description": "Starting Solidity v0.8.0, there's no need to check for uint to overflow while mathematical operations because this check is already built-in.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Vesting rules not described",
+            "description": "The smart contract doesn't specify vesting rules, which might lead to unclear or unmatched rules added by the admin.",
+            "severity": "low",
+            "location": "TokenVesting contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Access state variables in the loop",
+            "description": "Reading and writing access to state variables in loops costs a lot of gas.",
+            "severity": "low",
+            "location": "TokenVesting contract, createMultipleVesting and createVesting functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "External calls in the loop",
+            "description": "Unnecessary external calls to ERC20Interface.allowance and ERC20Interface.safeTransferFrom functions in loops.",
+            "severity": "low",
+            "location": "TokenVesting contract, createMultipleVesting and createVesting functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Using storage variable",
+            "description": "Using storage variables instead of memory ones without any writings only for multiple reads will burn excess gas.",
+            "severity": "low",
+            "location": "TokenVesting contract, claim and suspendLockTransferToReceiver functions"
+        }
+    ]
+}

@@ -1,0 +1,146 @@
+{
+    "path": "artifacts/Solidified-Polymath_Token_Distribution_[01.09.18].pdf",
+    "project_info": {
+        "url": "https://github.com/PolymathNetwork/polymath-token-distribution/tree/aa042b75ff9d815c1b863ad58a5109fa62d961f3",
+        "commit_id": "aa042b75ff9d815c1b863ad58a5109fa62d961f3",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "polymath-token-distribution": "contracts/Solidified-Polymath_Token_Distribution_[01/polymath-token-distribution"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Bypass allocation/vesting and drain all POLY held by PolyDistribution",
+            "description": "Owner of PolyDistribution can bypass allocation/vesting and drain all POLY tokens.",
+            "severity": "n/a",
+            "location": "PolyDistribution.sol, line 113"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Tokens allocated from AVAILABLE_PRESALE_SUPPLY and AVAILABLE_AIRDROP_SUPPLY can be transferred before 'vesting clock' has started",
+            "description": "Tokens allocated from AVAILABLE_PRESALE_SUPPLY and AVAILABLE_AIRDROP_SUPPLY can be transferred before the vesting period.",
+            "severity": "n/a",
+            "location": "PolyDistribution.sol, lines 21, 23"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Allocations can occur after startTime",
+            "description": "The intended behavior of setAllocation after startTime is unclear and may allow allocations to occur after startTime.",
+            "severity": "n/a",
+            "location": "PolyDistribution.sol, lines 61-87"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "State variable grandTotalAllocated can be converted into a function with view modifier to save gas",
+            "description": "The state variable grandTotalAllocated can be replaced with a function to reduce gas consumption.",
+            "severity": "n/a",
+            "location": "PolyDistribution.sol, various lines"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Consider renaming 'decimals' in PolyDistribution",
+            "description": "The non-standard usage of 'decimals' may cause confusion and should be renamed for clarity.",
+            "severity": "n/a",
+            "location": "PolyDistribution.sol, line 18"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Log arguments are not indexed",
+            "description": "Log arguments _fromSupply and _recipient could be indexed to make logs searchable.",
+            "severity": "n/a",
+            "location": "PolyDistribution.sol, lines 41, 42"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Include licenses of 3rd party code",
+            "description": "The MIT license and copyright notice for OpenZeppelin contracts must be included in the repository.",
+            "severity": "n/a",
+            "location": "Various files, including Ownable.sol and SafeMath.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Preference for using the AllocationType enum",
+            "description": "Using only one data structure to represent allocation type (enum) would improve code readability.",
+            "severity": "n/a",
+            "location": "PolyDistribution.sol, various lines"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Avoid storing non-fundamental data",
+            "description": "Contract storage is expensive and should be used only for essential data; grandTotalAllocation and grandTotalClaimed can be calculated off-chain.",
+            "severity": "n/a",
+            "location": "PolyDistribution.sol, various lines"
+        }
+    ]
+}

@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-TortleNinja-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/Tortle-Ninja/Tortle-Contracts/tree/b287bb8",
+        "commit_id": "b287bb8",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Tortle-Contracts": "contracts/PeckShield-Audit-Report-TortleNinja-v1/Tortle-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Improved Validation of Function Arguments",
+            "description": "Lack of proper validation for function arguments lpToken, token0, and token1 in depositOnLp() routine, leading to potential user assets loss.",
+            "severity": "medium",
+            "location": "Nodes contract, depositOnLp() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Missed Access Control in Nodes_::split()",
+            "description": "Lack of proper access control validation at the beginning of the split() routine, which results in potential assets loss.",
+            "severity": "low",
+            "location": "Nodes contract, split() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Insufficient Validation for Token Desired",
+            "description": "Lack of proper validation to ensure args.tokenDesired is one of args.token0 or args.token1 in _withdrawLpAndSwap() routine.",
+            "severity": "medium",
+            "location": "Nodes contract, _withdrawLpAndSwap() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged owner account has critical roles in governing system-wide operations, allowing it to handle user assets deposited in the contract at any time.",
+            "severity": "medium",
+            "location": "Nodes contract, functions: depositOnLp and withdrawFromLp; TortleFarmingStrategy contract, functions: updateCallFee and updateTreasury"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Insecure Approval Handling",
+            "description": "The liquidate() function does not handle approvals safely, which can lead to issues.",
+            "severity": "n/a",
+            "location": "Nodes::liquidate() function, line 466"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of Slippage Control in Tortle",
+            "description": "The swap() routine in the TortleFarmingStrategy contract lacks slippage control, making it vulnerable to front-running and potentially resulting in a smaller converted amount.",
+            "severity": "low",
+            "location": "TortleFarmingStrategy contract, swap() function"
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/Torcash Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xa3b6618f932d6c6b5252a501da50e3069dd049c8, 0xda1e55da00265ca9ef2ddbefdc5c49ab31eafa9, 0x678aB8a6e336482cd6FC415de3eF99cf2EeA4CC4, 0xfe8fac74da035323fb702b99230e7e29f31fa64d",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.5.17+commit.d19bba13",
+            "v0.6.2+commit.bacdbe57"
+        ],
+        "project_path": {
+            "TorCoin": "contracts/Torcash Full Smart Contract Security Audit/TorCoin",
+            "Deploy": "contracts/Torcash Full Smart Contract Security Audit/Deploy",
+            "MasterChef": "contracts/Torcash Full Smart Contract Security Audit/MasterChef"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "add or set functions can invoke massUpdatePools(), which may fail due to block gas limit if pool size is too big.",
+            "severity": "low",
+            "location": "MasterChef contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "add function issue",
+            "description": "If an LP token is added twice using the add function, total reward in updatePool will be incorrect.",
+            "severity": "low",
+            "location": "MasterChef contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "Tokens are sent to a dead address instead of being burned in overridden _transfer functions.",
+            "severity": "low",
+            "location": "TorCoin token contract"
+        }
+    ]
+}

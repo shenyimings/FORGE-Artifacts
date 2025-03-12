@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/Fibo Token.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x5067c6e9e6c443372f2e62946273abbf3cc2f2b3",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "FiboToken": "contracts/Fibo Token/FiboToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which may cause an OUT_OF_GAS exception if the excluded addresses list is too long. Similar issue with `_getCurrentSupply()` function.",
+            "severity": "low",
+            "location": "Functions `includeInReward()` and `_getCurrentSupply()` in the contract."
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has excessive privileges, including changing maximum transaction amount, excluding from fee, withdrawing contract BNB balance, withdrawing ERC20 tokens, changing number of tokens to sell, and locking/unlocking.",
+            "severity": "low",
+            "location": "Various functions in the contract related to owner privileges."
+        }
+    ]
+}

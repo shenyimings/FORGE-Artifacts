@@ -1,0 +1,131 @@
+{
+    "path": "artifacts/Solidified-Hermez_[31.10.2020].pdf",
+    "project_info": {
+        "url": "https://github.com/hermeznetwork/contracts",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Solidified-Hermez_[31/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Potential Shortcomings with exchange rates",
+            "description": "Governance process unclear, leading to potential issues with token exchange values.",
+            "severity": "low",
+            "location": "Hermez protocol contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Donation Address can be 0, leading to burned tokens",
+            "description": "`setDonationAddress()` function does not verify that the donation address is not set to 0.",
+            "severity": "low",
+            "location": "HermezAuctionProtocol.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Tokens charging token transfer fee would cause balances accounting discrepancy",
+            "description": "Tokens with transfer fees can lead to accounting discrepancies and withdrawal problems.",
+            "severity": "low",
+            "location": "Hermez.sol, WithdrawalDelayer.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Malleable signatures accepted",
+            "description": "_checkSig() function in HermezHelpers.sol allows malleable signatures for backward compatibility reasons.",
+            "severity": "info",
+            "location": "HermezHelpers.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Endpoint Information for Coordinators is not Enforced",
+            "description": "setCoordinator() function allows URL parameter to be left unset.",
+            "severity": "info",
+            "location": "Auction contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Roles in WithdrawlDelayer can be set to address 0",
+            "description": "Addresses of DAO, white hack group, and Hermez keeper can be set to 0.",
+            "severity": "info",
+            "location": "WithdrawalDelayer contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Saving constants with the hash result is cheaper than saving the hashing operation",
+            "description": "Pre-calculating hashes and saving constants could save gas.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "Deposit timestamps are only recorded for the last deposit",
+            "description": "`deposit()` function updates `depositTimestamp` to a new value every time, overwriting previous deposits.",
+            "severity": "info",
+            "location": "WithdrawalDelayer.sol"
+        }
+    ]
+}

@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/CakeGame Finance.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x28d25e63ab535040aaab1ab4b0c6e457aa7dbfac",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.4.26+commit.4563c3fc"
+        ],
+        "project_path": {
+            "CakeGameFinance": "contracts/CakeGame Finance/CakeGameFinance"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong total supply restriction",
+            "description": "The function Distribute() checks that totalDistributed < totalSupply, but should check totalDistributed + _amount < totalSupply.",
+            "severity": "low",
+            "location": "Distribute() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function DistributeAirdropMultiple() uses a loop for distributing tokens as airdrop and may run out of gas if the addresses array length is too big.",
+            "severity": "low",
+            "location": "DistributeAirdropMultiple() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Various owner privileges that can be exploited",
+            "severity": "low",
+            "location": "Various functions (add(), burn(), withdraw BNBs, withdraw tokens, stop distribution, distribute tokens, change tokensPerBsc value)"
+        }
+    ]
+}

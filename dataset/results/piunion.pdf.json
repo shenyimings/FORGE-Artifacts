@@ -1,0 +1,80 @@
+{
+    "path": "artifacts/piunion.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xaAd9e4FD545cB2518e5C0ee0d3dAD14D78cE4033",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "PiUnion": "contracts/piunion/PiUnion"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can stop transactions for all users excluding the owner",
+            "description": "The contract owner has the authority to stop the sales for all users excluding the owner, which can be exploited by setting _totalTaxIfSelling to a high percentage value or _maxTxAmount to zero.",
+            "severity": "info",
+            "location": "contract.sol#L658,760"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Contract Owner can increase fees more than the allowed limit of 25%",
+            "description": "The contract owner has the authority to increase fees over the allowed limit by calling the setSelTaxes function with a high percentage value.",
+            "severity": "info",
+            "location": "contract.sol#L545,553"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "Unused state variables",
+            "description": "There are segments that contain unused state variables.",
+            "severity": "low",
+            "location": "contract.sol#L141,142"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Missing events for critical arithmetic parameters",
+            "description": "Detected missing events for critical arithmetic parameters make it difficult to track off-chain changes.",
+            "severity": "low",
+            "location": "contract.sol#L545,553,561,569,581,585"
+        }
+    ]
+}

@@ -1,0 +1,140 @@
+{
+    "path": "artifacts/Smart Contract Security Audit Report - earning.farm.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "6638ef7940660f01597da84c4748ba8845a4d6acb80311fe79b343d56e7f7ab1",
+        "address": "0x65ff67d6a61ae6bab8821c584f5f394d35e9b50e",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.5.10+commit.5a6ea5b1"
+        ],
+        "project_path": {
+            "CRVExchange": "contracts/Smart Contract Security Audit Report - earning/CRVExchange"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "Type mismatch in remove_liquidity_one_coin interface",
+            "description": "The type of the 'i' variable in the parameter list of the remove_liquidity_one_coin interface is wrong, which results in normal withdrawal failure.",
+            "severity": "high",
+            "location": "CurveInterface"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "PriceInterface uses non-existent curve variable in Aave Pool",
+            "description": "The PriceInterface in the Aave Pool uses the curve variable of the CurveInterface when obtaining the price, but the actual Curve Aave pool does not have this variable.",
+            "severity": "high",
+            "location": "Aave Pool (PriceInterface)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "No slippage control during deposit in IPoolBase/IethPoolBase/IWbtcPoolBase contracts",
+            "description": "The contracts directly transfer funds to the Curve fund pool without slippage control, which may cause asset loss.",
+            "severity": "medium",
+            "location": "IPoolBase/IethPoolBase/IWbtcPoolBase contracts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "No exchange slippage check during CRV exchange operation",
+            "description": "The contract did not check the exchange slippage, resulting in possible losses due to slippage.",
+            "severity": "medium",
+            "location": "CRV exchange operation (handleExtraToken function)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Risk of Excessive Authority",
+            "description": "The owner authority of controller/Vault/Exchgange/TrustList/Pool has not been transferred, allowing the project party to arbitrarily modify sensitive parameters or transfer user funds.",
+            "severity": "medium",
+            "location": "Various contracts (controller/Vault/Exchgange/TrustList/Pool)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Unrestricted _amount Parameter",
+            "description": "There has not restriction on _amount, which may cause gas wasting.",
+            "severity": "n/a",
+            "location": "deposit function in CFBault.sol contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Hardcoded Address",
+            "description": "The address is hard-coded in many places in the contract. Once the relevant external address is changed, the business logic will become invalid.",
+            "severity": "n/a",
+            "location": "Multiple locations in the contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Simplified Operation Leading to Calculation Errors",
+            "description": "The CFValut.sol / CFETHVault.sol contract uses precision merging to expand the recharge amount when processing the accuracy of the recharge, instead of first expanding and then reducing it, which may cause a certain degree of error.",
+            "severity": "n/a",
+            "location": "deposit function in CFValut.sol and CFETHVault.sol contracts"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unrestricted refundTarget Function",
+            "description": "The CFController.sol / CFETHController.sol contract does not limit the calling source of the refundTarget function, and the user may misuse the function to call this function and cause the loss of funds.",
+            "severity": "n/a",
+            "location": "refundTarget function in CFController.sol and CFETHController.sol contracts"
+        }
+    ]
+}

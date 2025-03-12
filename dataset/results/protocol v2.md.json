@@ -1,0 +1,308 @@
+{
+    "path": "artifacts/protocol v2.md",
+    "project_info": {
+        "url": "https://github.com/aave/protocol-v2",
+        "commit_id": "750920303e33b66bc29862ea3b85206dda9ce786",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "protocol-v2": "contracts/protocol v2/protocol-v2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Missing leading 'F' in LIQUIDATION_BONUS_MASK",
+            "description": "Corruption of four bits in the reserve factor field during liquidation bonus operations",
+            "severity": "high",
+            "location": "ReserveConfiguration.sol, L18"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Unchecked bit lengths",
+            "description": "Bit lengths of provided values are not checked against bit lengths of corresponding fields in data",
+            "severity": "high",
+            "location": "ReserveConfiguration.sol, L46,63,84,106,128"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong argument usage",
+            "description": "userBalance is used instead of amount, resulting in overly strict restrictions on withdrawals",
+            "severity": "high",
+            "location": "ValidationLogic.sol, L68"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Uninitialized variable",
+            "description": "vars.availableLiquidity field is not initialized before usage",
+            "severity": "high",
+            "location": "ValidationLogic.sol, L200"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Inconsistent decimals update",
+            "description": "Changing decimals in setReserveDecimals function will not automatically change decimals in aToken or debt tokens",
+            "severity": "high",
+            "location": "LendingPoolConfigurator.sol, L533"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect stable debt calculation",
+            "description": "vars.previousStableDebt is calculated as the current stable debt and always equals to vars.currentStableDebt",
+            "severity": "high",
+            "location": "ReserveLogic.sol, L341-347"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect interest rate update",
+            "description": "updateInterestRates needs to be called with liquidityAdded set to 0 since liquidity was already transferred to the pool's balance",
+            "severity": "high",
+            "location": "LendingPool.sol, L582 and LendingPoolCollateralManager.sol, L521"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Debt reserve interest rates update before debt burning",
+            "description": "updateInterestRates is called before debt burning takes place, resulting in stale total debt values used during interest rates calculation",
+            "severity": "high",
+            "location": "LendingPoolCollateralManager.sol, L227-232 and L409-414"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect liquidityAdded parameter",
+            "description": "The liquidityAdded parameter of the updateInterestRates call seems to be incorrect as the flashloan body is yet to be transferred thus it will not be included in the interest rates calculation",
+            "severity": "high",
+            "location": "LendingPool.sol, L511"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ],
+                "3": [
+                    "CWE-1060"
+                ]
+            },
+            "title": "Unoptimized usage of storage-allocated list addressesProvidersList",
+            "description": "Reading of a single element of a list requires 2 SLOADs and loop bounds check requires 1 SLOAD (3*N SLOADs total)",
+            "severity": "info",
+            "location": "LendingPoolAddressesProviderRegistry.sol, L38-50"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ],
+                "3": [
+                    "CWE-1060"
+                ]
+            },
+            "title": "Unoptimized loop",
+            "description": "addressesProvidersList.length provides multiple SLOADs inside the loop",
+            "severity": "info",
+            "location": "LendingPoolAddressesProviderRegistry.sol, L77-81"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Uninitialized DOMAIN_SEPARATOR",
+            "description": "Broken permit functionality due to uninitialized DOMAIN_SEPARATOR",
+            "severity": "n/a",
+            "location": "DelegationAwareAToken.sol, L55-L63"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy in liquidation process",
+            "description": "Attacker can steal funds by reentering the liquidation process",
+            "severity": "high",
+            "location": "LendingPoolCollateralManager.sol, L212-L225"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inaccurate constant",
+            "description": "Does not account for leap years",
+            "severity": "low",
+            "location": "MathUtils.sol, L11"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect comment",
+            "description": "Returns a number, not a boolean value",
+            "severity": "low",
+            "location": "LendingPoolAddressesProviderRegistry.sol, L23"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent check for `ltv` and `liquidationThreshold / liquidationBonus`",
+            "description": "`ltv` may not serve its purpose",
+            "severity": "n/a",
+            "location": "LendingPoolConfigurator.sol#L337-L339"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent approach for checking reserve usage as collateral",
+            "description": "Non-uniform approach throughout the code",
+            "severity": "n/a",
+            "location": "ValidationLogic.sol#L193 and #L277"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "UpdateInterestRates invocation issues",
+            "description": "Complications of concurrent state update",
+            "severity": "high",
+            "location": "Not specified (multiple contracts)"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "User flags handling issues",
+            "description": "State duplication, typical dangerous setup",
+            "severity": "high",
+            "location": "Not specified (user flags handling)"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Potential fund flow issues",
+            "description": "Need to be mitigated by interest rate strategies and/or code upgrade",
+            "severity": "info",
+            "location": "Reserve parameters"
+        }
+    ]
+}

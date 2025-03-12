@@ -1,0 +1,275 @@
+{
+    "path": "artifacts/QuillAudit-Severus.finance_Smart_Contract_Audit_Report.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xF0DC35a6868A7b0c0213dDEbb7a6f941664b8A36",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "LiquidityGeneratorToken": "contracts/QuillAudit-Severus/LiquidityGeneratorToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Excluded[] Length problem",
+            "description": "Transaction may fail if the length of Excluded array is very large.",
+            "severity": "medium",
+            "location": "Severus contract, includeInReward() and _getCurrentSupply() functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "BEP20 Standard Violation",
+            "description": "Implementation of transfer() function does not allow the input of zero amount as it’s demanded in ERC20 and BEP20 standards.",
+            "severity": "low",
+            "location": "Severus contract, transfer() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-209"
+                ]
+            },
+            "title": "Incorrect Error Message",
+            "description": "includeInReward() function displays an incorrect error message if the require statement fails.",
+            "severity": "low",
+            "location": "Severus contract, includeInReward() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Contract gains non-withdrawable BNB",
+            "description": "The swapAndLiquify function converts half of the contractTokenBalance SVD tokens to BNB, leaving a small amount of BNB leftover in the contract.",
+            "severity": "low",
+            "location": "Severus contract, swapAndLiquify() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ],
+                "3": [
+                    "CWE-708"
+                ]
+            },
+            "title": "addLiquidity() recipient issues",
+            "description": "addLiquidity() function in LiquidityGeneratorToken contract calls for uniswapV2Router.addLiquidityETH() function with the parameter of lp tokens recipient set to owner address.",
+            "severity": "low",
+            "location": "LiquidityGeneratorToken contract, addLiquidity() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Abuse ExcludeFromReward()",
+            "description": "The owner of the token contract can redistribute part of the tokens from users to a specific account.",
+            "severity": "low",
+            "location": "Severus contract, ExcludeFromReward() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1053"
+                ]
+            },
+            "title": "Missing Test Cases",
+            "description": "Test cases for the code and functions have not been provided.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Public functions that could be declared external",
+            "description": "For all the public functions, the input parameters are copied to memory automatically, and it costs gas.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "Variables That Could Be Declared As Constant",
+            "description": "There are multiple variables in the contract, whose value is never updated.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing zero check",
+            "description": "Contracts lack zero address checks, hence are prone to be initialized with zero addresses.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Unindexed event parameters",
+            "description": "MinTokensBeforeSwapUpdated, SwapAndLiquify and SwapAndLiquifyEnabledUpdated events don't have any indexed parameters.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Third Party Dependencies",
+            "description": "The logic of the contract requires it to interact with third-party protocols.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary require statement",
+            "description": "In the constructor, on line 988,989,990 there are three require statements which checks if provided value is greater than or equal to 0.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Gas optimization: For loop optimization",
+            "description": "In includeInReward() and _getCurrentSupply(), there is a for loop which iterates the value of _excluded.length times.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Code",
+            "description": "The token _tokenTransfer() function in LiquidityGeneratorToken.sol, has an if-else block and in the second else if block, there is _transferStandard(sender, recipient, amount).",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Use of block.timestamp for trade deadline",
+            "description": "Deadline set as block.timestamp, which may add the risk of the transaction being reverted by router contract because of the expired deadline.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Minimum amount to receive is 0",
+            "description": "Minimum amount of output tokens that must be received is 0, which allows trade to execute even when the output amount is very low.",
+            "severity": "info",
+            "location": "n/a"
+        }
+    ]
+}

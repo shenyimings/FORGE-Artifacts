@@ -1,0 +1,1238 @@
+{
+    "path": "artifacts/ConnextNxtp-Spearbit-Security-Review.pdf",
+    "project_info": {
+        "url": "https://github.com/connext/nxtp",
+        "commit_id": "32a0370edc917cc45c231565591740ff274b5c05",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "nxtp": "contracts/ConnextNxtp-Spearbit-Security-Review/nxtp"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "swapInternal() shouldn't use msg.sender",
+            "description": "The internal stable swap checks if msg.sender has sufficient funds on execute().",
+            "severity": "high",
+            "location": "BridgeFacet.sol, AssetLogic.sol, SwapUtils.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "MERKLE.insert does not return the updated tree leaf count",
+            "description": "The NatSpec comment for insert is incorrect.",
+            "severity": "high",
+            "location": "Merkle.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Dosable constructor parameters",
+            "description": "Anyone can call setFxRootTunnel (setFxChildTunnel) and assign their own fxRootTunnel (fxChildTunnel) address.",
+            "severity": "high",
+            "location": "FxBaseChildTunnel.sol, FxBaseRootTunnel.sol, Connector.sol, PolygonSpokeConnector.sol, PolygonHubConnector.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Router liquidity draining",
+            "description": "A malicious owner or user with Role.Router role can remove the router and add it back to drain its liquidity.",
+            "severity": "high",
+            "location": "RoutersFacet.sol, BridgeFacet.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Forced slippage acceptance",
+            "description": "Users have no option to cancel and send funds back to the origin domain if they don't accept high slippage rate.",
+            "severity": "high",
+            "location": "BridgeFacet.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ],
+                "4": [
+                    "CWE-638"
+                ]
+            },
+            "title": "Broken trust assumption in ZkSync",
+            "description": "msg.sender preservation in ZkSync can lead to broken trust assumptions for contract-based accounts.",
+            "severity": "high",
+            "location": "ZkSyncHubConnector.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-410"
+                ]
+            },
+            "title": "Messages destined for ZkSync cannot be processed",
+            "description": "The ZkSync's hub connector on Ethereum cannot forward the latest aggregated Merkle root to the ZkSync's spoke connector due to a lack of ETH supply.",
+            "severity": "high",
+            "location": "ZkSyncHubConnector.sol#L49-L72"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Cross-chain messaging via Multichain protocol will fail",
+            "description": "Cross-chain messaging using Multichain within Connext will not work due to a lack of gas fee consideration.",
+            "severity": "high",
+            "location": "BaseMultichain.sol#L39-L47"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "_domainSeparatorV4() not updated after name/symbol change",
+            "description": "DOMAIN_SEPARATOR() is updated but _CACHED_DOMAIN_SEPARATOR isn't.",
+            "severity": "medium",
+            "location": "BridgeToken.sol, OZERC20.sol, EIP712.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ],
+                "4": [
+                    "CWE-567"
+                ]
+            },
+            "title": "diamondCut() allows re-execution of old updates",
+            "description": "ds.acceptanceTimes[keccak256(abi.encode(_diamondCut, _init, _calldata))] isn't reset to zero.",
+            "severity": "medium",
+            "location": "LibDiamond.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "User may not be able to override slippage on destination",
+            "description": "Slippage specified on the source chain is used if BridgeFacet.execute() is executed before BridgeFacet.forceUpdateSlippage().",
+            "severity": "medium",
+            "location": "BridgeFacet.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Do not rely on token balance to determine when cap is reached",
+            "description": "Anyone can send tokens to Connext Diamond to artificially increase the custodied amount.",
+            "severity": "medium",
+            "location": "BridgeFacet.sol, RoutersFacet.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Router recipient can be configured more than once",
+            "description": "setRouterRecipient function allows setting the recipient more than once.",
+            "severity": "medium",
+            "location": "RoutersFacet.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "The set of tokens in an internal swap pool cannot be updated",
+            "description": "Once a swap is initialized, _pooledTokens cannot be updated.",
+            "severity": "medium",
+            "location": "SwapAdminFacet.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "An incorrect decimal supplied to initializeSwap for a token cannot be corrected",
+            "description": "tokenPrecisionMultipliers cannot be changed once initialized.",
+            "severity": "medium",
+            "location": "SwapAdminFacet.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ],
+                "4": [
+                    "CWE-401"
+                ]
+            },
+            "title": "Relayer could lose funds",
+            "description": "Unreliable code in xReceive function can cause a relayer to lose funds.",
+            "severity": "medium",
+            "location": "BridgeFacet.sol#L828-L835"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1024"
+                ]
+            },
+            "title": "sameType does not use the correct right shift value",
+            "description": "Incorrect type flag comparison due to zero padding in bytes29 type.",
+            "severity": "medium",
+            "location": "TypedMemView.sol#L402"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "RootManager.propagate does not operate in a fail-safe manner",
+            "description": "Bridge failure on one chain can cause the entire messaging network to break down.",
+            "severity": "medium",
+            "location": "RootManager.sol#L147-L173"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Arborist once whitelisted cannot be removed",
+            "description": "Arborist cannot be removed from whitelist in case of misbehavior.",
+            "severity": "medium",
+            "location": "Merkle.sol#L93-L97"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "WatcherManager is not set correctly",
+            "description": "SetWatcherManager function does not update the watcherManager.",
+            "severity": "medium",
+            "location": "WatcherClient.sol#L36-L39"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Message can be delivered out of order",
+            "description": "Messages can be delivered out of order on the spoke, allowing malicious users to front-run.",
+            "severity": "medium",
+            "location": "SpokeConnector.sol#L330-L376"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ]
+            },
+            "title": "Extra checks in _verifySender() of GnosisBase",
+            "description": "Lack of check for messageSourceChainId() in _verifySender(), allowing malicious actors to spoof function calls and asset transfers.",
+            "severity": "medium",
+            "location": "GnosisBase.sol#L16-L19"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Absence of Minimum delayBlocks",
+            "description": "Owner can set delayBlocks to 0, collapsing the fraud protection mechanism.",
+            "severity": "medium",
+            "location": "RootManager.sol#L102-106, SpokeConnector.sol#L218-L221"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-459"
+                ]
+            },
+            "title": "_removeAssetId() should also clear custodied",
+            "description": "_removeAssetId() doesn't clear custodied, leading to potential issues if cap & custodied have non-zero values.",
+            "severity": "low",
+            "location": "TokenFacet.sol#L483-L534"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Remove liquidity while paused",
+            "description": "Inconsistency in whenNotPaused modifiers in StableSwapFacet and StableSwap, allowing removal of liquidity while paused.",
+            "severity": "low",
+            "location": "StableSwapFacet.sol#L312-L360, StableSwap.sol#L394-L446"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Relayers can frontrun each other's calls to BridgeFacet.execute",
+            "description": "Lack of on-chain mechanism to track fees allocated to each relayer, allowing front-running.",
+            "severity": "low",
+            "location": "BridgeFacet.sol#L337, BridgeFacet.sol#L366, BridgeFacet.sol#L565-L567, BridgeFacet.sol#L381"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "OptimismHubConnector.processMessageFromRoot emits MessageProcessed for already processed messages",
+            "description": "processMessageFromRoot emits MessageProcessed even for already processed messages, causing issues for off-chain agents.",
+            "severity": "low",
+            "location": "OptimismHubConnector.sol#L119-L120"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Add max cap for domains",
+            "description": "Lack of cap on maximum amount of domains, leading to potential DOS attacks.",
+            "severity": "low",
+            "location": "DomainIndexer.sol#L99"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "DoS vulnerability in xcall and addRouterLiquidity functions",
+            "description": "Frontrun a call to set the cap to a low number, causing subsequent calls to fail.",
+            "severity": "low",
+            "location": "TokenFacet.sol, BridgeFacet.sol, RoutersFacet.sol"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "_executeCalldata() can revert if insufficient gas is supplied",
+            "description": "The function can revert if the available gas is less than 10,000.",
+            "severity": "low",
+            "location": "BridgeFacet.sol"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Be aware of precompiles",
+            "description": "External calls by _executeCalldata() could call a precompile, posing problems on different chains.",
+            "severity": "low",
+            "location": "BridgeFacet.sol"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Upgrade to solidity 0.8.17",
+            "description": "A bugfix was released in Solidity 0.8.17 that affects the optimizer.",
+            "severity": "low",
+            "location": "nxtp contracts"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "If an adopted token and its canonical live on the same domain, the cap for the custodied amount is applied for each of those tokens",
+            "description": "The cap is applied to both adopted and canonical tokens, potentially doubling the intended capped amount.",
+            "severity": "low",
+            "location": "RoutersFacet.sol"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No checks/constraints against the _representation provided to setupAssetWithDeployedRepresentation()",
+            "description": "The _representation parameter does not have checks or constraints.",
+            "severity": "low",
+            "location": "TokenFacet.sol"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Infinite loop in dequeueVerified()",
+            "description": "Possible infinite loop in dequeueVerified() due to unchecked condition for queue initialization.",
+            "severity": "low",
+            "location": "Queue.sol#L59-L102"
+        },
+        {
+            "id": 35,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Ignoring staticcall's return value",
+            "description": "Do not ignore staticcall's return value.",
+            "severity": "low",
+            "location": "TypedMemView.sol#L652, #L668-L669, #L685-L686"
+        },
+        {
+            "id": 36,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Extra parameter in function checker()",
+            "description": "Extra parameter in function checker() at encodeWithSelector().",
+            "severity": "low",
+            "location": "SendOutboundRootResolver.sol#L32-L42"
+        },
+        {
+            "id": 37,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "EIP712 domain separator can be cached",
+            "description": "Caching EIP712 domain separator to optimize gas usage.",
+            "severity": "info",
+            "location": "OZERC20.sol#L386"
+        },
+        {
+            "id": 38,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "getD can be optimized by removing an extra multiplication by d per iteration",
+            "description": "The calculation for the new d can be simplified by canceling a d from the numerator and denominator.",
+            "severity": "info",
+            "location": "SwapUtils.sol#L327-L341, SwapUtilsExternal.sol#L364-L378"
+        },
+        {
+            "id": 39,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Replace divisions by powers of 2 by right shifts and multiplications by left shifts",
+            "description": "Division operations can be replaced by right shifts to save gas.",
+            "severity": "info",
+            "location": "Merkle.sol#L96"
+        },
+        {
+            "id": 40,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "TypedMemView.castTo can be optimized by using bitmasks instead of multiple shifts",
+            "description": "Using bit masks instead of multiple shifts to clear type flag bits.",
+            "severity": "info",
+            "location": "TypedMemView.sol#L306-L307"
+        },
+        {
+            "id": 41,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ]
+            },
+            "title": "Make domain immutable in Facets",
+            "description": "Domain can be made an immutable variable to avoid reading from storage.",
+            "severity": "info",
+            "location": "LibConnextStorage.sol#L145, Connector.sol"
+        },
+        {
+            "id": 42,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Cache router balance in repayAavePortal()",
+            "description": "Reading s.routerBalances[msg.sender][local] twice can be cached to only read it once.",
+            "severity": "info",
+            "location": "PortalFacet.sol#L89-L115"
+        },
+        {
+            "id": 43,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unrequired if condition",
+            "description": "Unrequired if condition in ConnextPriceOracle.sol can be removed.",
+            "severity": "info",
+            "location": "ConnextPriceOracle.sol#L97"
+        },
+        {
+            "id": 44,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Delete slippage for gas refund",
+            "description": "Deleting s.slippage[_transferId] to get some gas refund.",
+            "severity": "info",
+            "location": "BridgeFacet.sol#L741"
+        },
+        {
+            "id": 45,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unnecessary branching decision in AmplificationUtils._getAPrecise",
+            "description": "Simplify the formula to return the interpolated value of a.",
+            "severity": "info",
+            "location": "AmplificationUtils.sol#L49-L66, SwapUtilsExternal.sol#L152-L169"
+        },
+        {
+            "id": 46,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Optimization opportunity in dequeueVerified()",
+            "description": "Calculate block.number - delay outside the loop.",
+            "severity": "info",
+            "location": "Queue.sol#L59-L102"
+        },
+        {
+            "id": 47,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Cache array length for loops",
+            "description": "Fetching array length for each iteration consumes more gas compared to caching it in a variable.",
+            "severity": "info",
+            "location": "Multiple files (listed in the document)"
+        },
+        {
+            "id": 48,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-209"
+                ]
+            },
+            "title": "Use custom errors instead of encoding the error message",
+            "description": "Use custom errors instead of encoding variables in revert string.",
+            "severity": "info",
+            "location": "TypedMemView.sol#L287-L290, TypedMemView.sol#L145, Encoding.sol#L35"
+        },
+        {
+            "id": 49,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Avoid OR with a zero variable",
+            "description": "Boolean OR operation with a zero variable is a no-op.",
+            "severity": "info",
+            "location": "TypedMemView.sol#L306, TypedMemView.sol#L328, TypedMemView.sol#L132"
+        },
+        {
+            "id": 50,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Use scratch space instead of free memory",
+            "description": "Memory slots 0x00 and 0x20 are scratch space.",
+            "severity": "info",
+            "location": "TypedMemView.sol#L651, TypedMemView.sol#L667, TypedMemView.sol#L684"
+        },
+        {
+            "id": 51,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant checks in _processMessageFromRoot()",
+            "description": "The function _processMessageFromRoot() does two checks on sender, which are the same.",
+            "severity": "info",
+            "location": "PolygonSpokeConnector.sol#L61-L74, PolygonSpokeConnector.sol#L78-L82, FxBaseChildTunnel.sol#L32-41"
+        },
+        {
+            "id": 52,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1093"
+                ]
+            },
+            "title": "Consider using bitmaps in _recordOutputAsSpent()",
+            "description": "The function _recordOutputAsSpent() stores status via a mapping of booleans.",
+            "severity": "info",
+            "location": "ArbitrumHubConnector.sol#L171-L196, Outbox.sol#L219-L235"
+        },
+        {
+            "id": 53,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Move nonReentrant from process() to proveAndProcess()",
+            "description": "The function behavior may vary depending on the input and pool balances.",
+            "severity": "info",
+            "location": "SpokeConnector.sol#L220, L418, L480; ZkSyncHubConnector.sol#L124"
+        },
+        {
+            "id": 54,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Typos, grammatical and styling errors",
+            "description": "Multiple typos, grammatical mistakes in various files",
+            "severity": "info",
+            "location": "Multiple files (listed in the description)"
+        },
+        {
+            "id": 55,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Keep consistent return parameters in calculateSwapToLocalAssetIfNeeded",
+            "description": "Inconsistent return parameters",
+            "severity": "info",
+            "location": "AssetLogic.sol#L392-L394"
+        },
+        {
+            "id": 56,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Fix/add or complete missing NatSpec comments",
+            "description": "Missing or incomplete NatSpec comments in various files",
+            "severity": "info",
+            "location": "Multiple files (listed in the description)"
+        },
+        {
+            "id": 57,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Lack of constants for literals",
+            "description": "Define and use constants for different literals used in the codebase.",
+            "severity": "info",
+            "location": "AssetLogic.sol#L180, AssetLogic.sol#L260, AssetLogic.sol#L330, AssetLogic.sol#L528"
+        },
+        {
+            "id": 58,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Inconsistent return values",
+            "description": "Enforce using adopted for the returned parameter in swapFromLocalAssetIfNeeded for consistency.",
+            "severity": "info",
+            "location": "AssetLogic.sol#L162, AssetLogic.sol#L212, AssetLogic.sol#L355"
+        },
+        {
+            "id": 59,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Casting to interface type multiple times",
+            "description": "Use interface types for parameters instead of casting to the interface type multiple times.",
+            "severity": "info",
+            "location": "AssetLogic.sol#L38-L58"
+        },
+        {
+            "id": 60,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Tokens with multiple addresses",
+            "description": "Be aware of tokens with multiple addresses.",
+            "severity": "info",
+            "location": "RoutersFacet.sol#L536-L571"
+        },
+        {
+            "id": 61,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-706"
+                ]
+            },
+            "title": "Old references to claims",
+            "description": "Remove old references to claims.",
+            "severity": "info",
+            "location": "RelayerFacet.sol#L13-L14, RelayerFacet.sol#L46-L54"
+        },
+        {
+            "id": 62,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Doublecheck references to Nomad",
+            "description": "Doublecheck references to Nomad.",
+            "severity": "info",
+            "location": "Connext contracts"
+        },
+        {
+            "id": 63,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Document usage of Nomad domain schema",
+            "description": "Document usage of Nomad domain schema.",
+            "severity": "info",
+            "location": "LibConnextStorage.sol#L49-L50, BridgeFacet.sol#L258, BridgeFacet.sol#L291, IXReceiver.sol#L5"
+        },
+        {
+            "id": 64,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ]
+            },
+            "title": "Router has multiple meanings",
+            "description": "Router has multiple meanings.",
+            "severity": "info",
+            "location": "RoutersFacet.sol#L16, LibConnextStorage.sol#L18, InboxFacet.sol#L217"
+        },
+        {
+            "id": 65,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Robustness of receiving contract",
+            "description": "Functions _handleExecuteTransaction(), _executeCalldata() don't revert when underlying call reverts",
+            "severity": "info",
+            "location": "BridgeFacet.sol#L785-L840, BridgeFacet.sol#L756-L770"
+        },
+        {
+            "id": 66,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Functions can be combined",
+            "description": "Both xcall and xcallIntoLocal have same code except receiveLocal value",
+            "severity": "info",
+            "location": "BridgeFacet.sol#L258-L322"
+        },
+        {
+            "id": 67,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Document source of zeroHashes",
+            "description": "The hashes used in function zeroHashes() are not explained",
+            "severity": "info",
+            "location": "Merkle.sol#L173-L241"
+        },
+        {
+            "id": 68,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Document underflow/overflows in TypedMemView",
+            "description": "Functions index() and leftMask() have overflows/underflows that need documentation",
+            "severity": "info",
+            "location": "TypedMemView.sol#L559-L582, TypedMemView.sol#L204-L210"
+        },
+        {
+            "id": 69,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use while loops in dequeueVerified()",
+            "description": "For loops can be replaced with while loops for better readability and gas efficiency",
+            "severity": "info",
+            "location": "Queue.sol#L59-L102"
+        },
+        {
+            "id": 70,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate functions in Encoding.sol",
+            "description": "Functions are duplicated between Encoding.sol and TypedMemView.sol",
+            "severity": "info",
+            "location": "Encoding.sol#L35-L74, TypedMemView.sol#L72-L168"
+        },
+        {
+            "id": 71,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Document about two MerkleTreeManager's",
+            "description": "There are two MerkleTreeManagers on the hub domain that need documentation",
+            "severity": "info",
+            "location": "messaging/Merkle.sol"
+        },
+        {
+            "id": 72,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Match filename to contract name",
+            "description": "Filenames do not match contract names, making it difficult to find contracts",
+            "severity": "info",
+            "location": "Various files (messaging/Merkle.sol, etc.)"
+        },
+        {
+            "id": 73,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Use uint40 for type in TypedMemView",
+            "description": "Inconsistent interface due to different types used",
+            "severity": "info",
+            "location": "TypedMemView.sol#L347"
+        },
+        {
+            "id": 74,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Comment in function typeOf() is inaccurate",
+            "description": "Inaccurate comment about shifting 24 bytes instead of 27 bytes",
+            "severity": "info",
+            "location": "TypedMemView.sol#L391"
+        },
+        {
+            "id": 75,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ],
+                "3": [
+                    "CWE-1060"
+                ]
+            },
+            "title": "Missing Natspec documentation in TypedMemView",
+            "description": "Incomplete Natspec documentation for unsafeJoin() function",
+            "severity": "info",
+            "location": "TypedMemView.sol#L802"
+        },
+        {
+            "id": 76,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Remove irrelevant comments",
+            "description": "Irrelevant comments that need to be removed or updated",
+            "severity": "info",
+            "location": "Various files (TypedMemView.sol, SpokeConnector.sol, BridgeFacet.sol)"
+        },
+        {
+            "id": 77,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect comment about TypedMemView encoding",
+            "description": "A TypedMemView variable of type bytes29 is encoded incorrectly in a comment.",
+            "severity": "info",
+            "location": "TypedMemView.sol#L414"
+        },
+        {
+            "id": 78,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Constants can be used in assembly blocks directly",
+            "description": "Yul cannot read global variables, but constants can be used directly in assembly code.",
+            "severity": "info",
+            "location": "ExcessivelySafeCall.sol#L127-L133, TypedMemView.sol#L411-L415"
+        },
+        {
+            "id": 79,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Document source of processMessageFromRoot()",
+            "description": "The function processMessageFromRoot() lacks a comment about its derivation.",
+            "severity": "info",
+            "location": "ArbitrumHubConnector.sol#L86-L117"
+        },
+        {
+            "id": 80,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Be aware of zombies",
+            "description": "The function _validateSendRoot() might need to consider zombies in stakerCount and childStakerCount.",
+            "severity": "info",
+            "location": "ArbitrumHubConnector.sol#L119-L138, Node.sol#L20-L23"
+        },
+        {
+            "id": 81,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1120"
+                ]
+            },
+            "title": "Readability of proveAndProcess()",
+            "description": "The function proveAndProcess() is difficult to understand due to its structure.",
+            "severity": "info",
+            "location": "SpokeConnector.sol#L330-L365"
+        },
+        {
+            "id": 82,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Readability of checker()",
+            "description": "The function checker() is difficult to read due to else if chaining.",
+            "severity": "info",
+            "location": "SendOutboundRootResolver.sol#L32-L42"
+        },
+        {
+            "id": 83,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Use function addressToBytes32",
+            "description": "An explicit conversion from address to bytes32 can be replaced with a more readable function call.",
+            "severity": "info",
+            "location": "SpokeConnector.sol#L282-L289, TypeCasts.sol#L31-L33"
+        }
+    ]
+}

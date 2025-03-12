@@ -1,0 +1,143 @@
+{
+    "path": "artifacts/2-blb.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x13D67Fd10BDBe8301E978e4AdCBD2c0AD26F7549",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "BLBToken": "contracts/2-blb/BLBToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "ELFM - Exceeds Fees Limit",
+            "description": "The contract owner has the authority to increase over the allowed limit of 25%",
+            "severity": "critical",
+            "location": "contracts/BEP20/TransactionFee.sol#L37"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "MT - Mints Tokens",
+            "description": "The contract owner has the authority to mint tokens.",
+            "severity": "critical",
+            "location": "contracts/BEP20/BLBToken.sol#L36,50"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "TSD - Total Supply Diversion",
+            "description": "The amount that is added to the total supply does not equal the amount that is added to the balances.",
+            "severity": "critical",
+            "location": "contracts/BEP20/TransactionFee.sol#L93"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Abuse of mint functionality by contract owner",
+            "description": "The contract owner can abuse the mint functionality, causing high inflation.",
+            "severity": "high",
+            "location": "BLBToken implementation, `mint` function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "Not following Solidity naming conventions.",
+            "severity": "low",
+            "location": "contracts/BEP20/TransactionFee.sol#L39,40,38"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "L05 - Unused State Variable",
+            "description": "Unused state variables exist.",
+            "severity": "low",
+            "location": "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol#L37"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L14 - Uninitialized Variables in Local Scope",
+            "description": "Variables defined in local scope are not initialized.",
+            "severity": "low",
+            "location": "contracts/BEP20/BLBToken.sol#L54"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Manipulation of fees by contract owner",
+            "description": "The contract owner can manipulate fees, potentially causing losses to users.",
+            "severity": "medium",
+            "location": "TransactionFee implementation, `setTransactionFee` function"
+        }
+    ]
+}

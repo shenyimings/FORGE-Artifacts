@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-GumBallV2-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/Heesho/GumballV2/tree/c788e001406f5db27ded20de0f9f0d82e1ca9be4",
+        "commit_id": "c788e001406f5db27ded20de0f9f0d82e1ca9be4",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "GumballV2": "contracts/PeckShield-Audit-Report-GumBallV2-v1/GumballV2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incompatibility with Deflationary/Rebasing Tokens",
+            "description": "The contract assumes that token transfers will always result in full transfer, which may not be true for deflationary or rebasing tokens.",
+            "severity": "medium",
+            "location": "GumBallFactory.sol (previously Factory.sol), ERC20BondingCurveL contract, buy() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20-Compliant Tokens",
+            "description": "The approve() function may not work correctly with non-ERC20-compliant tokens that do not return a value.",
+            "severity": "low",
+            "location": "GBTFactory.sol (previously ERC20BondingCurveL.sol), ERC20BondingCurveL contract, treasurySkim() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged accounts can be compromised if they are plain EOA accounts, which could modify system parameters and undermine the protocol design.",
+            "severity": "medium",
+            "location": "XGBTFactory.sol (previously GumbarL.sol), Multiple contracts, including GumBallFactory and GNFT"
+        }
+    ]
+}

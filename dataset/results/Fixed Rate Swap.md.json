@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/Fixed Rate Swap.md",
+    "project_info": {
+        "url": "https://github.com/1inch/fixed-rate-swap",
+        "commit_id": "0b5a75e9f56e7d21c290dd28c59dc140dcbcc1d5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "fixed-rate-swap": "contracts/Fixed Rate Swap/fixed-rate-swap"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Withdraw \"with ratio\" without fee via reentrancy",
+            "description": "Tokens with callback e.g. ERC-777 allow easy reentrancy, enabling users to exploit reentrancy to withdraw with non-equal proportions without fees.",
+            "severity": "high",
+            "location": "withdraw function after the first transfer of depositFor or _swap"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Token exchange blocking",
+            "description": "The exchange functionality can be blocked by constantly making a small balance of one of the tokens.",
+            "severity": "medium",
+            "location": "Line 92 of FixedRateSwap.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Duplicate code",
+            "description": "Duplicate code structures in several places, violating SOLID software development principles.",
+            "severity": "low",
+            "location": "Lines 171-178, 212-220, 346-358, and 388-400 of FixedRateSwap.sol"
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/High Rise Finance.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x70D1468Ee2A09Df5fe2a2f16042B6BA8D1677c78",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.6+commit.7338295f"
+        ],
+        "project_path": {
+            "HiRise2": "contracts/High Rise Finance/HiRise2"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Owner has excessive privileges, including changing presale and router addresses, dividend tracker address, BNBReward, liquidity fee, Uniswap router address, excluding/including addresses in automatedMarketMakerPairs array, excluding from fees, changing gas for processing, updating claimWait value, and excluding from dividends.",
+            "severity": "n/a",
+            "location": "Various owner-only functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Inflexible gas value in _withdrawDividendOfUser function",
+            "description": "Gas value is constant and cannot be changed if needed.",
+            "severity": "low",
+            "location": "_withdrawDividendOfUser function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unaudited dividend tracker logic",
+            "description": "Logic of setBalance and other functions could be different and not audited if the dividend tracker is changed.",
+            "severity": "n/a",
+            "location": "Dividend tracker related functions"
+        }
+    ]
+}

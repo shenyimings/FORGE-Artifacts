@@ -1,0 +1,62 @@
+{
+    "path": "artifacts/FAYA World Smart Contract Audit Report.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x04e3e226bedfd57252198443561b57c0a6456e9b",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.18+commit.87f61d96"
+        ],
+        "project_path": {
+            "FAYA": "contracts/FAYA World Smart Contract Audit Report/FAYA"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Donations can't be sent to the contract",
+            "description": "In contract FAYA, the constructor is payable, but after deployment, if someone tries to send native tokens as the contract doesn't have a receive() function, it won't be able to accept donations afterwards.",
+            "severity": "low",
+            "location": "Contract - FAYA"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma (pragma solidity ^0.8.18)",
+            "description": "Contracts should be deployed with the same compiler version and flags that they have been tested with thoroughly. Locking the pragma helps to ensure that contracts do not accidentally get deployed using, for example, an outdated compiler version that might introduce bugs that affect the contract system negatively.",
+            "severity": "info",
+            "location": "Contract - FAYA"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Use safeTransfer instead of transfer for ERC20 tokens",
+            "description": "In contract TokenRecover, transfer is used to transfer ERC20 tokens to the owner which are sent as donations but using transfer sometimes does not work properly and can give true even if the transaction failed for some tokens such as USDT.",
+            "severity": "low",
+            "location": "Contract - TokenRecover"
+        }
+    ]
+}

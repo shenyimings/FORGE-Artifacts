@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/Hacken_PHPT_SCA-PHPT_Token_Dec2023_P-2023-075_1_20240112-13_51.pdf",
+    "project_info": {
+        "url": "https://github.com/PHPT-COM/PHPToken",
+        "commit_id": "476400faa7e15a2823cdf0ce569ad4052946104e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "PHPToken": "contracts/Hacken_PHPT_SCA-PHPT_Token_Dec2023_P-2023-075_1_20240112-13_51/PHPToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Checks for Zero Address",
+            "description": "The contract does not properly check or prevent interactions with the zero address.",
+            "severity": "low",
+            "location": "ExchangeV4.sol contract, initialize() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Rates and Coefficients Setters Could be Frontrunned",
+            "description": "Attackers can frontrun updates to exchange rates and coefficients by increasing their transaction's gas price.",
+            "severity": "medium",
+            "location": "ExchangeV4.sol contract, setter and getter functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Owner can Frontrun the User Exchange Transaction",
+            "description": "The owner can frontrun user exchange transactions by submitting a transaction to adjust exchange rates concurrently.",
+            "severity": "medium",
+            "location": "ExchangeV4.sol contract, exchange() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Using a floating pragma can lead to compatibility and stability issues.",
+            "severity": "info",
+            "location": "Phptoken.sol and ExchangeV4.sol contracts"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Public Functions That Should Be External",
+            "description": "Some functions are declared as public but should be external for gas efficiency and security.",
+            "severity": "info",
+            "location": "Phptoken.sol, Blacklist.sol, and ExchangeV4.sol contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Imports",
+            "description": "Redundant imports can result in unnecessary gas consumption during deployment.",
+            "severity": "info",
+            "location": "Phptoken.sol and ExchangeV4.sol contracts"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing Events",
+            "description": "Some functions are missing events that should be emitted for tracking actions off-chain.",
+            "severity": "info",
+            "location": "ExchangeV4.sol contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Events Emitted Inside Loops",
+            "description": "Emitting events inside loops can result in unnecessary gas consumption.",
+            "severity": "info",
+            "location": "Blacklist.sol contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Out-of-Gas Error Due to Excessive Loop Iterations",
+            "description": "Batch inputs in addBlacklist() and removeBlacklist() functions can lead to out-of-gas errors.",
+            "severity": "info",
+            "location": "Blacklist.sol contract"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "Testing features",
+            "description": "The ExchangeV4.sol contract contains testing features that should be removed.",
+            "severity": "info",
+            "location": "ExchangeV4.sol contract"
+        }
+    ]
+}

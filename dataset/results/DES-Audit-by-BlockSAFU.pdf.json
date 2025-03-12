@@ -1,0 +1,110 @@
+{
+    "path": "artifacts/DES-Audit-by-BlockSAFU.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x8938071Dd7A4BaB850AA160590871629B00379e5",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.7+commit.e28d00a7"
+        ],
+        "project_path": {
+            "RebaseDividendToken": "contracts/DES-Audit-by-BlockSAFU/RebaseDividendToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Semantic Imprecision Amount of Tokenomic",
+            "description": "Potentially semantic imprecision amount of tokenomic due to decimal in division result.",
+            "severity": "medium",
+            "location": "_tokenTransfer function, specifically in the line '_takeTransfer(sender,recipient,(tAmount / 100) * 1,currentRate)'"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of Zero Check",
+            "description": "Funding address not checked if it is zero.",
+            "severity": "low",
+            "location": "setFundAddress function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked Return Value of External Transfer",
+            "description": "The return value of an external transfer/transferFrom is not checked.",
+            "severity": "low",
+            "location": "transferFrom function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner Can Change Tax Fee Up to 100%",
+            "description": "Owner can change tax fees up to 100%.",
+            "severity": "high",
+            "location": "setDividendFee, setFundFee, setOtherFee, and setNftFee functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner can set fees up to 100%",
+            "description": "The owner can set fees up to 100%, which can cause a honeypot.",
+            "severity": "high",
+            "location": "Tax Fee contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Centralized Ownership",
+            "description": "The owner has too much control over the contract.",
+            "severity": "low",
+            "location": "Honeypot Review"
+        }
+    ]
+}

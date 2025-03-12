@@ -1,0 +1,161 @@
+{
+    "path": "artifacts/[HAECHI AUDIT] Sygma Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/sygmaprotocol/sygma-solidity/tree/aa22b0cd57b60044972e9e2596b6e115b440bbc3",
+        "commit_id": "aa22b0cd57b60044972e9e2596b6e115b440bbc3",
+        "address": "0xda8556c2485048eee3de91085347c3210785323c",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "sygma-solidity": "contracts/[HAECHI AUDIT] Sygma Audit Report/sygma-solidity"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "DoS occurs because relayer does not verify event data",
+            "description": "Relayer mishandles event data, leading to DoS.",
+            "severity": "critical",
+            "location": "Relayer, event handling"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-346"
+                ]
+            },
+            "title": "RetryEventHandler does not verify the event address, leads to arbitrary deposit",
+            "description": "The relayer doesn't check whether the address that emitted the Deposit event is equal to the bridge address itself.",
+            "severity": "critical",
+            "location": "sygma/chains/evm/listener/event-handler.go"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "blockConfirmations can be bypassed",
+            "description": "An attacker can bypass blockConfirmations by supplying the transaction hash of a transaction that did not occur yet as an input to the retry function.",
+            "severity": "critical",
+            "location": "sygma/chains/evm/listener/event-handler.go"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Attacker may always become the coordinator in bully mode",
+            "description": "The attacker can prolong the coordination process, making every other relayer go into waitForStart, then start the TSS initiate process, which makes the attacker the coordinator.",
+            "severity": "high",
+            "location": "sygma/tss/coordinator.go"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Retry function can be spammed to exhaust relayer’s balance",
+            "description": "The retry function can be repeatedly called with a failed deposit transaction hash, exhausting the relayer's mainnet token.",
+            "severity": "high",
+            "location": "sygma/chains/evm/listener/event-handler.go"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Documentation does not match implementation in setResource() functions",
+            "description": "The admin may overwrite contract addresses or resourceIDs by mistake due to incorrect documentation.",
+            "severity": "info",
+            "location": "sygma-solidity/handlers"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "ERC721Handler can be used to steal other's bridged NFTs",
+            "description": "Any attacker can steal other's bridged (burnable) NFTs if the user has approved the NFT to the ERC721Handler.",
+            "severity": "critical",
+            "location": "sygma-solidity/handlers"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Hashing issue in Bridge.sol",
+            "description": "Malicious attackers may be able to replay signatures if additional modifications are made to the code.",
+            "severity": "low",
+            "location": "Bridge.sol, executeProposal() and executeProposals() functions"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "TSS process has weak input validation on libp2p peer and message data",
+            "description": "A malicious relayer can sign any signatures at will due to weak input validation.",
+            "severity": "critical",
+            "location": "sygma/tss/common/base.go, sygma/tss/resharing/resharing.go"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Other minor documentation flaws exist",
+            "description": "Various minor mistakes in the documentation.",
+            "severity": "info",
+            "location": "sygma-solidity"
+        }
+    ]
+}

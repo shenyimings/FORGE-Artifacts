@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/2023-05-fraxgov-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/FraxFinance/frax-governance/tree/ed4e7083fe1b71af34f400ca67090e7123e4e053",
+        "commit_id": "ed4e7083fe1b71af34f400ca67090e7123e4e053",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "frax-governance": "contracts/2023-05-fraxgov-securityreview/frax-governance"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Race condition in FraxGovernorOmega target validation",
+            "description": "A proposal to update governance parameters submitted through FraxGovernorOmega could pass with a 4% quorum, rather than needing to go through FraxGovernorAlpha and its 40% quorum.",
+            "severity": "high",
+            "location": "src/FraxGovernorOmega.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Vulnerable project dependency",
+            "description": "A known vulnerability in the yaml library was identified, which could have a significant effect on the project system as a whole.",
+            "severity": "n/a",
+            "location": "package.json"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Replay protection missing in castVoteWithReasonAndParamsBySig",
+            "description": "The castVoteWithReasonAndParamsBySig function does not include a voter nonce, so transactions involving the function can be replayed by anyone.",
+            "severity": "medium",
+            "location": "Governor.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Ability to lock any user’s tokens using deposit_for",
+            "description": "The deposit_for function can be used to lock anyone's tokens given sufficient token approvals and an existing lock.",
+            "severity": "info",
+            "location": "veFXS.vy"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "The relay function can be used to call critical safe functions",
+            "description": "A malicious user can hide a call to the Gnosis Safe by wrapping it in a call to the relay function.",
+            "severity": "high",
+            "location": "src/Governor.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Votes can be delegated to contracts",
+            "description": "Votes can be delegated to smart contracts, which could lead to unexpected behavior.",
+            "severity": "info",
+            "location": "VeFxsVotingDelegation.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ]
+            },
+            "title": "Lack of public documentation regarding voting power expiry",
+            "description": "The user documentation concerning the calculation of voting power is unclear.",
+            "severity": "info",
+            "location": "VeFxsVotingDelegation.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Spamming risk in propose functions",
+            "description": "Anyone with enough veFXS tokens can submit an unbounded number of proposals.",
+            "severity": "info",
+            "location": "FraxGovernorAlpha.sol, FraxGovernorBravo.sol"
+        }
+    ]
+}

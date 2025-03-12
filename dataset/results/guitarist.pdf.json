@@ -1,0 +1,299 @@
+{
+    "path": "artifacts/guitarist.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xa249d8f280ba32ab3e95bddf4f3dbde059d62ac3",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.17+commit.8df45f5f"
+        ],
+        "project_path": {
+            "Guitarist": "contracts/guitarist/Guitarist"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "PRE - Potential Reentrance Exploit",
+            "description": "The contract makes an external call to transfer funds to recipients using the payable transfer method, which can be exploited by a malicious contract.",
+            "severity": "critical",
+            "location": "_safeMint function within the mint function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "MSB - Max Supply Bypass",
+            "description": "The airdrop function lacks a check to prevent minting exceeding the MAX_SUPPLY limit.",
+            "severity": "n/a",
+            "location": "airdrop function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "CCR - Contract Centralization Risk",
+            "description": "The contract's functionality is heavily dependent on external parameters and configurations, posing centralization risks.",
+            "severity": "n/a",
+            "location": "Various functions with external configuration dependencies"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "DFI - Duplicated Function Implementation",
+            "description": "The contract contains two separate functions, airdrop and partnerMint, which serve the same purpose.",
+            "severity": "n/a",
+            "location": "airdrop and partnerMint functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "MC - Missing Check",
+            "description": "The setMax_per_wallet function permits setting the max_per_wallet limit above MAX_SUPPLY, leading to inconsistencies.",
+            "severity": "n/a",
+            "location": "setMax_per_wallet function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RF - Redundant Functions",
+            "description": "The setWallet2 and setWallet3 functions update wallet addresses, but these updates are not utilized after contract deployment.",
+            "severity": "low",
+            "location": "Guitarist.sol#L1719,1723"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "FO - Function Optimization",
+            "description": "The functions use if-else statements to toggle boolean variables, which can be simplified.",
+            "severity": "low",
+            "location": "Guitarist.sol#L1676,1685"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "MEE - Missing Events Emission",
+            "description": "The contract performs actions without emitting corresponding events.",
+            "severity": "low",
+            "location": "Guitarist.sol#L1685,1707,1713"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "RPF - Redundant Payable Function",
+            "description": "The functions do not use the msg.value variable, making the payable modifier redundant.",
+            "severity": "low",
+            "location": "Guitarist.sol#L1585,1612"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1126"
+                ]
+            },
+            "title": "EIS - Excessively Integer Size",
+            "description": "The contract uses larger than necessary unsigned integer data types.",
+            "severity": "low",
+            "location": "Guitarist.sol#L1560,1562"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "L02 - State Variables could be Declared Constant",
+            "description": "State variables are not declared as constants.",
+            "severity": "low",
+            "location": "Guitarist.sol#L1560"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L04 - Conformance to Solidity Naming Conventions",
+            "description": "The contract does not follow the Solidity style guide for naming conventions.",
+            "severity": "low",
+            "location": "Various locations in the contract"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-561"
+                ]
+            },
+            "title": "L09 - Dead Code Elimination",
+            "description": "The contract contains unreachable or dead code.",
+            "severity": "low",
+            "location": "Guitarist.sol#L130,371,397,407,422,432,447,457,471,481,489,698,710,724,1111,1116,1188,1416"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "L11 - Unnecessary Boolean equality",
+            "description": "The contract uses unnecessary boolean equalities.",
+            "severity": "low",
+            "location": "Guitarist.sol#L1621,1678,1687"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "L14 - Uninitialized Variables in Local Scope",
+            "description": "The contract uses uninitialized local variables.",
+            "severity": "low",
+            "location": "Guitarist.sol#L1039,1044,1065,1066,1071,1336"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "L16 - Validate Variable Setters",
+            "description": "The contract performs operations on variables that have been configured on user-supplied input without proper validation.",
+            "severity": "low",
+            "location": "Guitarist.sol#L1716,1720,1724"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ]
+            },
+            "title": "L17 - Usage of Solidity Assembly",
+            "description": "The contract uses assembly code unnecessarily.",
+            "severity": "low",
+            "location": "Guitarist.sol#L351,498,1495"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "L18 - Multiple Pragma Directives",
+            "description": "If the contract includes multiple conflicting pragma directives, it may produce unexpected errors.",
+            "severity": "low",
+            "location": "Guitarist.sol#L5,37,99,118,173,210,238,321,513,538,565,591,621,732,864,893,923,1551"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "L19 - Stable Compiler Version",
+            "description": "The `^` symbol indicates that any version of Solidity that is compatible with the specified version can be used to compile the contract.",
+            "severity": "low",
+            "location": "Guitarist.sol#L5,37,99,118,173,210,238,321,513,538,565,591,621,732,864,893,923,1551"
+        }
+    ]
+}

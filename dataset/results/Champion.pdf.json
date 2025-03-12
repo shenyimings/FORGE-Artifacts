@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/Champion.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x3F247c09B6b59f4D7eFd4FC3eE2d0BC6e469599C",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "Champion": "contracts/Champion/Champion"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_excluded` list, which can lead to an OUT_OF_GAS exception if the list is too long. Similarly, the `_getCurrentSupply` function also uses a loop that can cause an OUT_OF_GAS exception.",
+            "severity": "low",
+            "location": "`includeInReward()` and `_getCurrentSupply` functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Burn issue",
+            "description": "The function `_reflectBurn()` decreases the reflection balance without checking if it's excluded from reward, which can cause an economy model issue.",
+            "severity": "low",
+            "location": "`_reflectBurn` function"
+        }
+    ]
+}

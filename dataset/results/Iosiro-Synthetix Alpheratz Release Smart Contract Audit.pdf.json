@@ -1,0 +1,56 @@
+{
+    "path": "artifacts/Iosiro-Synthetix Alpheratz Release Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/Synthetixio/synthetix",
+        "commit_id": "2f46009bacf20bab6c442f1ddaefd8991c922559",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "synthetix": "contracts/Iosiro-Synthetix Alpheratz Release Smart Contract Audit/synthetix"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Distribution of liquidator fees",
+            "description": "When the total redeemed amount from a liquidation is less than the sum of the flagger and liquidator fees, the system sends all the redeemed SNX to the stakers and does not pay the flagger or liquidator.",
+            "severity": "info",
+            "location": "SIP-148"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Liquidation flag not removed from healthy positions",
+            "description": "When attempting to liquidate a flagged account that is currently healthy, the flag should be removed instead of reverting.",
+            "severity": "info",
+            "location": "SIP-148"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect debt cache update",
+            "description": "During liquidation, the system incorrectly subtracted the liquidated debt from the debt cache, misrepresenting the system value on that layer.",
+            "severity": "medium",
+            "location": "Issuer.sol#L672 (SIP-148)"
+        }
+    ]
+}

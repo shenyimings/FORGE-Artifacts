@@ -1,0 +1,119 @@
+{
+    "path": "artifacts/Solidified-Flash_Protocol_[27.02.2021].pdf",
+    "project_info": {
+        "url": "https://github.com/XIO-Network/xio-flash-token",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "xio-flash-token": "contracts/Solidified-Flash_Protocol_[27/xio-flash-token"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentrancy issues in pool contract allow malicious tokens or ERC777 tokens to manipulate balances",
+            "description": "The pool code is vulnerable to malicious token implementations or ERC-777 tokens that provide a hook allowing user code to be executed.",
+            "severity": "high",
+            "location": "Pool.sol (Pool contract)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "ERC-20 Return Values Ignored",
+            "description": "Return values of ERC-20 calls are not checked, which could lead to problems with external tokens managed in liquidity pools.",
+            "severity": "low",
+            "location": "Throughout the codebase (ERC-20 calls)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "FlashToken.sol: Incorrect check of balance in flashMint",
+            "description": "The requirement to check whether the flash minted amount plus the current balance is larger than the max uint112 is incorrect.",
+            "severity": "low",
+            "location": "FlashToken.sol (flashMint function)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Potential problems with some ERC tokens",
+            "description": "Some ERC20 tokens may cause unintended behaviors, such as charging fees on transfers or being deflationary.",
+            "severity": "low",
+            "location": "Protocol design (interacting with external ERC20 tokens)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Token susceptible to approve attack",
+            "description": "Changing an allowance through the approve() method brings the risk that someone may use both the old and the new allowance by unfortunate transaction ordering.",
+            "severity": "low",
+            "location": "Approve() function (ERC20 token)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "FlashToken.sol: minter role unnecessary",
+            "description": "The MinterRole in FlashToken.sol is maintained but cannot be used.",
+            "severity": "info",
+            "location": "FlashToken.sol (MinterRole)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Tautology in precondition check",
+            "description": "A redundant check for _newMatchRatio >= 0 in FlashProtocol.sol is performed, as uint256 is always >= 0.",
+            "severity": "info",
+            "location": "FlashProtocol.sol (line 95)"
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "path": "artifacts/Meo.tools Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x37c4a3a9acfaa4bbe543dcb0d6ce4b2443b3b0d7",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.7.6+commit.7338295f"
+        ],
+        "project_path": {
+            "MEO": "contracts/Meo/MEO"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function `includeInRFI()` and `_getCurrentSupply` uses a loop that can lead to an OUT_OF_GAS exception if there is a long excluded addresses list.",
+            "severity": "low",
+            "location": "Functions `includeInRFI()` and `_getCurrentSupply`"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Wrong reflectDevandResearchFee taking",
+            "description": "The function `reflectDevandResearchFee()` does not check dev and research addresses to be excluded from reward and do not increase `_tOwned` balance of this addresses if needed.",
+            "severity": "low",
+            "location": "Function `reflectDevandResearchFee()`"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Owner has multiple privileges that can be exploited, including changing presale wallet, minimum number of tokens to add to liquidity, excluding from fee and rfi, changing fee rates, research and dev wallets, maximum transaction amount, etc.",
+            "severity": "n/a",
+            "location": "Various owner-controlled functions"
+        }
+    ]
+}

@@ -1,0 +1,182 @@
+{
+    "path": "artifacts/YYDS Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/yydsfinance/yyds/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "yyds": "contracts/YYDS Smart Contract Audit Report - QuillAudits/yyds"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "On-chain generated prices can be manipulated",
+            "description": "On-chain generated prices are susceptible to price manipulation.",
+            "severity": "high",
+            "location": "YYDS.sol, tokenPrice() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper token accounting",
+            "description": "In swapAndDividend(), YYDS tokens are swapped to their USDT equivalent via the uniswapV2Router.",
+            "severity": "medium",
+            "location": "YYDS.sol, swapAndDividend() function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Use of two-step ownable",
+            "description": "If ownership transfer is not done appropriately, the current contract owner can renounce/transfer ownership, lose owner privileges, and lose the ability to burn tokens.",
+            "severity": "medium",
+            "location": "YYDS.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing test cases",
+            "description": "The YYDS token contract does not have any test cases and has not shown any results of thoroughly testing the protocol before launch.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "No way to withdraw stuck tokens/BNB",
+            "description": "There could be tokens mistakenly sent into the YYDS token contract and will remain stuck there with no means to claim them.",
+            "severity": "low",
+            "location": "YYDS.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Outdated libraries",
+            "description": "The codebase is replete with old packages from libraries that have gotten updates and newer releases.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Variables can be converted into immutable instead of constant",
+            "description": "For addresses and values that do not change after deployment, they can be stored as immutable values to reduce gas costs for reading from storage.",
+            "severity": "low",
+            "location": "YYDS.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Missing event emission",
+            "description": "Some of the contract functions that update the token’s state do not emit events when called.",
+            "severity": "low",
+            "location": "YYDS.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Unlocked pragma (pragma solidity ^0.8.0)",
+            "description": "Contracts should be deployed with the same compiler version and flags that they have been tested with thoroughly.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Functions guaranteed to revert can be marked payable",
+            "description": "Throughout the codebase, there are functions marked as onlyOwner. These functions are guaranteed to revert when a regular user tries to call them.",
+            "severity": "info",
+            "location": "YYDS.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Wrong comments",
+            "description": "Some lines of code (comments) do not match the codebase specs.",
+            "severity": "info",
+            "location": "YYDS.sol"
+        }
+    ]
+}

@@ -1,0 +1,116 @@
+{
+    "path": "artifacts/Inspex-SpookySwap_Integration_&_Fantom_Expansion.pdf",
+    "project_info": {
+        "url": "https://github.com/alpaca-finance/bsc-alpaca-contract",
+        "commit_id": "5f1ea3c0e8b65bee715f3c192340416e829b7f2c",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bsc-alpaca-contract": "contracts/Inspex-SpookySwap_Integration_&_Fantom_Expansion/bsc-alpaca-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variables",
+            "description": "Critical state variables can be updated by controlling authorities, causing unfairness to other users.",
+            "severity": "high",
+            "location": "`MiniFL` contract, `setMaxAlpacaPerSecond()` function; multiple contracts and functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Use of Upgradable Contract Design",
+            "description": "Logic of affected contracts can be arbitrarily changed by proxy owner.",
+            "severity": "high",
+            "location": "Multiple contracts listed in the report, including `SpookySwapStrategyAddBaseTokenOnly`, `Rewarder1`, and `MiniFL`"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation on `_withUpdate` Parameter",
+            "description": "When `addPool()` and `setPool()` functions are called without updating the pools, the reward will be miscalculated, leading to unfair reward distribution.",
+            "severity": "medium",
+            "location": "MiniFL contract, `addPool()` and `setPool()` functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Design Flaw in massUpdatePool() Function",
+            "description": "The massUpdatePool() function can be unusable due to excessive gas usage.",
+            "severity": "low",
+            "location": "MiniFL.sol, Rewarder1.sol (massUpdatePools() and _massUpdatePools() functions)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Transaction Ordering Dependence in _reinvest() Function",
+            "description": "The front-running attack can be performed, resulting in a bad swapping rate for the reinvestment and lower reward for the platform users.",
+            "severity": "low",
+            "location": "SpookyWorker03.sol (_reinvest() function), SpookySwapStrategyAddBaseTokenOnly.sol (execute() function)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-477"
+                ]
+            },
+            "title": "Use of Outdated Solidity Compiler Version",
+            "description": "The Solidity compiler versions specified in the smart contracts were outdated, which may potentially cause damage to the smart contracts or their users.",
+            "severity": "low",
+            "location": "Various contracts (SpookySwapStrategyAddBaseTokenOnly, SpookySwapStrategyAddTwoSidesOptimal, etc.) with version 0.6.6"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions that are executable by the controlling parties are not logged properly by emitting events.",
+            "severity": "low",
+            "location": "Various contracts (SpookySwapStrategyAddBaseTokenOnly, SpookySwapStrategyAddTwoSidesOptimal, etc.) with functions setWorkersOk() and modifier onlyOwner"
+        }
+    ]
+}

@@ -1,0 +1,86 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-DackieSwap-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/DackieSwap/dackieswap-contracts-v3/tree/0b1c8c8",
+        "commit_id": "0b1c8c8",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "dackieswap-contracts-v3": "contracts/PeckShield-Audit-Report-DackieSwap-v1/dackieswap-contracts-v3"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Lack of Timelocked finalWithdraw() in DackiePadInitializableV5/V6",
+            "description": "The admin function finalWithdraw() can be called to withdraw all funds from IDO contracts without a timelock.",
+            "severity": "high",
+            "location": "DackiePadInitializableV5/V6, finalWithdraw() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Incorrect NFT Removal Logic in SmartChefNFT",
+            "description": "The removeTokenId() routine may be abused to withdraw a tokenId that does not belong to the withdrawing user.",
+            "severity": "high",
+            "location": "SmartChefNFT"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Improved Ether Transfer With Necessary Reentrancy Guard",
+            "description": "The ETH transfer in the withdraw() routine may fail due to Out-of-Gas issue and lock ETH in the contract.",
+            "severity": "low",
+            "location": "DackieNFT, DackiEggNFT"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Incorrect Liquidity Mining in DackieV3LmPool",
+            "description": "The getRewardGrowthInside() routine may block a legitimate user from claiming rewards due to underflow situation.",
+            "severity": "medium",
+            "location": "DackieV3LmPool"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "The privileged owner account has critical roles in governing and regulating protocol-wide operations, which may be worrisome if not governed by a DAO-like structure.",
+            "severity": "medium",
+            "location": "Multiple Contracts"
+        }
+    ]
+}

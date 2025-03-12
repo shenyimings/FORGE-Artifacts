@@ -1,0 +1,143 @@
+{
+    "path": "artifacts/merit-circle.pdf",
+    "project_info": {
+        "url": "https://github.com/Merit-Circle/merit-liquidity-mining/tree/bc1ef21b4e04f6a92949af70495e6c8b8f1da512",
+        "commit_id": "bc1ef21b4e04f6a92949af70495e6c8b8f1da512",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "merit-liquidity-mining": "contracts/merit-circle/merit-liquidity-mining"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Unlimited funds can be moved",
+            "description": "Line 62 calls approve(_poolContract, type(uint256).max); which means unlimited funds can be moved if something goes wrong.",
+            "severity": "medium",
+            "location": "LiquidityMiningManager.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Unlocked Pragma",
+            "description": "Every Solidity file specifies in the header a version number of the format pragma solidity (^)0.4.*",
+            "severity": "low",
+            "location": "Multiple files (IAbstractRewards.sol, TimeLockPool.sol, IBasePool.sol, View.sol, LiquidityMiningManager.sol, ITimeLock.sol, AbstractRewards.sol, BasePool.sol, TokenSaver.sol, TimeLockNonTransferablePool.sol)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Privileged Roles and Ownership",
+            "description": "Certain contracts have special roles, which provide certain addresses with privileged roles.",
+            "severity": "low",
+            "location": "LiquidityMiningManager.sol, TimeLockPool.sol, BasePool.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Input Validation",
+            "description": "Functions do not have proper validation of input parameters.",
+            "severity": "low",
+            "location": "Multiple files (View.sol, LiquidityMiningManager.sol, AbstractRewards.sol, TimeLockPool.sol, BasePool.sol)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Events Not Emitted on State Change",
+            "description": "An event should always be emitted when a state change is performed.",
+            "severity": "info",
+            "location": "AbstractRewards.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "View.fetchData() Always Calling getMultiplier(0)",
+            "description": "In View.fetchData() the multiplier field of the Deposit structures always returns 1e18.",
+            "severity": "n/a",
+            "location": "View.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Gas Costs for Processing Arrays Could be Prohibitive",
+            "description": "In View.fetchData() and LiquidityMiningManager.distributeRewards() a for-loop is used to iterate over the pools returned by liquidityMiningManager.getPools().",
+            "severity": "n/a",
+            "location": "View.sol, TimeLockPool.sol, LiquidityMiningManager.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Ignored Failed Transaction",
+            "description": "There is a comment ignore tx failing on line 121.",
+            "severity": "n/a",
+            "location": "LiquidityMiningManager.sol"
+        }
+    ]
+}

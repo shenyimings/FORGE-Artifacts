@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/lrs.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "c9d9d6a227c52959b21ecd190b1ba6246b289bca0e1c09 067cda733bd8b4e227",
+        "address": "0x5878ADeA653b2f9148ba31beA7ed2F031D7603E6",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "LUCKYRABBITSPIN": "contracts/lrs/LUCKYRABBITSPIN"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected contract owner authority",
+            "description": "The contract owner can claim all the balance of the contract.",
+            "severity": "low",
+            "location": "Manual swap function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected transfer to team wallet",
+            "description": "The contract owner can transfer funds without limit to the team wallet.",
+            "severity": "low",
+            "location": "Contract.sol#L387, Manual send function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Revert propagation risk in transfer flow",
+            "description": "The contract may revert when sending funds to a contract address.",
+            "severity": "critical",
+            "location": "Contract.sol#L296, SendETHToFee function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Division precision issue",
+            "description": "Division in the contract may miss decimal precision.",
+            "severity": "low",
+            "location": "Contract.sol#L297,298, SendETHToFee function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary SafeMath library usage",
+            "description": "The contract uses SafeMath library which is not needed in Solidity versions greater than or equal to 0.8.0.",
+            "severity": "low",
+            "location": "Contract.sol#L59, SafeMath library"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused state variable declaration",
+            "description": "Some state variables can be declared constant to save gas.",
+            "severity": "low",
+            "location": "Contract.sol#L99, _previousOwner variable"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-conformant naming conventions",
+            "description": "Some variables and functions do not follow Solidity naming conventions.",
+            "severity": "low",
+            "location": "Multiple locations in the contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused state variable",
+            "description": "There are unused state variables in the contract.",
+            "severity": "low",
+            "location": "Contract.sol#L99,133"
+        }
+    ]
+}

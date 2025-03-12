@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/Iosiro-Etherparty Smart Contract Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/etherparty/eth-smart-contracts",
+        "commit_id": "39ab46c841f2e8e5beff4508a3f05362bd583049",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "eth-smart-contracts": "contracts/Iosiro-Etherparty Smart Contract Audit/eth-smart-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary declaration of the return variable name balance",
+            "description": "The `balanceOf(...) function explicitly defined the return variable name `balance`, which is unnecessary.",
+            "severity": "info",
+            "location": "BasicToken.sol, line 47"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "Use of assert instead of require for transfer validation",
+            "description": "The `assert` operator was used to validate transfers, which is not recommended.",
+            "severity": "info",
+            "location": "SafeERC20.sol, lines 15, 19, 23"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Use of implicit integer sizes in StandardToken implementation",
+            "description": "Implicit `uint` type declarations were used instead of explicit `uint256` type declarations.",
+            "severity": "info",
+            "location": "StandardToken.sol, lines 73, 89, 90"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Redundant if statements can be replaced with require",
+            "description": "The design pattern using an `if` statement for validation followed by a `revert()` if validation failed was used, which is not recommended.",
+            "severity": "info",
+            "location": "Crowdfund.sol, lines 157, 176, 212, 227, 232, 253"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Timestamp dependency",
+            "description": "The `now` keyword is used to determine the current time, which can be marginally affected by miners.",
+            "severity": "info",
+            "location": "n/a"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Uncessary Self-Destruct Functionality",
+            "description": "The crowdsale contract had `selfdestruct` functionality, which results in a single point of failure and unnecessarily extends the attack surface of the contract.",
+            "severity": "low",
+            "location": "Crowdfund.sol, Line 266"
+        }
+    ]
+}

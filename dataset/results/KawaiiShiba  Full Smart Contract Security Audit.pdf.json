@@ -1,0 +1,47 @@
+{
+    "path": "artifacts/KawaiiShiba  Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xc7160Df445AB62B7B3daD4c4453EBB1e597a2503",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "KawaiiShiba": "contracts/KawaiiShiba  Full Smart Contract Security Audit/KawaiiShiba"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function includeInReward() uses a loop to find and remove addresses from the _excluded list, which can cause an OUT_OF_GAS exception if the excluded addresses list is too long.",
+            "severity": "low",
+            "location": "KawaiiShiba contract, includeInReward() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "The owner has extensive privileges to change fees, maximum transaction amount, and exclude from fee, which can be exploited if the ownership is not renounced.",
+            "severity": "low",
+            "location": "KawaiiShiba contract, various functions (e.g., setTaxFeePercent(), setLiquidityFeePercent(), etc.)"
+        }
+    ]
+}

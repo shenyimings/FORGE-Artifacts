@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/SafeStar Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0x3c00f8fcc8791fa78daa4a480095ec7d475781e2",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "SafeStar": "contracts/SafeStar Full Smart Contract Security Audit/SafeStar"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Out of gas in includeInReward() function",
+            "description": "The function `includeInReward()` uses a loop to find and remove addresses from the `_isExcluded` list, which can lead to an OUT_OF_GAS exception if there is a long excluded addresses list.",
+            "severity": "low",
+            "location": "Function `includeInReward()`"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Out of gas in _getCurrentSupply() function",
+            "description": "The function `_getCurrentSupply()` uses a loop for evaluating total supply, which can lead to an OUT_OF_GAS exception if there is a long excluded addresses list.",
+            "severity": "low",
+            "location": "Function `_getCurrentSupply()`"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges vulnerability",
+            "description": "The owner has the ability to change tax fees, liquidity fees, maximum transaction amounts, and exclude from fees, which can lead to potential issues.",
+            "severity": "n/a",
+            "location": "Various functions (e.g., `setTaxFeePercent()`, `setLiquidityFeePercent()`, etc.)"
+        }
+    ]
+}

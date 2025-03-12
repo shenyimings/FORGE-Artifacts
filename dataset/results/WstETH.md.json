@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/WstETH.md",
+    "project_info": {
+        "url": "https://github.com/lidofinance/lido-dao",
+        "commit_id": "ea6fa222004b88e6a24b566a51e5b56b0079272d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "lido-dao": "contracts/WstETH/lido-dao"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-1419"
+                ]
+            },
+            "title": "Possible incorrect initialization",
+            "description": "_stETH can be zero address in WstETH.sol#L39.",
+            "severity": "info",
+            "location": "WstETH.sol, function _stETH"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-369"
+                ]
+            },
+            "title": "Working with values equal to zero",
+            "description": "wstETHAmount or stETHAmount potentially can be zero in WstETH.sol#L56 and #L73.",
+            "severity": "info",
+            "location": "WstETH.sol, functions using wstETHAmount and stETHAmount"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect burning of shares",
+            "description": "Burning of shares for WstETH contract from stETH contract can lead to block unwrap function for users in WstETH.sol#L69-L75.",
+            "severity": "info",
+            "location": "WstETH.sol, burn function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked returned value",
+            "description": "Returned value for transfer, transferFrom not checked in WstETH.sol#L57 and #L73.",
+            "severity": "n/a",
+            "location": "WstETH.sol, functions using transfer and transferFrom"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "stETH can be paused",
+            "description": "stETH can be paused, so all transfers would revert in WstETH.sol#L57, #L73, and #L81.",
+            "severity": "n/a",
+            "location": "WstETH.sol, functions using stETH"
+        }
+    ]
+}

@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Bancor_V2_AMM_Security_Audit.pdf",
+    "project_info": {
+        "url": "https://github.com/bancorprotocol/contracts-solidity",
+        "commit_id": "4ffec698485bc34128ada6015e76e1b2fdf3a884",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts-solidity": "contracts/ConsenSys_Diligence-Bancor_V2_AMM_Security_Audit/contracts-solidity"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Oracle updates can be manipulated to perform atomic front-running attack",
+            "description": "Attackers can sandwich an Oracle update between two transactions, allowing them to arbitrage rate changes risk-free.",
+            "severity": "critical",
+            "location": "Oracle update"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Slippage and fees can be manipulated by a trader",
+            "description": "Traders can add liquidity, make a trade, and remove liquidity to optimize trading costs and potentially deplete reserves.",
+            "severity": "high",
+            "location": "Converter contract and Bancor formula"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Loss of the liquidity pool is not equally distributed",
+            "description": "Stakeholders may not be able to withdraw their stakes due to a deficit in reserves, resulting in unequal distribution of losses.",
+            "severity": "high",
+            "location": "LiquidityPoolV2Converter.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Oracle front-running could deplete reserves over time",
+            "description": "An attacker can frontrun oracle updates to drain reserves by making conversions that take into account future rebalancing.",
+            "severity": "high",
+            "location": "Bancor's weight rebalancing mechanism, using Chainlink price oracles"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Use of external calls with a fixed amount of gas",
+            "description": "Solidity `transfer()` and `send()` functions forward exactly 2300 gas to the recipient, which is not enough to prevent reentrancy attacks.",
+            "severity": "medium",
+            "location": "Converter smart contract, using `transfer()` function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ],
+                "3": [
+                    "CWE-617"
+                ]
+            },
+            "title": "Insecure use of assert statement for input validation",
+            "description": "Solidity assertion should only be used to assert invariants, not for input validation.",
+            "severity": "low",
+            "location": "ConverterBase.sol, using `assert()` function"
+        }
+    ]
+}

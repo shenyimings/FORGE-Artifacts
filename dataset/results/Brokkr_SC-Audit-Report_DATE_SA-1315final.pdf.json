@@ -1,0 +1,89 @@
+{
+    "path": "artifacts/Brokkr_SC-Audit-Report_DATE_SA-1315final.pdf",
+    "project_info": {
+        "url": "https://github.com/BrokkrFinance/bro-strategies/tree/main",
+        "commit_id": "main",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "bro-strategies": "contracts/Brokkr_SC-Audit-Report_DATE_SA-1315final/bro-strategies"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Front Running Attack",
+            "description": "Functions swap tokens without setting proper slippage, enabling users to perform sandwich attacks.",
+            "severity": "high",
+            "location": "index/libraries/UniswapV2Library.sol (swapTokensForExactTokens(), swapExactTokensForTokens()) and index/libraries/SwapAdapter.sol (swapTokensFor ExactTokens(), swapExactTokensForTokens())"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Contradiction - Unfinalized Code",
+            "description": "The provided code should be implemented in the full logic of the project, as any missing parts can change over time.",
+            "severity": "medium",
+            "location": "index/oracles/OracleAvalanche.sol (_getAmmPrice())"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "Address parameters are used without checking against the possibility of 0x0.",
+            "severity": "low",
+            "location": "index/oracles/OracleAvalanche.sol (setPriceFeed()) and index/bases/IndexStrategyUpgradeable.sol (_addRouter(), _setDEX())"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "The project uses floating pragmas 0.8.0.",
+            "severity": "info",
+            "location": "Various contracts (listed in the report)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Function That Can Be Declared External",
+            "description": "Public functions that are never called by the contract should be declared external to save Gas.",
+            "severity": "info",
+            "location": "index/token/IndexToken.sol : initialize()"
+        }
+    ]
+}

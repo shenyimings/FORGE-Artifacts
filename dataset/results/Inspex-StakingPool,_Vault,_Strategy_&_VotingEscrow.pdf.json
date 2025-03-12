@@ -1,0 +1,197 @@
+{
+    "path": "artifacts/Inspex-StakingPool,_Vault,_Strategy_&_VotingEscrow.pdf",
+    "project_info": {
+        "url": "https://github.com/ScientixFinance/scientix-contract",
+        "commit_id": "eda8c5e46e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "scientix-contract": "contracts/Inspex-StakingPool,_Vault,_Strategy_&_VotingEscrow/scientix-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Use of Upgradable Contract Design",
+            "description": "The logic of affected contracts can be arbitrarily changed, allowing the proxy owner to perform malicious actions.",
+            "severity": "high",
+            "location": "StakingPool, Vault, Strategy & VotingEscrow contracts"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Design Flaw in Contract Initialization",
+            "description": "The contract owner can call the initialize() function multiple times to replace critical state variables and steal users' funds or cause unfair changes.",
+            "severity": "high",
+            "location": "StakingPool, Vault, Strategy & VotingEscrow contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Modification of Strategy Contract Address",
+            "description": "The contract owner can use the upgradeStrat() function to withdraw users' funds.",
+            "severity": "high",
+            "location": "SimpleVault.sol, functions proposeStrat() and upgradeStrat()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Improper Modification of Vault Contract Address",
+            "description": "The owner can set a new vault address and steal users' funds.",
+            "severity": "high",
+            "location": "StratAlpaca.sol, functions setVault() and withdraw()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Transaction Ordering Dependence",
+            "description": "Race condition in StratAlpaca contract's _harvest() function allowing front-running attacks.",
+            "severity": "high",
+            "location": "StratAlpaca.sol, function _harvest()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "Critical state variables can be updated by controlling authorities without user notification or acceptance.",
+            "severity": "medium",
+            "location": "Multiple contracts (StakingPools, StratAlpaca, SimpleVault, VotingEscrow) with various functions and modifiers."
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Configuration Validation",
+            "description": "The contract will be unusable when the reward reduction exceeds the original reward, causing users to be unable to deposit or withdraw their funds.",
+            "severity": "medium",
+            "location": "StakingPools.sol (initialize() function)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Design Flaw in _updatePools() Function",
+            "description": "The `_updatePools()` function will eventually be unusable due to excessive gas usage.",
+            "severity": "low",
+            "location": "StakingPools.sol, _updatePools() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions' executions cannot be monitored easily by the users.",
+            "severity": "low",
+            "location": "Multiple contracts, including StratAlpaca, SimpleVault, and VotingEscrow"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Improper Lock Time Extension",
+            "description": "User's token will be locked for a longer duration without receiving any additional reward if the lock duration exceeds MAX_TIME.",
+            "severity": "low",
+            "location": "VotingEscrow contract, claimReward() modifier and _extendLock() function"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Function Parameter",
+            "description": "Parameters defined in multiple functions are not used anywhere, causing unnecessary gas usage.",
+            "severity": "info",
+            "location": "StratAlpaca and VotingEscrow contracts"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "VotingEscrow contract"
+        }
+    ]
+}

@@ -1,0 +1,263 @@
+{
+    "path": "artifacts/2023-04-prysm-securityreview.pdf",
+    "project_info": {
+        "url": "https://github.com/prysmaticlabs/prysm/tree/e2fa7d40e3f496416283cc1d329a8ff6c048cb8a",
+        "commit_id": "e2fa7d40e3f496416283cc1d329a8ff6c048cb8a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "prysm": "contracts/2023-04-prysm-securityreview/prysm"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Unhandled errors",
+            "description": "Ineffectual assignments to err error variables may lead to undefined test behavior given a sufficiently large change set.",
+            "severity": "info",
+            "location": "Various"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "os.Create() used without checking for an existing file",
+            "description": "Prysm uses os.Create() in several locations without checking for the presence of an existing file.",
+            "severity": "info",
+            "location": "prysm/tools/interop/convert-keys/main.go, prysm/tools/specs-checker/download.go"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-311"
+                ],
+                "3": [
+                    "CWE-312"
+                ],
+                "4": [
+                    "CWE-526"
+                ]
+            },
+            "title": "Passing sensitive configuration values through the command line may leak to other processes on the system",
+            "description": "Specifying sensitive values through command line flags may leak their values to an attacker who can read files on the machine.",
+            "severity": "low",
+            "location": "Command line flags"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Configuration files containing potentially sensitive values are not checked for permissions",
+            "description": "The Prysm binaries do not check that the configuration files are not readable by other users on the system.",
+            "severity": "low",
+            "location": "Confgiuration flies loading"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-229"
+                ],
+                "4": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Panics by the beacon-chain and validator RPC APIs can panic are recovered but may lead to crashes due to memory exhaustion",
+            "description": "The beacon-chain RPC APIs that support pagination via the pagination.StartAndPage function panic due to an out-of-bounds slice indexing when they receive a negative value of the PageToken or PageSize parameters.",
+            "severity": "low",
+            "location": "prysm/api/pagination/pagination.go, API endpoints"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Goroutine leaks can lead to Denial of Service",
+            "description": "Many tests in Prysm codebase leak goroutines, leading to resource exhaustion.",
+            "severity": "n/a",
+            "location": "Various test files in the Prysm codebase"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-662"
+                ],
+                "3": [
+                    "CWE-820"
+                ]
+            },
+            "title": "Potential deadlock if Feed.Send panic is recovered and function is retried",
+            "description": "The Feed.Send function can cause a deadlock if it is called again on the same object after the first call panics and is recovered.",
+            "severity": "n/a",
+            "location": "prysm/async/event/feed.go"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Block Proposer DDoS",
+            "description": "A Distributed Denial-of-Service (DDoS) attack can be launched against a block proposer to prevent it from fulfilling its responsibilities.",
+            "severity": "medium",
+            "location": "Ethereum 2.0 Specification"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "db backup endpoint may be triggered via SSRF or when visiting an attacker website, causing DoS",
+            "description": "The db backup endpoint can be reached through an SSRF attack or by visiting a malicious website.",
+            "severity": "medium",
+            "location": "/db/backup monitoring API endpoint"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Maximum gRPC message size set to MaxInt32 (2GB) leading to DoS",
+            "description": "The maximum gRPC message size can be used to cause a DoS attack by sending large messages.",
+            "severity": "info",
+            "location": "beacon-chain/server"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ]
+            },
+            "title": "EpochParticipation.UnmarshalJSON may parse invalid data",
+            "description": "The EpochParticipation.UnmarshalJSON function does not validate input, leading to potential parsing of malformed JSON strings.",
+            "severity": "n/a",
+            "location": "prysm/beacon-chain/rpc/apimiddleware/structs_marshalling.go"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Uint256.UnmarshalJSON may parse invalid data",
+            "description": "The Uint256.UnmarshalJSON function does not validate input, leading to potential parsing of malformed JSON strings.",
+            "severity": "n/a",
+            "location": "prysm/api/client/builder/types.go"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-330"
+                ],
+                "3": [
+                    "CWE-829"
+                ]
+            },
+            "title": "JWT authentication suggests generating secret using third-party websites",
+            "description": "Suggested online generator may produce non-random values or store generated secrets, adding risk of leakage or misuse.",
+            "severity": "low",
+            "location": "Prysm's JWT authentication documentation"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-116"
+                ],
+                "3": [
+                    "CWE-838"
+                ]
+            },
+            "title": "Sensitive values exposure in command line flags",
+            "description": "Passing sensitive values as CLI flags can lead to leakage",
+            "severity": "low",
+            "location": "Prysm deployment configuration"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Insecure key management",
+            "description": "Using the same validation key by multiple validator clients can lead to slashing",
+            "severity": "low",
+            "location": "Key management for Ethereum proof-of-stake validators"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "DoS vulnerability in network configuration",
+            "description": "Targeted attacks on validator nodes can be launched due to exposed ports",
+            "severity": "low",
+            "location": "Prysm network configuration"
+        }
+    ]
+}

@@ -1,0 +1,437 @@
+{
+    "path": "artifacts/Yearn_Agnostic_Smart_Contract_Audit_Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/YFIAG/NFT-Marketplace-Contracts/tree/audit_%233",
+        "commit_id": "audit_%233",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "NFT-Marketplace-Contracts": "contracts/Yearn_Agnostic_Smart_Contract_Audit_Report - QuillAudits/NFT-Marketplace-Contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Possible absence of NFT with RootId",
+            "description": "mintFragment() will never work unless the NFT with rootid is minted.",
+            "severity": "medium",
+            "location": "YFIAGLaunchPad, addLaunchPad()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Centralization of setWinners()",
+            "description": "Only owner can call setWinners(), leading to unfair distribution of rewards.",
+            "severity": "medium",
+            "location": "YFIAGLaunchPad, setWinners()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Handle error when staking to non-existent pool",
+            "description": "Transaction will revert with panic code 0x32 error if user stakes into non-existent pool.",
+            "severity": "low",
+            "location": "YFIAGLaunchPad, stake()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Unsafe to rely on isContract()",
+            "description": "Use of isContract() is unsafe as it may return false for certain types of addresses.",
+            "severity": "low",
+            "location": "YFIAGLaunchPad, stake(), unstake(), claim()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant code block",
+            "description": "numFinishedSalesDelta will always be zero and else block won't execute.",
+            "severity": "low",
+            "location": "YFIAGLaunchPad"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Check",
+            "description": "Contracts lack zero address checks, prone to initialization with zero addresses.",
+            "severity": "low",
+            "location": "YFIAGLaunchPad, constructor(), setWinners(), setAddressMarketplace()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Denial of service to the user while claiming NFT",
+            "description": "User can't claim NFT if staked amount is equal to minTotalStake due to require check.",
+            "severity": "low",
+            "location": "YFIAGLaunchPad, addUserCheckpoint()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Redundant Statements",
+            "description": "amountRefund will always be 0 or greater than 0 due to unsigned integer declaration.",
+            "severity": "info",
+            "location": "YFIAGLaunchPad"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Modifier launchpadNotFound checks <= instead of only <",
+            "description": "Modifier checks for <=, causing issues if entered launchpadId is equal to launchpads.length.",
+            "severity": "info",
+            "location": "YFIAGLaunchPad, launchpadNotFound modifier"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary use of nonReentrant modifier",
+            "description": "setWinners() function doesn't have external calls, making nonReentrant modifier unnecessary.",
+            "severity": "info",
+            "location": "YFIAGLaunchPad, setWinners()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary use of storage keyword",
+            "description": "Some functions use storage keyword instead of memory, potentially wasting gas.",
+            "severity": "info",
+            "location": "YFIAGLaunchPad"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect comment and error message",
+            "description": "Comment and error message in addUserCheckpoint() don't match code logic.",
+            "severity": "info",
+            "location": "YFIAGLaunchPad, addUserCheckpoint()"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-372"
+                ]
+            },
+            "title": "Incorrect launchpad count",
+            "description": "deleteLaunchpad() doesn't delete launchpad from launchpads array, causing incorrect count.",
+            "severity": "info",
+            "location": "YFIAGLaunchPad"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-826"
+                ]
+            },
+            "title": "Part A- User’s Ether can get stuck in the contract",
+            "description": "If statement on line 325 fails to execute for NFTs with non-zero tokenAddresses.",
+            "severity": "high",
+            "location": "YFIAGNftMarketplace, buy(), buyAndBurn()"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Part B- Malicious admin can withdraw all stuck ether",
+            "description": "Admin can use withdraw() function to steal stuck ether without refunding buyers.",
+            "severity": "high",
+            "location": "YFIAGNftMarketplace, withdraw()"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Non-owner can burn any NFT",
+            "description": "Admin can burn any root token even if not owned by the admin.",
+            "severity": "high",
+            "location": "YFIAGNftMarketplace, burnByLaunchPad()"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "setPool will always revert",
+            "description": "setPool() function will always revert due to zero address check and incorrect yfiagPool initialization.",
+            "severity": "medium",
+            "location": "YFIAGNftMarketplace, setPool()"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Part A- Denial of Service via setDefaultAmountEarn()",
+            "description": "Malicious EOA can wipe out user rewards by setting amountEarn equal to zero.",
+            "severity": "medium",
+            "location": "YFIAGNftMarketplace, setDefaultAmountEarn()"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-250"
+                ]
+            },
+            "title": "Part B- Potential Denial of Service via setPool()",
+            "description": "Admin changing pool address can lead to potential Denial of Service attacks for subowners.",
+            "severity": "medium",
+            "location": "YFIAGNftMarketplace, setPool()"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ]
+            },
+            "title": "Uninitialized YFIAGPool and _launchpad",
+            "description": "YFIAGPool and _launchpad will be zero addresses if not set manually or forgotten to set using the setPool() and setLaunchPad() functions.",
+            "severity": "high",
+            "location": "Unspecified"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Admin can withdraw all funds and Deny subowner fees",
+            "description": "The function withdrawAdmin() allows the admin to withdraw all Ether at any point of time, thus withdrawing the funds that are meant only for the subowners.",
+            "severity": "high",
+            "location": "YFIAGNftPool contract, line 58"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "For loop over Dynamic array",
+            "description": "The length of the _subOwners array can increase when admin or launchPad mints NFTs via the mintFragment() function, leading to out-of-gas errors and consistently failed execution of the buy() function.",
+            "severity": "medium",
+            "location": "Unspecified"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Use of transferFrom instead of transfer",
+            "description": "Using transferFrom instead of transfer may revert with an insufficient allowance error.",
+            "severity": "medium",
+            "location": "YFIAGNftPool contract, lines 38 and 49"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Check",
+            "description": "Contracts lack zero address checks, hence are prone to be initialized with zero addresses.",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Misleading name/execution of burnByLaunchPad()",
+            "description": "The function burnByLaunchpad() can also be called by admin, not just Launchpad.",
+            "severity": "low",
+            "location": "Unspecified"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Transaction Order Dependence in setPriceAndSell() and buy()",
+            "description": "A buyer can frontrun his own transaction to buy the NFT at a possibly cheaper price.",
+            "severity": "low",
+            "location": "Unspecified"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing events for Critical functions",
+            "description": "Missing events for functions carrying out critical operations.",
+            "severity": "info",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Usage of ERC721Enumerable pattern is costly",
+            "description": "The ERC721 Enumerable contract's pattern has been used in the Modified ERC721 contract, which is highly costly in terms of gas costs.",
+            "severity": "info",
+            "location": "Modified ERC721 contract"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Private key visible",
+            "description": "The initial code contained a private key in one of its test files and was visible due to the repo being public.",
+            "severity": "info",
+            "location": "Unspecified"
+        }
+    ]
+}

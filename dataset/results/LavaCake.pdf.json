@@ -1,0 +1,64 @@
+{
+    "path": "artifacts/LavaCake.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xa2Eb573862F1910F0537001a419Bd9B01e821c8A, 0xfbfae2D489Bb649C7f33d9812b2Dcf17E9bb279C, 0xd74d11B1f4D0E2e1C71210B25456670A19B09b34",
+        "chain": "bsc",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "LavaToken": "contracts/LavaCake/LavaToken",
+            "MasterChef": "contracts/LavaCake/MasterChef",
+            "Timelock": "contracts/LavaCake/Timelock"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ]
+            },
+            "title": "Wrong burning",
+            "description": "Sending tokens to the dead address instead of burning them in token contract",
+            "severity": "medium",
+            "location": "Overridden _transfer functions, token contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Block gas limit",
+            "description": "add, set, and updateEmissionRate functions can fail due to block gas limit if pool size is too big",
+            "severity": "low",
+            "location": "massUpdatePools function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Owner can change referral bonus amount, start harvest block, and harvest time (affects rewards lockup)",
+            "severity": "n/a",
+            "location": "Owner privileges when not renounced"
+        }
+    ]
+}

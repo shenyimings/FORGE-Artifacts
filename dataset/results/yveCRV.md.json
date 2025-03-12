@@ -1,0 +1,101 @@
+{
+    "path": "artifacts/yveCRV.md",
+    "project_info": {
+        "url": "https://github.com/andy8052/yveCRV-vault",
+        "commit_id": "6706b9ad45e71ee9014454419f229adfa6409f1d",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "yveCRV-vault": "contracts/yveCRV/yveCRV-vault"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-404"
+                ],
+                "3": [
+                    "CWE-772"
+                ]
+            },
+            "title": "Correct migration",
+            "description": "In constructor, rights are granted to spend tokens, which should be canceled when migrating the strategy.",
+            "severity": "high",
+            "location": "Strategy.sol#L171"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Missed token",
+            "description": "yveCrv token is not protected in the `protectedTokens()` function.",
+            "severity": "medium",
+            "location": "Strategy.sol#L266-L277"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "The approval value obtained in the constructor may not be enough for the long term of the smart contract",
+            "description": "Approval values decrease over time, potentially locking tokens in the contract forever.",
+            "severity": "medium",
+            "location": "Strategy.sol#L96-L97"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "No input parameter processing in the method",
+            "description": "The `_debtOutstanding` variable is not processed in the `adjustPosition()` function body.",
+            "severity": "low",
+            "location": "Strategy.sol#L151"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Event is probably missing",
+            "description": "A `SetBuffer` event is likely missing in the `setBuffer` method.",
+            "severity": "low",
+            "location": "Strategy.sol#L259"
+        }
+    ]
+}

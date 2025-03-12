@@ -1,0 +1,77 @@
+{
+    "path": "artifacts/Alpha Capital Full Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xd5a98e77d1feb091344096301ea336a5c07a6a41",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.8.4+commit.c7e474f2"
+        ],
+        "project_path": {
+            "ACAP": "contracts/Alpha Capital Full Smart Contract Security Audit/ACAP"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "The function airdrop() uses a loop to make multiple minting to addresses, which can lead to an OUT_OF_GAS exception if the list of addresses is too long.",
+            "severity": "low",
+            "location": "Function airdrop()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Unchecked total minted amount",
+            "description": "The function airdrop() does not check if the total minted amount is lower than MAX_SUPPLY, which can cause the function to revert.",
+            "severity": "low",
+            "location": "Function airdrop()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused _reflectionExcluded logic",
+            "description": "The _reflectionExcluded logic is unused.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Excessive owner privileges",
+            "description": "The owner has excessive privileges, including the ability to change wallets, rates, and balances, as well as mint tokens and withdraw funds.",
+            "severity": "low",
+            "location": "Various functions with onlyOwner modifier"
+        }
+    ]
+}

@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/Yearn Vaults V3.md",
+    "project_info": {
+        "url": "https://github.com/yearn/yearn-vaults",
+        "commit_id": "e390c2a6b2ba6e2ecc8f3a72a1ea4adfabd17544",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "yearn-vaults": "contracts/Yearn Vaults V3/yearn-vaults"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Incorrect use of a library function",
+            "description": "Improper usage of `safeApprove()` function from `SafeERC20` library, which can cause blocking after the second call.",
+            "severity": "high",
+            "location": "BaseWrapper.sol (#L117 and #L198)"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Outdated `_cachedVaults` after `registry` changing",
+            "description": "The cache is not updated when the registry changes, leading to outdated values.",
+            "severity": "high",
+            "location": "BaseWrapper.sol (#L71-73 and #L148-149)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Gas overflow during iteration (DoS)",
+            "description": "The contract may run out of gas due to unbounded iterations in loops, leading to Denial-of-Service attacks.",
+            "severity": "medium",
+            "location": "yToken.sol (#L107, #L154), BaseWrapper.sol (#L151)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "No validation of the address parameter value in contract constructor",
+            "description": "The address parameter is not validated in the contract constructor, leading to potential zero values.",
+            "severity": "medium",
+            "location": "BaseWrapper.sol (#L45)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "No response check after function call to transfer tokens ",
+            "description": "There's no response check after token transfers, which can lead to unknown errors.",
+            "severity": "medium",
+            "location": "BaseWrapper.sol (#L137 and #L171)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Check for a zero input value",
+            "description": "No check for zero input values in the `setRegistry()` method.",
+            "severity": "medium",
+            "location": "BaseWrapper.sol (#L50)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "An attack like `Reentrancy` is possible ",
+            "description": "Potential reentrancy attacks are possible due to the withdrawETH() function.",
+            "severity": "high",
+            "location": "yToken.sol (#L186)"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Event is probably missing",
+            "description": "Events are not emitted in certain functions, leading to potential monitoring issues.",
+            "severity": "low",
+            "location": "Various locations"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "The name of the function does not correspond to the logic of work ",
+            "description": "Inconsistent naming of the `tagVault()` function, which can cause confusion.",
+            "severity": "low",
+            "location": "Registry.vy (#L316)"
+        }
+    ]
+}

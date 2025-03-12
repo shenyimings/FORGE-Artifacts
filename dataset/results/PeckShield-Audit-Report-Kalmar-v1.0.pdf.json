@@ -1,0 +1,122 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Kalmar-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/kalmar-io/leverage-yield-contracts/tree/a0f5299",
+        "commit_id": "a0f5299",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "leverage-yield-contracts": "contracts/PeckShield-Audit-Report-Kalmar-v1/leverage-yield-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ]
+            },
+            "title": "Possible Costly LPs From Improper Bank Initialization",
+            "description": "An issue in the Bank contract's deposit() function can lead to a pool token becoming extremely expensive, causing inconvenience and potential losses for liquidity providers.",
+            "severity": "medium",
+            "location": "Kalmar protocol, Bank contract, deposit() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Trading Fee Discrepancy Between Kalmar And PancakeSwap",
+            "description": "The built-in trading fee in Kalmar is inconsistent with the actual trading fee in PancakeSwap, which may skew asset allocation and affect strategy performance.",
+            "severity": "medium",
+            "location": "Multiple contracts (e.g., MasterChefGoblin, UniswapV2Library)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "No payable in All Four Strategies",
+            "description": "The execute() functions in four strategies do not handle native tokens despite having the payable keyword.",
+            "severity": "low",
+            "location": "Multiple contracts (e.g., StrategyAllBaseTokenOnly, StrategyAddTwoSidesOptimal, StrategyLiquidate, StrategyWithdrawMinimizeTrading)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistency Between Document and Implementation",
+            "description": "Misleading comments in solidity code hindering understanding and maintenance of software.",
+            "severity": "info",
+            "location": "Multiple Contracts (StrategyAllBaseTokenOnly, StrategyAddTwoSidesOptimal, StrategyWithdrawMinimizeTrading)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Trust Issue of Admin Keys",
+            "description": "Privileged account with control over assets needs scrutiny and potential migration to community-governed DAO.",
+            "severity": "medium",
+            "location": "Business Logic, Bank contract, MasterChefGoblin contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Potential Sandwich Attacks For Reduced Returns",
+            "description": "Front-running attacks possible due to lack of restriction on swap operations, resulting in smaller gains for users.",
+            "severity": "low",
+            "location": "Time and State, MasterChefGoblin::reinvest()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Precision Loss Due to Mixed Multiplication and Division",
+            "description": "The comparison between lpPrice and external oracle price involves mixed multiplication and division, which may lead to precision loss.",
+            "severity": "low",
+            "location": "MasterChefGoblinConfig::isStable() function, lines 67-68"
+        }
+    ]
+}

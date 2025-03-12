@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/saddle-finance-virtual-swap.pdf",
+    "project_info": {
+        "url": "https://github.com/saddle-finance/saddle-contract/tree/5452b154da46401b020e653d64b9a079624bb36f",
+        "commit_id": "5452b154da46401b020e653d64b9a079624bb36f",
+        "address": "0x856e4424f806D16E8CBC702B3c0F2ede5468eae5",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "saddle-contract": "contracts/saddle-finance-virtual-swap/saddle-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Insecure function call order in Bridge contract",
+            "description": "Calling `Bridge._setPendingSwapType` after `Bridge._setPendingSwapState` for an itemId may erase the state.",
+            "severity": "n/a",
+            "location": "Bridge contract, `_setPendingSwapType` and `_setPendingSwapState` functions"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Incorrect variable in Bridge.sol",
+            "description": "`TokenToSynth` should be `SynthToToken` in Bridge.sol on line 517.",
+            "severity": "n/a",
+            "location": "Bridge.sol, line 517"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Duplicate check in `Bridge._settle` and `exchanger._internalSettle`",
+            "description": "The function `Bridge._settle` invokes `maxSecsLeftInWaitingPeriod`, which is also invoked by `exchanger._internalSettle`, potentially wasting gas.",
+            "severity": "n/a",
+            "location": "Bridge contract, `_settle` function and exchanger contract, `_internalSettle` function"
+        }
+    ]
+}

@@ -1,0 +1,692 @@
+{
+    "path": "artifacts/Dragonereum-audit-report.pdf",
+    "project_info": {
+        "url": "https://github.com/dragonereum/dragonereum-contracts",
+        "commit_id": "2faadda1e23156141b4265c4c8ce878a5c8d9b08",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "dragonereum-contracts": "contracts/Dragonereum-audit-report/dragonereum-contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Attacker can create fake auctions",
+            "description": "An attacker can create a huge amount of fake auctions, which may confuse legitimate users.",
+            "severity": "medium",
+            "location": "Contract, auction functionality"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "ERC721Receiver doesn't comply with ERC721 specification",
+            "description": "The onERC721Received function must accept 4 arguments, but it only gets 3.",
+            "severity": "high",
+            "location": "ERC721Receiver.sol (onERC721Received function)"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Modifier onlyController is not Gas optimal",
+            "description": "The modifier goes through the array, referring to the Storage for each array element.",
+            "severity": "medium",
+            "location": "onlyController modifier"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "Migration script doesn't set required dependency",
+            "description": "The 3_establish_dependencies.js migration script does not set the Events contract as a dependency of Mainbase.",
+            "severity": "high",
+            "location": "3_establish_dependencies.js migration script"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Hardcoded block number",
+            "description": "The Distribution contract utilizes hardcoded block number for work.",
+            "severity": "medium",
+            "location": "Distribution.sol (constructor)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Old ERC20 Token implementation",
+            "description": "Deprecated and vulnerable to withdrawal attacks",
+            "severity": "medium",
+            "location": "Gold/Gold.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Attacker can use rounding to buy Gold for free",
+            "description": "Full price calculation gives 0 if _amount is less than 99999 * 10**18",
+            "severity": "critical",
+            "location": "Marketplace/GoldMarketplace.sol, buyTokens function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ]
+            },
+            "title": "Zero item has special meaning",
+            "description": "Arrays of Eggs, Dragons, and Battles have a special zero item to avoid some issues with parent tracking.",
+            "severity": "low",
+            "location": "Egg/EggStorage.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Seller can use front-running attack to change auction",
+            "description": "Attacker can steal user coins by changing the auction after users send their transaction and before the smart contract processes it.",
+            "severity": "critical",
+            "location": "Marketplace/Marketplace.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Marketplace doesn't care about accidentally sent ETH",
+            "description": "The buyEgg, buyDragon, and buyBreeding functions do not check whether a user sends ETH to GOLD auction or not.",
+            "severity": "medium",
+            "location": "Marketplace/Marketplace.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "GoldMarketplace.totalSupply() returns wrong value",
+            "description": "The function returns the current count of open auctions by returning the length of auctions, but due to the Zero item has special meaning issue, it is one item more than actually exists.",
+            "severity": "medium",
+            "location": "Marketplace/GoldMarketplace.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Resending an open or not existing egg to the incubator",
+            "description": "At the time of sending an egg to the incubator, there is no explicit verification that the egg actually exists.",
+            "severity": "low",
+            "location": "MainBase.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "pause can't be called directly",
+            "description": "Due to the current architecture, it is not possible to call pause of a particular contract directly.",
+            "severity": "high",
+            "location": "Common/Pausable.sol and UpgradeController.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "MainFights doesn't care about accidentally sent ETH",
+            "description": "The createBattle and applyForBattle functions do not check whether a user sends ETH when isGold == true or not.",
+            "severity": "medium",
+            "location": "MainFights.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Wrong calculation in battle logic",
+            "description": "Dragon's distance is set to 0.7 * DragonSpeed instead of changing its current distance.",
+            "severity": "high",
+            "location": "Fight.sol, _turn function, line 318"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "User can battle with opponent in sale",
+            "description": "_checkBattlePossibility does not require the opponent to not be on sale or breeding.",
+            "severity": "medium",
+            "location": "FightController.sol, line 53"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ],
+                "3": [
+                    "CWE-1284"
+                ]
+            },
+            "title": "Bad bet validation",
+            "description": "_payForBet function requires msg.value >= _bet, but allows more than the bet.",
+            "severity": "medium",
+            "location": "Bets.sol, line 111"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "MainBase.sendToIncubator returns misleading value",
+            "description": "Returns newDragonId that may not match the egg sent by the user to the incubator.",
+            "severity": "low",
+            "location": "MainBase.sol, sendToIncubator function"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "The constant MAX_COOLNESS has incorrect value",
+            "description": "MAX_COOLNESS is set to 6336 instead of 11088.",
+            "severity": "medium",
+            "location": "BattleController.sol, line 38"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "The function upgradeDragonGenes doesn't revert the transaction if not updated genome",
+            "description": "Does not roll back the transaction if the genome is not changed.",
+            "severity": "low",
+            "location": "MainBase.sol, line 53"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Buying a skill from the dragon participating in gladiator battle",
+            "description": "Allows buying a skill when the dragon is in a gladiator battle.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "fillGoldSellOrder gas optimisation",
+            "description": "Updates SellOrder even if it's empty and only then removes it.",
+            "severity": "medium",
+            "location": "GoldMarketplace.sol, line 58"
+        },
+        {
+            "id": 22,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Buyer can use front-running attack to change Order price and steal GOLD tokens",
+            "description": "Allows changing the price of an order and stealing user's coins by canceling the current Order.",
+            "severity": "critical",
+            "location": "MainMarket.sol, line 203"
+        },
+        {
+            "id": 23,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Redundant ETH transfering",
+            "description": "Transfers ETH to GoldMarketplace contract which then transfers it to GoldMarketplaceStorage.",
+            "severity": "medium",
+            "location": "MainMarket.sol, createGoldBuyOrder function"
+        },
+        {
+            "id": 24,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Order matching",
+            "description": "Does not match a user's 'buy' and 'sell' orders when possible.",
+            "severity": "low",
+            "location": "n/a"
+        },
+        {
+            "id": 25,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "When using the special peaceful skill for intelligence to itself buff to intellect is reset to zero",
+            "description": "Resets the intelligence buff to zero when using the special peaceful skill on oneself.",
+            "severity": "high",
+            "location": "DragonCore.sol, line 256"
+        },
+        {
+            "id": 26,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Execution of matchOpponents can exceed block Gas limit",
+            "description": "May exceed block Gas limit if there are too many dragons.",
+            "severity": "high",
+            "location": "n/a"
+        },
+        {
+            "id": 27,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "migrate does not validate input addresses",
+            "description": "The migrate function does not validate _oldAddress and _newAddress at all.",
+            "severity": "high",
+            "location": "UpgradeController.sol, migrate function"
+        },
+        {
+            "id": 28,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Redundant check for uint16",
+            "description": "The create function requires the _counter < 65536 which is redundant due to _counter's type being uint16.",
+            "severity": "low",
+            "location": "Bets.sol, create function"
+        },
+        {
+            "id": 29,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing input validation in setInternalDependencies",
+            "description": "The setInternalDependencies function does not validate dependencies' addresses.",
+            "severity": "medium",
+            "location": "MainBase.sol, setInternalDependencies function"
+        },
+        {
+            "id": 30,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Users have no idea who is the winner before startGladiatorBattle call",
+            "description": "The startGladiatorBattle function allows anyone to draw the battle without knowing the winner.",
+            "severity": "high",
+            "location": "n/a"
+        },
+        {
+            "id": 31,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "requestRewardForGladiatorBattle is redundant",
+            "description": "The requestRewardForGladiatorBattle function can be removed as it's redundant with startGladiatorBattle.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 32,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Attacker can use EVM feature to set new block for battle",
+            "description": "An attacker can manipulate the block number using updateBlockNumberOfGladiatorBattle and reset the battleBlockNumber.",
+            "severity": "high",
+            "location": "MainBattle.sol, startGladiatorBattle function"
+        },
+        {
+            "id": 33,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "returnBetFromGladiatorBattle has redundant checks",
+            "description": "The returnBetFromGladiatorBattle function has redundant checks for caller not being a participant.",
+            "severity": "medium",
+            "location": "Bets.sol, returnBetFromGladiatorBattle function"
+        },
+        {
+            "id": 34,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Attacker can use front-running to constantly get compensation from battle",
+            "description": "An attacker can continuously participate in battles and get compensation using front-running attacks.",
+            "severity": "high",
+            "location": "n/a"
+        },
+        {
+            "id": 35,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Attacker can use front-running to escape from battle",
+            "description": "An attacker can escape a battle by calling returnBetFromGladiatorBattle right before the creator calls chooseOpponentForGladiatorBattle.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 36,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Function createGladiatorBattle doesn't create an event",
+            "description": "The createGladiatorBattle function does not emit an event for successful battle creation.",
+            "severity": "low",
+            "location": "MainBattle.sol, createGladiatorBattle function"
+        },
+        {
+            "id": 37,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Functions don't check the item existence",
+            "description": "Functions from Getter.sol and DragonGetter.sol do not check for dragon existence and return zero values for non-existent dragons.",
+            "severity": "low",
+            "location": "Getter.sol and DragonGetter.sol, various functions"
+        },
+        {
+            "id": 38,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Solidity version should be locked at final project stage",
+            "description": "Contracts should be deployed with the same compiler version and flags used during testing to prevent undiscovered bugs.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 39,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Battle creator can use Sybil attack to get compensation",
+            "description": "A battle creator can control multiple addresses with dragons and applyForGladiatorBattle against themselves to get compensation.",
+            "severity": "medium",
+            "location": "n/a"
+        },
+        {
+            "id": 40,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1025"
+                ],
+                "3": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistent battle outcome",
+            "description": "The code implementation contradicts the documentation, where the first player will win in case of equal HP instead of a draw.",
+            "severity": "n/a",
+            "location": "Fight.sol#L340"
+        },
+        {
+            "id": 41,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Upgradable mechanism allows for unauthorized control",
+            "description": "The upgradable mechanism can be exploited to allow unauthorized control over the Dragonereum Gold account.",
+            "severity": "n/a",
+            "location": "Dragonereum Gold account"
+        },
+        {
+            "id": 42,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-282"
+                ]
+            },
+            "title": "Predictable randomness in low-value transactions",
+            "description": "The use of last block hash makes it easily predictable, allowing attackers to exploit 'low-value' functions.",
+            "severity": "critical",
+            "location": "Low-value transaction functionality"
+        },
+        {
+            "id": 43,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Front-running attacks in Gladiator Battles",
+            "description": "Attackers can exploit the system to cheat in Gladiator Battles and buy GOLD tokens at a lower price.",
+            "severity": "critical",
+            "location": "Gladiator Battle mechanism"
+        },
+        {
+            "id": 44,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Theft of funds from legitimate users",
+            "description": "Attackers can steal funds, including GOLD tokens and ETH, from legitimate users.",
+            "severity": "critical",
+            "location": "Multiple locations in the smart contract"
+        }
+    ]
+}

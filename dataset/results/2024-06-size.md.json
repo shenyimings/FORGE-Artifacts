@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/2024-06-size.md",
+    "project_info": {
+        "url": "https://github.com/code-423n4/2024-06-size",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "size": "contracts/2024-06-size/src"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "[H-01] When `sellCreditMarket()` is called to sell credit for a specific cash amount, the protocol might receive a lower swapping fee than expected",
+            "description": "The protocol might receive a lower fee than expected when `sellCreditMarket()` is called to sell credit for a specific cash amount.",
+            "severity": "high",
+            "location": "AccountingLibrary.sol, lines 249 and 256"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Risk of overpayment due to race condition between `repay` and `liquidateWithReplacement` transactions",
+            "description": "Users end up repaying more than double their future value.",
+            "severity": "high",
+            "location": "LiquidateWithReplacement mechanism in Size.sol"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect collateral remainder cap calculation during liquidation",
+            "description": "The function creates credit positions with forSale == true, allowing a borrower to set up a new position and substitute the existing lender's position.",
+            "severity": "medium",
+            "location": "AccountingLibrary.sol (lines 62-82), Compensate.sol (lines 118-145), BuyCreditMarket.sol (lines 79-83)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unintended behavior in createDebtAndCreditPositions",
+            "description": "The function returns the cash amount without deducting fees, leading to an incorrect validation check.",
+            "severity": "medium",
+            "location": "executeBuyCreditMarket function in BuyCreditMarket.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Fragmentation fee is not taken if user compensates with newly created position",
+            "description": "The fragmentation fee is not charged when the compensate function is invoked under specific conditions.",
+            "severity": "medium",
+            "location": "executeCompensate function in Compensate.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1023"
+                ],
+                "3": [
+                    "CWE-839"
+                ]
+            },
+            "title": "Inconsistent Minimum Tenor Period Check",
+            "description": "Users cannot create new debt/credit and compensate using this new credit if the due date is within the minimum tenor period, leading to potential losses.",
+            "severity": "low",
+            "location": "validateCompensate function in smart contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Precision Errors in Repaying Debt",
+            "description": "Users may not always be able to repay their debt due to precision errors when the `borrowAToken` cap is reached, leading to potential losses.",
+            "severity": "low",
+            "location": "Various libraries and contracts in Size and Aave protocols"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-253"
+                ]
+            },
+            "title": "Withdraw users may can't withdraw underlyingBorrowToken properly",
+            "description": "Users may not be able to withdraw borrowed funds due to an incorrect validation check.",
+            "severity": "medium",
+            "location": "withdraw function in Size.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "LiquidateWithReplacement does not charge swap fees on the borrower",
+            "description": "Swap fees are not charged during `LiquidateWithReplacement` which contradicts the protocol's fee definition.",
+            "severity": "medium",
+            "location": "executeLiquidateWithReplacement function in Size.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "executeBuyCreditMarket returns the wrong amount of cash and overestimates the amount that needs to be checked in the variable pool",
+            "description": "The function returns the cash amount without deducting fees, leading to an incorrect validation check.",
+            "severity": "medium",
+            "location": "executeBuyCreditMarket function in BuyCreditMarket.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Precision discrepancy in scaled balance calculation",
+            "description": "The validation check fails due to a precision discrepancy between the `rayDiv` function and the `mulDivDown` function, preventing users from repaying their debt.",
+            "severity": "low",
+            "location": "`depositUnderlyingBorrowTokenToVariablePool`, `_mintScaled`, `rayDiv`, and `validateBorrowATokenIncreaseLteDebtTokenDecrease` functions"
+        }
+    ]
+}

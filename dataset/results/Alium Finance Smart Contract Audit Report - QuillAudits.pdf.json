@@ -1,0 +1,197 @@
+{
+    "path": "artifacts/Alium Finance Smart Contract Audit Report - QuillAudits.pdf",
+    "project_info": {
+        "url": "https://github.com/Alium-Finance/alium-farm/tree/master/contracts",
+        "commit_id": "545b2e29b253dbe09375d57575d9ed6ac2503145",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "alium-farm": "contracts/Alium Finance Smart Contract Audit Report - QuillAudits/alium-farm"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "A.1 Centralization Risks",
+            "description": "The role owner has the authority to perform privileged operations.",
+            "severity": "medium",
+            "location": "FarmingTicketWindow contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "A.2 passFree() fails if the owner has the ticket",
+            "description": "The execution reverts if the owner is a ticket holder and tries to use the passFree() function.",
+            "severity": "low",
+            "location": "passFree() function in FarmingTicketWindow contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralization Risks",
+            "description": "The role owner has the authority to addPool with any lpToken to the contract, update the reward allocation at any time, and change the setting for strong holder pool lock.",
+            "severity": "high",
+            "location": "Contract - MasterChef"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "B.2 Fewer rewards for users if SHP is disabled",
+            "description": "The SHP contract locks the tokens for the user if the toTokenLock calculated is more than 100,000 and shpStatus == true.",
+            "severity": "medium",
+            "location": "Contract - MasterChef (Line 340-356)"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "B.3 Fewer rewards for users in staking",
+            "description": "Staking functionality has been disabled on deployment, and the total amount of token staked for a specific pool is identified using the balance of that token in the MasterChef contract.",
+            "severity": "medium",
+            "location": "Contract - MasterChef (Line 297-317)"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "B.4 massUpdatePools() may run out-of-gas if too many tokens are added",
+            "description": "massUpdatePools() function loops on the poolInfo array. If too many pools are added to the contract, it might run out of gas.",
+            "severity": "low",
+            "location": "Contract - MasterChef (Line 288-293)"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ]
+            },
+            "title": "B.5 Pool with lpToken as ALM can be added again",
+            "description": "In the constructor, a pool with lpToken as ALM is added. But _addedLP mapping is not updated accordingly.",
+            "severity": "low",
+            "location": "Contract - MasterChef"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "B.6 blockReward() may run out-of-gas",
+            "description": "blockReward() function loops on the _blockRewards array. If too many elements are added to it, then it might run out of gas.",
+            "severity": "low",
+            "location": "Contract - MasterChef (Line 275-285)"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-221"
+                ],
+                "3": [
+                    "CWE-223"
+                ]
+            },
+            "title": "B.7 Missing Events for Significant Transactions",
+            "description": "The missing event makes it difficult to track off-chain liquidity fee changes.",
+            "severity": "info",
+            "location": "Contract - MasterChef"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "B.8 emergencyWithdraw() does not follow the checks-effects-interactions",
+            "description": "The values for user.amount and user.rewardDebt are not zeroed until after the external call to pool.lpToken.safeTransfer().",
+            "severity": "info",
+            "location": "Contract - MasterChef (Line 173-180)"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "B.9 Precision loss for dev fee",
+            "description": "Due to division before multiplication, precision is lost.",
+            "severity": "info",
+            "location": "Contract - MasterChef (Line 312)"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-392"
+                ]
+            },
+            "title": "B.10 Incorrect Error Message",
+            "description": "The error message 'MasterChef: withdraw ALM by unstaking' describes the error incorrectly.",
+            "severity": "info",
+            "location": "Contract - MasterChef (Line 150)"
+        }
+    ]
+}

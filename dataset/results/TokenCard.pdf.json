@@ -1,0 +1,233 @@
+{
+    "path": "artifacts/TokenCard.pdf",
+    "project_info": {
+        "url": "https://github.com/tokencard/contracts",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/TokenCard/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Wallet and Licence are incompatible with non-standard ERC20 tokens",
+            "description": "The TokenCard contracts are meant to work with any ERC20 token, but several high-profile ERC20 tokens do not correctly implement the ERC20 standard.",
+            "severity": "low",
+            "location": "wallet.sol, licence.sol"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-228"
+                ],
+                "3": [
+                    "CWE-241"
+                ]
+            },
+            "title": "Parsing large JSON integers could result in interoperability issues",
+            "description": "The parsing of strings as JSON integers differs from mainstream implementations.",
+            "severity": "low",
+            "location": "internals/parseIntScientific.sol, function _parseIntScientific"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Base64 decoding does not validate its input",
+            "description": "The _base64decode function does not properly validate its input.",
+            "severity": "low",
+            "location": "externals/base64.sol, function _base64decode"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-841"
+                ]
+            },
+            "title": "Solidity compiler optimizations can be dangerous",
+            "description": "Optional Solidity compiler optimizations are enabled and may introduce security vulnerabilities.",
+            "severity": "n/a",
+            "location": "build.sh"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Lack of contract existence check may mislead the user about the transaction’s result",
+            "description": "A failure to check for a contract's existence may mislead a user into thinking that a failed transaction was successful.",
+            "severity": "medium",
+            "location": "Wallet.sol, function _externalCall"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-1329"
+                ]
+            },
+            "title": "Contracts used as dependencies do not track upstream changes",
+            "description": "Third-party contracts or functions are copy-pasted and not updated reliably.",
+            "severity": "low",
+            "location": "Wallet.sol, oracle.sol, external contracts"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-74"
+                ],
+                "3": [
+                    "CWE-75"
+                ]
+            },
+            "title": "No sanitization is performed when the Oraclize query is constructed",
+            "description": "An Oraclize URL query is not carefully constructed using the name of the token and can be manipulated.",
+            "severity": "medium",
+            "location": "oracle.sol, function _updateTokenRatesList"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ]
+            },
+            "title": "_licenceAmountScaled can be incorrectly initialized",
+            "description": "The licence contract's _licenceAmountScaled variable can be initialized with any unsigned integer value in the constructor.",
+            "severity": "low",
+            "location": "licence.sol, constructor"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Multiplication overflow can block certain wallet operations",
+            "description": "Integer overflow in convertToEther and convertToStablecoin functions",
+            "severity": "low",
+            "location": "wallet.sol, convertToEther and convertToStablecoin functions"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "AddressWhitelist owner can be added to the whitelist",
+            "description": "Owner can be added to the whitelist by transferring ownership",
+            "severity": "medium",
+            "location": "wallet.sol, AddressWhitelist contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Date validation is insufficient and returns imprecise timestamps",
+            "description": "_verifyDate function does not properly validate its input",
+            "severity": "low",
+            "location": "oracle.sol, _verifyDate function"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-669"
+                ],
+                "3": [
+                    "CWE-829"
+                ]
+            },
+            "title": "Malicious price source can block withdrawal of funds",
+            "description": "Compromised CryptoCompare signing key can prevent transfers",
+            "severity": "low",
+            "location": "oracle.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Daily limits may be bypassed via executeTransaction for certain tokens",
+            "description": "executeTransaction function allows bypassing daily limits using approve and transferFrom functions",
+            "severity": "medium",
+            "location": "wallet.sol, executeTransaction function"
+        }
+    ]
+}

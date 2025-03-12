@@ -1,0 +1,128 @@
+{
+    "path": "artifacts/Hacken-Bolide-V2.pdf",
+    "project_info": {
+        "url": "https://github.com/bolide-fi/contracts",
+        "commit_id": "n/a",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "contracts": "contracts/Hacken-Bolide-V2/contracts"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "Test failed",
+            "description": "One of the two tests is failing, which could be an issue in the test or an error in the contract logic implementation.",
+            "severity": "medium",
+            "location": "Strategies"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Floating solidity version",
+            "description": "The exact solidity version should be specified in the contracts.",
+            "severity": "low",
+            "location": "All contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Excessive state access",
+            "description": "Reading the state at each code line is not gas effective; it's recommended to read the state value into a local memory variable and use it for reading.",
+            "severity": "medium",
+            "location": "StorageV0.sol contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "Not emitting events",
+            "description": "Events should be emitted on state changes to allow the community to track the current state off-chain.",
+            "severity": "medium",
+            "location": "StorageV0.sol and Logic.sol contracts, functions setBLID, addToken, setLogic, setStorage, setAdmin"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Implicit variables visibility",
+            "description": "State variables without specified visibility are declared internal implicitly; it's recommended to declare visibility explicitly.",
+            "severity": "low",
+            "location": "StorageV0.sol contract, variables earnBLID, countEarns, countTokens, tokens, tokenBalance, oracles, tokensAdd, deposits, tokenDeposited, tokenTime, reserveBLID, logicContract, BLID"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Reading state variable's length in the loop",
+            "description": "Reading 'length' attribute in the loop may cost excess gas fees.",
+            "severity": "medium",
+            "location": "Logic.sol contract, function returnToken"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "Reading state variable in the loop",
+            "description": "Reading 'countTokens' state variable in the loop would cost excess gas fees.",
+            "severity": "medium",
+            "location": "StorageV0.sol contract, functions addEarn, _upBalance, _upBalanceByItarate, balanceEarnBLID, balanceOf, getTotalDeposit"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "A public function that could be declared external",
+            "description": "Public functions never called by the contract should be declared external.",
+            "severity": "low",
+            "location": "Logic.sol and StorageV0.sol contracts, multiple functions"
+        }
+    ]
+}

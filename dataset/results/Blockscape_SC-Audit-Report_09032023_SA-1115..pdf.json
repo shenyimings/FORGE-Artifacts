@@ -1,0 +1,299 @@
+{
+    "path": "artifacts/Blockscape_SC-Audit-Report_09032023_SA-1115..pdf",
+    "project_info": {
+        "url": "https://github.com/BlockscapeNetwork/rocketscape/tree/main/src",
+        "commit_id": "73fe19ee5b8c62af2c04b22ee7a6b2972ce1aa2e",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "rocketscape": "contracts/Blockscape_SC-Audit-Report_09032023_SA-1115/rocketscape"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Requirements Violation",
+            "description": "Function userRequestWithdraw() doesn't contain logic for sending funds by itself.",
+            "severity": "critical",
+            "location": "./src/BlockscapeValidatorNFT.sol : userRequestWithdraw()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "Owner can withdraw any amount at any moment in time.",
+            "severity": "high",
+            "location": "./src/BlockscapeValidatorNFT.sol : withdraw();"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Highly Permissive Role Access",
+            "description": "Owner can set a withdrawal fee at any value and at any time.",
+            "severity": "high",
+            "location": "./src/BlockscapeValidatorNFT.sol : setWithdrawFee();"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1093"
+                ]
+            },
+            "title": "Wrong Data Type",
+            "description": "The state variable tokenIDtoValidator stores addresses as dynamic bytes array, increasing Gas usage and complexity unnecessarily.",
+            "severity": "medium",
+            "location": "./src/BlockscapeETHStakeNFT.sol; ./src/BlockscapeValidatorNFT.sol;"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Misleading Documentation",
+            "description": "Function updateValidator() allows setting a validator only once for a given tokenID, which is not mentioned in the NatSpec comments.",
+            "severity": "medium",
+            "location": "./src/BlockscapeValidatorNFT.sol : updateValidator();"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Requirements Violation",
+            "description": "Function viewUserRequestWithdraw() returns initWithdrawFee when called with a Token ID having 0 balance or non-existing, instead of returning 0.",
+            "severity": "medium",
+            "location": "./src/BlockscapeValidatorNFT.sol : viewUserRequestWithdraw();"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Writing Blank Data",
+            "description": "Function _metadataValidatorNFTInternal() writes blank bytes to tokenIDtoValidator[_tokenID].",
+            "severity": "medium",
+            "location": "./src/BlockscapeETHStakeNFT.sol : _metadataValidatorNFTInternal(); ./src/BlockscapeValidatorNFT.sol : _metadataValidatorNFTInternal();"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Bad Practice",
+            "description": "Function updateValidator() emits an event instead of reverting when there are insufficient staked RLP.",
+            "severity": "medium",
+            "location": "./src/BlockscapeValidatorNFT.sol : updateValidator();"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-394"
+                ]
+            },
+            "title": "Using transfer() to Send Native Tokens",
+            "description": "Using withdraw() and send() functions which rely on Gas limitation can give unclear error in case of insufficient funds to send.",
+            "severity": "medium",
+            "location": "./src/BlockscapeValidatorNFT.sol : withdraw();"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1076"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "The project uses floating pragmas “>0.5.0 <0.9.0” and “^0.8.16”, which can lead to deploying contracts using outdated compiler versions.",
+            "severity": "low",
+            "location": "./src/BlockscapeETHStakeNFT.sol; ./src/BlockscapeValidatorNFT.sol;"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation - Constant Naming",
+            "description": "The provided project violates the official guidelines for constant naming conventions.",
+            "severity": "low",
+            "location": "./src/ BlockscapeETHStakeNFT.sol; ./src/BlockscapeValidatorNFT.sol;"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Variables",
+            "description": "Unused variables should be removed from the contracts to decrease Gas consumption and increase readability.",
+            "severity": "low",
+            "location": "./src/BlockscapeETHStakeNFT.sol : name, symbol; ./src/BlockscapeValidatorNFT.sol : name, symbol;"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "State Variables Default Visibility",
+            "description": "Some state variables default visibility is not specified.",
+            "severity": "low",
+            "location": "./src/BlockscapeETHStakeNFT.sol; ./src/BlockscapeValidatorNFT.sol;"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant Zero Value Initialization",
+            "description": "Variables allowPubDeposit, poolSupply are initialized with their default data type zero value.",
+            "severity": "low",
+            "location": "./src/BlockscapeETHStakeNFT.sol; ./src/BlockscapeValidatorNFT.sol;"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant State Variable",
+            "description": "The state variable rocketNodeStakingAddress is never used directly in the code except for assignment to another state variable rocketNodeStaking.",
+            "severity": "low",
+            "location": "./src/BlockscapeETHStakeNFT.sol; ./src/BlockscapeValidatorNFT.sol;"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused Fields in Struct",
+            "description": "The struct Metadata contains unused fields institution, institutionName, institutionVerified that increase Gas cost.",
+            "severity": "low",
+            "location": "./src/BlockscapeETHStakeNFT.sol; ./src/BlockscapeValidatorNFT.sol;"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1164"
+                ],
+                "3": [
+                    "CWE-563"
+                ]
+            },
+            "title": "State Variables Can Be Declared Immutable",
+            "description": "The state variables rocketStorage and rocketNodeStaking are never modified in the code.",
+            "severity": "low",
+            "location": "./src/BlockscapeETHStakeNFT.sol; ./src/BlockscapeValidatorNFT.sol;"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Unindexed Events",
+            "description": "Many events lacks indexed parameters making it difficult to filter and search for these events.",
+            "severity": "low",
+            "location": "./src/BlockscapeETHStakeNFT.sol : RPLStakeRequired, RocketPoolNodeAddressChanged, StakeUpdated; ./src/BlockscapeValidatorNFT.sol : RPLStakeRequired, UserRequestedWithdrawal, ETHLimitChanged, RocketPoolNodeAddressChanged;"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code Duplication",
+            "description": "Many functions, events and state variables are duplicated in both Smart Contracts.",
+            "severity": "low",
+            "location": "./src/BlockscapeETHStakeNFT.sol; ./src/BlockscapeValidatorNFT.sol"
+        }
+    ]
+}

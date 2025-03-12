@@ -1,0 +1,59 @@
+{
+    "path": "artifacts/PolyGoon Standart Smart Contract Security Audit.pdf",
+    "project_info": {
+        "url": "n/a",
+        "commit_id": "n/a",
+        "address": "0xC406D91a1C51DFeeEF41bc448453D2c7B340cCF5",
+        "chain": "polygon",
+        "compiler_version": [
+            "v0.8.6+commit.11564f7e"
+        ],
+        "project_path": {
+            "PolyGoonToken": "contracts/PolyGoon Standart Smart Contract Security Audit/PolyGoonToken"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Calculation error",
+            "description": "The function claimRewardExpress increases rewardToBurn variable and subtracting it from claimableReward variable.",
+            "severity": "high",
+            "location": "claimRewardExpress function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Out of gas",
+            "description": "Functions massUpdatePools() uses a loop to update all loops from the poolInfo list, which may cause an OUT_OF_GAS exception if the pool addresses list is too long.",
+            "severity": "low",
+            "location": "massUpdatePools function"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Owner privileges",
+            "description": "Various owner privileges in GoonTreasurer, PolyGoonToken and MasterGoon contracts that can be exploited (e.g., minting, changing master address, etc.).",
+            "severity": "n/a",
+            "location": "GoonTreasurer, PolyGoonToken and MasterGoon contracts"
+        }
+    ]
+}

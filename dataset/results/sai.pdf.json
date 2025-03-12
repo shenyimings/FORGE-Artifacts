@@ -1,0 +1,233 @@
+{
+    "path": "artifacts/sai.pdf",
+    "project_info": {
+        "url": "https://github.com/dapphub/ds-chief/tree/ea8759a0a5f1b9724ac1c328d85a57eb1b3c9557",
+        "commit_id": "ea8759a0a5f1b9724ac1c328d85a57eb1b3c9557",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ds-chief": "contracts/sai/ds-chief"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Race condition in the ERC20 approve function may lead to token theft",
+            "description": "Known race condition on the approve function, making it possible for tokens to be stolen.",
+            "severity": "high",
+            "location": "DSToken and DSTokenBase"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Unprotected function and integer overflow may lead to system destabilization",
+            "description": "Unprotected access to DSWarp.warp function and an integer overflow, allowing anyone to control time-related computations.",
+            "severity": "high",
+            "location": "DSWarp"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Reliance on undefined behavior may lead to unexpected behavior",
+            "description": "Use of undefined Solidity behavior in constant functions that change the state of the contract.",
+            "severity": "low",
+            "location": "SaiTap, SaiTub, and DaiVox"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Rounding strategy in DSMath fixed-point multiplication/division may lead to errors",
+            "description": "Bias introduced due to \"round half up\" rounding strategy in DSMath",
+            "severity": "medium",
+            "location": "DSMath"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-665"
+                ],
+                "3": [
+                    "CWE-909"
+                ],
+                "4": [
+                    "CWE-456"
+                ]
+            },
+            "title": "Misconfigured deploy may lead to unusable system",
+            "description": "Uninitialized `hat` variable in SaiTub leads to debt ceiling not being set",
+            "severity": "low",
+            "location": "SaiTub, bin/deploy-live-public"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Inconsistent documentation on SaiTub.join() may lead to unexpected system behavior for users",
+            "description": "Documentation inconsistency for SaiTub.join function",
+            "severity": "low",
+            "location": "SaiTub"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Race conditions during contracts deployment may lead to system compromise",
+            "description": "Lack of validation in contract initialization can be used to compromise the system.",
+            "severity": "high",
+            "location": "All contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Multiple divisions by zero may lead to unusable system",
+            "description": "Divisions by zero can cause exceptions and block the system.",
+            "severity": "medium",
+            "location": "SaiTub, SaiTap, SaiTop, DaiVox"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack of validation on tax may lead to unusable system",
+            "description": "Tax value not enforced, potentially causing exceptions and failures in SaiTub.",
+            "severity": "high",
+            "location": "SaiTub, SaiTop"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Inconsistent debt bookkeeping may lead to trapped tokens",
+            "description": "Rounding operations can cause differences in sin token manipulation, leading to inconsistent debt tracking.",
+            "severity": "medium",
+            "location": "SaiTub"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Loss of decimal precision leads to free tokens",
+            "description": "Fixed point arithmetic issues allow attackers to receive tokens for free through exploiting certain pattern(s).",
+            "severity": "high",
+            "location": "SaiTub, SaiTap, Ds-math"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Loss of decimal precision leads to incomplete global settlement",
+            "description": "Rounding errors can prevent Sai from converting tokens in certain situations.",
+            "severity": "medium",
+            "location": "SaiTub, SaiTap, SaiTop"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Misleading documentation in sai join",
+            "description": "sai join deducts the parameter from the initial GEM balance, which may cause a 2x loss of GEM for users.",
+            "severity": "n/a",
+            "location": "Sai join function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Unhandled divisions by zero",
+            "description": "Various functions use rdiv without checking for division by zero.",
+            "severity": "n/a",
+            "location": "SaiTub, SaiTap, SaiTop"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Code Quality Issues",
+            "description": "Recommendations to improve code quality and readability.",
+            "severity": "n/a",
+            "location": "Various contracts (SaiTub, SaiTap, SaiTop)"
+        }
+    ]
+}

@@ -1,0 +1,248 @@
+{
+    "path": "artifacts/2022-07-08_Yearn_veYFI(Voting_and_RewardPool).pdf",
+    "project_info": {
+        "url": "https://github.com/yearn/veYFI/tree/fbda9ac523252920bf3295557f9f764725a23f41",
+        "commit_id": "fbda9ac523252920bf3295557f9f764725a23f41",
+        "address": "0x90c1f9220d90d3966fbee24045edd73e1d588ad5",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "veYFI": "contracts/2022-07-08_Yearn_veYFI(Voting_and_RewardPool)/veYFI"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "veYFI balance might not decrease",
+            "description": "User can create a lock longer than MAX_LOCK_DURATION, causing the balance to not decrease with time.",
+            "severity": "critical",
+            "location": "VotingYFI.vy, function balanceOf()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect balance calculation leading to higher reward",
+            "description": "Balance calculation can be incorrect if a user creates a lock longer than 4 years.",
+            "severity": "critical",
+            "location": "RewardPool.vy, line L266"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect interface",
+            "description": "Interface for the VotingYFI contract is incorrect.",
+            "severity": "high",
+            "location": "RewardPool.vy, lines L9-L16"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect balance calculation",
+            "description": "Calculation can be incorrect if a user creates a lock longer than 4 years.",
+            "severity": "high",
+            "location": "RewardPool.vy, line L175"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-666"
+                ],
+                "3": [
+                    "CWE-672"
+                ]
+            },
+            "title": "Tokens may be lost if checkpoint functions are not called for 20 weeks",
+            "description": "Tokens may be lost if _checkpoint_token() and _checkpoint_total_supply() are not called for more than 20 weeks.",
+            "severity": "medium",
+            "location": "RewardPool.vy, lines L92 and L211"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Incorrect indentation",
+            "description": "Incorrect indentation causes the contract to not compile.",
+            "severity": "medium",
+            "location": "RewardPool.vy, line L211"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Function _find_timestamp_epoch() can be view",
+            "description": "Function can be marked as @view.",
+            "severity": "info",
+            "location": "RewardPool.vy, line L130"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Code duplication",
+            "description": "Duplicate code in _find_timestamp_epoch() and _find_timestamp_user_epoch() functions.",
+            "severity": "info",
+            "location": "RewardPool.vy, lines L130-L142"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Excess reentrancy protection",
+            "description": "Unnecessary @noreentrant('lock') modifier.",
+            "severity": "info",
+            "location": "RewardPool.vy, line L284"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "No check for address zero",
+            "description": "Lack of sanity checks for address zero.",
+            "severity": "info",
+            "location": "VotingYFI.vy, lines L87-L88"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-358"
+                ]
+            },
+            "title": "Unnecessary condition",
+            "description": "Unnecessary check in RewardPool.vy, line L100.",
+            "severity": "info",
+            "location": "RewardPool.vy, line L100"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Unreachable code",
+            "description": "Unreachable code in RewardPool.vy, line L106.",
+            "severity": "info",
+            "location": "RewardPool.vy, line L106"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary gas usage",
+            "description": "Unnecessary loop iteration in _checkpoint_token() function.",
+            "severity": "info",
+            "location": "RewardPool.vy, line L86"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unnecessary check",
+            "description": "Unnecessary check in RewardPool.vy, line L212.",
+            "severity": "info",
+            "location": "RewardPool.vy, line L212"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Incorrect comment",
+            "description": "Incorrect comment about the contract owner.",
+            "severity": "info",
+            "location": "RewardPool.vy, lines L121-L122"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused arguments",
+            "description": "Unused arguments in RewardPool.vy, lines L130 and L147.",
+            "severity": "info",
+            "location": "RewardPool.vy, lines L130 and L147"
+        }
+    ]
+}

@@ -1,0 +1,107 @@
+{
+    "path": "artifacts/ConsenSys_Diligence-Gluwacoin_ERC_20_Wrapper.pdf",
+    "project_info": {
+        "url": "https://github.com/gluwa/ERC-20-Wrapper-Gluwacoin",
+        "commit_id": "72db3ee06e8d5889f27b6cbee7109ba8a10ea843",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "ERC-20-Wrapper-Gluwacoin": "contracts/ConsenSys_Diligence-Gluwacoin_ERC_20_Wrapper/ERC-20-Wrapper-Gluwacoin"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Upgradeability risks",
+            "description": "The system uses upgradeable contracts, which means that users have to place a lot of trust in Gluwa not only in their honest intentions but also in their ability to secure the keys with upgrade privileges.",
+            "severity": "high",
+            "location": "System's design"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ]
+            },
+            "title": "Lack of reentrancy protection",
+            "description": "The Gluwacoin ERC-20 wrapper has no reentrancy protection, which can lead to a loss of funds if an ERC-20 token that allows reentering the Gluwacoin contract is wrapped.",
+            "severity": "high",
+            "location": "Gluwacoin ERC-20 wrapper contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ],
+                "3": [
+                    "CWE-266"
+                ]
+            },
+            "title": "Trust in Executors",
+            "description": "Executors have control over reserved amounts and must be trusted to \"do the right thing\".",
+            "severity": "high",
+            "location": "Non-custodial Exchange Functions"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Initialization flaws",
+            "description": "The initialization functions in the contracts are missing some _init_unchained calls, and sometimes the existing calls are not in the correct order.",
+            "severity": "low",
+            "location": "ERC20WrapperGluwacoin.sol, ERC20Reservable.sol, ERC20ETHless.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Flaw in _beforeTokenTransfer call chain and missing tests",
+            "description": "The implementation of the _beforeTokenTransfer function in ERC20WrapperGluwacoin, ERC20Reservable, and ERC20Wrapper has a flaw that can lead to incorrect behavior.",
+            "severity": "low",
+            "location": "ERC20WrapperGluwacoin.sol, ERC20Reservable.sol, ERC20Wrapper.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Hard-coded decimals",
+            "description": "The number of decimals is hard-coded to 6, limiting flexibility or requiring source code changes and recompilation if a token with a different number of decimals is to be wrapped.",
+            "severity": "low",
+            "location": "ERC20WrapperGluwacoin contract, function decimals(), lines L32-L34"
+        }
+    ]
+}

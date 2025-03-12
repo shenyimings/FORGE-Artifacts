@@ -1,0 +1,170 @@
+{
+    "path": "artifacts/Chocoswap Audit Report.pdf",
+    "project_info": {
+        "url": "https://github.com/chocoswap/chocoswap/",
+        "commit_id": "70240143695f37cd11a65bbd70a8ea4949d67472",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "chocoswap": "contracts/Chocoswap Audit Report/chocoswap"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Missing source code for Migrator contract",
+            "description": "The source code for the Migrator contract is not provided, which can lead to exploits in the VNLADistribution contract.",
+            "severity": "low",
+            "location": "VNLADistribution contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Incorrect investment limit checking",
+            "description": "The system does not check if the investment amount is bigger than phase 2 limit when the contract is in phase 1.",
+            "severity": "low",
+            "location": "chocoPresale contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Lack of documentation and code comments",
+            "description": "Verifying business logic without documented requirements is not possible.",
+            "severity": "low",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Insecure use of modifiers",
+            "description": "The onlyOwner modifier can be used on the transfer and mint functions instead of manually checking that msg.sender is the owner.",
+            "severity": "low",
+            "location": "chocoPresale contract"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Fallback function not used",
+            "description": "The fallback function can be used instead of receive in the chocoPresale contract.",
+            "severity": "low",
+            "location": "chocoPresale contract"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1059"
+                ]
+            },
+            "title": "Missing package.json file",
+            "description": "It is hard to verify the dependency versions that are intended to be used without this file.",
+            "severity": "low",
+            "location": "Codebase"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Improper data type usage",
+            "description": "preSalePhase can be made an enum instead of uint256 for clarity.",
+            "severity": "low",
+            "location": "chocoPresale contract"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Non-compliant ERC20 token",
+            "description": "pChoc token is not ERC20 compliant since it is missing functions like approve. Also, only the owner can transfer the pChoc token.",
+            "severity": "low",
+            "location": "chocoPresale contract"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Overpowered owner",
+            "description": "The owner controls multiple critical aspects of the system.",
+            "severity": "medium",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Duplicate pool addition vulnerability",
+            "description": "It is possible to add duplicate pools in the VNLADistribution contract.",
+            "severity": "medium",
+            "location": "VNLADistribution contract"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Reentry attacks",
+            "description": "Reentry attacks are possible in withdraw, deposit, emergencyWithdraw, and updatePool functions of the VNLADistribution.",
+            "severity": "medium",
+            "location": "VNLADistribution contract"
+        }
+    ]
+}

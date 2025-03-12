@@ -1,0 +1,155 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Plexus-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/stimuluspackage/PlexusContracts/tree/6408424716cb9ce0723499cd764df9254afbc157",
+        "commit_id": "6408424716cb9ce0723499cd764df9254afbc157",
+        "address": "0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.6.12+commit.27d51765"
+        ],
+        "project_path": {
+            "InitializableImmutableAdminUpgradeabilityProxy": "contracts/PeckShield-Audit-Report-Plexus-v1/InitializableImmutableAdminUpgradeabilityProxy"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-706"
+                ]
+            },
+            "title": "Wrong Hardcoded Aave AToken Address",
+            "description": "Misconfigured DAI/aDAI mapping could result in loss of user funds.",
+            "severity": "medium",
+            "location": "tier2Aave contract"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Accommodation of approve() Idiosyncrasies",
+            "description": "Failure to accommodate approve() idiosyncrasy may cause deposit routine to fail.",
+            "severity": "low",
+            "location": "Multiple contracts, including tier2Farm"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Business Logic Errors in tier2Aave::withdraw()",
+            "description": "The routine does not properly handle certain token addresses, and the reduction of totalAmountStaked[tokenAddress] and depositBalances[onBehalfOf][tokenAddress] is not consistent.",
+            "severity": "low",
+            "location": "tier2Aave contract, withdraw() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-354"
+                ]
+            },
+            "title": "Improper Handling of ETHs in tier2Farm::deposit()",
+            "description": "The routine does not properly handle ETH deposits, and there is a need to validate that the given amount should be the same as msg.value.",
+            "severity": "low",
+            "location": "tier2Farm contract, deposit() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Loss of Staked Funds With Wrongly Triggered tier2Farm::kill()",
+            "description": "The kill() functionality may lead to loss of staked funds if not properly handled.",
+            "severity": "medium",
+            "location": "Multiple contracts, e.g., tier2Aave, tier2Farm, tier2Pickle, and tier2Aggregator."
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Sufficient Allowance Guarantee in tier2Farm::withdraw()",
+            "description": "The staking of the remaining balance does not properly check whether there is sufficient allowance to stake.",
+            "severity": "low",
+            "location": "tier2Farm contract, withdraw() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-807"
+                ]
+            },
+            "title": "Possible Front-Running For Reduced Return",
+            "description": "The swap operation does not specify any restriction on possible slippage and is vulnerable to front-running attacks.",
+            "severity": "low",
+            "location": "WrapAndUnWrap contract, conductUniswap() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Lack Of Sanity Checks For System Parameters",
+            "description": "The update logic for commission parameter lacks rigorous range checks, leading to possible mis-configuration.",
+            "severity": "low",
+            "location": "Multiple contracts, including tier2Pickle contract, updateCommission() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ],
+                "2": [
+                    "CWE-436"
+                ],
+                "3": [
+                    "CWE-437"
+                ]
+            },
+            "title": "Safe-Version Replacement With safeTransfer(), safeTransferFrom(), And safeApprove()",
+            "description": "Non-compliant token contracts may cause issues if not handled properly, as they do not follow ERC-20 specification.",
+            "severity": "medium",
+            "location": "Core contract, transfer() and transferFrom() functions"
+        }
+    ]
+}

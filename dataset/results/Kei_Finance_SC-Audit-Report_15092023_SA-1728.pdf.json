@@ -1,0 +1,227 @@
+{
+    "path": "artifacts/Kei_Finance_SC-Audit-Report_15092023_SA-1728.pdf",
+    "project_info": {
+        "url": "https://github.com/Kei-Finance/presale-contract",
+        "commit_id": "0ea9e6ff7aa5aad8966a0d59420300b262108f13",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "presale-contract": "contracts/Kei_Finance_SC-Audit-Report_15092023_SA-1728/presale-contract"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Data Consistency",
+            "description": "Inconsistent user allocations generated from Liquidity round type",
+            "severity": "critical",
+            "location": "Presale.sol, _purchase() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Invalid Calculations",
+            "description": "Incorrect number of USD due to conversion issue",
+            "severity": "critical",
+            "location": "Presale.sol, purchaseDAI(), purchaseUSDC(), purchase(), ethToUsd(), and ethToTokens() functions"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unsafe Casting",
+            "description": "Unsafe casting from int256 to uint256 without checking for negative values",
+            "severity": "high",
+            "location": "Presale.sol, ethPrice() function"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Data Inconsistency",
+            "description": "Total USD allocation not recorded if round type is not 'Liquidity'",
+            "severity": "high",
+            "location": "Presale.sol, _purchase() function"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Requirements Violation",
+            "description": "Mismatch between documentation and implementation",
+            "severity": "high",
+            "location": "./contracts/Presale.sol: initialize()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ],
+                "3": [
+                    "CWE-252"
+                ]
+            },
+            "title": "Unchecked Return Value",
+            "description": "Stale prices due to unchecked return values from Chainlink oracle",
+            "severity": "high",
+            "location": "./contracts/Presale.sol: ethPrice()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "Unchecked zero address allocation",
+            "severity": "high",
+            "location": "./contracts/Presale.sol: purchase(), purchaseUSDC(), purchaseDAI()"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Incorrect Usage of Transfer",
+            "description": "Insufficient Gas for transfer()",
+            "severity": "medium",
+            "location": "./contracts/Presale.sol: _send()"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Data Inconsistency",
+            "description": "Assuming 1 USD = 1 USDC/DAI without using oracle price",
+            "severity": "medium",
+            "location": "./contracts/Presale.sol: purchaseUSDC(), purchaseDAI()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Inefficient Gas Pattern",
+            "description": "No zero balance check before purchasing tokens",
+            "severity": "low",
+            "location": "./contracts/Presale.sol: purchase(), purchaseDAI(), purchaseUSDC()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Style Guide Violation",
+            "description": "Function order is incorrect, private functions should go after internal ones",
+            "severity": "low",
+            "location": "./contracts/Presale.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-923"
+                ],
+                "3": [
+                    "CWE-940"
+                ],
+                "4": [
+                    "CWE-766"
+                ]
+            },
+            "title": "Floating Pragma",
+            "description": "Unlocked pragma version",
+            "severity": "low",
+            "location": "./contracts/IPresale.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Zero Address Validation",
+            "description": "No zero address check in allocation functions",
+            "severity": "medium",
+            "location": "./contracts/Presale.sol: allocate(), constructor()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ]
+            },
+            "title": "Replace \"\" With bytes(0) for Gas Optimization",
+            "description": "Using bytes(0) instead of \"\" for Gas optimization.",
+            "severity": "info",
+            "location": "./contracts/Presale.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Replace Require Error Strings With Custom Errors for Gas Optimization",
+            "description": "Using custom errors instead of require error strings for Gas optimization.",
+            "severity": "info",
+            "location": "./contracts/Presale.sol: _setConfig(), _purchase()"
+        }
+    ]
+}

@@ -1,0 +1,242 @@
+{
+    "path": "artifacts/PeckShield-Audit-Report-Augmented-v1.0.pdf",
+    "project_info": {
+        "url": "https://github.com/augmented-finance/augmented-finance-protocol/tree/9f359e5",
+        "commit_id": "9f359e5",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "augmented-finance-protocol": "contracts/PeckShield-Audit-Report-Augmented-v1/augmented-finance-protocol"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-1339"
+                ]
+            },
+            "title": "Inconsistent Rate Scale Of ControlledRewardPool",
+            "description": "Inconsistent rate scale in `_setRate()` function leading to possible precision loss.",
+            "severity": "medium",
+            "location": "ControlledRewardPool::_setRate() and internalPause()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-1265"
+                ]
+            },
+            "title": "Potential Reentrancy Risk in BaseTokenLocker",
+            "description": "Violation of the checks-effects-interactions principle, allowing for potential reentrancy attacks.",
+            "severity": "low",
+            "location": "BaseTokenLocker contract, lock() function."
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant State/Code Removal",
+            "description": "Unused code and redundant states present in multiple contracts.",
+            "severity": "info",
+            "location": "Multiple Contracts"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-287"
+                ]
+            },
+            "title": "Adjusted Authentication of setLockedAt()",
+            "description": "Insecure authentication allowing team managers to adjust the reward lockup timestamp.",
+            "severity": "medium",
+            "location": "TeamRewardPool contract, setUnlockedAt() function."
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improved BaseUniswapAdapter::_getAmountsInData() Logic",
+            "description": "Incorrect calculation of amountIn due to flashloan-related premium charges.",
+            "severity": "low",
+            "location": "BaseUniswapAdapter contract, _getAmountsInData() function."
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ],
+                "3": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Lack Of setRewardMinter() in RewardConfigurator",
+            "description": "Missing functionality to dynamically update reward minters.",
+            "severity": "low",
+            "location": "RewardConfigurator contract"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-707"
+                ],
+                "2": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Improved Sanity Checks For System Parameters",
+            "description": "Inadequate sanity checks for system-wide parameters, potentially leading to undesirable consequences.",
+            "severity": "low",
+            "location": "Multiple Contracts"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Proper initializerRunAlways() Modifier",
+            "description": "Incorrect implementation of the initializerRunAlways modifier, allowing for multiple calls and unexpected execution results.",
+            "severity": "medium",
+            "location": "VersionedInitializable contract, initializerRunAlways modifier"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Possible CooldownTimestamp Manipulation",
+            "description": "Malicious actor can lock another victim's staking funds inside the contract.",
+            "severity": "high",
+            "location": "SlashableStakeTokenBase getNextCooldown()"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Possible Fund Loss From (Permissive) Smart Wallets With Allowances to LendingPool",
+            "description": "Flashloan can be abused to cause fund loss of an innocent user if the user previously specified certain allowances to LendingPool.",
+            "severity": "low",
+            "location": "LendingPool _flashLoan()"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-732"
+                ]
+            },
+            "title": "Possible Costly StakeToken From Improper Pool Initialization",
+            "description": "Malicious actor can make the pool token extremely expensive by transferring a huge amount of _stakedToken.",
+            "severity": "medium",
+            "location": "SlashableStakeTokenBase internalStake() and exchangeRate()"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Trust Issue Of Admin Keys",
+            "description": "Unsecured admin keys may allow an attacker to modify system parameters.",
+            "severity": "medium",
+            "location": "Multiple Contracts, admin roles"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-862"
+                ]
+            },
+            "title": "Flashloan-Lowered StableBorrowRate For Mode-Switching",
+            "description": "Flashloan-assisted sandwich attack can lead to a lowered stable borrow rate.",
+            "severity": "medium",
+            "location": "LendingPool, swapBorrowRateMode()"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Accommodation of Non-ERC20-Compliant Tokens",
+            "description": "Non-compliant tokens may cause issues if not handled properly.",
+            "severity": "low",
+            "location": "Multiple Contracts, transfer() and related functions"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Possible DoS On Forced Destruction Of LendingPool",
+            "description": "A malicious user can force the LendingPool to self-destruct.",
+            "severity": "high",
+            "location": "LendingPool, initialize() and liquidationCall()"
+        }
+    ]
+}

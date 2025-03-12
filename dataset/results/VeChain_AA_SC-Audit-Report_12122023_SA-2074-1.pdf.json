@@ -1,0 +1,125 @@
+{
+    "path": "artifacts/VeChain_AA_SC-Audit-Report_12122023_SA-2074-1.pdf",
+    "project_info": {
+        "url": "https://github.com/vechainfoundation/account-abstraction",
+        "commit_id": "bc2a9ec",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "account-abstraction": "contracts/VeChain_AA_SC-Audit-Report_12122023_SA-2074-1/account-abstraction"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ],
+                "3": [
+                    "CWE-770"
+                ]
+            },
+            "title": "Lack of Penalty for Reserving Redundant Gas",
+            "description": "User operations can reserve large parts of the Gas space in the bundle and leave it unused, preventing the bundler from including other UserOperations.",
+            "severity": "medium",
+            "location": "./contracts/core/EntryPoint.sol : _postExecution()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Possible Execution Reversion Due to the Revert Reason of the Wrong Size",
+            "description": "The EntryPoint contract might lead to unexpected reversion calling the returndatacopy function, if the revert reason is shorter than 32 bytes.",
+            "severity": "low",
+            "location": "./contracts/core/EntryPoint.sol : _executeUserOp()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-193"
+                ]
+            },
+            "title": "Inconsistent User Operation Hash Generation",
+            "description": "The getUserOpHash function truncates the original chain ID to 8 bits, so different chain IDs might result in the same value.",
+            "severity": "low",
+            "location": "./contracts/core/EntryPoint.sol : getUserOpHash()"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-670"
+                ]
+            },
+            "title": "Misplaced BeforeExecution() Event",
+            "description": "The BeforeExecution() event is misplaced in the handleAggregatedOps() function, leading to inconsistent tracking.",
+            "severity": "info",
+            "location": "./contracts/core/EntryPoint.sol : handleAggregatedOps()"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Untracked Revert Reason In _executeUserOp()",
+            "description": "The _executeUserOp() function only checks if the revert reason is INNER_OUT_OF_GAS, ignoring any other reason.",
+            "severity": "info",
+            "location": "./contracts/core/EntryPoint.sol : _executeUserOp()"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Possible Lack of Tokens to Cover Gas Expenses",
+            "description": "The BaseAccount.validateUserOp() is ignoring the missingAccountFunds parameter, leading to transactions failing due to insufficient deposited balance.",
+            "severity": "info",
+            "location": "./contracts/core/EntryPoint.sol : validateUserOp()"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Redundant mySimulateValidation() Function",
+            "description": "The mySimulateValidation() function has unclear usage and contains a subset of the logic.",
+            "severity": "info",
+            "location": "./contracts/core/EntryPoint.sol : mySimulateValidation()"
+        }
+    ]
+}

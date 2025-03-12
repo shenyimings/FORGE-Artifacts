@@ -1,0 +1,272 @@
+{
+    "path": "artifacts/Inspex-FairLaunch,_Token,_Vault_&_Workers.pdf",
+    "project_info": {
+        "url": "https://github.com/meow-finance/Meow-Finance",
+        "commit_id": "4a4f13efaf5e5fbed74c0ed23b665751e655d715",
+        "address": "n/a",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "Meow-Finance": "contracts/Inspex-FairLaunch,_Token,_Vault_&_Workers/Meow-Finance"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Denial of Service in Beneficiary Mechanism",
+            "description": "In the MeowMining contract, malicious actors can prevent others from depositing or withdrawing for a beneficiary address by setting user.fundedBy to their own address.",
+            "severity": "high",
+            "location": "MeowMining contract, deposit() function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Use of Upgradable Contract Design",
+            "description": "The Vault and SpookyswapWorker contracts are designed to be upgradable, allowing the proxy owner to modify their logic arbitrarily.",
+            "severity": "high",
+            "location": "Vault and SpookyswapWorker contracts"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Centralized Control of State Variable",
+            "description": "The controlling authorities can change critical state variables to gain additional profit, causing significant monetary loss to users.",
+            "severity": "high",
+            "location": "Vault, TripleSlopeModel, MeowMining, SpookyswapWorker, MeowToken, FeeDistribute, DevelopmentFund (multiple contracts and functions)"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation in MeowMining",
+            "description": "The reward of the pool that has the same staking token as the reward token will be slightly lower than what it should be, resulting in monetary loss for users.",
+            "severity": "medium",
+            "location": "MeowMining contract, addPool() and updatePool() functions"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Reward Calculation in FeeDistribute",
+            "description": "The reward of the pool that has the same staking token as the reward token will be slightly higher than what it should be, resulting in monetary loss for some users and loss of reputation for the platform.",
+            "severity": "medium",
+            "location": "FeeDistribute contract, addPool() function"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Improper Compliance to Tokenomics",
+            "description": "The $MEOW token allocated for distribution in the MeowMining contract can be decreased due to the use of the manualMint() function, making it different from the tokenomics announced to users.",
+            "severity": "medium",
+            "location": "MeowToken contract, manualMint() function"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "Denial of Service on Minting Cap Exceeding",
+            "description": "The `mint()` function will be unusable when the sum of the reward to be minted and the minted amount exceeds the max supply, causing transactions that call this function to be reverted and disrupting the availability of the platform.",
+            "severity": "medium",
+            "location": "MeowMining contract, updatePool() function"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Improper Delegation Handling in Token Burning",
+            "description": "The number of votes can be higher than the amount of tokens available, causing unfair and untrustworthy vote results.",
+            "severity": "low",
+            "location": "MeowToken contract, burn() function"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ],
+                "2": [
+                    "CWE-400"
+                ]
+            },
+            "title": "Design Flaw in massUpdatePool() Function",
+            "description": "The massUpdatePools() function will eventually be unusable due to excessive gas usage.",
+            "severity": "low",
+            "location": "MeowMining contract, massUpdatePools() function"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-362"
+                ]
+            },
+            "title": "Transaction Ordering Dependence (Race Condition)",
+            "description": "The front-running attack can be performed, resulting in a bad swapping rate for the reinvestment. This causes the reinvestment fund to be lower, which is a minor monetary loss for the platform users.",
+            "severity": "low",
+            "location": "SpookyswapWorker contract, reinvest() function, specifically line 163 where router.swapExactTokensForTokens() is called with amountOutMin set to 0."
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Missing Input Validation (maxReinvestBountyBps)",
+            "description": "By setting reinvestBountyBps to be greater than 10,000, the transaction will revert for all work() function executions.",
+            "severity": "low",
+            "location": "SpookyswapWorker.sol, functions setMaxReinvestBountyBps and reinvest"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Denial of Service in reinvest() Function",
+            "description": "The reinvest() function will be unusable, disrupting the availability of the service, when the baseToken is a reward token, causing the path to be empty and leading to the transaction being reverted.",
+            "severity": "low",
+            "location": "SpookyswapWorker contract, reinvest() function"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Missing Input Validation of preShare and lockShare Values",
+            "description": "The sum of preShare and lockShare values can cause issues in the MeowMining contract, leading to monetary loss for users and reputation loss for the platform.",
+            "severity": "low",
+            "location": "MeowMining.sol, _harvest function"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-693"
+                ],
+                "2": [
+                    "CWE-778"
+                ]
+            },
+            "title": "Insufficient Logging for Privileged Functions",
+            "description": "Privileged functions lack sufficient logging, making it difficult for users to monitor their execution.",
+            "severity": "low",
+            "location": "Multiple contracts (Vault, TripleSlopeModel, MeowMining, SpookyswapWorker, MeowToken, FeeDistribute)"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Unavailability of manualMint() Function",
+            "description": "The manualMint() function can become unusable due to subtraction overflow protection mechanism from SafeMath library.",
+            "severity": "info",
+            "location": "MeowToken.sol, function manualMint()"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Access Control for Development Fund Locking",
+            "description": "The lock() function can be called by anyone, allowing them to extend the lock period and decrease the developer's token amount.",
+            "severity": "info",
+            "location": "DevelopmentFund.sol, function lock()"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Access Control for burnFrom() Function",
+            "description": "The burnFrom() function can be used to burn tokens from any wallet address without the user's consent.",
+            "severity": "info",
+            "location": "MeowToken.sol, function burnFrom()"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Unsupported Design for Deflationary Token",
+            "description": "Failure to recognize the actual token amount in deposit() function can lead to issues with withdrawing staking tokens and reward calculation.",
+            "severity": "info",
+            "location": "MeowMining contract, deposit() function"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Improper Function Visibility",
+            "description": "Functions with public visibility copy calldata to memory when being executed, while external functions can read directly from calldata.",
+            "severity": "info",
+            "location": "DevelopmentFund contract, setDev() function; FeeDistribute contract, setParams() function; MeowMining contract, setDev() and unlock() functions"
+        }
+    ]
+}

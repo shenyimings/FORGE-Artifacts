@@ -1,0 +1,98 @@
+{
+    "path": "artifacts/Solidified-AquaFi_[15_Sept_2021].pdf",
+    "project_info": {
+        "url": "https://github.com/BlockzeroLabs/aquafi-premium-contract",
+        "commit_id": "n/a",
+        "address": "0x5089722613C2cCEe071C39C59e9889641f435F15",
+        "chain": "eth",
+        "compiler_version": [
+            "v0.5.14+commit.1f1aaa4"
+        ],
+        "project_path": {
+            "Proxy": "contracts/Solidified-AquaFi_[15_Sept_2021]/Proxy"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ]
+            },
+            "title": "Possible Ether loss in IndexFund.sol",
+            "description": "withdrawWithPermission() transfers ERC-20 tokens to recipient, whereas contract's Ether balance is transferred to indexFundV2 without checking if variable contract indexFundV2 is set.",
+            "severity": "high",
+            "location": "IndexFund.sol, function withdrawWithPermission()"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Insufficient parameter pool validation in UniswapHandlerV3.sol",
+            "description": "update() function decodes pool value from supplied data parameter but relation of pool to UniswapV3 positions NFT token is never validated.",
+            "severity": "low",
+            "location": "UniswapHandlerV3.sol, function update()"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Token susceptible to front running in AquaToken.sol",
+            "description": "Changing account allowance through approve() method brings risk that someone may use both old and new allowance by unfortunate transaction ordering.",
+            "severity": "low",
+            "location": "AquaToken.sol"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-754"
+                ]
+            },
+            "title": "Migrated contract can cause loss of tokens in IndexFund.sol",
+            "description": "burnAndWithdraw function does not implement checks to ensure whether IndexFund contract is migrated or active, which prevents user from accidentally calling method and burning tokens.",
+            "severity": "low",
+            "location": "IndexFund.sol, function burnAndWithdraw"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ]
+            },
+            "title": "Missing zero address validations in various contracts",
+            "description": "Contracts do not validate address in parameter or storage, which can cause unintentional loss of funds.",
+            "severity": "low",
+            "location": "Various contracts"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-269"
+                ]
+            },
+            "title": "Administrative accounts could drain funds if compromised",
+            "description": "Some administrative accounts, such as timelock account or owner account, have privileges to drain funds if compromised.",
+            "severity": "info",
+            "location": "Various contracts"
+        }
+    ]
+}

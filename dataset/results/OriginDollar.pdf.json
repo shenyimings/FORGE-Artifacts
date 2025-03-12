@@ -1,0 +1,326 @@
+{
+    "path": "artifacts/OriginDollar.pdf",
+    "project_info": {
+        "url": "https://github.com/OriginProtocol/origin-dollar/tree/81431fd3b2aa4c518ffc389844f9708c00b516f0",
+        "commit_id": "81431fd3b2aa4c518ffc389844f9708c00b516f0",
+        "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+        "chain": "n/a",
+        "compiler_version": [
+            "n/a"
+        ],
+        "project_path": {
+            "origin-dollar": "contracts/OriginDollar/origin-dollar"
+        }
+    },
+    "findings": [
+        {
+            "id": 0,
+            "category": {
+                "1": [
+                    "CWE-20"
+                ]
+            },
+            "title": "Invalid vaultBuffer could revert allocate",
+            "description": "Lack of input validation when updating the vaultBuffer could cause token allocations inside allocate to revert.",
+            "severity": "low",
+            "location": "Origin Dollar contract, setVaultBuffer function"
+        },
+        {
+            "id": 1,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-755"
+                ],
+                "3": [
+                    "CWE-390"
+                ]
+            },
+            "title": "OUSD.changeSupply should require rebasingCreditsPerToken > 0",
+            "description": "ChangeSupply function does not validate that rebasingCreditsPerToken is non-zero, which could break invariants in the contract.",
+            "severity": "high",
+            "location": "OUSD contract"
+        },
+        {
+            "id": 2,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-190"
+                ]
+            },
+            "title": "SafeMath is recommended in OUSD._executeTransfer",
+            "description": "Using SafeMath for mathematical operations is recommended to prevent underflow or overflow issues.",
+            "severity": "info",
+            "location": "OUSD contract"
+        },
+        {
+            "id": 3,
+            "category": {
+                "1": [
+                    "CWE-703"
+                ],
+                "2": [
+                    "CWE-393"
+                ]
+            },
+            "title": "Transfers could silently fail without safeTransfer",
+            "description": "Functions do not check the ERC20.transfer return value, which may lead to unexpected results.",
+            "severity": "info",
+            "location": "VaultAdmin.sol, InitializableAbstractStrategy.sol"
+        },
+        {
+            "id": 4,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "Proxies are only partially EIP-1967-compliant",
+            "description": "The InitializeGovernedUpgradeabilityProxy contract does not fully comply with EIP-1967 standards.",
+            "severity": "info",
+            "location": "InitializeGovernedUpgradeabilityProxy.sol, Governable.sol"
+        },
+        {
+            "id": 5,
+            "category": {
+                "1": [
+                    "CWE-664"
+                ]
+            },
+            "title": "Queued transactions cannot be canceled",
+            "description": "The Governor contract contains special functions to set it as the admin of the Timelock, but there are no functions in Governor that call Timelock.cancelTransaction.",
+            "severity": "high",
+            "location": "Governor.sol, Timelock.sol"
+        },
+        {
+            "id": 6,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1041"
+                ]
+            },
+            "title": "Unused code could cause problems in future",
+            "description": "The three oracle contracts are not upgradeable, yet contain code meant for upgradeable contracts.",
+            "severity": "n/a",
+            "location": "ChainlinkOracle.sol, MixOracle.sol, OpenUniswapOracle.sol"
+        },
+        {
+            "id": 7,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Proposal transactions can be executed separately and block Proposal.execute call",
+            "description": "Missing access controls in the Timelock.executeTransaction function allow Proposal transactions to be executed separately, circumventing the Governor.execute function.",
+            "severity": "high",
+            "location": "Governor.sol, Timelock.sol"
+        },
+        {
+            "id": 8,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ]
+            },
+            "title": "Proposals could allow Timelock.admin takeover",
+            "description": "A regular Proposal is also allowed to contain a transaction to change the Timelock.admin, posing an unnecessary risk in that an attacker could create a Proposal to change the Timelock.admin.",
+            "severity": "high",
+            "location": "Governor.sol, Timelock.sol"
+        },
+        {
+            "id": 9,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-749"
+                ]
+            },
+            "title": "Reentrancy and untrusted contract call in mintMultiple",
+            "description": "Missing checks and no reentrancy prevention allow untrusted contracts to be called from mintMultiple, which could be used by an attacker to drain the contracts.",
+            "severity": "high",
+            "location": "VaultCore.sol"
+        },
+        {
+            "id": 10,
+            "category": {
+                "1": [
+                    "CWE-697"
+                ],
+                "2": [
+                    "CWE-1254"
+                ]
+            },
+            "title": "Off-by-one minDrift / maxDrift causes unexpected revert",
+            "description": "The MixOracle contract contains an off-by-one in the checks that make use of the minDrift and maxDrift variables, causing an error to be generated when the price is exactly the minDrift or maxDrift.",
+            "severity": "low",
+            "location": "MixOracle.sol"
+        },
+        {
+            "id": 11,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ],
+                "2": [
+                    "CWE-191"
+                ]
+            },
+            "title": "Unsafe last array element removal poses future risk",
+            "description": "Array length underflow when removing the last array element",
+            "severity": "n/a",
+            "location": "VaultAdmin.sol, MixOracle.sol"
+        },
+        {
+            "id": 12,
+            "category": {
+                "1": [
+                    "CWE-284"
+                ],
+                "2": [
+                    "CWE-285"
+                ],
+                "3": [
+                    "CWE-863"
+                ]
+            },
+            "title": "Strategy targetWeight can be set for non-existent strategy",
+            "description": "Setting targetWeight for a non-existent strategy",
+            "severity": "low",
+            "location": "VaultAdmin.sol"
+        },
+        {
+            "id": 13,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Lack of minimum redeem value might lead to less return than expected",
+            "description": "Redeem fee deducted from the redeem amount inside the _calculateRedeemOutputs function",
+            "severity": "medium",
+            "location": "VaultCore.sol"
+        },
+        {
+            "id": 14,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "Withdraw allows redeemer to withdraw accidentally sent tokens",
+            "description": "Withdraw function transfers the entire contract’s token balance to the recipient instead of the requested amount",
+            "severity": "low",
+            "location": "AaveStrategy.sol"
+        },
+        {
+            "id": 15,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-705"
+                ]
+            },
+            "title": "Variable shadowing from OUSD to ERC20",
+            "description": "OUSD redefines _allowances and _totalSupply state variables, leading to unexpected behaviors",
+            "severity": "low",
+            "location": "OUSD.sol, @openzeppelin/contracts/token/ERC20"
+        },
+        {
+            "id": 16,
+            "category": {
+                "1": [
+                    "CWE-710"
+                ],
+                "2": [
+                    "CWE-1068"
+                ]
+            },
+            "title": "VaultCore.rebase functions have no return statements",
+            "description": "rebase() and rebase(bool) return a uint but lack a return statement",
+            "severity": "low",
+            "location": "VaultCore.sol"
+        },
+        {
+            "id": 17,
+            "category": {
+                "1": [
+                    "CWE-435"
+                ]
+            },
+            "title": "Multiple contracts are missing inheritances",
+            "description": "Several critical operations do not trigger events.",
+            "severity": "info",
+            "location": "Various contracts"
+        },
+        {
+            "id": 18,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-834"
+                ]
+            },
+            "title": "External calls in loop can lead to denial of service",
+            "description": "Several function calls are made in unbounded loops.",
+            "severity": "high",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 19,
+            "category": {
+                "1": [
+                    "CWE-691"
+                ],
+                "2": [
+                    "CWE-431"
+                ]
+            },
+            "title": "No events for critical operations",
+            "description": "Several critical operations do not trigger events.",
+            "severity": "info",
+            "location": "Multiple contracts"
+        },
+        {
+            "id": 20,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "OUSD allows users to transfer more tokens than expected",
+            "description": "Under certain circumstances, the OUSD contract allows users to transfer more tokens than they have in their balance.",
+            "severity": "high",
+            "location": "OUSD.sol"
+        },
+        {
+            "id": 21,
+            "category": {
+                "1": [
+                    "CWE-682"
+                ]
+            },
+            "title": "OUSD total supply can be arbitrary, even smaller than user balances",
+            "description": "The OUSD token contract allows users to opt out of rebasing effects, leading to an inconsistent total supply.",
+            "severity": "high",
+            "location": "OUSD.sol"
+        }
+    ]
+}
