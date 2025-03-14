@@ -1,6 +1,6 @@
 # FORGE-Artifact
 
-This repository contains the artifacts for the paper "Development of the FORGE: A Smart Contract Vulnerability Dataset for Reliable Research."
+This repository contains the artifacts for the paper "FORGE: An LLM-driven Framework for Large-Scale Smart Contract Vulnerability Dataset Construction."
 
 Specifically, it includes the [source code](src/) of the FORGE framework, the [dataset](dataset/) constructed by FORGE, and the [evaluation results](evaluation/).
 
@@ -144,4 +144,4 @@ The CWE classification results for vulnerability classifications by authors acro
 If you find any issues with the dataset, please submit an issue to describe the problem. We will respond promptly and work to resolve it. You can also contribute to improving our code by creating a new pull request.
 
 
-For more information about the dataset and research findings, please refer to our paper: "Development of the FORGE: A Smart Contract Vulnerability Dataset for Reliable Research."
+For more information about the dataset and research findings, please refer to our paper: "FORGE: An LLM-driven Framework for Large-Scale Smart Contract Vulnerability Dataset Construction."
