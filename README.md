@@ -4,6 +4,11 @@ This repository contains the artifacts for the paper "FORGE: An LLM-driven Frame
 
 Specifically, it includes the [source code](src/) of the FORGE framework, the [dataset](dataset/) constructed by FORGE, and the [evaluation results](evaluation/).
 
+## References
+
+For more information about the dataset and research findings, please refer to our paper accepted by **ICSE 2026**: "*FORGE: An LLM-driven Framework for Large-Scale Smart Contract Vulnerability Dataset Construction.*"
+
+
 ## FORGE Framework
 
 ### Overview
@@ -22,13 +27,15 @@ FORGE is an automated framework that constructs comprehensive smart contract vul
 
 ### Installation and Setup
 
+We recommend using the [uv package manager](https://docs.astral.sh/uv/) for installing and configuring FORGE:
+
 ```bash
 # Clone the repository
 git clone https://github.com/FOGRE-security/FORGE-Artifact.git
 cd FORGE-Artifact/src
 
-# Install dependencies
-pip install -r requirements.txt
+# Install dependencies with uv
+uv sync
 
 # Configure model settings
 vim config.yaml  # Configure LLM and provider API Baseurl
@@ -38,11 +45,22 @@ cp .env-example .env
 vim .env  # Configure API-key
 ```
 
+Alternatively, you can use pip:
+
+```bash
+# Install dependencies with pip
+pip install -r requirements.txt
+```
+
 ### Quick Start
 
 Run the FORGE to extract, classify and fetch source code on a sample document:
 
 ```bash
+# Using uv (recommended)
+uv run main.py forge -t sample/sample.pdf -o sample
+
+# Or using python directly
 python main.py forge -t sample/sample.pdf -o sample
 ```
 
@@ -63,13 +81,16 @@ FORGE offers several commands to run different parts of the pipeline:
 
 ```bash
 # Extract vulnerability and project metadata from security documents:
-python main.py extract -t path/to/documents -o output/directory
+uv run main.py extract -t path/to/documents -o output/directory
+# Or: python main.py extract -t path/to/documents -o output/directory
 
 # Classify extracted vulnerabilities into CWE categories:
-python main.py classify -t path/to/extracted/json
+uv run main.py classify -t path/to/extracted/json
+# Or: python main.py classify -t path/to/extracted/json
 
 # Fetch source code based on project metadata from *Github*, *Etherscan*, *Bscscan*, *Polygonscan* and *Basescan*.
-python main.py fetch -t path/to/project/json
+uv run main.py fetch -t path/to/project/json
+# Or: python main.py fetch -t path/to/project/json
 ```
 
 #### Additional Options
@@ -88,7 +109,7 @@ We have made our dataset available in the following ways:
 
 - **Vulnerability Information**: Available in the `dataset/results` directory of this repository.
 - **Solidity Code Files**: Available in the `dataset/contracts` directory of this repository.
-- **Original Audit Reports**: Due to GitHub storage limitations, these are hosted on an anonymous Cloudflare R2 storage. You can download them through the `dataset/access_reports.ipynb` notebook.
+- **Audit Reports**: Due to GitHub storage limitations, these are hosted on Cloudflare R2 storage. You can download them using API tokens with any method you prefer. The `dataset/access_reports.ipynb` notebook provides a usage example.
 
 
 ---
@@ -141,7 +162,4 @@ The CWE classification results for vulnerability classifications by authors acro
 
 ## Contributing
 
-If you find any issues with the dataset, please submit an issue to describe the problem. We will respond promptly and work to resolve it. You can also contribute to improving our code by creating a new pull request.
-
-
-For more information about the dataset and research findings, please refer to our paper: "FORGE: An LLM-driven Framework for Large-Scale Smart Contract Vulnerability Dataset Construction."
+If you find any issues with the dataset or have questions, please contact shenym7@mail2.sysu.edu.cn or submit an issue to describe the problem. We will respond promptly and work to resolve it. You can also contribute to improving our code by creating a new pull request.
