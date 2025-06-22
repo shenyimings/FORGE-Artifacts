@@ -162,4 +162,4 @@ The CWE classification results for vulnerability classifications by authors acro
 
 ## Contributing
 
-If you find any issues with the dataset or have questions, please contact shenym7@mail2.sysu.edu.cn or submit an issue to describe the problem. We will respond promptly and work to resolve it. You can also contribute to improving our code by creating a new pull request.
+If you find any issues with the dataset or have questions, please contact [shenym7@mail2.sysu.edu.cn](mailto:shenym7@mail2.sysu.edu.cn) or submit an issue to describe the problem. We will respond promptly and work to resolve it. You can also contribute to improving our code by creating a new pull request.
