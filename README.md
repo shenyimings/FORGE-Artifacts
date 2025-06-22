@@ -6,8 +6,17 @@ Specifically, it includes the [source code](src/) of the FORGE framework, the [d
 
 ## References
 
-For more information about the dataset and research findings, please refer to our paper accepted by **ICSE 2026**: "*FORGE: An LLM-driven Framework for Large-Scale Smart Contract Vulnerability Dataset Construction.*"
+For more information about the dataset and research findings, please refer to our paper accepted by **ICSE 2026**: 
 
+```bibtex
+@inproceedings{chenFORGELLMdrivenFramework2026,
+  title = {FORGE: An LLM-driven Framework for Large-Scale Smart Contract Vulnerability Dataset Construction},
+  booktitle = {Proceedings of the 48th {{International Conference}} on {{Software Engineering}}},
+  author = {Chen, Jiachi and Shen, Yiming and Zhang, Jiashuo and Li, Zihao and Grundy, John and Shao, Zhenzhe and Wang, Yanlin and Wang, Jiashui and Chen, Ting and Zheng, Zibin},
+  year = {2026},
+  series = {{{ICSE}} '26},
+}
+```
 
 ## FORGE Framework
 
