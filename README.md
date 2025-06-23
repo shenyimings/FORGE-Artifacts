@@ -102,6 +102,10 @@ uv run main.py fetch -t path/to/project/json
 # Or: python main.py fetch -t path/to/project/json
 ```
 
+#### Benchmark Construction
+
+A potential use case for FORGE is to construct small-scale benchmark datasets for specific vulnerabilities from security artifacts by editing the prompts in [src/core/invoker.py](src/core/invoker.py). We are considering decoupling this feature in the next release and enabling the construction of task-specific workflows.
+
 #### Additional Options
 
 All commands support the following options:
