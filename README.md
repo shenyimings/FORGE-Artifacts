@@ -1,6 +1,6 @@
 # FORGE-Artifact
 
-This repository contains the artifacts for the paper "FORGE: An LLM-driven Framework for Large-Scale Smart Contract Vulnerability Dataset Construction."
+This repository contains the artifacts for the paper ["FORGE: An LLM-driven Framework for Large-Scale Smart Contract Vulnerability Dataset Construction."](http://arxiv.org/abs/2506.18795)
 
 Specifically, it includes the [source code](src/) of the FORGE framework, the [dataset](dataset/) constructed by FORGE, and the [evaluation results](evaluation/).
 
@@ -9,12 +9,14 @@ Specifically, it includes the [source code](src/) of the FORGE framework, the [d
 For more information about the dataset and research findings, please refer to our paper accepted by **ICSE 2026**: 
 
 ```bibtex
-@inproceedings{chenFORGELLMdrivenFramework2026,
-  title = {FORGE: An LLM-driven Framework for Large-Scale Smart Contract Vulnerability Dataset Construction},
-  booktitle = {Proceedings of the 48th {{International Conference}} on {{Software Engineering}}},
-  author = {Chen, Jiachi and Shen, Yiming and Zhang, Jiashuo and Li, Zihao and Grundy, John and Shao, Zhenzhe and Wang, Yanlin and Wang, Jiashui and Chen, Ting and Zheng, Zibin},
-  year = {2026},
-  series = {{{ICSE}} '26},
+@misc{chen2025forgellmdrivenframeworklargescale,
+      title={FORGE: An LLM-driven Framework for Large-Scale Smart Contract Vulnerability Dataset Construction}, 
+      author={Jiachi Chen and Yiming Shen and Jiashuo Zhang and Zihao Li and John Grundy and Zhenzhe Shao and Yanlin Wang and Jiashui Wang and Ting Chen and Zibin Zheng},
+      year={2025},
+      eprint={2506.18795},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      url={https://arxiv.org/abs/2506.18795}, 
 }
 ```
 
