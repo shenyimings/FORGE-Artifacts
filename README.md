@@ -157,6 +157,8 @@ The dataset contains 81,390 Solidity files and 27,497 vulnerabilities across 296
 
 You can use `RQ1/statistic.ipynb` to analyze and summarize the relevant data within our dataset.
 
+> NOTE: This dataset is dynamically maintained through a community-driven issue system and may differ from the current records.
+
 
 ### RQ2
 
