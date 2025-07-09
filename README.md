@@ -42,8 +42,8 @@ We recommend using the [uv package manager](https://docs.astral.sh/uv/) for inst
 
 ```bash
 # Clone the repository
-git clone https://github.com/FOGRE-security/FORGE-Artifact.git
-cd FORGE-Artifact/src
+git clone https://github.com/FOGRE-security/FORGE-Artifacts.git
+cd FORGE-Artifacts/src
 
 # Install dependencies with uv
 uv sync
