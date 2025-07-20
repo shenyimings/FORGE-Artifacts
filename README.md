@@ -61,6 +61,10 @@ uv run main.py forge -t sample/sample.pdf -o sample
 Alternatively, you can use pip:
 
 ```bash
+# Clone the repository
+git clone https://github.com/shenyimings/FORGE-Artifacts.git
+cd FORGE-Artifacts/src
+
 # Install dependencies with pip
 pip install -r requirements.txt
 
@@ -168,7 +172,7 @@ The dataset contains 81,390 Solidity files and 27,497 vulnerabilities across 296
 
 You can use `RQ1/statistic.ipynb` to analyze and summarize the relevant data within our dataset.
 
-> NOTE: This dataset is dynamically maintained through a community-driven issue system and may differ from the current records.
+> NOTE: This dataset is dynamically maintained and may differ from the current records.
 
 
 ### RQ2
