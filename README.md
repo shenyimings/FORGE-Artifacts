@@ -42,7 +42,7 @@ We recommend using the [uv package manager](https://docs.astral.sh/uv/) for inst
 
 ```bash
 # Clone the repository
-git clone https://github.com/FOGRE-security/FORGE-Artifacts.git
+git clone https://github.com/shenyimings/FORGE-Artifacts.git
 cd FORGE-Artifacts/src
 
 # Install dependencies with uv
@@ -54,6 +54,8 @@ vim config.yaml  # Configure LLM and provider API Baseurl
 # Set up API keys
 cp .env-example .env
 vim .env  # Configure API-key
+
+uv run main.py forge -t sample/sample.pdf -o sample
 ```
 
 Alternatively, you can use pip:
@@ -61,6 +63,15 @@ Alternatively, you can use pip:
 ```bash
 # Install dependencies with pip
 pip install -r requirements.txt
+
+# Configure model settings
+vim config.yaml  # Configure LLM and provider API Baseurl
+
+# Set up API keys
+cp .env-example .env
+vim .env  # Configure API-key
+
+python main.py forge -t sample/sample.pdf -o sample
 ```
 
 ### Quick Start
