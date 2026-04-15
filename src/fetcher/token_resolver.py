@@ -118,9 +118,25 @@ class TokenResolver:
             return self._coins
         if self.cache_path.exists():
             logger.debug("Loading CoinGecko cache from {}", self.cache_path)
-            with self.cache_path.open("r", encoding="utf-8") as f:
-                self._coins = json.load(f)
-            return self._coins
+            try:
+                with self.cache_path.open("r", encoding="utf-8") as f:
+                    self._coins = json.load(f)
+                return self._coins
+            except (json.JSONDecodeError, OSError) as e:
+                logger.warning(
+                    "Failed to load CoinGecko cache from {}: {}. Refetching...",
+                    self.cache_path,
+                    e,
+                )
+                try:
+                    # Remove corrupted cache so it can be rebuilt cleanly
+                    self.cache_path.unlink(missing_ok=True)
+                except OSError as unlink_err:
+                    logger.warning(
+                        "Failed to delete corrupted CoinGecko cache {}: {}",
+                        self.cache_path,
+                        unlink_err,
+                    )
         return self._fetch_and_cache()
 
     def _fetch_and_cache(self) -> list:
