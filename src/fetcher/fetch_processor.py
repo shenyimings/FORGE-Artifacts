@@ -10,6 +10,7 @@ from core.invoker import CONFIG, MAX_RETRIES, INTERVAL
 
 from fetcher.project_parser import ProjectParser
 from fetcher.code_fetcher import Router
+from fetcher.token_resolver import TokenResolver
 
 MODE_OPTIONS = {
     "addr_only": 0,
@@ -21,6 +22,13 @@ ENABLED = CONFIG["fetcher"].get("enabled", ["github", "eth", "bsc"])
 
 
 def _fetcher(report: Report, output: str) -> ProjectInfo:
+    if not report.project_info.address or report.project_info.address == "n/a":
+        resolved = TokenResolver().resolve(
+            report.project_info.token_name, report.project_info.chain
+        )
+        if resolved != "n/a":
+            report.project_info.address = resolved
+
     parser = ProjectParser(enabled_fetcher=ENABLED)
     fetch_target = parser.parse(report.project_info)  # [(<FETCHER_NAME>,<URL/ADDR>)]
     logger.info("Find {} target to fetch: {}", len(fetch_target), fetch_target)
@@ -47,6 +55,13 @@ def _fetcher(report: Report, output: str) -> ProjectInfo:
 class FetchProcessor(BaseProcessor):
     def _process(self, input: Report) -> Report | None:
         report = input
+        if not report.project_info.address or report.project_info.address == "n/a":
+            resolved = TokenResolver().resolve(
+                report.project_info.token_name, report.project_info.chain
+            )
+            if resolved != "n/a":
+                report.project_info.address = resolved
+
         parser = ProjectParser(enabled_fetcher=ENABLED)
         fetch_target = parser.parse(
             report.project_info
@@ -71,6 +86,8 @@ class FetchProcessor(BaseProcessor):
         contract_name = message.get("contract_name", "contracts")
         project_path = {contract_name: output_dir}
         report.project_info.project_path = project_path
+        if message.get("fetch_errors"):
+            report.fetch_errors = message["fetch_errors"]
         return report
 
     def _parse_file(self, filepath: str) -> Report | None:

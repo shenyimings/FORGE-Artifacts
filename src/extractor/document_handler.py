@@ -2,6 +2,7 @@ import os
 import re
 import sys
 import tiktoken
+import pymupdf
 
 from pydantic import BaseModel
 from dataclasses import dataclass, field
@@ -147,14 +148,28 @@ class DocumentHandler(BaseModel):
         return self._merge_documents(self.max_tokens, text_splitted)
 
     def _read_file(self, filepath: str) -> str:
-        # 判断extname 是pdf还是md
         extname = os.path.splitext(filepath)[1]
         if extname == ".pdf":
             md_text = to_markdown(filepath, show_progress=VERBOSE)
+            md_text += self._extract_pdf_links(filepath)
         elif extname == ".md":
             with open(filepath, "r") as f:
                 md_text = f.read()
         return md_text
+
+    def _extract_pdf_links(self, filepath: str) -> str:
+        """Extract all hyperlink URIs from PDF annotations and append as plain text."""
+        uris = []
+        with pymupdf.open(filepath) as doc:
+            for page in doc:
+                for link in page.get_links():
+                    uri = link.get("uri", "")
+                    if uri and uri not in uris:
+                        uris.append(uri)
+        if not uris:
+            return ""
+        lines = "\n\nLinks found in document:\n" + "\n".join(f"- {u}" for u in uris)
+        return lines
 
     def _calc_token_length(self, text: str) -> int:
         enc = tiktoken.get_encoding("cl100k_base")

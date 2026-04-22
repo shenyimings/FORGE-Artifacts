@@ -176,11 +176,12 @@ class MapReducer(BaseModel):
         index = 0
         for p in partial:
             # Merge project_info fields individually, keeping non-empty values
-            url, commit_id, address, chain = (
+            url, commit_id, address, chain, token_name = (
                 p.project_info.url,
                 p.project_info.commit_id,
                 p.project_info.address,
                 p.project_info.chain,
+                p.project_info.token_name,
             )
             # logger.debug(url, commit_id, address, chain)
             if result.project_info.url == "n/a" or not result.project_info.url:
@@ -194,6 +195,8 @@ class MapReducer(BaseModel):
                 result.project_info.address = address
             if result.project_info.chain == "n/a" or not result.project_info.chain:
                 result.project_info.chain = chain
+            if result.project_info.token_name == "n/a" or not result.project_info.token_name:
+                result.project_info.token_name = token_name
             logger.debug("Project metadata merged results: {}", result.project_info)
             p.findings = [
                 finding

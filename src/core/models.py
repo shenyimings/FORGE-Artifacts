@@ -10,6 +10,7 @@ class ProjectInfo:
     commit_id: Union[str, int, List, None] = "n/a"
     address: Union[str, int, List, None] = "n/a"
     chain: Union[str, int, List, None] = "n/a"
+    token_name: Union[str, int, List, None] = "n/a"
     compiler_version: Union[str, List, None] = "n/a"
     project_path: Union[str, List, Dict, None] = "n/a"
 
@@ -134,6 +135,7 @@ class Report(BaseModel):
     path: str = ""
     project_info: ProjectInfo = field(default_factory=ProjectInfo)
     findings: List[Finding] = field(default_factory=list)
+    fetch_errors: List[Dict] = Field(default_factory=list)
 
     def append_finding(self, finding: Finding):
         self.findings.append(finding)

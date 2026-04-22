@@ -54,12 +54,20 @@ class Router:
         elif self.fetch_mode == 2:
             targets = targets
 
-        all_failed = True
+        # Split into chain fetchers (priority) and github fetcher (fallback)
+        chain_targets = [t for t in targets if t.fetcher_name != "github"]
+        github_targets = [t for t in targets if t.fetcher_name == "github"]
+
         messages = {}
-        for target in targets:
+        fetch_errors = []
+        chain_succeeded = False
+
+        # Try all chain targets first
+        for target in chain_targets:
             fetchers = self._get_fetcher(target.fetcher_name)
             if not fetchers:
                 logger.error("Fetcher {} not found!", target.fetcher_name)
+                fetch_errors.append({"target": target.target, "fetcher": target.fetcher_name, "reason": "fetcher not found"})
                 continue
             for fetcher in fetchers:
                 success, result = fetcher.fetch(target.target, work_dir)
@@ -70,15 +78,41 @@ class Router:
                         target.fetcher_name,
                         result,
                     )
+                    fetch_errors.append({"target": target.target, "fetcher": target.fetcher_name, "reason": "fetch failed"})
                     continue
                 if not result:
                     result = {}
                 messages.update(result)
-                all_failed = False
+                chain_succeeded = True
                 break
+
+        # Only fall back to GitHub if all chain fetches failed
+        if not chain_succeeded:
+            for target in github_targets:
+                fetchers = self._get_fetcher(target.fetcher_name)
+                if not fetchers:
+                    logger.error("Fetcher {} not found!", target.fetcher_name)
+                    fetch_errors.append({"target": target.target, "fetcher": target.fetcher_name, "reason": "fetcher not found"})
+                    continue
+                for fetcher in fetchers:
+                    success, result = fetcher.fetch(target.target, work_dir)
+                    if not success:
+                        logger.error(
+                            "Failed to fetch {} from {}: {}",
+                            target.target,
+                            target.fetcher_name,
+                            result,
+                        )
+                        fetch_errors.append({"target": target.target, "fetcher": target.fetcher_name, "reason": "fetch failed"})
+                        continue
+                    if not result:
+                        result = {}
+                    messages.update(result)
+                    break
+
+        if fetch_errors:
+            messages["fetch_errors"] = fetch_errors
         logger.debug("Fetch result: {}", messages)
-        if all_failed:
-            return {}
         return messages
 
     def _get_fetcher(self, fetcher_name: str) -> List[BaseFetcher]:
@@ -132,7 +166,10 @@ class GithubFetcher(BaseFetcher):
         # Clone the repository
         try:
             git.Repo.clone_from(
-                url_info.git_url, output_path, kill_after_timeout=self.clone_timeout
+                url_info.git_url,
+                output_path,
+                kill_after_timeout=self.clone_timeout,
+                multi_options=["--recurse-submodules"],
             )
 
             # Checkout specific branch or commit if specified
@@ -145,6 +182,7 @@ class GithubFetcher(BaseFetcher):
             return True, metadata
 
         except Exception as e:
+            logger.error(f"Failed to clone {url_info.git_url}: {e}")
             # Clean up empty directory on failure
             if os.path.exists(output_path) and not os.listdir(output_path):
                 os.rmdir(output_path)
@@ -194,9 +232,11 @@ class GithubFetcher(BaseFetcher):
 
 
 class EthFetcher(BaseFetcher):
-    def __init__(self, name="eth"):
+    BASE_URL = "https://api.etherscan.io/v2/api"
+
+    def __init__(self, name="eth", chain_id=1):
         super().__init__(name)
-        self.base_url = "https://api.etherscan.io/api"
+        self.chain_id = chain_id
         self.api_key = os.getenv("ETH_API_KEY")
         self.addr_parser = r"\b0x[a-fA-F0-9]{40}\b"
 
@@ -217,10 +257,11 @@ class EthFetcher(BaseFetcher):
             logger.error(f"Invalid address format: {target}")
             return False, {}
 
-        # Call Etherscan API
+        # Call Etherscan V2 API
         success, response = self._request_with_retry(
-            url=self.base_url,
+            url=self.BASE_URL,
             params={
+                "chainid": self.chain_id,
                 "module": "contract",
                 "action": "getsourcecode",
                 "address": target,
@@ -350,23 +391,14 @@ class EthFetcher(BaseFetcher):
 
 class BscFetcher(EthFetcher):
     def __init__(self):
-        super().__init__("bsc")
-        self.base_url = "https://api.bscscan.com/api"
-        self.api_key = os.getenv("BSC_API_KEY")
-        self.addr_parser = r"\b0x[a-fA-F0-9]{40}\b"
+        super().__init__("bsc", chain_id=56)
 
 
 class PolygonFetcher(EthFetcher):
     def __init__(self):
-        super().__init__("polygon")
-        self.base_url = "https://api.polygonscan.com/api"
-        self.api_key = os.getenv("POLYGON_API_KEY")
-        self.addr_parser = r"\b0x[a-fA-F0-9]{40}\b"
+        super().__init__("polygon", chain_id=137)
 
 
 class BasechainFetcher(EthFetcher):
     def __init__(self):
-        super().__init__("base")
-        self.base_url = "https://api.basescan.org/api"
-        self.api_key = os.getenv("BASE_API_KEY")
-        self.addr_parser = r"\b0x[a-fA-F0-9]{40}\b"
+        super().__init__("base", chain_id=8453)
