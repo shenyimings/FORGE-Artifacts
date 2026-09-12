@@ -185,14 +185,19 @@ The CWE classification results for vulnerability classifications by authors acro
 For more information about the dataset and research findings, please refer to our paper accepted by **ICSE 2026**: 
 
 ```bibtex
-@misc{chen2025forgellmdrivenframeworklargescale,
-      title={FORGE: An LLM-driven Framework for Large-Scale Smart Contract Vulnerability Dataset Construction}, 
-      author={Jiachi Chen and Yiming Shen and Jiashuo Zhang and Zihao Li and John Grundy and Zhenzhe Shao and Yanlin Wang and Jiashui Wang and Ting Chen and Zibin Zheng},
-      year={2025},
-      eprint={2506.18795},
-      archivePrefix={arXiv},
-      primaryClass={cs.CR},
-      url={https://arxiv.org/abs/2506.18795}, 
+@inproceedings{10.1145/3744916.3764529,
+author = {Chen, Jiachi and Shen, Yiming and Zhang, Jiashuo and Li, Zihao and Grundy, John and Shao, Zhenzhe and Wang, Yanlin and Wang, Jiashui and Chen, Ting and Zheng, Zibin},
+title = {FORGE: An LLM-driven Framework for Large-Scale Smart Contract Vulnerability Dataset Construction},
+year = {2026},
+isbn = {9798400720253},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3744916.3764529},
+doi = {10.1145/3744916.3764529},
+booktitle = {Proceedings of the 2026 IEEE/ACM 48th International Conference on Software Engineering},
+pages = {491–503},
+numpages = {13},
+series = {ICSE '26}
 }
 ```
 
