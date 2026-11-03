@@ -12,6 +12,7 @@ Specifically, it includes the [source code](src/) of the FORGE framework, the [d
 
 ## News
 
+- **[2026-10-21] 🎉 FORGE's follow-up work on Solana (FORGE-S) has been directly accepted by ICSE'27 (Direct Acceptance Rate: 5.0%, 119/2375).**
 - **[2026-02-11] 🔥 We have released [FORGE-Curated](https://github.com/shenyimings/FORGE-Curated): A curated smart contract vulnerability dataset with moderate size, higher quality, and enhanced feasibility!**
 - **[2025-06-20] 🎉 Our [paper](http://arxiv.org/abs/2506.18795) has been directly accepted by ICSE'26 Round 1 (Direct Acceptance Rate: 9.2%, 60/646). Can't wait to see you in Rio de Janeiro!**
 - **[2025-03-12] ✨ We have released the largest smart contract vulnerability dataset FORGE-Dataset, together with the source code of FORGE, the first automated vulnerability dataset construction framework.**
